@@ -1,0 +1,13 @@
+{
+  "itemGroup.morefeatures": "Example Mod Tab",
+  "block.morefeatures.example_block": "Example Block",
+  "item.morefeatures.example_item": "Example Item",
+
+  "morefeatures.configuration.title": "More Features Configs",
+  "morefeatures.configuration.section.morefeatures.common.toml": "More Features Configs",
+  "morefeatures.configuration.section.morefeatures.common.toml.title": "More Features Configs",
+  "morefeatures.configuration.items": "Item List",
+  "morefeatures.configuration.logDirtBlock": "Log Dirt Block",
+  "morefeatures.configuration.magicNumberIntroduction": "Magic Number Text",
+  "morefeatures.configuration.magicNumber": "Magic Number"
+}
