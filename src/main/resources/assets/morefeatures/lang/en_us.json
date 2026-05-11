@@ -1,6 +1,11 @@
 {
   "item.morefeatures.raw_aluminium": "Raw Aluminum",
   "item.morefeatures.aluminium_ingot": "Aluminum Ingot",
+  "block.morefeatures.aluminium_block": "Aluminum Block",
   "creativetab.morefeatures.morefeatures_items": "More Features Items",
-  "creativetab.morefeatures.morefeatures_blocks": "More Features Blocks"
+  "creativetab.morefeatures.morefeatures_blocks": "More Features Blocks",
+  "block.morefeatures.aluminium_ore": "Aluminum Ore",
+  "block.morefeatures.deepslate_aluminium_ore": "Deepslate Aluminum Ore",
+  "block.morefeatures.raw_aluminium_block": "Raw Aluminum Block",
+  "block.morefeatures.magnesium_block": "Magnesium Block"
 }

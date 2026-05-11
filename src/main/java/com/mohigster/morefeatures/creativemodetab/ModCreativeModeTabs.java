@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.creativemodetab;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -28,15 +29,18 @@ public class ModCreativeModeTabs {
             })
             .build());
 
-    // No blocks in the mod yet, but they are coming! Raw Aluminium is used as a placeholder until then.
 
-    // May subdivide this into natural blocks, building blocks, etc. Depends on what I add and how big these tabs get.
+    // May subdivide this blocks tab into natural blocks, building blocks, etc. Depends on what I add and how big these tabs get.
     public static final Supplier<CreativeModeTab> MOREFEATURES_BLOCKS_TAB = CREATIVE_MODE_TABS.register("morefeatures_blocks_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(ModItems.ALUMINIUM_INGOT.get()))
             .title(Component.translatable("creativetab.morefeatures.morefeatures_blocks"))
             .displayItems((itemDisplayParameters, output) -> {
-                // Aluminium blocks (actually items for now, but pretend that isn't the case)
-                output.accept(ModItems.RAW_ALUMINIUM);
+                // Aluminium blocks
+                output.accept(ModBlocks.ALUMINIUM_BLOCK);
+                output.accept(ModBlocks.RAW_ALUMINIUM_BLOCK);
+                output.accept(ModBlocks.ALUMINIUM_ORE);
+                output.accept(ModBlocks.DEEPSLATE_ALUMINIUM_ORE);
+                output.accept(ModBlocks.MAGNESIUM_BLOCK);
             })
             .build());
 
