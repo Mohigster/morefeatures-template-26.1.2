@@ -1,4 +1,6 @@
 {
   "item.morefeatures.raw_aluminium": "Raw Aluminum",
-  "item.morefeatures.aluminium_ingot": "Aluminum Ingot"
+  "item.morefeatures.aluminium_ingot": "Aluminum Ingot",
+  "creativetab.morefeatures.morefeatures_items": "More Features Items",
+  "creativetab.morefeatures.morefeatures_blocks": "More Features Blocks"
 }

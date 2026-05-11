@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures;
 
+import com.mohigster.morefeatures.creativemodetab.ModCreativeModeTabs;
 import com.mohigster.morefeatures.item.ModItems;
 import org.slf4j.Logger;
 
@@ -46,6 +47,8 @@ public class MoreFeatures {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        ModCreativeModeTabs.register(modEventBus);
+
 
         ModItems.register(modEventBus);
 
@@ -65,7 +68,7 @@ public class MoreFeatures {
 
     }
 
-    // Add the example block item to the building blocks tab
+    // Add the items to a creative mode tab.
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         if(event.getTabKey() == CreativeModeTabs.INGREDIENTS){
             event.accept(ModItems.RAW_ALUMINIUM);
