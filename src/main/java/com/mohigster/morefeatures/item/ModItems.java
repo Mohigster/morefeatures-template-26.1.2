@@ -16,8 +16,6 @@ public class ModItems {
     // This mod has no theme and therefore may add a large number of items. For convenience, Items should be
     // split into categories headed by comments, e.g. // Aluminium items.
 
-    // While this seems useless now, future me will be grateful.
-
     // Aluminium items
     public static final DeferredItem<Item> RAW_ALUMINIUM = ITEMS.registerSimpleItem("raw_aluminium");
     public static final DeferredItem<Item> ALUMINIUM_INGOT = ITEMS.registerSimpleItem("aluminium_ingot");
