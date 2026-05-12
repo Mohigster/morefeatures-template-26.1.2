@@ -18,6 +18,9 @@ public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(MoreFeatures.MODID);
 
+    // Same convention as ModItems. Section block registration into types of blocks e.g. // Aluminium Blocks
+
+    // Aluminium Blocks
     public static final DeferredBlock<Block> ALUMINIUM_BLOCK = registerBlock("aluminium_block",
             properties -> new Block(properties
                     .strength(4f, 4f)
@@ -46,6 +49,7 @@ public class ModBlocks {
                     .sound(SoundType.DEEPSLATE)
     ));
 
+    // Magnesium Blocks
     public static final DeferredBlock<Block> MAGNESIUM_BLOCK = registerBlock("magnesium_block",
             properties -> new Block(properties
                     .strength(4f, 4f)
@@ -53,6 +57,8 @@ public class ModBlocks {
                     .sound(SoundType.IRON)
     ));
 
+
+    // Bismuth Blocks
     public static final DeferredBlock<Block> BISMUTH_ORE = registerBlock("bismuth_ore",
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
                     .strength(4f, 4f)
@@ -60,6 +66,9 @@ public class ModBlocks {
                     .sound(SoundType.STONE)
             ));
 
+
+
+    // Register functions
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> function){
         DeferredBlock<T> toReturn = BLOCKS.registerBlock(name, function);
         registerBlockItem(name, toReturn);
@@ -72,5 +81,6 @@ public class ModBlocks {
 
     public static void register(IEventBus eventBus){
         BLOCKS.register(eventBus);
+        MoreFeatures.LOGGER.info("Mod Blocks registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

@@ -9,7 +9,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 public class ModItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MoreFeatures.MODID);
 
-    // Item registration. JSON files are generated with datagen. See MoreFeaturesDataGen and ModModelProvider.
+    // Item registration. JSON files are generated with DataGen. See MoreFeaturesDataGen and classes in the datagen package.
 
     // Texture files and language data still must be manually added.
 
@@ -22,5 +22,6 @@ public class ModItems {
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
+        MoreFeatures.LOGGER.info("Mod Blocks registered -> Performed by: " + MoreFeatures.MODID);
     }
 }
