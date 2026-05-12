@@ -28,5 +28,6 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.ALUMINIUM_ORE.get());
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get());
         blockModels.createTrivialCube(ModBlocks.MAGNESIUM_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.BISMUTH_ORE.get());
     }
 }

@@ -53,6 +53,13 @@ public class ModBlocks {
                     .sound(SoundType.IRON)
     ));
 
+    public static final DeferredBlock<Block> BISMUTH_ORE = registerBlock("bismuth_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)
+            ));
+
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> function){
         DeferredBlock<T> toReturn = BLOCKS.registerBlock(name, function);
         registerBlockItem(name, toReturn);

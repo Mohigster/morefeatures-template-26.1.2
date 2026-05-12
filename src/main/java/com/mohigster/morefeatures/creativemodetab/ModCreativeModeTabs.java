@@ -32,7 +32,7 @@ public class ModCreativeModeTabs {
 
     // May subdivide this blocks tab into natural blocks, building blocks, etc. Depends on what I add and how big these tabs get.
     public static final Supplier<CreativeModeTab> MOREFEATURES_BLOCKS_TAB = CREATIVE_MODE_TABS.register("morefeatures_blocks_tab", () -> CreativeModeTab.builder()
-            .icon(() -> new ItemStack(ModItems.ALUMINIUM_INGOT.get()))
+            .icon(() -> new ItemStack(ModBlocks.ALUMINIUM_ORE.get()))
             .title(Component.translatable("creativetab.morefeatures.morefeatures_blocks"))
             .displayItems((itemDisplayParameters, output) -> {
                 // Aluminium blocks
@@ -41,6 +41,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.ALUMINIUM_ORE);
                 output.accept(ModBlocks.DEEPSLATE_ALUMINIUM_ORE);
                 output.accept(ModBlocks.MAGNESIUM_BLOCK);
+                output.accept(ModBlocks.BISMUTH_ORE);
             })
             .build());
 
