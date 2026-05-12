@@ -4,6 +4,9 @@
     "morefeatures:aluminium_ore",
     "morefeatures:deepslate_aluminium_ore",
     "morefeatures:raw_aluminium_block",
+    "morefeatures:raw_magnesium_block",
+    "morefeatures:magnesium_ore",
+    "morefeatures:deepslate_magnesium_ore",
     "morefeatures:magnesium_block"
   ]
 }
