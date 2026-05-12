@@ -22,6 +22,7 @@ public class ModItems {
 
     // Magnesium items
     public static final DeferredItem<Item> RAW_MAGNESIUM = ITEMS.registerSimpleItem("raw_magnesium");
+    public static final DeferredItem<Item> MAGNESIUM_INGOT = ITEMS.registerSimpleItem("magnesium_ingot");
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

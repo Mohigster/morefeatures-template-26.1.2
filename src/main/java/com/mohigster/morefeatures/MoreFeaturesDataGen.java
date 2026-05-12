@@ -3,6 +3,7 @@ package com.mohigster.morefeatures;
 import com.mohigster.morefeatures.datagen.ModBlockLootTableProvider;
 import com.mohigster.morefeatures.datagen.ModBlockTagsProvider;
 import com.mohigster.morefeatures.datagen.ModModelProvider;
+import com.mohigster.morefeatures.datagen.ModRecipeProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -29,7 +30,7 @@ public class MoreFeaturesDataGen {
         generator.addProvider(true, new ModBlockTagsProvider(packOutput, lookupProvider));
         generator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(),
                 List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
-
+        generator.addProvider(true, new ModRecipeProvider.Runner(packOutput, lookupProvider));
 
     }
 

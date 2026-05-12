@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.25,
+  "group": "aluminium",
+  "ingredient": "morefeatures:deepslate_aluminium_ore",
+  "result": {
+    "id": "morefeatures:aluminium_ingot"
+  }
+}
