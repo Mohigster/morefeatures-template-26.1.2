@@ -9,6 +9,8 @@
   "block.morefeatures.raw_aluminium_block": "Block of Raw Aluminum",
   "block.morefeatures.magnesium_block": "Block of Magnesium",
   "item.morefeatures.raw_magnesium": "Raw Magnesium",
+  "item.morefeatures.magnesium_ingot": "Magnesium Ingot",
   "block.morefeatures.magnesium_ore": "Magnesium Ore",
-  "block.morefeatures.deepslate_magnesium_ore": "Deepslate Magnesium Ore"
+  "block.morefeatures.deepslate_magnesium_ore": "Deepslate Magnesium Ore",
+  "block.morefeatures.raw_magnesium_block": "Block of Raw Magnesium"
 }

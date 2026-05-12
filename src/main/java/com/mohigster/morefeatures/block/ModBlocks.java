@@ -65,14 +65,14 @@ public class ModBlocks {
     ));
 
     public static final DeferredBlock<Block> MAGNESIUM_ORE = registerBlock("magnesium_ore",
-            properties -> new Block(properties
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE)
     ));
 
     public static final DeferredBlock<Block> DEEPSLATE_MAGNESIUM_ORE = registerBlock("deepslate_magnesium_ore",
-            properties -> new Block(properties
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.DEEPSLATE)

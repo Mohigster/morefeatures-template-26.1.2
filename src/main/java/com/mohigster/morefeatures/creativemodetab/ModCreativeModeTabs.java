@@ -31,6 +31,7 @@ public class ModCreativeModeTabs {
 
                 // Magnesium items
                 output.accept(ModItems.RAW_MAGNESIUM);
+                output.accept(ModItems.MAGNESIUM_INGOT);
             })
             .build());
 
@@ -49,6 +50,9 @@ public class ModCreativeModeTabs {
 
                 // Magnesium blocks
                 output.accept(ModBlocks.MAGNESIUM_BLOCK);
+                output.accept(ModBlocks.RAW_MAGNESIUM_BLOCK);
+                output.accept(ModBlocks.MAGNESIUM_ORE);
+                output.accept(ModBlocks.DEEPSLATE_MAGNESIUM_ORE);
 
                 // Bismuth blocks
                 output.accept(ModBlocks.BISMUTH_ORE);
