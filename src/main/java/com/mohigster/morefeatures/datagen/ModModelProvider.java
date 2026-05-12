@@ -6,7 +6,6 @@ import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
 import net.minecraft.data.PackOutput;
 
@@ -20,6 +19,7 @@ public class ModModelProvider extends ModelProvider {
         // ITEMS
         itemModels.generateFlatItem(ModItems.RAW_ALUMINIUM.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ALUMINIUM_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.RAW_MAGNESIUM.get(), ModelTemplates.FLAT_ITEM);
 
 
         // BLOCKS
@@ -28,6 +28,9 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.ALUMINIUM_ORE.get());
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get());
         blockModels.createTrivialCube(ModBlocks.MAGNESIUM_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.RAW_MAGNESIUM_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.MAGNESIUM_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get());
         blockModels.createTrivialCube(ModBlocks.BISMUTH_ORE.get());
     }
 }

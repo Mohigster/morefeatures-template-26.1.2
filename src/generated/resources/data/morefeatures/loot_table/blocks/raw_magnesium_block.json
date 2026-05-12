@@ -11,11 +11,11 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "morefeatures:raw_aluminium_block"
+          "name": "morefeatures:raw_magnesium_block"
         }
       ],
       "rolls": 1.0
     }
   ],
-  "random_sequence": "morefeatures:blocks/raw_aluminium_block"
+  "random_sequence": "morefeatures:blocks/raw_magnesium_block"
 }

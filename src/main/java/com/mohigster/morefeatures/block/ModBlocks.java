@@ -20,7 +20,7 @@ public class ModBlocks {
 
     // Same convention as ModItems. Section block registration into types of blocks e.g. // Aluminium Blocks
 
-    // Aluminium Blocks
+    //———————————————————————————————————————Aluminium Blocks————————————————————————————————————————————————————————————————————————
     public static final DeferredBlock<Block> ALUMINIUM_BLOCK = registerBlock("aluminium_block",
             properties -> new Block(properties
                     .strength(4f, 4f)
@@ -32,7 +32,7 @@ public class ModBlocks {
             properties -> new Block(properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
-                    .sound(SoundType.IRON)
+                    .sound(SoundType.STONE)
     ));
 
     public static final DeferredBlock<Block> ALUMINIUM_ORE = registerBlock("aluminium_ore",
@@ -49,7 +49,7 @@ public class ModBlocks {
                     .sound(SoundType.DEEPSLATE)
     ));
 
-    // Magnesium Blocks
+    //———————————————————————————————————————Magnesium Blocks————————————————————————————————————————————————————————————————————————
     public static final DeferredBlock<Block> MAGNESIUM_BLOCK = registerBlock("magnesium_block",
             properties -> new Block(properties
                     .strength(4f, 4f)
@@ -57,8 +57,29 @@ public class ModBlocks {
                     .sound(SoundType.IRON)
     ));
 
+    public static final DeferredBlock<Block> RAW_MAGNESIUM_BLOCK = registerBlock("raw_magnesium_block",
+            properties -> new Block(properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)
+    ));
 
-    // Bismuth Blocks
+    public static final DeferredBlock<Block> MAGNESIUM_ORE = registerBlock("magnesium_ore",
+            properties -> new Block(properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)
+    ));
+
+    public static final DeferredBlock<Block> DEEPSLATE_MAGNESIUM_ORE = registerBlock("deepslate_magnesium_ore",
+            properties -> new Block(properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.DEEPSLATE)
+    ));
+
+
+    //———————————————————————————————————————Bismuth Blocks——————————————————————————————————————————————————————————————————————————
     public static final DeferredBlock<Block> BISMUTH_ORE = registerBlock("bismuth_ore",
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
                     .strength(4f, 4f)

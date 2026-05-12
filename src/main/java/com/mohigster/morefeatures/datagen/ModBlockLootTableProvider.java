@@ -32,6 +32,9 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(ModBlocks.ALUMINIUM_BLOCK.get());
         dropSelf(ModBlocks.MAGNESIUM_BLOCK.get());
+        dropSelf(ModBlocks.RAW_ALUMINIUM_BLOCK.get());
+        dropSelf(ModBlocks.RAW_MAGNESIUM_BLOCK.get());
+
 
         // TEMPORARY. Bismuth ore will drop raw bismuth when that item is added
         dropSelf(ModBlocks.BISMUTH_ORE.get());
@@ -41,8 +44,11 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get(),
                 createOreDrop(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get(), ModItems.RAW_ALUMINIUM.get()));
 
-        add(ModBlocks.RAW_ALUMINIUM_BLOCK.get(),
-                createMultipleOreDrops(ModBlocks.RAW_ALUMINIUM_BLOCK.get(), ModItems.RAW_ALUMINIUM.get(), 8, 12));
+        add(ModBlocks.MAGNESIUM_ORE.get(),
+                createMultipleOreDrops(ModBlocks.MAGNESIUM_ORE.get(), ModItems.RAW_MAGNESIUM.get(), 4, 7));
+
+        add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get(),
+                createMultipleOreDrops(ModBlocks.MAGNESIUM_ORE.get(), ModItems.RAW_MAGNESIUM.get(), 4, 7));
     }
 
 

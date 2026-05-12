@@ -24,8 +24,13 @@ public class ModCreativeModeTabs {
             .withTabsBefore(CreativeModeTabs.INGREDIENTS)
             .withTabsAfter(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures_blocks_tab"))
             .displayItems((itemDisplayParameters, output) -> {
+
+                // Aluminium items
                 output.accept(ModItems.RAW_ALUMINIUM);
                 output.accept(ModItems.ALUMINIUM_INGOT);
+
+                // Magnesium items
+                output.accept(ModItems.RAW_MAGNESIUM);
             })
             .build());
 
@@ -35,12 +40,17 @@ public class ModCreativeModeTabs {
             .icon(() -> new ItemStack(ModBlocks.ALUMINIUM_ORE.get()))
             .title(Component.translatable("creativetab.morefeatures.morefeatures_blocks"))
             .displayItems((itemDisplayParameters, output) -> {
+
                 // Aluminium blocks
                 output.accept(ModBlocks.ALUMINIUM_BLOCK);
                 output.accept(ModBlocks.RAW_ALUMINIUM_BLOCK);
                 output.accept(ModBlocks.ALUMINIUM_ORE);
                 output.accept(ModBlocks.DEEPSLATE_ALUMINIUM_ORE);
+
+                // Magnesium blocks
                 output.accept(ModBlocks.MAGNESIUM_BLOCK);
+
+                // Bismuth blocks
                 output.accept(ModBlocks.BISMUTH_ORE);
             })
             .build());

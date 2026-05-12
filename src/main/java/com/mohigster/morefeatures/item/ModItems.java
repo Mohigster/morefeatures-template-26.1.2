@@ -20,8 +20,11 @@ public class ModItems {
     public static final DeferredItem<Item> RAW_ALUMINIUM = ITEMS.registerSimpleItem("raw_aluminium");
     public static final DeferredItem<Item> ALUMINIUM_INGOT = ITEMS.registerSimpleItem("aluminium_ingot");
 
+    // Magnesium items
+    public static final DeferredItem<Item> RAW_MAGNESIUM = ITEMS.registerSimpleItem("raw_magnesium");
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
-        MoreFeatures.LOGGER.info("Mod Blocks registered -> Performed by: " + MoreFeatures.MODID);
+        MoreFeatures.LOGGER.info("Mod Items registered -> Performed by: " + MoreFeatures.MODID);
     }
 }
