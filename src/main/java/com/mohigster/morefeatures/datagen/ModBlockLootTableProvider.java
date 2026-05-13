@@ -52,6 +52,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get(),
                 createMultipleOreDrops(ModBlocks.MAGNESIUM_ORE.get(), ModItems.RAW_MAGNESIUM.get(), 2, 4));
 
+        // Azurite ores
+
         add(ModBlocks.AZURITE_ORE.get(),
                 createOreDrop(ModBlocks.AZURITE_ORE.get(), ModItems.RAW_AZURITE.get()));
         add(ModBlocks.DEEPSLATE_AZURITE_ORE.get(),
@@ -60,6 +62,12 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
                 createOreDrop(ModBlocks.NETHER_AZURITE_ORE.get(), ModItems.RAW_AZURITE.get()));
         add(ModBlocks.END_AZURITE_ORE.get(),
                 createOreDrop(ModBlocks.END_AZURITE_ORE.get(), ModItems.RAW_AZURITE.get()));
+
+        // Bismuth ore
+
+        add(ModBlocks.BISMUTH_ORE.get(),
+                createOreDrop(ModBlocks.BISMUTH_ORE.get(), ModItems.RAW_BISMUTH.get()));
+
 
     }
 

@@ -20,5 +20,6 @@
   "block.morefeatures.deepslate_azurite_ore": "Deepslate Azurite Ore",
   "block.morefeatures.nether_azurite_ore": "Nether Azurite Ore",
   "block.morefeatures.end_azurite_ore": "End Azurite Ore",
-  "block.morefeatures.raw_azurite_block": "Block of Raw Azurite"
+  "block.morefeatures.raw_azurite_block": "Block of Raw Azurite",
+  "item.morefeatures.raw_bismuth": "Raw Bismuth"
 }

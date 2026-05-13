@@ -29,6 +29,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.MAGNESIUM_ORE.get())
                 .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
                 .add(ModBlocks.BISMUTH_ORE.get());
+
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.ALUMINIUM_BLOCK.get())
                 .add(ModBlocks.ALUMINIUM_ORE.get())
@@ -47,10 +48,18 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.NETHER_AZURITE_ORE.get())
                 .add(ModBlocks.END_AZURITE_ORE.get())
                 .add(ModBlocks.AZURITE_BLOCK.get());
+
         tag(BlockTags.BEACON_BASE_BLOCKS)
+                .add(Blocks.COPPER_BLOCK)
+                .add(Blocks.WAXED_COPPER_BLOCK)
+                .add(Blocks.EXPOSED_COPPER)
+                .add(Blocks.WAXED_EXPOSED_COPPER)
+                .add(Blocks.WEATHERED_COPPER)
+                .add(Blocks.WAXED_WEATHERED_COPPER)
+                .add(Blocks.OXIDIZED_COPPER)
+                .add(Blocks.WAXED_OXIDIZED_COPPER)
                 .add(ModBlocks.ALUMINIUM_BLOCK.get())
                 .add(ModBlocks.MAGNESIUM_BLOCK.get())
-                .add(Blocks.COPPER_BLOCK)
                 .add(ModBlocks.AZURITE_BLOCK.get());
     }
 }

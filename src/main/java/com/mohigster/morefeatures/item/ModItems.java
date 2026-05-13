@@ -28,6 +28,10 @@ public class ModItems {
     public static final DeferredItem<Item> AZURITE = ITEMS.registerSimpleItem("azurite");
     public static final DeferredItem<Item> RAW_AZURITE = ITEMS.registerSimpleItem("raw_azurite");
 
+    // Bismuth items
+    public static final DeferredItem<Item> BISMUTH_INGOT = ITEMS.registerSimpleItem("bismuth_ingot");
+    public static final DeferredItem<Item> RAW_BISMUTH = ITEMS.registerSimpleItem("raw_bismuth");
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
         MoreFeatures.LOGGER.info("Mod Items registered -> Performed by: " + MoreFeatures.MODID);
