@@ -36,6 +36,10 @@ public class ModCreativeModeTabs {
                 // Azurite items
                 output.accept(ModItems.RAW_AZURITE);
                 output.accept(ModItems.AZURITE);
+
+                // Fluorite items
+                output.accept(ModItems.RAW_FLUORITE);
+                output.accept(ModItems.FLUORITE);
             })
             .build());
 
@@ -68,6 +72,14 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.DEEPSLATE_AZURITE_ORE);
                 output.accept(ModBlocks.NETHER_AZURITE_ORE);
                 output.accept(ModBlocks.END_AZURITE_ORE);
+
+                // Fluorite blocks
+                output.accept(ModBlocks.FLUORITE_BLOCK);
+                output.accept(ModBlocks.RAW_FLUORITE_BLOCK);
+                output.accept(ModBlocks.FLUORITE_ORE);
+                output.accept(ModBlocks.DEEPSLATE_FLUORITE_ORE);
+                output.accept(ModBlocks.NETHER_FLUORITE_ORE);
+                output.accept(ModBlocks.END_FLUORITE_ORE);
             })
             .build());
 
