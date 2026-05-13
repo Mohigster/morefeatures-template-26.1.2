@@ -131,6 +131,49 @@ public class ModBlocks {
                     .sound(SoundType.AMETHYST)
             ));
 
+    public static final DeferredBlock<Block> FLUORITE_ORE = registerBlock("fluorite_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)
+            ));
+
+    public static final DeferredBlock<Block> DEEPSLATE_FLUORITE_ORE = registerBlock("deepslate_fluorite_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.DEEPSLATE)
+            ));
+
+    public static final DeferredBlock<Block> NETHER_FLUORITE_ORE = registerBlock("nether_fluorite_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.NETHER_ORE)
+            ));
+
+    public static final DeferredBlock<Block> END_FLUORITE_ORE = registerBlock("end_fluorite_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)
+            ));
+
+    public static final DeferredBlock<Block> FLUORITE_BLOCK = registerBlock("fluorite_block",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST)
+            ));
+
+    public static final DeferredBlock<Block> RAW_FLUORITE_BLOCK = registerBlock("raw_fluorite_block",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST)
+            ));
+
+
 
 
 

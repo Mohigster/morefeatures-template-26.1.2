@@ -16,6 +16,7 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import net.neoforged.fml.common.Mod;
 
 import java.util.Set;
 
@@ -33,6 +34,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.RAW_MAGNESIUM_BLOCK.get());
         dropSelf(ModBlocks.AZURITE_BLOCK.get());
         dropSelf(ModBlocks.RAW_AZURITE_BLOCK.get());
+        dropSelf(ModBlocks.FLUORITE_BLOCK.get());
+        dropSelf(ModBlocks.RAW_FLUORITE_BLOCK.get());
 
 
         // TEMPORARY. Bismuth ore will drop raw bismuth when that item is added
@@ -62,6 +65,17 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
                 createOreDrop(ModBlocks.NETHER_AZURITE_ORE.get(), ModItems.RAW_AZURITE.get()));
         add(ModBlocks.END_AZURITE_ORE.get(),
                 createOreDrop(ModBlocks.END_AZURITE_ORE.get(), ModItems.RAW_AZURITE.get()));
+
+        // Fluorite ores
+
+        add(ModBlocks.FLUORITE_ORE.get(),
+                createOreDrop(ModBlocks.FLUORITE_ORE.get(), ModItems.RAW_FLUORITE.get()));
+        add(ModBlocks.DEEPSLATE_FLUORITE_ORE.get(),
+                createOreDrop(ModBlocks.DEEPSLATE_FLUORITE_ORE.get(), ModItems.RAW_FLUORITE.get()));
+        add(ModBlocks.NETHER_FLUORITE_ORE.get(),
+                createOreDrop(ModBlocks.NETHER_FLUORITE_ORE.get(), ModItems.RAW_FLUORITE.get()));
+        add(ModBlocks.END_FLUORITE_ORE.get(),
+                createOreDrop(ModBlocks.END_FLUORITE_ORE.get(), ModItems.RAW_FLUORITE.get()));
 
         // Bismuth ore
 

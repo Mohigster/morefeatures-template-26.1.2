@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "group": "fluorite",
+  "key": {
+    "A": "morefeatures:raw_fluorite"
+  },
+  "pattern": [
+    "AAA",
+    "AAA",
+    "AAA"
+  ],
+  "result": {
+    "id": "morefeatures:raw_fluorite_block"
+  }
+}

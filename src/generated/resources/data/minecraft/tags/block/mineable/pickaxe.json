@@ -8,6 +8,18 @@
     "morefeatures:magnesium_block",
     "morefeatures:magnesium_ore",
     "morefeatures:deepslate_magnesium_ore",
+    "morefeatures:azurite_block",
+    "morefeatures:fluorite_block",
+    "morefeatures:raw_azurite_block",
+    "morefeatures:raw_fluorite_block",
+    "morefeatures:nether_fluorite_ore",
+    "morefeatures:nether_azurite_ore",
+    "morefeatures:deepslate_azurite_ore",
+    "morefeatures:deepslate_fluorite_ore",
+    "morefeatures:end_fluorite_ore",
+    "morefeatures:end_azurite_ore",
+    "morefeatures:fluorite_ore",
+    "morefeatures:azurite_ore",
     "morefeatures:bismuth_ore"
   ]
 }

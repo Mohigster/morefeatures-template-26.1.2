@@ -28,6 +28,10 @@ public class ModItems {
     public static final DeferredItem<Item> AZURITE = ITEMS.registerSimpleItem("azurite");
     public static final DeferredItem<Item> RAW_AZURITE = ITEMS.registerSimpleItem("raw_azurite");
 
+    // Fluorite items
+    public static final DeferredItem<Item> FLUORITE = ITEMS.registerSimpleItem("fluorite");
+    public static final DeferredItem<Item> RAW_FLUORITE = ITEMS.registerSimpleItem("raw_fluorite");
+
     // Bismuth items
     public static final DeferredItem<Item> BISMUTH_INGOT = ITEMS.registerSimpleItem("bismuth_ingot");
     public static final DeferredItem<Item> RAW_BISMUTH = ITEMS.registerSimpleItem("raw_bismuth");

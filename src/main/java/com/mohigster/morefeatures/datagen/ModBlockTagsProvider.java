@@ -28,6 +28,18 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.MAGNESIUM_BLOCK.get())
                 .add(ModBlocks.MAGNESIUM_ORE.get())
                 .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
+                .add(ModBlocks.AZURITE_BLOCK.get())
+                .add(ModBlocks.FLUORITE_BLOCK.get())
+                .add(ModBlocks.RAW_AZURITE_BLOCK.get())
+                .add(ModBlocks.RAW_FLUORITE_BLOCK.get())
+                .add(ModBlocks.NETHER_FLUORITE_ORE.get())
+                .add(ModBlocks.NETHER_AZURITE_ORE.get())
+                .add(ModBlocks.DEEPSLATE_AZURITE_ORE.get())
+                .add(ModBlocks.DEEPSLATE_FLUORITE_ORE.get())
+                .add(ModBlocks.END_FLUORITE_ORE.get())
+                .add(ModBlocks.END_AZURITE_ORE.get())
+                .add(ModBlocks.FLUORITE_ORE.get())
+                .add(ModBlocks.AZURITE_ORE.get())
                 .add(ModBlocks.BISMUTH_ORE.get());
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
@@ -47,7 +59,14 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.DEEPSLATE_AZURITE_ORE.get())
                 .add(ModBlocks.NETHER_AZURITE_ORE.get())
                 .add(ModBlocks.END_AZURITE_ORE.get())
-                .add(ModBlocks.AZURITE_BLOCK.get());
+                .add(ModBlocks.AZURITE_BLOCK.get())
+                .add(ModBlocks.FLUORITE_ORE.get())
+                .add(ModBlocks.END_FLUORITE_ORE.get())
+                .add(ModBlocks.NETHER_FLUORITE_ORE.get())
+                .add(ModBlocks.RAW_FLUORITE_BLOCK.get())
+                .add(ModBlocks.FLUORITE_BLOCK.get())
+                .add(ModBlocks.DEEPSLATE_FLUORITE_ORE.get());
+
 
         tag(BlockTags.BEACON_BASE_BLOCKS)
                 .add(Blocks.COPPER_BLOCK)
@@ -60,6 +79,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(Blocks.WAXED_OXIDIZED_COPPER)
                 .add(ModBlocks.ALUMINIUM_BLOCK.get())
                 .add(ModBlocks.MAGNESIUM_BLOCK.get())
+                .add(ModBlocks.FLUORITE_BLOCK.get())
                 .add(ModBlocks.AZURITE_BLOCK.get());
     }
 }

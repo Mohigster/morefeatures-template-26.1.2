@@ -67,6 +67,12 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("aluminium")
                 .save(output);
 
+        shapeless(RecipeCategory.MISC, ModItems.ALUMINIUM_INGOT.get(), 9)
+                .requires(ModBlocks.ALUMINIUM_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.ALUMINIUM_BLOCK.get()), has(ModBlocks.ALUMINIUM_BLOCK))
+                .group("aluminium")
+                .save(output);
+
         // Magnesium recipes
 
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_MAGNESIUM_BLOCK)
@@ -90,6 +96,12 @@ public class ModRecipeProvider extends RecipeProvider {
         shapeless(RecipeCategory.MISC, ModItems.RAW_MAGNESIUM.get(), 9)
                 .requires(ModBlocks.RAW_MAGNESIUM_BLOCK)
                 .unlockedBy(getHasName(ModBlocks.RAW_MAGNESIUM_BLOCK.get()), has(ModBlocks.RAW_MAGNESIUM_BLOCK))
+                .group("magnesium")
+                .save(output);
+
+        shapeless(RecipeCategory.MISC, ModItems.MAGNESIUM_INGOT.get(), 9)
+                .requires(ModBlocks.MAGNESIUM_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.MAGNESIUM_BLOCK.get()), has(ModBlocks.MAGNESIUM_BLOCK))
                 .group("magnesium")
                 .save(output);
 
@@ -119,6 +131,45 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("azurite")
                 .save(output);
 
+        shapeless(RecipeCategory.MISC, ModItems.AZURITE.get(), 9)
+                .requires(ModBlocks.AZURITE_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.AZURITE_BLOCK.get()), has(ModBlocks.AZURITE_BLOCK))
+                .group("azurite")
+                .save(output);
+
+        // Fluorite recipes
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_FLUORITE_BLOCK)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItems.RAW_FLUORITE.get())
+                .unlockedBy(getHasName(ModItems.RAW_FLUORITE.get()), has(ModItems.RAW_FLUORITE))
+                .group("fluorite")
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.FLUORITE_BLOCK)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItems.FLUORITE.get())
+                .unlockedBy(getHasName(ModItems.FLUORITE.get()), has(ModItems.FLUORITE))
+                .group("fluorite")
+                .save(output);
+
+        shapeless(RecipeCategory.MISC, ModItems.RAW_FLUORITE.get(), 9)
+                .requires(ModBlocks.RAW_FLUORITE_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.RAW_FLUORITE_BLOCK.get()), has(ModBlocks.RAW_FLUORITE_BLOCK))
+                .group("fluorite")
+                .save(output);
+
+        shapeless(RecipeCategory.MISC, ModItems.FLUORITE.get(), 9)
+                .requires(ModBlocks.FLUORITE_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.FLUORITE_BLOCK.get()), has(ModBlocks.FLUORITE_BLOCK))
+                .group("fluorite")
+                .save(output);
+
+
 
 
 
@@ -129,6 +180,7 @@ public class ModRecipeProvider extends RecipeProvider {
         List<ItemLike> ALUMINIUM_SMELTABLES = List.of(ModItems.RAW_ALUMINIUM, ModBlocks.ALUMINIUM_ORE, ModBlocks.DEEPSLATE_ALUMINIUM_ORE);
         List<ItemLike> MAGNESIUM_SMELTABLES = List.of(ModItems.RAW_MAGNESIUM, ModBlocks.MAGNESIUM_ORE, ModBlocks.DEEPSLATE_MAGNESIUM_ORE);
         List<ItemLike> AZURITE_SMELTABLES = List.of(ModItems.RAW_AZURITE, ModBlocks.AZURITE_ORE, ModBlocks.DEEPSLATE_AZURITE_ORE, ModBlocks.END_AZURITE_ORE, ModBlocks.NETHER_AZURITE_ORE);
+        List<ItemLike> FLUORITE_SMELTABLES = List.of(ModItems.RAW_FLUORITE, ModBlocks.FLUORITE_ORE, ModBlocks.DEEPSLATE_FLUORITE_ORE, ModBlocks.NETHER_FLUORITE_ORE, ModBlocks.END_FLUORITE_ORE);
 
 
         //——————————————————————SMELTING RECIPE DATA GENERATION——————————————————————
@@ -144,6 +196,10 @@ public class ModRecipeProvider extends RecipeProvider {
         // Azurite
         oreSmelting(AZURITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.AZURITE.get(), 0.25f, 200, "azurite");
         oreBlasting(AZURITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.AZURITE.get(), 0.25f, 100, "azurite");
+
+        // Fluorite
+        oreSmelting(FLUORITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.FLUORITE.get(), 0.25f, 200, "fluorite");
+        oreBlasting(FLUORITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.FLUORITE.get(), 0.25f, 100, "fluorite");
     }
     @Override
     protected <T extends AbstractCookingRecipe> void oreCooking(AbstractCookingRecipe.Factory<T> factory, List<ItemLike> smeltables,

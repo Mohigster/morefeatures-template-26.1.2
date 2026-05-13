@@ -21,5 +21,13 @@
   "block.morefeatures.nether_azurite_ore": "Nether Azurite Ore",
   "block.morefeatures.end_azurite_ore": "End Azurite Ore",
   "block.morefeatures.raw_azurite_block": "Block of Raw Azurite",
-  "item.morefeatures.raw_bismuth": "Raw Bismuth"
+  "item.morefeatures.raw_bismuth": "Raw Bismuth",
+  "block.morefeatures.fluorite_block": "Block of Fluorite",
+  "item.morefeatures.raw_fluorite": "Raw Fluorite",
+  "item.morefeatures.fluorite": "Fluorite",
+  "block.morefeatures.fluorite_ore": "Fluorite Ore",
+  "block.morefeatures.deepslate_fluorite_ore": "Deepslate Fluorite Ore",
+  "block.morefeatures.nether_fluorite_ore": "Nether Fluorite Ore",
+  "block.morefeatures.end_fluorite_ore": "End Fluorite Ore",
+  "block.morefeatures.raw_fluorite_block": "Block of Raw Fluorite"
 }
