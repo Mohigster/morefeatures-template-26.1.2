@@ -16,14 +16,18 @@ public class ModModelProvider extends ModelProvider {
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
+
         // ITEMS
+
         itemModels.generateFlatItem(ModItems.RAW_ALUMINIUM.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.ALUMINIUM_INGOT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_MAGNESIUM.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.MAGNESIUM_INGOT.get(), ModelTemplates.FLAT_ITEM);
-
+        itemModels.generateFlatItem(ModItems.RAW_AZURITE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.AZURITE.get(), ModelTemplates.FLAT_ITEM);
 
         // BLOCKS
+
         blockModels.createTrivialCube(ModBlocks.ALUMINIUM_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.RAW_ALUMINIUM_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.ALUMINIUM_ORE.get());
@@ -33,5 +37,11 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.MAGNESIUM_ORE.get());
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get());
         blockModels.createTrivialCube(ModBlocks.BISMUTH_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.AZURITE_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.DEEPSLATE_AZURITE_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.NETHER_AZURITE_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.END_AZURITE_ORE.get());
+        blockModels.createTrivialCube(ModBlocks.AZURITE_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.RAW_AZURITE_BLOCK.get());
     }
 }

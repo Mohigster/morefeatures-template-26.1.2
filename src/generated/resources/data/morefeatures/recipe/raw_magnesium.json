@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "magnesium",
+  "ingredients": [
+    "morefeatures:raw_magnesium_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "morefeatures:raw_magnesium"
+  }
+}

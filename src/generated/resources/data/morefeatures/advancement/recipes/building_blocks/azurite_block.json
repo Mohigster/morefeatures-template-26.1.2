@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_azurite": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morefeatures:azurite"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morefeatures:azurite_block"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_azurite"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morefeatures:azurite_block"
+    ]
+  }
+}

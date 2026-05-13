@@ -31,21 +31,36 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.MAGNESIUM_BLOCK.get());
         dropSelf(ModBlocks.RAW_ALUMINIUM_BLOCK.get());
         dropSelf(ModBlocks.RAW_MAGNESIUM_BLOCK.get());
+        dropSelf(ModBlocks.AZURITE_BLOCK.get());
+        dropSelf(ModBlocks.RAW_AZURITE_BLOCK.get());
 
 
         // TEMPORARY. Bismuth ore will drop raw bismuth when that item is added
         dropSelf(ModBlocks.BISMUTH_ORE.get());
+
+        // Aluminium ores
 
         add(ModBlocks.ALUMINIUM_ORE.get(),
                 createOreDrop(ModBlocks.ALUMINIUM_ORE.get(), ModItems.RAW_ALUMINIUM.get()));
         add(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get(),
                 createOreDrop(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get(), ModItems.RAW_ALUMINIUM.get()));
 
+        // Magnesium ores
+
         add(ModBlocks.MAGNESIUM_ORE.get(),
                 createMultipleOreDrops(ModBlocks.MAGNESIUM_ORE.get(), ModItems.RAW_MAGNESIUM.get(), 1, 3));
-
         add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get(),
                 createMultipleOreDrops(ModBlocks.MAGNESIUM_ORE.get(), ModItems.RAW_MAGNESIUM.get(), 2, 4));
+
+        add(ModBlocks.AZURITE_ORE.get(),
+                createOreDrop(ModBlocks.AZURITE_ORE.get(), ModItems.RAW_AZURITE.get()));
+        add(ModBlocks.DEEPSLATE_AZURITE_ORE.get(),
+                createOreDrop(ModBlocks.DEEPSLATE_AZURITE_ORE.get(), ModItems.RAW_AZURITE.get()));
+        add(ModBlocks.NETHER_AZURITE_ORE.get(),
+                createOreDrop(ModBlocks.NETHER_AZURITE_ORE.get(), ModItems.RAW_AZURITE.get()));
+        add(ModBlocks.END_AZURITE_ORE.get(),
+                createOreDrop(ModBlocks.END_AZURITE_ORE.get(), ModItems.RAW_AZURITE.get()));
+
     }
 
 

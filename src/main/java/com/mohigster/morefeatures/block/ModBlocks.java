@@ -88,6 +88,52 @@ public class ModBlocks {
             ));
 
 
+    //———————————————————————————————————————Azurite Blocks——————————————————————————————————————————————————————————————————————————
+    public static final DeferredBlock<Block> AZURITE_ORE = registerBlock("azurite_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)
+            ));
+
+    public static final DeferredBlock<Block> DEEPSLATE_AZURITE_ORE = registerBlock("deepslate_azurite_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.DEEPSLATE)
+            ));
+
+    public static final DeferredBlock<Block> NETHER_AZURITE_ORE = registerBlock("nether_azurite_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.NETHER_ORE)
+            ));
+
+    public static final DeferredBlock<Block> END_AZURITE_ORE = registerBlock("end_azurite_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)
+            ));
+
+    public static final DeferredBlock<Block> AZURITE_BLOCK = registerBlock("azurite_block",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST)
+            ));
+
+    public static final DeferredBlock<Block> RAW_AZURITE_BLOCK = registerBlock("raw_azurite_block",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST)
+            ));
+
+
+
+
 
     // Register functions
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Function<BlockBehaviour.Properties, T> function){

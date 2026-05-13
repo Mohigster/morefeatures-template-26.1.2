@@ -5,6 +5,7 @@ import com.mohigster.morefeatures.block.ModBlocks;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 
@@ -39,6 +40,17 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.MAGNESIUM_BLOCK.get());
 
         tag(Tags.Blocks.NEEDS_NETHERITE_TOOL)
-                .add(ModBlocks.BISMUTH_ORE.get());
+                .add(ModBlocks.BISMUTH_ORE.get())
+                .add(ModBlocks.AZURITE_ORE.get())
+                .add(ModBlocks.RAW_AZURITE_BLOCK.get())
+                .add(ModBlocks.DEEPSLATE_AZURITE_ORE.get())
+                .add(ModBlocks.NETHER_AZURITE_ORE.get())
+                .add(ModBlocks.END_AZURITE_ORE.get())
+                .add(ModBlocks.AZURITE_BLOCK.get());
+        tag(BlockTags.BEACON_BASE_BLOCKS)
+                .add(ModBlocks.ALUMINIUM_BLOCK.get())
+                .add(ModBlocks.MAGNESIUM_BLOCK.get())
+                .add(Blocks.COPPER_BLOCK)
+                .add(ModBlocks.AZURITE_BLOCK.get());
     }
 }

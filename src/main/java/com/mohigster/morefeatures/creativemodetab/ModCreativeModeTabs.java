@@ -32,6 +32,10 @@ public class ModCreativeModeTabs {
                 // Magnesium items
                 output.accept(ModItems.RAW_MAGNESIUM);
                 output.accept(ModItems.MAGNESIUM_INGOT);
+
+                // Azurite items
+                output.accept(ModItems.RAW_AZURITE);
+                output.accept(ModItems.AZURITE);
             })
             .build());
 
@@ -56,6 +60,14 @@ public class ModCreativeModeTabs {
 
                 // Bismuth blocks
                 output.accept(ModBlocks.BISMUTH_ORE);
+
+                // Azurite blocks
+                output.accept(ModBlocks.AZURITE_BLOCK);
+                output.accept(ModBlocks.RAW_AZURITE_BLOCK);
+                output.accept(ModBlocks.AZURITE_ORE);
+                output.accept(ModBlocks.DEEPSLATE_AZURITE_ORE);
+                output.accept(ModBlocks.NETHER_AZURITE_ORE);
+                output.accept(ModBlocks.END_AZURITE_ORE);
             })
             .build());
 

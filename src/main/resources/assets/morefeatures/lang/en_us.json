@@ -12,5 +12,13 @@
   "item.morefeatures.magnesium_ingot": "Magnesium Ingot",
   "block.morefeatures.magnesium_ore": "Magnesium Ore",
   "block.morefeatures.deepslate_magnesium_ore": "Deepslate Magnesium Ore",
-  "block.morefeatures.raw_magnesium_block": "Block of Raw Magnesium"
+  "block.morefeatures.raw_magnesium_block": "Block of Raw Magnesium",
+  "block.morefeatures.azurite_block": "Block of Azurite",
+  "item.morefeatures.raw_azurite": "Raw Azurite",
+  "item.morefeatures.azurite": "Azurite",
+  "block.morefeatures.azurite_ore": "Azurite Ore",
+  "block.morefeatures.deepslate_azurite_ore": "Deepslate Azurite Ore",
+  "block.morefeatures.nether_azurite_ore": "Nether Azurite Ore",
+  "block.morefeatures.end_azurite_ore": "End Azurite Ore",
+  "block.morefeatures.raw_azurite_block": "Block of Raw Azurite"
 }

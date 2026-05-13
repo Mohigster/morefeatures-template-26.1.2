@@ -42,7 +42,7 @@ public class ModRecipeProvider extends RecipeProvider {
     protected void buildRecipes(){
 
 
-
+        // Aluminium recipes
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ALUMINIUM_BLOCK.get())
                 .pattern("AAA")
                 .pattern("AAA")
@@ -67,12 +67,68 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("aluminium")
                 .save(output);
 
+        // Magnesium recipes
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_MAGNESIUM_BLOCK)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItems.RAW_MAGNESIUM.get())
+                .unlockedBy(getHasName(ModItems.RAW_MAGNESIUM.get()), has(ModItems.RAW_MAGNESIUM))
+                .group("magnesium")
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.MAGNESIUM_BLOCK)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItems.MAGNESIUM_INGOT.get())
+                .unlockedBy(getHasName(ModItems.MAGNESIUM_INGOT.get()), has(ModItems.MAGNESIUM_INGOT))
+                .group("magnesium")
+                .save(output);
+
+        shapeless(RecipeCategory.MISC, ModItems.RAW_MAGNESIUM.get(), 9)
+                .requires(ModBlocks.RAW_MAGNESIUM_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.RAW_MAGNESIUM_BLOCK.get()), has(ModBlocks.RAW_MAGNESIUM_BLOCK))
+                .group("magnesium")
+                .save(output);
+
+        // Azurite recipes
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_AZURITE_BLOCK)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItems.RAW_AZURITE.get())
+                .unlockedBy(getHasName(ModItems.RAW_AZURITE.get()), has(ModItems.RAW_AZURITE))
+                .group("azurite")
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AZURITE_BLOCK)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItems.AZURITE.get())
+                .unlockedBy(getHasName(ModItems.AZURITE.get()), has(ModItems.AZURITE))
+                .group("azurite")
+                .save(output);
+
+        shapeless(RecipeCategory.MISC, ModItems.RAW_AZURITE.get(), 9)
+                .requires(ModBlocks.RAW_AZURITE_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.RAW_AZURITE_BLOCK.get()), has(ModBlocks.RAW_AZURITE_BLOCK))
+                .group("azurite")
+                .save(output);
+
+
+
+
 
 
         //—————————————————————————————SMELTABLE LISTS———————————————————————————————
 
         List<ItemLike> ALUMINIUM_SMELTABLES = List.of(ModItems.RAW_ALUMINIUM, ModBlocks.ALUMINIUM_ORE, ModBlocks.DEEPSLATE_ALUMINIUM_ORE);
         List<ItemLike> MAGNESIUM_SMELTABLES = List.of(ModItems.RAW_MAGNESIUM, ModBlocks.MAGNESIUM_ORE, ModBlocks.DEEPSLATE_MAGNESIUM_ORE);
+        List<ItemLike> AZURITE_SMELTABLES = List.of(ModItems.RAW_AZURITE, ModBlocks.AZURITE_ORE, ModBlocks.DEEPSLATE_AZURITE_ORE, ModBlocks.END_AZURITE_ORE, ModBlocks.NETHER_AZURITE_ORE);
 
 
         //——————————————————————SMELTING RECIPE DATA GENERATION——————————————————————
@@ -84,6 +140,10 @@ public class ModRecipeProvider extends RecipeProvider {
         // Magnesium
         oreSmelting(MAGNESIUM_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.MAGNESIUM_INGOT.get(), 0.25f, 200, "magnesium");
         oreBlasting(MAGNESIUM_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.MAGNESIUM_INGOT.get(), 0.25f, 100, "magnesium");
+
+        // Azurite
+        oreSmelting(AZURITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.AZURITE.get(), 0.25f, 200, "azurite");
+        oreBlasting(AZURITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.AZURITE.get(), 0.25f, 100, "azurite");
     }
     @Override
     protected <T extends AbstractCookingRecipe> void oreCooking(AbstractCookingRecipe.Factory<T> factory, List<ItemLike> smeltables,
