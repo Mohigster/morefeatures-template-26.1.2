@@ -9,6 +9,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -137,6 +138,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("azurite")
                 .save(output);
 
+        shapeless(RecipeCategory.MISC, ModItems.AZURITE.get(), 18)
+                .requires(ModBlocks.AZURITE_BLOCK)
+                .requires(Items.BLAZE_ROD)
+                .requires(Items.BREEZE_ROD)
+                .requires(ModItems.BRINE_ROD)
+                .unlockedBy(getHasName(ModBlocks.AZURITE_BLOCK.get()), has(ModBlocks.AZURITE_BLOCK))
+                .group("azurite")
+                .save(output, "morefeatures:azurite_from_blaze_rod_and_breeze_rod_and_brine_rod");
+
         // Fluorite recipes
 
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_FLUORITE_BLOCK)
@@ -168,6 +178,16 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(ModBlocks.FLUORITE_BLOCK.get()), has(ModBlocks.FLUORITE_BLOCK))
                 .group("fluorite")
                 .save(output);
+
+        shapeless(RecipeCategory.MISC, ModItems.FLUORITE.get(), 18)
+                .requires(ModBlocks.FLUORITE_BLOCK)
+                .requires(Items.BLAZE_ROD)
+                .requires(Items.BREEZE_ROD)
+                .requires(ModItems.BRINE_ROD)
+                .unlockedBy(getHasName(ModBlocks.FLUORITE_BLOCK.get()), has(ModBlocks.FLUORITE_BLOCK))
+                .group("fluorite")
+                .save(output, "morefeatures:fluorite_from_blaze_rod_and_breeze_rod_and_brine_rod");
+
 
 
 

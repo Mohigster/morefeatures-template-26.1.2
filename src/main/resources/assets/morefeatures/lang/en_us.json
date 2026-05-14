@@ -30,5 +30,6 @@
   "block.morefeatures.nether_fluorite_ore": "Nether Fluorite Ore",
   "block.morefeatures.end_fluorite_ore": "End Fluorite Ore",
   "block.morefeatures.raw_fluorite_block": "Block of Raw Fluorite",
-  "block.morefeatures.bismuth_ore": "Bismuth Ore"
+  "block.morefeatures.bismuth_ore": "Bismuth Ore",
+  "item.morefeatures.brine_rod": "Brine Rod"
 }

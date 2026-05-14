@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "azurite",
+  "ingredients": [
+    "morefeatures:azurite_block",
+    "minecraft:blaze_rod",
+    "minecraft:breeze_rod",
+    "morefeatures:brine_rod"
+  ],
+  "result": {
+    "count": 18,
+    "id": "morefeatures:azurite"
+  }
+}

@@ -36,6 +36,10 @@ public class ModItems {
     public static final DeferredItem<Item> BISMUTH_INGOT = ITEMS.registerSimpleItem("bismuth_ingot");
     public static final DeferredItem<Item> RAW_BISMUTH = ITEMS.registerSimpleItem("raw_bismuth");
 
+    // Elemental rods
+    public static final DeferredItem<Item> BRINE_ROD = ITEMS.registerSimpleItem("brine_rod");
+
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
         MoreFeatures.LOGGER.info("Mod Items registered -> Performed by: " + MoreFeatures.MODID);
