@@ -41,6 +41,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.END_AZURITE_ORE.get())
                 .add(ModBlocks.FLUORITE_ORE.get())
                 .add(ModBlocks.AZURITE_ORE.get())
+                .add(ModBlocks.BISMUTH_BLOCK.get())
                 .add(ModBlocks.BISMUTH_ORE.get());
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
@@ -66,6 +67,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.NETHER_FLUORITE_ORE.get())
                 .add(ModBlocks.RAW_FLUORITE_BLOCK.get())
                 .add(ModBlocks.FLUORITE_BLOCK.get())
+                .add(ModBlocks.BISMUTH_BLOCK.get())
+                .add(ModBlocks.RAW_BISMUTH_BLOCK.get())
                 .add(ModBlocks.DEEPSLATE_FLUORITE_ORE.get());
 
 
@@ -81,6 +84,19 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.ALUMINIUM_BLOCK.get())
                 .add(ModBlocks.MAGNESIUM_BLOCK.get())
                 .add(ModBlocks.FLUORITE_BLOCK.get())
+                .add(ModBlocks.BISMUTH_BLOCK.get())
                 .add(ModBlocks.AZURITE_BLOCK.get());
+
+        tag(BlockTags.STONE_ORE_REPLACEABLES)
+                .add(ModBlocks.AZURITE_ORE.get())
+                .add(ModBlocks.ALUMINIUM_ORE.get())
+                .add(ModBlocks.MAGNESIUM_ORE.get())
+                .add(ModBlocks.FLUORITE_ORE.get());
+
+        tag(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
+                .add(ModBlocks.DEEPSLATE_AZURITE_ORE.get())
+                .add(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get())
+                .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
+                .add(ModBlocks.DEEPSLATE_FLUORITE_ORE.get());
     }
 }

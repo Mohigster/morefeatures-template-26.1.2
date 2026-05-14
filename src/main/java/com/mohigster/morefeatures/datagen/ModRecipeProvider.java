@@ -188,6 +188,46 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("fluorite")
                 .save(output, "morefeatures:fluorite_from_blaze_rod_and_breeze_rod_and_brine_rod");
 
+        // Bismuth recipes
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BISMUTH_BLOCK)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItems.BISMUTH.get())
+                .unlockedBy(getHasName(ModItems.BISMUTH.get()), has(ModItems.BISMUTH))
+                .group("bismuth")
+                .save(output);
+
+        shapeless(RecipeCategory.MISC, ModItems.BISMUTH.get(), 9)
+                .requires(ModBlocks.BISMUTH_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.BISMUTH_BLOCK.get()), has(ModBlocks.BISMUTH_BLOCK))
+                .group("bismuth")
+                .save(output);
+
+        shapeless(RecipeCategory.MISC, ModItems.RAW_BISMUTH.get(), 9)
+                .requires(ModBlocks.RAW_BISMUTH_BLOCK)
+                .unlockedBy(getHasName(ModBlocks.RAW_BISMUTH_BLOCK.get()), has(ModBlocks.RAW_BISMUTH_BLOCK))
+                .group("bismuth")
+                .save(output);
+
+        shapeless(RecipeCategory.MISC, ModItems.BISMUTH.get(), 18)
+                .requires(ModBlocks.BISMUTH_BLOCK)
+                .requires(Items.BLAZE_ROD)
+                .requires(Items.BREEZE_ROD)
+                .requires(ModItems.BRINE_ROD)
+                .unlockedBy(getHasName(ModBlocks.BISMUTH_BLOCK.get()), has(ModBlocks.BISMUTH_BLOCK))
+                .group("bismuth")
+                .save(output, "morefeatures:bismuth_from_blaze_rod_and_breeze_rod_and_brine_rod");
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_BISMUTH_BLOCK)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ModItems.RAW_BISMUTH.get())
+                .unlockedBy(getHasName(ModItems.RAW_BISMUTH.get()), has(ModItems.RAW_BISMUTH))
+                .group("bismuth")
+                .save(output);
+
 
 
 
@@ -201,6 +241,8 @@ public class ModRecipeProvider extends RecipeProvider {
         List<ItemLike> MAGNESIUM_SMELTABLES = List.of(ModItems.RAW_MAGNESIUM, ModBlocks.MAGNESIUM_ORE, ModBlocks.DEEPSLATE_MAGNESIUM_ORE);
         List<ItemLike> AZURITE_SMELTABLES = List.of(ModItems.RAW_AZURITE, ModBlocks.AZURITE_ORE, ModBlocks.DEEPSLATE_AZURITE_ORE, ModBlocks.END_AZURITE_ORE, ModBlocks.NETHER_AZURITE_ORE);
         List<ItemLike> FLUORITE_SMELTABLES = List.of(ModItems.RAW_FLUORITE, ModBlocks.FLUORITE_ORE, ModBlocks.DEEPSLATE_FLUORITE_ORE, ModBlocks.NETHER_FLUORITE_ORE, ModBlocks.END_FLUORITE_ORE);
+        List<ItemLike> BISMUTH_SMELTABLES = List.of(ModItems.RAW_BISMUTH, ModBlocks.BISMUTH_ORE);
+
 
 
         //——————————————————————SMELTING RECIPE DATA GENERATION——————————————————————
@@ -220,6 +262,10 @@ public class ModRecipeProvider extends RecipeProvider {
         // Fluorite
         oreSmelting(FLUORITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.FLUORITE.get(), 0.25f, 200, "fluorite");
         oreBlasting(FLUORITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.FLUORITE.get(), 0.25f, 100, "fluorite");
+
+        // Bismuth
+        oreSmelting(BISMUTH_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 200, "bismuth");
+        oreBlasting(BISMUTH_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 100, "bismuth");
     }
     @Override
     protected <T extends AbstractCookingRecipe> void oreCooking(AbstractCookingRecipe.Factory<T> factory, List<ItemLike> smeltables,

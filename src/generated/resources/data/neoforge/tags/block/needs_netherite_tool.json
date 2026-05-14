@@ -12,6 +12,8 @@
     "morefeatures:nether_fluorite_ore",
     "morefeatures:raw_fluorite_block",
     "morefeatures:fluorite_block",
+    "morefeatures:bismuth_block",
+    "morefeatures:raw_bismuth_block",
     "morefeatures:deepslate_fluorite_ore"
   ]
 }

@@ -36,10 +36,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.RAW_AZURITE_BLOCK.get());
         dropSelf(ModBlocks.FLUORITE_BLOCK.get());
         dropSelf(ModBlocks.RAW_FLUORITE_BLOCK.get());
-
-
-        // TEMPORARY. Bismuth ore will drop raw bismuth when that item is added
-        dropSelf(ModBlocks.BISMUTH_ORE.get());
+        dropSelf(ModBlocks.BISMUTH_BLOCK.get());
+        dropSelf(ModBlocks.RAW_BISMUTH_BLOCK.get());
 
         // Aluminium ores
 

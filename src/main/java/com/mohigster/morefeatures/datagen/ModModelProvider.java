@@ -6,8 +6,11 @@ import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TexturedModel;
 import net.minecraft.data.PackOutput;
+import net.neoforged.fml.common.Mod;
 
 public class ModModelProvider extends ModelProvider {
     public ModModelProvider(PackOutput output) {
@@ -26,7 +29,7 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.RAW_AZURITE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.AZURITE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_BISMUTH.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.BISMUTH_INGOT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.BISMUTH.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_FLUORITE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.FLUORITE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BRINE_ROD.get(), ModelTemplates.FLAT_ITEM);
@@ -54,5 +57,7 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.END_FLUORITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.FLUORITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.RAW_FLUORITE_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.BISMUTH_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.RAW_BISMUTH_BLOCK.get());
     }
 }

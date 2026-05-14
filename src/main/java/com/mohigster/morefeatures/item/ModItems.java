@@ -33,7 +33,7 @@ public class ModItems {
     public static final DeferredItem<Item> RAW_FLUORITE = ITEMS.registerSimpleItem("raw_fluorite");
 
     // Bismuth items
-    public static final DeferredItem<Item> BISMUTH_INGOT = ITEMS.registerSimpleItem("bismuth_ingot");
+    public static final DeferredItem<Item> BISMUTH = ITEMS.registerSimpleItem("bismuth");
     public static final DeferredItem<Item> RAW_BISMUTH = ITEMS.registerSimpleItem("raw_bismuth");
 
     // Elemental rods

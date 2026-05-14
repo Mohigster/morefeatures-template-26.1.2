@@ -40,6 +40,10 @@ public class ModCreativeModeTabs {
                 // Fluorite items
                 output.accept(ModItems.RAW_FLUORITE);
                 output.accept(ModItems.FLUORITE);
+
+                // Bismuth items
+                output.accept(ModItems.RAW_BISMUTH);
+                output.accept(ModItems.BISMUTH);
             })
             .build());
 
@@ -63,6 +67,8 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.DEEPSLATE_MAGNESIUM_ORE);
 
                 // Bismuth blocks
+                output.accept(ModBlocks.BISMUTH_BLOCK);
+                output.accept(ModBlocks.RAW_BISMUTH_BLOCK);
                 output.accept(ModBlocks.BISMUTH_ORE);
 
                 // Azurite blocks

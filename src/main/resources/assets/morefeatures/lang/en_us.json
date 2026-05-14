@@ -1,18 +1,21 @@
 {
+  "creativetab.morefeatures.morefeatures_items": "More Features Items",
+  "creativetab.morefeatures.morefeatures_blocks": "More Features Blocks",
+
   "item.morefeatures.raw_aluminium": "Raw Aluminum",
   "item.morefeatures.aluminium_ingot": "Aluminum Ingot",
   "block.morefeatures.aluminium_block": "Block of Aluminum",
-  "creativetab.morefeatures.morefeatures_items": "More Features Items",
-  "creativetab.morefeatures.morefeatures_blocks": "More Features Blocks",
   "block.morefeatures.aluminium_ore": "Aluminum Ore",
   "block.morefeatures.deepslate_aluminium_ore": "Deepslate Aluminum Ore",
   "block.morefeatures.raw_aluminium_block": "Block of Raw Aluminum",
+
   "block.morefeatures.magnesium_block": "Block of Magnesium",
   "item.morefeatures.raw_magnesium": "Raw Magnesium",
   "item.morefeatures.magnesium_ingot": "Magnesium Ingot",
   "block.morefeatures.magnesium_ore": "Magnesium Ore",
   "block.morefeatures.deepslate_magnesium_ore": "Deepslate Magnesium Ore",
   "block.morefeatures.raw_magnesium_block": "Block of Raw Magnesium",
+
   "block.morefeatures.azurite_block": "Block of Azurite",
   "item.morefeatures.raw_azurite": "Raw Azurite",
   "item.morefeatures.azurite": "Azurite",
@@ -21,7 +24,7 @@
   "block.morefeatures.nether_azurite_ore": "Nether Azurite Ore",
   "block.morefeatures.end_azurite_ore": "End Azurite Ore",
   "block.morefeatures.raw_azurite_block": "Block of Raw Azurite",
-  "item.morefeatures.raw_bismuth": "Raw Bismuth",
+
   "block.morefeatures.fluorite_block": "Block of Fluorite",
   "item.morefeatures.raw_fluorite": "Raw Fluorite",
   "item.morefeatures.fluorite": "Fluorite",
@@ -30,6 +33,12 @@
   "block.morefeatures.nether_fluorite_ore": "Nether Fluorite Ore",
   "block.morefeatures.end_fluorite_ore": "End Fluorite Ore",
   "block.morefeatures.raw_fluorite_block": "Block of Raw Fluorite",
+
   "block.morefeatures.bismuth_ore": "Bismuth Ore",
+  "item.morefeatures.raw_bismuth": "Raw Bismuth",
+  "block.morefeatures.bismuth_block": "Block of Bismuth",
+  "item.morefeatures.bismuth": "Bismuth",
+  "block.morefeatures.raw_bismuth_block": "Block of Raw Bismuth",
+
   "item.morefeatures.brine_rod": "Brine Rod"
 }
