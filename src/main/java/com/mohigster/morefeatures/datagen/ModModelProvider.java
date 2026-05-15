@@ -69,8 +69,5 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.RAW_FLUORITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.BISMUTH_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.RAW_BISMUTH_BLOCK.get());
-
-        // Equipment Models
-
     }
 }
