@@ -39,6 +39,16 @@
   "block.morefeatures.bismuth_block": "Block of Bismuth",
   "item.morefeatures.bismuth": "Bismuth",
   "block.morefeatures.raw_bismuth_block": "Block of Raw Bismuth",
+  "item.morefeatures.bismuth_pickaxe": "Bismuth Pickaxe",
+  "item.morefeatures.bismuth_sword": "Bismuth Sword",
+  "item.morefeatures.bismuth_axe": "Bismuth Axe",
+  "item.morefeatures.bismuth_hoe": "Bismuth Hoe",
+  "item.morefeatures.bismuth_shovel": "Bismuth Shovel",
+  "item.morefeatures.bismuth_helmet": "Bismuth Helmet",
+  "item.morefeatures.bismuth_chestplate": "Bismuth Chestplate",
+  "item.morefeatures.bismuth_leggings": "Bismuth Leggings",
+  "item.morefeatures.bismuth_boots": "Bismuth Boots",
 
-  "item.morefeatures.brine_rod": "Brine Rod"
+  "item.morefeatures.brine_rod": "Brine Rod",
+  "creativetab.morefeatures.morefeatures_equipment": "More Features Equipment"
 }

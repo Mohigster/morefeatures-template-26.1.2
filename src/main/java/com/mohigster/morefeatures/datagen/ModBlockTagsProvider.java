@@ -2,6 +2,9 @@ package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.item.ModItems;
+import com.mohigster.morefeatures.tag.ModBlockTags;
+import com.mohigster.morefeatures.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
@@ -42,6 +45,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.FLUORITE_ORE.get())
                 .add(ModBlocks.AZURITE_ORE.get())
                 .add(ModBlocks.BISMUTH_BLOCK.get())
+                .add(ModBlocks.RAW_BISMUTH_BLOCK.get())
                 .add(ModBlocks.BISMUTH_ORE.get());
 
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
@@ -58,7 +62,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.BISMUTH_ORE.get())
                 .add(ModBlocks.AZURITE_ORE.get())
                 .add(ModBlocks.RAW_AZURITE_BLOCK.get())
-                .add(ModBlocks.DEEPSLATE_AZURITE_ORE.get())
+//                .add(ModBlocks.DEEPSLATE_AZURITE_ORE.get())
                 .add(ModBlocks.NETHER_AZURITE_ORE.get())
                 .add(ModBlocks.END_AZURITE_ORE.get())
                 .add(ModBlocks.AZURITE_BLOCK.get())
@@ -98,5 +102,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get())
                 .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
                 .add(ModBlocks.DEEPSLATE_FLUORITE_ORE.get());
+
+        tag(ModBlockTags.NEEDS_BISMUTH_TOOL)
+                .add(ModBlocks.DEEPSLATE_AZURITE_ORE.get());
     }
 }

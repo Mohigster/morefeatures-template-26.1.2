@@ -6,6 +6,7 @@ import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.ItemStack;
@@ -86,6 +87,29 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.DEEPSLATE_FLUORITE_ORE);
                 output.accept(ModBlocks.NETHER_FLUORITE_ORE);
                 output.accept(ModBlocks.END_FLUORITE_ORE);
+            })
+            .build());
+
+    public static final Supplier<CreativeModeTab> MOREFEATURES_EQUIPMENT_TAB = CREATIVE_MODE_TABS.register("morefeatures_equipment_tab", () -> CreativeModeTab.builder()
+            .icon(() -> new ItemStack(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())) // 0 is Sword
+            .title(Component.translatable("creativetab.morefeatures.morefeatures_equipment"))
+            .withTabsBefore(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures_blocks_tab"))
+            .displayItems((itemDisplayParameters, output) -> {
+
+                // Tools
+
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(1).asItem());
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
+
+                // Armor
+
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(6).asItem());
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(8).asItem());
             })
             .build());
 

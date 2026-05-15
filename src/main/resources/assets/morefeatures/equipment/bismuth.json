@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "morefeatures:bismuth"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "morefeatures:bismuth"
+      }
+    ]
+  }
+}
