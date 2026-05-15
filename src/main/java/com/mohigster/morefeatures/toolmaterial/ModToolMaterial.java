@@ -12,7 +12,6 @@ public class ModToolMaterial {
 
     }
 
-    public static final ToolMaterial BISMUTH_TOOL_MATERIAL = new ToolMaterial(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2849, 1.0f, 3.5f, 20, BISMUTH_TOOL_MATERIAL_REPAIRABLE);
-
+    public static final ToolMaterial BISMUTH_TOOL_MATERIAL = new ToolMaterial(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2849, 13.5f, 3.5f, 20, BISMUTH_TOOL_MATERIAL_REPAIRABLE);
 
 }
