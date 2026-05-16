@@ -1,11 +1,11 @@
 {
-  "type": "minecraft:blasting",
+  "type": "minecraft:smelting",
   "category": "misc",
-  "cookingtime": 100,
+  "cookingtime": 200,
   "experience": 0.25,
   "group": "bismuth",
   "ingredient": "morefeatures:raw_bismuth",
   "result": {
-    "id": "morefeatures:bismuth"
+    "id": "morefeatures:bismuth_scrap"
   }
 }

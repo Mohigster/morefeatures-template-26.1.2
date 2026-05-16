@@ -7,6 +7,7 @@ import net.minecraft.world.item.Item;
 
 public final class ModItemTags {
     public static final TagKey<Item> BISMUTH_TOOL_MATERIAL_REPAIRABLE = bind("bismuth_tool_materials");
+    public static final TagKey<Item> BISMUTH_TOOL_MATERIALS = bind("bismuth_tools_material");
 
     private ModItemTags() {
     }

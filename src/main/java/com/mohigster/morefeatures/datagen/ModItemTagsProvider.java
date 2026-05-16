@@ -8,6 +8,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
@@ -34,6 +35,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.BISMUTH_EQUIPMENT.get(7).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(8).asItem());
 
+        tag(ModItemTags.BISMUTH_TOOL_MATERIALS)
+                .add(ModItems.BISMUTH.get());
+
         tag(ItemTags.SHOVELS)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
 
@@ -48,5 +52,67 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         tag(ItemTags.SWORDS)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
+
+        tag(ItemTags.MELEE_WEAPON_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+
+        tag(ItemTags.MINING_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(1).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
+
+        tag(ItemTags.DURABILITY_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(1).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(6).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(7).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(8).asItem());
+
+        tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+
+        tag(ItemTags.WEAPON_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+
+        tag(ItemTags.FIRE_ASPECT_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+
+        tag(ItemTags.ARMOR_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(6).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(7).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(8).asItem());
+
+        tag(ItemTags.HEAD_ARMOR)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+
+        tag(ItemTags.CHEST_ARMOR)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(6).asItem());
+
+        tag(ItemTags.LEG_ARMOR)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
+
+        tag(ItemTags.FOOT_ARMOR)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(8).asItem());
+
+        tag(ItemTags.HEAD_ARMOR_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+
+        tag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(6).asItem());
+
+        tag(ItemTags.LEG_ARMOR_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
+
+        tag(ItemTags.FOOT_ARMOR_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(8).asItem());
     }
 }

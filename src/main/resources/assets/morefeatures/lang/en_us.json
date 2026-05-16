@@ -48,7 +48,15 @@
   "item.morefeatures.bismuth_chestplate": "Bismuth Chestplate",
   "item.morefeatures.bismuth_leggings": "Bismuth Leggings",
   "item.morefeatures.bismuth_boots": "Bismuth Boots",
+  "item.morefeatures.bismuth_scrap": "Bismuth Scrap",
+
+  "item.morefeatures.bismuth_upgrade_smithing_template": "Bismuth Upgrade",
+  "item.minecraft.smithing_template.bismuth_upgrade.additions_slot_description": "Add Bismuth",
+  "item.minecraft.smithing_template.bismuth_upgrade.applies_to": "Netherite Equipment",
+  "item.minecraft.smithing_template.bismuth_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
+  "item.minecraft.smithing_template.bismuth_upgrade.ingredients": "Bismuth",
 
   "item.morefeatures.brine_rod": "Brine Rod",
+
   "creativetab.morefeatures.morefeatures_equipment": "More Features Equipment"
 }

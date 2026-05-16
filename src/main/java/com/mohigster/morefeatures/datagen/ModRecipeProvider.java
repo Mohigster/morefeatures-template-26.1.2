@@ -3,17 +3,19 @@ package com.mohigster.morefeatures.datagen;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.item.ModItems;
+import com.mohigster.morefeatures.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
-import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.RecipeProvider;
-import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
+import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -227,6 +229,30 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(ModItems.RAW_BISMUTH.get()), has(ModItems.RAW_BISMUTH))
                 .group("bismuth")
                 .save(output);
+        shaped(RecipeCategory.MISC, ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE, 2)
+                .pattern("NBN")
+                .pattern("NEN")
+                .pattern("NNN")
+                .define('B', ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE.get())
+                .define('N', Items.NETHERITE_SCRAP)
+                .define('E', Blocks.END_STONE.asItem())
+                .unlockedBy(getHasName(Items.NETHERITE_SCRAP), has(Items.NETHERITE_SCRAP))
+                .group("bismuth")
+                .save(output);
+        shapeless(RecipeCategory.MISC, ModItems.BISMUTH.get())
+                .requires(ModItems.BISMUTH_SCRAP, 4)
+                .requires(Items.DIAMOND, 4)
+                .unlockedBy(getHasName(ModItems.BISMUTH_SCRAP.get()), has(ModItems.BISMUTH_SCRAP))
+                .group("bismuth")
+                .save(output, "morefeatures:bismuth_from_bismuth_scraps_and_diamonds");
+
+        // Bismuth smithing recipes
+
+        bismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
+        bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+        bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(6).asItem());
+        bismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
+        bismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(8).asItem());
 
 
 
@@ -264,8 +290,8 @@ public class ModRecipeProvider extends RecipeProvider {
         oreBlasting(FLUORITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.FLUORITE.get(), 0.25f, 100, "fluorite");
 
         // Bismuth
-        oreSmelting(BISMUTH_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 200, "bismuth");
-        oreBlasting(BISMUTH_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.BISMUTH.get(), 0.25f, 100, "bismuth");
+        oreSmelting(BISMUTH_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.BISMUTH_SCRAP.get(), 0.25f, 200, "bismuth");
+        oreBlasting(BISMUTH_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.BISMUTH_SCRAP.get(), 0.25f, 100, "bismuth");
     }
     @Override
     protected <T extends AbstractCookingRecipe> void oreCooking(AbstractCookingRecipe.Factory<T> factory, List<ItemLike> smeltables,
@@ -275,5 +301,8 @@ public class ModRecipeProvider extends RecipeProvider {
             SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), craftingCategory, cookingCategory, result, experience, cookingTime, factory).group(group).unlockedBy(getHasName(itemlike), has(itemlike))
                     .save(output, MoreFeatures.MODID + ":" + getItemName(result) + fromDesc + "_" + getItemName(itemlike));
         }
+    }
+    protected void bismuthSmithing(Item base, RecipeCategory category, Item result) {
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(base), this.tag(ModItemTags.BISMUTH_TOOL_MATERIALS), category, result).unlocks("has_bismuth_ingot", this.has(ModItemTags.BISMUTH_TOOL_MATERIALS)).save(this.output, getItemName(result) + "_smithing");
     }
 }

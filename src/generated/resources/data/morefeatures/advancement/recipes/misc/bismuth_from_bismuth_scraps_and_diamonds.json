@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_bismuth_scrap": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morefeatures:bismuth_scrap"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morefeatures:bismuth_from_bismuth_scraps_and_diamonds"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_bismuth_scrap"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morefeatures:bismuth_from_bismuth_scraps_and_diamonds"
+    ]
+  }
+}

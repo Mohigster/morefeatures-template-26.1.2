@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.item;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.item.custom.ModSmithingTemplateItem;
 import com.mohigster.morefeatures.toolmaterial.ModArmorMaterial;
 import com.mohigster.morefeatures.toolmaterial.ModToolMaterial;
 import net.minecraft.core.registries.Registries;
@@ -25,6 +26,8 @@ public class ModItems {
     public static DeferredItem<Item> registerItem(String name, Function<Item.Properties, Item> function, Item.Properties itemProp) {
         return ITEMS.register(name, () -> function.apply(itemProp.setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MODID, name)))));
     }
+
+
 
     // Item registration. JSON files are generated with DataGen. See MoreFeaturesDataGen and classes in the datagen package.
 
@@ -51,19 +54,18 @@ public class ModItems {
 
     // Bismuth items
     public static final DeferredItem<Item> BISMUTH = ITEMS.registerSimpleItem("bismuth");
+    public static final DeferredItem<Item> BISMUTH_SCRAP = ITEMS.registerSimpleItem("bismuth_scrap");
     public static final DeferredItem<Item> RAW_BISMUTH = ITEMS.registerSimpleItem("raw_bismuth");
 
     // Elemental rods
     public static final DeferredItem<Item> BRINE_ROD = ITEMS.registerSimpleItem("brine_rod");
 
     // Tools and equipment
-//    public static final DeferredItem<Item> BISMUTH_SWORD = ITEMS.registerItem("bismuth_sword",
-//            properties -> new Item(properties
-//                    .sword(BISMUTH_TOOL_MATERIAL, 6.0f, 1.0f)));
-//
-//    public static final DeferredItem<Item> BISMUTH_PICKAXE = ITEMS.registerItem("bismuth_pickaxe",
-//            properties -> new Item(properties
-//                    .pickaxe(BISMUTH_TOOL_MATERIAL, 10.0f, 2.0f)));
+    public static final DeferredItem<Item> BISMUTH_UPGRADE_SMITHING_TEMPLATE = registerItem(
+            "bismuth_upgrade_smithing_template", ModSmithingTemplateItem::createBismuthUpgradeTemplate, new Item.Properties().rarity(Rarity.UNCOMMON)
+    );
+
+
 
     public static final List<DeferredItem<Item>> BISMUTH_EQUIPMENT = registerEquipmentItems("bismuth", BISMUTH_TOOL_MATERIAL, ModArmorMaterial.Armor.BISMUTH,
             new float[]{7.5f, -2.2f}, new float[]{4f, -2.8f}, new float[]{8f, -3f}, new float[]{0f, 0f}, new float[]{4.5f, -3f},
@@ -71,7 +73,7 @@ public class ModItems {
 
 
     public static List<DeferredItem<Item>> registerEquipmentItems(String name, ToolMaterial toolmaterial, ArmorMaterial armormaterial,
-                                                            float[] swordattr, float[] pickaxeattr, float[] axeattr, float[] hoeattr, float[] shovelattr,
+                                                            float[] swordattr, float[] pickaxeattr, float[] axeattr, float[] shovelattr, float[] hoeattr,
                                                             Item.Properties itemProp) {
 
         return List.of(
@@ -87,6 +89,9 @@ public class ModItems {
                 registerItem(name + "_boots", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.BOOTS)), itemProp)
         );
     }
+
+
+
 
 
 

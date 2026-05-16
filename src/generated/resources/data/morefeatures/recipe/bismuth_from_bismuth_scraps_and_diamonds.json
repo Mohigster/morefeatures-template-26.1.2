@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "bismuth",
+  "ingredients": [
+    "morefeatures:bismuth_scrap",
+    "morefeatures:bismuth_scrap",
+    "morefeatures:bismuth_scrap",
+    "morefeatures:bismuth_scrap",
+    "minecraft:diamond",
+    "minecraft:diamond",
+    "minecraft:diamond",
+    "minecraft:diamond"
+  ],
+  "result": {
+    "id": "morefeatures:bismuth"
+  }
+}

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_bismuth_ore": {
+    "has_bismuth_ingot": {
       "conditions": {
         "items": [
           {
-            "items": "morefeatures:bismuth_ore"
+            "items": "#minecraft:bismuth_tools_material"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "morefeatures:bismuth_from_smelting_bismuth_ore"
+        "recipe": "minecraft:bismuth_sword_smithing"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_bismuth_ore"
+      "has_bismuth_ingot"
     ]
   ],
   "rewards": {
     "recipes": [
-      "morefeatures:bismuth_from_smelting_bismuth_ore"
+      "minecraft:bismuth_sword_smithing"
     ]
   }
 }

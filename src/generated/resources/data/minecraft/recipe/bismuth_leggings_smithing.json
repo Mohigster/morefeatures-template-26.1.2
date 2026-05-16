@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "#minecraft:bismuth_tools_material",
+  "base": "minecraft:netherite_leggings",
+  "result": {
+    "id": "morefeatures:bismuth_leggings"
+  },
+  "template": "morefeatures:bismuth_upgrade_smithing_template"
+}

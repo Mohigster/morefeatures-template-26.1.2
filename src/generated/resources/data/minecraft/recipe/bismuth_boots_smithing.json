@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "#minecraft:bismuth_tools_material",
+  "base": "minecraft:netherite_boots",
+  "result": {
+    "id": "morefeatures:bismuth_boots"
+  },
+  "template": "morefeatures:bismuth_upgrade_smithing_template"
+}

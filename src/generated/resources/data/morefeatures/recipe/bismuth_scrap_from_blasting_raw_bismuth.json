@@ -4,8 +4,8 @@
   "cookingtime": 100,
   "experience": 0.25,
   "group": "bismuth",
-  "ingredient": "morefeatures:bismuth_ore",
+  "ingredient": "morefeatures:raw_bismuth",
   "result": {
-    "id": "morefeatures:bismuth"
+    "id": "morefeatures:bismuth_scrap"
   }
 }
