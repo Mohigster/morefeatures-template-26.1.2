@@ -28,6 +28,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+
+        // Self dropping
         dropSelf(ModBlocks.ALUMINIUM_BLOCK.get());
         dropSelf(ModBlocks.MAGNESIUM_BLOCK.get());
         dropSelf(ModBlocks.RAW_ALUMINIUM_BLOCK.get());
@@ -38,6 +40,18 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.RAW_FLUORITE_BLOCK.get());
         dropSelf(ModBlocks.BISMUTH_BLOCK.get());
         dropSelf(ModBlocks.RAW_BISMUTH_BLOCK.get());
+        dropSelf(ModBlocks.BLOODWOOD_PLANKS.get());
+        dropSelf(ModBlocks.BLOODWOOD_LOG.get());
+        dropSelf(ModBlocks.BLOODWOOD.get());
+        dropSelf(ModBlocks.STRIPPED_BLOODWOOD_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_BLOODWOOD.get());
+        dropSelf(ModBlocks.BLOODWOOD_SAPLING.get());
+
+        // LEAVES
+
+        // Bloodwood
+        add(ModBlocks.BLOODWOOD_LEAVES.get(),
+                createLeavesDrops(ModBlocks.BLOODWOOD_LEAVES.get(), ModBlocks.BLOODWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
         // Aluminium ores
 

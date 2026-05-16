@@ -6,12 +6,14 @@ import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.model.ModelTemplate;
 import net.minecraft.client.data.models.model.ModelTemplates;
+import net.minecraft.client.data.models.model.TextureMapping;
+import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.client.model.object.armorstand.ArmorStandArmorModel;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
-import net.neoforged.fml.common.Mod;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.level.block.Blocks;
 
 public class ModModelProvider extends ModelProvider {
     public ModModelProvider(PackOutput output) {
@@ -71,5 +73,14 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.RAW_FLUORITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.BISMUTH_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.RAW_BISMUTH_BLOCK.get());
+        blockModels.woodProvider(ModBlocks.BLOODWOOD_LOG.get()).logWithHorizontal(ModBlocks.BLOODWOOD_LOG.get()).wood(ModBlocks.BLOODWOOD.get());
+        blockModels.woodProvider(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()).wood(ModBlocks.STRIPPED_BLOODWOOD.get());
+        blockModels.createTrivialCube(ModBlocks.BLOODWOOD_PLANKS.get());
+        blockModels.createTrivialBlock(ModBlocks.BLOODWOOD_LEAVES.get(), TexturedModel.LEAVES);
+
+        blockModels.createTrivialCube(ModBlocks.BLOODWOOD_SAPLING.get());
+
+//        blockModels.createPlantWithDefaultItem(ModBlocks.BLOODWOOD_SAPLING.get(), ModBlocks.BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
     }
+
 }

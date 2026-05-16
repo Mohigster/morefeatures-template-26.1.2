@@ -45,6 +45,8 @@ public class ModCreativeModeTabs {
                 // Bismuth items
                 output.accept(ModItems.RAW_BISMUTH);
                 output.accept(ModItems.BISMUTH);
+                output.accept(ModItems.BISMUTH_SCRAP);
+                output.accept(ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE);
             })
             .build());
 

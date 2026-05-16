@@ -58,5 +58,11 @@
 
   "item.morefeatures.brine_rod": "Brine Rod",
 
+  "block.morefeatures.bloodwood": "Bloodwood",
+  "block.morefeatures.bloodwood_log": "Bloodwood Log",
+  "block.morefeatures.stripped_bloodwood": "Stripped Bloodwood",
+  "block.morefeatures.stripped_bloodwood_log": "Stripped Bloodwood Log",
+  "block.morefeatures.bloodwood_planks": "Bloodwood Planks",
+
   "creativetab.morefeatures.morefeatures_equipment": "More Features Equipment"
 }

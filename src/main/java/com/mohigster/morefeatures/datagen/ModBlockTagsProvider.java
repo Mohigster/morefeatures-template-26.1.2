@@ -9,6 +9,7 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.minecraft.world.entity.monster.breeze.Breeze;
@@ -48,6 +49,25 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.RAW_BISMUTH_BLOCK.get())
                 .add(ModBlocks.BISMUTH_ORE.get());
 
+        tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(ModBlocks.BLOODWOOD_PLANKS.get())
+                .add(ModBlocks.STRIPPED_BLOODWOOD.get())
+                .add(ModBlocks.BLOODWOOD.get())
+                .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
+                .add(ModBlocks.BLOODWOOD_LOG.get());
+
+        tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBlocks.BLOODWOOD_LOG.get())
+                .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
+                .add(ModBlocks.BLOODWOOD.get())
+                .add(ModBlocks.STRIPPED_BLOODWOOD.get());
+
+        tag(ModBlockTags.BLOODWOOD_LOGS)
+                .add(ModBlocks.STRIPPED_BLOODWOOD.get())
+                .add(ModBlocks.BLOODWOOD.get())
+                .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
+                .add(ModBlocks.BLOODWOOD_LOG.get());
+
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.ALUMINIUM_BLOCK.get())
                 .add(ModBlocks.ALUMINIUM_ORE.get())
@@ -57,6 +77,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.MAGNESIUM_ORE.get())
                 .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
                 .add(ModBlocks.MAGNESIUM_BLOCK.get());
+
+        tag(BlockTags.LEAVES)
+                .add(ModBlocks.BLOODWOOD_LEAVES.get());
+
+        tag(BlockTags.SAPLINGS)
+                .add(ModBlocks.BLOODWOOD_SAPLING.get());
 
         tag(Tags.Blocks.NEEDS_NETHERITE_TOOL)
                 .add(ModBlocks.BISMUTH_ORE.get())
