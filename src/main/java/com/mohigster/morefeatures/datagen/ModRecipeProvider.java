@@ -327,6 +327,19 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("magic")
                 .save(output);
 
+        // Carbon Recipes
+
+        shaped(RecipeCategory.COMBAT, ModItems.CARBON_BOW)
+                .pattern("CCC")
+                .pattern("CBC")
+                .pattern("CRC")
+                .define('C', ModItems.CARBON_FIBER.get())
+                .define('B', Items.BOW)
+                .define('R', Items.RESIN_CLUMP)
+                .unlockedBy(getHasName(ModItems.CARBON_FIBER.get()), has(ModItems.CARBON_FIBER))
+                .group("carbon_bow")
+                .save(output);
+
 
         // Bismuth smithing recipes
 
