@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.block.custom;
 import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
@@ -42,14 +43,23 @@ public class MagicBlock extends Block {
         }
 
         if(entity instanceof ItemEntity itemEntity) {
-            if(isCarbonItem(itemEntity.getItem())) {
-                itemEntity.setItem(new ItemStack(ModItems.CARBON_FIBER.get(), itemEntity.getItem().getCount()));
-            }
-            if(isMetalItem(itemEntity.getItem())) {
-                itemEntity.setItem(new ItemStack(ModItems.BISMUTH_SCRAP.get(), itemEntity.getItem().getCount()));
-            }
-            if(isGemstoneItem(itemEntity.getItem())) {
-                itemEntity.setItem(new ItemStack(Items.DIAMOND, itemEntity.getItem().getCount()));
+            if(isValidItem(itemEntity.getItem())) {
+                if(isCarbonItem(itemEntity.getItem())) {
+                    itemEntity.setItem(new ItemStack(ModItems.CARBON_FIBER.get(), itemEntity.getItem().getCount()));
+                }
+                if(isMetalItem(itemEntity.getItem())) {
+                    itemEntity.setItem(new ItemStack(ModItems.BISMUTH_SCRAP.get(), itemEntity.getItem().getCount()));
+                }
+                if(isGemstoneItem(itemEntity.getItem())) {
+                    itemEntity.setItem(new ItemStack(Items.DIAMOND, itemEntity.getItem().getCount()));
+                }
+
+                level.addParticle(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
+                        0, 1, 0);
+
+                level.playSound(null, itemEntity,
+                        SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.5f, 1f);
+
             }
 
         }
@@ -70,5 +80,14 @@ public class MagicBlock extends Block {
     private boolean isGemstoneItem(ItemStack item) {
         return item.is(Items.EMERALD) || item.is(ModItems.AZURITE)
                 || item.is(ModItems.FLUORITE);
+    }
+
+    private boolean isValidItem(ItemStack item) {
+        return item.is(Items.IRON_INGOT) || item.is(ModItems.MAGNESIUM_INGOT) ||
+                item.is(ModItems.ALUMINIUM_INGOT) || item.is(Items.COPPER_INGOT) ||
+                item.is(Items.GOLD_INGOT)||item.is(Items.EMERALD) || item.is(ModItems.AZURITE)
+                || item.is(ModItems.FLUORITE) ||item.is(Items.COAL) || item.is(ItemTags.SAPLINGS) ||
+                item.is(ItemTags.FLOWERS) || item.is(ItemTags.LOGS_THAT_BURN) ||
+                item.is(ItemTags.LOGS) || item.is(Items.REDSTONE);
     }
 }

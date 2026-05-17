@@ -314,6 +314,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .save(output, "morefeatures:bismuth_from_bismuth_scraps_and_diamonds");
 
         // Magic block recipe
+
         shaped(RecipeCategory.MISC, ModBlocks.MAGIC_BLOCK)
                 .pattern("DBD")
                 .pattern("BEB")
@@ -325,6 +326,21 @@ public class ModRecipeProvider extends RecipeProvider {
                 .define('D', Items.DIAMOND)
                 .unlockedBy(getHasName(Items.NETHERITE_SCRAP), has(Items.NETHERITE_SCRAP))
                 .group("magic")
+                .save(output);
+
+        // Metal detector recipe
+
+        shaped(RecipeCategory.TOOLS, ModItems.METAL_DETECTOR)
+                .pattern("  S")
+                .pattern("MS ")
+                .pattern("BMI")
+                .pattern("  S")
+                .define('B', ModItems.BISMUTH.get())
+                .define('S', Items.STICK)
+                .define('M', ModItems.MAGNESIUM_INGOT.get())
+                .define('I', Items.IRON_INGOT)
+                .unlockedBy(getHasName(ModItems.MAGNESIUM_INGOT.get()), has(ModItems.MAGNESIUM_INGOT))
+                .group("metal_detector")
                 .save(output);
 
         // Carbon Recipes

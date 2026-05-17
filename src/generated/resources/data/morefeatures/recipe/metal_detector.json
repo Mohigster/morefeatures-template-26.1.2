@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "metal_detector",
+  "key": {
+    "B": "morefeatures:bismuth",
+    "I": "minecraft:iron_ingot",
+    "M": "morefeatures:magnesium_ingot",
+    "S": "minecraft:stick"
+  },
+  "pattern": [
+    "  S",
+    "MS ",
+    "BMI",
+    "  S"
+  ],
+  "result": {
+    "id": "morefeatures:metal_detector"
+  }
+}
