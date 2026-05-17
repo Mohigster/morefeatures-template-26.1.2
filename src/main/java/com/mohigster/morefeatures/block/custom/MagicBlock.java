@@ -43,7 +43,7 @@ public class MagicBlock extends Block {
 
         if(entity instanceof ItemEntity itemEntity) {
             if(isCarbonItem(itemEntity.getItem())) {
-                itemEntity.setItem(new ItemStack(Items.DIAMOND, itemEntity.getItem().getCount()));
+                itemEntity.setItem(new ItemStack(ModItems.CARBON_FIBER.get(), itemEntity.getItem().getCount()));
             }
             if(isMetalItem(itemEntity.getItem())) {
                 itemEntity.setItem(new ItemStack(ModItems.BISMUTH_SCRAP.get(), itemEntity.getItem().getCount()));
