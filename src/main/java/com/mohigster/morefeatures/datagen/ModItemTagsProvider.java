@@ -28,24 +28,24 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(1).asItem())
                 .add(ModItems.BISMUTH_AXE.get())
+                .add(ModItems.BISMUTH_HOE.get())
+                .add(ModItems.BISMUTH_SHOVEL.get())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(6).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
 
         tag(ModItemTags.BISMUTH_TOOL_MATERIALS)
                 .add(ModItems.BISMUTH.get());
 
         tag(ItemTags.SHOVELS)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
+                .add(ModItems.BISMUTH_SHOVEL.get());
 
         tag(ItemTags.AXES)
                 .add(ModItems.BISMUTH_AXE.get());
 
         tag(ItemTags.HOES)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+                .add(ModItems.BISMUTH_HOE.get());
 
         tag(ItemTags.PICKAXES)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(1).asItem());
@@ -60,18 +60,18 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.MINING_ENCHANTABLE)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(1).asItem())
                 .add(ModItems.BISMUTH_AXE.get())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
+                .add(ModItems.BISMUTH_SHOVEL.get());
 
         tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(1).asItem())
                 .add(ModItems.BISMUTH_AXE.get())
+                .add(ModItems.BISMUTH_HOE.get())
+                .add(ModItems.BISMUTH_SHOVEL.get())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(6).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
 
         tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
@@ -86,36 +86,42 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.BISMUTH_AXE.get());
 
         tag(ItemTags.ARMOR_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(6).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
 
         tag(ItemTags.HEAD_ARMOR)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
 
         tag(ItemTags.CHEST_ARMOR)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
 
         tag(ItemTags.LEG_ARMOR)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(6).asItem());
-
-        tag(ItemTags.FOOT_ARMOR)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
-
-        tag(ItemTags.HEAD_ARMOR_ENCHANTABLE)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
 
-        tag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
+        tag(ItemTags.FOOT_ARMOR)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
 
+        tag(ItemTags.HEAD_ARMOR_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+
+        tag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
+
         tag(ItemTags.LEG_ARMOR_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(6).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
 
         tag(ItemTags.FOOT_ARMOR_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
 
         tag(ItemTags.SAPLINGS)
                 .add(ModBlocks.BLOODWOOD_SAPLING.get().asItem());
+
+        tag(ItemTags.LOGS_THAT_BURN)
+                .add(ModBlocks.BLOODWOOD.get().asItem())
+                .add(ModBlocks.BLOODWOOD_LOG.get().asItem())
+                .add(ModBlocks.STRIPPED_BLOODWOOD.get().asItem())
+                .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get().asItem());
     }
 }

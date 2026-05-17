@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "#minecraft:bismuth_tools_material",
+  "base": "minecraft:netherite_pickaxe",
+  "result": {
+    "id": "morefeatures:bismuth_pickaxe"
+  },
+  "template": "morefeatures:bismuth_upgrade_smithing_template"
+}

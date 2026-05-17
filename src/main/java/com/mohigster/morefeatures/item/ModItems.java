@@ -92,25 +92,40 @@ public class ModItems {
             properties -> new AxeItem(BISMUTH_TOOL_MATERIAL, 8f, -3f, properties
                     .enchantable(15)
                     .fireResistant()
+                    .rarity(Rarity.RARE)
+                    .repairable(BISMUTH.get()
+                    )));
+
+    public static final DeferredItem<Item> BISMUTH_SHOVEL = ITEMS.registerItem("bismuth_shovel",
+            properties -> new ShovelItem(BISMUTH_TOOL_MATERIAL, 0f, 0f, properties
+                    .enchantable(15)
+                    .fireResistant()
+                    .rarity(Rarity.RARE)
+                    .repairable(BISMUTH.get()
+                    )));
+
+    public static final DeferredItem<Item> BISMUTH_HOE = ITEMS.registerItem("bismuth_hoe",
+            properties -> new HoeItem(BISMUTH_TOOL_MATERIAL, 4.5f, -3f, properties
+                    .enchantable(15)
+                    .fireResistant()
+                    .rarity(Rarity.RARE)
                     .repairable(BISMUTH.get()
                     )));
 
 
 
     public static final List<DeferredItem<Item>> BISMUTH_EQUIPMENT = registerEquipmentItems("bismuth", BISMUTH_TOOL_MATERIAL, ModArmorMaterial.Armor.BISMUTH,
-            new float[]{7.5f, -2.2f}, new float[]{4f, -2.8f}, new float[]{0f, 0f}, new float[]{4.5f, -3f},
+            new float[]{7.5f, -2.2f}, new float[]{4f, -2.8f},
             new Item.Properties().rarity(Rarity.RARE).fireResistant().enchantable(15));
 
 
     public static List<DeferredItem<Item>> registerEquipmentItems(String name, ToolMaterial toolmaterial, ArmorMaterial armormaterial,
-                                                            float[] swordattr, float[] pickaxeattr, float[] shovelattr, float[] hoeattr,
+                                                            float[] swordattr, float[] pickaxeattr,
                                                             Item.Properties itemProp) {
 
         return List.of(
                 registerItem(name + "_sword", (p) -> new Item(p.sword(toolmaterial, swordattr[0], swordattr[1])), itemProp),
                 registerItem(name + "_pickaxe", (p) -> new Item(p.pickaxe(toolmaterial, pickaxeattr[0], pickaxeattr[1])), itemProp),
-                registerItem(name + "_hoe", (p) -> new Item(p.hoe(toolmaterial, hoeattr[0], hoeattr[1])), itemProp),
-                registerItem(name + "_shovel", (p) -> new Item(p.shovel(toolmaterial, shovelattr[0], shovelattr[1])), itemProp),
 
                 registerItem(name + "_helmet", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.HELMET)), itemProp),
                 registerItem(name + "_chestplate", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.CHESTPLATE)), itemProp),

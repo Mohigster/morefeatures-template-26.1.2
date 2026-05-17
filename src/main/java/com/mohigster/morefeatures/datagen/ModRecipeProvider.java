@@ -359,11 +359,15 @@ public class ModRecipeProvider extends RecipeProvider {
 
         // Bismuth smithing recipes
 
+        bismuthSmithing(Items.NETHERITE_AXE, RecipeCategory.COMBAT, ModItems.BISMUTH_AXE.get());
+        bismuthSmithing(Items.NETHERITE_SHOVEL, RecipeCategory.COMBAT, ModItems.BISMUTH_SHOVEL.get());
+        bismuthSmithing(Items.NETHERITE_HOE, RecipeCategory.COMBAT, ModItems.BISMUTH_HOE.get());
         bismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
-        bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
-        bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
-        bismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(6).asItem());
-        bismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
+        bismuthSmithing(Items.NETHERITE_PICKAXE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(1).asItem());
+        bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+        bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
+        bismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
+        bismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
 
 
         //—————————————————————————————SMELTABLE LISTS———————————————————————————————

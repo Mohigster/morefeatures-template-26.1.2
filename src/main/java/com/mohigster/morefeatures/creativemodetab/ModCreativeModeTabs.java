@@ -105,16 +105,16 @@ public class ModCreativeModeTabs {
 
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(1).asItem());
-                output.accept(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
-                output.accept(ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
-                output.accept(ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
+                output.accept(ModItems.BISMUTH_AXE);
+                output.accept(ModItems.BISMUTH_SHOVEL);
+                output.accept(ModItems.BISMUTH_HOE);
 
                 // Armor
 
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
+                output.accept(ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
-                output.accept(ModItems.BISMUTH_EQUIPMENT.get(6).asItem());
-                output.accept(ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
-                output.accept(ModItems.BISMUTH_EQUIPMENT.get(8).asItem());
 
                 // Metal detector
 
