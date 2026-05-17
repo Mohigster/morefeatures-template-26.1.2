@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "morefeatures:block/magic_block"
+    }
+  }
+}

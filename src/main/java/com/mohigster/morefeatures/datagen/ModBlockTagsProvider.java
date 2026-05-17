@@ -45,6 +45,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.END_AZURITE_ORE.get())
                 .add(ModBlocks.FLUORITE_ORE.get())
                 .add(ModBlocks.AZURITE_ORE.get())
+                .add(ModBlocks.MAGIC_BLOCK.get())
                 .add(ModBlocks.BISMUTH_BLOCK.get())
                 .add(ModBlocks.RAW_BISMUTH_BLOCK.get())
                 .add(ModBlocks.BISMUTH_ORE.get());
@@ -83,6 +84,15 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
         tag(BlockTags.SAPLINGS)
                 .add(ModBlocks.BLOODWOOD_SAPLING.get());
+
+        tag(BlockTags.PLANKS)
+                .add(ModBlocks.BLOODWOOD_PLANKS.get());
+
+//        tag(BlockTags.STAIRS)
+//                .add(ModBlocks.BLOODWOOD_STAIRS.get());
+
+//        tag(BlockTags.SLABS)
+//                .add(ModBlocks.BLOODWOOD_SLAB.get());
 
         tag(Tags.Blocks.NEEDS_NETHERITE_TOOL)
                 .add(ModBlocks.BISMUTH_ORE.get())

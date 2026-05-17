@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "bloodwood_planks",
+  "ingredients": [
+    "morefeatures:stripped_bloodwood"
+  ],
+  "result": {
+    "count": 4,
+    "id": "morefeatures:bloodwood_planks"
+  }
+}

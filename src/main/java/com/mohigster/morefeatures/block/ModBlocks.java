@@ -1,12 +1,14 @@
 package com.mohigster.morefeatures.block;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.block.custom.MagicBlock;
 import com.mohigster.morefeatures.block.custom.ModFlammableRotatedPillarBlock;
 import com.mohigster.morefeatures.item.ModItems;
 import com.mohigster.morefeatures.worldgen.tree.ModTreeGrowers;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -16,6 +18,8 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.PotDecorations;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.material.MapColor;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -240,17 +244,21 @@ public class ModBlocks {
                 public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
                     return 5;
                 }
-            }
-            );
+            });
 
     public static final DeferredBlock<Block> BLOODWOOD_LEAVES = registerBlock("bloodwood_leaves",
-            properties -> new LeavesBlock(4, properties
-                    .strength(1f, 1f)
-                    .sound(SoundType.GRASS))
+            properties -> new TintedParticleLeavesBlock(4, properties
+                    .strength(0.2f, 0.2f)
+                    .sound(SoundType.GRASS)
+                    .noOcclusion()
+                    .ignitedByLava()
+            )
+
+
 
             {
                 @Override
-                public MapCodec<? extends LeavesBlock> codec() {
+                public MapCodec<? extends TintedParticleLeavesBlock> codec() {
                     return null;
                 }
 
@@ -273,11 +281,6 @@ public class ModBlocks {
                 public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
                     return 30;
                 }
-
-                @Override
-                public boolean hidesNeighborFace(BlockGetter level, BlockPos pos, BlockState state, BlockState neighborState, Direction dir){
-                    return false;
-                }
             }
     );
     public static final DeferredBlock<Block> BLOODWOOD_SAPLING = registerBlock("bloodwood_sapling",
@@ -286,6 +289,59 @@ public class ModBlocks {
                     .sound(SoundType.GRASS))
     );
 
+//    public static final DeferredBlock<Block> BLOODWOOD_STAIRS = registerBlock("bloodwood_stairs",
+//            properties -> new StairBlock(ModBlocks.BLOODWOOD_PLANKS.get().defaultBlockState(), properties
+//                            .strength(1f, 1f)
+//                            .sound(SoundType.WOOD)
+//                            .ignitedByLava()
+//                    )
+//            {
+//                @Override
+//                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+//                    return true;
+//                }
+//
+//                @Override
+//                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+//                    return 20;
+//                }
+//
+//                @Override
+//                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+//                    return 5;
+//                }
+//            }
+//    );
+
+//    public static final DeferredBlock<Block> BLOODWOOD_SLAB = registerBlock("bloodwood_slab",
+//            properties -> new SlabBlock(properties
+//                    .strength(1f, 1f)
+//                    .sound(SoundType.WOOD)
+//                    .ignitedByLava()
+//            )
+//            {
+//                @Override
+//                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+//                    return true;
+//                }
+//
+//                @Override
+//                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+//                    return 20;
+//                }
+//
+//                @Override
+//                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+//                    return 5;
+//                }
+//            }
+//    );
+
+
+    // Magic block!
+    public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock("magic_block",
+            properties -> new MagicBlock(properties.strength(2f)
+                    .requiresCorrectToolForDrops().sound(SoundType.DECORATED_POT)));
 
 
 

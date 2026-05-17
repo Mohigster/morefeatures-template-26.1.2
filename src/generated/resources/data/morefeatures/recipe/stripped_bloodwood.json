@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "B": "morefeatures:stripped_bloodwood_log"
+  },
+  "pattern": [
+    "BB",
+    "BB"
+  ],
+  "result": {
+    "count": 3,
+    "id": "morefeatures:stripped_bloodwood"
+  }
+}

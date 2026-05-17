@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "group": "magic",
+  "key": {
+    "B": "morefeatures:bismuth",
+    "D": "minecraft:diamond",
+    "E": "minecraft:end_stone",
+    "F": "minecraft:netherrack",
+    "N": "minecraft:netherite_scrap"
+  },
+  "pattern": [
+    "DBD",
+    "BEB",
+    "NFN"
+  ],
+  "result": {
+    "id": "morefeatures:magic_block"
+  }
+}

@@ -89,6 +89,9 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.DEEPSLATE_FLUORITE_ORE);
                 output.accept(ModBlocks.NETHER_FLUORITE_ORE);
                 output.accept(ModBlocks.END_FLUORITE_ORE);
+
+                // Magic block
+                output.accept(ModBlocks.MAGIC_BLOCK);
             })
             .build());
 
@@ -112,6 +115,10 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(6).asItem());
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(8).asItem());
+
+                // Metal detector
+
+                output.accept(ModItems.METAL_DETECTOR);
             })
             .build());
 

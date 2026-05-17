@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.item;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.item.custom.MetalDetectorItem;
 import com.mohigster.morefeatures.item.custom.ModSmithingTemplateItem;
 import com.mohigster.morefeatures.toolmaterial.ModArmorMaterial;
 import com.mohigster.morefeatures.toolmaterial.ModToolMaterial;
@@ -60,26 +61,54 @@ public class ModItems {
     // Elemental rods
     public static final DeferredItem<Item> BRINE_ROD = ITEMS.registerSimpleItem("brine_rod");
 
+    // Metal detector
+    public static final DeferredItem<Item> METAL_DETECTOR = ITEMS.registerItem("metal_detector",
+            properties -> new MetalDetectorItem(properties
+                    .durability(128)
+            ));
+
+    // Carbon Fiber
+    public static final DeferredItem<Item> CARBON_FIBER = ITEMS.registerItem("carbon_fiber",
+            properties -> new Item(properties
+                    .fireResistant()
+            ));
+
+    public static final DeferredItem<Item> CARBON_BOW = ITEMS.registerItem("carbon_bow",
+            properties -> new BowItem(properties
+                    .durability(856)
+                    .repairable(CARBON_FIBER.get())
+                    .enchantable(15)
+                    .fireResistant()
+            ));
+
+
+
     // Tools and equipment
     public static final DeferredItem<Item> BISMUTH_UPGRADE_SMITHING_TEMPLATE = registerItem(
             "bismuth_upgrade_smithing_template", ModSmithingTemplateItem::createBismuthUpgradeTemplate, new Item.Properties().rarity(Rarity.UNCOMMON)
     );
 
+    public static final DeferredItem<Item> BISMUTH_AXE = ITEMS.registerItem("bismuth_axe",
+            properties -> new AxeItem(BISMUTH_TOOL_MATERIAL, 8f, -3f, properties
+                    .enchantable(15)
+                    .fireResistant()
+                    .repairable(BISMUTH.get()
+                    )));
+
 
 
     public static final List<DeferredItem<Item>> BISMUTH_EQUIPMENT = registerEquipmentItems("bismuth", BISMUTH_TOOL_MATERIAL, ModArmorMaterial.Armor.BISMUTH,
-            new float[]{7.5f, -2.2f}, new float[]{4f, -2.8f}, new float[]{8f, -3f}, new float[]{0f, 0f}, new float[]{4.5f, -3f},
-            new Item.Properties().rarity(Rarity.RARE));
+            new float[]{7.5f, -2.2f}, new float[]{4f, -2.8f}, new float[]{0f, 0f}, new float[]{4.5f, -3f},
+            new Item.Properties().rarity(Rarity.RARE).fireResistant().enchantable(15));
 
 
     public static List<DeferredItem<Item>> registerEquipmentItems(String name, ToolMaterial toolmaterial, ArmorMaterial armormaterial,
-                                                            float[] swordattr, float[] pickaxeattr, float[] axeattr, float[] shovelattr, float[] hoeattr,
+                                                            float[] swordattr, float[] pickaxeattr, float[] shovelattr, float[] hoeattr,
                                                             Item.Properties itemProp) {
 
         return List.of(
                 registerItem(name + "_sword", (p) -> new Item(p.sword(toolmaterial, swordattr[0], swordattr[1])), itemProp),
                 registerItem(name + "_pickaxe", (p) -> new Item(p.pickaxe(toolmaterial, pickaxeattr[0], pickaxeattr[1])), itemProp),
-                registerItem(name + "_axe", (p) -> new Item(p.axe(toolmaterial, axeattr[0], axeattr[1])), itemProp),
                 registerItem(name + "_hoe", (p) -> new Item(p.hoe(toolmaterial, hoeattr[0], hoeattr[1])), itemProp),
                 registerItem(name + "_shovel", (p) -> new Item(p.shovel(toolmaterial, shovelattr[0], shovelattr[1])), itemProp),
 
@@ -89,13 +118,6 @@ public class ModItems {
                 registerItem(name + "_boots", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.BOOTS)), itemProp)
         );
     }
-
-
-
-
-
-
-
 
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);

@@ -190,6 +190,70 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("fluorite")
                 .save(output, "morefeatures:fluorite_from_blaze_rod_and_breeze_rod_and_brine_rod");
 
+        // Bloodwood recipes
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_PLANKS.get(), 4)
+                .requires(ModBlocks.BLOODWOOD_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_LOG.get()), has(ModBlocks.BLOODWOOD_LOG.get()))
+                .group("bloodwood_planks")
+                .save(output, "morefeatures:bloodwood_planks_from_log");
+
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_PLANKS.get(), 4)
+                .requires(ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_LOG.get()), has(ModBlocks.BLOODWOOD_LOG.get()))
+                .group("bloodwood_planks")
+                .save(output, "morefeatures:bloodwood_planks_from_stripped_log");
+
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_PLANKS.get(), 4)
+                .requires(ModBlocks.BLOODWOOD.get())
+                .unlockedBy(getHasName(ModBlocks.BLOODWOOD.get()), has(ModBlocks.BLOODWOOD.get()))
+                .group("bloodwood_planks")
+                .save(output, "morefeatures:bloodwood_planks_from_wood");
+
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_PLANKS.get(), 4)
+                .requires(ModBlocks.STRIPPED_BLOODWOOD.get())
+                .unlockedBy(getHasName(ModBlocks.BLOODWOOD.get()), has(ModBlocks.BLOODWOOD))
+                .group("bloodwood_planks")
+                .save(output, "morefeatures:bloodwood_planks_from_stripped_wood");
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD.get(), 3)
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModBlocks.BLOODWOOD_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_LOG.get()), has(ModBlocks.BLOODWOOD_LOG))
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_BLOODWOOD.get(), 3)
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()), has(ModBlocks.STRIPPED_BLOODWOOD_LOG))
+                .save(output);
+
+        shaped(RecipeCategory.MISC, Items.STICK, 4)
+                .pattern("P")
+                .pattern("P")
+                .define('P', ModBlocks.BLOODWOOD_PLANKS.get())
+                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_PLANKS.get()), has(ModBlocks.BLOODWOOD_PLANKS))
+                .group("stick")
+                .save(output, "morefeatures:sticks_from_bloodwood_planks");
+
+        shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
+                .pattern("PP")
+                .pattern("PP")
+                .define('P', ModBlocks.BLOODWOOD_PLANKS.get())
+                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_PLANKS.get()), has(ModBlocks.BLOODWOOD_PLANKS))
+                .group("crafting_table")
+                .save(output, "morefeatures:crafting_table_from_bloodwood_planks");
+
+//        stairBuilder(ModBlocks.BLOODWOOD_STAIRS.get(), Ingredient.of(ModBlocks.BLOODWOOD_PLANKS))
+//                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_PLANKS), has(ModBlocks.BLOODWOOD_PLANKS))
+//                .group("bloodwood_stairs")
+//                .save(output);
+
+//        slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_SLAB, ModBlocks.BLOODWOOD_PLANKS);
+
+
+
         // Bismuth recipes
 
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BISMUTH_BLOCK)
@@ -221,6 +285,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(ModBlocks.BISMUTH_BLOCK.get()), has(ModBlocks.BISMUTH_BLOCK))
                 .group("bismuth")
                 .save(output, "morefeatures:bismuth_from_blaze_rod_and_breeze_rod_and_brine_rod");
+
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.RAW_BISMUTH_BLOCK)
                 .pattern("AAA")
                 .pattern("AAA")
@@ -229,6 +294,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(ModItems.RAW_BISMUTH.get()), has(ModItems.RAW_BISMUTH))
                 .group("bismuth")
                 .save(output);
+
         shaped(RecipeCategory.MISC, ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE, 2)
                 .pattern("NBN")
                 .pattern("NEN")
@@ -239,6 +305,7 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(Items.NETHERITE_SCRAP), has(Items.NETHERITE_SCRAP))
                 .group("bismuth")
                 .save(output);
+
         shapeless(RecipeCategory.MISC, ModItems.BISMUTH.get())
                 .requires(ModItems.BISMUTH_SCRAP, 4)
                 .requires(Items.DIAMOND, 4)
@@ -246,19 +313,28 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("bismuth")
                 .save(output, "morefeatures:bismuth_from_bismuth_scraps_and_diamonds");
 
+        // Magic block recipe
+        shaped(RecipeCategory.MISC, ModBlocks.MAGIC_BLOCK)
+                .pattern("DBD")
+                .pattern("BEB")
+                .pattern("NFN")
+                .define('B', ModItems.BISMUTH.get())
+                .define('N', Items.NETHERITE_SCRAP)
+                .define('E', Blocks.END_STONE.asItem())
+                .define('F', Blocks.NETHERRACK.asItem())
+                .define('D', Items.DIAMOND)
+                .unlockedBy(getHasName(Items.NETHERITE_SCRAP), has(Items.NETHERITE_SCRAP))
+                .group("magic")
+                .save(output);
+
+
         // Bismuth smithing recipes
 
         bismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
-        bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
-        bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(6).asItem());
-        bismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
-        bismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(8).asItem());
-
-
-
-
-
-
+        bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
+        bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+        bismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(6).asItem());
+        bismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(7).asItem());
 
 
         //—————————————————————————————SMELTABLE LISTS———————————————————————————————

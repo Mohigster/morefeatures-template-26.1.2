@@ -46,6 +46,11 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.STRIPPED_BLOODWOOD_LOG.get());
         dropSelf(ModBlocks.STRIPPED_BLOODWOOD.get());
         dropSelf(ModBlocks.BLOODWOOD_SAPLING.get());
+        dropSelf(ModBlocks.MAGIC_BLOCK.get());
+//        dropSelf(ModBlocks.BLOODWOOD_STAIRS.get());
+
+//        add(ModBlocks.BLOODWOOD_SLAB.get(),
+//                createSlabItemTable(ModBlocks.BLOODWOOD_SLAB.get()));
 
         // LEAVES
 

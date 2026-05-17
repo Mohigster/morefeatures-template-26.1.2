@@ -1,6 +1,7 @@
 {
   "creativetab.morefeatures.morefeatures_items": "More Features Items",
   "creativetab.morefeatures.morefeatures_blocks": "More Features Blocks",
+  "creativetab.morefeatures.morefeatures_equipment": "More Features Equipment",
 
   "item.morefeatures.raw_aluminium": "Raw Aluminum",
   "item.morefeatures.aluminium_ingot": "Aluminum Ingot",
@@ -63,6 +64,11 @@
   "block.morefeatures.stripped_bloodwood": "Stripped Bloodwood",
   "block.morefeatures.stripped_bloodwood_log": "Stripped Bloodwood Log",
   "block.morefeatures.bloodwood_planks": "Bloodwood Planks",
+  "block.morefeatures.bloodwood_leaves": "Bloodwood Leaves",
+  "block.morefeatures.bloodwood_sapling": "Bloodwood Sapling",
 
-  "creativetab.morefeatures.morefeatures_equipment": "More Features Equipment"
+  "item.morefeatures.metal_detector.fail": "No Valuable Metals Found!",
+  "item.morefeatures.metal_detector": "Metal Detector",
+
+  "block.morefeatures.magic_block": "Magic Block"
 }

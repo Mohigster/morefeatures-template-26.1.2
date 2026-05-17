@@ -40,13 +40,29 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(1).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(2).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(3).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(4).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(4).asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(5).asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(6).asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(7).asItem(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(8).asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_SCRAP.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModBlocks.BLOODWOOD_SAPLING.get().asItem(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.METAL_DETECTOR.get(), ModelTemplates.FLAT_ITEM);
+//        itemModels.generateFlatItem(ModItems.CARBON_BOW.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(ModItems.CARBON_FIBER.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.BISMUTH_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+
+        // Used the generateFlatItem() line to get carbon_bow.json, then to prevent datagen deleting it,
+        // I moved that file to the permanent resources file instead of the generated resources file.
+        // Then ran the generateBow() line. Keeping generateFlatItem() commented there for reference
+
+        // Must do this because generateBow() gives the models for when the bow is being pulled,
+        // but generateFlatItem() gives the model for when it isn't. However, using both methods
+        // at the same time causes DataGen to fail. I don't know why, but it does.
+
+//        itemModels.generateFlatItem(ModItems.CARBON_BOW.get(), ModelTemplates.BOW);
+        itemModels.generateBow(ModItems.CARBON_BOW.get());
+
 
         // BLOCKS
 
@@ -77,10 +93,11 @@ public class ModModelProvider extends ModelProvider {
         blockModels.woodProvider(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()).wood(ModBlocks.STRIPPED_BLOODWOOD.get());
         blockModels.createTrivialCube(ModBlocks.BLOODWOOD_PLANKS.get());
         blockModels.createTrivialBlock(ModBlocks.BLOODWOOD_LEAVES.get(), TexturedModel.LEAVES);
-
-        blockModels.createTrivialCube(ModBlocks.BLOODWOOD_SAPLING.get());
-
-//        blockModels.createPlantWithDefaultItem(ModBlocks.BLOODWOOD_SAPLING.get(), ModBlocks.BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createCrossBlock(ModBlocks.BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createTrivialCube(ModBlocks.MAGIC_BLOCK.get());
+//        blockModels.family(ModBlocks.BLOODWOOD_PLANKS.get())
+//                .stairs(ModBlocks.BLOODWOOD_STAIRS.get());
+//                .slab(ModBlocks.BLOODWOOD_SLAB.get());
     }
 
 }
