@@ -59,9 +59,8 @@ public class MagicBlock extends Block {
 
     private boolean isCarbonItem(ItemStack item) {
         return item.is(Items.COAL) || item.is(ItemTags.SAPLINGS) ||
-                item.is(ItemTags.FLOWERS) || item.is(ItemTags.SAPLINGS) ||
-                item.is(ItemTags.LOGS_THAT_BURN) || item.is(ItemTags.LOGS) ||
-                item.is(Items.REDSTONE);
+                item.is(ItemTags.FLOWERS) || item.is(ItemTags.LOGS_THAT_BURN) ||
+                item.is(ItemTags.LOGS) || item.is(Items.REDSTONE);
     }
     private boolean isMetalItem(ItemStack item) {
         return item.is(Items.IRON_INGOT) || item.is(ModItems.MAGNESIUM_INGOT) ||
