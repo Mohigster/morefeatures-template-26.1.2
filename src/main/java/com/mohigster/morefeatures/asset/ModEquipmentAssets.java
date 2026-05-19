@@ -10,6 +10,7 @@ import static net.minecraft.world.item.equipment.EquipmentAssets.ROOT_ID;
 public interface ModEquipmentAssets {
     ResourceKey<EquipmentAsset> BISMUTH = createId("bismuth");
     ResourceKey<EquipmentAsset> CARBON_ELYTRA = createId("carbon_elytra");
+    ResourceKey<EquipmentAsset> CARBON = createId("carbon");
 
     static ResourceKey<EquipmentAsset> createId(String name) {
         return ResourceKey.create(ROOT_ID, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, name));

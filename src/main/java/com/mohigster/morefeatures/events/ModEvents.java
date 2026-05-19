@@ -14,7 +14,6 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 import java.util.List;
 
 @EventBusSubscriber(modid = MoreFeatures.MODID)
-
 public class ModEvents {
 
     @SubscribeEvent
@@ -37,7 +36,7 @@ public class ModEvents {
         for (FireworkRocketEntity rocket : rockets) {
 
             if (rocket.getOwner() == player) {
-                double maxSpeed = 5.5;
+                double maxSpeed = 8.5;
                 Vec3 movement = player.getDeltaMovement();
 
                 if (movement.length() <= maxSpeed) {

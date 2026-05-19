@@ -15,6 +15,7 @@ import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.ChargedProjectiles;
+import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.EquipmentAssets;
@@ -116,7 +117,7 @@ public class ModItems {
                     .repairable(CARBON_FIBER.get())
                     .enchantable(15)
                     .fireResistant()
-                    .wolfArmor(ModArmorMaterials.BISMUTH)
+                    .wolfArmor(ModArmorMaterials.CARBON)
             ));
 
     public static final DeferredItem<Item> CARBON_ELYTRA = ITEMS.registerItem("carbon_elytra",
@@ -135,6 +136,16 @@ public class ModItems {
                                     .build()
 
                     )
+            ));
+
+    public static final DeferredItem<Item> CARBON_TRIDENT = ITEMS.registerItem("carbon_trident",
+            properties -> new TridentItem(properties
+                    .fireResistant()
+                    .enchantable(15)
+                    .durability(594)
+                    .rarity(Rarity.RARE)
+                    .component(DataComponents.TOOL, TridentItem.createToolProperties())
+                    .component(DataComponents.WEAPON, new Weapon(1))
             ));
 
 

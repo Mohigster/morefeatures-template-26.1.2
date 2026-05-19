@@ -60,8 +60,8 @@
 
   "item.morefeatures.bismuth_upgrade_smithing_template": "Bismuth Upgrade",
   "item.minecraft.smithing_template.bismuth_upgrade.additions_slot_description": "Add Bismuth",
-  "item.minecraft.smithing_template.bismuth_upgrade.applies_to": "Netherite Equipment",
-  "item.minecraft.smithing_template.bismuth_upgrade.base_slot_description": "Add netherite armor, weapon, or tool",
+  "item.minecraft.smithing_template.bismuth_upgrade.applies_to": "Netherite or Carbon Equipment",
+  "item.minecraft.smithing_template.bismuth_upgrade.base_slot_description": "Add netherite or carbon armor, weapon, or tool",
   "item.minecraft.smithing_template.bismuth_upgrade.ingredients": "Bismuth",
 
   "item.morefeatures.brine_rod": "Brine Rod",
@@ -84,5 +84,6 @@
   "item.morefeatures.carbon_fiber": "Carbon Fiber",
   "item.morefeatures.carbon_bow": "Carbon Reinforced Bow",
   "item.morefeatures.carbon_crossbow": "Carbon Reinforced Crossbow",
-  "item.morefeatures.carbon_elytra": "Carbon Reinforced Elytra"
+  "item.morefeatures.carbon_elytra": "Carbon Reinforced Elytra",
+  "item.morefeatures.carbon_wolf_armor": "Carbon Reinforced Wolf Armor"
 }

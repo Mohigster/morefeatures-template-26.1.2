@@ -70,6 +70,7 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateCrossbow(ModItems.CARBON_CROSSBOW.get());
         itemModels.generateElytra(ModItems.CARBON_ELYTRA.get());
         itemModels.generateSpear(ModItems.BISMUTH_SPEAR.get());
+        itemModels.generateTrident(ModItems.CARBON_TRIDENT.get());
         itemModels.generateFlatItem(ModItems.BISMUTH_HORSE_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_NAUTILUS_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.CARBON_WOLF_ARMOR.get(), ModelTemplates.FLAT_ITEM);

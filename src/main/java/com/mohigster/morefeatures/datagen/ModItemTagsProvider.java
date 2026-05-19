@@ -93,6 +93,46 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ModItemTags.BISMUTH_TOOL_MATERIALS)
                 .add(ModItems.BISMUTH.get());
 
+        tag(ModItemTags.IS_GOLD_ARMOR)
+                .add(Items.GOLDEN_CHESTPLATE)
+                .add(Items.GOLDEN_HELMET)
+                .add(Items.GOLDEN_LEGGINGS)
+                .add(Items.GOLDEN_BOOTS);
+
+        tag(ModItemTags.IS_NON_GOLD_RAW_METAL)
+                .add(Items.RAW_IRON)
+                .add(ModItems.RAW_ALUMINIUM.get())
+                .add(ModItems.RAW_MAGNESIUM.get())
+                .add(Items.RAW_COPPER);
+
+        tag(ModItemTags.IS_NON_GOLD_METAL_BLOCK)
+                .add(Items.IRON_BLOCK)
+                .add(Items.COPPER_BLOCK)
+                .add(Items.EXPOSED_COPPER)
+                .add(Items.WEATHERED_COPPER)
+                .add(Items.OXIDIZED_COPPER)
+                .add(Items.WAXED_COPPER_BLOCK)
+                .add(Items.WAXED_EXPOSED_COPPER)
+                .add(Items.WAXED_WEATHERED_COPPER)
+                .add(Items.WAXED_OXIDIZED_COPPER)
+                .add(ModBlocks.ALUMINIUM_BLOCK.get().asItem())
+                .add(ModBlocks.MAGNESIUM_BLOCK.get().asItem())
+                .add(Items.RAW_IRON_BLOCK)
+                .add(ModBlocks.RAW_ALUMINIUM_BLOCK.get().asItem())
+                .add(ModBlocks.RAW_MAGNESIUM_BLOCK.get().asItem())
+                .add(Items.RAW_COPPER_BLOCK);
+
+        tag(ModItemTags.IS_NON_GOLD_INGOT)
+                .add(Items.COPPER_INGOT)
+                .add(ModItems.MAGNESIUM_INGOT.get())
+                .add(ModItems.ALUMINIUM_INGOT.get())
+                .add(Items.IRON_INGOT);
+
+        tag(ModItemTags.IS_GOLD)
+                .add(Items.RAW_GOLD)
+                .add(Items.GOLD_INGOT);
+
+
         tag(ItemTags.SHOVELS)
                 .add(ModItems.BISMUTH_SHOVEL.get());
 

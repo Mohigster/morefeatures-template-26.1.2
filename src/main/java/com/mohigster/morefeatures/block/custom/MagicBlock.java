@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.block.custom;
 
+import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.item.ModItems;
 import com.mohigster.morefeatures.tag.ModItemTags;
 import net.minecraft.core.BlockPos;
@@ -15,6 +16,7 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.equipment.ArmorMaterials;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -71,6 +73,15 @@ public class MagicBlock extends Block {
         if (isMetalItem(item)) {
             return new ItemStack(ModItems.BISMUTH_SCRAP.get(), count);
         }
+        if (isMetalBlock(item)) {
+            return new ItemStack(ModBlocks.RAW_BISMUTH_BLOCK.get().asItem(), count);
+        }
+        if (isGoldItem(item)) {
+            return new ItemStack(Items.NETHERITE_SCRAP, count);
+        }
+        if (isGoldBlock(item)) {
+            return new ItemStack(Items.NETHERITE_INGOT, count);
+        }
         if (isGemstoneItem(item)) {
             return new ItemStack(Items.DIAMOND, count);
         }
@@ -93,13 +104,21 @@ public class MagicBlock extends Block {
                 item.is(ItemTags.WOOL) || item.is(ItemTags.PLANKS);
     }
     private boolean isMetalItem(ItemStack item) {
-        return item.is(Items.IRON_INGOT) || item.is(ModItems.MAGNESIUM_INGOT) ||
-                item.is(ModItems.ALUMINIUM_INGOT) || item.is(Items.COPPER_INGOT) ||
-                item.is(Items.GOLD_INGOT);
+        return item.is(ModItemTags.IS_NON_GOLD_INGOT)|| item.is(ModItemTags.IS_NON_GOLD_RAW_METAL);
+    }
+    private boolean isMetalBlock(ItemStack item){
+        return item.is(ModItemTags.IS_NON_GOLD_METAL_BLOCK);
+    }
+    private boolean isGoldItem(ItemStack item) {
+        return item.is(ItemTags.GOLD_TOOL_MATERIALS) || item.is(ItemTags.GOLD_ORES) ||
+                item.is(ModItemTags.IS_GOLD) || item.is(ModItemTags.IS_GOLD_ARMOR);
+    }
+    private boolean isGoldBlock(ItemStack item){
+        return item.is(Items.RAW_GOLD_BLOCK) || item.is(Items.GOLD_BLOCK);
     }
     private boolean isGemstoneItem(ItemStack item) {
         return item.is(Items.EMERALD) || item.is(ModItems.AZURITE)
-                || item.is(ModItems.FLUORITE);
+                || item.is(ModItems.FLUORITE) || item.is(Items.AMETHYST_SHARD);
     }
     private boolean isPotionItem(ItemStack item) {
         return item.is(Items.POTION) || item.is(Items.SPLASH_POTION);
