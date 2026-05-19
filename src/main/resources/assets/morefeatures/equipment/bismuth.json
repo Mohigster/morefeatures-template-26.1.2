@@ -1,11 +1,21 @@
 {
   "layers": {
+    "horse_body": [
+      {
+        "texture": "morefeatures:bismuth"
+      }
+    ],
     "humanoid": [
       {
         "texture": "morefeatures:bismuth"
       }
     ],
     "humanoid_leggings": [
+      {
+        "texture": "morefeatures:bismuth"
+      }
+    ],
+    "nautilus_body": [
       {
         "texture": "morefeatures:bismuth"
       }

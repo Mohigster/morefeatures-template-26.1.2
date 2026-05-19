@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "group": "carbon_bow",
+  "key": {
+    "B": "minecraft:elytra",
+    "C": "morefeatures:carbon_fiber",
+    "R": "minecraft:resin_clump"
+  },
+  "pattern": [
+    "CCC",
+    "CBC",
+    "CRC"
+  ],
+  "result": {
+    "id": "morefeatures:carbon_elytra"
+  }
+}

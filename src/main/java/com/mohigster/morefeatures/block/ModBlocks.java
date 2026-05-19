@@ -8,18 +8,14 @@ import com.mohigster.morefeatures.worldgen.tree.ModTreeGrowers;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.entity.PotDecorations;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -94,20 +90,21 @@ public class ModBlocks {
     //———————————————————————————————————————Bismuth Blocks——————————————————————————————————————————————————————————————————————————
     public static final DeferredBlock<Block> BISMUTH_ORE = registerBlock("bismuth_ore",
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
-                    .strength(4f, 4f)
+                    .strength(6f, 6f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE)
             ));
 
     public static final DeferredBlock<Block> BISMUTH_BLOCK = registerBlock("bismuth_block",
             properties -> new Block(properties
-                    .strength(4f, 4f)
+                    .strength(8f, 8f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
             ));
+
     public static final DeferredBlock<Block> RAW_BISMUTH_BLOCK = registerBlock("raw_bismuth_block",
             properties -> new Block(properties
-                    .strength(4f, 4f)
+                    .strength(8f, 8f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
             ));
@@ -142,18 +139,30 @@ public class ModBlocks {
             ));
 
     public static final DeferredBlock<Block> AZURITE_BLOCK = registerBlock("azurite_block",
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+            properties -> new Block(properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
             ));
 
     public static final DeferredBlock<Block> RAW_AZURITE_BLOCK = registerBlock("raw_azurite_block",
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+            properties -> new Block(properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
             ));
+
+    public static final DeferredBlock<Block> AZURITE_STAIRS = registerBlock("azurite_stairs",
+            properties -> new StairBlock(ModBlocks.AZURITE_BLOCK.get().defaultBlockState(), properties
+                    .strength(3f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST)));
+
+    public static final DeferredBlock<Block> AZURITE_SLAB = registerBlock("azurite_slab",
+            properties -> new SlabBlock(properties
+                    .strength(3f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST)));
 
     //———————————————————————————————————————Fluorite Blocks—————————————————————————————————————————————————————————————————————————
 
@@ -186,18 +195,31 @@ public class ModBlocks {
             ));
 
     public static final DeferredBlock<Block> FLUORITE_BLOCK = registerBlock("fluorite_block",
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+            properties -> new Block(properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
             ));
 
     public static final DeferredBlock<Block> RAW_FLUORITE_BLOCK = registerBlock("raw_fluorite_block",
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+            properties -> new Block(properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
             ));
+
+    public static final DeferredBlock<Block> FLUORITE_STAIRS = registerBlock("fluorite_stairs",
+            properties -> new StairBlock(ModBlocks.FLUORITE_BLOCK.get().defaultBlockState(), properties
+                    .strength(3f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST)));
+
+    public static final DeferredBlock<Block> FLUORITE_SLAB = registerBlock("fluorite_slab",
+            properties -> new SlabBlock(properties
+                    .strength(3f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.AMETHYST)));
+
 
     //———————————————————————————————————————Bloodwood Blocks————————————————————————————————————————————————————————————————————————
 
@@ -289,53 +311,52 @@ public class ModBlocks {
                     .sound(SoundType.GRASS))
     );
 
-//    public static final DeferredBlock<Block> BLOODWOOD_STAIRS = registerBlock("bloodwood_stairs",
-//            properties -> new StairBlock(ModBlocks.BLOODWOOD_PLANKS.get().defaultBlockState(), properties
-//                            .strength(1f, 1f)
-//                            .sound(SoundType.WOOD)
-//                            .ignitedByLava()
-//                    )
-//            {
-//                @Override
-//                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-//                    return true;
-//                }
-//
-//                @Override
-//                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-//                    return 20;
-//                }
-//
-//                @Override
-//                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-//                    return 5;
-//                }
-//            }
-//    );
+    public static final DeferredBlock<Block> BLOODWOOD_STAIRS = registerBlock("bloodwood_stairs",
+            properties -> new StairBlock(ModBlocks.FLUORITE_BLOCK.get().defaultBlockState(), properties
+                    .strength(3f)
+                    .ignitedByLava()
+                    .sound(SoundType.WOOD))
+            {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
 
-//    public static final DeferredBlock<Block> BLOODWOOD_SLAB = registerBlock("bloodwood_slab",
-//            properties -> new SlabBlock(properties
-//                    .strength(1f, 1f)
-//                    .sound(SoundType.WOOD)
-//                    .ignitedByLava()
-//            )
-//            {
-//                @Override
-//                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-//                    return true;
-//                }
-//
-//                @Override
-//                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-//                    return 20;
-//                }
-//
-//                @Override
-//                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-//                    return 5;
-//                }
-//            }
-//    );
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            }
+    );
+
+    public static final DeferredBlock<Block> BLOODWOOD_SLAB = registerBlock("bloodwood_slab",
+            properties -> new SlabBlock(properties
+                    .strength(1f)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava()
+            )
+            {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            }
+    );
 
 
     // Magic block!

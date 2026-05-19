@@ -229,28 +229,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()), has(ModBlocks.STRIPPED_BLOODWOOD_LOG))
                 .save(output);
 
-        shaped(RecipeCategory.MISC, Items.STICK, 4)
-                .pattern("P")
-                .pattern("P")
-                .define('P', ModBlocks.BLOODWOOD_PLANKS.get())
-                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_PLANKS.get()), has(ModBlocks.BLOODWOOD_PLANKS))
-                .group("stick")
-                .save(output, "morefeatures:sticks_from_bloodwood_planks");
-
-        shaped(RecipeCategory.MISC, Blocks.CRAFTING_TABLE)
-                .pattern("PP")
-                .pattern("PP")
-                .define('P', ModBlocks.BLOODWOOD_PLANKS.get())
-                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_PLANKS.get()), has(ModBlocks.BLOODWOOD_PLANKS))
-                .group("crafting_table")
-                .save(output, "morefeatures:crafting_table_from_bloodwood_planks");
-
-//        stairBuilder(ModBlocks.BLOODWOOD_STAIRS.get(), Ingredient.of(ModBlocks.BLOODWOOD_PLANKS))
-//                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_PLANKS), has(ModBlocks.BLOODWOOD_PLANKS))
-//                .group("bloodwood_stairs")
-//                .save(output);
-
-//        slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_SLAB, ModBlocks.BLOODWOOD_PLANKS);
 
 
 
@@ -317,12 +295,12 @@ public class ModRecipeProvider extends RecipeProvider {
 
         shaped(RecipeCategory.MISC, ModBlocks.MAGIC_BLOCK)
                 .pattern("DBD")
-                .pattern("BEB")
+                .pattern("BAB")
                 .pattern("NFN")
                 .define('B', ModItems.BISMUTH.get())
                 .define('N', Items.NETHERITE_SCRAP)
-                .define('E', Blocks.END_STONE.asItem())
-                .define('F', Blocks.NETHERRACK.asItem())
+                .define('A', ModItems.AZURITE.get())
+                .define('F', ModItems.FLUORITE.get())
                 .define('D', Items.DIAMOND)
                 .unlockedBy(getHasName(Items.NETHERITE_SCRAP), has(Items.NETHERITE_SCRAP))
                 .group("magic")
@@ -334,7 +312,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("  S")
                 .pattern("MS ")
                 .pattern("BMI")
-                .pattern("  S")
                 .define('B', ModItems.BISMUTH.get())
                 .define('S', Items.STICK)
                 .define('M', ModItems.MAGNESIUM_INGOT.get())
@@ -356,9 +333,50 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("carbon_bow")
                 .save(output);
 
+        shaped(RecipeCategory.COMBAT, ModItems.CARBON_CROSSBOW)
+                .pattern("CCC")
+                .pattern("CBC")
+                .pattern("CRC")
+                .define('C', ModItems.CARBON_FIBER.get())
+                .define('B', Items.CROSSBOW)
+                .define('R', Items.RESIN_CLUMP)
+                .unlockedBy(getHasName(ModItems.CARBON_FIBER.get()), has(ModItems.CARBON_FIBER))
+                .group("carbon_bow")
+                .save(output);
+
+        shaped(RecipeCategory.COMBAT, ModItems.CARBON_ELYTRA)
+                .pattern("CCC")
+                .pattern("CBC")
+                .pattern("CRC")
+                .define('C', ModItems.CARBON_FIBER.get())
+                .define('B', Items.ELYTRA)
+                .define('R', Items.RESIN_CLUMP)
+                .unlockedBy(getHasName(ModItems.CARBON_FIBER.get()), has(ModItems.CARBON_FIBER))
+                .group("carbon_bow")
+                .save(output);
+
+        // Stairs and slabs
+        stairBuilder(ModBlocks.AZURITE_STAIRS.get(), Ingredient.of(ModBlocks.AZURITE_BLOCK))
+                .unlockedBy(getHasName(ModBlocks.AZURITE_BLOCK.get()), has(ModBlocks.AZURITE_BLOCK))
+                .group("azurite").save(output);
+        slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.AZURITE_SLAB.get(), ModBlocks.AZURITE_BLOCK.get());
+
+        stairBuilder(ModBlocks.FLUORITE_STAIRS.get(), Ingredient.of(ModBlocks.FLUORITE_BLOCK))
+                .unlockedBy(getHasName(ModBlocks.FLUORITE_BLOCK.get()), has(ModBlocks.FLUORITE_BLOCK))
+                .group("fluorite").save(output);
+        slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.FLUORITE_SLAB.get(), ModBlocks.FLUORITE_BLOCK.get());
+
+        stairBuilder(ModBlocks.BLOODWOOD_STAIRS.get(), Ingredient.of(ModBlocks.BLOODWOOD_PLANKS))
+                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_PLANKS.get()), has(ModBlocks.BLOODWOOD_PLANKS))
+                .group("bloodwood").save(output);
+        slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_SLAB.get(), ModBlocks.BLOODWOOD_PLANKS.get());
+
 
         // Bismuth smithing recipes
 
+        bismuthSmithing(Items.NETHERITE_NAUTILUS_ARMOR, RecipeCategory.COMBAT, ModItems.BISMUTH_NAUTILUS_ARMOR.get());
+        bismuthSmithing(Items.NETHERITE_HORSE_ARMOR, RecipeCategory.COMBAT, ModItems.BISMUTH_HORSE_ARMOR.get());
+        bismuthSmithing(Items.NETHERITE_SPEAR, RecipeCategory.COMBAT, ModItems.BISMUTH_SPEAR.get());
         bismuthSmithing(Items.NETHERITE_AXE, RecipeCategory.COMBAT, ModItems.BISMUTH_AXE.get());
         bismuthSmithing(Items.NETHERITE_SHOVEL, RecipeCategory.COMBAT, ModItems.BISMUTH_SHOVEL.get());
         bismuthSmithing(Items.NETHERITE_HOE, RecipeCategory.COMBAT, ModItems.BISMUTH_HOE.get());

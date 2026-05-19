@@ -9,6 +9,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
@@ -30,10 +31,64 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.BISMUTH_AXE.get())
                 .add(ModItems.BISMUTH_HOE.get())
                 .add(ModItems.BISMUTH_SHOVEL.get())
+                .add(ModItems.BISMUTH_SPEAR.get())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+
+        tag(ModItemTags.IS_FOOD)
+                .add(Items.APPLE.asItem())
+                .add(Items.BAKED_POTATO.asItem())
+                .add(Items.POTATO.asItem())
+                .add(Items.POISONOUS_POTATO.asItem())
+                .add(Items.MUSHROOM_STEW.asItem())
+                .add(Items.SUSPICIOUS_STEW.asItem())
+                .add(Items.BREAD.asItem())
+                .add(Items.CAKE.asItem())
+                .add(Items.WHEAT.asItem())
+                .add(Items.CARROT.asItem())
+                .add(Items.COOKIE.asItem())
+                .add(Items.BEETROOT.asItem())
+                .add(Items.BEETROOT_SOUP.asItem())
+                .add(Items.GOLDEN_APPLE.asItem())
+                .add(Items.ENCHANTED_GOLDEN_APPLE.asItem())
+                .add(Items.GOLDEN_CARROT.asItem())
+                .add(Items.GLOW_BERRIES.asItem())
+                .add(Items.MELON_SLICE.asItem())
+                .add(Items.MELON.asItem())
+                .add(Items.PUMPKIN.asItem())
+                .add(Items.PUMPKIN_PIE.asItem())
+                .add(Items.CARVED_PUMPKIN.asItem())
+                .add(Items.ROTTEN_FLESH.asItem())
+                .add(Items.SWEET_BERRIES.asItem())
+                .add(Items.SPIDER_EYE.asItem())
+                .add(Items.TROPICAL_FISH.asItem())
+                .add(Items.CHICKEN.asItem())
+                .add(Items.BEEF.asItem())
+                .add(Items.MUTTON.asItem())
+                .add(Items.PORKCHOP.asItem())
+                .add(Items.RABBIT.asItem())
+                .add(Items.COD.asItem())
+                .add(Items.SALMON.asItem())
+                .add(Items.COOKED_CHICKEN.asItem())
+                .add(Items.COOKED_BEEF.asItem())
+                .add(Items.COOKED_MUTTON.asItem())
+                .add(Items.COOKED_PORKCHOP.asItem())
+                .add(Items.COOKED_RABBIT.asItem())
+                .add(Items.COOKED_COD.asItem())
+                .add(Items.COOKED_SALMON.asItem());
+
+        tag(ModItemTags.IS_POTION)
+                .add(Items.SPLASH_POTION)
+                .add(Items.LINGERING_POTION)
+                .add(Items.POTION);
+
+        tag(ItemTags.BOW_ENCHANTABLE)
+                .add(ModItems.CARBON_BOW.get());
+
+        tag(ItemTags.CROSSBOW_ENCHANTABLE)
+                .add(ModItems.CARBON_CROSSBOW.get());
 
         tag(ModItemTags.BISMUTH_TOOL_MATERIALS)
                 .add(ModItems.BISMUTH.get());
@@ -53,9 +108,16 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ItemTags.SWORDS)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
 
+        tag(ItemTags.SPEARS)
+                .add(ModItems.BISMUTH_SPEAR.get());
+
         tag(ItemTags.MELEE_WEAPON_ENCHANTABLE)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
+                .add(ModItems.BISMUTH_SPEAR.get())
                 .add(ModItems.BISMUTH_AXE.get());
+
+        tag(ItemTags.SWEEPING_ENCHANTABLE)
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
 
         tag(ItemTags.MINING_ENCHANTABLE)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(1).asItem())
@@ -68,22 +130,31 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.BISMUTH_AXE.get())
                 .add(ModItems.BISMUTH_HOE.get())
                 .add(ModItems.BISMUTH_SHOVEL.get())
+                .add(ModItems.CARBON_CROSSBOW.get())
+                .add(ModItems.CARBON_BOW.get())
+                .add(ModItems.BISMUTH_SPEAR.get())
+                .add(ModItems.CARBON_ELYTRA.get())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
 
+        tag(ItemTags.LUNGE_ENCHANTABLE)
+                .add(ModItems.BISMUTH_SPEAR.get());
+
         tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
+                .add(ModItems.BISMUTH_SPEAR.get())
                 .add(ModItems.BISMUTH_AXE.get());
 
         tag(ItemTags.WEAPON_ENCHANTABLE)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
+                .add(ModItems.BISMUTH_SPEAR.get())
                 .add(ModItems.BISMUTH_AXE.get());
 
         tag(ItemTags.FIRE_ASPECT_ENCHANTABLE)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
-                .add(ModItems.BISMUTH_AXE.get());
+                .add(ModItems.BISMUTH_SPEAR.get());
 
         tag(ItemTags.ARMOR_ENCHANTABLE)
                 .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())
@@ -123,5 +194,8 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModBlocks.BLOODWOOD_LOG.get().asItem())
                 .add(ModBlocks.STRIPPED_BLOODWOOD.get().asItem())
                 .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get().asItem());
+
+        tag(ItemTags.PLANKS)
+                .add(ModBlocks.BLOODWOOD_PLANKS.get().asItem());
     }
 }

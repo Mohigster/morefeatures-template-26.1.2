@@ -23,6 +23,12 @@
     "morefeatures:magic_block",
     "morefeatures:bismuth_block",
     "morefeatures:raw_bismuth_block",
+    "morefeatures:azurite_stairs",
+    "morefeatures:azurite_slab",
+    "morefeatures:fluorite_stairs",
+    "morefeatures:fluorite_slab",
+    "morefeatures:bloodwood_stairs",
+    "morefeatures:bloodwood_slab",
     "morefeatures:bismuth_ore"
   ]
 }

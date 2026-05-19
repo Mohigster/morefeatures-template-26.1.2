@@ -48,6 +48,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.MAGIC_BLOCK.get())
                 .add(ModBlocks.BISMUTH_BLOCK.get())
                 .add(ModBlocks.RAW_BISMUTH_BLOCK.get())
+                .add(ModBlocks.AZURITE_STAIRS.get())
+                .add(ModBlocks.AZURITE_SLAB.get())
+                .add(ModBlocks.FLUORITE_STAIRS.get())
+                .add(ModBlocks.FLUORITE_SLAB.get())
+                .add(ModBlocks.BLOODWOOD_STAIRS.get())
+                .add(ModBlocks.BLOODWOOD_SLAB.get())
                 .add(ModBlocks.BISMUTH_ORE.get());
 
         tag(BlockTags.MINEABLE_WITH_AXE)

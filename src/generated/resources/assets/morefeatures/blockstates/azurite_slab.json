@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "morefeatures:block/azurite_slab"
+    },
+    "type=double": {
+      "model": "morefeatures:block/azurite_block"
+    },
+    "type=top": {
+      "model": "morefeatures:block/azurite_slab_top"
+    }
+  }
+}

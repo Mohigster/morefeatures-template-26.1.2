@@ -4,5 +4,8 @@
   "block.morefeatures.aluminium_block": "Block of Aluminium",
   "block.morefeatures.aluminium_ore": "Aluminium Ore",
   "block.morefeatures.deepslate_aluminium_ore": "Deepslate Aluminium Ore",
-  "block.morefeatures.raw_aluminium_block": "Block of Raw Aluminium"
+  "block.morefeatures.raw_aluminium_block": "Block of Raw Aluminium",
+  "item.morefeatures.carbon_fiber": "Carbon Fibre",
+  "item.morefeatures.bismuth_horse_armor": "Bismuth Horse Armour",
+  "item.morefeatures.bismuth_nautilus_armor": "Bismuth Nautilus Armour"
 }

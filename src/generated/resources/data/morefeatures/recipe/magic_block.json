@@ -3,15 +3,15 @@
   "category": "misc",
   "group": "magic",
   "key": {
+    "A": "morefeatures:azurite",
     "B": "morefeatures:bismuth",
     "D": "minecraft:diamond",
-    "E": "minecraft:end_stone",
-    "F": "minecraft:netherrack",
+    "F": "morefeatures:fluorite",
     "N": "minecraft:netherite_scrap"
   },
   "pattern": [
     "DBD",
-    "BEB",
+    "BAB",
     "NFN"
   ],
   "result": {

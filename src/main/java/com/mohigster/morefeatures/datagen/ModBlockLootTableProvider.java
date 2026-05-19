@@ -16,7 +16,6 @@ import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
-import net.neoforged.fml.common.Mod;
 
 import java.util.Set;
 
@@ -47,10 +46,12 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.STRIPPED_BLOODWOOD.get());
         dropSelf(ModBlocks.BLOODWOOD_SAPLING.get());
         dropSelf(ModBlocks.MAGIC_BLOCK.get());
-//        dropSelf(ModBlocks.BLOODWOOD_STAIRS.get());
-
-//        add(ModBlocks.BLOODWOOD_SLAB.get(),
-//                createSlabItemTable(ModBlocks.BLOODWOOD_SLAB.get()));
+        dropSelf(ModBlocks.AZURITE_STAIRS.get());
+        dropSelf(ModBlocks.FLUORITE_STAIRS.get());
+        dropSelf(ModBlocks.BLOODWOOD_STAIRS.get());
+        add(ModBlocks.AZURITE_SLAB.get(), this::createSlabItemTable);
+        add(ModBlocks.FLUORITE_SLAB.get(), this::createSlabItemTable);
+        add(ModBlocks.BLOODWOOD_SLAB.get(), this::createSlabItemTable);
 
         // LEAVES
 

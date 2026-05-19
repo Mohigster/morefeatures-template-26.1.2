@@ -18,6 +18,7 @@ import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSi
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
@@ -42,6 +43,7 @@ public class ModConfiguredFeatures {
     // Tree resource keys
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLOODWOOD_KEY = registerKey("bloodwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_BLOODWOOD_KEY = registerKey("small_bloodwood");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context){
 
@@ -83,8 +85,17 @@ public class ModConfiguredFeatures {
                 BlockStateProvider.simple(ModBlocks.BLOODWOOD_LOG.get()),
                 new ForkingTrunkPlacer(4, 4, 3),
                 BlockStateProvider.simple(ModBlocks.BLOODWOOD_LEAVES.get()),
-                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(3), 3),
+                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2), 3),
                 new TwoLayersFeatureSize(1, 0, 2))
+                .ignoreVines()
+                .build()
+        );
+        register(context, SMALL_BLOODWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBlocks.BLOODWOOD_LOG.get()),
+                new StraightTrunkPlacer(4, 2, 0),
+                BlockStateProvider.simple(ModBlocks.BLOODWOOD_LEAVES.get()),
+                new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
+                new TwoLayersFeatureSize(1, 0, 1))
                 .ignoreVines()
                 .build()
         );

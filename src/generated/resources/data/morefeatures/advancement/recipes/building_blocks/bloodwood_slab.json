@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "morefeatures:sticks_from_bloodwood_planks"
+        "recipe": "morefeatures:bloodwood_slab"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -26,7 +26,7 @@
   ],
   "rewards": {
     "recipes": [
-      "morefeatures:sticks_from_bloodwood_planks"
+      "morefeatures:bloodwood_slab"
     ]
   }
 }

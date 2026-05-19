@@ -53,6 +53,8 @@ public class MetalDetectorItem extends Item {
 
             if(!foundBlock){
                 outputNoValuablesFound(player);
+                level.playSound(null, positionClicked,
+                        SoundEvents.ANVIL_LAND, SoundSource.BLOCKS, 1.5f, 1f);
             }
         }
 
@@ -68,7 +70,6 @@ public class MetalDetectorItem extends Item {
                     Math.cos(i * 18) * 0.15d, 0.15d, Math.sin(i * 18) * 0.15d, 0.1);
         }
     }
-
     private boolean isValuableBlock(BlockState blockState) {
         return(
                 blockState.is(Blocks.IRON_ORE) ||

@@ -25,6 +25,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_BISMUTH_ORE = registerKey("add_bismuth_ore");
 
     public static final ResourceKey<BiomeModifier> ADD_BLOODWOOD = registerKey("add_bloodwood");
+    public static final ResourceKey<BiomeModifier> ADD_SMALL_BLOODWOOD = registerKey("add_small_bloodwood");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context){
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -78,6 +79,11 @@ public class ModBiomeModifiers {
         context.register(ADD_BLOODWOOD, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.PLAINS), biomes.getOrThrow(Biomes.SAVANNA)),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.BLOODWOOD_PLACED_KEY)),
+                GenerationStep.Decoration.VEGETAL_DECORATION
+        ));
+        context.register(ADD_SMALL_BLOODWOOD, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.PLAINS), biomes.getOrThrow(Biomes.SAVANNA)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.SMALL_BLOODWOOD_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
 

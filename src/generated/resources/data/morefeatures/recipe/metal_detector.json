@@ -11,8 +11,7 @@
   "pattern": [
     "  S",
     "MS ",
-    "BMI",
-    "  S"
+    "BMI"
   ],
   "result": {
     "id": "morefeatures:metal_detector"

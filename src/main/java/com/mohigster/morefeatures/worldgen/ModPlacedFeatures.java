@@ -34,6 +34,7 @@ public class ModPlacedFeatures {
     // Tree resource keys
 
     public static final ResourceKey<PlacedFeature> BLOODWOOD_PLACED_KEY = registerKey("bloodwood_placed");
+    public static final ResourceKey<PlacedFeature> SMALL_BLOODWOOD_PLACED_KEY = registerKey("small_bloodwood_placed");
 
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
@@ -71,7 +72,11 @@ public class ModPlacedFeatures {
         // PLACE TREES
 
         register(context, BLOODWOOD_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLOODWOOD_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(3, 0.1f, 2),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.01f, 1),
+                        ModBlocks.BLOODWOOD_SAPLING.get()));
+
+        register(context, SMALL_BLOODWOOD_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_BLOODWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.01f, 1),
                         ModBlocks.BLOODWOOD_SAPLING.get()));
 
     }

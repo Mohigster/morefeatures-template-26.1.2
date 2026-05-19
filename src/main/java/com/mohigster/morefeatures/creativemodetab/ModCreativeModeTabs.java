@@ -76,6 +76,8 @@ public class ModCreativeModeTabs {
 
                 // Azurite blocks
                 output.accept(ModBlocks.AZURITE_BLOCK);
+                output.accept(ModBlocks.AZURITE_STAIRS);
+                output.accept(ModBlocks.AZURITE_SLAB);
                 output.accept(ModBlocks.RAW_AZURITE_BLOCK);
                 output.accept(ModBlocks.AZURITE_ORE);
                 output.accept(ModBlocks.DEEPSLATE_AZURITE_ORE);
@@ -84,6 +86,8 @@ public class ModCreativeModeTabs {
 
                 // Fluorite blocks
                 output.accept(ModBlocks.FLUORITE_BLOCK);
+                output.accept(ModBlocks.FLUORITE_STAIRS);
+                output.accept(ModBlocks.FLUORITE_SLAB);
                 output.accept(ModBlocks.RAW_FLUORITE_BLOCK);
                 output.accept(ModBlocks.FLUORITE_ORE);
                 output.accept(ModBlocks.DEEPSLATE_FLUORITE_ORE);
@@ -101,20 +105,29 @@ public class ModCreativeModeTabs {
             .withTabsBefore(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures_blocks_tab"))
             .displayItems((itemDisplayParameters, output) -> {
 
-                // Tools
+                // Bismuth Tools
 
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(1).asItem());
                 output.accept(ModItems.BISMUTH_AXE);
                 output.accept(ModItems.BISMUTH_SHOVEL);
                 output.accept(ModItems.BISMUTH_HOE);
+                output.accept(ModItems.BISMUTH_SPEAR);
 
-                // Armor
+                // Bismuth Armor
 
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+                output.accept(ModItems.BISMUTH_HORSE_ARMOR);
+                output.accept(ModItems.BISMUTH_NAUTILUS_ARMOR);
+
+                // Carbon tools and equipment
+
+                output.accept(ModItems.CARBON_BOW);
+                output.accept(ModItems.CARBON_CROSSBOW);
+                output.accept(ModItems.CARBON_ELYTRA);
 
                 // Metal detector
 

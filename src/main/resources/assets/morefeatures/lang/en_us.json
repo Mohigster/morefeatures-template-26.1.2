@@ -18,6 +18,8 @@
   "block.morefeatures.raw_magnesium_block": "Block of Raw Magnesium",
 
   "block.morefeatures.azurite_block": "Block of Azurite",
+  "block.morefeatures.azurite_stairs": "Azurite Stairs",
+  "block.morefeatures.azurite_slab": "Azurite Slab",
   "item.morefeatures.raw_azurite": "Raw Azurite",
   "item.morefeatures.azurite": "Azurite",
   "block.morefeatures.azurite_ore": "Azurite Ore",
@@ -27,6 +29,8 @@
   "block.morefeatures.raw_azurite_block": "Block of Raw Azurite",
 
   "block.morefeatures.fluorite_block": "Block of Fluorite",
+  "block.morefeatures.fluorite_stairs": "Fluorite Stairs",
+  "block.morefeatures.gluorite_slab": "Fluorite Slab",
   "item.morefeatures.raw_fluorite": "Raw Fluorite",
   "item.morefeatures.fluorite": "Fluorite",
   "block.morefeatures.fluorite_ore": "Fluorite Ore",
@@ -38,17 +42,20 @@
   "block.morefeatures.bismuth_ore": "Bismuth Ore",
   "item.morefeatures.raw_bismuth": "Raw Bismuth",
   "block.morefeatures.bismuth_block": "Block of Bismuth",
-  "item.morefeatures.bismuth": "Bismuth",
+  "item.morefeatures.bismuth": "Refined Bismuth",
   "block.morefeatures.raw_bismuth_block": "Block of Raw Bismuth",
   "item.morefeatures.bismuth_pickaxe": "Bismuth Pickaxe",
   "item.morefeatures.bismuth_sword": "Bismuth Sword",
   "item.morefeatures.bismuth_axe": "Bismuth Axe",
   "item.morefeatures.bismuth_hoe": "Bismuth Hoe",
+  "item.morefeatures.bismuth_spear": "Bismuth Spear",
   "item.morefeatures.bismuth_shovel": "Bismuth Shovel",
   "item.morefeatures.bismuth_helmet": "Bismuth Helmet",
   "item.morefeatures.bismuth_chestplate": "Bismuth Chestplate",
   "item.morefeatures.bismuth_leggings": "Bismuth Leggings",
   "item.morefeatures.bismuth_boots": "Bismuth Boots",
+  "item.morefeatures.bismuth_horse_armor": "Bismuth Horse Armor",
+  "item.morefeatures.bismuth_nautilus_armor": "Bismuth Nautilus Armor",
   "item.morefeatures.bismuth_scrap": "Bismuth Scrap",
 
   "item.morefeatures.bismuth_upgrade_smithing_template": "Bismuth Upgrade",
@@ -64,11 +71,18 @@
   "block.morefeatures.stripped_bloodwood": "Stripped Bloodwood",
   "block.morefeatures.stripped_bloodwood_log": "Stripped Bloodwood Log",
   "block.morefeatures.bloodwood_planks": "Bloodwood Planks",
+  "block.morefeatures.bloodwood_slab": "Bloodwood Slab",
+  "block.morefeatures.bloodwood_stairs": "Bloodwood Stairs",
   "block.morefeatures.bloodwood_leaves": "Bloodwood Leaves",
   "block.morefeatures.bloodwood_sapling": "Bloodwood Sapling",
 
   "item.morefeatures.metal_detector.fail": "No Valuable Metals Found!",
   "item.morefeatures.metal_detector": "Metal Detector",
 
-  "block.morefeatures.magic_block": "Magic Block"
+  "block.morefeatures.magic_block": "Magic Block",
+
+  "item.morefeatures.carbon_fiber": "Carbon Fiber",
+  "item.morefeatures.carbon_bow": "Carbon Reinforced Bow",
+  "item.morefeatures.carbon_crossbow": "Carbon Reinforced Crossbow",
+  "item.morefeatures.carbon_elytra": "Carbon Reinforced Elytra"
 }

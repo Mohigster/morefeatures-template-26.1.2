@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smithing_transform",
+  "addition": "#minecraft:bismuth_tools_material",
+  "base": "minecraft:netherite_horse_armor",
+  "result": {
+    "id": "morefeatures:bismuth_horse_armor"
+  },
+  "template": "morefeatures:bismuth_upgrade_smithing_template"
+}

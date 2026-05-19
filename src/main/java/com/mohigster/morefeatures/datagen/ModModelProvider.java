@@ -46,11 +46,12 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.BISMUTH_SCRAP.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModBlocks.BLOODWOOD_SAPLING.get().asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.METAL_DETECTOR.get(), ModelTemplates.FLAT_ITEM);
-//        itemModels.generateFlatItem(ModItems.CARBON_BOW.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(ModItems.CARBON_FIBER.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_HOE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+//        itemModels.generateFlatItem(ModItems.CARBON_BOW.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
+
 
         // Used the generateFlatItem() line to get carbon_bow.json, then to prevent datagen deleting it,
         // I moved that file to the permanent resources file instead of the generated resources file.
@@ -60,9 +61,18 @@ public class ModModelProvider extends ModelProvider {
         // but generateFlatItem() gives the model for when it isn't. However, using both methods
         // at the same time causes DataGen to fail. I don't know why, but it does.
 
-//        itemModels.generateFlatItem(ModItems.CARBON_BOW.get(), ModelTemplates.BOW);
-        itemModels.generateBow(ModItems.CARBON_BOW.get());
+        // Same logic applies to crossbow and elytra
 
+//        itemModels.generateFlatItem(ModItems.CARBON_BOW.get(), ModelTemplates.BOW);
+//        itemModels.generateFlatItem(ModItems.CARBON_CROSSBOW.get(), ModelTemplates.CROSSBOW);
+//        itemModels.generateFlatItem(ModItems.CARBON_ELYTRA.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateBow(ModItems.CARBON_BOW.get());
+        itemModels.generateCrossbow(ModItems.CARBON_CROSSBOW.get());
+        itemModels.generateElytra(ModItems.CARBON_ELYTRA.get());
+        itemModels.generateSpear(ModItems.BISMUTH_SPEAR.get());
+        itemModels.generateFlatItem(ModItems.BISMUTH_HORSE_ARMOR.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.BISMUTH_NAUTILUS_ARMOR.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.CARBON_WOLF_ARMOR.get(), ModelTemplates.FLAT_ITEM);
 
         // BLOCKS
 
@@ -79,25 +89,28 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_AZURITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.NETHER_AZURITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.END_AZURITE_ORE.get());
-        blockModels.createTrivialCube(ModBlocks.AZURITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.RAW_AZURITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.FLUORITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.DEEPSLATE_FLUORITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.NETHER_FLUORITE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.END_FLUORITE_ORE.get());
-        blockModels.createTrivialCube(ModBlocks.FLUORITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.RAW_FLUORITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.BISMUTH_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.RAW_BISMUTH_BLOCK.get());
         blockModels.woodProvider(ModBlocks.BLOODWOOD_LOG.get()).logWithHorizontal(ModBlocks.BLOODWOOD_LOG.get()).wood(ModBlocks.BLOODWOOD.get());
         blockModels.woodProvider(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()).wood(ModBlocks.STRIPPED_BLOODWOOD.get());
-        blockModels.createTrivialCube(ModBlocks.BLOODWOOD_PLANKS.get());
         blockModels.createTrivialBlock(ModBlocks.BLOODWOOD_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createCrossBlock(ModBlocks.BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createTrivialCube(ModBlocks.MAGIC_BLOCK.get());
-//        blockModels.family(ModBlocks.BLOODWOOD_PLANKS.get())
-//                .stairs(ModBlocks.BLOODWOOD_STAIRS.get());
-//                .slab(ModBlocks.BLOODWOOD_SLAB.get());
+        blockModels.family(ModBlocks.AZURITE_BLOCK.get())
+                .stairs(ModBlocks.AZURITE_STAIRS.get())
+                .slab(ModBlocks.AZURITE_SLAB.get());
+        blockModels.family(ModBlocks.FLUORITE_BLOCK.get())
+                .stairs(ModBlocks.FLUORITE_STAIRS.get())
+                .slab(ModBlocks.FLUORITE_SLAB.get());
+        blockModels.family(ModBlocks.BLOODWOOD_PLANKS.get())
+                .stairs(ModBlocks.BLOODWOOD_STAIRS.get())
+                .slab(ModBlocks.BLOODWOOD_SLAB.get());
     }
 
 }

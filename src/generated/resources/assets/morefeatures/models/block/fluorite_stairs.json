@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/stairs",
+  "textures": {
+    "bottom": "morefeatures:block/fluorite_block",
+    "side": "morefeatures:block/fluorite_block",
+    "top": "morefeatures:block/fluorite_block"
+  }
+}
