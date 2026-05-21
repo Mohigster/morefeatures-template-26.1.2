@@ -229,6 +229,45 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()), has(ModBlocks.STRIPPED_BLOODWOOD_LOG))
                 .save(output);
 
+        // Tainted wood recipes
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_PLANKS.get(), 4)
+                .requires(ModBlocks.TAINTED_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.TAINTED_LOG.get()), has(ModBlocks.TAINTED_LOG.get()))
+                .group("tainted_planks")
+                .save(output, "morefeatures:tainted_planks_from_log");
+
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_PLANKS.get(), 4)
+                .requires(ModBlocks.STRIPPED_TAINTED_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.TAINTED_LOG.get()), has(ModBlocks.TAINTED_LOG.get()))
+                .group("tainted_planks")
+                .save(output, "morefeatures:tainted_planks_from_stripped_log");
+
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_PLANKS.get(), 4)
+                .requires(ModBlocks.TAINTED_WOOD.get())
+                .unlockedBy(getHasName(ModBlocks.TAINTED_WOOD.get()), has(ModBlocks.TAINTED_WOOD.get()))
+                .group("tainted_planks")
+                .save(output, "morefeatures:tainted_planks_from_wood");
+
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_PLANKS.get(), 4)
+                .requires(ModBlocks.STRIPPED_TAINTED_WOOD.get())
+                .unlockedBy(getHasName(ModBlocks.TAINTED_WOOD.get()), has(ModBlocks.TAINTED_WOOD))
+                .group("tainted_planks")
+                .save(output, "morefeatures:tainted_planks_from_stripped_wood");
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_WOOD.get(), 3)
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModBlocks.TAINTED_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.TAINTED_LOG.get()), has(ModBlocks.TAINTED_LOG))
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_TAINTED_WOOD.get(), 3)
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', ModBlocks.STRIPPED_TAINTED_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.STRIPPED_TAINTED_LOG.get()), has(ModBlocks.STRIPPED_TAINTED_LOG))
+                .save(output);
+
 
 
 

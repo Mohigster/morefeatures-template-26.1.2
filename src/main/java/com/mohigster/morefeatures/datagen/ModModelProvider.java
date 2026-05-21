@@ -7,13 +7,8 @@ import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TextureMapping;
-import net.minecraft.client.data.models.model.TextureSlot;
 import net.minecraft.client.data.models.model.TexturedModel;
-import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.block.Blocks;
 
 public class ModModelProvider extends ModelProvider {
     public ModModelProvider(PackOutput output) {
@@ -45,6 +40,7 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_SCRAP.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModBlocks.BLOODWOOD_SAPLING.get().asItem(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModBlocks.TAINTED_SAPLING.get().asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.METAL_DETECTOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.CARBON_FIBER.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
@@ -70,10 +66,12 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateCrossbow(ModItems.CARBON_CROSSBOW.get());
         itemModels.generateElytra(ModItems.CARBON_ELYTRA.get());
         itemModels.generateSpear(ModItems.BISMUTH_SPEAR.get());
-        itemModels.generateTrident(ModItems.CARBON_TRIDENT.get());
+//        itemModels.generateTrident(ModItems.CARBON_TRIDENT.get());
         itemModels.generateFlatItem(ModItems.BISMUTH_HORSE_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_NAUTILUS_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.CARBON_WOLF_ARMOR.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateTrident(ModItems.CARBON_TRIDENT.get());
+        itemModels.generateFlatItem(ModItems.AQUAMARINE_MUSIC_DISC.get(), ModelTemplates.FLAT_ITEM);
 
         // BLOCKS
 
@@ -98,11 +96,17 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.RAW_FLUORITE_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.BISMUTH_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.RAW_BISMUTH_BLOCK.get());
+        blockModels.woodProvider(ModBlocks.TAINTED_LOG.get()).logWithHorizontal(ModBlocks.TAINTED_LOG.get()).wood(ModBlocks.TAINTED_WOOD.get());
+        blockModels.woodProvider(ModBlocks.STRIPPED_TAINTED_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_TAINTED_LOG.get()).wood(ModBlocks.STRIPPED_TAINTED_WOOD.get());
+        blockModels.createTrivialBlock(ModBlocks.TAINTED_LEAVES.get(), TexturedModel.LEAVES);
+        blockModels.createCrossBlock(ModBlocks.TAINTED_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.woodProvider(ModBlocks.BLOODWOOD_LOG.get()).logWithHorizontal(ModBlocks.BLOODWOOD_LOG.get()).wood(ModBlocks.BLOODWOOD.get());
         blockModels.woodProvider(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()).wood(ModBlocks.STRIPPED_BLOODWOOD.get());
         blockModels.createTrivialBlock(ModBlocks.BLOODWOOD_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createCrossBlock(ModBlocks.BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createTrivialCube(ModBlocks.MAGIC_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.COMPRESSOR_BLOCK.get());
+        blockModels.createTrivialCube(ModBlocks.EVIL_PORTAL.get());
         blockModels.family(ModBlocks.AZURITE_BLOCK.get())
                 .stairs(ModBlocks.AZURITE_STAIRS.get())
                 .slab(ModBlocks.AZURITE_SLAB.get());
@@ -112,6 +116,9 @@ public class ModModelProvider extends ModelProvider {
         blockModels.family(ModBlocks.BLOODWOOD_PLANKS.get())
                 .stairs(ModBlocks.BLOODWOOD_STAIRS.get())
                 .slab(ModBlocks.BLOODWOOD_SLAB.get());
+        blockModels.family(ModBlocks.TAINTED_PLANKS.get())
+                .stairs(ModBlocks.TAINTED_STAIRS.get())
+                .slab(ModBlocks.TAINTED_SLAB.get());
     }
 
 }

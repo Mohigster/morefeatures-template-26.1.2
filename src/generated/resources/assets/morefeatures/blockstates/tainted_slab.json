@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "morefeatures:block/tainted_slab"
+    },
+    "type=double": {
+      "model": "morefeatures:block/tainted_planks"
+    },
+    "type=top": {
+      "model": "morefeatures:block/tainted_slab_top"
+    }
+  }
+}

@@ -52,18 +52,30 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.AZURITE_SLAB.get())
                 .add(ModBlocks.FLUORITE_STAIRS.get())
                 .add(ModBlocks.FLUORITE_SLAB.get())
-                .add(ModBlocks.BLOODWOOD_STAIRS.get())
-                .add(ModBlocks.BLOODWOOD_SLAB.get())
+                .add(ModBlocks.COMPRESSOR_BLOCK.get())
                 .add(ModBlocks.BISMUTH_ORE.get());
 
         tag(BlockTags.MINEABLE_WITH_AXE)
+                .add(ModBlocks.TAINTED_PLANKS.get())
+                .add(ModBlocks.STRIPPED_TAINTED_WOOD.get())
+                .add(ModBlocks.TAINTED_WOOD.get())
+                .add(ModBlocks.STRIPPED_TAINTED_LOG.get())
+                .add(ModBlocks.TAINTED_LOG.get())
+                .add(ModBlocks.TAINTED_STAIRS.get())
+                .add(ModBlocks.TAINTED_SLAB.get())
                 .add(ModBlocks.BLOODWOOD_PLANKS.get())
                 .add(ModBlocks.STRIPPED_BLOODWOOD.get())
                 .add(ModBlocks.BLOODWOOD.get())
                 .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
-                .add(ModBlocks.BLOODWOOD_LOG.get());
+                .add(ModBlocks.BLOODWOOD_LOG.get())
+                .add(ModBlocks.BLOODWOOD_STAIRS.get())
+                .add(ModBlocks.BLOODWOOD_SLAB.get());
 
         tag(BlockTags.LOGS_THAT_BURN)
+                .add(ModBlocks.TAINTED_LOG.get())
+                .add(ModBlocks.STRIPPED_TAINTED_LOG.get())
+                .add(ModBlocks.TAINTED_WOOD.get())
+                .add(ModBlocks.STRIPPED_TAINTED_WOOD.get())
                 .add(ModBlocks.BLOODWOOD_LOG.get())
                 .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
                 .add(ModBlocks.BLOODWOOD.get())
@@ -75,6 +87,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
                 .add(ModBlocks.BLOODWOOD_LOG.get());
 
+        tag(ModBlockTags.TAINTED_LOGS)
+                .add(ModBlocks.STRIPPED_TAINTED_WOOD.get())
+                .add(ModBlocks.TAINTED_WOOD.get())
+                .add(ModBlocks.STRIPPED_TAINTED_LOG.get())
+                .add(ModBlocks.TAINTED_LOG.get());
+
         tag(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.ALUMINIUM_BLOCK.get())
                 .add(ModBlocks.ALUMINIUM_ORE.get())
@@ -83,22 +101,28 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.RAW_MAGNESIUM_BLOCK.get())
                 .add(ModBlocks.MAGNESIUM_ORE.get())
                 .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
+                .add(ModBlocks.COMPRESSOR_BLOCK.get())
                 .add(ModBlocks.MAGNESIUM_BLOCK.get());
 
         tag(BlockTags.LEAVES)
+                .add(ModBlocks.TAINTED_LEAVES.get())
                 .add(ModBlocks.BLOODWOOD_LEAVES.get());
 
         tag(BlockTags.SAPLINGS)
+                .add(ModBlocks.TAINTED_SAPLING.get())
                 .add(ModBlocks.BLOODWOOD_SAPLING.get());
 
         tag(BlockTags.PLANKS)
+                .add(ModBlocks.TAINTED_PLANKS.get())
                 .add(ModBlocks.BLOODWOOD_PLANKS.get());
 
-//        tag(BlockTags.STAIRS)
-//                .add(ModBlocks.BLOODWOOD_STAIRS.get());
+        tag(BlockTags.STAIRS)
+                .add(ModBlocks.TAINTED_STAIRS.get())
+                .add(ModBlocks.BLOODWOOD_STAIRS.get());
 
-//        tag(BlockTags.SLABS)
-//                .add(ModBlocks.BLOODWOOD_SLAB.get());
+        tag(BlockTags.SLABS)
+                .add(ModBlocks.TAINTED_SLAB.get())
+                .add(ModBlocks.BLOODWOOD_SLAB.get());
 
         tag(Tags.Blocks.NEEDS_NETHERITE_TOOL)
                 .add(ModBlocks.BISMUTH_ORE.get())
@@ -133,16 +157,16 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.BISMUTH_BLOCK.get())
                 .add(ModBlocks.AZURITE_BLOCK.get());
 
-        tag(BlockTags.STONE_ORE_REPLACEABLES)
-                .add(ModBlocks.AZURITE_ORE.get())
-                .add(ModBlocks.ALUMINIUM_ORE.get())
-                .add(ModBlocks.MAGNESIUM_ORE.get())
-                .add(ModBlocks.FLUORITE_ORE.get());
-
-        tag(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
-                .add(ModBlocks.DEEPSLATE_AZURITE_ORE.get())
-                .add(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get())
-                .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
-                .add(ModBlocks.DEEPSLATE_FLUORITE_ORE.get());
+//        tag(BlockTags.STONE_ORE_REPLACEABLES)
+//                .add(ModBlocks.AZURITE_ORE.get())
+//                .add(ModBlocks.ALUMINIUM_ORE.get())
+//                .add(ModBlocks.MAGNESIUM_ORE.get())
+//                .add(ModBlocks.FLUORITE_ORE.get());
+//
+//        tag(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
+//                .add(ModBlocks.DEEPSLATE_AZURITE_ORE.get())
+//                .add(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get())
+//                .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
+//                .add(ModBlocks.DEEPSLATE_FLUORITE_ORE.get());
     }
 }

@@ -35,6 +35,8 @@ public class ModPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> BLOODWOOD_PLACED_KEY = registerKey("bloodwood_placed");
     public static final ResourceKey<PlacedFeature> SMALL_BLOODWOOD_PLACED_KEY = registerKey("small_bloodwood_placed");
+    public static final ResourceKey<PlacedFeature> TAINTED_PLACED_KEY = registerKey("tainted_placed");
+    public static final ResourceKey<PlacedFeature> SMALL_TAINTED_PLACED_KEY = registerKey("small_tainted_placed");
 
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
@@ -78,6 +80,14 @@ public class ModPlacedFeatures {
         register(context, SMALL_BLOODWOOD_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_BLOODWOOD_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.01f, 1),
                         ModBlocks.BLOODWOOD_SAPLING.get()));
+
+        register(context, TAINTED_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.TAINTED_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.01f, 1),
+                        ModBlocks.TAINTED_SAPLING.get()));
+
+        register(context, SMALL_TAINTED_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_TAINTED_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.01f, 1),
+                        ModBlocks.TAINTED_SAPLING.get()));
 
     }
 

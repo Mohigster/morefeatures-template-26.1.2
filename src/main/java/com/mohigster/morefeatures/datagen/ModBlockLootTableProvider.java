@@ -45,19 +45,31 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.STRIPPED_BLOODWOOD_LOG.get());
         dropSelf(ModBlocks.STRIPPED_BLOODWOOD.get());
         dropSelf(ModBlocks.BLOODWOOD_SAPLING.get());
+        dropSelf(ModBlocks.TAINTED_PLANKS.get());
+        dropSelf(ModBlocks.TAINTED_LOG.get());
+        dropSelf(ModBlocks.TAINTED_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_TAINTED_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_TAINTED_WOOD.get());
+        dropSelf(ModBlocks.TAINTED_SAPLING.get());
         dropSelf(ModBlocks.MAGIC_BLOCK.get());
         dropSelf(ModBlocks.AZURITE_STAIRS.get());
         dropSelf(ModBlocks.FLUORITE_STAIRS.get());
         dropSelf(ModBlocks.BLOODWOOD_STAIRS.get());
+        dropSelf(ModBlocks.TAINTED_STAIRS.get());
+        dropSelf(ModBlocks.COMPRESSOR_BLOCK.get());
         add(ModBlocks.AZURITE_SLAB.get(), this::createSlabItemTable);
         add(ModBlocks.FLUORITE_SLAB.get(), this::createSlabItemTable);
         add(ModBlocks.BLOODWOOD_SLAB.get(), this::createSlabItemTable);
+        add(ModBlocks.TAINTED_SLAB.get(), this::createSlabItemTable);
 
         // LEAVES
 
         // Bloodwood
         add(ModBlocks.BLOODWOOD_LEAVES.get(),
                 createLeavesDrops(ModBlocks.BLOODWOOD_LEAVES.get(), ModBlocks.BLOODWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        add(ModBlocks.TAINTED_LEAVES.get(),
+                createLeavesDrops(ModBlocks.TAINTED_LEAVES.get(), ModBlocks.TAINTED_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
         // Aluminium ores
 
@@ -99,6 +111,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         add(ModBlocks.BISMUTH_ORE.get(),
                 createOreDrop(ModBlocks.BISMUTH_ORE.get(), ModItems.RAW_BISMUTH.get()));
+
+        dropSelf(ModBlocks.EVIL_PORTAL.get());
 
 
     }

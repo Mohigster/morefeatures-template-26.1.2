@@ -76,6 +76,16 @@
   "block.morefeatures.bloodwood_leaves": "Bloodwood Leaves",
   "block.morefeatures.bloodwood_sapling": "Bloodwood Sapling",
 
+  "block.morefeatures.tainted_wood": "Tainted Wood",
+  "block.morefeatures.tainted_log": "Tainted Log",
+  "block.morefeatures.stripped_tainted_wood": "Stripped Tainted Wood",
+  "block.morefeatures.stripped_tainted_log": "Stripped Tainted Log",
+  "block.morefeatures.tainted_planks": "Tainted Planks",
+  "block.morefeatures.tainted_slab": "Tainted Slab",
+  "block.morefeatures.tainted_stairs": "Tainted Stairs",
+  "block.morefeatures.tainted_leaves": "Tainted Leaves",
+  "block.morefeatures.tainted_sapling": "Tainted Sapling",
+
   "item.morefeatures.metal_detector.fail": "No Valuable Metals Found!",
   "item.morefeatures.metal_detector": "Metal Detector",
 
@@ -85,5 +95,15 @@
   "item.morefeatures.carbon_bow": "Carbon Reinforced Bow",
   "item.morefeatures.carbon_crossbow": "Carbon Reinforced Crossbow",
   "item.morefeatures.carbon_elytra": "Carbon Reinforced Elytra",
-  "item.morefeatures.carbon_wolf_armor": "Carbon Reinforced Wolf Armor"
+  "item.morefeatures.carbon_wolf_armor": "Carbon Reinforced Wolf Armor",
+  "item.morefeatures.carbon_trident": "Carbon Reinforced Trident",
+
+  "item.morefeatures.aquamarine_music_disc": "Aquamarine Music Disc",
+  "jukebox_song.morefeatures.aquamarine": "Mohigster - Aquamarine",
+
+  "container.compression": "Compression",
+  "advancements.morefeatures.root.title": "More Features Advancements",
+  "advancements.morefeatures.root.description": "More Features Advancements... How exciting!",
+  "advancement.morefeatures.get_hoe.description": "You crafted a Bismuth Hoe! ...Why?",
+  "advancement.morefeatures.get_hoe.title": "Intense Tenacity"
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "morefeatures:block/tainted_planks",
+    "side": "morefeatures:block/tainted_planks",
+    "top": "morefeatures:block/tainted_planks"
+  }
+}

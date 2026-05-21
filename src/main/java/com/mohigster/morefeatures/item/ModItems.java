@@ -2,6 +2,8 @@ package com.mohigster.morefeatures.item;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.asset.ModEquipmentAssets;
+import com.mohigster.morefeatures.datagen.ModJukeboxSongs;
+import com.mohigster.morefeatures.item.custom.CarbonTridentItem;
 import com.mohigster.morefeatures.item.custom.MetalDetectorItem;
 import com.mohigster.morefeatures.item.custom.ModSmithingTemplateItem;
 import com.mohigster.morefeatures.toolmaterial.ModArmorMaterials;
@@ -88,6 +90,14 @@ public class ModItems {
                     .durability(128)
             ));
 
+    // Music Discs
+
+    public static final DeferredItem<Item> AQUAMARINE_MUSIC_DISC = ITEMS.registerItem("aquamarine_music_disc",
+            properties -> new Item(properties
+                    .jukeboxPlayable(ModJukeboxSongs.AQUAMARINE_KEY)
+                    .stacksTo(1)
+                    .rarity(Rarity.RARE)));
+
     // Carbon Items and tools
     public static final DeferredItem<Item> CARBON_FIBER = ITEMS.registerItem("carbon_fiber",
             properties -> new Item(properties
@@ -139,12 +149,13 @@ public class ModItems {
             ));
 
     public static final DeferredItem<Item> CARBON_TRIDENT = ITEMS.registerItem("carbon_trident",
-            properties -> new TridentItem(properties
+            properties -> new CarbonTridentItem(properties
                     .fireResistant()
                     .enchantable(15)
                     .durability(594)
+                    .attributes(CarbonTridentItem.createAttributes())
                     .rarity(Rarity.RARE)
-                    .component(DataComponents.TOOL, TridentItem.createToolProperties())
+                    .component(DataComponents.TOOL, CarbonTridentItem.createToolProperties())
                     .component(DataComponents.WEAPON, new Weapon(1))
             ));
 
@@ -156,7 +167,7 @@ public class ModItems {
     );
 
     public static final DeferredItem<Item> BISMUTH_AXE = ITEMS.registerItem("bismuth_axe",
-            properties -> new AxeItem(BISMUTH_TOOL_MATERIAL, 8f, -3f, properties
+            properties -> new AxeItem(BISMUTH_TOOL_MATERIAL, 6f, -3f, properties
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
@@ -164,7 +175,7 @@ public class ModItems {
                     )));
 
     public static final DeferredItem<Item> BISMUTH_SHOVEL = ITEMS.registerItem("bismuth_shovel",
-            properties -> new ShovelItem(BISMUTH_TOOL_MATERIAL, 0f, 0f, properties
+            properties -> new ShovelItem(BISMUTH_TOOL_MATERIAL, 1f, -3.0f, properties
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
@@ -172,7 +183,7 @@ public class ModItems {
                     )));
 
     public static final DeferredItem<Item> BISMUTH_HOE = ITEMS.registerItem("bismuth_hoe",
-            properties -> new HoeItem(BISMUTH_TOOL_MATERIAL, 4.5f, -3f, properties
+            properties -> new HoeItem(BISMUTH_TOOL_MATERIAL, -5.4f, 1f, properties
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
@@ -216,7 +227,7 @@ public class ModItems {
 
 
     public static final List<DeferredItem<Item>> BISMUTH_EQUIPMENT = registerEquipmentItems("bismuth", BISMUTH_TOOL_MATERIAL, ModArmorMaterials.BISMUTH,
-            new float[]{7.5f, -2.2f}, new float[]{4f, -2.8f},
+            new float[]{5.5f, -2.2f}, new float[]{0f, -2.8f},
             new Item.Properties().rarity(Rarity.RARE).fireResistant().enchantable(15));
 
 

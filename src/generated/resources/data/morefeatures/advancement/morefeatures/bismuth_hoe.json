@@ -1,0 +1,33 @@
+{
+  "parent": "morefeatures:morefeatures/root",
+  "criteria": {
+    "bismuth_hoe": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morefeatures:bismuth_hoe"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.morefeatures.get_hoe.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "morefeatures:bismuth_hoe"
+    },
+    "title": {
+      "translate": "advancement.morefeatures.get_hoe.title"
+    }
+  },
+  "requirements": [
+    [
+      "bismuth_hoe"
+    ]
+  ],
+  "sends_telemetry_event": true
+}

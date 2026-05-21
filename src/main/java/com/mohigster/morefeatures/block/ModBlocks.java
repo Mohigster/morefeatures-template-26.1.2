@@ -1,6 +1,8 @@
 package com.mohigster.morefeatures.block;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.block.custom.CompressorBlock;
+import com.mohigster.morefeatures.block.custom.EvilPortalBlock;
 import com.mohigster.morefeatures.block.custom.MagicBlock;
 import com.mohigster.morefeatures.block.custom.ModFlammableRotatedPillarBlock;
 import com.mohigster.morefeatures.item.ModItems;
@@ -358,11 +360,160 @@ public class ModBlocks {
             }
     );
 
+    //———————————————————————————————————————Tainted Wood Blocks—————————————————————————————————————————————————————————————————————
+
+
+    public static final DeferredBlock<Block> TAINTED_LOG = registerBlock("tainted_log",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.WOOD)
+            ));
+
+    public static final DeferredBlock<Block> TAINTED_WOOD = registerBlock("tainted_wood",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.WOOD)
+            ));
+
+    public static final DeferredBlock<Block> STRIPPED_TAINTED_LOG = registerBlock("stripped_tainted_log",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.WOOD)
+            ));
+
+    public static final DeferredBlock<Block> STRIPPED_TAINTED_WOOD = registerBlock("stripped_tainted_wood",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.WOOD)
+            ));
+
+    public static final DeferredBlock<Block> TAINTED_PLANKS = registerBlock("tainted_planks",
+            properties -> new Block(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.WOOD))
+            {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return 5;
+                }
+            });
+
+    public static final DeferredBlock<Block> TAINTED_LEAVES = registerBlock("tainted_leaves",
+            properties -> new TintedParticleLeavesBlock(4, properties
+                    .strength(0.2f, 0.2f)
+                    .sound(SoundType.GRASS)
+                    .noOcclusion()
+                    .ignitedByLava()
+            )
+            {
+                @Override
+                public MapCodec<? extends TintedParticleLeavesBlock> codec() {
+                    return null;
+                }
+
+                @Override
+                protected void spawnFallingLeavesParticle(Level level, BlockPos blockPos, RandomSource randomSource) {
+
+                }
+
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return 30;
+                }
+            }
+    );
+    public static final DeferredBlock<Block> TAINTED_SAPLING = registerBlock("tainted_sapling",
+            properties -> new SaplingBlock(ModTreeGrowers.TAINTED, properties
+                    .instabreak()
+                    .sound(SoundType.GRASS))
+    );
+
+    public static final DeferredBlock<Block> TAINTED_STAIRS = registerBlock("tainted_stairs",
+            properties -> new StairBlock(ModBlocks.FLUORITE_BLOCK.get().defaultBlockState(), properties
+                    .strength(3f)
+                    .ignitedByLava()
+                    .sound(SoundType.WOOD))
+            {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            }
+    );
+
+    public static final DeferredBlock<Block> TAINTED_SLAB = registerBlock("tainted_slab",
+            properties -> new SlabBlock(properties
+                    .strength(1f)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava()
+            )
+            {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            }
+    );
 
     // Magic block!
     public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock("magic_block",
             properties -> new MagicBlock(properties.strength(2f)
                     .requiresCorrectToolForDrops().sound(SoundType.DECORATED_POT)));
+
+
+    // TEST CRAFTING STATION
+    public static final DeferredBlock<Block> COMPRESSOR_BLOCK = registerBlock("compressor_block",
+            properties -> new CompressorBlock(properties
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.IRON)
+            ));
+
+    // Portal Block
+    public static final DeferredBlock<Block> EVIL_PORTAL = registerBlock("evil_portal",
+            properties -> new EvilPortalBlock(properties.strength(2f)));
+
+
 
 
 

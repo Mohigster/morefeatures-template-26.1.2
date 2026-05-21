@@ -1,0 +1,11 @@
+{
+  "aquamarine": {
+    "sounds": [
+      {
+        "name": "morefeatures:aquamarine",
+        "stream": true
+      }
+    ],
+    "subtitle": "sounds.morefeatures.aquamarine"
+  }
+}

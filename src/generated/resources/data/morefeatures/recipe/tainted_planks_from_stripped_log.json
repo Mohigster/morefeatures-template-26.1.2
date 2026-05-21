@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "tainted_planks",
+  "ingredients": [
+    "morefeatures:stripped_tainted_log"
+  ],
+  "result": {
+    "count": 4,
+    "id": "morefeatures:tainted_planks"
+  }
+}

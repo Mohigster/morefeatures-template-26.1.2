@@ -32,5 +32,7 @@ public class MoreFeaturesDataGen {
                 List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
         generator.addProvider(true, new ModRecipeProvider.Runner(packOutput, lookupProvider));
         generator.addProvider(true, new ModDatapackProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new ModSoundsProvider(packOutput));
+        generator.addProvider(true, new ModAdvancementProvider(packOutput, lookupProvider));
     }
 }
