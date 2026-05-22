@@ -162,6 +162,7 @@ public class ModItems {
 
 
     // Bismuth tools and equipment
+
     public static final DeferredItem<Item> BISMUTH_UPGRADE_SMITHING_TEMPLATE = registerItem(
             "bismuth_upgrade_smithing_template", ModSmithingTemplateItem::createBismuthUpgradeTemplate, new Item.Properties().rarity(Rarity.UNCOMMON)
     );

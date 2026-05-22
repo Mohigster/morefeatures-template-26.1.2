@@ -24,9 +24,6 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_MAGNESIUM_ORE = registerKey("add_magnesium_ore");
     public static final ResourceKey<BiomeModifier> ADD_BISMUTH_ORE = registerKey("add_bismuth_ore");
 
-    public static final ResourceKey<BiomeModifier> ADD_BLOODWOOD = registerKey("add_bloodwood");
-    public static final ResourceKey<BiomeModifier> ADD_SMALL_BLOODWOOD = registerKey("add_small_bloodwood");
-
     public static void bootstrap(BootstrapContext<BiomeModifier> context){
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);

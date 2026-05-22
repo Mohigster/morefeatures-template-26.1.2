@@ -54,7 +54,7 @@ public class MetalDetectorItem extends Item {
             if(!foundBlock){
                 outputNoValuablesFound(player);
                 level.playSound(null, positionClicked,
-                        SoundEvents.ANVIL_LAND, SoundSource.BLOCKS, 1.5f, 1f);
+                        SoundEvents.EGG_THROW, SoundSource.BLOCKS, 1.5f, 1f);
             }
         }
 

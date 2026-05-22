@@ -128,10 +128,39 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.CARBON_BOW);
                 output.accept(ModItems.CARBON_CROSSBOW);
                 output.accept(ModItems.CARBON_ELYTRA);
+                output.accept(ModItems.CARBON_WOLF_ARMOR);
 
                 // Metal detector
 
                 output.accept(ModItems.METAL_DETECTOR);
+            })
+            .build());
+
+    public static final Supplier<CreativeModeTab> MOREFEATURES_WOOD_TAB = CREATIVE_MODE_TABS.register("morefeatures_wood_tab", () -> CreativeModeTab.builder()
+            .icon(() -> new ItemStack(ModBlocks.BLOODWOOD_LOG))
+            .title(Component.translatable("creativetab.morefeatures.morefeatures_wood"))
+            .withTabsBefore(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures_equipment_tab"))
+            .displayItems((itemDisplayParameters, output) -> {
+
+                // Bloodwood
+
+                output.accept(ModBlocks.BLOODWOOD_LOG);
+                output.accept(ModBlocks.BLOODWOOD);
+                output.accept(ModBlocks.STRIPPED_BLOODWOOD_LOG);
+                output.accept(ModBlocks.STRIPPED_BLOODWOOD);
+                output.accept(ModBlocks.BLOODWOOD_PLANKS);
+                output.accept(ModBlocks.BLOODWOOD_STAIRS);
+                output.accept(ModBlocks.BLOODWOOD_SLAB);
+
+                // Tainted wood
+
+                output.accept(ModBlocks.TAINTED_LOG);
+                output.accept(ModBlocks.TAINTED_WOOD);
+                output.accept(ModBlocks.STRIPPED_TAINTED_LOG);
+                output.accept(ModBlocks.STRIPPED_TAINTED_WOOD);
+                output.accept(ModBlocks.TAINTED_PLANKS);
+                output.accept(ModBlocks.TAINTED_STAIRS);
+                output.accept(ModBlocks.TAINTED_SLAB);
             })
             .build());
 

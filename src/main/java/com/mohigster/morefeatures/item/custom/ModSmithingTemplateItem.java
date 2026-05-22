@@ -15,8 +15,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class ModSmithingTemplateItem extends Item {
-    // This code is taken from vanilla and modified so that it displays the correct info
-    // Necessary because Minecraft hardcoded description values.
+    // This code is taken from vanilla and modified so that it displays the correct info.
+    // This is necessary because vanilla Minecraft has hardcoded description values.
     private static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
     private static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
     private static final Component INGREDIENTS_TITLE = Component.translatable(

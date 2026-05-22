@@ -76,10 +76,10 @@ public class ModDimensions {
         NoiseBasedChunkGenerator multiBiomeGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
                         new Climate.ParameterList<>(List.of(
-                                Pair.of(Climate.parameters(0.5f, 0.1f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f), biomes.getOrThrow(ModBiomes.BLOODWOOD_FOREST)),
+                                Pair.of(Climate.parameters(0.1f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f), biomes.getOrThrow(ModBiomes.BLOODWOOD_FOREST)),
                                 Pair.of(Climate.parameters(-0.1f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f), biomes.getOrThrow(ModBiomes.TAINTED_FOREST))
                         ))),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.FLOATING_ISLANDS));
+                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.AMPLIFIED));
 
         context.register(EVILDIM_KEY, new LevelStem(dimensionTypes.getOrThrow(ModDimensions.EVIL_DIM_TYPE_KEY), multiBiomeGenerator));
     }

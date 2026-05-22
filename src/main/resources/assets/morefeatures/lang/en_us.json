@@ -105,5 +105,6 @@
   "advancements.morefeatures.root.title": "More Features Advancements",
   "advancements.morefeatures.root.description": "More Features Advancements... How exciting!",
   "advancement.morefeatures.get_hoe.description": "You crafted a Bismuth Hoe! ...Why?",
-  "advancement.morefeatures.get_hoe.title": "Intense Tenacity"
+  "advancement.morefeatures.get_hoe.title": "Intense Tenacity",
+  "creativetab.morefeatures.morefeatures_wood": "More Features Wood"
 }

@@ -15,7 +15,7 @@ public class ModSurfaceRules {
                         SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, GRASS_BLOCK),
                                 SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT), STONE)),
                 // Default to Dirt
-                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DIRT)
+                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, GRASS_BLOCK)
         );
     }
 
@@ -25,7 +25,7 @@ public class ModSurfaceRules {
                         SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, GRASS_BLOCK),
                                 SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT), STONE)),
                 // Default to Dirt
-                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DIRT)
+                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,GRASS_BLOCK)
         );
     }
 
