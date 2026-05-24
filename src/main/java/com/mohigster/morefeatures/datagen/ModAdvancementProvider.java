@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
@@ -56,6 +57,20 @@ public class ModAdvancementProvider extends AdvancementProvider {
                     )
                     .addCriterion("bismuth_hoe", hasItems(ItemPredicate.Builder.item().of(items, ModItems.BISMUTH_HOE.asItem())))
                     .save(output, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures/bismuth_hoe"));
+
+            AdvancementHolder craftPortal = Advancement.Builder.advancement()
+                    .parent(root)
+                    .display(ModBlocks.EVIL_PORTAL,
+                            Component.translatable("advancement.morefeatures.get_portal.title"),
+                            Component.translatable("advancement.morefeatures.get_portal.description"),
+                            null,
+                            AdvancementType.CHALLENGE,
+                            true,
+                            true,
+                            false
+                    )
+                    .addCriterion("evil_portal", hasItems(ItemPredicate.Builder.item().of(items, ModBlocks.EVIL_PORTAL.asItem())))
+                    .save(output, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures/evil_portal"));
 
 
 

@@ -106,5 +106,7 @@
   "advancements.morefeatures.root.description": "More Features Advancements... How exciting!",
   "advancement.morefeatures.get_hoe.description": "You crafted a Bismuth Hoe! ...Why?",
   "advancement.morefeatures.get_hoe.title": "Intense Tenacity",
-  "creativetab.morefeatures.morefeatures_wood": "More Features Wood"
+  "creativetab.morefeatures.morefeatures_wood": "More Features Wood",
+  "advancement.morefeatures.get_portal.title": "Darkness Calls...",
+  "advancement.morefeatures.get_portal.description": "Craft an Evil Portal block and ponder if the journey is worth it."
 }

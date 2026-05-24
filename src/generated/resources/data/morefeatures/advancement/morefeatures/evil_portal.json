@@ -1,0 +1,33 @@
+{
+  "parent": "morefeatures:morefeatures/root",
+  "criteria": {
+    "evil_portal": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morefeatures:evil_portal"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    }
+  },
+  "display": {
+    "description": {
+      "translate": "advancement.morefeatures.get_portal.description"
+    },
+    "frame": "challenge",
+    "icon": {
+      "id": "morefeatures:evil_portal"
+    },
+    "title": {
+      "translate": "advancement.morefeatures.get_portal.title"
+    }
+  },
+  "requirements": [
+    [
+      "evil_portal"
+    ]
+  ],
+  "sends_telemetry_event": true
+}
