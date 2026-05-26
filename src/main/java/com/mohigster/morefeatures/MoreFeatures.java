@@ -1,10 +1,12 @@
 package com.mohigster.morefeatures;
 
 import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.entity.ModBlockEntities;
 import com.mohigster.morefeatures.creativemodetab.ModCreativeModeTabs;
 import com.mohigster.morefeatures.enchantment.ModEnchantmentEffects;
 import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
 import com.mohigster.morefeatures.item.ModItems;
+import com.mohigster.morefeatures.menu.ModMenuTypes;
 import com.mohigster.morefeatures.sound.ModSounds;
 import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
 import com.mohigster.morefeatures.worldgen.biome.ModSurfaceRules;
@@ -48,6 +50,9 @@ public class MoreFeatures {
         ModSounds.register(modEventBus);
 
         ModEnchantmentEffects.register(modEventBus);
+
+        ModMenuTypes.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (MoreFeatures) to respond directly to events.

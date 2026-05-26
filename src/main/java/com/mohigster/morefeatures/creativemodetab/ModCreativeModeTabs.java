@@ -99,6 +99,9 @@ public class ModCreativeModeTabs {
 
                 // Magic block
                 output.accept(ModBlocks.MAGIC_BLOCK);
+
+                // Compressor block
+                output.accept(ModBlocks.COMPRESSOR_BLOCK);
             })
             .build());
 
@@ -110,6 +113,7 @@ public class ModCreativeModeTabs {
 
                 // Carbon tools and equipment
 
+                output.accept(ModItems.CARBON_TRIDENT);
                 output.accept(ModItems.CARBON_BOW);
                 output.accept(ModItems.CARBON_CROSSBOW);
                 output.accept(ModItems.CARBON_ELYTRA);
@@ -123,6 +127,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.BISMUTH_SHOVEL);
                 output.accept(ModItems.BISMUTH_HOE);
                 output.accept(ModItems.BISMUTH_SPEAR);
+                output.accept(ModItems.BISMUTH_TRIDENT);
                 output.accept(ModItems.BISMUTH_BOW);
 
                 // Bismuth Armor

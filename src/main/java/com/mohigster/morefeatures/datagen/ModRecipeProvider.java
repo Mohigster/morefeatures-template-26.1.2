@@ -47,6 +47,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
 
         // Aluminium recipes
+
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.ALUMINIUM_BLOCK.get())
                 .pattern("AAA")
                 .pattern("AAA")
@@ -406,6 +407,20 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("carbon_bow")
                 .save(output);
 
+        // Compressor block recipe
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COMPRESSOR_BLOCK)
+                .pattern("AMA")
+                .pattern("MNM")
+                .pattern("ANA")
+                .define('A', ModItems.ALUMINIUM_INGOT)
+                .define('M', ModItems.MAGNESIUM_INGOT)
+                .define('N', Items.NETHERITE_INGOT)
+                .unlockedBy(getHasName(Items.NETHERITE_INGOT), has(Items.NETHERITE_INGOT))
+                .group("compressor_block")
+                .save(output);
+
+
         // Stairs and slabs
         stairBuilder(ModBlocks.AZURITE_STAIRS.get(), Ingredient.of(ModBlocks.AZURITE_BLOCK))
                 .unlockedBy(getHasName(ModBlocks.AZURITE_BLOCK.get()), has(ModBlocks.AZURITE_BLOCK))
@@ -427,6 +442,8 @@ public class ModRecipeProvider extends RecipeProvider {
 
         // carbonBismuthSmithing upgrades carbon items to bismuth
         // netheriteBismuthSmithing applies to netherite items
+
+        // This is not technically necessary and is simply for clarity on my part
 
         carbonBismuthSmithing(ModItems.CARBON_BOW, RecipeCategory.COMBAT, ModItems.BISMUTH_BOW.get());
         carbonBismuthSmithing(ModItems.CARBON_TRIDENT, RecipeCategory.COMBAT, ModItems.BISMUTH_TRIDENT.get());

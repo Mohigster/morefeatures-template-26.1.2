@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "morefeatures:block/compressor_block",
+      "y": 90
+    },
+    "facing=north": {
       "model": "morefeatures:block/compressor_block"
+    },
+    "facing=south": {
+      "model": "morefeatures:block/compressor_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "morefeatures:block/compressor_block",
+      "y": 270
     }
   }
 }

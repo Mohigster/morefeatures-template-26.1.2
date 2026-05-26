@@ -3,12 +3,15 @@ package com.mohigster.morefeatures.datagen;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.item.ModItems;
-import com.mohigster.morefeatures.model.ModCarbonItemModelGenerators;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
+import net.minecraft.client.data.models.ItemModelOutput;
 import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.client.data.models.model.*;
+import net.minecraft.client.renderer.item.properties.select.DisplayContext;
 import net.minecraft.data.PackOutput;
+import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
 
 public class ModModelProvider extends ModelProvider {
     public ModModelProvider(PackOutput output) {
@@ -68,7 +71,7 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateElytra(ModItems.CARBON_ELYTRA.get());
         itemModels.generateBow(ModItems.BISMUTH_BOW.get());
         itemModels.generateSpear(ModItems.BISMUTH_SPEAR.get());
-//        itemModels.generateTrident(ModItems.CARBON_TRIDENT.get());
+        itemModels.generateShield(ModItems.CARBON_SHIELD.get());
         itemModels.generateFlatItem(ModItems.CARBON_TRIDENT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_HORSE_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_NAUTILUS_ARMOR.get(), ModelTemplates.FLAT_ITEM);
@@ -108,8 +111,8 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialBlock(ModBlocks.BLOODWOOD_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createCrossBlock(ModBlocks.BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createTrivialCube(ModBlocks.MAGIC_BLOCK.get());
-        blockModels.createTrivialCube(ModBlocks.COMPRESSOR_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.EVIL_PORTAL.get());
+        blockModels.createHorizontallyRotatedBlock(ModBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
         blockModels.family(ModBlocks.AZURITE_BLOCK.get())
                 .stairs(ModBlocks.AZURITE_STAIRS.get())
                 .slab(ModBlocks.AZURITE_SLAB.get());
@@ -123,5 +126,4 @@ public class ModModelProvider extends ModelProvider {
                 .stairs(ModBlocks.TAINTED_STAIRS.get())
                 .slab(ModBlocks.TAINTED_SLAB.get());
     }
-
 }

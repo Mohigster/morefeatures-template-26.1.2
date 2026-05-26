@@ -5,8 +5,11 @@ import com.mohigster.morefeatures.entity.projectile.BismuthTridentModel;
 import com.mohigster.morefeatures.entity.projectile.BismuthTridentRenderer;
 import com.mohigster.morefeatures.entity.projectile.CarbonTridentModel;
 import com.mohigster.morefeatures.entity.projectile.CarbonTridentRenderer;
+import com.mohigster.morefeatures.menu.ModMenuTypes;
+import com.mohigster.morefeatures.menu.custom.CompressorScreen;
 import com.mohigster.morefeatures.model.ModModelLayer;
 import com.mohigster.morefeatures.renderer.special.BismuthTridentSpecialRenderer;
+import com.mohigster.morefeatures.renderer.special.CarbonShieldSpecialRenderer;
 import com.mohigster.morefeatures.renderer.special.CarbonTridentSpecialRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.Identifier;
@@ -17,6 +20,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
@@ -62,5 +66,14 @@ public class MoreFeaturesClient {
                 Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "bismuth_trident"),
                 BismuthTridentSpecialRenderer.Unbaked.MAP_CODEC
         );
+        event.register(
+                Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "carbon_shield"),
+                CarbonShieldSpecialRenderer.Unbaked.MAP_CODEC
+        );
+    }
+
+    @SubscribeEvent
+    public static void registerScreens(RegisterMenuScreensEvent event) {
+        event.register(ModMenuTypes.COMPRESSOR_MENU.get(), CompressorScreen::new);
     }
 }

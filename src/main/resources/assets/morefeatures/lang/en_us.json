@@ -62,7 +62,7 @@
   "item.morefeatures.bismuth_trident": "Bismuth Trident",
 
   "item.morefeatures.bismuth_upgrade_smithing_template": "Bismuth Upgrade",
-  "item.minecraft.smithing_template.bismuth_upgrade.additions_slot_description": "Add Bismuth",
+  "item.minecraft.smithing_template.bismuth_upgrade.additions_slot_description": "Add Refined Bismuth",
   "item.minecraft.smithing_template.bismuth_upgrade.applies_to": "Netherite or Carbon Equipment",
   "item.minecraft.smithing_template.bismuth_upgrade.base_slot_description": "Add netherite or carbon armor, weapon, or tool",
   "item.minecraft.smithing_template.bismuth_upgrade.ingredients": "Refined Bismuth",
@@ -111,6 +111,8 @@
   "sounds.morefeatures.magic_block_step": "Stepping on Magic Block",
 
   "container.compression": "Compression",
+  "block.morefeatures.compressor": "Compression",
+  "block.morefeatures.compressor_block": "Compressor",
 
   "advancements.morefeatures.root.title": "More Features Advancements",
   "advancements.morefeatures.root.description": "More Features Advancements... How exciting!",
@@ -124,5 +126,9 @@
   "advancement.morefeatures.get_portal.description": "Craft an Evil Portal block and ponder if the journey is worth it.",
 
   "enchantment.morefeatures.thunderbolt": "Thunderbolt",
-  "enchantment.morefeatures.thundering": "Thundering"
+  "enchantment.morefeatures.thundering": "Thundering",
+
+
+  "tooltip.morefeatures.metal_detector": "Right click a block to start detecting!",
+  "tooltip.morefeatures.magic_block": "Try throwing a metal, carbon-based organic material, or potion! It's §9MAGIC§r"
 }

@@ -8,6 +8,8 @@ import com.mohigster.morefeatures.item.custom.CarbonTridentItem;
 import com.mohigster.morefeatures.item.custom.MetalDetectorItem;
 import com.mohigster.morefeatures.item.custom.ModSmithingTemplateItem;
 import com.mohigster.morefeatures.toolmaterial.ModArmorMaterials;
+import net.minecraft.network.chat.Component;
+import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Unit;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -17,7 +19,9 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.item.component.ChargedProjectiles;
+import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
@@ -28,6 +32,8 @@ import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
 import static com.mohigster.morefeatures.MoreFeatures.MODID;
@@ -89,7 +95,13 @@ public class ModItems {
     public static final DeferredItem<Item> METAL_DETECTOR = ITEMS.registerItem("metal_detector",
             properties -> new MetalDetectorItem(properties
                     .durability(128)
-            ));
+            ){
+                @Override
+                public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
+                    builder.accept(Component.translatable("tooltip.morefeatures.metal_detector"));
+                    super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
+                }
+            });
 
     // Music Discs
 
@@ -154,10 +166,33 @@ public class ModItems {
                     .fireResistant()
                     .enchantable(15)
                     .durability(594)
+                    .repairable(CARBON_FIBER.get())
                     .attributes(CarbonTridentItem.createAttributes())
                     .rarity(Rarity.RARE)
                     .component(DataComponents.TOOL, CarbonTridentItem.createToolProperties())
                     .component(DataComponents.WEAPON, new Weapon(1))
+            ));
+
+    public static final DeferredItem<Item> CARBON_SHIELD = ITEMS.registerItem("carbon_shield",
+            properties -> new ShieldItem(properties
+                    .fireResistant()
+                    .enchantable(15)
+                    .durability(685)
+                    .repairable(CARBON_FIBER.get())
+                    .equippableUnswappable(EquipmentSlot.OFFHAND)
+                    .delayedComponent(
+                            DataComponents.BLOCKS_ATTACKS,
+                            context -> new BlocksAttacks(
+                                    0.25F,
+                                    1.0F,
+                                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                                    Optional.of(context.getOrThrow(DamageTypeTags.BYPASSES_SHIELD)),
+                                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                                    Optional.of(SoundEvents.SHIELD_BREAK)
+                            )
+                    )
+                    .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK)
             ));
 
 
@@ -238,14 +273,12 @@ public class ModItems {
             properties -> new BismuthTridentItem(properties
                     .fireResistant()
                     .enchantable(15)
-                    .durability(994)
+                    .durability(997)
                     .attributes(BismuthTridentItem.createAttributes())
                     .rarity(Rarity.RARE)
                     .component(DataComponents.TOOL, BismuthTridentItem.createToolProperties())
                     .component(DataComponents.WEAPON, new Weapon(2))
             ));
-
-
 
     public static final List<DeferredItem<Item>> BISMUTH_EQUIPMENT = registerEquipmentItems("bismuth", BISMUTH_TOOL_MATERIAL, ModArmorMaterials.BISMUTH,
             new float[]{5.5f, -2.2f}, new float[]{0f, -2.8f},
