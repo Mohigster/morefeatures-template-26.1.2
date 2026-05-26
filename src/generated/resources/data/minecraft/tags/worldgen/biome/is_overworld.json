@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "morefeatures:tainted_forest",
+      "required": false
+    },
+    {
+      "id": "morefeatures:bloodwood_forest",
+      "required": false
+    }
+  ]
+}

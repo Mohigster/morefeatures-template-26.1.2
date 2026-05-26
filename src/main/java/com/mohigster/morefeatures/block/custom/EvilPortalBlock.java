@@ -75,7 +75,7 @@ public class EvilPortalBlock extends Block implements Portal {
             if(!targetLevel.getBlockState(portalPos.above()).is(ModBlocks.EVIL_PORTAL)) {
                 EndPlatformFeature.createEndPlatform(targetLevel, platformCenter, true);
 
-                targetLevel.setBlockAndUpdate(portalPos, ModBlocks.BISMUTH_BLOCK.get().defaultBlockState());
+                targetLevel.setBlockAndUpdate(portalPos, Blocks.BASALT.defaultBlockState());
                 targetLevel.setBlockAndUpdate(portalPos.above(), ModBlocks.EVIL_PORTAL.get().defaultBlockState());
             }
 

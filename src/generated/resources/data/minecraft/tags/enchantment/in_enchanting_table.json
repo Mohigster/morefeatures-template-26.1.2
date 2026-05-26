@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "morefeatures:thundering",
+      "required": false
+    },
+    {
+      "id": "morefeatures:thunderbolt",
+      "required": false
+    }
+  ]
+}

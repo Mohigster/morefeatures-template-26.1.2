@@ -47,6 +47,9 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.BISMUTH);
                 output.accept(ModItems.BISMUTH_SCRAP);
                 output.accept(ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE);
+
+                // Carbon
+                output.accept(ModItems.CARBON_FIBER);
             })
             .build());
 
@@ -105,6 +108,13 @@ public class ModCreativeModeTabs {
             .withTabsBefore(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures_blocks_tab"))
             .displayItems((itemDisplayParameters, output) -> {
 
+                // Carbon tools and equipment
+
+                output.accept(ModItems.CARBON_BOW);
+                output.accept(ModItems.CARBON_CROSSBOW);
+                output.accept(ModItems.CARBON_ELYTRA);
+                output.accept(ModItems.CARBON_WOLF_ARMOR);
+
                 // Bismuth Tools
 
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
@@ -113,6 +123,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.BISMUTH_SHOVEL);
                 output.accept(ModItems.BISMUTH_HOE);
                 output.accept(ModItems.BISMUTH_SPEAR);
+                output.accept(ModItems.BISMUTH_BOW);
 
                 // Bismuth Armor
 
@@ -122,13 +133,6 @@ public class ModCreativeModeTabs {
                 output.accept(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
                 output.accept(ModItems.BISMUTH_HORSE_ARMOR);
                 output.accept(ModItems.BISMUTH_NAUTILUS_ARMOR);
-
-                // Carbon tools and equipment
-
-                output.accept(ModItems.CARBON_BOW);
-                output.accept(ModItems.CARBON_CROSSBOW);
-                output.accept(ModItems.CARBON_ELYTRA);
-                output.accept(ModItems.CARBON_WOLF_ARMOR);
 
                 // Metal detector
 

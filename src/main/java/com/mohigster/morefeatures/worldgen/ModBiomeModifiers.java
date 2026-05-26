@@ -73,16 +73,6 @@ public class ModBiomeModifiers {
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.BISMUTH_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES
         ));
-//        context.register(ADD_BLOODWOOD, new BiomeModifiers.AddFeaturesBiomeModifier(
-//                HolderSet.direct(biomes.getOrThrow(Biomes.PLAINS), biomes.getOrThrow(Biomes.SAVANNA)),
-//                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.BLOODWOOD_PLACED_KEY)),
-//                GenerationStep.Decoration.VEGETAL_DECORATION
-//        ));
-//        context.register(ADD_SMALL_BLOODWOOD, new BiomeModifiers.AddFeaturesBiomeModifier(
-//                HolderSet.direct(biomes.getOrThrow(Biomes.PLAINS), biomes.getOrThrow(Biomes.SAVANNA)),
-//                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.SMALL_BLOODWOOD_PLACED_KEY)),
-//                GenerationStep.Decoration.VEGETAL_DECORATION
-//        ));
 
     }
 

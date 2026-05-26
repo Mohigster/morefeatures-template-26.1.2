@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.worldgen.dimension;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
+import com.mohigster.morefeatures.worldgen.noise.ModNoiseGeneratorSettings;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -73,13 +74,15 @@ public class ModDimensions {
 //        var bloodwoodKey = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "bloodwood_forest"));
 //        var ebonKey = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "ebon_forest"));
 
+
+
         NoiseBasedChunkGenerator multiBiomeGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
                         new Climate.ParameterList<>(List.of(
                                 Pair.of(Climate.parameters(0.1f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f), biomes.getOrThrow(ModBiomes.BLOODWOOD_FOREST)),
                                 Pair.of(Climate.parameters(-0.1f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f), biomes.getOrThrow(ModBiomes.TAINTED_FOREST))
                         ))),
-                noiseGenSettings.getOrThrow(NoiseGeneratorSettings.AMPLIFIED));
+                noiseGenSettings.getOrThrow(ModNoiseGeneratorSettings.FLOATING_ISLANDS_MULTI));
 
         context.register(EVILDIM_KEY, new LevelStem(dimensionTypes.getOrThrow(ModDimensions.EVIL_DIM_TYPE_KEY), multiBiomeGenerator));
     }

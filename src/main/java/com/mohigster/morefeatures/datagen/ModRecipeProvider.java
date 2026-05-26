@@ -16,6 +16,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.Tags;
+import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -372,6 +373,17 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("carbon_bow")
                 .save(output);
 
+        shaped(RecipeCategory.COMBAT, ModItems.CARBON_TRIDENT)
+                .pattern("CCC")
+                .pattern("CTC")
+                .pattern("CRC")
+                .define('C', ModItems.CARBON_FIBER.get())
+                .define('T', Items.TRIDENT)
+                .define('R', Items.RESIN_CLUMP)
+                .unlockedBy(getHasName(ModItems.CARBON_FIBER.get()), has(ModItems.CARBON_FIBER))
+                .group("carbon_bow")
+                .save(output);
+
         shaped(RecipeCategory.COMBAT, ModItems.CARBON_CROSSBOW)
                 .pattern("CCC")
                 .pattern("CBC")
@@ -385,10 +397,10 @@ public class ModRecipeProvider extends RecipeProvider {
 
         shaped(RecipeCategory.COMBAT, ModItems.CARBON_ELYTRA)
                 .pattern("CCC")
-                .pattern("CBC")
+                .pattern("CEC")
                 .pattern("CRC")
                 .define('C', ModItems.CARBON_FIBER.get())
-                .define('B', Items.ELYTRA)
+                .define('E', Items.ELYTRA)
                 .define('R', Items.RESIN_CLUMP)
                 .unlockedBy(getHasName(ModItems.CARBON_FIBER.get()), has(ModItems.CARBON_FIBER))
                 .group("carbon_bow")
@@ -413,18 +425,23 @@ public class ModRecipeProvider extends RecipeProvider {
 
         // Bismuth smithing recipes
 
-        bismuthSmithing(Items.NETHERITE_NAUTILUS_ARMOR, RecipeCategory.COMBAT, ModItems.BISMUTH_NAUTILUS_ARMOR.get());
-        bismuthSmithing(Items.NETHERITE_HORSE_ARMOR, RecipeCategory.COMBAT, ModItems.BISMUTH_HORSE_ARMOR.get());
-        bismuthSmithing(Items.NETHERITE_SPEAR, RecipeCategory.COMBAT, ModItems.BISMUTH_SPEAR.get());
-        bismuthSmithing(Items.NETHERITE_AXE, RecipeCategory.COMBAT, ModItems.BISMUTH_AXE.get());
-        bismuthSmithing(Items.NETHERITE_SHOVEL, RecipeCategory.COMBAT, ModItems.BISMUTH_SHOVEL.get());
-        bismuthSmithing(Items.NETHERITE_HOE, RecipeCategory.COMBAT, ModItems.BISMUTH_HOE.get());
-        bismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
-        bismuthSmithing(Items.NETHERITE_PICKAXE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(1).asItem());
-        bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
-        bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
-        bismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
-        bismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+        // carbonBismuthSmithing upgrades carbon items to bismuth
+        // netheriteBismuthSmithing applies to netherite items
+
+        carbonBismuthSmithing(ModItems.CARBON_BOW, RecipeCategory.COMBAT, ModItems.BISMUTH_BOW.get());
+        carbonBismuthSmithing(ModItems.CARBON_TRIDENT, RecipeCategory.COMBAT, ModItems.BISMUTH_TRIDENT.get());
+        netheriteBismuthSmithing(Items.NETHERITE_NAUTILUS_ARMOR, RecipeCategory.COMBAT, ModItems.BISMUTH_NAUTILUS_ARMOR.get());
+        netheriteBismuthSmithing(Items.NETHERITE_HORSE_ARMOR, RecipeCategory.COMBAT, ModItems.BISMUTH_HORSE_ARMOR.get());
+        netheriteBismuthSmithing(Items.NETHERITE_SPEAR, RecipeCategory.COMBAT, ModItems.BISMUTH_SPEAR.get());
+        netheriteBismuthSmithing(Items.NETHERITE_AXE, RecipeCategory.COMBAT, ModItems.BISMUTH_AXE.get());
+        netheriteBismuthSmithing(Items.NETHERITE_SHOVEL, RecipeCategory.COMBAT, ModItems.BISMUTH_SHOVEL.get());
+        netheriteBismuthSmithing(Items.NETHERITE_HOE, RecipeCategory.COMBAT, ModItems.BISMUTH_HOE.get());
+        netheriteBismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
+        netheriteBismuthSmithing(Items.NETHERITE_PICKAXE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(1).asItem());
+        netheriteBismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+        netheriteBismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
+        netheriteBismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
+        netheriteBismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
 
 
         //—————————————————————————————SMELTABLE LISTS———————————————————————————————
@@ -468,7 +485,12 @@ public class ModRecipeProvider extends RecipeProvider {
                     .save(output, MoreFeatures.MODID + ":" + getItemName(result) + fromDesc + "_" + getItemName(itemlike));
         }
     }
-    protected void bismuthSmithing(Item base, RecipeCategory category, Item result) {
+    protected void netheriteBismuthSmithing(Item base, RecipeCategory category, Item result) {
+        SmithingTransformRecipeBuilder.smithing(Ingredient.of(ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(base), this.tag(ModItemTags.BISMUTH_TOOL_MATERIALS), category, result).unlocks("has_bismuth_ingot", this.has(ModItemTags.BISMUTH_TOOL_MATERIALS)).save(this.output, getItemName(result) + "_smithing");
+    }
+
+    protected void carbonBismuthSmithing(DeferredItem<Item> base, RecipeCategory category, Item result) {
         SmithingTransformRecipeBuilder.smithing(Ingredient.of(ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(base), this.tag(ModItemTags.BISMUTH_TOOL_MATERIALS), category, result).unlocks("has_bismuth_ingot", this.has(ModItemTags.BISMUTH_TOOL_MATERIALS)).save(this.output, getItemName(result) + "_smithing");
     }
 }
+

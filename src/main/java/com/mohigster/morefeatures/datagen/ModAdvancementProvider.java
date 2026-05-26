@@ -64,7 +64,7 @@ public class ModAdvancementProvider extends AdvancementProvider {
                             Component.translatable("advancement.morefeatures.get_portal.title"),
                             Component.translatable("advancement.morefeatures.get_portal.description"),
                             null,
-                            AdvancementType.CHALLENGE,
+                            AdvancementType.TASK,
                             true,
                             true,
                             false

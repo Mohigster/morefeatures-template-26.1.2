@@ -23,7 +23,7 @@ public class CarbonTridentRenderer extends ThrownTridentRenderer {
 
     public CarbonTridentRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new CarbonTridentModel(context.bakeLayer(ModelLayers.TRIDENT));
+        this.model = new CarbonTridentModel(context.bakeLayer(ModModelLayer.CARBON_TRIDENT));
     }
 
     @Override
@@ -52,7 +52,6 @@ public class CarbonTridentRenderer extends ThrownTridentRenderer {
                     );
         }
         poseStack.popPose();
-        super.submit(state, poseStack, submitNodeCollector, camera);
     }
 
     @Override

@@ -1,7 +1,8 @@
 {
     "gui_light": "front",
+    "parent": "minecraft:item/trident_throwing",
     "textures": {
-        "particle": "item/trident",
+        "particle": "morefeatures:entity/trident/carbon_trident",
         "texture": "morefeatures:entity/trident/carbon_trident"
     },
     "display": {

@@ -5,7 +5,7 @@
       {
         "model": {
           "type": "minecraft:model",
-          "model": "morefeatures:item/carbon_trident"
+          "model": "morefeatures:item/bismuth_trident"
         },
         "when": [
           "gui",
@@ -19,16 +19,16 @@
       "type": "minecraft:condition",
       "on_false": {
         "type": "minecraft:special",
-        "base": "morefeatures:item/carbon_trident_in_hand",
+        "base": "morefeatures:item/bismuth_trident_in_hand",
         "model": {
-          "type": "minecraft:trident"
+          "type": "morefeatures:bismuth_trident"
         }
       },
       "on_true": {
         "type": "minecraft:special",
-        "base": "morefeatures:item/carbon_trident_throwing",
+        "base": "morefeatures:item/bismuth_trident_throwing",
         "model": {
-          "type": "minecraft:trident"
+          "type": "morefeatures:bismuth_trident"
         }
       },
       "property": "minecraft:using_item",

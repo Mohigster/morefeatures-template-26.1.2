@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.item;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.asset.ModEquipmentAssets;
 import com.mohigster.morefeatures.datagen.ModJukeboxSongs;
+import com.mohigster.morefeatures.item.custom.BismuthTridentItem;
 import com.mohigster.morefeatures.item.custom.CarbonTridentItem;
 import com.mohigster.morefeatures.item.custom.MetalDetectorItem;
 import com.mohigster.morefeatures.item.custom.ModSmithingTemplateItem;
@@ -211,6 +212,14 @@ public class ModItems {
                     .rarity(Rarity.RARE)
                     ));
 
+    public static final DeferredItem<Item> BISMUTH_BOW = ITEMS.registerItem("bismuth_bow",
+            properties -> new BowItem(properties
+                    .rarity(Rarity.RARE)
+                    .fireResistant()
+                    .durability(1516)
+                    .enchantable(19)
+            ));
+
     public static final DeferredItem<Item> BISMUTH_HORSE_ARMOR = ITEMS.registerItem("bismuth_horse_armor",
             properties -> new Item(properties
                     .horseArmor(ModArmorMaterials.BISMUTH)
@@ -223,6 +232,17 @@ public class ModItems {
                     .nautilusArmor(ModArmorMaterials.BISMUTH)
                     .rarity(Rarity.RARE)
                     .fireResistant()
+            ));
+
+    public static final DeferredItem<Item> BISMUTH_TRIDENT = ITEMS.registerItem("bismuth_trident",
+            properties -> new BismuthTridentItem(properties
+                    .fireResistant()
+                    .enchantable(15)
+                    .durability(994)
+                    .attributes(BismuthTridentItem.createAttributes())
+                    .rarity(Rarity.RARE)
+                    .component(DataComponents.TOOL, BismuthTridentItem.createToolProperties())
+                    .component(DataComponents.WEAPON, new Weapon(2))
             ));
 
 

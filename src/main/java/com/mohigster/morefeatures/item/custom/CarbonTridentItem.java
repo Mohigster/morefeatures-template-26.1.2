@@ -27,7 +27,6 @@ import java.util.Objects;
 
 public class CarbonTridentItem extends TridentItem {
     public static final int THROW_THRESHOLD_TIME = 10;
-    public static final float BASE_DAMAGE = 8.0F;
     public static final float PROJECTILE_SHOOT_POWER = 2.5F;
 
     public CarbonTridentItem(Properties properties) {
@@ -56,26 +55,43 @@ public class CarbonTridentItem extends TridentItem {
     public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
         if (entity instanceof Player player) {
             int useTime = this.getUseDuration(stack, entity) - timeLeft;
-            if (useTime <10){
+            if (useTime < THROW_THRESHOLD_TIME) {
                 return false;
-            } else {
-                player.awardStat(Stats.ITEM_USED.get(this));
-                if (level instanceof ServerLevel serverLevel) {
-                    stack.hurtWithoutBreaking(1, player);
-
-                    ThrownCarbonTrident carbonTrident = new ThrownCarbonTrident(level, player, stack);
-                    carbonTrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 2.5F, 1.0F);
-
-                    if (player.hasInfiniteMaterials()) {
-                        carbonTrident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
-                    }
-
-                    level.addFreshEntity(carbonTrident);
-                    level.playSound(null, carbonTrident, SoundEvents.TRIDENT_THROW.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
-                    return true;
-                }
             }
+
+
+
+            // 1. Play sound on both client and server safely via level.playSound
+            level.playSound(null, player.getX(), player.getY(), player.getZ(),
+                    SoundEvents.TRIDENT_THROW.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
+
+            if (!level.isClientSide() && level instanceof ServerLevel serverLevel) {
+
+                // Hurt the item stack
+                stack.hurtWithoutBreaking(1, player);
+
+                // 2. Spawn your custom entity on the server
+                ThrownCarbonTrident carbonTrident = new ThrownCarbonTrident(level, player, stack);
+                carbonTrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, PROJECTILE_SHOOT_POWER, 1.0F);
+
+                if (player.hasInfiniteMaterials()) {
+                    carbonTrident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+                }
+
+                // Add to level
+                serverLevel.addFreshEntity(carbonTrident);
+
+                // Track stats
+                player.awardStat(Stats.ITEM_USED.get(this));
+            }
+
+            // 3. Consume the item from the inventory if they aren't in creative
+            if (!player.hasInfiniteMaterials()) {
+                stack.shrink(1);
+            }
+
+            return true;
         }
-        return true;
+        return false;
     }
 }

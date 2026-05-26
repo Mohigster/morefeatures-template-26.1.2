@@ -3,13 +3,13 @@
   "category": "equipment",
   "group": "carbon_bow",
   "key": {
-    "B": "minecraft:elytra",
     "C": "morefeatures:carbon_fiber",
+    "E": "minecraft:elytra",
     "R": "minecraft:resin_clump"
   },
   "pattern": [
     "CCC",
-    "CBC",
+    "CEC",
     "CRC"
   ],
   "result": {

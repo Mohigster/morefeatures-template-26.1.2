@@ -11,6 +11,7 @@ import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
@@ -36,6 +37,17 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+
+        tag(ModItemTags.BOW_UPGRADE_ENCHANTABLE)
+                .add(ModItems.BISMUTH_BOW.get());
+
+        tag(ModItemTags.MELEE_WEAPON_UPGRADE_ENCHANTABLE)
+                .add(ModItems.BISMUTH_AXE.get())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
+
+        tag(ItemTags.TRIDENT_ENCHANTABLE)
+                .add(ModItems.BISMUTH_TRIDENT.get())
+                .add(ModItems.CARBON_TRIDENT.get());
 
         tag(ModItemTags.IS_FOOD)
                 .add(Items.APPLE.asItem())
@@ -85,6 +97,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(Items.POTION);
 
         tag(ItemTags.BOW_ENCHANTABLE)
+                .add(ModItems.BISMUTH_BOW.get())
                 .add(ModItems.CARBON_BOW.get());
 
         tag(ItemTags.CROSSBOW_ENCHANTABLE)
@@ -172,6 +185,7 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.BISMUTH_SHOVEL.get())
                 .add(ModItems.CARBON_CROSSBOW.get())
                 .add(ModItems.CARBON_BOW.get())
+                .add(ModItems.BISMUTH_BOW.get())
                 .add(ModItems.BISMUTH_SPEAR.get())
                 .add(ModItems.CARBON_ELYTRA.get())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())

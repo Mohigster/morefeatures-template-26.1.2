@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.enchantment.ModEnchantments;
 import com.mohigster.morefeatures.worldgen.ModBiomeModifiers;
 import com.mohigster.morefeatures.worldgen.ModConfiguredFeatures;
 import com.mohigster.morefeatures.worldgen.ModPlacedFeatures;
@@ -24,6 +25,7 @@ public class ModDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, ModBiomeModifiers::bootstrap)
             .add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType)
             .add(Registries.LEVEL_STEM, ModDimensions::bootstrapStem)
+            .add(Registries.ENCHANTMENT, ModEnchantments::bootstrap)
             .add(Registries.BIOME, ModBiomes::bootstrap);
 
     public ModDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries){

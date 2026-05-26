@@ -15,6 +15,7 @@
         "probability": 0.00625
       }
     ],
+    "minecraft:visual/cloud_color": "#9bc81f19",
     "minecraft:visual/fog_color": "#330808",
     "minecraft:visual/sky_color": "#dc143c"
   },

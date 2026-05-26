@@ -2,6 +2,7 @@
   "creativetab.morefeatures.morefeatures_items": "More Features Items",
   "creativetab.morefeatures.morefeatures_blocks": "More Features Blocks",
   "creativetab.morefeatures.morefeatures_equipment": "More Features Equipment",
+  "creativetab.morefeatures.morefeatures_wood": "More Features Wood",
 
   "item.morefeatures.raw_aluminium": "Raw Aluminum",
   "item.morefeatures.aluminium_ingot": "Aluminum Ingot",
@@ -57,12 +58,14 @@
   "item.morefeatures.bismuth_horse_armor": "Bismuth Horse Armor",
   "item.morefeatures.bismuth_nautilus_armor": "Bismuth Nautilus Armor",
   "item.morefeatures.bismuth_scrap": "Bismuth Scrap",
+  "item.morefeatures.bismuth_bow": "Bismuth Bow",
+  "item.morefeatures.bismuth_trident": "Bismuth Trident",
 
   "item.morefeatures.bismuth_upgrade_smithing_template": "Bismuth Upgrade",
   "item.minecraft.smithing_template.bismuth_upgrade.additions_slot_description": "Add Bismuth",
   "item.minecraft.smithing_template.bismuth_upgrade.applies_to": "Netherite or Carbon Equipment",
   "item.minecraft.smithing_template.bismuth_upgrade.base_slot_description": "Add netherite or carbon armor, weapon, or tool",
-  "item.minecraft.smithing_template.bismuth_upgrade.ingredients": "Bismuth",
+  "item.minecraft.smithing_template.bismuth_upgrade.ingredients": "Refined Bismuth",
 
   "item.morefeatures.brine_rod": "Brine Rod",
 
@@ -101,12 +104,25 @@
   "item.morefeatures.aquamarine_music_disc": "Aquamarine Music Disc",
   "jukebox_song.morefeatures.aquamarine": "Mohigster - Aquamarine",
 
+  "sounds.morefeatures.magic_block_break": "Breaking Magic Block",
+  "sounds.morefeatures.magic_block_fall": "Falling on Magic Block",
+  "sounds.morefeatures.magic_block_hit": "Hitting Magic Block",
+  "sounds.morefeatures.magic_block_place": "Placing Magic Block",
+  "sounds.morefeatures.magic_block_step": "Stepping on Magic Block",
+
   "container.compression": "Compression",
+
   "advancements.morefeatures.root.title": "More Features Advancements",
   "advancements.morefeatures.root.description": "More Features Advancements... How exciting!",
   "advancement.morefeatures.get_hoe.description": "You crafted a Bismuth Hoe! ...Why?",
   "advancement.morefeatures.get_hoe.title": "Intense Tenacity",
-  "creativetab.morefeatures.morefeatures_wood": "More Features Wood",
+
+  "entity.morefeatures.carbon_trident": "Carbon Reinforced Trident",
+  "entity.morefeatures.bismuth_trident": "Bismuth Trident",
+
   "advancement.morefeatures.get_portal.title": "Darkness Calls...",
-  "advancement.morefeatures.get_portal.description": "Craft an Evil Portal block and ponder if the journey is worth it."
+  "advancement.morefeatures.get_portal.description": "Craft an Evil Portal block and ponder if the journey is worth it.",
+
+  "enchantment.morefeatures.thunderbolt": "Thunderbolt",
+  "enchantment.morefeatures.thundering": "Thundering"
 }

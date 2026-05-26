@@ -34,5 +34,7 @@ public class MoreFeaturesDataGen {
         generator.addProvider(true, new ModDatapackProvider(packOutput, lookupProvider));
         generator.addProvider(true, new ModSoundsProvider(packOutput));
         generator.addProvider(true, new ModAdvancementProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new ModEnchantmentTagProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new ModBiomeTagProvider(packOutput, lookupProvider));
     }
 }

@@ -16,7 +16,6 @@
     "description": {
       "translate": "advancement.morefeatures.get_portal.description"
     },
-    "frame": "challenge",
     "icon": {
       "id": "morefeatures:evil_portal"
     },

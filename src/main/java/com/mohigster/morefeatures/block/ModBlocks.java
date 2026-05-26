@@ -6,6 +6,7 @@ import com.mohigster.morefeatures.block.custom.EvilPortalBlock;
 import com.mohigster.morefeatures.block.custom.MagicBlock;
 import com.mohigster.morefeatures.block.custom.ModFlammableRotatedPillarBlock;
 import com.mohigster.morefeatures.item.ModItems;
+import com.mohigster.morefeatures.sound.ModSounds;
 import com.mohigster.morefeatures.worldgen.tree.ModTreeGrowers;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
@@ -497,8 +498,11 @@ public class ModBlocks {
 
     // Magic block!
     public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock("magic_block",
-            properties -> new MagicBlock(properties.strength(2f)
-                    .requiresCorrectToolForDrops().sound(SoundType.DECORATED_POT)));
+            properties -> new MagicBlock(properties
+                    .strength(2f)
+                    .requiresCorrectToolForDrops()
+                    .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+            ));
 
 
     // TEST CRAFTING STATION
@@ -511,7 +515,9 @@ public class ModBlocks {
 
     // Portal Block
     public static final DeferredBlock<Block> EVIL_PORTAL = registerBlock("evil_portal",
-            properties -> new EvilPortalBlock(properties.strength(2f)));
+            properties -> new EvilPortalBlock(properties
+                    .strength(2f)
+                    .sound(ModSounds.MAGIC_BLOCK_SOUNDS)));
 
 
 

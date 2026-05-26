@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.entity.custom.trident;
 
+import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
 import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -22,15 +23,14 @@ public class ThrownCarbonTrident extends ThrownTrident {
         super(level, x, y, z, itemStack);
     }
 
-
     @Override
-    protected ItemStack getDefaultPickupItem() {
-        // Essential: Makes sure the player gets back a Carbon Trident when picked up
-        return new ItemStack(ModItems.CARBON_TRIDENT.get());
+    public EntityType<?> getType() {
+        return ModEntityTypes.CARBON_TRIDENT.get();
     }
 
 
-
-
-
+    @Override
+    protected ItemStack getDefaultPickupItem() {
+        return new ItemStack(ModItems.CARBON_TRIDENT.get());
+    }
 }

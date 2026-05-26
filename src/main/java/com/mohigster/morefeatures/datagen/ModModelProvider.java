@@ -3,11 +3,11 @@ package com.mohigster.morefeatures.datagen;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.item.ModItems;
+import com.mohigster.morefeatures.model.ModCarbonItemModelGenerators;
 import net.minecraft.client.data.models.BlockModelGenerators;
 import net.minecraft.client.data.models.ItemModelGenerators;
 import net.minecraft.client.data.models.ModelProvider;
-import net.minecraft.client.data.models.model.ModelTemplates;
-import net.minecraft.client.data.models.model.TexturedModel;
+import net.minecraft.client.data.models.model.*;
 import net.minecraft.data.PackOutput;
 
 public class ModModelProvider extends ModelProvider {
@@ -33,8 +33,8 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.BRINE_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(0).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(1).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(2).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(3).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(2).asItem(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(3).asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(4).asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(5).asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE.get(), ModelTemplates.FLAT_ITEM);
@@ -57,20 +57,23 @@ public class ModModelProvider extends ModelProvider {
         // but generateFlatItem() gives the model for when it isn't. However, using both methods
         // at the same time causes DataGen to fail. I don't know why, but it does.
 
-        // Same logic applies to crossbow and elytra
+        // Same logic applies to crossbow and elytra, and their bismuth equivalents
 
 //        itemModels.generateFlatItem(ModItems.CARBON_BOW.get(), ModelTemplates.BOW);
 //        itemModels.generateFlatItem(ModItems.CARBON_CROSSBOW.get(), ModelTemplates.CROSSBOW);
 //        itemModels.generateFlatItem(ModItems.CARBON_ELYTRA.get(), ModelTemplates.FLAT_ITEM);
+//        itemModels.generateFlatItem(ModItems.BISMUTH_BOW.get(), ModelTemplates.BOW);
         itemModels.generateBow(ModItems.CARBON_BOW.get());
         itemModels.generateCrossbow(ModItems.CARBON_CROSSBOW.get());
         itemModels.generateElytra(ModItems.CARBON_ELYTRA.get());
+        itemModels.generateBow(ModItems.BISMUTH_BOW.get());
         itemModels.generateSpear(ModItems.BISMUTH_SPEAR.get());
 //        itemModels.generateTrident(ModItems.CARBON_TRIDENT.get());
+        itemModels.generateFlatItem(ModItems.CARBON_TRIDENT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_HORSE_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_NAUTILUS_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.CARBON_WOLF_ARMOR.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateTrident(ModItems.CARBON_TRIDENT.get());
+        itemModels.generateFlatItem(ModItems.BISMUTH_TRIDENT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.AQUAMARINE_MUSIC_DISC.get(), ModelTemplates.FLAT_ITEM);
 
         // BLOCKS

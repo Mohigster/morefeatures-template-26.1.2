@@ -15,8 +15,9 @@
         "probability": 0.00625
       }
     ],
+    "minecraft:visual/cloud_color": "#9ba01fb9",
     "minecraft:visual/fog_color": "#280e52",
-    "minecraft:visual/sky_color": "#280e52"
+    "minecraft:visual/sky_color": "#aa55cc"
   },
   "carvers": [
     "minecraft:cave",

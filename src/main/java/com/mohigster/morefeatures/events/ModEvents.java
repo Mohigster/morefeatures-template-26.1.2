@@ -5,6 +5,9 @@ import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
+import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -42,11 +45,45 @@ public class ModEvents {
                 if (movement.length() <= maxSpeed) {
                     player.push(
                             movement.x * 0.185,
-                            movement.y,
+                            movement.y * 0.185,
                             movement.z * 0.185
                     );
                 }
             }
+        }
+    }
+
+
+
+    @SubscribeEvent
+    public static void onArrowSpawn(EntityJoinLevelEvent event) {
+
+        if (!(event.getEntity() instanceof AbstractArrow arrow)) {
+            return;
+        }
+
+        if (!(arrow.getOwner() instanceof Player player)) {
+            MoreFeatures.LOGGER.info("Shooter was not a player");
+            return;
+        }
+
+        Vec3 movement = arrow.getDeltaMovement();
+
+        double velBonus = movement.length();
+
+        double baseDamage = 2.0 * velBonus;
+
+        ItemStack weapon = player.getUseItem();
+
+
+        if (weapon.is(ModItems.CARBON_BOW.get())) { // Carbon Bow damage boost
+            MoreFeatures.LOGGER.debug("Carbon damage multiplier applied");
+            MoreFeatures.LOGGER.debug("Weapon instance of: {}", weapon);
+            arrow.setBaseDamage(baseDamage * 0.75);
+        } else if (weapon.is(ModItems.BISMUTH_BOW.get())) { // Bismuth Bow damage boost
+            MoreFeatures.LOGGER.debug("Bismuth damage multiplier applied");
+            MoreFeatures.LOGGER.debug("Weapon instance of: {}", weapon);
+            arrow.setBaseDamage(baseDamage * 1.05);
         }
     }
 }

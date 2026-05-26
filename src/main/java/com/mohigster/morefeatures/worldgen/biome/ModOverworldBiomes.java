@@ -1,11 +1,14 @@
 package com.mohigster.morefeatures.worldgen.biome;
 
+import com.mohigster.morefeatures.worldgen.ModOrePlacement;
 import com.mohigster.morefeatures.worldgen.ModPlacedFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
+import net.minecraft.data.worldgen.placement.OrePlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.util.ARGB;
 import net.minecraft.world.attribute.*;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -16,9 +19,6 @@ import net.minecraft.world.level.biome.MobSpawnSettings;
 import net.minecraft.world.level.levelgen.GenerationStep;
 import net.minecraft.world.level.levelgen.carver.ConfiguredWorldCarver;
 import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-
-import java.util.List;
-import java.util.Optional;
 
 public class ModOverworldBiomes {
     public static Biome bloodwoodForest(HolderGetter<PlacedFeature> placedFeatureGetter, HolderGetter<ConfiguredWorldCarver<?>> carverGetter) {
@@ -43,15 +43,16 @@ public class ModOverworldBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.BLOODWOOD_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.SMALL_BLOODWOOD_PLACED_KEY);
 
+
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false).temperature(4.0F).downfall(0.0F)
                 .specialEffects((new BiomeSpecialEffects.Builder().waterColor(0xf13123).grassColorOverride(0xf26231)).build())
                 .mobSpawnSettings(spawnBuilder.build()).generationSettings(biomeBuilder.build())
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, -13432824)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, -2354116)
+                .setAttribute(EnvironmentAttributes.CLOUD_COLOR, ARGB.color(155, 200, 31, 25))
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_BADLANDS))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.CRIMSON_SPORE, 0.00625F))
-//
                 .build();
     }
 
@@ -82,7 +83,8 @@ public class ModOverworldBiomes {
                 .specialEffects((new BiomeSpecialEffects.Builder().waterColor(0x8121a3).grassColorOverride(0x8242a1)).build())
                 .mobSpawnSettings(spawnBuilder.build()).generationSettings(biomeBuilder.build())
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, -14152110)
-                .setAttribute(EnvironmentAttributes.SKY_COLOR, -14152110)
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, -5614132)
+                .setAttribute(EnvironmentAttributes.CLOUD_COLOR, ARGB.color(155, 160, 31, 185))
                 .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_BADLANDS))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.WARPED_SPORE, 0.00625F))
                 .build();
