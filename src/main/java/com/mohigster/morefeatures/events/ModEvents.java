@@ -1,17 +1,26 @@
 package com.mohigster.morefeatures.events;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.block.entity.ModBlockEntities;
+import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
 import com.mohigster.morefeatures.item.ModItems;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.effect.MobEffectInstance;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.entity.animal.sheep.Sheep;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.Items;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.List;
@@ -78,12 +87,30 @@ public class ModEvents {
 
         if (weapon.is(ModItems.CARBON_BOW.get())) { // Carbon Bow damage boost
             MoreFeatures.LOGGER.debug("Carbon damage multiplier applied");
-            MoreFeatures.LOGGER.debug("Weapon instance of: {}", weapon);
             arrow.setBaseDamage(baseDamage * 0.75);
         } else if (weapon.is(ModItems.BISMUTH_BOW.get())) { // Bismuth Bow damage boost
             MoreFeatures.LOGGER.debug("Bismuth damage multiplier applied");
-            MoreFeatures.LOGGER.debug("Weapon instance of: {}", weapon);
             arrow.setBaseDamage(baseDamage * 1.05);
         }
+    }
+
+    @SubscribeEvent
+    public static void livingDamage(LivingDamageEvent.Pre event) {
+        if(event.getEntity() instanceof Sheep sheep && event.getSource().getDirectEntity() instanceof Player player) {
+            if(player.getMainHandItem().getItem() == Items.END_ROD) {
+                player.sendSystemMessage(Component.literal(player.getName().getString() + " just hit this sheep with an End Rod? YOU SICK FUCK!"));
+                player.getMainHandItem().shrink(1);
+                sheep.addEffect(new MobEffectInstance(MobEffects.POISON, 600, 6));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(Capabilities.Item.BLOCK, ModBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getItemHandler);
+
+        event.registerBlockEntity(Capabilities.Energy.BLOCK, ModBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getEnergyStorage);
+
+        event.registerBlockEntity(Capabilities.Fluid.BLOCK, ModBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getFluidTank);
     }
 }

@@ -72,8 +72,6 @@ public class ModAdvancementProvider extends AdvancementProvider {
                     .addCriterion("evil_portal", hasItems(ItemPredicate.Builder.item().of(items, ModBlocks.EVIL_PORTAL.asItem())))
                     .save(output, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures/evil_portal"));
 
-
-
         }
     }
 }

@@ -130,5 +130,7 @@
 
 
   "tooltip.morefeatures.metal_detector": "Right click a block to start detecting!",
-  "tooltip.morefeatures.magic_block": "Try throwing a metal, carbon-based organic material, or potion! It's §9MAGIC§r"
+  "tooltip.morefeatures.magic_block": "Try throwing a metal, carbon-based organic material, or potion! It's §9MAGIC§r",
+  "morefeatures.tooltip.liquid.amount.with.capacity": "%s / %s mB",
+  "mccourse.tooltip.liquid.amount": "%s mB"
 }

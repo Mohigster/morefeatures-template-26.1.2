@@ -7,6 +7,7 @@ import com.mohigster.morefeatures.enchantment.ModEnchantmentEffects;
 import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
 import com.mohigster.morefeatures.item.ModItems;
 import com.mohigster.morefeatures.menu.ModMenuTypes;
+import com.mohigster.morefeatures.recipe.ModRecipes;
 import com.mohigster.morefeatures.sound.ModSounds;
 import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
 import com.mohigster.morefeatures.worldgen.biome.ModSurfaceRules;
@@ -54,6 +55,8 @@ public class MoreFeatures {
         ModMenuTypes.register(modEventBus);
         ModBlockEntities.register(modEventBus);
 
+        ModRecipes.register(modEventBus);
+
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (MoreFeatures) to respond directly to events.
         // Do not add this line if there are no @SubscribeEvent-annotated functions in this class, like onServerStarting() below.
@@ -75,6 +78,8 @@ public class MoreFeatures {
 
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeBloodwoodForestRules());
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeTaintedForestRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, ModSurfaceRules.makeEndRotRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, ModSurfaceRules.makeEndGrowthRules());
         });
 
     }

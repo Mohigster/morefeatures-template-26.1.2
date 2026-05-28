@@ -19,6 +19,7 @@ public final class ModItemTags {
     public static final TagKey<Item> IS_NON_GOLD_METAL_BLOCK = bind("is_non_gold_metal_block");
     public static final TagKey<Item> BOW_UPGRADE_ENCHANTABLE = bind("bow_upgrade_enchantable");
     public static final TagKey<Item> MELEE_WEAPON_UPGRADE_ENCHANTABLE = bind("melee_weapon_upgrade_enchantable");
+    public static final TagKey<Item> CARBON_INGREDIENTS = bind("carbon_ingredients");
 
     private ModItemTags() {
     }

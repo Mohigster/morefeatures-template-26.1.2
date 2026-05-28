@@ -1,12 +1,16 @@
 package com.mohigster.morefeatures.menu.custom;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.renderer.EnergyDisplayTooltipArea;
+import com.mohigster.morefeatures.renderer.FluidTankRenderer;
+import com.mohigster.morefeatures.util.MouseUtil;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
+import net.neoforged.neoforge.fluids.FluidStack;
 
 public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
     private static final Identifier GUI_TEXTURE =
@@ -15,6 +19,9 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
             Identifier.fromNamespaceAndPath(MoreFeatures.MODID,"textures/gui/compressor/arrow_progress.png");
     private static final Identifier CRYSTAL_TEXTURE =
             Identifier.parse("textures/block/amethyst_cluster.png");
+
+    private EnergyDisplayTooltipArea energyInfoArea;
+    private FluidTankRenderer fluidRenderer;
 
     public CompressorScreen(CompressorMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
@@ -25,6 +32,40 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
 
         this.inventoryLabelX = 65;
         this.titleLabelX = 65;
+        assignEnergyInfoArea();
+        assignFluidRenderer();
+    }
+
+    private void assignEnergyInfoArea() {
+        energyInfoArea = new EnergyDisplayTooltipArea(((width - imageWidth) / 2) + 156,
+                ((height - imageHeight) / 2 ) + 9, menu.blockEntity.getEnergyStorage(null), 8, 48);
+    }
+
+    private void assignFluidRenderer() {
+        fluidRenderer = new FluidTankRenderer(16000, true, 16, 50);
+    }
+
+    private void renderEnergyAreaTooltip(GuiGraphicsExtractor guiGraphics, int pMouseX, int pMouseY, int x, int y) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 11, 8, 48)) {
+            guiGraphics.setComponentTooltipForNextFrame(this.font, energyInfoArea.getTooltips(), pMouseX, pMouseY);
+        }
+    }
+
+    private void renderFluidTooltipArea(GuiGraphicsExtractor guiGraphics, int pMouseX, int pMouseY, int x, int y,
+                                        FluidStack stack, int offsetX, int offsetY, FluidTankRenderer renderer) {
+        if(isMouseAboveArea(pMouseX, pMouseY, x, y, offsetX, offsetY, renderer)) {
+            guiGraphics.setComponentTooltipForNextFrame(this.font, renderer.getTooltip(stack), pMouseX, pMouseY);
+        }
+    }
+
+    @Override
+    protected void extractLabels(GuiGraphicsExtractor graphics, int xm, int ym) {
+        super.extractLabels(graphics, xm, ym);
+        int x = (width - imageWidth) / 2;
+        int y = (height - imageHeight) / 2;
+
+        renderEnergyAreaTooltip(graphics, xm, ym, x, y);
+        renderFluidTooltipArea(graphics, xm, ym, x, y, menu.blockEntity.getFluid(), 8, 7, fluidRenderer);
     }
 
     @Override
@@ -34,6 +75,9 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
         int y = (height - imageHeight) / 2;
 
         graphics.blit(RenderPipelines.GUI_TEXTURED, GUI_TEXTURE, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
+
+        energyInfoArea.render(graphics);
+        fluidRenderer.render(graphics, x + 8, y + 7, menu.blockEntity.getFluid());
 
         renderProgressArrow(graphics, x, y);
         renderProgressCrystal(graphics, x, y);
@@ -52,5 +96,12 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
             guiGraphics.blit(RenderPipelines.GUI_TEXTURED, CRYSTAL_TEXTURE, x + 104, y + 13 + 16 - menu.getScaledCrystalProgress(), 0,
                     16 - menu.getScaledCrystalProgress(), 16, menu.getScaledCrystalProgress(),16, 16);
         }
+    }
+    public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, FluidTankRenderer renderer) {
+        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, renderer.getWidth(), renderer.getHeight());
+    }
+
+    public static boolean isMouseAboveArea(int pMouseX, int pMouseY, int x, int y, int offsetX, int offsetY, int width, int height) {
+        return MouseUtil.isMouseOver(pMouseX, pMouseY, x + offsetX, y + offsetY, width, height);
     }
 }

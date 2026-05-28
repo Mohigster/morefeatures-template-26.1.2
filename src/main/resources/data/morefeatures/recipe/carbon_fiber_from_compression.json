@@ -1,0 +1,8 @@
+{
+  "type": "morefeatures:compressing",
+  "ingredient": "#minecraft:carbon_ingredients",
+  "result": {
+    "id": "morefeatures:carbon_fiber",
+    "count": 1
+  }
+}

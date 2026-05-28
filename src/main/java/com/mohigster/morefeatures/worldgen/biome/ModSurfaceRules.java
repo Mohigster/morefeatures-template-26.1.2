@@ -9,6 +9,25 @@ public class ModSurfaceRules {
     private static final SurfaceRules.RuleSource DIRT = makeStateRule(Blocks.DIRT);
     private static final SurfaceRules.RuleSource GRASS_BLOCK = makeStateRule(Blocks.GRASS_BLOCK);
     private static final SurfaceRules.RuleSource STONE = makeStateRule(Blocks.STONE);
+
+    private static final SurfaceRules.RuleSource OBSIDIAN = makeStateRule(Blocks.OBSIDIAN);
+    private static final SurfaceRules.RuleSource END_STONE = makeStateRule(Blocks.END_STONE);
+
+    public static SurfaceRules.RuleSource makeEndRotRules() {
+        return SurfaceRules.sequence(
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.END_ROT), OBSIDIAN),
+                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, OBSIDIAN)
+        );
+    }
+
+    public static SurfaceRules.RuleSource makeEndGrowthRules() {
+        return SurfaceRules.sequence(
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.END_GROWTH), END_STONE),
+                // Default to end stone
+                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, END_STONE)
+        );
+    }
+
     public static SurfaceRules.RuleSource makeBloodwoodForestRules() {
         return SurfaceRules.sequence(
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.BLOODWOOD_FOREST),

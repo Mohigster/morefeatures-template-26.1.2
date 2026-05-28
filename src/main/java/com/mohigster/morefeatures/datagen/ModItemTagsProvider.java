@@ -38,6 +38,18 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem())
                 .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
 
+        tag(ModItemTags.CARBON_INGREDIENTS)
+                .add(Items.STICK)
+                .add(Items.COAL)
+                .add(Items.REDSTONE)
+                .add(Items.DIAMOND)
+                .addTag(ItemTags.LOGS_THAT_BURN)
+                .addTag(ItemTags.LOGS)
+                .addTag(ItemTags.SAPLINGS)
+                .addTag(ItemTags.PLANKS)
+                .addTag(ItemTags.WOOL)
+                .addTag(ModItemTags.IS_FOOD);
+
         tag(ModItemTags.BOW_UPGRADE_ENCHANTABLE)
                 .add(ModItems.BISMUTH_BOW.get());
 

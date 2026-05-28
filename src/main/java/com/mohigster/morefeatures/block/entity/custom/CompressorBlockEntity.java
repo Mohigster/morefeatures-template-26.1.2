@@ -1,16 +1,22 @@
 package com.mohigster.morefeatures.block.entity.custom;
 
+import com.mohigster.morefeatures.block.custom.CompressorBlock;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
 import com.mohigster.morefeatures.item.ModItems;
 import com.mohigster.morefeatures.menu.custom.CompressorMenu;
+import com.mohigster.morefeatures.recipe.ModRecipes;
+import com.mohigster.morefeatures.recipe.custom.CompressionRecipe;
+import com.mohigster.morefeatures.recipe.custom.CompressorRecipeInput;
 import com.mohigster.morefeatures.tag.ModItemTags;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
@@ -21,14 +27,30 @@ import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.storage.ValueInput;
+import net.minecraft.world.level.storage.ValueOutput;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.fluids.FluidStack;
+import net.neoforged.neoforge.fluids.FluidType;
+import net.neoforged.neoforge.transfer.RangedResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandler;
+import net.neoforged.neoforge.transfer.ResourceHandlerUtil;
 import net.neoforged.neoforge.transfer.access.ItemAccess;
+import net.neoforged.neoforge.transfer.energy.EnergyHandler;
+import net.neoforged.neoforge.transfer.energy.SimpleEnergyHandler;
+import net.neoforged.neoforge.transfer.fluid.FluidResource;
+import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
 import org.jspecify.annotations.Nullable;
+
+import java.util.Optional;
 
 public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     public final ItemStacksResourceHandler inventory = new ItemStacksResourceHandler(4) {
@@ -38,6 +60,12 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
             CompressorBlockEntity.this.setChanged();
         }
     };
+    private final ResourceHandler<ItemResource> leftHandler = RangedResourceHandler.of(inventory, FLUID_ITEM_SLOT, FLUID_ITEM_SLOT + 1);
+    private final ResourceHandler<ItemResource> topHandler = RangedResourceHandler.of(inventory, INPUT_SLOT, INPUT_SLOT + 1);
+    private final ResourceHandler<ItemResource> bottomHandler = RangedResourceHandler.of(inventory, OUTPUT_SLOT, OUTPUT_SLOT + 1);
+    private final ResourceHandler<ItemResource> rightHandler = RangedResourceHandler.of(inventory, ENERGY_ITEM_SLOT, ENERGY_ITEM_SLOT + 1);
+
+    private final ResourceHandler<ItemResource> frontBackHandler = RangedResourceHandler.of(inventory, INPUT_SLOT, OUTPUT_SLOT + 1);
 
     private static final int FLUID_ITEM_SLOT = 0;
     private static final int INPUT_SLOT = 1;
@@ -46,7 +74,33 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
 
     private final ContainerData data;
     private int progress = 0;
-    private int maxProgress = 72;
+    private int maxProgress = 300;
+
+    private static final int ENERGY_CRAFT_AMOUNT = 25;      // per tick
+    private static final int FLUID_CRAFT_AMOUNT = 1000;     // per craft
+
+    private final SimpleEnergyHandler ENERGY_STORAGE = new SimpleEnergyHandler(64000, 3200) {
+        @Override
+        protected void onEnergyChanged(int previousAmount) {
+            super.onEnergyChanged(previousAmount);
+            getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+        }
+    };
+
+    private final FluidStacksResourceHandler FLUID_TANK = new FluidStacksResourceHandler(1, 16000) {
+        @Override
+        protected void onContentsChanged(int index, FluidStack previousContents) {
+            setChanged();
+            if(!getLevel().isClientSide()) {
+                getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
+            }
+        }
+
+        @Override
+        public boolean isValid(int index, FluidResource resource) {
+            return true;
+        }
+    };
 
     public CompressorBlockEntity(BlockPos worldPosition, BlockState blockState) {
         super(ModBlockEntities.COMPRESSOR_BE.get(), worldPosition, blockState);
@@ -84,6 +138,30 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
         return new CompressorMenu(containerId, inventory, this, this.inventory, this.data);
     }
 
+    @Override
+    protected void saveAdditional(ValueOutput output) {
+        super.saveAdditional(output);
+        output.putInt("compressor.progress", progress);
+        output.putInt("compressor.max_progress", maxProgress);
+
+        output.putChild("inventory", inventory);
+
+        ENERGY_STORAGE.serialize(output);
+        FLUID_TANK.serialize(output);
+    }
+
+    @Override
+    protected void loadAdditional(ValueInput input) {
+        super.loadAdditional(input);
+        progress = input.getIntOr("compressor.progress", 0);
+        maxProgress = input.getIntOr("compressor.max_progress", 72);
+
+        input.child("inventory").ifPresent(inventory::deserialize);
+
+        ENERGY_STORAGE.deserialize(input);
+        FLUID_TANK.deserialize(input);
+    }
+
     public void drops() {
         SimpleContainer inv = new SimpleContainer(inventory.size());
         for (int i = 0; i < inventory.size(); i++) {
@@ -93,33 +171,81 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
         Containers.dropContents(this.level, this.worldPosition, inv);
     }
 
+    public ResourceHandler<ItemResource> getItemHandler(Direction direction) {
+        if (direction == null)
+            return inventory;
+
+        Direction facing = this.getBlockState().hasProperty(BlockStateProperties.HORIZONTAL_FACING)
+                ? this.getBlockState().getValue(BlockStateProperties.HORIZONTAL_FACING)
+                : Direction.NORTH;
+
+        return switch (getRelativeSide(facing, direction)) {
+            case UP -> topHandler;
+            case DOWN -> bottomHandler;
+            case WEST -> leftHandler;
+            case EAST -> rightHandler;
+            case NORTH, SOUTH -> frontBackHandler;
+        };
+    }
+
+    private Direction getRelativeSide(Direction facing, Direction absoluteSide) {
+        if (absoluteSide.getAxis().isVertical()) return absoluteSide;
+
+        if (absoluteSide == facing) return Direction.NORTH;
+        if (absoluteSide == facing.getOpposite()) return Direction.SOUTH;
+        if (absoluteSide == facing.getClockWise()) return Direction.WEST;
+        if (absoluteSide == facing.getCounterClockWise()) return Direction.EAST;
+
+        return absoluteSide;
+    }
+
     public void tick(Level level, BlockPos pos, BlockState state) {
         if(hasRecipe() && isOutputSlotEmptyOrReceivable()) { // isOutputSlotEmptyOrReceivable redundant?
             increaseCraftingProgress();
+            useEnergyForCrafting();
             setChanged(level, pos, state);
+            level.setBlockAndUpdate(pos, state.setValue(CompressorBlock.LIT, true));
 
             if(hasCraftingFinished()) {
                 craftItem();
+                extractFluidForCrafting();
                 resetProgress();
             }
         } else {
             resetProgress();
+            level.setBlockAndUpdate(pos, state.setValue(CompressorBlock.LIT, false));
+        }
+        if (hasFluidItemStackInSlot()) {
+            transferFluidFromItemToTank();
+        }
+
+        if(hasItemInEnergySlot()) {
+            fillUpOnEnergy();
         }
     }
 
+
+
     private boolean hasRecipe() {
-        boolean isValidRecipe = inventory.getResource(INPUT_SLOT).toStack().is(
-                ModItemTags.IS_FOOD) || inventory.getResource(INPUT_SLOT).toStack().is(
-                ItemTags.WOOL) || inventory.getResource(INPUT_SLOT).toStack().is(
-                ItemTags.PLANKS) || inventory.getResource(INPUT_SLOT).toStack().is(
-                Items.STICK) || inventory.getResource(INPUT_SLOT).toStack().is(
-                ItemTags.LOGS_THAT_BURN);
-        ItemStack output = new ItemStack(ModItems.CARBON_FIBER.get(), 3);
+        Optional<RecipeHolder<CompressionRecipe>> recipe = getCurrentRecipe();
+        if(recipe.isEmpty()) {
+            return false;
+        }
+
+        ItemStack output = recipe.get().value().assemble(new CompressorRecipeInput(inventory.getResource(INPUT_SLOT).toStack()));
 
         boolean outputSlotAmount = canInsertAmountIntoOutputSlot(output.getCount());
         boolean outputSlotItem = canInsertItemIntoOutputSlot(output);
+        boolean hasEnoughEnergy = hasEnoughEnergyToCraft();
+        boolean hasEnoughFluid = hasEnoughFluidToCraft();
 
-        return isValidRecipe && outputSlotItem && outputSlotAmount;
+        return outputSlotItem && outputSlotAmount && hasEnoughEnergy && hasEnoughFluid;
+    }
+
+    private Optional<RecipeHolder<CompressionRecipe>> getCurrentRecipe() {
+        return ((ServerLevel) level).recipeAccess()
+                .getRecipeFor(ModRecipes.COMPRESSOR_TYPE.get(),
+                        new CompressorRecipeInput(inventory.getResource(INPUT_SLOT).toStack()), level);
     }
 
     private boolean canInsertItemIntoOutputSlot(ItemStack output) {
@@ -135,7 +261,8 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void craftItem() {
-        ItemStack output = new ItemStack(ModItems.CARBON_FIBER.get(), 3);
+        Optional<RecipeHolder<CompressionRecipe>> recipe = getCurrentRecipe();
+        ItemStack output = recipe.get().value().output().create();
 
         try(Transaction transaction = Transaction.openRoot()) {
             ItemAccess itemAccess = ItemAccess.forHandlerIndex(inventory, OUTPUT_SLOT);
@@ -144,6 +271,10 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
             inventory.set(OUTPUT_SLOT, ItemResource.of(output), itemAccess.getAmount() + output.getCount());
 
             transaction.commit();
+        }
+
+        if(hasItemInEnergySlot()) {
+            fillUpOnEnergy();
         }
     }
 
@@ -162,6 +293,95 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
 
     private void resetProgress() {
         this.progress = 0;
+    }
+
+    /* ENERGY */
+
+    public EnergyHandler getEnergyStorage(@Nullable Direction direction) {
+        return this.ENERGY_STORAGE;
+    }
+
+    private boolean hasEnoughEnergyToCraft() {
+        // Starting a new craft
+        if (progress == 0) {
+            return this.ENERGY_STORAGE.getAmountAsInt() >= ENERGY_CRAFT_AMOUNT * maxProgress;
+        }
+
+        // Continuing an existing craft
+        return this.ENERGY_STORAGE.getAmountAsInt() >= ENERGY_CRAFT_AMOUNT;
+    }
+
+    private void useEnergyForCrafting() {
+        try(Transaction transaction = Transaction.openRoot()) {
+            this.ENERGY_STORAGE.extract(ENERGY_CRAFT_AMOUNT, transaction);
+            transaction.commit();
+        }
+    }
+
+    private void fillUpOnEnergy() {
+        int energyToInsert = 3200;
+        int currentEnergy = this.ENERGY_STORAGE.getAmountAsInt();
+        int maxEnergy = this.ENERGY_STORAGE.getCapacityAsInt();
+
+
+        if (maxEnergy - currentEnergy >= energyToInsert) {
+            try (Transaction transaction = Transaction.openRoot()) {
+                // 1. Consume exactly 1 Azurite item from the energy slot
+                long extracted = inventory.extract(inventory.getResource(ENERGY_ITEM_SLOT), 1, transaction);
+
+                // 2. If an item was successfully extracted, insert the energy
+                if (extracted == 1) {
+                    this.ENERGY_STORAGE.insert(energyToInsert, transaction);
+                    transaction.commit(); // Apply changes permanently
+                }
+            }
+        }
+    }
+
+    private boolean hasItemInEnergySlot() {
+        return (inventory.getResource(ENERGY_ITEM_SLOT).is(ModItems.AZURITE.get()) ||
+                inventory.getResource(ENERGY_ITEM_SLOT).is(ModItems.FLUORITE.get()))
+                && inventory.getAmountAsInt(ENERGY_ITEM_SLOT) > 0;
+    }
+
+    /* FLUID */
+    public FluidStacksResourceHandler getFluidTank(@Nullable Direction direction) {
+        return this.FLUID_TANK;
+    }
+
+    public FluidStack getFluid() {
+        return new FluidStack(FLUID_TANK.getResource(0).getFluid(), FLUID_TANK.getAmountAsInt(0));
+    }
+
+    private void transferFluidFromItemToTank() {
+        try(Transaction transaction = Transaction.openRoot()) {
+            ItemAccess itemAccess = ItemAccess.forHandlerIndex(inventory, FLUID_ITEM_SLOT);
+            var itemCapability = itemAccess.getCapability(Capabilities.Fluid.ITEM);
+
+            int fluidMoved = ResourceHandlerUtil.move(itemCapability, FLUID_TANK, fluidResource -> true,
+                    FluidType.BUCKET_VOLUME, transaction);
+
+            if(fluidMoved == FluidType.BUCKET_VOLUME) {
+                transaction.commit();
+            }
+        }
+    }
+
+    private boolean hasFluidItemStackInSlot() {
+        return !inventory.getResource(FLUID_ITEM_SLOT).isEmpty()
+                && ItemAccess.forHandlerIndex(inventory, FLUID_ITEM_SLOT).getCapability(Capabilities.Fluid.ITEM) != null
+                && ItemAccess.forHandlerIndex(inventory, FLUID_ITEM_SLOT).getCapability(Capabilities.Fluid.ITEM).getAmountAsInt(0) != 0;
+    }
+
+    private void extractFluidForCrafting() {
+        try(Transaction transaction = Transaction.openRoot()) {
+            FLUID_TANK.extract(FLUID_TANK.getResource(0), FLUID_CRAFT_AMOUNT, transaction);
+            transaction.commit();
+        }
+    }
+
+    private boolean hasEnoughFluidToCraft() {
+        return FLUID_TANK.getAmountAsInt(0) >= FLUID_CRAFT_AMOUNT;
     }
 
 

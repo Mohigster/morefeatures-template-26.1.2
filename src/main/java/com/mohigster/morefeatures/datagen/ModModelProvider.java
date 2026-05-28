@@ -72,11 +72,11 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateBow(ModItems.BISMUTH_BOW.get());
         itemModels.generateSpear(ModItems.BISMUTH_SPEAR.get());
         itemModels.generateShield(ModItems.CARBON_SHIELD.get());
-        itemModels.generateFlatItem(ModItems.CARBON_TRIDENT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateTrident(ModItems.CARBON_TRIDENT.get());
         itemModels.generateFlatItem(ModItems.BISMUTH_HORSE_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_NAUTILUS_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.CARBON_WOLF_ARMOR.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModItems.BISMUTH_TRIDENT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateTrident(ModItems.BISMUTH_TRIDENT.get());
         itemModels.generateFlatItem(ModItems.AQUAMARINE_MUSIC_DISC.get(), ModelTemplates.FLAT_ITEM);
 
         // BLOCKS
@@ -112,7 +112,7 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createCrossBlock(ModBlocks.BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createTrivialCube(ModBlocks.MAGIC_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.EVIL_PORTAL.get());
-        blockModels.createHorizontallyRotatedBlock(ModBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
+        blockModels.createFurnace(ModBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
         blockModels.family(ModBlocks.AZURITE_BLOCK.get())
                 .stairs(ModBlocks.AZURITE_STAIRS.get())
                 .slab(ModBlocks.AZURITE_SLAB.get());
