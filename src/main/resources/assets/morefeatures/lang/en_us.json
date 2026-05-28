@@ -21,6 +21,8 @@
   "block.morefeatures.azurite_block": "Block of Azurite",
   "block.morefeatures.azurite_stairs": "Azurite Stairs",
   "block.morefeatures.azurite_slab": "Azurite Slab",
+  "block.morefeatures.azurite_button": "Azurite Button",
+  "block.morefeatures.azurite_pressure_plate": "Azurite Pressure Plate",
   "item.morefeatures.raw_azurite": "Raw Azurite",
   "item.morefeatures.azurite": "Azurite",
   "block.morefeatures.azurite_ore": "Azurite Ore",
@@ -31,7 +33,7 @@
 
   "block.morefeatures.fluorite_block": "Block of Fluorite",
   "block.morefeatures.fluorite_stairs": "Fluorite Stairs",
-  "block.morefeatures.gluorite_slab": "Fluorite Slab",
+  "block.morefeatures.fluorite_slab": "Fluorite Slab",
   "item.morefeatures.raw_fluorite": "Raw Fluorite",
   "item.morefeatures.fluorite": "Fluorite",
   "block.morefeatures.fluorite_ore": "Fluorite Ore",
@@ -128,9 +130,9 @@
   "enchantment.morefeatures.thunderbolt": "Thunderbolt",
   "enchantment.morefeatures.thundering": "Thundering",
 
-
   "tooltip.morefeatures.metal_detector": "Right click a block to start detecting!",
   "tooltip.morefeatures.magic_block": "Try throwing a metal, carbon-based organic material, or potion! It's §9MAGIC§r",
+
   "morefeatures.tooltip.liquid.amount.with.capacity": "%s / %s mB",
-  "mccourse.tooltip.liquid.amount": "%s mB"
+  "morefeatures.tooltip.liquid.amount": "%s mB"
 }

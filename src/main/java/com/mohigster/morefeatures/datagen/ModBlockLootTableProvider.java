@@ -29,6 +29,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     protected void generate() {
 
         // Self dropping
+
         dropSelf(ModBlocks.ALUMINIUM_BLOCK.get());
         dropSelf(ModBlocks.MAGNESIUM_BLOCK.get());
         dropSelf(ModBlocks.RAW_ALUMINIUM_BLOCK.get());
@@ -57,6 +58,11 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.BLOODWOOD_STAIRS.get());
         dropSelf(ModBlocks.TAINTED_STAIRS.get());
         dropSelf(ModBlocks.COMPRESSOR_BLOCK.get());
+        dropSelf(ModBlocks.AZURITE_BUTTON.get());
+        dropSelf(ModBlocks.AZURITE_PRESSURE_PLATE.get());
+
+        // SLABS
+
         add(ModBlocks.AZURITE_SLAB.get(), this::createSlabItemTable);
         add(ModBlocks.FLUORITE_SLAB.get(), this::createSlabItemTable);
         add(ModBlocks.BLOODWOOD_SLAB.get(), this::createSlabItemTable);

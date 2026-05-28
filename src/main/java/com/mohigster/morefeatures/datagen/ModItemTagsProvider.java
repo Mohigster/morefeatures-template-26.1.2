@@ -253,15 +253,21 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
 
         tag(ItemTags.SAPLINGS)
+                .add(ModBlocks.TAINTED_SAPLING.get().asItem())
                 .add(ModBlocks.BLOODWOOD_SAPLING.get().asItem());
 
         tag(ItemTags.LOGS_THAT_BURN)
+                .add(ModBlocks.TAINTED_WOOD.get().asItem())
+                .add(ModBlocks.TAINTED_LOG.get().asItem())
+                .add(ModBlocks.STRIPPED_TAINTED_WOOD.get().asItem())
+                .add(ModBlocks.STRIPPED_TAINTED_LOG.get().asItem())
                 .add(ModBlocks.BLOODWOOD.get().asItem())
                 .add(ModBlocks.BLOODWOOD_LOG.get().asItem())
                 .add(ModBlocks.STRIPPED_BLOODWOOD.get().asItem())
                 .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get().asItem());
 
         tag(ItemTags.PLANKS)
+                .add(ModBlocks.TAINTED_PLANKS.get().asItem())
                 .add(ModBlocks.BLOODWOOD_PLANKS.get().asItem());
     }
 }

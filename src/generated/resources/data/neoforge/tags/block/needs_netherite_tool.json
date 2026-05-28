@@ -14,6 +14,8 @@
     "morefeatures:fluorite_block",
     "morefeatures:bismuth_block",
     "morefeatures:raw_bismuth_block",
+    "morefeatures:azurite_button",
+    "morefeatures:azurite_pressure_plate",
     "morefeatures:deepslate_fluorite_ore"
   ]
 }

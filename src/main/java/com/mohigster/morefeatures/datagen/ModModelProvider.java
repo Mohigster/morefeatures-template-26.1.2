@@ -113,9 +113,15 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.MAGIC_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.EVIL_PORTAL.get());
         blockModels.createFurnace(ModBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
+
+        // Block families—createTrivialCube is unnecessary for Azurite block
+        // etc. because their models are created by the block family.
+
         blockModels.family(ModBlocks.AZURITE_BLOCK.get())
                 .stairs(ModBlocks.AZURITE_STAIRS.get())
-                .slab(ModBlocks.AZURITE_SLAB.get());
+                .slab(ModBlocks.AZURITE_SLAB.get())
+                .pressurePlate(ModBlocks.AZURITE_PRESSURE_PLATE.get())
+                .button(ModBlocks.AZURITE_BUTTON.get());
         blockModels.family(ModBlocks.FLUORITE_BLOCK.get())
                 .stairs(ModBlocks.FLUORITE_STAIRS.get())
                 .slab(ModBlocks.FLUORITE_SLAB.get());

@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.block.custom;
 
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.item.ModItems;
+import com.mohigster.morefeatures.sound.ModSounds;
 import com.mohigster.morefeatures.tag.ModItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -35,7 +36,7 @@ public class MagicBlock extends Block {
         level.addParticle(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
                 0, 1, 0);
 
-        level.playSound(player, pos, SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 2f, 1f);
+        level.playSound(player, pos, ModSounds.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 2f, 1f);
         return InteractionResult.SUCCESS;
     }
 
@@ -56,7 +57,7 @@ public class MagicBlock extends Block {
                         0, 1, 0);
 
                 level.playSound(null, itemEntity,
-                        SoundEvents.AMETHYST_CLUSTER_PLACE, SoundSource.BLOCKS, 1.5f, 1f);
+                        ModSounds.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 1.5f, 1f);
 
             }
         }
@@ -92,6 +93,9 @@ public class MagicBlock extends Block {
 
             return lingeringPotion;
         }
+        if (isMagicBlock(item)) {
+            return new ItemStack(Items.BEDROCK, count);
+        }
 
         return ItemStack.EMPTY; // Returns an empty stack if no match is found
     }
@@ -122,5 +126,9 @@ public class MagicBlock extends Block {
     }
     private boolean isPotionItem(ItemStack item) {
         return item.is(Items.POTION) || item.is(Items.SPLASH_POTION);
+    }
+
+    private boolean isMagicBlock(ItemStack item) {
+        return item.is(ModBlocks.MAGIC_BLOCK.get().asItem());
     }
 }

@@ -30,7 +30,6 @@ import java.util.function.Consumer;
 public class CarbonShieldSpecialRenderer implements SpecialModelRenderer<DataComponentMap> {
     public static final Transformation DEFAULT_TRANSFORMATION = new Transformation(null, null, new Vector3f(1.0F, -1.0F, -1.0F), null);
 
-    // Define your custom shield texture locations on the material/sprite sheet
     public static final SpriteId CARBON_SHIELD_BASE = new SpriteId(Identifier.withDefaultNamespace("textures/atlas/shield_patterns.png"), Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "entity/shield/carbon_shield_base"));
     public static final SpriteId CARBON_SHIELD_BASE_NO_PATTERN = new SpriteId(Identifier.withDefaultNamespace("textures/atlas/shield_patterns.png"), Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "entity/shield/carbon_shield_base_nopattern"));
 
@@ -62,7 +61,6 @@ public class CarbonShieldSpecialRenderer implements SpecialModelRenderer<DataCom
         DyeColor baseColor = components != null ? components.get(DataComponents.BASE_COLOR) : null;
         boolean hasPatterns = !patterns.layers().isEmpty() || baseColor != null;
 
-        // Pointing to your custom Carbon Shield sprites instead of Sheets.SHIELD_BASE
         SpriteId base = hasPatterns ? CARBON_SHIELD_BASE : CARBON_SHIELD_BASE_NO_PATTERN;
 
         submitNodeCollector.submitModel(this.model, Unit.INSTANCE, poseStack, lightCoords, overlayCoords, -1, base, this.sprites, outlineColor, null);
@@ -113,7 +111,7 @@ public class CarbonShieldSpecialRenderer implements SpecialModelRenderer<DataCom
             // Reuses vanilla ShieldModel geometry but assigns your custom bake layers if needed
             return new CarbonShieldSpecialRenderer(
                     context.sprites(),
-                    new ShieldModel(context.entityModelSet().bakeLayer(ModelLayers.SHIELD)) // Or net.minecraft.client.model.geom.ModelLayers.SHIELD if geometry is unchanged
+                    new ShieldModel(context.entityModelSet().bakeLayer(ModelLayers.SHIELD))
             );
         }
     }

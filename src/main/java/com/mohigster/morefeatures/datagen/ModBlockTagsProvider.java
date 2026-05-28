@@ -50,6 +50,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.RAW_BISMUTH_BLOCK.get())
                 .add(ModBlocks.AZURITE_STAIRS.get())
                 .add(ModBlocks.AZURITE_SLAB.get())
+                .add(ModBlocks.AZURITE_BUTTON.get())
+                .add(ModBlocks.AZURITE_PRESSURE_PLATE.get())
                 .add(ModBlocks.FLUORITE_STAIRS.get())
                 .add(ModBlocks.FLUORITE_SLAB.get())
                 .add(ModBlocks.COMPRESSOR_BLOCK.get())
@@ -139,6 +141,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.FLUORITE_BLOCK.get())
                 .add(ModBlocks.BISMUTH_BLOCK.get())
                 .add(ModBlocks.RAW_BISMUTH_BLOCK.get())
+                .add(ModBlocks.AZURITE_BUTTON.get())
+                .add(ModBlocks.AZURITE_PRESSURE_PLATE.get())
                 .add(ModBlocks.DEEPSLATE_FLUORITE_ORE.get());
 
 
@@ -156,6 +160,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.FLUORITE_BLOCK.get())
                 .add(ModBlocks.BISMUTH_BLOCK.get())
                 .add(ModBlocks.AZURITE_BLOCK.get());
+
+        tag(BlockTags.PRESSURE_PLATES)
+                .add(ModBlocks.AZURITE_PRESSURE_PLATE.get());
+
+        tag(BlockTags.BUTTONS)
+                .add(ModBlocks.AZURITE_BUTTON.get());
 
 //        tag(BlockTags.STONE_ORE_REPLACEABLES)
 //                .add(ModBlocks.AZURITE_ORE.get())

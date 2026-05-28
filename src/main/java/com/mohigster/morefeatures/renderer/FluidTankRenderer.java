@@ -107,7 +107,7 @@ public class FluidTankRenderer {
                 MutableComponent amountString = Component.translatable("morefeatures.tooltip.liquid.amount.with.capacity", nf.format(milliBuckets), nf.format(capacity));
                 tooltip.add(amountString.withStyle(ChatFormatting.GRAY));
             } else if (tooltipMode == TooltipMode.SHOW_AMOUNT) {
-                MutableComponent amountString = Component.translatable("mccourse.tooltip.liquid.amount", nf.format(milliBuckets));
+                MutableComponent amountString = Component.translatable("morefeatures.tooltip.liquid.amount", nf.format(milliBuckets));
                 tooltip.add(amountString.withStyle(ChatFormatting.GRAY));
             }
         } catch (RuntimeException e) {

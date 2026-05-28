@@ -7,7 +7,6 @@ import com.mohigster.morefeatures.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
@@ -15,7 +14,6 @@ import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.List;
@@ -407,6 +405,17 @@ public class ModRecipeProvider extends RecipeProvider {
                 .group("carbon_bow")
                 .save(output);
 
+        shaped(RecipeCategory.COMBAT, ModItems.CARBON_WOLF_ARMOR)
+                .pattern("CCC")
+                .pattern("CWC")
+                .pattern("CRC")
+                .define('C', ModItems.CARBON_FIBER.get())
+                .define('W', Items.WOLF_ARMOR)
+                .define('R', Items.RESIN_CLUMP)
+                .unlockedBy(getHasName(ModItems.CARBON_FIBER.get()), has(ModItems.CARBON_FIBER))
+                .group("carbon_bow")
+                .save(output);
+
         // Compressor block recipe
 
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.COMPRESSOR_BLOCK)
@@ -436,6 +445,14 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(ModBlocks.BLOODWOOD_PLANKS.get()), has(ModBlocks.BLOODWOOD_PLANKS))
                 .group("bloodwood").save(output);
         slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_SLAB.get(), ModBlocks.BLOODWOOD_PLANKS.get());
+
+        // Buttons and pressure plates
+
+        buttonBuilder(ModBlocks.AZURITE_BUTTON.get(), Ingredient.of(ModItems.AZURITE))
+                .group("zircon")
+                .unlockedBy(getHasName(ModItems.AZURITE.get()), has(ModItems.AZURITE.get()))
+                .save(output);
+        pressurePlate(ModBlocks.AZURITE_PRESSURE_PLATE.get(), ModItems.AZURITE.get());
 
 
         // Bismuth smithing recipes

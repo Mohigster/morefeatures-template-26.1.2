@@ -23,6 +23,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -164,13 +166,33 @@ public class ModBlocks {
             properties -> new StairBlock(ModBlocks.AZURITE_BLOCK.get().defaultBlockState(), properties
                     .strength(3f)
                     .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)));
+                    .sound(SoundType.AMETHYST)
+            ));
 
     public static final DeferredBlock<Block> AZURITE_SLAB = registerBlock("azurite_slab",
             properties -> new SlabBlock(properties
                     .strength(3f)
                     .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)));
+                    .sound(SoundType.AMETHYST)
+            ));
+
+    public static final DeferredBlock<Block> AZURITE_PRESSURE_PLATE = registerBlock("azurite_pressure_plate",
+            properties -> new PressurePlateBlock(BlockSetType.IRON, properties
+                    .strength(2f)
+                    .requiresCorrectToolForDrops()
+                    .forceSolidOn()
+                    .noCollision()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> AZURITE_BUTTON = registerBlock("azurite_button",
+            properties -> new ButtonBlock(BlockSetType.IRON, 20, properties
+                    .strength(2f)
+                    .requiresCorrectToolForDrops()
+                    .noCollision()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
 
     //———————————————————————————————————————Fluorite Blocks—————————————————————————————————————————————————————————————————————————
 

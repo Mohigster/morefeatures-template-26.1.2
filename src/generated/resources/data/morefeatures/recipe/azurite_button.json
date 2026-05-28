@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "zircon",
+  "ingredients": [
+    "morefeatures:azurite"
+  ],
+  "result": {
+    "id": "morefeatures:azurite_button"
+  }
+}
