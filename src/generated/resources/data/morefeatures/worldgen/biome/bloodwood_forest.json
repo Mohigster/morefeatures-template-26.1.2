@@ -83,7 +83,8 @@
       "minecraft:red_mushroom_normal",
       "minecraft:patch_sugar_cane",
       "morefeatures:bloodwood_placed",
-      "morefeatures:small_bloodwood_placed"
+      "morefeatures:small_bloodwood_placed",
+      "morefeatures:fallen_bloodwood_placed"
     ]
   ],
   "has_precipitation": false,

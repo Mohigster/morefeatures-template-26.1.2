@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "morefeatures:block/bloodwood_sapling"
+    "layer0": "morefeatures:block/blue_rose"
   }
 }

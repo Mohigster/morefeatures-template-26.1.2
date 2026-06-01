@@ -167,16 +167,14 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.BUTTONS)
                 .add(ModBlocks.AZURITE_BUTTON.get());
 
-//        tag(BlockTags.STONE_ORE_REPLACEABLES)
-//                .add(ModBlocks.AZURITE_ORE.get())
-//                .add(ModBlocks.ALUMINIUM_ORE.get())
-//                .add(ModBlocks.MAGNESIUM_ORE.get())
-//                .add(ModBlocks.FLUORITE_ORE.get());
-//
-//        tag(BlockTags.DEEPSLATE_ORE_REPLACEABLES)
-//                .add(ModBlocks.DEEPSLATE_AZURITE_ORE.get())
-//                .add(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get())
-//                .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
-//                .add(ModBlocks.DEEPSLATE_FLUORITE_ORE.get());
+        tag(BlockTags.FLOWER_POTS)
+                .add(ModBlocks.POTTED_ROSE.get())
+                .add(ModBlocks.POTTED_BLUE_ROSE.get())
+                .add(ModBlocks.POTTED_TAINTED_SAPLING.get())
+                .add(ModBlocks.POTTED_BLOODWOOD_SAPLING.get());
+
+        tag(BlockTags.FLOWERS)
+                .add(ModBlocks.ROSE.get())
+                .add(ModBlocks.BLUE_ROSE.get());
     }
 }

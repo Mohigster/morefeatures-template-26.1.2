@@ -28,7 +28,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
 
-        // Self dropping
+        // SELF DROPPING
 
         dropSelf(ModBlocks.ALUMINIUM_BLOCK.get());
         dropSelf(ModBlocks.MAGNESIUM_BLOCK.get());
@@ -60,6 +60,16 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.COMPRESSOR_BLOCK.get());
         dropSelf(ModBlocks.AZURITE_BUTTON.get());
         dropSelf(ModBlocks.AZURITE_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.ROSE.get());
+        dropSelf(ModBlocks.BLUE_ROSE.get());
+        dropSelf(ModBlocks.EVIL_PORTAL.get());
+
+        // POTTED PLANTS
+
+        add(ModBlocks.POTTED_ROSE.get(), createPotFlowerItemTable(ModBlocks.ROSE.get()));
+        add(ModBlocks.POTTED_BLUE_ROSE.get(), createPotFlowerItemTable(ModBlocks.BLUE_ROSE.get()));
+        add(ModBlocks.POTTED_TAINTED_SAPLING.get(), createPotFlowerItemTable(ModBlocks.TAINTED_SAPLING.get()));
+        add(ModBlocks.POTTED_BLOODWOOD_SAPLING.get(), createPotFlowerItemTable(ModBlocks.BLOODWOOD_SAPLING.get()));
 
         // SLABS
 
@@ -74,8 +84,11 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.BLOODWOOD_LEAVES.get(),
                 createLeavesDrops(ModBlocks.BLOODWOOD_LEAVES.get(), ModBlocks.BLOODWOOD_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
+        // Tainted
         add(ModBlocks.TAINTED_LEAVES.get(),
                 createLeavesDrops(ModBlocks.TAINTED_LEAVES.get(), ModBlocks.TAINTED_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        // ORES
 
         // Aluminium ores
 
@@ -117,10 +130,6 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         add(ModBlocks.BISMUTH_ORE.get(),
                 createOreDrop(ModBlocks.BISMUTH_ORE.get(), ModItems.RAW_BISMUTH.get()));
-
-        dropSelf(ModBlocks.EVIL_PORTAL.get());
-
-
     }
 
 

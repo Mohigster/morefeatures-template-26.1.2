@@ -40,6 +40,7 @@ public class ModOverworldBiomes {
 
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.BLOODWOOD_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.SMALL_BLOODWOOD_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.FALLEN_BLOODWOOD_PLACED_KEY);
 
 
         return new Biome.BiomeBuilder()
@@ -75,6 +76,7 @@ public class ModOverworldBiomes {
 
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.TAINTED_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.SMALL_TAINTED_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.FALLEN_TAINTED_PLACED_KEY);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false).temperature(4.0F).downfall(0.0F)

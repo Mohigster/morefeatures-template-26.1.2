@@ -8,9 +8,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.configurations.FallenTreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
@@ -44,8 +46,10 @@ public class ModConfiguredFeatures {
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> BLOODWOOD_KEY = registerKey("bloodwood");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_BLOODWOOD_KEY = registerKey("small_bloodwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_BLOODWOOD_KEY = registerKey("fallen_bloodwood_key");
     public static final ResourceKey<ConfiguredFeature<?, ?>> TAINTED_KEY = registerKey("tainted");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_TAINTED_KEY = registerKey("small_tainted");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_TAINTED_KEY = registerKey("fallen_tainted_key");
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context){
 
@@ -72,12 +76,12 @@ public class ModConfiguredFeatures {
         );
 
         // Registering ore configured features
-        register(context, OVERWORLD_AZURITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldAzuriteOres, 9));
-        register(context, NETHER_AZURITE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplaceables, ModBlocks.NETHER_AZURITE_ORE.get().defaultBlockState(), 9));
-        register(context, END_AZURITE_ORE_KEY, Feature.ORE, new OreConfiguration(endStoneReplaceables, ModBlocks.END_AZURITE_ORE.get().defaultBlockState(), 9));
-        register(context, OVERWORLD_FLUORITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldFluoriteOres, 9));
-        register(context, NETHER_FLUORITE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplaceables, ModBlocks.NETHER_FLUORITE_ORE.get().defaultBlockState(), 9));
-        register(context, END_FLUORITE_ORE_KEY, Feature.ORE, new OreConfiguration(endStoneReplaceables, ModBlocks.END_FLUORITE_ORE.get().defaultBlockState(), 9));
+        register(context, OVERWORLD_AZURITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldAzuriteOres, 9, 0.65f));
+        register(context, NETHER_AZURITE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplaceables, ModBlocks.NETHER_AZURITE_ORE.get().defaultBlockState(), 9, 0.85f));
+        register(context, END_AZURITE_ORE_KEY, Feature.ORE, new OreConfiguration(endStoneReplaceables, ModBlocks.END_AZURITE_ORE.get().defaultBlockState(), 9, 0.80f));
+        register(context, OVERWORLD_FLUORITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldFluoriteOres, 9, 0.65f));
+        register(context, NETHER_FLUORITE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplaceables, ModBlocks.NETHER_FLUORITE_ORE.get().defaultBlockState(), 9, 0.85f));
+        register(context, END_FLUORITE_ORE_KEY, Feature.ORE, new OreConfiguration(endStoneReplaceables, ModBlocks.END_FLUORITE_ORE.get().defaultBlockState(), 9, 0.80f));
         register(context, ALUMINIUM_ORE_KEY, Feature.ORE, new OreConfiguration(aluminiumOres, 9));
         register(context, MAGNESIUM_ORE_KEY, Feature.ORE, new OreConfiguration(magnesiumOres, 9));
         register(context, BISMUTH_ORE_KEY, Feature.ORE, new OreConfiguration(endStoneReplaceables, ModBlocks.BISMUTH_ORE.get().defaultBlockState(), 3, 1.0f));
@@ -101,6 +105,11 @@ public class ModConfiguredFeatures {
                 .ignoreVines()
                 .build()
         );
+        register(context, FALLEN_BLOODWOOD_KEY, Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBlocks.BLOODWOOD_LOG.get()),
+                UniformInt.of(4, 9))
+                .build()
+        );
         register(context, TAINTED_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.TAINTED_LOG.get()),
                 new ForkingTrunkPlacer(4, 4, 3),
@@ -117,6 +126,11 @@ public class ModConfiguredFeatures {
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
                 new TwoLayersFeatureSize(1, 0, 1))
                 .ignoreVines()
+                .build()
+        );
+        register(context, FALLEN_TAINTED_KEY, Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
+                BlockStateProvider.simple(ModBlocks.TAINTED_LOG.get()),
+                UniformInt.of(4, 9))
                 .build()
         );
     }

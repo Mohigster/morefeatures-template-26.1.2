@@ -35,8 +35,10 @@ public class ModPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> BLOODWOOD_PLACED_KEY = registerKey("bloodwood_placed");
     public static final ResourceKey<PlacedFeature> SMALL_BLOODWOOD_PLACED_KEY = registerKey("small_bloodwood_placed");
+    public static final ResourceKey<PlacedFeature> FALLEN_BLOODWOOD_PLACED_KEY = registerKey("fallen_bloodwood_placed");
     public static final ResourceKey<PlacedFeature> TAINTED_PLACED_KEY = registerKey("tainted_placed");
     public static final ResourceKey<PlacedFeature> SMALL_TAINTED_PLACED_KEY = registerKey("small_tainted_placed");
+    public static final ResourceKey<PlacedFeature> FALLEN_TAINTED_PLACED_KEY = registerKey("fallen_tainted_placed");
 
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
@@ -81,12 +83,20 @@ public class ModPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.01f, 1),
                         ModBlocks.BLOODWOOD_SAPLING.get()));
 
+        register(context, FALLEN_BLOODWOOD_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FALLEN_BLOODWOOD_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05f, 1),
+                        ModBlocks.BLOODWOOD_SAPLING.get()));
+
         register(context, TAINTED_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.TAINTED_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.01f, 1),
                         ModBlocks.TAINTED_SAPLING.get()));
 
         register(context, SMALL_TAINTED_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_TAINTED_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.01f, 1),
+                        ModBlocks.TAINTED_SAPLING.get()));
+
+        register(context, FALLEN_TAINTED_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FALLEN_TAINTED_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05f, 1),
                         ModBlocks.TAINTED_SAPLING.get()));
 
     }

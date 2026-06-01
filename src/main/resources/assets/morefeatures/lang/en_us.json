@@ -91,6 +91,9 @@
   "block.morefeatures.tainted_leaves": "Tainted Leaves",
   "block.morefeatures.tainted_sapling": "Tainted Sapling",
 
+  "block.morefeatures.rose": "Rose",
+  "block.morefeatures.blue_rose": "Blue Rose",
+
   "item.morefeatures.metal_detector.fail": "No Valuable Metals Found!",
   "item.morefeatures.metal_detector": "Metal Detector",
 

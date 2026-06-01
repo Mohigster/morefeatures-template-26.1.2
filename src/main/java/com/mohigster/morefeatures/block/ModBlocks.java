@@ -5,6 +5,7 @@ import com.mohigster.morefeatures.block.custom.CompressorBlock;
 import com.mohigster.morefeatures.block.custom.EvilPortalBlock;
 import com.mohigster.morefeatures.block.custom.MagicBlock;
 import com.mohigster.morefeatures.block.custom.ModFlammableRotatedPillarBlock;
+import com.mohigster.morefeatures.fluid.ModFluids;
 import com.mohigster.morefeatures.item.ModItems;
 import com.mohigster.morefeatures.sound.ModSounds;
 import com.mohigster.morefeatures.worldgen.tree.ModTreeGrowers;
@@ -14,6 +15,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.network.chat.Component;
 import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -24,6 +26,7 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
+import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -337,9 +340,20 @@ public class ModBlocks {
     );
     public static final DeferredBlock<Block> BLOODWOOD_SAPLING = registerBlock("bloodwood_sapling",
             properties -> new SaplingBlock(ModTreeGrowers.BLOODWOOD, properties
+                    .randomTicks()
                     .instabreak()
+                    .noCollision()
+                    .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.GRASS))
     );
+
+    public static final DeferredBlock<Block> POTTED_BLOODWOOD_SAPLING = BLOCKS.registerBlock("potted_bloodwood_sapling",
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, BLOODWOOD_SAPLING, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
 
     public static final DeferredBlock<Block> BLOODWOOD_STAIRS = registerBlock("bloodwood_stairs",
             properties -> new StairBlock(ModBlocks.FLUORITE_BLOCK.get().defaultBlockState(), properties
@@ -470,11 +484,23 @@ public class ModBlocks {
                 }
             }
     );
+
     public static final DeferredBlock<Block> TAINTED_SAPLING = registerBlock("tainted_sapling",
             properties -> new SaplingBlock(ModTreeGrowers.TAINTED, properties
+                    .randomTicks()
                     .instabreak()
+                    .noCollision()
+                    .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.GRASS))
     );
+
+    public static final DeferredBlock<Block> POTTED_TAINTED_SAPLING = BLOCKS.registerBlock("potted_tainted_sapling",
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, TAINTED_SAPLING, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
 
     public static final DeferredBlock<Block> TAINTED_STAIRS = registerBlock("tainted_stairs",
             properties -> new StairBlock(ModBlocks.FLUORITE_BLOCK.get().defaultBlockState(), properties
@@ -522,6 +548,50 @@ public class ModBlocks {
                 }
             }
     );
+    // Liquid
+
+//    public static final DeferredBlock<Block> OIL_BLOCK = BLOCKS.register("oil_block",
+//            () -> new LiquidBlock(ModFluids.OIL_SOURCE.get(), BlockBehaviour.Properties.ofFullCopy(Blocks.WATER)));
+
+    // Flowers
+
+    public static final DeferredBlock<Block> ROSE = registerBlock("rose",
+            properties -> new FlowerBlock(
+                    MobEffects.SLOW_FALLING, 10, properties
+                    .mapColor(MapColor.PLANT)
+                    .instabreak()
+                    .noCollision()
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.GRASS)
+            ));
+
+    public static final DeferredBlock<Block> POTTED_ROSE = BLOCKS.registerBlock("potted_rose",
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, ROSE, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> BLUE_ROSE = registerBlock("blue_rose",
+            properties -> new FlowerBlock(
+                    MobEffects.SLOW_FALLING, 10, properties
+                    .mapColor(MapColor.PLANT)
+                    .instabreak()
+                    .noCollision()
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.GRASS)
+            ));
+
+    public static final DeferredBlock<Block> POTTED_BLUE_ROSE = BLOCKS.registerBlock("potted_blue_rose",
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, BLUE_ROSE, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
 
     // Magic block!
     public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock("magic_block",

@@ -83,7 +83,8 @@
       "minecraft:red_mushroom_normal",
       "minecraft:patch_sugar_cane",
       "morefeatures:tainted_placed",
-      "morefeatures:small_tainted_placed"
+      "morefeatures:small_tainted_placed",
+      "morefeatures:fallen_tainted_placed"
     ]
   ],
   "has_precipitation": false,

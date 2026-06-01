@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.item;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.asset.ModEquipmentAssets;
 import com.mohigster.morefeatures.datagen.ModJukeboxSongs;
+import com.mohigster.morefeatures.fluid.ModFluids;
 import com.mohigster.morefeatures.item.custom.BismuthTridentItem;
 import com.mohigster.morefeatures.item.custom.CarbonTridentItem;
 import com.mohigster.morefeatures.item.custom.MetalDetectorItem;
@@ -27,11 +28,13 @@ import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -279,6 +282,10 @@ public class ModItems {
                     .component(DataComponents.TOOL, BismuthTridentItem.createToolProperties())
                     .component(DataComponents.WEAPON, new Weapon(2))
             ));
+
+//    public static final DeferredItem<Item> OIL_BUCKET = ITEMS.registerItem("oil_bucket",
+//            properties -> new BucketItem(ModFluids.OIL_SOURCE.get(), properties
+//                    .stacksTo(1)));
 
     public static final List<DeferredItem<Item>> BISMUTH_EQUIPMENT = registerEquipmentItems("bismuth", BISMUTH_TOOL_MATERIAL, ModArmorMaterials.BISMUTH,
             new float[]{5.5f, -2.2f}, new float[]{0f, -2.8f},

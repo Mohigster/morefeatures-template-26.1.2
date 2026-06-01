@@ -42,15 +42,11 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.BISMUTH_EQUIPMENT.get(5).asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_SCRAP.get(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModBlocks.BLOODWOOD_SAPLING.get().asItem(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(ModBlocks.TAINTED_SAPLING.get().asItem(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.METAL_DETECTOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.CARBON_FIBER.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_AXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_SHOVEL.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(ModItems.BISMUTH_HOE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-//        itemModels.generateFlatItem(ModItems.CARBON_BOW.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-
 
         // Used the generateFlatItem() line to get carbon_bow.json, then to prevent datagen deleting it,
         // I moved that file to the permanent resources file instead of the generated resources file.
@@ -105,14 +101,16 @@ public class ModModelProvider extends ModelProvider {
         blockModels.woodProvider(ModBlocks.TAINTED_LOG.get()).logWithHorizontal(ModBlocks.TAINTED_LOG.get()).wood(ModBlocks.TAINTED_WOOD.get());
         blockModels.woodProvider(ModBlocks.STRIPPED_TAINTED_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_TAINTED_LOG.get()).wood(ModBlocks.STRIPPED_TAINTED_WOOD.get());
         blockModels.createTrivialBlock(ModBlocks.TAINTED_LEAVES.get(), TexturedModel.LEAVES);
-        blockModels.createCrossBlock(ModBlocks.TAINTED_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createPlantWithDefaultItem(ModBlocks.TAINTED_SAPLING.get(), ModBlocks.POTTED_TAINTED_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.woodProvider(ModBlocks.BLOODWOOD_LOG.get()).logWithHorizontal(ModBlocks.BLOODWOOD_LOG.get()).wood(ModBlocks.BLOODWOOD.get());
         blockModels.woodProvider(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_BLOODWOOD_LOG.get()).wood(ModBlocks.STRIPPED_BLOODWOOD.get());
         blockModels.createTrivialBlock(ModBlocks.BLOODWOOD_LEAVES.get(), TexturedModel.LEAVES);
-        blockModels.createCrossBlock(ModBlocks.BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createPlantWithDefaultItem(ModBlocks.BLOODWOOD_SAPLING.get(), ModBlocks.POTTED_BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createTrivialCube(ModBlocks.MAGIC_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.EVIL_PORTAL.get());
         blockModels.createFurnace(ModBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
+        blockModels.createPlantWithDefaultItem(ModBlocks.ROSE.get(), ModBlocks.POTTED_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
+        blockModels.createPlantWithDefaultItem(ModBlocks.BLUE_ROSE.get(), ModBlocks.POTTED_BLUE_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
 
         // Block families—createTrivialCube is unnecessary for Azurite block
         // etc. because their models are created by the block family.

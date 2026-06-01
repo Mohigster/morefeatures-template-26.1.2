@@ -11,6 +11,8 @@ import com.mohigster.morefeatures.recipe.ModRecipes;
 import com.mohigster.morefeatures.sound.ModSounds;
 import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
 import com.mohigster.morefeatures.worldgen.biome.ModSurfaceRules;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -73,6 +75,11 @@ public class MoreFeatures {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ROSE.getId(), ModBlocks.POTTED_ROSE);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BLUE_ROSE.getId(), ModBlocks.POTTED_BLUE_ROSE);
+
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.TAINTED_SAPLING.getId(), ModBlocks.POTTED_TAINTED_SAPLING);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BLOODWOOD_SAPLING.getId(), ModBlocks.POTTED_BLOODWOOD_SAPLING);
 
             ModBiomes.registerBiomes();
 

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "morefeatures:item/tainted_sapling"
+    "layer0": "morefeatures:block/tainted_sapling"
   }
 }
