@@ -2,7 +2,7 @@ package com.mohigster.morefeatures.block.entity.custom;
 
 import com.mohigster.morefeatures.block.custom.CompressorBlock;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
-import com.mohigster.morefeatures.item.ModItems;
+import com.mohigster.morefeatures.data_component.ModDataComponentTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorMenu;
 import com.mohigster.morefeatures.recipe.ModRecipes;
 import com.mohigster.morefeatures.recipe.custom.CompressionRecipe;
@@ -17,7 +17,6 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.Containers;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.SimpleContainer;
@@ -26,7 +25,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.ContainerData;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -79,7 +77,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     private static final int ENERGY_CRAFT_AMOUNT = 25;      // per tick
     private static final int FLUID_CRAFT_AMOUNT = 1000;     // per craft
 
-    private final SimpleEnergyHandler ENERGY_STORAGE = new SimpleEnergyHandler(64000, 3200) {
+    private final SimpleEnergyHandler ENERGY_STORAGE = new SimpleEnergyHandler(64000, 12800) {
         @Override
         protected void onEnergyChanged(int previousAmount) {
             super.onEnergyChanged(previousAmount);
@@ -319,7 +317,12 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private void fillUpOnEnergy() {
-        int energyToInsert = 3200;
+        ItemStack stack = inventory.getResource(ENERGY_ITEM_SLOT).toStack();
+
+        int energyToInsert = stack.get(ModDataComponentTypes.COMPRESSOR_FUEL_VALUE.get());
+
+        if (energyToInsert <= 0) return;
+
         int currentEnergy = this.ENERGY_STORAGE.getAmountAsInt();
         int maxEnergy = this.ENERGY_STORAGE.getCapacityAsInt();
 
@@ -339,9 +342,8 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasItemInEnergySlot() {
-        return (inventory.getResource(ENERGY_ITEM_SLOT).is(ModItems.AZURITE.get()) ||
-                inventory.getResource(ENERGY_ITEM_SLOT).is(ModItems.FLUORITE.get()))
-                && inventory.getAmountAsInt(ENERGY_ITEM_SLOT) > 0;
+        return (inventory.getResource(ENERGY_ITEM_SLOT).is(ModItemTags.COMPRESSOR_FUEL)
+                && inventory.getAmountAsInt(ENERGY_ITEM_SLOT) > 0);
     }
 
     /* FLUID */

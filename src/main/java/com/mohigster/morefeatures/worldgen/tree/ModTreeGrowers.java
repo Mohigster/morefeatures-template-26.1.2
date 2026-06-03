@@ -31,4 +31,9 @@ public class ModTreeGrowers {
             Optional.empty(),
             Optional.empty()
     );
+
+    public static final TreeGrower PALM = new TreeGrower(
+            MoreFeatures.MODID + "palm",
+            Optional.empty(), Optional.of(ModConfiguredFeatures.PALM_TREE_KEY), Optional.empty()
+    );
 }

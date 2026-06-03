@@ -5,6 +5,10 @@
       "required": false
     },
     {
+      "id": "morefeatures:ice_caves",
+      "required": false
+    },
+    {
       "id": "morefeatures:bloodwood_forest",
       "required": false
     }

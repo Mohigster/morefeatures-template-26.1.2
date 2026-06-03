@@ -19,6 +19,11 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
     protected void addTags(HolderLookup.Provider provider) {
         tag(BiomeTags.IS_OVERWORLD)
                 .addOptional(ModBiomes.TAINTED_FOREST)
+                .addOptional(ModBiomes.ICE_CAVE)
                 .addOptional(ModBiomes.BLOODWOOD_FOREST);
+
+        tag(BiomeTags.IS_END)
+                .addOptional(ModBiomes.END_ROT)
+                .addOptional(ModBiomes.END_GROWTH);
     }
 }

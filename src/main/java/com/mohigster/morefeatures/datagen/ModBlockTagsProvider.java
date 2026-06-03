@@ -55,7 +55,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.FLUORITE_STAIRS.get())
                 .add(ModBlocks.FLUORITE_SLAB.get())
                 .add(ModBlocks.COMPRESSOR_BLOCK.get())
+                .add(ModBlocks.EVERFROST_PACKED_ICE_ORE.get())
+                .add(ModBlocks.EVERFROST_BLUE_ICE_ORE.get())
                 .add(ModBlocks.BISMUTH_ORE.get());
+
+        tag(ModBlockTags.IS_LIQUID)
+                .add(Blocks.WATER);
 
         tag(BlockTags.MINEABLE_WITH_AXE)
                 .add(ModBlocks.TAINTED_PLANKS.get())
@@ -71,7 +76,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
                 .add(ModBlocks.BLOODWOOD_LOG.get())
                 .add(ModBlocks.BLOODWOOD_STAIRS.get())
-                .add(ModBlocks.BLOODWOOD_SLAB.get());
+                .add(ModBlocks.BLOODWOOD_SLAB.get())
+                .add(ModBlocks.PALM_WOOD.get())
+                .add(ModBlocks.PALM_LOG.get());
 
         tag(BlockTags.LOGS_THAT_BURN)
                 .add(ModBlocks.TAINTED_LOG.get())
@@ -81,7 +88,9 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.BLOODWOOD_LOG.get())
                 .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
                 .add(ModBlocks.BLOODWOOD.get())
-                .add(ModBlocks.STRIPPED_BLOODWOOD.get());
+                .add(ModBlocks.STRIPPED_BLOODWOOD.get())
+                .add(ModBlocks.PALM_WOOD.get())
+                .add(ModBlocks.PALM_LOG.get());
 
         tag(ModBlockTags.BLOODWOOD_LOGS)
                 .add(ModBlocks.STRIPPED_BLOODWOOD.get())
@@ -104,6 +113,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.MAGNESIUM_ORE.get())
                 .add(ModBlocks.DEEPSLATE_MAGNESIUM_ORE.get())
                 .add(ModBlocks.COMPRESSOR_BLOCK.get())
+                .add(ModBlocks.EVERFROST_PACKED_ICE_ORE.get())
+                .add(ModBlocks.EVERFROST_BLUE_ICE_ORE.get())
                 .add(ModBlocks.MAGNESIUM_BLOCK.get());
 
         tag(BlockTags.LEAVES)

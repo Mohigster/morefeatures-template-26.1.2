@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.worldgen;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
+import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -9,11 +10,12 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
-import net.minecraft.world.level.levelgen.placement.HeightRangePlacement;
-import net.minecraft.world.level.levelgen.placement.PlacedFeature;
-import net.minecraft.world.level.levelgen.placement.PlacementModifier;
+import net.minecraft.world.level.levelgen.placement.*;
 
 import java.util.List;
 
@@ -39,6 +41,28 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> TAINTED_PLACED_KEY = registerKey("tainted_placed");
     public static final ResourceKey<PlacedFeature> SMALL_TAINTED_PLACED_KEY = registerKey("small_tainted_placed");
     public static final ResourceKey<PlacedFeature> FALLEN_TAINTED_PLACED_KEY = registerKey("fallen_tainted_placed");
+    public static final ResourceKey<PlacedFeature> PALM_PLACED_KEY = registerKey("palm_placed");
+
+    // Frozen cluster resource keys
+
+    public static final ResourceKey<PlacedFeature> SMALL_ICE_PATCH_PLACED_KEY = registerKey("small_ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> ICE_PATCH_PLACED_KEY = registerKey("ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> LARGE_ICE_PATCH_PLACED_KEY = registerKey("large_ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> SMALL_BLUE_ICE_PATCH_PLACED_KEY = registerKey("small_blue_ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> BLUE_ICE_PATCH_PLACED_KEY = registerKey("blue_ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> LARGE_BLUE_ICE_PATCH_PLACED_KEY = registerKey("large_blue_ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> SMALL_SNOW_PATCH_PLACED_KEY = registerKey("small_snow_patch_placed");
+    public static final ResourceKey<PlacedFeature> SNOW_PATCH_PLACED_KEY = registerKey("snow_patch_placed");
+    public static final ResourceKey<PlacedFeature> LARGE_SNOW_PATCH_PLACED_KEY = registerKey("large_snow_patch_placed");
+
+    public static final ResourceKey<PlacedFeature> EVERFROST_ORE_PLACED_KEY = registerKey("everfrost_ore_placed");
+
+    public static final ResourceKey<PlacedFeature> ICE_SPIRE_PLACED_KEY = registerKey("iced_spire_placed");
+
+    // Oasis resource key
+
+    public static final ResourceKey<PlacedFeature> OASIS_PLACED_KEY = registerKey("oasis_placed");
+
 
 
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
@@ -73,6 +97,37 @@ public class ModPlacedFeatures {
         register(context, BISMUTH_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BISMUTH_ORE_KEY),
                 ModOrePlacement.commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
 
+        register(context, EVERFROST_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EVERFROST_ORE_KEY),
+                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
+
+        register(context, SMALL_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_ICE_PATCH_KEY),
+                ModOrePlacement.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+
+        register(context, ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_PATCH_KEY),
+                ModOrePlacement.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+
+        register(context, LARGE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LARGE_ICE_PATCH_KEY),
+                ModOrePlacement.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+
+        register(context, SMALL_BLUE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_BLUE_ICE_PATCH_KEY),
+                ModOrePlacement.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+
+        register(context, BLUE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLUE_ICE_PATCH_KEY),
+                ModOrePlacement.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+
+        register(context, LARGE_BLUE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LARGE_BLUE_ICE_PATCH_KEY),
+                ModOrePlacement.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+
+        register(context, SMALL_SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_SNOW_PATCH_KEY),
+                ModOrePlacement.commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+
+        register(context, SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SNOW_PATCH_KEY),
+                ModOrePlacement.commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+
+        register(context, LARGE_SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LARGE_SNOW_PATCH_KEY),
+                ModOrePlacement.commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+
+
         // PLACE TREES
 
         register(context, BLOODWOOD_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLOODWOOD_KEY),
@@ -99,6 +154,43 @@ public class ModPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05f, 1),
                         ModBlocks.TAINTED_SAPLING.get()));
 
+        register(context, PALM_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PALM_TREE_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05f, 1),
+                        ModBlocks.PALM_SAPLING.get()));
+
+        register(context, OASIS_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OASIS_KEY),
+                List.of(
+                        RarityFilter.onAverageOnceEvery(200),   // very rare
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                )
+        );
+
+        // PLACE SPIRE
+
+        PlacementUtils.register(
+                context,
+                ICE_SPIRE_PLACED_KEY,
+                configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_SPIRE_KEY),
+                CountPlacement.of(UniformInt.of(1, 2)),
+                InSquarePlacement.spread(),
+
+                // Check across vertical heightmap
+                PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
+
+
+                EnvironmentScanPlacement.scanningFor(
+                        Direction.UP,
+                        BlockPredicate.solid(),              // Target the ice cave ceiling
+                        BlockPredicate.ONLY_IN_AIR_PREDICATE,// only allow for air
+                        12
+                ),
+
+                BiomeFilter.biome(),
+
+                PlacementUtils.HEIGHTMAP
+        );
     }
 
     private static ResourceKey<PlacedFeature> registerKey(String name){

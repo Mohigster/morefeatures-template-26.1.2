@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": "#minecraft:bismuth_tools_material",
+  "addition": "#morefeatures:bismuth_tools_material",
   "base": "minecraft:netherite_axe",
   "result": {
     "id": "morefeatures:bismuth_axe"

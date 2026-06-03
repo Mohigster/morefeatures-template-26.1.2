@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#minecraft:bismuth_tools_material"
+            "items": "#morefeatures:bismuth_tools_material"
           }
         ]
       },

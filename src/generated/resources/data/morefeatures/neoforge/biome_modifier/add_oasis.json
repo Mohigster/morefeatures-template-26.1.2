@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "minecraft:desert",
+  "features": "morefeatures:oasis_placed",
+  "step": "fluid_springs"
+}

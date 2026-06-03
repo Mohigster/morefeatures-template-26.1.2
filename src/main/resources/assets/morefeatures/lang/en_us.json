@@ -42,6 +42,11 @@
   "block.morefeatures.end_fluorite_ore": "End Fluorite Ore",
   "block.morefeatures.raw_fluorite_block": "Block of Raw Fluorite",
 
+  "block.morefeatures.everfrost_packed_ice_ore": "Packed Ice Everfrost Ore",
+  "block.morefeatures.everfrost_blue_ice_ore": "Blue Ice Everfrost Ore",
+  "item.morefeatures.raw_everfrost": "Raw Everfrost",
+  "item.morefeatures.everfrost": "Everfrost",
+
   "block.morefeatures.bismuth_ore": "Bismuth Ore",
   "item.morefeatures.raw_bismuth": "Raw Bismuth",
   "block.morefeatures.bismuth_block": "Block of Bismuth",
@@ -91,6 +96,9 @@
   "block.morefeatures.tainted_leaves": "Tainted Leaves",
   "block.morefeatures.tainted_sapling": "Tainted Sapling",
 
+  "block.morefeatures.palm_log": "Palm Log",
+  "block.morefeatures.palm_wood": "Palm Wood",
+
   "block.morefeatures.rose": "Rose",
   "block.morefeatures.blue_rose": "Blue Rose",
 
@@ -106,8 +114,9 @@
   "item.morefeatures.carbon_wolf_armor": "Carbon Reinforced Wolf Armor",
   "item.morefeatures.carbon_trident": "Carbon Reinforced Trident",
 
-  "item.morefeatures.aquamarine_music_disc": "Aquamarine Music Disc",
+  "item.morefeatures.aquamarine_music_disc": "Music Disc",
   "jukebox_song.morefeatures.aquamarine": "Mohigster - Aquamarine",
+  "sound.morefeatures.aquamarine": "Aquamarine",
 
   "sounds.morefeatures.magic_block_break": "Breaking Magic Block",
   "sounds.morefeatures.magic_block_fall": "Falling on Magic Block",

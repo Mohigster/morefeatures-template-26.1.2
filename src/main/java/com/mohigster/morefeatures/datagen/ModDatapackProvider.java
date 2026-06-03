@@ -6,6 +6,7 @@ import com.mohigster.morefeatures.worldgen.ModBiomeModifiers;
 import com.mohigster.morefeatures.worldgen.ModConfiguredFeatures;
 import com.mohigster.morefeatures.worldgen.ModPlacedFeatures;
 import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
+import com.mohigster.morefeatures.worldgen.carver.ModCarvers;
 import com.mohigster.morefeatures.worldgen.dimension.ModDimensions;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -26,6 +27,7 @@ public class ModDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.DIMENSION_TYPE, ModDimensions::bootstrapType)
             .add(Registries.LEVEL_STEM, ModDimensions::bootstrapStem)
             .add(Registries.ENCHANTMENT, ModEnchantments::bootstrap)
+            .add(Registries.CONFIGURED_CARVER, ModCarvers::bootstrap)
             .add(Registries.BIOME, ModBiomes::bootstrap);
 
     public ModDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries){

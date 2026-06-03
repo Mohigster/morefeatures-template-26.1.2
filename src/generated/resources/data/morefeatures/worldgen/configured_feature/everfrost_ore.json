@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:ore",
+  "config": {
+    "discard_chance_on_air_exposure": 0.0,
+    "size": 9,
+    "targets": [
+      {
+        "state": {
+          "Name": "morefeatures:everfrost_packed_ice_ore"
+        },
+        "target": {
+          "block": "minecraft:packed_ice",
+          "predicate_type": "minecraft:block_match"
+        }
+      },
+      {
+        "state": {
+          "Name": "morefeatures:everfrost_blue_ice_ore"
+        },
+        "target": {
+          "block": "minecraft:blue_ice",
+          "predicate_type": "minecraft:block_match"
+        }
+      }
+    ]
+  }
+}

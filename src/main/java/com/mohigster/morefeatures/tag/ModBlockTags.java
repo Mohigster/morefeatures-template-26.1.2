@@ -11,6 +11,7 @@ public class ModBlockTags {
     public static final TagKey<Block> NEEDS_BISMUTH_TOOL = morefeaturesTag("needs_bismuth_tool");
     public static final TagKey<Block> BLOODWOOD_LOGS = create("bloodwood_logs");
     public static final TagKey<Block> TAINTED_LOGS = create("tainted_logs");
+    public static final TagKey<Block> IS_LIQUID = create("is_liquid");
 
     private ModBlockTags() {
     }

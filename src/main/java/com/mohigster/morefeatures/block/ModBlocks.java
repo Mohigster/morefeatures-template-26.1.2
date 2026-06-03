@@ -1,11 +1,7 @@
 package com.mohigster.morefeatures.block;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.block.custom.CompressorBlock;
-import com.mohigster.morefeatures.block.custom.EvilPortalBlock;
-import com.mohigster.morefeatures.block.custom.MagicBlock;
-import com.mohigster.morefeatures.block.custom.ModFlammableRotatedPillarBlock;
-import com.mohigster.morefeatures.fluid.ModFluids;
+import com.mohigster.morefeatures.block.custom.*;
 import com.mohigster.morefeatures.item.ModItems;
 import com.mohigster.morefeatures.sound.ModSounds;
 import com.mohigster.morefeatures.worldgen.tree.ModTreeGrowers;
@@ -251,7 +247,25 @@ public class ModBlocks {
             properties -> new SlabBlock(properties
                     .strength(3f)
                     .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)));
+                    .sound(SoundType.AMETHYST)
+            ));
+
+    //———————————————————————————————————————Everfrost Blocks————————————————————————————————————————————————————————————————————————
+
+    public static final DeferredBlock<Block> EVERFROST_BLUE_ICE_ORE = registerBlock("everfrost_blue_ice_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 2f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.GLASS)
+            ));
+
+    public static final DeferredBlock<Block> EVERFROST_PACKED_ICE_ORE = registerBlock("everfrost_packed_ice_ore",
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
+                    .strength(4f, 2f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.GLASS)
+            ));
+
 
 
     //———————————————————————————————————————Bloodwood Blocks————————————————————————————————————————————————————————————————————————
@@ -548,6 +562,35 @@ public class ModBlocks {
                 }
             }
     );
+
+    //———————————————————————————————————————Palm Blocks—————————————————————————————————————————————————————————————————————————————
+
+    public static final DeferredBlock<Block> PALM_LOG = registerBlock("palm_log",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.WOOD)
+            ));
+
+    public static final DeferredBlock<Block> PALM_WOOD = registerBlock("palm_wood",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.WOOD)
+            ));
+
+    public static final DeferredBlock<Block> PALM_SAPLING = registerBlock("palm_sapling",
+            properties -> new PlantedOffGrassSaplingBlock(ModTreeGrowers.PALM, properties
+                    .sound(SoundType.GRASS)
+                    .instabreak()
+                    .noOcclusion(),
+                    () -> Blocks.SAND));
+
+    public static final DeferredBlock<Block> POTTED_PALM_SAPLING = BLOCKS.registerBlock("potted_palm_sapling",
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, PALM_SAPLING, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
     // Liquid
 
 //    public static final DeferredBlock<Block> OIL_BLOCK = BLOCKS.register("oil_block",

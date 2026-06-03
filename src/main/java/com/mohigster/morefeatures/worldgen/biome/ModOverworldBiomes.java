@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.worldgen.biome;
 
 import com.mohigster.morefeatures.worldgen.ModPlacedFeatures;
+import com.mohigster.morefeatures.worldgen.carver.ModCarvers;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
@@ -90,5 +91,38 @@ public class ModOverworldBiomes {
                 .build();
     }
 
+    public static Biome iceCave(HolderGetter<PlacedFeature> placedFeatureGetter, HolderGetter<ConfiguredWorldCarver<?>> carverGetter) {
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+        // Spawns tailored for a cold cave environment
+        BiomeDefaultFeatures.commonSpawns(spawnBuilder, 30);
+        spawnBuilder.addSpawn(MobCategory.MONSTER, 95, new MobSpawnSettings.SpawnerData(EntityType.STRAY, 4, 4));
+        spawnBuilder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityType.POLAR_BEAR, 1, 2));
+
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
+        biomeBuilder.addCarver(ModCarvers.ICE_CAVE);
+        biomeBuilder.addCarver(ModCarvers.ICE_CAVE_EXTRA_UNDERGROUND);
+        biomeBuilder.addCarver(ModCarvers.ICE_CANYON);
+        BiomeDefaultFeatures.addDefaultCrystalFormations(biomeBuilder);
+        BiomeDefaultFeatures.addDefaultMonsterRoom(biomeBuilder);
+
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.SMALL_SNOW_PATCH_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.SNOW_PATCH_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.LARGE_SNOW_PATCH_PLACED_KEY);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(true)
+                .temperature(-0.5F) // Below freezing point
+                .downfall(0.5F)
+                .specialEffects((new BiomeSpecialEffects.Builder()
+                        .waterColor(0x3f76e4)
+                        .build()))
+                .mobSpawnSettings(spawnBuilder.build())
+                .generationSettings(biomeBuilder.build())
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, -4138753)     // Light ice blue fog
+                .setAttribute(EnvironmentAttributes.SKY_COLOR, -8871425)
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DEEP_DARK))
+                .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.WHITE_ASH, 0.01F))
+                .build();
+    }
 }
 

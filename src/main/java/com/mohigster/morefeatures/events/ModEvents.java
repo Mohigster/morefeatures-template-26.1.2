@@ -4,7 +4,10 @@ import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
 import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
 import com.mohigster.morefeatures.item.ModItems;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -13,6 +16,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
@@ -27,6 +32,11 @@ import java.util.List;
 
 @EventBusSubscriber(modid = MoreFeatures.MODID)
 public class ModEvents {
+
+    private static final ResourceKey<Biome> ICE_CAVES = ResourceKey.create(
+            Registries.BIOME,
+            Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "ice_caves")
+    );
 
     @SubscribeEvent
     public static void onPlayerTick(PlayerTickEvent.Post event) {
@@ -62,7 +72,31 @@ public class ModEvents {
         }
     }
 
+    @SubscribeEvent
+    public static void onPlayerTickIceCaves(PlayerTickEvent.Post event) {
+        Player player = event.getEntity();
 
+        if (player.level().isClientSide()) return; // Server side only
+
+        // Check biome
+        if (!player.level().getBiome(player.blockPosition()).is(ICE_CAVES)) {
+            return;
+        }
+
+        if(!player.gameMode().isSurvival()) return;
+
+        // Check if player is in water
+        if (!player.isInWater()) {
+            return;
+        }
+
+        // Apply freezing
+        int currentFrozen = player.getTicksFrozen();
+        int required = player.getTicksRequiredToFreeze();
+
+        // Freeze faster in your ice caves
+        player.setTicksFrozen(Math.min(currentFrozen + 3, required + 20));
+    }
 
     @SubscribeEvent
     public static void onArrowSpawn(EntityJoinLevelEvent event) {

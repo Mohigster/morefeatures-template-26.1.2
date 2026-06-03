@@ -27,7 +27,7 @@ public class OverworldRegion extends Region {
         new ParameterUtils.ParameterPointListBuilder()
                 .temperature(ParameterUtils.Temperature.span(ParameterUtils.Temperature.WARM, ParameterUtils.Temperature.HOT))
                 .humidity(ParameterUtils.Humidity.span(ParameterUtils.Humidity.ARID, ParameterUtils.Humidity.DRY))
-                .continentalness(ParameterUtils.Continentalness.INLAND)
+                .continentalness(ParameterUtils.Continentalness.FAR_INLAND)
                 .erosion(ParameterUtils.Erosion.EROSION_0, ParameterUtils.Erosion.EROSION_1)
                 .depth(ParameterUtils.Depth.SURFACE)
                 .weirdness(ParameterUtils.Weirdness.MID_SLICE_NORMAL_ASCENDING, ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING)
@@ -36,11 +36,26 @@ public class OverworldRegion extends Region {
         new ParameterUtils.ParameterPointListBuilder()
                 .temperature(ParameterUtils.Temperature.span(ParameterUtils.Temperature.COOL, ParameterUtils.Temperature.FROZEN))
                 .humidity(ParameterUtils.Humidity.span(ParameterUtils.Humidity.ARID, ParameterUtils.Humidity.DRY))
-                .continentalness(ParameterUtils.Continentalness.INLAND)
+                .continentalness(ParameterUtils.Continentalness.FAR_INLAND)
                 .erosion(ParameterUtils.Erosion.EROSION_0, ParameterUtils.Erosion.EROSION_1)
                 .depth(ParameterUtils.Depth.SURFACE)
                 .weirdness(ParameterUtils.Weirdness.MID_SLICE_NORMAL_ASCENDING, ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING)
                 .build().forEach(point -> builder.add(point, ModBiomes.TAINTED_FOREST));
+
+        new ParameterUtils.ParameterPointListBuilder()
+                .temperature(ParameterUtils.Temperature.FROZEN)
+                .humidity(ParameterUtils.Humidity.HUMID)
+                .continentalness(ParameterUtils.Continentalness.span(
+                        ParameterUtils.Continentalness.INLAND,
+                        ParameterUtils.Continentalness.FAR_INLAND))
+                .erosion(ParameterUtils.Erosion.EROSION_0)
+                .depth(ParameterUtils.Depth.FLOOR)
+                .weirdness(
+                        ParameterUtils.Weirdness.HIGH_SLICE_VARIANT_ASCENDING,
+                        ParameterUtils.Weirdness.HIGH_SLICE_VARIANT_DESCENDING,
+                        ParameterUtils.Weirdness.HIGH_SLICE_NORMAL_ASCENDING,
+                        ParameterUtils.Weirdness.HIGH_SLICE_NORMAL_DESCENDING)
+                .build().forEach(point -> builder.add(point, ModBiomes.ICE_CAVE));
 
         // Add our points to the mapper
         builder.build().forEach(mapper);

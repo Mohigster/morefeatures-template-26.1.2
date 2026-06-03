@@ -14,6 +14,8 @@ public class ModBiomes {
     public static final ResourceKey<Biome> BLOODWOOD_FOREST = registerBiomeKey("bloodwood_forest");
     public static final ResourceKey<Biome> TAINTED_FOREST = registerBiomeKey("tainted_forest");
 
+    public static final ResourceKey<Biome> ICE_CAVE = registerBiomeKey("ice_caves");
+
     public static final ResourceKey<Biome> END_ROT = registerBiomeKey("end_rot");
     public static final ResourceKey<Biome> END_GROWTH = registerBiomeKey("end_growth");
 
@@ -34,6 +36,9 @@ public class ModBiomes {
 
         register(context, BLOODWOOD_FOREST, ModOverworldBiomes.bloodwoodForest(placedFeatures, carver));
         register(context, TAINTED_FOREST, ModOverworldBiomes.taintedForest(placedFeatures, carver));
+
+        register(context, ICE_CAVE, ModOverworldBiomes.iceCave(placedFeatures, carver));
+
         register(context, END_ROT, ModEndBiomes.endRot(placedFeatures, carver));
         register(context, END_GROWTH, ModEndBiomes.endGrowth(placedFeatures, carver));
     }

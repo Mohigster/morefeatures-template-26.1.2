@@ -3,6 +3,7 @@ package com.mohigster.morefeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
 import com.mohigster.morefeatures.creativemodetab.ModCreativeModeTabs;
+import com.mohigster.morefeatures.data_component.ModDataComponentTypes;
 import com.mohigster.morefeatures.enchantment.ModEnchantmentEffects;
 import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
 import com.mohigster.morefeatures.item.ModItems;
@@ -11,6 +12,9 @@ import com.mohigster.morefeatures.recipe.ModRecipes;
 import com.mohigster.morefeatures.sound.ModSounds;
 import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
 import com.mohigster.morefeatures.worldgen.biome.ModSurfaceRules;
+import com.mohigster.morefeatures.worldgen.feature.ModFeatures;
+import com.mohigster.morefeatures.worldgen.tree.foliage_placer.ModFoliagePlacerType;
+import com.mohigster.morefeatures.worldgen.tree.trunk_placer.ModTrunkPlacerType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import org.slf4j.Logger;
@@ -57,7 +61,13 @@ public class MoreFeatures {
         ModMenuTypes.register(modEventBus);
         ModBlockEntities.register(modEventBus);
 
+        ModTrunkPlacerType.register(modEventBus);
+        ModFoliagePlacerType.register(modEventBus);
+        ModFeatures.register(modEventBus);
+
         ModRecipes.register(modEventBus);
+
+        ModDataComponentTypes.DATA_COMPONENT_TYPES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (MoreFeatures) to respond directly to events.
@@ -80,11 +90,13 @@ public class MoreFeatures {
 
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.TAINTED_SAPLING.getId(), ModBlocks.POTTED_TAINTED_SAPLING);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BLOODWOOD_SAPLING.getId(), ModBlocks.POTTED_BLOODWOOD_SAPLING);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALM_SAPLING.getId(), ModBlocks.POTTED_PALM_SAPLING);
 
             ModBiomes.registerBiomes();
 
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeBloodwoodForestRules());
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeTaintedForestRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeIceCaveRules());
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, ModSurfaceRules.makeEndRotRules());
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, ModSurfaceRules.makeEndGrowthRules());
         });

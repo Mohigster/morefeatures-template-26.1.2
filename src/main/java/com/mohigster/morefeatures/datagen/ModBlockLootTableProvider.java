@@ -52,6 +52,9 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.STRIPPED_TAINTED_LOG.get());
         dropSelf(ModBlocks.STRIPPED_TAINTED_WOOD.get());
         dropSelf(ModBlocks.TAINTED_SAPLING.get());
+        dropSelf(ModBlocks.PALM_LOG.get());
+        dropSelf(ModBlocks.PALM_WOOD.get());
+        dropSelf(ModBlocks.PALM_SAPLING.get());
         dropSelf(ModBlocks.MAGIC_BLOCK.get());
         dropSelf(ModBlocks.AZURITE_STAIRS.get());
         dropSelf(ModBlocks.FLUORITE_STAIRS.get());
@@ -70,6 +73,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.POTTED_BLUE_ROSE.get(), createPotFlowerItemTable(ModBlocks.BLUE_ROSE.get()));
         add(ModBlocks.POTTED_TAINTED_SAPLING.get(), createPotFlowerItemTable(ModBlocks.TAINTED_SAPLING.get()));
         add(ModBlocks.POTTED_BLOODWOOD_SAPLING.get(), createPotFlowerItemTable(ModBlocks.BLOODWOOD_SAPLING.get()));
+        add(ModBlocks.POTTED_PALM_SAPLING.get(), createPotFlowerItemTable(ModBlocks.PALM_SAPLING.get()));
 
         // SLABS
 
@@ -96,6 +100,14 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
                 createOreDrop(ModBlocks.ALUMINIUM_ORE.get(), ModItems.RAW_ALUMINIUM.get()));
         add(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get(),
                 createOreDrop(ModBlocks.DEEPSLATE_ALUMINIUM_ORE.get(), ModItems.RAW_ALUMINIUM.get()));
+
+        // Everfrost ores
+
+        add(ModBlocks.EVERFROST_PACKED_ICE_ORE.get(),
+                createOreDrop(ModBlocks.EVERFROST_PACKED_ICE_ORE.get(), ModItems.RAW_EVERFROST.get()));
+        add(ModBlocks.EVERFROST_BLUE_ICE_ORE.get(),
+                createOreDrop(ModBlocks.EVERFROST_BLUE_ICE_ORE.get(), ModItems.RAW_EVERFROST.get()));
+
 
         // Magnesium ores
 

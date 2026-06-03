@@ -2,8 +2,8 @@ package com.mohigster.morefeatures.item;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.asset.ModEquipmentAssets;
+import com.mohigster.morefeatures.data_component.ModDataComponentTypes;
 import com.mohigster.morefeatures.datagen.ModJukeboxSongs;
-import com.mohigster.morefeatures.fluid.ModFluids;
 import com.mohigster.morefeatures.item.custom.BismuthTridentItem;
 import com.mohigster.morefeatures.item.custom.CarbonTridentItem;
 import com.mohigster.morefeatures.item.custom.MetalDetectorItem;
@@ -18,7 +18,6 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.item.component.ChargedProjectiles;
@@ -26,15 +25,12 @@ import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
-import net.minecraft.world.item.equipment.EquipmentAssets;
 import net.minecraft.world.item.equipment.Equippable;
-import net.minecraft.world.level.material.Fluids;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -67,11 +63,15 @@ public class ModItems {
     public static final DeferredItem<Item> MAGNESIUM_INGOT = ITEMS.registerSimpleItem("magnesium_ingot");
 
     // Azurite items
-    public static final DeferredItem<Item> AZURITE = ITEMS.registerSimpleItem("azurite");
+    public static final DeferredItem<Item> AZURITE = ITEMS.registerItem("azurite",
+            properties -> new Item(properties
+                    .component(ModDataComponentTypes.COMPRESSOR_FUEL_VALUE.get(), 3200)));
     public static final DeferredItem<Item> RAW_AZURITE = ITEMS.registerSimpleItem("raw_azurite");
 
     // Fluorite items
-    public static final DeferredItem<Item> FLUORITE = ITEMS.registerSimpleItem("fluorite");
+    public static final DeferredItem<Item> FLUORITE = ITEMS.registerItem("fluorite",
+            properties -> new Item(properties
+                    .component(ModDataComponentTypes.COMPRESSOR_FUEL_VALUE.get(), 3200)));
     public static final DeferredItem<Item> RAW_FLUORITE = ITEMS.registerSimpleItem("raw_fluorite");
 
     // Bismuth items
@@ -90,6 +90,12 @@ public class ModItems {
                     .rarity(Rarity.UNCOMMON)
                     .fireResistant())
     );
+
+    // Everfrost items
+    public static final DeferredItem<Item> EVERFROST = ITEMS.registerItem("everfrost",
+            properties -> new Item(properties
+                    .component(ModDataComponentTypes.COMPRESSOR_FUEL_VALUE.get(), 6400)));
+    public static final DeferredItem<Item> RAW_EVERFROST = ITEMS.registerSimpleItem("raw_everfrost");
 
     // Elemental rods
     public static final DeferredItem<Item> BRINE_ROD = ITEMS.registerSimpleItem("brine_rod");
@@ -282,6 +288,8 @@ public class ModItems {
                     .component(DataComponents.TOOL, BismuthTridentItem.createToolProperties())
                     .component(DataComponents.WEAPON, new Weapon(2))
             ));
+
+
 
 //    public static final DeferredItem<Item> OIL_BUCKET = ITEMS.registerItem("oil_bucket",
 //            properties -> new BucketItem(ModFluids.OIL_SOURCE.get(), properties

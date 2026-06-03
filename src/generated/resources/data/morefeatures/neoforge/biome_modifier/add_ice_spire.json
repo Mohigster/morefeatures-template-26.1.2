@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "morefeatures:ice_caves",
+  "features": "morefeatures:iced_spire_placed",
+  "step": "surface_structures"
+}

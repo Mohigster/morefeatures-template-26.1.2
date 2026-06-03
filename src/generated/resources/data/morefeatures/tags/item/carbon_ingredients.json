@@ -9,6 +9,6 @@
     "#minecraft:saplings",
     "#minecraft:planks",
     "#minecraft:wool",
-    "#minecraft:is_food"
+    "#morefeatures:is_food"
   ]
 }

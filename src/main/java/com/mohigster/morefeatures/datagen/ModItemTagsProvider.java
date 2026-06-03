@@ -256,6 +256,11 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModBlocks.TAINTED_SAPLING.get().asItem())
                 .add(ModBlocks.BLOODWOOD_SAPLING.get().asItem());
 
+        tag(ModItemTags.COMPRESSOR_FUEL)
+                .add(ModItems.AZURITE.get())
+                .add(ModItems.FLUORITE.get())
+                .add(ModItems.EVERFROST.get());
+
         tag(ItemTags.FLOWERS)
                 .add(ModBlocks.BLUE_ROSE.asItem())
                 .add(ModBlocks.ROSE.asItem());

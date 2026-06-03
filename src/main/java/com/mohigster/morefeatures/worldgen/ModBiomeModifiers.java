@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.worldgen;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -23,6 +24,16 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_ALUMINIUM_ORE = registerKey("add_aluminium_ore");
     public static final ResourceKey<BiomeModifier> ADD_MAGNESIUM_ORE = registerKey("add_magnesium_ore");
     public static final ResourceKey<BiomeModifier> ADD_BISMUTH_ORE = registerKey("add_bismuth_ore");
+    public static final ResourceKey<BiomeModifier> ADD_SMALL_ICE_PATCH = registerKey("add_small_ice_patch");
+    public static final ResourceKey<BiomeModifier> ADD_ICE_PATCH = registerKey("add_ice_patch");
+    public static final ResourceKey<BiomeModifier> ADD_LARGE_ICE_PATCH = registerKey("add_large_ice_patch");
+    public static final ResourceKey<BiomeModifier> ADD_SMALL_BLUE_ICE_PATCH = registerKey("add_small_blue_ice_patch");
+    public static final ResourceKey<BiomeModifier> ADD_BLUE_ICE_PATCH = registerKey("add_blue_ice_patch");
+    public static final ResourceKey<BiomeModifier> ADD_LARGE_BLUE_ICE_PATCH = registerKey("add_large_blue_ice_patch");
+    public static final ResourceKey<BiomeModifier> ADD_EVERFROST_ORE = registerKey("add_everfrost_ore");
+    public static final ResourceKey<BiomeModifier> ADD_OASIS = registerKey("add_oasis");
+    public static final ResourceKey<BiomeModifier> ADD_PALM_TREE = registerKey("add_palm_tree");
+    public static final ResourceKey<BiomeModifier> ADD_ICE_SPIRE = registerKey("add_ice_spire");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context){
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
@@ -73,7 +84,56 @@ public class ModBiomeModifiers {
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.BISMUTH_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES
         ));
-
+        context.register(ADD_SMALL_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.ICE_CAVE)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.SMALL_ICE_PATCH_PLACED_KEY)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+        context.register(ADD_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.ICE_CAVE)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_PATCH_PLACED_KEY)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+        context.register(ADD_LARGE_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.ICE_CAVE)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.LARGE_ICE_PATCH_PLACED_KEY)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+        context.register(ADD_SMALL_BLUE_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.ICE_CAVE)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.SMALL_BLUE_ICE_PATCH_PLACED_KEY)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+        context.register(ADD_BLUE_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.ICE_CAVE)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.BLUE_ICE_PATCH_PLACED_KEY)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+        context.register(ADD_LARGE_BLUE_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.ICE_CAVE)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.LARGE_BLUE_ICE_PATCH_PLACED_KEY)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+        context.register(ADD_EVERFROST_ORE, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.ICE_CAVE)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.EVERFROST_ORE_PLACED_KEY)),
+                GenerationStep.Decoration.UNDERGROUND_ORES
+        ));
+        context.register(ADD_PALM_TREE, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.DESERT)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PALM_PLACED_KEY)),
+                GenerationStep.Decoration.VEGETAL_DECORATION
+        ));
+        context.register(ADD_OASIS, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.DESERT)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.OASIS_PLACED_KEY)),
+                GenerationStep.Decoration.FLUID_SPRINGS
+        ));
+        context.register(ADD_ICE_SPIRE, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(ModBiomes.ICE_CAVE)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.ICE_SPIRE_PLACED_KEY)),
+                GenerationStep.Decoration.SURFACE_STRUCTURES
+        ));
     }
 
     public static ResourceKey<BiomeModifier> registerKey(String name){

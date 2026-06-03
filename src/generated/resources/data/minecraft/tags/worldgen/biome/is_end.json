@@ -1,0 +1,12 @@
+{
+  "values": [
+    {
+      "id": "morefeatures:end_rot",
+      "required": false
+    },
+    {
+      "id": "morefeatures:end_growth",
+      "required": false
+    }
+  ]
+}

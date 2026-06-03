@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "morefeatures:ice_caves",
+  "features": "morefeatures:small_ice_patch_placed",
+  "step": "underground_ores"
+}
