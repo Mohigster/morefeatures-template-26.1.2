@@ -16,7 +16,7 @@
     "foliage_provider": {
       "type": "minecraft:simple_state_provider",
       "state": {
-        "Name": "minecraft:azalea_leaves",
+        "Name": "morefeatures:palm_leaves",
         "Properties": {
           "distance": "7",
           "persistent": "false",

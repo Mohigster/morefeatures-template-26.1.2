@@ -123,6 +123,7 @@ public class ModConfiguredFeatures {
         register(context, LARGE_SNOW_PATCH_KEY, Feature.ORE, new OreConfiguration(packedIceReplaceables, Blocks.SNOW_BLOCK.defaultBlockState(), 30));
         register(context, EVERFROST_ORE_KEY, Feature.ORE, new OreConfiguration(everfrostOres, 9));
 
+        // Registering ice spire
         register(context, ICE_SPIRE_KEY, ModFeatures.ICE_SPIRE.get(), FeatureConfiguration.NONE);
 
         // Registering tree configured features
@@ -175,7 +176,7 @@ public class ModConfiguredFeatures {
         register(context, PALM_TREE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.PALM_LOG.get()),
                 new LeaningTrunkPlacer(5, 2, 2),
-                BlockStateProvider.simple(Blocks.AZALEA_LEAVES), // Placeholder. Will replace with palm leaves when added
+                BlockStateProvider.simple(ModBlocks.PALM_LEAVES.get()),
                 new PalmFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
                 new TwoLayersFeatureSize(1, 0, 2))
                 .belowTrunkProvider(BlockStateProvider.simple(Blocks.SAND))
@@ -183,8 +184,7 @@ public class ModConfiguredFeatures {
                 .build()
         );
 
-        // Register oasis
-
+        // Registering oasis
         register(context, OASIS_KEY, ModFeatures.OASIS.get(),
                 new OasisConfiguration(context.lookup(Registries.CONFIGURED_FEATURE)
                         .getOrThrow(ModConfiguredFeatures.PALM_TREE_KEY)));

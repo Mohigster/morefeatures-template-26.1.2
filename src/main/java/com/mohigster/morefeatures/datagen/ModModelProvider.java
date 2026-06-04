@@ -111,6 +111,7 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialBlock(ModBlocks.BLOODWOOD_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createPlantWithDefaultItem(ModBlocks.BLOODWOOD_SAPLING.get(), ModBlocks.POTTED_BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.woodProvider(ModBlocks.PALM_LOG.get()).logWithHorizontal(ModBlocks.PALM_LOG.get()).wood(ModBlocks.PALM_WOOD.get());
+        blockModels.createTrivialBlock(ModBlocks.PALM_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createPlantWithDefaultItem(ModBlocks.PALM_SAPLING.get(), ModBlocks.POTTED_PALM_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createTrivialCube(ModBlocks.MAGIC_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.EVIL_PORTAL.get());

@@ -92,6 +92,10 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.TAINTED_LEAVES.get(),
                 createLeavesDrops(ModBlocks.TAINTED_LEAVES.get(), ModBlocks.TAINTED_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
+        // Palm
+        add(ModBlocks.PALM_LEAVES.get(),
+                createLeavesDrops(ModBlocks.PALM_LEAVES.get(), ModBlocks.PALM_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
         // ORES
 
         // Aluminium ores

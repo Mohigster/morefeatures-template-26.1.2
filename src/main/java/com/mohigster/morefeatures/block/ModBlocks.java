@@ -577,6 +577,41 @@ public class ModBlocks {
                     .sound(SoundType.WOOD)
             ));
 
+    public static final DeferredBlock<Block> PALM_LEAVES = registerBlock("palm_leaves",
+            properties -> new TintedParticleLeavesBlock(4, properties
+                    .strength(0.2f, 0.2f)
+                    .sound(SoundType.GRASS)
+                    .noOcclusion()
+                    .ignitedByLava()
+            )
+            {
+                @Override
+                public MapCodec<? extends TintedParticleLeavesBlock> codec() {
+                    return null;
+                }
+
+                @Override
+                protected void spawnFallingLeavesParticle(Level level, BlockPos blockPos, RandomSource randomSource) {
+
+                }
+
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return 30;
+                }
+            }
+    );
+
     public static final DeferredBlock<Block> PALM_SAPLING = registerBlock("palm_sapling",
             properties -> new PlantedOffGrassSaplingBlock(ModTreeGrowers.PALM, properties
                     .sound(SoundType.GRASS)
