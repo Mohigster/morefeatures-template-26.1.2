@@ -16,18 +16,22 @@ public class ModSurfaceRules {
 
     private static final SurfaceRules.RuleSource OBSIDIAN = makeStateRule(Blocks.OBSIDIAN);
     private static final SurfaceRules.RuleSource END_STONE = makeStateRule(Blocks.END_STONE);
+    private static final SurfaceRules.RuleSource PALE_MOSS = makeStateRule(Blocks.PALE_MOSS_BLOCK);
 
-    public static SurfaceRules.RuleSource makeEndRotRules() {
+    public static SurfaceRules.RuleSource makeEndSurfaceRules() {
         return SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.END_ROT), OBSIDIAN),
-                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, OBSIDIAN)
-        );
-    }
+                // Specific biome rules (highest priority)
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.END_ROT),
+                        SurfaceRules.sequence(
+                                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, OBSIDIAN),
+                                OBSIDIAN
+                        )
+                ),
 
-    public static SurfaceRules.RuleSource makeEndGrowthRules() {
-        return SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.END_GROWTH), END_STONE),
-                // Default to end stone
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.END_GROWTH),
+                        SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, PALE_MOSS)),
+
+                // Fallback for other End biomes / vanilla behavior
                 SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, END_STONE)
         );
     }
@@ -37,7 +41,6 @@ public class ModSurfaceRules {
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.BLOODWOOD_FOREST),
                         SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, GRASS_BLOCK),
                                 SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT), STONE)),
-                // Default to Dirt
                 SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, GRASS_BLOCK)
         );
     }

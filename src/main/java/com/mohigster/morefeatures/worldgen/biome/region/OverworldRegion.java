@@ -30,7 +30,7 @@ public class OverworldRegion extends Region {
                 .continentalness(ParameterUtils.Continentalness.FAR_INLAND)
                 .erosion(ParameterUtils.Erosion.EROSION_0, ParameterUtils.Erosion.EROSION_1)
                 .depth(ParameterUtils.Depth.SURFACE)
-                .weirdness(ParameterUtils.Weirdness.MID_SLICE_NORMAL_ASCENDING, ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING)
+                .weirdness(ParameterUtils.Weirdness.LOW_SLICE_NORMAL_DESCENDING)
                 .build().forEach(point -> builder.add(point, ModBiomes.BLOODWOOD_FOREST));
 
         new ParameterUtils.ParameterPointListBuilder()
@@ -39,7 +39,18 @@ public class OverworldRegion extends Region {
                 .continentalness(ParameterUtils.Continentalness.FAR_INLAND)
                 .erosion(ParameterUtils.Erosion.EROSION_0, ParameterUtils.Erosion.EROSION_1)
                 .depth(ParameterUtils.Depth.SURFACE)
-                .weirdness(ParameterUtils.Weirdness.MID_SLICE_NORMAL_ASCENDING, ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING)
+                .weirdness(ParameterUtils.Weirdness.LOW_SLICE_NORMAL_DESCENDING,
+                        ParameterUtils.Weirdness.MID_SLICE_NORMAL_ASCENDING,
+                        ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING,
+                        ParameterUtils.Weirdness.HIGH_SLICE_NORMAL_ASCENDING,
+                        ParameterUtils.Weirdness.HIGH_SLICE_NORMAL_DESCENDING,
+                        ParameterUtils.Weirdness.HIGH_SLICE_VARIANT_ASCENDING,
+                        ParameterUtils.Weirdness.HIGH_SLICE_VARIANT_DESCENDING,
+                        ParameterUtils.Weirdness.MID_SLICE_VARIANT_ASCENDING,
+                        ParameterUtils.Weirdness.MID_SLICE_VARIANT_DESCENDING,
+                        ParameterUtils.Weirdness.LOW_SLICE_VARIANT_ASCENDING,
+                        ParameterUtils.Weirdness.PEAK_NORMAL,
+                        ParameterUtils.Weirdness.PEAK_VARIANT)
                 .build().forEach(point -> builder.add(point, ModBiomes.TAINTED_FOREST));
 
         new ParameterUtils.ParameterPointListBuilder()

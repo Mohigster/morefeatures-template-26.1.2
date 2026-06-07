@@ -61,6 +61,24 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModItems.BISMUTH_TRIDENT.get())
                 .add(ModItems.CARBON_TRIDENT.get());
 
+        tag(ModItemTags.BLOODWOOD_LOGS)
+                .add(ModBlocks.BLOODWOOD.asItem())
+                .add(ModBlocks.BLOODWOOD_LOG.asItem())
+                .add(ModBlocks.STRIPPED_BLOODWOOD.asItem())
+                .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.asItem());
+
+        tag(ModItemTags.TAINTED_LOGS)
+                .add(ModBlocks.TAINTED_LOG.asItem())
+                .add(ModBlocks.TAINTED_WOOD.asItem())
+                .add(ModBlocks.STRIPPED_TAINTED_LOG.asItem())
+                .add(ModBlocks.STRIPPED_TAINTED_WOOD.asItem());
+
+        tag(ModItemTags.PALM_LOGS)
+                .add(ModBlocks.PALM_LOG.asItem())
+                .add(ModBlocks.PALM_WOOD.asItem())
+                .add(ModBlocks.STRIPPED_PALM_LOG.asItem())
+                .add(ModBlocks.STRIPPED_PALM_WOOD.asItem());
+
         tag(ModItemTags.IS_FOOD)
                 .add(Items.APPLE.asItem())
                 .add(Items.BAKED_POTATO.asItem())

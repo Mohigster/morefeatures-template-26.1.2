@@ -2,7 +2,7 @@ package com.mohigster.morefeatures.block.entity.custom;
 
 import com.mohigster.morefeatures.block.custom.CompressorBlock;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
-import com.mohigster.morefeatures.data_component.ModDataComponentTypes;
+import com.mohigster.morefeatures.datacomponent.ModDataComponentTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorMenu;
 import com.mohigster.morefeatures.recipe.ModRecipes;
 import com.mohigster.morefeatures.recipe.custom.CompressionRecipe;
@@ -198,7 +198,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     public void tick(Level level, BlockPos pos, BlockState state) {
-        if(hasRecipe() && isOutputSlotEmptyOrReceivable()) { // isOutputSlotEmptyOrReceivable redundant?
+        if(hasRecipe() && isOutputSlotEmptyOrReceivable()) {
             increaseCraftingProgress();
             useEnergyForCrafting();
             setChanged(level, pos, state);

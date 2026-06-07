@@ -12,7 +12,8 @@ public class ModModelLayer {
     private static final Set<ModelLayerLocation> ALL_MODELS = Sets.newHashSet();
     public static final ModelLayerLocation CARBON_TRIDENT = register("carbon_trident");
     public static final ModelLayerLocation BISMUTH_TRIDENT = register("bismuth_trident");
-    public static final ModelLayerLocation CARBON_SHIELD = register("carbon_shield");
+    public static final ModelLayerLocation PALM_BOAT = register("boat/palm");
+    public static final ModelLayerLocation PALM_CHEST_BOAT = register("chest_boat/palm");
 
     private static ModelLayerLocation register(final String model) {
         return register(model, "main");

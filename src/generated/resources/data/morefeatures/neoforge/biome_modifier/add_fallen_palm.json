@@ -1,0 +1,6 @@
+{
+  "type": "neoforge:add_features",
+  "biomes": "minecraft:desert",
+  "features": "morefeatures:fallen_palm_placed",
+  "step": "vegetal_decoration"
+}

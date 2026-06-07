@@ -1,9 +1,10 @@
 package com.mohigster.morefeatures;
 
 import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.custom.woodtype.ModWoodType;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
 import com.mohigster.morefeatures.creativemodetab.ModCreativeModeTabs;
-import com.mohigster.morefeatures.data_component.ModDataComponentTypes;
+import com.mohigster.morefeatures.datacomponent.ModDataComponentTypes;
 import com.mohigster.morefeatures.enchantment.ModEnchantmentEffects;
 import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
 import com.mohigster.morefeatures.item.ModItems;
@@ -15,7 +16,10 @@ import com.mohigster.morefeatures.worldgen.biome.ModSurfaceRules;
 import com.mohigster.morefeatures.worldgen.feature.ModFeatures;
 import com.mohigster.morefeatures.worldgen.tree.foliage_placer.ModFoliagePlacerType;
 import com.mohigster.morefeatures.worldgen.tree.trunk_placer.ModTrunkPlacerType;
+import net.minecraft.client.renderer.Sheets;
+import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
 import org.slf4j.Logger;
 
@@ -49,6 +53,8 @@ public class MoreFeatures {
         modEventBus.addListener(this::commonSetup);
 
         ModCreativeModeTabs.register(modEventBus);
+
+        ModWoodType.init();
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
@@ -94,11 +100,23 @@ public class MoreFeatures {
 
             ModBiomes.registerBiomes();
 
+            Sheets.addWoodType(ModWoodType.PALM);
+            Sheets.addWoodType(ModWoodType.BLOODWOOD);
+            Sheets.addWoodType(ModWoodType.TAINTED);
+
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeBloodwoodForestRules());
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeTaintedForestRules());
             SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeIceCaveRules());
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, ModSurfaceRules.makeEndRotRules());
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, ModSurfaceRules.makeEndGrowthRules());
+            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, ModSurfaceRules.makeEndSurfaceRules());
+
+            DispenserBlock.registerBehavior(
+                    ModItems.PALM_BOAT.get(),
+                    new BoatDispenseItemBehavior(ModEntityTypes.PALM_BOAT.get())
+            );
+            DispenserBlock.registerBehavior(
+                    ModItems.PALM_CHEST_BOAT.get(),
+                    new BoatDispenseItemBehavior(ModEntityTypes.PALM_CHEST_BOAT.get())
+            );
         });
 
     }

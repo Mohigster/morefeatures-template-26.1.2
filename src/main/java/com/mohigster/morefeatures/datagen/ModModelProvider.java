@@ -1,17 +1,18 @@
 package com.mohigster.morefeatures.datagen;
 
+
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.family.ModBlockFamilies;
 import com.mohigster.morefeatures.item.ModItems;
-import net.minecraft.client.data.models.BlockModelGenerators;
-import net.minecraft.client.data.models.ItemModelGenerators;
-import net.minecraft.client.data.models.ItemModelOutput;
-import net.minecraft.client.data.models.ModelProvider;
+import net.minecraft.client.data.models.*;
 import net.minecraft.client.data.models.model.*;
-import net.minecraft.client.renderer.item.properties.select.DisplayContext;
+
+import net.minecraft.data.BlockFamilies;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class ModModelProvider extends ModelProvider {
     public ModModelProvider(PackOutput output) {
@@ -76,6 +77,8 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.CARBON_WOLF_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateTrident(ModItems.BISMUTH_TRIDENT.get());
         itemModels.generateFlatItem(ModItems.AQUAMARINE_MUSIC_DISC.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.PALM_BOAT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.PALM_CHEST_BOAT.get(), ModelTemplates.FLAT_ITEM);
 
         // BLOCKS
 
@@ -111,6 +114,7 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialBlock(ModBlocks.BLOODWOOD_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createPlantWithDefaultItem(ModBlocks.BLOODWOOD_SAPLING.get(), ModBlocks.POTTED_BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.woodProvider(ModBlocks.PALM_LOG.get()).logWithHorizontal(ModBlocks.PALM_LOG.get()).wood(ModBlocks.PALM_WOOD.get());
+        blockModels.woodProvider(ModBlocks.STRIPPED_PALM_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_PALM_LOG.get()).wood(ModBlocks.STRIPPED_PALM_WOOD.get());
         blockModels.createTrivialBlock(ModBlocks.PALM_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createPlantWithDefaultItem(ModBlocks.PALM_SAPLING.get(), ModBlocks.POTTED_PALM_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createTrivialCube(ModBlocks.MAGIC_BLOCK.get());
@@ -118,6 +122,12 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createFurnace(ModBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
         blockModels.createPlantWithDefaultItem(ModBlocks.ROSE.get(), ModBlocks.POTTED_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createPlantWithDefaultItem(ModBlocks.BLUE_ROSE.get(), ModBlocks.POTTED_BLUE_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
+        blockModels.createHangingSign(ModBlocks.PALM_PLANKS.get(), ModBlocks.PALM_HANGING_SIGN.get(), ModBlocks.PALM_WALL_HANGING_SIGN.get());
+        blockModels.createHangingSign(ModBlocks.BLOODWOOD_PLANKS.get(), ModBlocks.BLOODWOOD_HANGING_SIGN.get(), ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.get());
+        blockModels.createHangingSign(ModBlocks.TAINTED_PLANKS.get(), ModBlocks.TAINTED_HANGING_SIGN.get(), ModBlocks.TAINTED_WALL_HANGING_SIGN.get());
+        blockModels.createShelf(ModBlocks.PALM_SHELF.get(), ModBlocks.PALM_PLANKS.get());
+
+
 
         // Block families—createTrivialCube is unnecessary for Azurite block
         // etc. because their models are created by the block family.
@@ -136,5 +146,7 @@ public class ModModelProvider extends ModelProvider {
         blockModels.family(ModBlocks.TAINTED_PLANKS.get())
                 .stairs(ModBlocks.TAINTED_STAIRS.get())
                 .slab(ModBlocks.TAINTED_SLAB.get());
+        blockModels.family(ModBlocks.PALM_PLANKS.get())
+                .generateFor(ModBlockFamilies.getPalmFamily());
     }
 }

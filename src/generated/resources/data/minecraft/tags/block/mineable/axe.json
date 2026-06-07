@@ -14,7 +14,12 @@
     "morefeatures:bloodwood_log",
     "morefeatures:bloodwood_stairs",
     "morefeatures:bloodwood_slab",
+    "morefeatures:palm_planks",
     "morefeatures:palm_wood",
-    "morefeatures:palm_log"
+    "morefeatures:palm_log",
+    "morefeatures:stripped_palm_log",
+    "morefeatures:stripped_palm_wood",
+    "morefeatures:palm_stairs",
+    "morefeatures:palm_slab"
   ]
 }

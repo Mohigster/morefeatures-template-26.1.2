@@ -33,6 +33,7 @@ public class ModBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_EVERFROST_ORE = registerKey("add_everfrost_ore");
     public static final ResourceKey<BiomeModifier> ADD_OASIS = registerKey("add_oasis");
     public static final ResourceKey<BiomeModifier> ADD_PALM_TREE = registerKey("add_palm_tree");
+    public static final ResourceKey<BiomeModifier> ADD_FALLEN_PALM = registerKey("add_fallen_palm");
     public static final ResourceKey<BiomeModifier> ADD_ICE_SPIRE = registerKey("add_ice_spire");
 
     public static void bootstrap(BootstrapContext<BiomeModifier> context){
@@ -122,6 +123,11 @@ public class ModBiomeModifiers {
         context.register(ADD_PALM_TREE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 HolderSet.direct(biomes.getOrThrow(Biomes.DESERT)),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PALM_PLACED_KEY)),
+                GenerationStep.Decoration.VEGETAL_DECORATION
+        ));
+        context.register(ADD_FALLEN_PALM, new BiomeModifiers.AddFeaturesBiomeModifier(
+                HolderSet.direct(biomes.getOrThrow(Biomes.DESERT)),
+                HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.FALLEN_PALM_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));
         context.register(ADD_OASIS, new BiomeModifiers.AddFeaturesBiomeModifier(

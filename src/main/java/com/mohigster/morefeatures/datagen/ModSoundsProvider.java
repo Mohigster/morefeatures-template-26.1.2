@@ -16,7 +16,6 @@ public class ModSoundsProvider extends SoundDefinitionsProvider {
         add(ModSounds.AQUAMARINE.get(), definition().subtitle("sounds.morefeatures.aquamarine")
                 .with(sound(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "aquamarine")).stream()));
 
-
         add(ModSounds.MAGIC_BLOCK_BREAK.get(), definition().subtitle("sounds.morefeatures.magic_block_break")
                 .with(sound(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "magic_block_break"))));
         add(ModSounds.MAGIC_BLOCK_STEP.get(), definition().subtitle("sounds.morefeatures.magic_block_step")

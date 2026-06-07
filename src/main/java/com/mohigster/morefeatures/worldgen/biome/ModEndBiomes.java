@@ -32,14 +32,15 @@ public class ModEndBiomes {
 
         // Biome features
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter)
-                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PALE_GARDEN_VEGETATION)
-                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PALE_GARDEN_FLOWERS)
+                .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, EndPlacements.END_SPIKE)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PALE_GARDEN_VEGETATION) // Pale garden blocks are placeholders until
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PALE_GARDEN_FLOWERS)    // custom end trees are added and used instead.
                 .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PALE_MOSS_PATCH);
 
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false).temperature(4.0F).downfall(0.0F)
-                .specialEffects((new BiomeSpecialEffects.Builder().waterColor(0xbdb133).build()))
+                .specialEffects((new BiomeSpecialEffects.Builder().waterColor(0xbdb1b3).grassColorOverride(0xbdb1b3).build()))
                 .mobSpawnSettings(spawnBuilder.build()).generationSettings(biomeBuilder.build()).build();
     }
 }

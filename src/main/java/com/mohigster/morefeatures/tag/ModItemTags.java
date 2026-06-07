@@ -22,6 +22,9 @@ public final class ModItemTags {
     public static final TagKey<Item> BOW_UPGRADE_ENCHANTABLE = bind("bow_upgrade_enchantable");
     public static final TagKey<Item> MELEE_WEAPON_UPGRADE_ENCHANTABLE = bind("melee_weapon_upgrade_enchantable");
     public static final TagKey<Item> CARBON_INGREDIENTS = bind("carbon_ingredients");
+    public static final TagKey<Item> BLOODWOOD_LOGS = bind("bloodwood_logs");
+    public static final TagKey<Item> TAINTED_LOGS = bind("tainted_logs");
+    public static final TagKey<Item> PALM_LOGS = bind("palm_logs");
 
     private ModItemTags() {
     }

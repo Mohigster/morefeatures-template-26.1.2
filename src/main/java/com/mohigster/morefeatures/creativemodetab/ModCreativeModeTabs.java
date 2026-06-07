@@ -172,6 +172,26 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.TAINTED_PLANKS);
                 output.accept(ModBlocks.TAINTED_STAIRS);
                 output.accept(ModBlocks.TAINTED_SLAB);
+
+                // Palm wood
+                output.accept(ModBlocks.PALM_LOG);
+                output.accept(ModBlocks.PALM_WOOD);
+                output.accept(ModBlocks.STRIPPED_PALM_LOG);
+                output.accept(ModBlocks.STRIPPED_PALM_WOOD);
+                output.accept(ModBlocks.PALM_PLANKS);
+                output.accept(ModBlocks.PALM_STAIRS);
+                output.accept(ModBlocks.PALM_SLAB);
+                output.accept(ModBlocks.PALM_FENCE);
+                output.accept(ModBlocks.PALM_FENCE_GATE);
+                output.accept(ModBlocks.PALM_DOOR);
+                output.accept(ModBlocks.PALM_TRAPDOOR);
+                output.accept(ModBlocks.PALM_PRESSURE_PLATE);
+                output.accept(ModBlocks.PALM_BUTTON);
+                output.accept(ModBlocks.PALM_LEAVES);
+                output.accept(ModItems.PALM_SIGN);
+                output.accept(ModItems.PALM_HANGING_SIGN);
+                output.accept(ModItems.PALM_BOAT);
+                output.accept(ModItems.PALM_CHEST_BOAT);
             })
             .build());
 

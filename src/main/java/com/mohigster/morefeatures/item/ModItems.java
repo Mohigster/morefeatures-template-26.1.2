@@ -2,8 +2,10 @@ package com.mohigster.morefeatures.item;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.asset.ModEquipmentAssets;
-import com.mohigster.morefeatures.data_component.ModDataComponentTypes;
+import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.datacomponent.ModDataComponentTypes;
 import com.mohigster.morefeatures.datagen.ModJukeboxSongs;
+import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
 import com.mohigster.morefeatures.item.custom.BismuthTridentItem;
 import com.mohigster.morefeatures.item.custom.CarbonTridentItem;
 import com.mohigster.morefeatures.item.custom.MetalDetectorItem;
@@ -17,6 +19,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
 import net.minecraft.world.item.component.BlocksAttacks;
@@ -289,11 +292,53 @@ public class ModItems {
                     .component(DataComponents.WEAPON, new Weapon(2))
             ));
 
+    // Sign item
 
+    public static final DeferredItem<SignItem> BLOODWOOD_HANGING_SIGN =
+            ITEMS.register("bloodwood_hanging_sign", () ->
+                    new HangingSignItem(
+                            ModBlocks.BLOODWOOD_HANGING_SIGN.get(),
+                            ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(),
+                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "bloodwood_hanging_sign")))
+                    )
+            );
 
-//    public static final DeferredItem<Item> OIL_BUCKET = ITEMS.registerItem("oil_bucket",
-//            properties -> new BucketItem(ModFluids.OIL_SOURCE.get(), properties
-//                    .stacksTo(1)));
+    public static final DeferredItem<SignItem> TAINTED_HANGING_SIGN =
+            ITEMS.register("tainted_hanging_sign", () ->
+                    new HangingSignItem(
+                            ModBlocks.TAINTED_HANGING_SIGN.get(),
+                            ModBlocks.TAINTED_WALL_HANGING_SIGN.get(),
+                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "tainted_hanging_sign")))
+                    )
+            );
+
+    public static final DeferredItem<SignItem> PALM_SIGN =
+            ITEMS.register("palm_sign", () ->
+                    new SignItem(
+                            ModBlocks.PALM_SIGN.get(),
+                            ModBlocks.PALM_WALL_SIGN.get(),
+                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "palm_sign")))
+                    )
+            );
+
+    public static final DeferredItem<SignItem> PALM_HANGING_SIGN =
+            ITEMS.register("palm_hanging_sign", () ->
+                    new HangingSignItem(
+                            ModBlocks.PALM_HANGING_SIGN.get(),
+                            ModBlocks.PALM_WALL_HANGING_SIGN.get(),
+                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "palm_hanging_sign")))
+                    )
+            );
+
+    public static final DeferredItem<BoatItem> PALM_BOAT = ITEMS.registerItem(
+            "palm_boat",
+            props -> new BoatItem(ModEntityTypes.PALM_BOAT.get(), props)
+    );
+
+    public static final DeferredItem<BoatItem> PALM_CHEST_BOAT = ITEMS.registerItem(
+            "palm_chest_boat",
+            props -> new BoatItem(ModEntityTypes.PALM_CHEST_BOAT.get(), props)
+    );
 
     public static final List<DeferredItem<Item>> BISMUTH_EQUIPMENT = registerEquipmentItems("bismuth", BISMUTH_TOOL_MATERIAL, ModArmorMaterials.BISMUTH,
             new float[]{5.5f, -2.2f}, new float[]{0f, -2.8f},

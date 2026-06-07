@@ -2,7 +2,8 @@
   "carvers": [],
   "downfall": 0.0,
   "effects": {
-    "water_color": "#bdb133"
+    "grass_color": "#bdb1b3",
+    "water_color": "#bdb1b3"
   },
   "features": [
     [],
@@ -12,7 +13,9 @@
     [],
     [],
     [],
-    [],
+    [
+      "minecraft:end_spike"
+    ],
     [],
     [
       "minecraft:pale_garden_vegetation",

@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.datagen;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.item.ModItems;
+import com.mohigster.morefeatures.tag.ModBlockTags;
 import com.mohigster.morefeatures.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -192,28 +193,10 @@ public class ModRecipeProvider extends RecipeProvider {
 
         // Bloodwood recipes
         shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_PLANKS.get(), 4)
-                .requires(ModBlocks.BLOODWOOD_LOG.get())
+                .requires(ModItemTags.BLOODWOOD_LOGS)
                 .unlockedBy(getHasName(ModBlocks.BLOODWOOD_LOG.get()), has(ModBlocks.BLOODWOOD_LOG.get()))
                 .group("bloodwood_planks")
-                .save(output, "morefeatures:bloodwood_planks_from_log");
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_PLANKS.get(), 4)
-                .requires(ModBlocks.STRIPPED_BLOODWOOD_LOG.get())
-                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_LOG.get()), has(ModBlocks.BLOODWOOD_LOG.get()))
-                .group("bloodwood_planks")
-                .save(output, "morefeatures:bloodwood_planks_from_stripped_log");
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_PLANKS.get(), 4)
-                .requires(ModBlocks.BLOODWOOD.get())
-                .unlockedBy(getHasName(ModBlocks.BLOODWOOD.get()), has(ModBlocks.BLOODWOOD.get()))
-                .group("bloodwood_planks")
-                .save(output, "morefeatures:bloodwood_planks_from_wood");
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_PLANKS.get(), 4)
-                .requires(ModBlocks.STRIPPED_BLOODWOOD.get())
-                .unlockedBy(getHasName(ModBlocks.BLOODWOOD.get()), has(ModBlocks.BLOODWOOD))
-                .group("bloodwood_planks")
-                .save(output, "morefeatures:bloodwood_planks_from_stripped_wood");
+                .save(output);
 
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD.get(), 3)
                 .pattern("BB")
@@ -231,45 +214,46 @@ public class ModRecipeProvider extends RecipeProvider {
 
         // Tainted wood recipes
         shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_PLANKS.get(), 4)
-                .requires(ModBlocks.TAINTED_LOG.get())
+                .requires(ModItemTags.TAINTED_LOGS)
                 .unlockedBy(getHasName(ModBlocks.TAINTED_LOG.get()), has(ModBlocks.TAINTED_LOG.get()))
                 .group("tainted_planks")
-                .save(output, "morefeatures:tainted_planks_from_log");
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_PLANKS.get(), 4)
-                .requires(ModBlocks.STRIPPED_TAINTED_LOG.get())
-                .unlockedBy(getHasName(ModBlocks.TAINTED_LOG.get()), has(ModBlocks.TAINTED_LOG.get()))
-                .group("tainted_planks")
-                .save(output, "morefeatures:tainted_planks_from_stripped_log");
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_PLANKS.get(), 4)
-                .requires(ModBlocks.TAINTED_WOOD.get())
-                .unlockedBy(getHasName(ModBlocks.TAINTED_WOOD.get()), has(ModBlocks.TAINTED_WOOD.get()))
-                .group("tainted_planks")
-                .save(output, "morefeatures:tainted_planks_from_wood");
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_PLANKS.get(), 4)
-                .requires(ModBlocks.STRIPPED_TAINTED_WOOD.get())
-                .unlockedBy(getHasName(ModBlocks.TAINTED_WOOD.get()), has(ModBlocks.TAINTED_WOOD))
-                .group("tainted_planks")
-                .save(output, "morefeatures:tainted_planks_from_stripped_wood");
+                .save(output);
 
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_WOOD.get(), 3)
-                .pattern("BB")
-                .pattern("BB")
-                .define('B', ModBlocks.TAINTED_LOG.get())
+                .pattern("TT")
+                .pattern("TT")
+                .define('T', ModBlocks.TAINTED_LOG.get())
                 .unlockedBy(getHasName(ModBlocks.TAINTED_LOG.get()), has(ModBlocks.TAINTED_LOG))
                 .save(output);
 
         shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_TAINTED_WOOD.get(), 3)
-                .pattern("BB")
-                .pattern("BB")
-                .define('B', ModBlocks.STRIPPED_TAINTED_LOG.get())
+                .pattern("TT")
+                .pattern("TT")
+                .define('T', ModBlocks.STRIPPED_TAINTED_LOG.get())
                 .unlockedBy(getHasName(ModBlocks.STRIPPED_TAINTED_LOG.get()), has(ModBlocks.STRIPPED_TAINTED_LOG))
                 .save(output);
 
+        // Palm recipes
 
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALM_PLANKS.get(), 4)
+                .requires(ModItemTags.PALM_LOGS)
+                .unlockedBy(getHasName(ModBlocks.PALM_LOG.get()), has(ModBlocks.PALM_LOG.get()))
+                .group("palm_planks")
+                .save(output);
 
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALM_WOOD.get(), 3)
+                .pattern("PP")
+                .pattern("PP")
+                .define('P', ModBlocks.PALM_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.PALM_LOG.get()), has(ModBlocks.PALM_LOG))
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_PALM_WOOD.get(), 3)
+                .pattern("PP")
+                .pattern("PP")
+                .define('P', ModBlocks.STRIPPED_PALM_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.STRIPPED_PALM_LOG.get()), has(ModBlocks.STRIPPED_PALM_LOG))
+                .save(output);
 
         // Bismuth recipes
 
@@ -445,6 +429,11 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(ModBlocks.BLOODWOOD_PLANKS.get()), has(ModBlocks.BLOODWOOD_PLANKS))
                 .group("bloodwood").save(output);
         slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_SLAB.get(), ModBlocks.BLOODWOOD_PLANKS.get());
+
+        stairBuilder(ModBlocks.TAINTED_STAIRS.get(), Ingredient.of(ModBlocks.TAINTED_PLANKS))
+                .unlockedBy(getHasName(ModBlocks.TAINTED_PLANKS.get()), has(ModBlocks.TAINTED_PLANKS))
+                .group("bloodwood").save(output);
+        slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_SLAB.get(), ModBlocks.TAINTED_PLANKS.get());
 
         // Buttons and pressure plates
 

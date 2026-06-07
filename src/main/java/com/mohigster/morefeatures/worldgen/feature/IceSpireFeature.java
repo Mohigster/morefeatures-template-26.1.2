@@ -38,7 +38,7 @@ public class IceSpireFeature extends Feature<NoneFeatureConfiguration> {
         // Generate the actual spire
         generateSpire(level, blueIce, packedIce, coreState, random, baseRadius, height, origin);
 
-        // Place a single glowing block at the bottom center of the geyser
+        // Place a single glowing block at the bottom center of the spire
         this.setBlock(level, origin.above(1), Blocks.MAGMA_BLOCK.defaultBlockState());
 
         // Extend the foundation so the spire isn't left floating

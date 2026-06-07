@@ -98,6 +98,27 @@
 
   "block.morefeatures.palm_log": "Palm Log",
   "block.morefeatures.palm_wood": "Palm Wood",
+  "block.morefeatures.stripped_palm_log": "Stripped Palm Log",
+  "block.morefeatures.stripped_palm_wood": "Stripped Palm Wood",
+  "block.morefeatures.palm_planks": "Palm Planks",
+  "block.morefeatures.palm_slab": "Palm Slab",
+  "block.morefeatures.palm_stairs": "Palm Stairs",
+  "block.morefeatures.palm_button": "Palm Button",
+  "block.morefeatures.palm_pressure_plate": "Palm Pressure Plate",
+  "block.morefeatures.palm_fence": "Palm Fence",
+  "block.morefeatures.palm_fence_gate": "Palm Fence Gate",
+  "block.morefeatures.palm_leaves": "Palm Leaves",
+  "block.morefeatures.palm_sapling": "Palm Sapling",
+  "item.morefeatures.palm_sign": "Palm Sign",
+  "item.morefeatures.palm_hanging_sign": "Palm Hanging Sign",
+  "block.morefeatures.palm_trapdoor": "Palm Trapdoor",
+  "block.morefeatures.palm_door": "Palm Door",
+  "block.morefeatures.palm_shelf": "Palm Shelf",
+  "item.morefeatures.palm_boat": "Palm Boat",
+  "item.morefeatures.palm_chest_boat": "Palm Boat with Chest",
+
+  "entity.morefeatures.palm_boat": "Palm Boat",
+  "entity.morefeatures.palm_chest_boat": "Palm Boat with Chest",
 
   "block.morefeatures.rose": "Rose",
   "block.morefeatures.blue_rose": "Blue Rose",
@@ -130,6 +151,7 @@
 
   "advancements.morefeatures.root.title": "More Features Advancements",
   "advancements.morefeatures.root.description": "More Features Advancements... How exciting!",
+
   "advancement.morefeatures.get_hoe.description": "You crafted a Bismuth Hoe! ...Why?",
   "advancement.morefeatures.get_hoe.title": "Intense Tenacity",
 

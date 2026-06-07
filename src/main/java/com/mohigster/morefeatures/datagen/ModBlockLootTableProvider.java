@@ -54,18 +54,28 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.TAINTED_SAPLING.get());
         dropSelf(ModBlocks.PALM_LOG.get());
         dropSelf(ModBlocks.PALM_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_PALM_LOG.get());
+        dropSelf(ModBlocks.STRIPPED_PALM_WOOD.get());
         dropSelf(ModBlocks.PALM_SAPLING.get());
+        dropSelf(ModBlocks.PALM_PLANKS.get());
+        dropSelf(ModBlocks.PALM_FENCE_GATE.get());
+        dropSelf(ModBlocks.PALM_FENCE.get());
         dropSelf(ModBlocks.MAGIC_BLOCK.get());
         dropSelf(ModBlocks.AZURITE_STAIRS.get());
         dropSelf(ModBlocks.FLUORITE_STAIRS.get());
         dropSelf(ModBlocks.BLOODWOOD_STAIRS.get());
         dropSelf(ModBlocks.TAINTED_STAIRS.get());
+        dropSelf(ModBlocks.PALM_STAIRS.get());
+        dropSelf(ModBlocks.PALM_TRAPDOOR.get());
         dropSelf(ModBlocks.COMPRESSOR_BLOCK.get());
         dropSelf(ModBlocks.AZURITE_BUTTON.get());
         dropSelf(ModBlocks.AZURITE_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.PALM_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.PALM_BUTTON.get());
         dropSelf(ModBlocks.ROSE.get());
         dropSelf(ModBlocks.BLUE_ROSE.get());
         dropSelf(ModBlocks.EVIL_PORTAL.get());
+        dropSelf(ModBlocks.PALM_SHELF.get());
 
         // POTTED PLANTS
 
@@ -81,6 +91,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.FLUORITE_SLAB.get(), this::createSlabItemTable);
         add(ModBlocks.BLOODWOOD_SLAB.get(), this::createSlabItemTable);
         add(ModBlocks.TAINTED_SLAB.get(), this::createSlabItemTable);
+        add(ModBlocks.PALM_SLAB.get(), this::createSlabItemTable);
 
         // LEAVES
 
@@ -95,6 +106,36 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         // Palm
         add(ModBlocks.PALM_LEAVES.get(),
                 createLeavesDrops(ModBlocks.PALM_LEAVES.get(), ModBlocks.PALM_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        // SIGN
+
+        add(ModBlocks.BLOODWOOD_HANGING_SIGN.get(),
+                createSingleItemTable(ModItems.BLOODWOOD_HANGING_SIGN.asItem()));
+
+        add(ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModItems.BLOODWOOD_HANGING_SIGN.asItem()));
+
+        add(ModBlocks.TAINTED_HANGING_SIGN.get(),
+                createSingleItemTable(ModItems.TAINTED_HANGING_SIGN.asItem()));
+
+        add(ModBlocks.TAINTED_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModItems.TAINTED_HANGING_SIGN.asItem()));
+
+        add(ModBlocks.PALM_SIGN.get(),
+                createSingleItemTable(ModItems.PALM_SIGN.asItem()));
+
+        add(ModBlocks.PALM_WALL_SIGN.get(),
+                createSingleItemTable(ModItems.PALM_SIGN.asItem()));
+
+        add(ModBlocks.PALM_HANGING_SIGN.get(),
+                createSingleItemTable(ModItems.PALM_HANGING_SIGN.asItem()));
+
+        add(ModBlocks.PALM_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModItems.PALM_HANGING_SIGN.asItem()));
+
+        // DOOR
+
+        add(ModBlocks.PALM_DOOR.get(), this::createDoorTable);
 
         // ORES
 

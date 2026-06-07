@@ -9,6 +9,9 @@
     "morefeatures:bloodwood",
     "morefeatures:stripped_bloodwood",
     "morefeatures:palm_wood",
-    "morefeatures:palm_log"
+    "morefeatures:palm_log",
+    "morefeatures:stripped_palm_log",
+    "morefeatures:stripped_palm_wood",
+    "morefeatures:palm_planks"
   ]
 }

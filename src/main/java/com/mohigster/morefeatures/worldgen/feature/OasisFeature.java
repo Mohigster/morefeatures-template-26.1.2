@@ -50,9 +50,10 @@ public class OasisFeature extends Feature<OasisConfiguration> {
             MoreFeatures.LOGGER.debug("Oasis at {} had {} positions without suitable surface", center, noSurfaceCount);
         }
 
-        generateOasisPool(level, center, uniqueAngle);
-        wallInWater(level, center, WATER_RADIUS);
-        placePalms(context, level, random, center);
+        generateOasisPool(level, center, uniqueAngle); // Generate the actual pool
+        wallInWater(level, center, WATER_RADIUS);      // Prevent holes in the pool wall from causing water to flow out
+        placePalms(context, level, random, center);    // Place on average 2-4 palm trees around the pool
+                                                       // NOTE: can generate with only one or none in rough areas, and can theoretically generate 5 or more
 
         return true;
     }
@@ -103,7 +104,7 @@ public class OasisFeature extends Feature<OasisConfiguration> {
 
                 int surfaceY = surfacePos.getY();
 
-                // 1. WATER POOL ZONE
+                // Water pool
                 if (distance <= effectiveWaterRadius) {
                     double relativeDistance = distance / effectiveWaterRadius;
                     int depth = (relativeDistance < 0.35) ? 3 : (relativeDistance < 0.75) ? 2 : 1;
@@ -143,7 +144,7 @@ public class OasisFeature extends Feature<OasisConfiguration> {
                         level.setBlock(floorPos, sandstone, 3); // If the block beneath the target block IS air, place sandstone instead
                     }
                 }
-                // 2. SAND RING ZONE
+                // Sand ring
                 else if (distance <= effectiveSandRadius) {
 
                     BlockPos target = surfacePos.below();

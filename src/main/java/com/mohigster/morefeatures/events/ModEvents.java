@@ -76,25 +76,21 @@ public class ModEvents {
     public static void onPlayerTickIceCaves(PlayerTickEvent.Post event) {
         Player player = event.getEntity();
 
-        if (player.level().isClientSide()) return; // Server side only
+        if (player.level().isClientSide()) return;
 
-        // Check biome
         if (!player.level().getBiome(player.blockPosition()).is(ICE_CAVES)) {
             return;
         }
 
         if(!player.gameMode().isSurvival()) return;
 
-        // Check if player is in water
         if (!player.isInWater()) {
             return;
         }
 
-        // Apply freezing
         int currentFrozen = player.getTicksFrozen();
         int required = player.getTicksRequiredToFreeze();
 
-        // Freeze faster in your ice caves
         player.setTicksFrozen(Math.min(currentFrozen + 3, required + 20));
     }
 

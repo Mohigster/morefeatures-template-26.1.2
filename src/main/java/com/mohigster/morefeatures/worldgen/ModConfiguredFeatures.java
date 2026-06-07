@@ -1,25 +1,33 @@
 package com.mohigster.morefeatures.worldgen;
 
+import com.google.common.collect.ImmutableList;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.worldgen.feature.ModFeatures;
 import com.mohigster.morefeatures.worldgen.feature.config.OasisConfiguration;
 import com.mohigster.morefeatures.worldgen.tree.foliage_placer.PalmFoliagePlacer;
 import com.mohigster.morefeatures.worldgen.tree.trunk_placer.LeaningTrunkPlacer;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.util.random.WeightedList;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.util.valueproviders.UniformInt;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
+import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLogsDecorator;
+import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
@@ -51,6 +59,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> TAINTED_KEY = registerKey("tainted");
     public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_TAINTED_KEY = registerKey("small_tainted");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_TAINTED_KEY = registerKey("fallen_tainted");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PALM_TREE_KEY = registerKey("palm_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_PALM_KEY = registerKey("fallen_palm");
 
     // Frozen resource keys
 
@@ -68,7 +78,7 @@ public class ModConfiguredFeatures {
     // Oasis
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> OASIS_KEY = registerKey("oasis");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PALM_TREE_KEY = registerKey("palm_tree");
+
 
 
 
@@ -145,9 +155,12 @@ public class ModConfiguredFeatures {
                 .ignoreVines()
                 .build()
         );
-        register(context, FALLEN_BLOODWOOD_KEY, Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBlocks.BLOODWOOD_LOG.get()),
-                UniformInt.of(4, 9))
+        register(context, FALLEN_BLOODWOOD_KEY, Feature.FALLEN_TREE,
+                createFallenTree(
+                        ModBlocks.BLOODWOOD_LOG.get(),
+                        4,
+                        9,
+                        true)
                 .build()
         );
         register(context, TAINTED_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
@@ -168,10 +181,13 @@ public class ModConfiguredFeatures {
                 .ignoreVines()
                 .build()
         );
-        register(context, FALLEN_TAINTED_KEY, Feature.FALLEN_TREE, new FallenTreeConfiguration.FallenTreeConfigurationBuilder(
-                BlockStateProvider.simple(ModBlocks.TAINTED_LOG.get()),
-                UniformInt.of(4, 9))
-                .build()
+        register(context, FALLEN_TAINTED_KEY, Feature.FALLEN_TREE,
+                createFallenTree(
+                        ModBlocks.TAINTED_LOG.get(),
+                        4,
+                        9,
+                        true)
+                        .build()
         );
         register(context, PALM_TREE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.PALM_LOG.get()),
@@ -183,11 +199,44 @@ public class ModConfiguredFeatures {
                 .ignoreVines()
                 .build()
         );
+        register(context, FALLEN_PALM_KEY, Feature.FALLEN_TREE,
+                createFallenTree(
+                        ModBlocks.PALM_LOG.get(),
+                        4,
+                        9,
+                        false)
+                        .build()
+        );
 
         // Registering oasis
         register(context, OASIS_KEY, ModFeatures.OASIS.get(),
                 new OasisConfiguration(context.lookup(Registries.CONFIGURED_FEATURE)
                         .getOrThrow(ModConfiguredFeatures.PALM_TREE_KEY)));
+    }
+
+    private static FallenTreeConfiguration.FallenTreeConfigurationBuilder createFallenTree(Block logBlock, final int minLength, final int maxLength, boolean hasVines){
+        FallenTreeConfiguration.FallenTreeConfigurationBuilder builder = new FallenTreeConfiguration.FallenTreeConfigurationBuilder(BlockStateProvider.simple(logBlock), UniformInt.of(minLength, maxLength))
+                .logDecorators(
+                        ImmutableList.of(
+                                new AttachedToLogsDecorator(
+                                        0.1F,
+                                        new WeightedStateProvider(
+                                                WeightedList.<BlockState>builder().add(Blocks.RED_MUSHROOM.defaultBlockState(), 2).add(Blocks.BROWN_MUSHROOM.defaultBlockState(), 1)
+                                        ),
+                                        List.of(Direction.UP)
+                                )
+                        )
+                );
+
+        if (hasVines) {
+            builder.stumpDecorators(ImmutableList.of(TrunkVineDecorator.INSTANCE));
+        }
+
+        return builder;
+    }
+
+    private static FallenTreeConfiguration.FallenTreeConfigurationBuilder registerFallenTaintedTree(){
+        return createFallenTree(ModBlocks.TAINTED_LOG.get(), 4, 9 ,true);
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name){

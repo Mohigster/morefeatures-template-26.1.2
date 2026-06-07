@@ -42,6 +42,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> SMALL_TAINTED_PLACED_KEY = registerKey("small_tainted_placed");
     public static final ResourceKey<PlacedFeature> FALLEN_TAINTED_PLACED_KEY = registerKey("fallen_tainted_placed");
     public static final ResourceKey<PlacedFeature> PALM_PLACED_KEY = registerKey("palm_placed");
+    public static final ResourceKey<PlacedFeature> FALLEN_PALM_PLACED_KEY = registerKey("fallen_palm_placed");
 
     // Frozen cluster resource keys
 
@@ -95,7 +96,7 @@ public class ModPlacedFeatures {
                 ModOrePlacement.commonOrePlacement(3, HeightRangePlacement.uniform(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(160))));
 
         register(context, BISMUTH_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BISMUTH_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(1, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
+                ModOrePlacement.rareOrePlacement(3, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
 
         register(context, EVERFROST_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EVERFROST_ORE_KEY),
                 ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
@@ -158,6 +159,10 @@ public class ModPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.05f, 1),
                         ModBlocks.PALM_SAPLING.get()));
 
+        register(context, FALLEN_PALM_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FALLEN_PALM_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
+                        ModBlocks.PALM_SAPLING.get()));
+
         register(context, OASIS_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OASIS_KEY),
                 List.of(
                         RarityFilter.onAverageOnceEvery(200),   // very rare
@@ -183,12 +188,11 @@ public class ModPlacedFeatures {
                 EnvironmentScanPlacement.scanningFor(
                         Direction.UP,
                         BlockPredicate.solid(),              // Target the ice cave ceiling
-                        BlockPredicate.ONLY_IN_AIR_PREDICATE,// only allow for air
+                        BlockPredicate.ONLY_IN_AIR_PREDICATE,// Only allow for air
                         12
                 ),
 
                 BiomeFilter.biome(),
-
                 PlacementUtils.HEIGHTMAP
         );
     }

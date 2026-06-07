@@ -23,11 +23,9 @@ public class ModBiomes {
         // Register regions
         Regions.register(new OverworldRegion(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures_overworld"), 20));
 
-
-        // Seperate EndBiomeRegistry, as end biomes work differently to overworld ones.
+        // Separate EndBiomeRegistry, as end biomes work differently to overworld ones.
         EndBiomeRegistry.registerHighlandsBiome(END_ROT, 20);
-        EndBiomeRegistry.registerHighlandsBiome(END_GROWTH, 20);
-
+        EndBiomeRegistry.registerHighlandsBiome(END_GROWTH, 10);
     }
 
     public static void bootstrap(BootstrapContext<Biome> context) {

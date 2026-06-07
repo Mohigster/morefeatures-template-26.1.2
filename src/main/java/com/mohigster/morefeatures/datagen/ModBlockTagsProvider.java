@@ -77,8 +77,19 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.BLOODWOOD_LOG.get())
                 .add(ModBlocks.BLOODWOOD_STAIRS.get())
                 .add(ModBlocks.BLOODWOOD_SLAB.get())
+                .add(ModBlocks.PALM_PLANKS.get())
                 .add(ModBlocks.PALM_WOOD.get())
-                .add(ModBlocks.PALM_LOG.get());
+                .add(ModBlocks.PALM_LOG.get())
+                .add(ModBlocks.STRIPPED_PALM_LOG.get())
+                .add(ModBlocks.STRIPPED_PALM_WOOD.get())
+                .add(ModBlocks.PALM_STAIRS.get())
+                .add(ModBlocks.PALM_SLAB.get());
+
+        tag(BlockTags.FENCES)
+                .add(ModBlocks.PALM_FENCE.get());
+
+        tag(BlockTags.FENCE_GATES)
+                .add(ModBlocks.PALM_FENCE_GATE.get());
 
         tag(BlockTags.LOGS_THAT_BURN)
                 .add(ModBlocks.TAINTED_LOG.get())
@@ -90,7 +101,10 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.BLOODWOOD.get())
                 .add(ModBlocks.STRIPPED_BLOODWOOD.get())
                 .add(ModBlocks.PALM_WOOD.get())
-                .add(ModBlocks.PALM_LOG.get());
+                .add(ModBlocks.PALM_LOG.get())
+                .add(ModBlocks.STRIPPED_PALM_LOG.get())
+                .add(ModBlocks.STRIPPED_PALM_WOOD.get())
+                .add(ModBlocks.PALM_PLANKS.get());
 
         tag(ModBlockTags.BLOODWOOD_LOGS)
                 .add(ModBlocks.STRIPPED_BLOODWOOD.get())
