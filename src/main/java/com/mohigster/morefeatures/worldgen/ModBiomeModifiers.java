@@ -121,7 +121,7 @@ public class ModBiomeModifiers {
                 GenerationStep.Decoration.UNDERGROUND_ORES
         ));
         context.register(ADD_PALM_TREE, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(Biomes.DESERT)),
+                HolderSet.direct(biomes.getOrThrow(Biomes.DESERT), biomes.getOrThrow(Biomes.BEACH)),
                 HolderSet.direct(placedFeatures.getOrThrow(ModPlacedFeatures.PALM_PLACED_KEY)),
                 GenerationStep.Decoration.VEGETAL_DECORATION
         ));

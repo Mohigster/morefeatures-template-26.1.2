@@ -104,6 +104,13 @@ public class ModCreativeModeTabs {
 
                 // Compressor block
                 output.accept(ModBlocks.COMPRESSOR_BLOCK);
+
+                // Decrepit blocks
+                output.accept(ModBlocks.DECREPIT_NULLIUM);
+                output.accept(ModBlocks.DECREPIT_ROOTS);
+
+                // Pallid blocks
+                output.accept(ModBlocks.PALLID_NULLIUM);
             })
             .build());
 
@@ -174,6 +181,7 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.TAINTED_SLAB);
 
                 // Palm wood
+
                 output.accept(ModBlocks.PALM_LOG);
                 output.accept(ModBlocks.PALM_WOOD);
                 output.accept(ModBlocks.STRIPPED_PALM_LOG);
@@ -188,10 +196,42 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.PALM_PRESSURE_PLATE);
                 output.accept(ModBlocks.PALM_BUTTON);
                 output.accept(ModBlocks.PALM_LEAVES);
+                output.accept(ModBlocks.PALM_SAPLING);
+                output.accept(ModBlocks.PALM_SHELF);
                 output.accept(ModItems.PALM_SIGN);
                 output.accept(ModItems.PALM_HANGING_SIGN);
                 output.accept(ModItems.PALM_BOAT);
                 output.accept(ModItems.PALM_CHEST_BOAT);
+
+                // Decrepit wood
+
+                output.accept(ModBlocks.DECREPIT_LOG);
+                output.accept(ModBlocks.DECREPIT_WOOD);
+                output.accept(ModBlocks.STRIPPED_DECREPIT_LOG);
+                output.accept(ModBlocks.STRIPPED_DECREPIT_WOOD);
+                output.accept(ModBlocks.DECREPIT_PLANKS);
+                output.accept(ModBlocks.DECREPIT_STAIRS);
+                output.accept(ModBlocks.DECREPIT_SLAB);
+                output.accept(ModBlocks.DECREPIT_FENCE);
+                output.accept(ModBlocks.DECREPIT_FENCE_GATE);
+                output.accept(ModBlocks.DECREPIT_PRESSURE_PLATE);
+                output.accept(ModBlocks.DECREPIT_BUTTON);
+                output.accept(ModBlocks.DECREPIT_LEAVES);
+                output.accept(ModBlocks.DECREPIT_SAPLING);
+
+                // Pallid wood
+
+                output.accept(ModBlocks.STRIPPED_PALLID_LOG);
+                output.accept(ModBlocks.STRIPPED_PALLID_WOOD);
+                output.accept(ModBlocks.PALLID_PLANKS);
+                output.accept(ModBlocks.PALLID_STAIRS);
+                output.accept(ModBlocks.PALLID_SLAB);
+                output.accept(ModBlocks.PALLID_FENCE);
+                output.accept(ModBlocks.PALLID_FENCE_GATE);
+                output.accept(ModBlocks.PALLID_PRESSURE_PLATE);
+                output.accept(ModBlocks.PALLID_BUTTON);
+                output.accept(ModBlocks.PALLID_LEAVES);
+                output.accept(ModBlocks.PALLID_SAPLING);
             })
             .build());
 

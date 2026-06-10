@@ -36,4 +36,13 @@ public class ModTreeGrowers {
             MoreFeatures.MODID + "palm",
             Optional.empty(), Optional.of(ModConfiguredFeatures.PALM_TREE_KEY), Optional.empty()
     );
+
+    public static final TreeGrower DECREPIT = new TreeGrower(
+            MoreFeatures.MODID + "decrepit",
+            Optional.of(ModConfiguredFeatures.DECREPIT_KEY), Optional.empty(), Optional.empty()
+    );
+    public static final TreeGrower PALLID = new TreeGrower(
+            MoreFeatures.MODID + "decrepit",
+            Optional.of(ModConfiguredFeatures.PALLID_KEY), Optional.empty(), Optional.empty()
+    );
 }

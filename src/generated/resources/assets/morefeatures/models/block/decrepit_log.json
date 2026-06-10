@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "morefeatures:block/decrepit_log_top",
+    "side": "morefeatures:block/decrepit_log"
+  }
+}

@@ -1,6 +1,9 @@
 {
   "values": [
     "morefeatures:tainted_slab",
-    "morefeatures:bloodwood_slab"
+    "morefeatures:bloodwood_slab",
+    "morefeatures:palm_slab",
+    "morefeatures:decrepit_slab",
+    "morefeatures:pallid_slab"
   ]
 }

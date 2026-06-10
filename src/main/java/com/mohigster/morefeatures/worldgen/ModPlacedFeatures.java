@@ -11,7 +11,6 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.UniformInt;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -43,8 +42,17 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> FALLEN_TAINTED_PLACED_KEY = registerKey("fallen_tainted_placed");
     public static final ResourceKey<PlacedFeature> PALM_PLACED_KEY = registerKey("palm_placed");
     public static final ResourceKey<PlacedFeature> FALLEN_PALM_PLACED_KEY = registerKey("fallen_palm_placed");
+    public static final ResourceKey<PlacedFeature> DECREPIT_PLACED_KEY = registerKey("decrepit_placed");
+    public static final ResourceKey<PlacedFeature> PALLID_PLACED_KEY = registerKey("pallid_placed");
 
-    // Frozen cluster resource keys
+    // Vegetation keys
+
+    public static final ResourceKey<PlacedFeature> DECREPIT_FOREST_VEGETATION_PLACED_KEY = registerKey("decrepit_forest_vegetation_placed");
+    public static final ResourceKey<PlacedFeature> DECREPIT_FOREST_VEGETATION_RARE_PLACED_KEY = registerKey("decrepit_forest_vegetation_rare_placed");
+    public static final ResourceKey<PlacedFeature> PALLID_FOREST_VEGETATION_PLACED_KEY = registerKey("pallid_forest_vegetation_placed");
+    public static final ResourceKey<PlacedFeature> PALLID_FOREST_VEGETATION_RARE_PLACED_KEY = registerKey("pallid_forest_vegetation_rare_placed");
+
+    // Ice cave patch resource keys
 
     public static final ResourceKey<PlacedFeature> SMALL_ICE_PATCH_PLACED_KEY = registerKey("small_ice_patch_placed");
     public static final ResourceKey<PlacedFeature> ICE_PATCH_PLACED_KEY = registerKey("ice_patch_placed");
@@ -120,13 +128,13 @@ public class ModPlacedFeatures {
                 ModOrePlacement.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, SMALL_SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_SNOW_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SNOW_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, LARGE_SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LARGE_SNOW_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(4, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
 
         // PLACE TREES
@@ -163,6 +171,14 @@ public class ModPlacedFeatures {
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(0, 0.01f, 1),
                         ModBlocks.PALM_SAPLING.get()));
 
+        register(context, DECREPIT_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DECREPIT_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.02f, 1),
+                        ModBlocks.DECREPIT_SAPLING.get()));
+
+        register(context, PALLID_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PALLID_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.02f, 1),
+                        ModBlocks.PALLID_SAPLING.get()));
+
         register(context, OASIS_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OASIS_KEY),
                 List.of(
                         RarityFilter.onAverageOnceEvery(200),   // very rare
@@ -171,6 +187,40 @@ public class ModPlacedFeatures {
                         BiomeFilter.biome()
                 )
         );
+
+        // PLACE VEGETATION
+
+        register(context, DECREPIT_FOREST_VEGETATION_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DECREPIT_ROOTS_KEY),
+                List.of(
+                        CountPlacement.of(56),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, DECREPIT_FOREST_VEGETATION_RARE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PALLID_ROOTS_KEY), // Rare chance for pallid roots to generate in decrepit forest
+                List.of(
+                        RarityFilter.onAverageOnceEvery(3),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.FULL_RANGE,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, PALLID_FOREST_VEGETATION_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PALLID_ROOTS_KEY),
+                List.of(
+                        CountPlacement.of(56),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.HEIGHTMAP_WORLD_SURFACE,
+                        BiomeFilter.biome()
+                ));
+
+        register(context, PALLID_FOREST_VEGETATION_RARE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DECREPIT_ROOTS_KEY), // Rare chance for decrepit roots in pallid forest
+                List.of(
+                        RarityFilter.onAverageOnceEvery(3),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.FULL_RANGE,
+                        BiomeFilter.biome()
+                ));
 
         // PLACE SPIRE
 

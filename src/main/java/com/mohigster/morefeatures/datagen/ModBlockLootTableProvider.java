@@ -11,6 +11,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
@@ -60,6 +61,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.PALM_PLANKS.get());
         dropSelf(ModBlocks.PALM_FENCE_GATE.get());
         dropSelf(ModBlocks.PALM_FENCE.get());
+        dropSelf(ModBlocks.DECREPIT_SAPLING.get());
+        dropSelf(ModBlocks.PALLID_SAPLING.get());
         dropSelf(ModBlocks.MAGIC_BLOCK.get());
         dropSelf(ModBlocks.AZURITE_STAIRS.get());
         dropSelf(ModBlocks.FLUORITE_STAIRS.get());
@@ -76,6 +79,28 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.BLUE_ROSE.get());
         dropSelf(ModBlocks.EVIL_PORTAL.get());
         dropSelf(ModBlocks.PALM_SHELF.get());
+        dropSelf(ModBlocks.DECREPIT_PLANKS.get());
+        dropSelf(ModBlocks.DECREPIT_WOOD.get());
+        dropSelf(ModBlocks.DECREPIT_LOG.get());
+        dropSelf(ModBlocks.DECREPIT_BUTTON.get());
+        dropSelf(ModBlocks.DECREPIT_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.DECREPIT_STAIRS.get());
+        dropSelf(ModBlocks.DECREPIT_FENCE.get());
+        dropSelf(ModBlocks.DECREPIT_FENCE_GATE.get());
+        dropSelf(ModBlocks.STRIPPED_DECREPIT_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_DECREPIT_LOG.get());
+        dropSelf(ModBlocks.PALLID_PLANKS.get());
+        dropSelf(ModBlocks.PALLID_WOOD.get());
+        dropSelf(ModBlocks.PALLID_LOG.get());
+        dropSelf(ModBlocks.PALLID_BUTTON.get());
+        dropSelf(ModBlocks.PALLID_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.PALLID_STAIRS.get());
+        dropSelf(ModBlocks.PALLID_FENCE.get());
+        dropSelf(ModBlocks.PALLID_FENCE_GATE.get());
+        dropSelf(ModBlocks.STRIPPED_PALLID_WOOD.get());
+        dropSelf(ModBlocks.STRIPPED_PALLID_LOG.get());
+        dropSelf(ModBlocks.DECREPIT_ROOTS.get());
+        dropSelf(ModBlocks.PALLID_ROOTS.get());
 
         // POTTED PLANTS
 
@@ -84,6 +109,14 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.POTTED_TAINTED_SAPLING.get(), createPotFlowerItemTable(ModBlocks.TAINTED_SAPLING.get()));
         add(ModBlocks.POTTED_BLOODWOOD_SAPLING.get(), createPotFlowerItemTable(ModBlocks.BLOODWOOD_SAPLING.get()));
         add(ModBlocks.POTTED_PALM_SAPLING.get(), createPotFlowerItemTable(ModBlocks.PALM_SAPLING.get()));
+        add(ModBlocks.POTTED_DECREPIT_SAPLING.get(), createPotFlowerItemTable(ModBlocks.DECREPIT_SAPLING.get()));
+        add(ModBlocks.POTTED_PALLID_SAPLING.get(), createPotFlowerItemTable(ModBlocks.PALLID_SAPLING.get()));
+        add(ModBlocks.POTTED_DECREPIT_ROOTS.get(), createPotFlowerItemTable(ModBlocks.DECREPIT_ROOTS.get()));
+        add(ModBlocks.POTTED_PALLID_ROOTS.get(), createPotFlowerItemTable(ModBlocks.PALLID_ROOTS.get()));
+
+        // SILK TOUCH DROPS
+        add(ModBlocks.PALLID_NULLIUM.get(), createSingleItemTableWithSilkTouch(ModBlocks.PALLID_NULLIUM.get(), Blocks.END_STONE));
+        add(ModBlocks.DECREPIT_NULLIUM.get(), createSingleItemTableWithSilkTouch(ModBlocks.DECREPIT_NULLIUM.get(), Blocks.END_STONE));
 
         // SLABS
 
@@ -92,6 +125,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.BLOODWOOD_SLAB.get(), this::createSlabItemTable);
         add(ModBlocks.TAINTED_SLAB.get(), this::createSlabItemTable);
         add(ModBlocks.PALM_SLAB.get(), this::createSlabItemTable);
+        add(ModBlocks.DECREPIT_SLAB.get(), this::createSlabItemTable);
+        add(ModBlocks.PALLID_SLAB.get(), this::createSlabItemTable);
 
         // LEAVES
 
@@ -106,6 +141,14 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         // Palm
         add(ModBlocks.PALM_LEAVES.get(),
                 createLeavesDrops(ModBlocks.PALM_LEAVES.get(), ModBlocks.PALM_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        // Decrepit
+        add(ModBlocks.DECREPIT_LEAVES.get(),
+                createLeavesDrops(ModBlocks.DECREPIT_LEAVES.get(), ModBlocks.DECREPIT_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
+
+        // Pallid
+        add(ModBlocks.PALLID_LEAVES.get(),
+                createLeavesDrops(ModBlocks.PALLID_LEAVES.get(), ModBlocks.PALLID_SAPLING.get(), NORMAL_LEAVES_SAPLING_CHANCES));
 
         // SIGN
 

@@ -5,6 +5,7 @@ import com.mojang.serialization.Codec;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
@@ -19,4 +20,8 @@ public class ModDataComponentTypes {
                     .persistent(Codec.INT) // Tells Minecraft how to save it to NBT / JSON
                     .networkSynchronized(ByteBufCodecs.VAR_INT) // Syncs it smoothly to the client
                     .build());
+
+    public static void register(IEventBus modEventBus) {
+        DATA_COMPONENT_TYPES.register(modEventBus);
+    }
 }

@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/cube_bottom_top",
+  "textures": {
+    "bottom": "minecraft:block/end_stone",
+    "side": "morefeatures:block/pallid_nullium_side",
+    "top": "morefeatures:block/pallid_nullium"
+  }
+}

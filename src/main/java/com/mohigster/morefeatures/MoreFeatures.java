@@ -14,6 +14,7 @@ import com.mohigster.morefeatures.sound.ModSounds;
 import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
 import com.mohigster.morefeatures.worldgen.biome.ModSurfaceRules;
 import com.mohigster.morefeatures.worldgen.feature.ModFeatures;
+import com.mohigster.morefeatures.worldgen.tree.decorator.ModTreeDecorators;
 import com.mohigster.morefeatures.worldgen.tree.foliage_placer.ModFoliagePlacerType;
 import com.mohigster.morefeatures.worldgen.tree.trunk_placer.ModTrunkPlacerType;
 import net.minecraft.client.renderer.Sheets;
@@ -73,7 +74,9 @@ public class MoreFeatures {
 
         ModRecipes.register(modEventBus);
 
-        ModDataComponentTypes.DATA_COMPONENT_TYPES.register(modEventBus);
+        ModTreeDecorators.register(modEventBus);
+
+        ModDataComponentTypes.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
         // Note that this is necessary if and only if we want *this* class (MoreFeatures) to respond directly to events.

@@ -210,7 +210,7 @@ public class OasisFeature extends Feature<OasisConfiguration> {
 
                         boolean replaceable =
                                 state.isAir() ||
-                                        (state.is(BlockTags.REPLACEABLE) && !state.is(ModBlockTags.IS_LIQUID));
+                                        (state.is(BlockTags.REPLACEABLE) && !state.is(ModBlockTags.COMPRESSOR_FLUIDS));
 
                         if (replaceable) {
                             level.setBlock(n, Blocks.SAND.defaultBlockState(), 3);

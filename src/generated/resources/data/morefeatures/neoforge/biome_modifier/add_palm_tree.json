@@ -1,6 +1,9 @@
 {
   "type": "neoforge:add_features",
-  "biomes": "minecraft:desert",
+  "biomes": [
+    "minecraft:desert",
+    "minecraft:beach"
+  ],
   "features": "morefeatures:palm_placed",
   "step": "vegetal_decoration"
 }

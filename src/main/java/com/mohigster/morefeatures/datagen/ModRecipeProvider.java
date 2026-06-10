@@ -2,12 +2,16 @@ package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.family.ModBlockFamilies;
 import com.mohigster.morefeatures.item.ModItems;
 import com.mohigster.morefeatures.tag.ModBlockTags;
 import com.mohigster.morefeatures.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.world.flag.FeatureFlagSet;
+import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.AbstractCookingRecipe;
@@ -41,9 +45,17 @@ public class ModRecipeProvider extends RecipeProvider {
         }
     }
 
+    protected void generateForModBlockFamilies(FeatureFlagSet flagSet) {
+        ModBlockFamilies.getAllFamilies()
+                .forEach(family -> this.generateRecipes(family, flagSet));
+    }
+
     @Override
     protected void buildRecipes(){
 
+        generateForModBlockFamilies(
+                FeatureFlagSet.of(FeatureFlags.VANILLA)
+        );
 
         // Aluminium recipes
 
@@ -253,6 +265,50 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("PP")
                 .define('P', ModBlocks.STRIPPED_PALM_LOG.get())
                 .unlockedBy(getHasName(ModBlocks.STRIPPED_PALM_LOG.get()), has(ModBlocks.STRIPPED_PALM_LOG))
+                .save(output);
+
+        // Decrepit recipes
+
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DECREPIT_PLANKS.get(), 4)
+                .requires(ModItemTags.DECREPIT_LOGS)
+                .unlockedBy(getHasName(ModBlocks.DECREPIT_LOG.get()), has(ModBlocks.DECREPIT_LOG.get()))
+                .group("palm_planks")
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.DECREPIT_WOOD.get(), 3)
+                .pattern("PP")
+                .pattern("PP")
+                .define('P', ModBlocks.DECREPIT_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.DECREPIT_LOG.get()), has(ModBlocks.DECREPIT_LOG))
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_DECREPIT_WOOD.get(), 3)
+                .pattern("PP")
+                .pattern("PP")
+                .define('P', ModBlocks.STRIPPED_DECREPIT_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.STRIPPED_DECREPIT_LOG.get()), has(ModBlocks.STRIPPED_DECREPIT_LOG))
+                .save(output);
+
+        // Pallid recipes
+
+        shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALLID_PLANKS.get(), 4)
+                .requires(ModItemTags.PALLID_LOGS)
+                .unlockedBy(getHasName(ModBlocks.PALLID_LOG.get()), has(ModBlocks.PALLID_LOG.get()))
+                .group("palm_planks")
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALLID_WOOD.get(), 3)
+                .pattern("PP")
+                .pattern("PP")
+                .define('P', ModBlocks.PALLID_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.PALLID_LOG.get()), has(ModBlocks.PALLID_LOG))
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, ModBlocks.STRIPPED_PALLID_WOOD.get(), 3)
+                .pattern("PP")
+                .pattern("PP")
+                .define('P', ModBlocks.STRIPPED_PALLID_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.STRIPPED_PALLID_LOG.get()), has(ModBlocks.STRIPPED_PALLID_LOG))
                 .save(output);
 
         // Bismuth recipes

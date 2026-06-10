@@ -16,6 +16,7 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
         super(output, lookupProvider, MoreFeatures.MODID);
     }
 
+    @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(BiomeTags.IS_OVERWORLD)
                 .addOptional(ModBiomes.TAINTED_FOREST)
@@ -24,6 +25,6 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
 
         tag(BiomeTags.IS_END)
                 .addOptional(ModBiomes.END_ROT)
-                .addOptional(ModBiomes.END_GROWTH);
+                .addOptional(ModBiomes.DECREPIT_FOREST);
     }
 }

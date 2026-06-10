@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "morefeatures:block/decrepit_slab"
+    },
+    "type=double": {
+      "model": "morefeatures:block/decrepit_planks"
+    },
+    "type=top": {
+      "model": "morefeatures:block/decrepit_slab_top"
+    }
+  }
+}

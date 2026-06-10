@@ -1,5 +1,7 @@
 {
   "values": [
-    "morefeatures:azurite_pressure_plate"
+    "morefeatures:azurite_pressure_plate",
+    "morefeatures:palm_pressure_plate",
+    "morefeatures:decrepit_pressure_plate"
   ]
 }

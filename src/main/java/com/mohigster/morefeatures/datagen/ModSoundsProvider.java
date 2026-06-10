@@ -13,8 +13,13 @@ public class ModSoundsProvider extends SoundDefinitionsProvider {
 
     @Override
     public void registerSounds() {
+
+        // Music disc
+
         add(ModSounds.AQUAMARINE.get(), definition().subtitle("sounds.morefeatures.aquamarine")
                 .with(sound(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "aquamarine")).stream()));
+
+        // Magic block sounds
 
         add(ModSounds.MAGIC_BLOCK_BREAK.get(), definition().subtitle("sounds.morefeatures.magic_block_break")
                 .with(sound(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "magic_block_break"))));

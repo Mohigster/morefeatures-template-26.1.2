@@ -6,12 +6,11 @@ import com.mohigster.morefeatures.block.custom.woodtype.ModWoodType;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
 import com.mohigster.morefeatures.item.ModItems;
 import com.mohigster.morefeatures.sound.ModSounds;
+import com.mohigster.morefeatures.tag.ModBlockTags;
 import com.mohigster.morefeatures.worldgen.tree.ModTreeGrowers;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.core.Registry;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
@@ -33,18 +32,19 @@ import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
-import net.minecraft.world.level.storage.loot.LootTable;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
 public class ModBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
+            DeferredRegister.createBlocks(MoreFeatures.MODID);
+
+    public static final DeferredRegister.Blocks FLUID_BLOCKS =
             DeferredRegister.createBlocks(MoreFeatures.MODID);
 
     // Same convention as ModItems. Section block registration into types of blocks e.g. // Aluminium Blocks
@@ -733,7 +733,8 @@ public class ModBlocks {
             properties -> new PlantedOffGrassSaplingBlock(ModTreeGrowers.PALM, properties
                     .sound(SoundType.GRASS)
                     .instabreak()
-                    .noOcclusion(),
+                    .noOcclusion()
+                    .noCollision(),
                     () -> Blocks.SAND));
 
     public static final DeferredBlock<Block> POTTED_PALM_SAPLING = BLOCKS.registerBlock("potted_palm_sapling",
@@ -804,8 +805,6 @@ public class ModBlocks {
                             .sound(SoundType.WOOD)
             ));
 
-
-    // Standing sign
     public static final DeferredBlock<Block> PALM_SIGN =
             BLOCKS.register("palm_sign", () ->
                     new StandingSignBlock(
@@ -823,7 +822,6 @@ public class ModBlocks {
                     }
             );
 
-    // Wall sign
     public static final DeferredBlock<Block> PALM_WALL_SIGN =
             BLOCKS.register("palm_wall_sign", () ->
                     new WallSignBlock(
@@ -832,7 +830,7 @@ public class ModBlocks {
                                     .noCollision()
                                     .strength(1.0f)
                                     .sound(SoundType.WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "palm_wall_sign")))
+                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "palm_wall_sign"))) // Since we're using BlockBehviour.Properties.of() (Which is necessary for most block entities) the ID is not set automatically. Game will crash if the ID is not set here. Block that use properties -> new /*BlockType*/(properties) do not use .setId and function perfectly with no crash, as that method sets the ID automatically.
                     ){
                         @Override
                         public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
@@ -889,11 +887,9 @@ public class ModBlocks {
                     .noOcclusion()
             ));
 
-
     public static final DeferredBlock<Block> PALM_PRESSURE_PLATE = registerBlock("palm_pressure_plate",
             properties -> new PressurePlateBlock(BlockSetType.ACACIA, properties
                     .strength(2f)
-                    .requiresCorrectToolForDrops()
                     .forceSolidOn()
                     .noCollision()
                     .pushReaction(PushReaction.DESTROY)
@@ -902,7 +898,6 @@ public class ModBlocks {
     public static final DeferredBlock<Block> PALM_BUTTON = registerBlock("palm_button",
             properties -> new ButtonBlock(BlockSetType.ACACIA, 20, properties
                     .strength(2f)
-                    .requiresCorrectToolForDrops()
                     .noCollision()
                     .pushReaction(PushReaction.DESTROY)
             ));
@@ -914,6 +909,373 @@ public class ModBlocks {
                     return ModBlockEntities.PALM_SHELF_BE.get().create(pos, state);
                 }
             });
+
+    public static final DeferredBlock<Block> DECREPIT_LOG = registerBlock("decrepit_log",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.STEM)
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_WOOD = registerBlock("decrepit_wood",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.STEM)
+            ));
+
+    public static final DeferredBlock<Block> STRIPPED_DECREPIT_LOG = registerBlock("stripped_decrepit_log",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.STEM)
+            ));
+
+    public static final DeferredBlock<Block> STRIPPED_DECREPIT_WOOD = registerBlock("stripped_decrepit_wood",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.STEM)
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_PLANKS = registerBlock("decrepit_planks",
+            properties -> new Block(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.NETHER_WOOD)
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_LEAVES = registerBlock("decrepit_leaves",
+            properties -> new TintedParticleLeavesBlock(4, properties
+                    .strength(0.2f, 0.2f)
+                    .sound(SoundType.GRASS)
+                    .noOcclusion()
+                    .ignitedByLava()
+            ) {
+                @Override
+                public MapCodec<? extends TintedParticleLeavesBlock> codec() {
+                    return null;
+                }
+
+                @Override
+                protected void spawnFallingLeavesParticle(Level level, BlockPos blockPos, RandomSource randomSource) {
+
+                }
+
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return 30;
+                }
+            }
+    );
+
+    public static final DeferredBlock<Block> DECREPIT_NULLIUM = registerBlock("decrepit_nullium",
+            properties -> new NulliumBlock(properties
+                    .sound(SoundType.NYLIUM)
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .randomTicks()
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_SAPLING = registerBlock("decrepit_sapling",
+            properties -> new PlantedOffGrassSaplingBlock(ModTreeGrowers.DECREPIT, properties
+                    .sound(SoundType.GRASS)
+                    .instabreak()
+                    .noOcclusion()
+                    .noCollision(),
+                    () -> DECREPIT_NULLIUM.get()));
+
+    public static final DeferredBlock<Block> POTTED_DECREPIT_SAPLING = BLOCKS.registerBlock("potted_decrepit_sapling",
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, DECREPIT_SAPLING, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_STAIRS = registerBlock("decrepit_stairs",
+            properties -> new StairBlock(ModBlocks.DECREPIT_PLANKS.get().defaultBlockState(), properties
+                    .strength(2f, 2f)
+                    .ignitedByLava()
+                    .sound(SoundType.NETHER_WOOD))
+            {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            }
+    );
+
+    public static final DeferredBlock<Block> DECREPIT_SLAB = registerBlock("decrepit_slab",
+            properties -> new SlabBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.NETHER_WOOD)
+                    .ignitedByLava()
+            )
+            {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            }
+    );
+
+    public static final DeferredBlock<Block> DECREPIT_FENCE = registerBlock("decrepit_fence",
+            properties -> new FenceBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.NETHER_WOOD)
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_FENCE_GATE = registerBlock("decrepit_fence_gate",
+            properties -> new FenceGateBlock(WoodType.ACACIA,
+                    properties
+                            .strength(2f, 2f)
+                            .sound(SoundType.NETHER_WOOD)
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_PRESSURE_PLATE = registerBlock("decrepit_pressure_plate",
+            properties -> new PressurePlateBlock(BlockSetType.WARPED, properties
+                    .strength(2f)
+                    .forceSolidOn()
+                    .noCollision()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_BUTTON = registerBlock("decrepit_button",
+            properties -> new ButtonBlock(BlockSetType.WARPED, 20, properties
+                    .strength(2f)
+                    .noCollision()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_ROOTS = registerBlock("decrepit_roots",
+            properties -> new NetherRootsBlock(ModBlockTags.NULLIUM_BLOCKS, properties
+                    .sound(SoundType.ROOTS)
+                    .noOcclusion()
+                    .noCollision()
+                    .instabreak()
+                    .replaceable()
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+            ));
+
+    public static final DeferredBlock<Block> POTTED_DECREPIT_ROOTS = registerBlock("potted_decrepit_roots",
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, DECREPIT_ROOTS, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> PALLID_LOG = registerBlock("pallid_log",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.STEM)
+            ));
+
+    public static final DeferredBlock<Block> PALLID_WOOD = registerBlock("pallid_wood",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.STEM)
+            ));
+
+    public static final DeferredBlock<Block> STRIPPED_PALLID_LOG = registerBlock("stripped_pallid_log",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.STEM)
+            ));
+
+    public static final DeferredBlock<Block> STRIPPED_PALLID_WOOD = registerBlock("stripped_pallid_wood",
+            properties -> new ModFlammableRotatedPillarBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.STEM)
+            ));
+
+    public static final DeferredBlock<Block> PALLID_PLANKS = registerBlock("pallid_planks",
+            properties -> new Block(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.NETHER_WOOD)
+            ));
+
+    public static final DeferredBlock<Block> PALLID_LEAVES = registerBlock("pallid_leaves",
+            properties -> new TintedParticleLeavesBlock(4, properties
+                    .strength(0.2f, 0.2f)
+                    .sound(SoundType.GRASS)
+                    .noOcclusion()
+                    .ignitedByLava()
+            ) {
+                @Override
+                public MapCodec<? extends TintedParticleLeavesBlock> codec() {
+                    return null;
+                }
+
+                @Override
+                protected void spawnFallingLeavesParticle(Level level, BlockPos blockPos, RandomSource randomSource) {
+
+                }
+
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return 60;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
+                    return 30;
+                }
+            }
+    );
+
+    public static final DeferredBlock<Block> PALLID_NULLIUM = registerBlock("pallid_nullium",
+            properties -> new NulliumBlock(properties
+                    .sound(SoundType.NYLIUM)
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .randomTicks()
+            )
+    );
+
+    public static final DeferredBlock<Block> PALLID_SAPLING = registerBlock("pallid_sapling",
+            properties -> new PlantedOffGrassSaplingBlock(ModTreeGrowers.PALLID, properties
+                    .sound(SoundType.GRASS)
+                    .instabreak()
+                    .noOcclusion()
+                    .noCollision(),
+                    () -> PALLID_NULLIUM.get()
+            )
+    );
+
+    public static final DeferredBlock<Block> POTTED_PALLID_SAPLING = BLOCKS.registerBlock("potted_pallid_sapling",
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, PALLID_SAPLING, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> PALLID_STAIRS = registerBlock("pallid_stairs",
+            properties -> new StairBlock(ModBlocks.DECREPIT_PLANKS.get().defaultBlockState(), properties
+                    .strength(2f, 2f)
+                    .ignitedByLava()
+                    .sound(SoundType.NETHER_WOOD))
+            {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            }
+    );
+
+    public static final DeferredBlock<Block> PALLID_SLAB = registerBlock("pallid_slab",
+            properties -> new SlabBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.NETHER_WOOD)
+                    .ignitedByLava()
+            )
+            {
+                @Override
+                public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return true;
+                }
+
+                @Override
+                public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 20;
+                }
+
+                @Override
+                public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
+                    return 5;
+                }
+            }
+    );
+
+    public static final DeferredBlock<Block> PALLID_FENCE = registerBlock("pallid_fence",
+            properties -> new FenceBlock(properties
+                    .strength(2f, 2f)
+                    .sound(SoundType.NETHER_WOOD)
+            ));
+
+    public static final DeferredBlock<Block> PALLID_FENCE_GATE = registerBlock("pallid_fence_gate",
+            properties -> new FenceGateBlock(WoodType.WARPED,
+                    properties
+                            .strength(2f, 2f)
+                            .sound(SoundType.NETHER_WOOD)
+            ));
+
+    public static final DeferredBlock<Block> PALLID_PRESSURE_PLATE = registerBlock("pallid_pressure_plate",
+            properties -> new PressurePlateBlock(BlockSetType.WARPED, properties
+                    .strength(2f)
+                    .forceSolidOn()
+                    .noCollision()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> PALLID_BUTTON = registerBlock("pallid_button",
+            properties -> new ButtonBlock(BlockSetType.WARPED, 20, properties
+                    .strength(2f)
+                    .noCollision()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> PALLID_ROOTS = registerBlock("pallid_roots",
+            properties -> new NetherRootsBlock(ModBlockTags.NULLIUM_BLOCKS, properties
+                    .sound(SoundType.ROOTS)
+                    .noOcclusion()
+                    .noCollision()
+                    .instabreak()
+                    .replaceable()
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+            ));
+
+    public static final DeferredBlock<Block> POTTED_PALLID_ROOTS = registerBlock("potted_pallid_roots",
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, PALLID_ROOTS, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+
 
     // Flowers
 
@@ -1000,6 +1362,7 @@ public class ModBlocks {
 
     private static <T extends Block> void registerBlockItem(String name, DeferredBlock<T> block, Component... components){
         ModItems.ITEMS.registerItem(name, (properties -> new BlockItem(block.get(), properties.useBlockDescriptionPrefix()){
+            @SuppressWarnings("deprecation")
             @Override
             public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
                 for(var component : components) {

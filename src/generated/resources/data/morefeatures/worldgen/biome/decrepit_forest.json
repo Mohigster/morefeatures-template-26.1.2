@@ -3,7 +3,7 @@
   "downfall": 0.0,
   "effects": {
     "grass_color": "#bdb1b3",
-    "water_color": "#bdb1b3"
+    "water_color": "#bdd1b4"
   },
   "features": [
     [],
@@ -18,9 +18,11 @@
     ],
     [],
     [
-      "minecraft:pale_garden_vegetation",
       "minecraft:pale_garden_flowers",
-      "minecraft:pale_moss_patch"
+      "minecraft:pale_moss_patch",
+      "morefeatures:decrepit_placed",
+      "morefeatures:decrepit_forest_vegetation_placed",
+      "morefeatures:decrepit_forest_vegetation_rare_placed"
     ]
   ],
   "has_precipitation": false,

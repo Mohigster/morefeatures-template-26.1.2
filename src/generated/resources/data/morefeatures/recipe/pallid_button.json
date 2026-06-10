@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_button",
+  "ingredients": [
+    "morefeatures:pallid_planks"
+  ],
+  "result": {
+    "id": "morefeatures:pallid_button"
+  }
+}

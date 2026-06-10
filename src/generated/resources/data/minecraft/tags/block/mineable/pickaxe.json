@@ -32,6 +32,8 @@
     "morefeatures:compressor_block",
     "morefeatures:everfrost_packed_ice_ore",
     "morefeatures:everfrost_blue_ice_ore",
-    "morefeatures:bismuth_ore"
+    "morefeatures:bismuth_ore",
+    "morefeatures:decrepit_nullium",
+    "morefeatures:pallid_nullium"
   ]
 }

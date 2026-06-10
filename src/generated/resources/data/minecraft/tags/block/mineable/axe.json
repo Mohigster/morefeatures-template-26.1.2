@@ -1,25 +1,5 @@
 {
   "values": [
-    "morefeatures:tainted_planks",
-    "morefeatures:stripped_tainted_wood",
-    "morefeatures:tainted_wood",
-    "morefeatures:stripped_tainted_log",
-    "morefeatures:tainted_log",
-    "morefeatures:tainted_stairs",
-    "morefeatures:tainted_slab",
-    "morefeatures:bloodwood_planks",
-    "morefeatures:stripped_bloodwood",
-    "morefeatures:bloodwood",
-    "morefeatures:stripped_bloodwood_log",
-    "morefeatures:bloodwood_log",
-    "morefeatures:bloodwood_stairs",
-    "morefeatures:bloodwood_slab",
-    "morefeatures:palm_planks",
-    "morefeatures:palm_wood",
-    "morefeatures:palm_log",
-    "morefeatures:stripped_palm_log",
-    "morefeatures:stripped_palm_wood",
-    "morefeatures:palm_stairs",
-    "morefeatures:palm_slab"
+    "#morefeatures:is_modded_wood"
   ]
 }

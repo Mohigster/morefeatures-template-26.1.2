@@ -1,6 +1,9 @@
 {
   "values": [
     "morefeatures:tainted_planks",
-    "morefeatures:bloodwood_planks"
+    "morefeatures:bloodwood_planks",
+    "morefeatures:palm_planks",
+    "morefeatures:decrepit_planks",
+    "morefeatures:pallid_planks"
   ]
 }

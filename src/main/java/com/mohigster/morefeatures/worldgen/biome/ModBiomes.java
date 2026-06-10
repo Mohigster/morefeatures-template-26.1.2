@@ -17,7 +17,8 @@ public class ModBiomes {
     public static final ResourceKey<Biome> ICE_CAVE = registerBiomeKey("ice_caves");
 
     public static final ResourceKey<Biome> END_ROT = registerBiomeKey("end_rot");
-    public static final ResourceKey<Biome> END_GROWTH = registerBiomeKey("end_growth");
+    public static final ResourceKey<Biome> DECREPIT_FOREST = registerBiomeKey("decrepit_forest");
+    public static final ResourceKey<Biome> PALLID_FOREST = registerBiomeKey("pallid_forest");
 
     public static void registerBiomes() {
         // Register regions
@@ -25,20 +26,28 @@ public class ModBiomes {
 
         // Separate EndBiomeRegistry, as end biomes work differently to overworld ones.
         EndBiomeRegistry.registerHighlandsBiome(END_ROT, 20);
-        EndBiomeRegistry.registerHighlandsBiome(END_GROWTH, 10);
+        EndBiomeRegistry.registerHighlandsBiome(DECREPIT_FOREST, 10);
+        EndBiomeRegistry.registerHighlandsBiome(PALLID_FOREST, 10);
     }
 
     public static void bootstrap(BootstrapContext<Biome> context) {
         var carver = context.lookup(Registries.CONFIGURED_CARVER);
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
 
+        // Surface Overworld Biomes
+
         register(context, BLOODWOOD_FOREST, ModOverworldBiomes.bloodwoodForest(placedFeatures, carver));
         register(context, TAINTED_FOREST, ModOverworldBiomes.taintedForest(placedFeatures, carver));
 
+        // Underground Overworld Biomes
+
         register(context, ICE_CAVE, ModOverworldBiomes.iceCave(placedFeatures, carver));
 
+        // End Biomes
+
         register(context, END_ROT, ModEndBiomes.endRot(placedFeatures, carver));
-        register(context, END_GROWTH, ModEndBiomes.endGrowth(placedFeatures, carver));
+        register(context, DECREPIT_FOREST, ModEndBiomes.decrepitForest(placedFeatures, carver));
+        register(context, PALLID_FOREST, ModEndBiomes.pallidForest(placedFeatures, carver));
     }
 
     private static void register(BootstrapContext<Biome> context, ResourceKey<Biome> key, Biome biome) {

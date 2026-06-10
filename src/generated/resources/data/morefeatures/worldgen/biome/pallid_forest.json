@@ -1,0 +1,38 @@
+{
+  "carvers": [],
+  "downfall": 0.0,
+  "effects": {
+    "grass_color": "#bda1b3",
+    "water_color": "#bda1b4"
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "minecraft:pale_garden_flowers",
+      "morefeatures:pallid_placed",
+      "morefeatures:pallid_forest_vegetation_placed",
+      "morefeatures:pallid_forest_vegetation_rare_placed"
+    ]
+  ],
+  "has_precipitation": false,
+  "spawn_costs": {},
+  "spawners": {
+    "ambient": [],
+    "axolotls": [],
+    "creature": [],
+    "misc": [],
+    "monster": [],
+    "underground_water_creature": [],
+    "water_ambient": [],
+    "water_creature": []
+  },
+  "temperature": 4.0
+}

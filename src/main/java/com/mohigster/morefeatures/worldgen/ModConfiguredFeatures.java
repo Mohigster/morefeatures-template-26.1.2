@@ -5,6 +5,7 @@ import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.worldgen.feature.ModFeatures;
 import com.mohigster.morefeatures.worldgen.feature.config.OasisConfiguration;
+import com.mohigster.morefeatures.worldgen.tree.decorator.TrunkLightDecorator;
 import com.mohigster.morefeatures.worldgen.tree.foliage_placer.PalmFoliagePlacer;
 import com.mohigster.morefeatures.worldgen.tree.trunk_placer.LeaningTrunkPlacer;
 import net.minecraft.core.Direction;
@@ -22,12 +23,15 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
+import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.BlobFoliagePlacer;
+import net.minecraft.world.level.levelgen.feature.foliageplacers.DarkOakFoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.stateproviders.WeightedStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.AttachedToLogsDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TrunkVineDecorator;
+import net.minecraft.world.level.levelgen.feature.trunkplacers.DarkOakTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.ForkingTrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.StraightTrunkPlacer;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
@@ -35,6 +39,7 @@ import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
 import java.util.List;
+import java.util.OptionalInt;
 
 public class ModConfiguredFeatures {
 
@@ -61,6 +66,14 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_TAINTED_KEY = registerKey("fallen_tainted");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PALM_TREE_KEY = registerKey("palm_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_PALM_KEY = registerKey("fallen_palm");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DECREPIT_KEY = registerKey("decrepit");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PALLID_KEY = registerKey("pallid");
+
+    // Vegetation keys
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DECREPIT_ROOTS_KEY = registerKey("decrepit_forest_vegetation");
+
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PALLID_ROOTS_KEY = registerKey("pallid_forest_vegetation");
 
     // Frozen resource keys
 
@@ -206,6 +219,45 @@ public class ModConfiguredFeatures {
                         9,
                         false)
                         .build()
+        );
+        register(context, DECREPIT_KEY, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                    BlockStateProvider.simple(ModBlocks.DECREPIT_LOG.get()),
+                    new DarkOakTrunkPlacer(6, 2, 1),
+                    BlockStateProvider.simple(ModBlocks.DECREPIT_LEAVES.get()),
+                    new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
+                    new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))
+                        .belowTrunkProvider(BlockStateProvider.simple(ModBlocks.DECREPIT_NULLIUM.get()))
+                        .ignoreVines()
+                        .decorators(List.of(
+                                new TrunkLightDecorator(0.03f,
+                                        BlockStateProvider.simple(Blocks.PEARLESCENT_FROGLIGHT))
+                        ))
+                        .build()
+        );
+        register(context, PALLID_KEY, Feature.TREE,
+                new TreeConfiguration.TreeConfigurationBuilder(
+                        BlockStateProvider.simple(ModBlocks.PALLID_LOG.get()),
+                        new DarkOakTrunkPlacer(6, 2, 1),
+                        BlockStateProvider.simple(ModBlocks.PALLID_LEAVES.get()),
+                        new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))
+                        .belowTrunkProvider(BlockStateProvider.simple(ModBlocks.PALLID_NULLIUM.get()))
+                        .ignoreVines()
+                        .decorators(List.of(
+                                new TrunkLightDecorator(0.03f,
+                                        BlockStateProvider.simple(Blocks.VERDANT_FROGLIGHT))
+                        ))
+                        .build()
+        );
+
+        // Registering forest vegetation (Roots)
+        register(context, DECREPIT_ROOTS_KEY, Feature.SIMPLE_BLOCK,
+                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.DECREPIT_ROOTS.get()))
+        );
+
+        register(context, PALLID_ROOTS_KEY, Feature.SIMPLE_BLOCK,
+                new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.PALLID_ROOTS.get()))
         );
 
         // Registering oasis

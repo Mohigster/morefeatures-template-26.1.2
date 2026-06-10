@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.worldgen.biome;
 
+import com.mohigster.morefeatures.block.ModBlocks;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.SurfaceRules;
@@ -7,16 +8,20 @@ import net.minecraft.world.level.levelgen.VerticalAnchor;
 
 public class ModSurfaceRules {
 
+    // Surface Overworld biomes
     private static final SurfaceRules.RuleSource DIRT = makeStateRule(Blocks.DIRT);
     private static final SurfaceRules.RuleSource GRASS_BLOCK = makeStateRule(Blocks.GRASS_BLOCK);
     private static final SurfaceRules.RuleSource STONE = makeStateRule(Blocks.STONE);
 
+    // Underground Overworld biomes
     private static final SurfaceRules.RuleSource PACKED_ICE = makeStateRule(Blocks.PACKED_ICE);
     private static final SurfaceRules.RuleSource BLUE_ICE = makeStateRule(Blocks.BLUE_ICE);
 
+    // End biomes
     private static final SurfaceRules.RuleSource OBSIDIAN = makeStateRule(Blocks.OBSIDIAN);
     private static final SurfaceRules.RuleSource END_STONE = makeStateRule(Blocks.END_STONE);
-    private static final SurfaceRules.RuleSource PALE_MOSS = makeStateRule(Blocks.PALE_MOSS_BLOCK);
+    private static final SurfaceRules.RuleSource PALLID_NULLIUM = makeStateRule(ModBlocks.PALLID_NULLIUM.get());
+    private static final SurfaceRules.RuleSource DECREPIT_NULLIUM = makeStateRule(ModBlocks.DECREPIT_NULLIUM.get());
 
     public static SurfaceRules.RuleSource makeEndSurfaceRules() {
         return SurfaceRules.sequence(
@@ -28,8 +33,11 @@ public class ModSurfaceRules {
                         )
                 ),
 
-                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.END_GROWTH),
-                        SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, PALE_MOSS)),
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.DECREPIT_FOREST),
+                        SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, DECREPIT_NULLIUM)),
+
+                SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.PALLID_FOREST),
+                        SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, PALLID_NULLIUM)),
 
                 // Fallback for other End biomes / vanilla behavior
                 SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, END_STONE)
@@ -73,7 +81,6 @@ public class ModSurfaceRules {
                 )
         );
     }
-
 
     private static SurfaceRules.RuleSource makeStateRule(Block block) {
         return SurfaceRules.state(block.defaultBlockState());

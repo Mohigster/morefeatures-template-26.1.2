@@ -79,6 +79,18 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .add(ModBlocks.STRIPPED_PALM_LOG.asItem())
                 .add(ModBlocks.STRIPPED_PALM_WOOD.asItem());
 
+        tag(ModItemTags.DECREPIT_LOGS)
+                .add(ModBlocks.DECREPIT_LOG.asItem())
+                .add(ModBlocks.DECREPIT_WOOD.asItem())
+                .add(ModBlocks.STRIPPED_DECREPIT_LOG.asItem())
+                .add(ModBlocks.STRIPPED_DECREPIT_WOOD.asItem());
+
+        tag(ModItemTags.PALLID_LOGS)
+                .add(ModBlocks.PALLID_LOG.asItem())
+                .add(ModBlocks.PALLID_WOOD.asItem())
+                .add(ModBlocks.STRIPPED_PALLID_LOG.asItem())
+                .add(ModBlocks.STRIPPED_PALLID_WOOD.asItem());
+
         tag(ModItemTags.IS_FOOD)
                 .add(Items.APPLE.asItem())
                 .add(Items.BAKED_POTATO.asItem())
@@ -174,7 +186,6 @@ public class ModItemTagsProvider extends ItemTagsProvider {
         tag(ModItemTags.IS_GOLD)
                 .add(Items.RAW_GOLD)
                 .add(Items.GOLD_INGOT);
-
 
         tag(ItemTags.SHOVELS)
                 .add(ModItems.BISMUTH_SHOVEL.get());
@@ -272,7 +283,10 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         tag(ItemTags.SAPLINGS)
                 .add(ModBlocks.TAINTED_SAPLING.get().asItem())
-                .add(ModBlocks.BLOODWOOD_SAPLING.get().asItem());
+                .add(ModBlocks.BLOODWOOD_SAPLING.get().asItem())
+                .add(ModBlocks.PALM_SAPLING.get().asItem())
+                .add(ModBlocks.DECREPIT_SAPLING.get().asItem())
+                .add(ModBlocks.PALLID_SAPLING.get().asItem());
 
         tag(ModItemTags.COMPRESSOR_FUEL)
                 .add(ModItems.AZURITE.get())
@@ -295,6 +309,9 @@ public class ModItemTagsProvider extends ItemTagsProvider {
 
         tag(ItemTags.PLANKS)
                 .add(ModBlocks.TAINTED_PLANKS.get().asItem())
-                .add(ModBlocks.BLOODWOOD_PLANKS.get().asItem());
+                .add(ModBlocks.BLOODWOOD_PLANKS.get().asItem())
+                .add(ModBlocks.PALM_PLANKS.get().asItem())
+                .add(ModBlocks.DECREPIT_PLANKS.get().asItem())
+                .add(ModBlocks.PALLID_PLANKS.get().asItem());
     }
 }

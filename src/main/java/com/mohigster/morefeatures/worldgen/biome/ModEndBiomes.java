@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.worldgen.biome;
 
+import com.mohigster.morefeatures.worldgen.ModPlacedFeatures;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.worldgen.placement.EndPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
@@ -26,21 +27,42 @@ public class ModEndBiomes {
                 .mobSpawnSettings(spawnBuilder.build()).generationSettings(biomeBuilder.build()).build();
     }
 
-    public static Biome endGrowth(HolderGetter<PlacedFeature> placedFeatureGetter, HolderGetter<ConfiguredWorldCarver<?>> carverGetter) {
+    public static Biome decrepitForest(HolderGetter<PlacedFeature> placedFeatureGetter, HolderGetter<ConfiguredWorldCarver<?>> carverGetter) {
         // Mob spawns
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
 
         // Biome features
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter)
                 .addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, EndPlacements.END_SPIKE)
-                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PALE_GARDEN_VEGETATION) // Pale garden blocks are placeholders until
-                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PALE_GARDEN_FLOWERS)    // custom end trees are added and used instead.
-                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PALE_MOSS_PATCH);
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PALE_GARDEN_FLOWERS)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PALE_MOSS_PATCH)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.DECREPIT_PLACED_KEY)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.DECREPIT_FOREST_VEGETATION_PLACED_KEY)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.DECREPIT_FOREST_VEGETATION_RARE_PLACED_KEY);
 
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false).temperature(4.0F).downfall(0.0F)
-                .specialEffects((new BiomeSpecialEffects.Builder().waterColor(0xbdb1b3).grassColorOverride(0xbdb1b3).build()))
+                .specialEffects((new BiomeSpecialEffects.Builder().waterColor(0xbdd1b4).grassColorOverride(0xbdb1b3).build()))
                 .mobSpawnSettings(spawnBuilder.build()).generationSettings(biomeBuilder.build()).build();
     }
+
+    public static Biome pallidForest(HolderGetter<PlacedFeature> placedFeatureGetter, HolderGetter<ConfiguredWorldCarver<?>> carverGetter) {
+
+        MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
+
+        BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, VegetationPlacements.PALE_GARDEN_FLOWERS)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.PALLID_PLACED_KEY)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.PALLID_FOREST_VEGETATION_PLACED_KEY)
+                .addFeature(GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.PALLID_FOREST_VEGETATION_RARE_PLACED_KEY);
+
+        return new Biome.BiomeBuilder()
+                .hasPrecipitation(false).temperature(4.0F).downfall(0.0F)
+                .specialEffects((new BiomeSpecialEffects.Builder().waterColor(0xbda1b4).grassColorOverride(0xbda1b3).build()))
+                .mobSpawnSettings(spawnBuilder.build()).generationSettings(biomeBuilder.build()).build();
+    }
+
+
+
 }

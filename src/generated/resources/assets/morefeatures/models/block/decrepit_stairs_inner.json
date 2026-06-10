@@ -1,0 +1,8 @@
+{
+  "parent": "minecraft:block/inner_stairs",
+  "textures": {
+    "bottom": "morefeatures:block/decrepit_planks",
+    "side": "morefeatures:block/decrepit_planks",
+    "top": "morefeatures:block/decrepit_planks"
+  }
+}

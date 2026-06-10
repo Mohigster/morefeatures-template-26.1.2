@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_button",
+  "ingredients": [
+    "morefeatures:decrepit_planks"
+  ],
+  "result": {
+    "id": "morefeatures:decrepit_button"
+  }
+}

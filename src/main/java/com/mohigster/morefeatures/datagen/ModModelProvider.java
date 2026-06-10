@@ -6,6 +6,7 @@ import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.block.family.ModBlockFamilies;
 import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.client.data.models.*;
+import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
 import net.minecraft.client.data.models.model.*;
 
 import net.minecraft.data.BlockFamilies;
@@ -13,8 +14,16 @@ import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
+
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+
+import static net.minecraft.client.data.models.BlockModelGenerators.createSimpleBlock;
+import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
 
 public class ModModelProvider extends ModelProvider {
+
     public ModModelProvider(PackOutput output) {
         super(output, MoreFeatures.MODID);
     }
@@ -126,6 +135,34 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createHangingSign(ModBlocks.BLOODWOOD_PLANKS.get(), ModBlocks.BLOODWOOD_HANGING_SIGN.get(), ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.get());
         blockModels.createHangingSign(ModBlocks.TAINTED_PLANKS.get(), ModBlocks.TAINTED_HANGING_SIGN.get(), ModBlocks.TAINTED_WALL_HANGING_SIGN.get());
         blockModels.createShelf(ModBlocks.PALM_SHELF.get(), ModBlocks.PALM_PLANKS.get());
+        blockModels.woodProvider(ModBlocks.DECREPIT_LOG.get()).logWithHorizontal(ModBlocks.DECREPIT_LOG.get()).wood(ModBlocks.DECREPIT_WOOD.get());
+        blockModels.woodProvider(ModBlocks.STRIPPED_DECREPIT_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_DECREPIT_LOG.get()).wood(ModBlocks.STRIPPED_DECREPIT_WOOD.get());
+        blockModels.createTrivialBlock(ModBlocks.DECREPIT_LEAVES.get(), TexturedModel.LEAVES);
+        blockModels.createPlantWithDefaultItem(ModBlocks.DECREPIT_SAPLING.get(), ModBlocks.POTTED_DECREPIT_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.woodProvider(ModBlocks.PALLID_LOG.get()).logWithHorizontal(ModBlocks.PALLID_LOG.get()).wood(ModBlocks.PALLID_WOOD.get());
+        blockModels.woodProvider(ModBlocks.STRIPPED_PALLID_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_PALLID_LOG.get()).wood(ModBlocks.STRIPPED_PALLID_WOOD.get());
+        blockModels.createTrivialBlock(ModBlocks.PALLID_LEAVES.get(), TexturedModel.LEAVES);
+        blockModels.createPlantWithDefaultItem(ModBlocks.DECREPIT_ROOTS.get(), ModBlocks.POTTED_DECREPIT_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createPlantWithDefaultItem(ModBlocks.PALLID_ROOTS.get(), ModBlocks.POTTED_PALLID_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createPlantWithDefaultItem(ModBlocks.PALLID_SAPLING.get(), ModBlocks.POTTED_PALLID_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        TextureMapping pallidNulliumMapping = new TextureMapping()
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.END_STONE))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.PALLID_NULLIUM.get()))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.PALLID_NULLIUM.get(), "_side"));
+        blockModels.blockStateOutput.accept(
+                createSimpleBlock(ModBlocks.PALLID_NULLIUM.get(),
+                        plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(
+                                ModBlocks.PALLID_NULLIUM.get(), pallidNulliumMapping, blockModels.modelOutput)))
+        );
+        TextureMapping decrepitNulliumMapping = new TextureMapping()
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.END_STONE))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.DECREPIT_NULLIUM.get()))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.DECREPIT_NULLIUM.get(), "_side"));
+        blockModels.blockStateOutput.accept(
+                createSimpleBlock(ModBlocks.DECREPIT_NULLIUM.get(),
+                        plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(
+                                ModBlocks.DECREPIT_NULLIUM.get(), decrepitNulliumMapping, blockModels.modelOutput)))
+        );
 
 
 
@@ -148,5 +185,9 @@ public class ModModelProvider extends ModelProvider {
                 .slab(ModBlocks.TAINTED_SLAB.get());
         blockModels.family(ModBlocks.PALM_PLANKS.get())
                 .generateFor(ModBlockFamilies.getPalmFamily());
+        blockModels.family(ModBlocks.DECREPIT_PLANKS.get())
+                .generateFor(ModBlockFamilies.getDecrepitFamily());
+        blockModels.family(ModBlocks.PALLID_PLANKS.get())
+                .generateFor(ModBlockFamilies.getPallidFamily());
     }
 }

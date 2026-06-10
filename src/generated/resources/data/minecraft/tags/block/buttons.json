@@ -1,5 +1,8 @@
 {
   "values": [
-    "morefeatures:azurite_button"
+    "morefeatures:azurite_button",
+    "morefeatures:palm_button",
+    "morefeatures:decrepit_button",
+    "morefeatures:pallid_button"
   ]
 }

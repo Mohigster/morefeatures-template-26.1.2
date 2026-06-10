@@ -71,11 +71,6 @@ public class ModDimensions {
         var dimensionTypes = context.lookup(Registries.DIMENSION_TYPE);
         var noiseGenSettings = context.lookup(Registries.NOISE_SETTINGS);
 
-//        var bloodwoodKey = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "bloodwood_forest"));
-//        var ebonKey = ResourceKey.create(Registries.BIOME, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "ebon_forest"));
-
-
-
         NoiseBasedChunkGenerator multiBiomeGenerator = new NoiseBasedChunkGenerator(
                 MultiNoiseBiomeSource.createFromList(
                         new Climate.ParameterList<>(List.of(

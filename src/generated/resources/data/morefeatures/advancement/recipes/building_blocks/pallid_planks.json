@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_pallid_log": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morefeatures:pallid_log"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morefeatures:pallid_planks"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_pallid_log"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morefeatures:pallid_planks"
+    ]
+  }
+}
