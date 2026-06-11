@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.events;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.custom.VoidAnchorBlock;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
 import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
 import com.mohigster.morefeatures.item.ModItems;
@@ -11,6 +12,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -25,8 +27,8 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.material.Fluids;
-import net.neoforged.bus.api.Event;
+import net.minecraft.world.level.portal.TeleportTransition;
+import net.minecraft.world.level.storage.LevelData;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
@@ -36,10 +38,14 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.BonemealEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.entity.player.PlayerRespawnPositionEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @EventBusSubscriber(modid = MoreFeatures.MODID)
 public class ModEvents {
@@ -209,6 +215,95 @@ public class ModEvents {
         // and prevents other handlers (including vanilla) from also firing.
         event.setSuccessful(true);
         event.setCanceled(true);
+    }
+
+    @SubscribeEvent
+    public static void onRespawnPosition(PlayerRespawnPositionEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+        ServerPlayer.RespawnConfig respawnConfig = player.getRespawnConfig();
+
+        if (respawnConfig == null) return;
+
+        // Resolve the dimension the anchor was set in.
+        ServerLevel anchorLevel = player.level().getServer().getLevel(respawnConfig.respawnData().dimension());
+        if (anchorLevel == null) return;
+
+        // Only handle our block — leave vanilla Respawn Anchor behaviour alone.
+        BlockPos anchorPos = respawnConfig.respawnData().pos();
+        BlockState state = anchorLevel.getBlockState(anchorPos);
+        if (!(state.getBlock() instanceof VoidAnchorBlock)) return;
+
+        // Confirm the anchor is still in the End and still charged.
+        if (!VoidAnchorBlock.canSetSpawn(anchorLevel)) return;
+        if (state.getValue(VoidAnchorBlock.CHARGE) == 0) return;
+
+        // Find a safe stand-up position around the anchor.
+        Optional<Vec3> spawnPos = VoidAnchorBlock.findStandUpPosition(
+                player.getType(), anchorLevel, anchorPos
+        );
+
+        if (spawnPos.isEmpty()) {
+            // Anchor is obstructed — consume a charge and fall back to world spawn.
+            // This mirrors vanilla behaviour when the Respawn Anchor is blocked.
+            consumeCharge(anchorLevel, anchorPos, state);
+            return;
+        }
+
+        // Consume one charge and redirect the respawn.
+        consumeCharge(anchorLevel, anchorPos, state);
+        if(anchorLevel.dimension().equals(Level.END)) {
+            event.setTeleportTransition(new TeleportTransition(
+                    anchorLevel,
+                    spawnPos.get(),
+                    Vec3.ZERO,      // no velocity on respawn
+                    0.0F,           // yaw — you could derive this from the anchor facing if desired
+                    0.0F,           // pitch
+                    TeleportTransition.DO_NOTHING
+            ));
+        }
+    }
+
+    @SubscribeEvent
+    public static void onRespawn(PlayerEvent.PlayerRespawnEvent event){
+        if (!(event.getEntity() instanceof ServerPlayer player)) return;
+
+        // If the player already has a valid respawn config, nothing to do.
+        if (player.getRespawnConfig() != null) return;
+
+        // Check the player's current level — if vanilla successfully respawned
+        // them in the End via our TeleportTransition, we know a Void Anchor was
+        // responsible and we can restore the config.
+        ServerLevel currentLevel = (ServerLevel) player.level();
+
+        if (!VoidAnchorBlock.canSetSpawn(currentLevel)) return;
+
+        // Find the nearest charged Void Anchor within a reasonable search radius.
+        // We stored nothing extra, so we find the closest one to the player's
+        // current position as a best-effort restore.
+        BlockPos playerPos = player.blockPosition();
+        int searchRadius = 8; // should always be within 1 block of the anchor
+        for (BlockPos candidate : BlockPos.betweenClosed(
+                playerPos.offset(-searchRadius, -searchRadius, -searchRadius),
+                playerPos.offset(searchRadius, searchRadius, searchRadius)
+        )) {
+            BlockState state = currentLevel.getBlockState(candidate);
+            if (!(state.getBlock() instanceof VoidAnchorBlock)) continue;
+            if (state.getValue(VoidAnchorBlock.CHARGE) == 0) continue;
+
+            // Found it — restore the respawn config silently.
+            player.setRespawnPosition(
+                    new ServerPlayer.RespawnConfig(LevelData.RespawnData.of(currentLevel.dimension(), candidate.immutable(), 0.0F, 0.0F), false),
+                    false
+            );
+            return;
+        }
+    }
+
+    private static void consumeCharge(ServerLevel level, BlockPos pos, BlockState state) { // This part works perfectly
+        int current = state.getValue(VoidAnchorBlock.CHARGE);
+        if (current > 0) {
+            level.setBlock(pos, state.setValue(VoidAnchorBlock.CHARGE, current - 1), 3);
+        }
     }
 
     @SubscribeEvent

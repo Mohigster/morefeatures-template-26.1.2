@@ -1,23 +1,20 @@
 package com.mohigster.morefeatures.datagen;
 
-
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.custom.VoidAnchorBlock;
 import com.mohigster.morefeatures.block.family.ModBlockFamilies;
 import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.client.data.models.*;
-import net.minecraft.client.data.models.blockstates.BlockModelDefinitionGenerator;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
+import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
 
-import net.minecraft.data.BlockFamilies;
-import net.minecraft.data.BlockFamily;
+import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import static net.minecraft.client.data.models.BlockModelGenerators.createSimpleBlock;
 import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
@@ -27,6 +24,7 @@ public class ModModelProvider extends ModelProvider {
     public ModModelProvider(PackOutput output) {
         super(output, MoreFeatures.MODID);
     }
+
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
@@ -145,24 +143,9 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createPlantWithDefaultItem(ModBlocks.DECREPIT_ROOTS.get(), ModBlocks.POTTED_DECREPIT_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(ModBlocks.PALLID_ROOTS.get(), ModBlocks.POTTED_PALLID_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(ModBlocks.PALLID_SAPLING.get(), ModBlocks.POTTED_PALLID_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        TextureMapping pallidNulliumMapping = new TextureMapping()
-                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.END_STONE))
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.PALLID_NULLIUM.get()))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.PALLID_NULLIUM.get(), "_side"));
-        blockModels.blockStateOutput.accept(
-                createSimpleBlock(ModBlocks.PALLID_NULLIUM.get(),
-                        plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(
-                                ModBlocks.PALLID_NULLIUM.get(), pallidNulliumMapping, blockModels.modelOutput)))
-        );
-        TextureMapping decrepitNulliumMapping = new TextureMapping()
-                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.END_STONE))
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(ModBlocks.DECREPIT_NULLIUM.get()))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(ModBlocks.DECREPIT_NULLIUM.get(), "_side"));
-        blockModels.blockStateOutput.accept(
-                createSimpleBlock(ModBlocks.DECREPIT_NULLIUM.get(),
-                        plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(
-                                ModBlocks.DECREPIT_NULLIUM.get(), decrepitNulliumMapping, blockModels.modelOutput)))
-        );
+        createNulliumBlock(blockModels, ModBlocks.PALLID_NULLIUM.get()); // Call blockModels as a parameter so that we can use blockStateOutput and modelOutput. This will be necessary for all custom model generation methods
+        createNulliumBlock(blockModels, ModBlocks.DECREPIT_NULLIUM.get());
+        createAnchor(blockModels, ModBlocks.VOID_ANCHOR.get());
 
 
 
@@ -189,5 +172,38 @@ public class ModModelProvider extends ModelProvider {
                 .generateFor(ModBlockFamilies.getDecrepitFamily());
         blockModels.family(ModBlocks.PALLID_PLANKS.get())
                 .generateFor(ModBlockFamilies.getPallidFamily());
+    }
+
+    public void createAnchor(BlockModelGenerators blockModels, Block anchorBlock){
+        Material bottom = TextureMapping.getBlockTexture(anchorBlock, "_bottom");
+        Material topOff = TextureMapping.getBlockTexture(anchorBlock, "_top_off");
+        Material topOn = TextureMapping.getBlockTexture(anchorBlock, "_top");
+        Identifier[] chargeLevelModels = new Identifier[5];
+
+        for (int i = 0; i < 5; ++i) {
+            TextureMapping mapping = new TextureMapping()
+                    .put(TextureSlot.BOTTOM, bottom)
+                    .put(TextureSlot.TOP, i == 0 ? topOff : topOn)
+                    .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(anchorBlock, "_side" + i));
+            chargeLevelModels[i] = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(anchorBlock, "_" + i, mapping, blockModels.modelOutput);
+        }
+
+        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(anchorBlock)
+                .with(PropertyDispatch.initial(VoidAnchorBlock.CHARGE)
+                        .generate(i -> plainVariant(chargeLevelModels[i]))));
+        blockModels.registerSimpleItemModel(anchorBlock, chargeLevelModels[0]);
+    }
+
+    public void createNulliumBlock(BlockModelGenerators blockModels, Block block){
+        TextureMapping mapping = new TextureMapping()
+                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.END_STONE))
+                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block))
+                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"));
+
+        blockModels.blockStateOutput.accept(
+                createSimpleBlock(block,
+                        plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(
+                                block, mapping, blockModels.modelOutput)))
+        );
     }
 }

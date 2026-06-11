@@ -55,7 +55,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.EVERFROST_BLUE_ICE_ORE.get())
                 .add(ModBlocks.BISMUTH_ORE.get())
                 .add(ModBlocks.DECREPIT_NULLIUM.get())
-                .add(ModBlocks.PALLID_NULLIUM.get());
+                .add(ModBlocks.PALLID_NULLIUM.get())
+                .add(ModBlocks.VOID_ANCHOR.get());
 
         tag(ModBlockTags.COMPRESSOR_FLUIDS)
                 .add(Blocks.WATER);
@@ -185,7 +186,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.COMPRESSOR_BLOCK.get())
                 .add(ModBlocks.EVERFROST_PACKED_ICE_ORE.get())
                 .add(ModBlocks.EVERFROST_BLUE_ICE_ORE.get())
-                .add(ModBlocks.MAGNESIUM_BLOCK.get());
+                .add(ModBlocks.MAGNESIUM_BLOCK.get())
+                .add(ModBlocks.VOID_ANCHOR.get());
 
         tag(BlockTags.LEAVES)
                 .add(ModBlocks.TAINTED_LEAVES.get())

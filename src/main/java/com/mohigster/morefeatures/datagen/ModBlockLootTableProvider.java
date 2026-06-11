@@ -101,6 +101,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.STRIPPED_PALLID_LOG.get());
         dropSelf(ModBlocks.DECREPIT_ROOTS.get());
         dropSelf(ModBlocks.PALLID_ROOTS.get());
+        dropSelf(ModBlocks.VOID_ANCHOR.get());
 
         // POTTED PLANTS
 

@@ -10,6 +10,7 @@
     "morefeatures:compressor_block",
     "morefeatures:everfrost_packed_ice_ore",
     "morefeatures:everfrost_blue_ice_ore",
-    "morefeatures:magnesium_block"
+    "morefeatures:magnesium_block",
+    "morefeatures:void_anchor"
   ]
 }

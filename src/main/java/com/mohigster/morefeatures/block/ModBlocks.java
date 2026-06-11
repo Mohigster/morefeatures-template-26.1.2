@@ -1317,6 +1317,14 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
             ));
 
+    // Void anchor block
+    public static final DeferredBlock<Block> VOID_ANCHOR = registerBlock("void_anchor",
+            properties -> new VoidAnchorBlock(properties
+                    .strength(6f, 6f)
+                    .requiresCorrectToolForDrops()
+                    .sound(SoundType.STONE)
+            ));
+
     // Magic block!
     public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock("magic_block",
             properties -> new MagicBlock(properties
