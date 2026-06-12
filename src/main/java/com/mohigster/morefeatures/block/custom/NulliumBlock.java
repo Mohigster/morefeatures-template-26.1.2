@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.block.custom;
 
+import com.mohigster.morefeatures.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -53,21 +54,36 @@ public class NulliumBlock extends Block implements BonemealableBlock {
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
 
-        BlockPos targetPos = blockPos.above();
+        // Place a root directly above the bonemealed block
+        BlockPos abovePos = blockPos.above();
+        if (serverLevel.getBlockState(abovePos).isAir()) {
+            placeRootAbove(serverLevel, blockState, abovePos);
+        }
 
-        // Loop through a small 3x3x3 area around the clicked block to find End Stone
+        // Spread roots to surrounding Nullium blocks in a 5x3x5 area
         for (int i = 0; i < 40; ++i) {
             BlockPos spreadPos = blockPos.offset(
+                    randomSource.nextInt(5) - 2,
                     randomSource.nextInt(3) - 1,
-                    randomSource.nextInt(3) - 1,
-                    randomSource.nextInt(3) - 1
+                    randomSource.nextInt(5) - 2
             );
 
-            // Check if the target block is standard End Stone and has air above it
-            if (serverLevel.getBlockState(spreadPos).is(Blocks.END_STONE) && serverLevel.getBlockState(spreadPos.above()).isAir()) {
-                // Replace End Stone with your custom Nylium block
-                serverLevel.setBlockAndUpdate(spreadPos, this.defaultBlockState());
+            BlockState spreadState = serverLevel.getBlockState(spreadPos);
+            BlockPos aboveSpread = spreadPos.above();
+
+            // Only place roots on top of Nullium blocks that have air above them
+            if ((spreadState.is(ModBlocks.DECREPIT_NULLIUM) || spreadState.is(ModBlocks.PALLID_NULLIUM))
+                    && serverLevel.getBlockState(aboveSpread).isAir()) {
+                placeRootAbove(serverLevel, spreadState, aboveSpread);
             }
+        }
+    }
+
+    private void placeRootAbove(ServerLevel serverLevel, BlockState nulliumState, BlockPos pos) {
+        if (nulliumState.is(ModBlocks.DECREPIT_NULLIUM)) {
+            serverLevel.setBlockAndUpdate(pos, ModBlocks.DECREPIT_ROOTS.get().defaultBlockState());
+        } else if (nulliumState.is(ModBlocks.PALLID_NULLIUM)) {
+            serverLevel.setBlockAndUpdate(pos, ModBlocks.PALLID_ROOTS.get().defaultBlockState());
         }
     }
 }

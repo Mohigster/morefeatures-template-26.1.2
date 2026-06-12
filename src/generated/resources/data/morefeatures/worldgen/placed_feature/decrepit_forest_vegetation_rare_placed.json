@@ -2,8 +2,8 @@
   "feature": "morefeatures:pallid_forest_vegetation",
   "placement": [
     {
-      "type": "minecraft:rarity_filter",
-      "chance": 3
+      "type": "minecraft:count",
+      "count": 15
     },
     {
       "type": "minecraft:in_square"

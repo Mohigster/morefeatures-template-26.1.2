@@ -13,6 +13,9 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -270,9 +273,6 @@ public class ModEvents {
         // If the player already has a valid respawn config, nothing to do.
         if (player.getRespawnConfig() != null) return;
 
-        // Check the player's current level — if vanilla successfully respawned
-        // them in the End via our TeleportTransition, we know a Void Anchor was
-        // responsible and we can restore the config.
         ServerLevel currentLevel = (ServerLevel) player.level();
 
         if (!VoidAnchorBlock.canSetSpawn(currentLevel)) return;
@@ -295,6 +295,7 @@ public class ModEvents {
                     new ServerPlayer.RespawnConfig(LevelData.RespawnData.of(currentLevel.dimension(), candidate.immutable(), 0.0F, 0.0F), false),
                     false
             );
+            currentLevel.playSound(null, candidate, SoundEvents.RESPAWN_ANCHOR_DEPLETE.value(), SoundSource.BLOCKS);
             return;
         }
     }

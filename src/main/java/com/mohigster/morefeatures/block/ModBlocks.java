@@ -1320,9 +1320,10 @@ public class ModBlocks {
     // Void anchor block
     public static final DeferredBlock<Block> VOID_ANCHOR = registerBlock("void_anchor",
             properties -> new VoidAnchorBlock(properties
-                    .strength(6f, 6f)
+                    .strength(50f, 1200f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE)
+                    .lightLevel(statex -> VoidAnchorBlock.getScaledChargeLevel(statex, 15))
             ));
 
     // Magic block!

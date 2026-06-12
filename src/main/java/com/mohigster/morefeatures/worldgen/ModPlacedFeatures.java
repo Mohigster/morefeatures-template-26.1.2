@@ -10,7 +10,6 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -51,6 +50,7 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> DECREPIT_FOREST_VEGETATION_RARE_PLACED_KEY = registerKey("decrepit_forest_vegetation_rare_placed");
     public static final ResourceKey<PlacedFeature> PALLID_FOREST_VEGETATION_PLACED_KEY = registerKey("pallid_forest_vegetation_placed");
     public static final ResourceKey<PlacedFeature> PALLID_FOREST_VEGETATION_RARE_PLACED_KEY = registerKey("pallid_forest_vegetation_rare_placed");
+    public static final ResourceKey<PlacedFeature> DECREPIT_BONEMEAL_PLACED_KEY = registerKey("decrepit_bonemeal_placed");
 
     // Ice cave patch resource keys
 
@@ -200,7 +200,7 @@ public class ModPlacedFeatures {
 
         register(context, DECREPIT_FOREST_VEGETATION_RARE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.PALLID_ROOTS_KEY), // Rare chance for pallid roots to generate in decrepit forest
                 List.of(
-                        RarityFilter.onAverageOnceEvery(3),
+                        CountPlacement.of(15),
                         InSquarePlacement.spread(),
                         PlacementUtils.FULL_RANGE,
                         BiomeFilter.biome()
@@ -216,7 +216,7 @@ public class ModPlacedFeatures {
 
         register(context, PALLID_FOREST_VEGETATION_RARE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.DECREPIT_ROOTS_KEY), // Rare chance for decrepit roots in pallid forest
                 List.of(
-                        RarityFilter.onAverageOnceEvery(3),
+                        CountPlacement.of(15),
                         InSquarePlacement.spread(),
                         PlacementUtils.FULL_RANGE,
                         BiomeFilter.biome()
@@ -228,7 +228,7 @@ public class ModPlacedFeatures {
                 context,
                 ICE_SPIRE_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_SPIRE_KEY),
-                CountPlacement.of(UniformInt.of(1, 2)),
+                RarityFilter.onAverageOnceEvery(2),
                 InSquarePlacement.spread(),
 
                 // Check across vertical heightmap
@@ -237,8 +237,8 @@ public class ModPlacedFeatures {
 
                 EnvironmentScanPlacement.scanningFor(
                         Direction.UP,
-                        BlockPredicate.solid(),              // Target the ice cave ceiling
-                        BlockPredicate.ONLY_IN_AIR_PREDICATE,// Only allow for air
+                        BlockPredicate.solid(),               // Target the ice cave ceiling
+                        BlockPredicate.ONLY_IN_AIR_PREDICATE, // Only allow for air
                         12
                 ),
 
