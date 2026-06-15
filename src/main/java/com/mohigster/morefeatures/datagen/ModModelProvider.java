@@ -4,6 +4,7 @@ import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.block.custom.VoidAnchorBlock;
 import com.mohigster.morefeatures.block.family.ModBlockFamilies;
+import com.mohigster.morefeatures.datagen.models.ModBlockModelGenerators;
 import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.client.data.models.*;
 import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
@@ -15,6 +16,7 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import org.jspecify.annotations.Nullable;
 
 import static net.minecraft.client.data.models.BlockModelGenerators.createSimpleBlock;
 import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
@@ -60,7 +62,7 @@ public class ModModelProvider extends ModelProvider {
 
         // Used the generateFlatItem() line to get carbon_bow.json, then to prevent datagen deleting it,
         // I moved that file to the permanent resources file instead of the generated resources file.
-        // Then ran the generateBow() line. Keeping generateFlatItem() commented there for reference
+        // I then ran the generateBow() line. Keeping generateFlatItem() commented there for reference
 
         // Must do this because generateBow() gives the models for when the bow is being pulled,
         // but generateFlatItem() gives the model for when it isn't. However, using both methods
@@ -129,9 +131,10 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createFurnace(ModBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
         blockModels.createPlantWithDefaultItem(ModBlocks.ROSE.get(), ModBlocks.POTTED_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createPlantWithDefaultItem(ModBlocks.BLUE_ROSE.get(), ModBlocks.POTTED_BLUE_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
-        blockModels.createHangingSign(ModBlocks.PALM_PLANKS.get(), ModBlocks.PALM_HANGING_SIGN.get(), ModBlocks.PALM_WALL_HANGING_SIGN.get());
-        blockModels.createHangingSign(ModBlocks.BLOODWOOD_PLANKS.get(), ModBlocks.BLOODWOOD_HANGING_SIGN.get(), ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.get());
-        blockModels.createHangingSign(ModBlocks.TAINTED_PLANKS.get(), ModBlocks.TAINTED_HANGING_SIGN.get(), ModBlocks.TAINTED_WALL_HANGING_SIGN.get());
+        blockModels.createHangingSign(ModBlocks.STRIPPED_PALM_WOOD.get(), ModBlocks.PALM_HANGING_SIGN.get(), ModBlocks.PALM_WALL_HANGING_SIGN.get());
+        blockModels.createHangingSign(ModBlocks.STRIPPED_BLOODWOOD.get(), ModBlocks.BLOODWOOD_HANGING_SIGN.get(), ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.get());
+        blockModels.createHangingSign(ModBlocks.STRIPPED_TAINTED_WOOD.get(), ModBlocks.TAINTED_HANGING_SIGN.get(), ModBlocks.TAINTED_WALL_HANGING_SIGN.get());
+        blockModels.createHangingSign(ModBlocks.STRIPPED_DECREPIT_WOOD.get(), ModBlocks.DECREPIT_HANGING_SIGN.get(), ModBlocks.DECREPIT_WALL_HANGING_SIGN.get());
         blockModels.createShelf(ModBlocks.PALM_SHELF.get(), ModBlocks.PALM_PLANKS.get());
         blockModels.woodProvider(ModBlocks.DECREPIT_LOG.get()).logWithHorizontal(ModBlocks.DECREPIT_LOG.get()).wood(ModBlocks.DECREPIT_WOOD.get());
         blockModels.woodProvider(ModBlocks.STRIPPED_DECREPIT_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_DECREPIT_LOG.get()).wood(ModBlocks.STRIPPED_DECREPIT_WOOD.get());
@@ -143,11 +146,9 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createPlantWithDefaultItem(ModBlocks.DECREPIT_ROOTS.get(), ModBlocks.POTTED_DECREPIT_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(ModBlocks.PALLID_ROOTS.get(), ModBlocks.POTTED_PALLID_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(ModBlocks.PALLID_SAPLING.get(), ModBlocks.POTTED_PALLID_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        createNulliumBlock(blockModels, ModBlocks.PALLID_NULLIUM.get()); // Call blockModels as a parameter so that we can use blockStateOutput and modelOutput. This will be necessary for all custom model generation methods
-        createNulliumBlock(blockModels, ModBlocks.DECREPIT_NULLIUM.get());
-        createAnchor(blockModels, ModBlocks.VOID_ANCHOR.get());
-
-
+        ModBlockModelGenerators.createNyliumLikeBlock(blockModels, ModBlocks.PALLID_NULLIUM.get(), Blocks.END_STONE); // Call blockModels as a parameter so that we can use blockStateOutput and modelOutput. This will be necessary for all custom model generation methods
+        ModBlockModelGenerators.createNyliumLikeBlock(blockModels, ModBlocks.DECREPIT_NULLIUM.get(), Blocks.END_STONE);
+        ModBlockModelGenerators.createAnchor(blockModels, ModBlocks.VOID_ANCHOR.get());
 
         // Block families—createTrivialCube is unnecessary for Azurite block
         // etc. because their models are created by the block family.
@@ -172,38 +173,5 @@ public class ModModelProvider extends ModelProvider {
                 .generateFor(ModBlockFamilies.getDecrepitFamily());
         blockModels.family(ModBlocks.PALLID_PLANKS.get())
                 .generateFor(ModBlockFamilies.getPallidFamily());
-    }
-
-    public void createAnchor(BlockModelGenerators blockModels, Block anchorBlock){
-        Material bottom = TextureMapping.getBlockTexture(anchorBlock, "_bottom");
-        Material topOff = TextureMapping.getBlockTexture(anchorBlock, "_top_off");
-        Material topOn = TextureMapping.getBlockTexture(anchorBlock, "_top");
-        Identifier[] chargeLevelModels = new Identifier[5];
-
-        for (int i = 0; i < 5; ++i) {
-            TextureMapping mapping = new TextureMapping()
-                    .put(TextureSlot.BOTTOM, bottom)
-                    .put(TextureSlot.TOP, i == 0 ? topOff : topOn)
-                    .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(anchorBlock, "_side" + i));
-            chargeLevelModels[i] = ModelTemplates.CUBE_BOTTOM_TOP.createWithSuffix(anchorBlock, "_" + i, mapping, blockModels.modelOutput);
-        }
-
-        blockModels.blockStateOutput.accept(MultiVariantGenerator.dispatch(anchorBlock)
-                .with(PropertyDispatch.initial(VoidAnchorBlock.CHARGE)
-                        .generate(i -> plainVariant(chargeLevelModels[i]))));
-        blockModels.registerSimpleItemModel(anchorBlock, chargeLevelModels[0]);
-    }
-
-    public void createNulliumBlock(BlockModelGenerators blockModels, Block block){
-        TextureMapping mapping = new TextureMapping()
-                .put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(Blocks.END_STONE))
-                .put(TextureSlot.TOP, TextureMapping.getBlockTexture(block))
-                .put(TextureSlot.SIDE, TextureMapping.getBlockTexture(block, "_side"));
-
-        blockModels.blockStateOutput.accept(
-                createSimpleBlock(block,
-                        plainVariant(ModelTemplates.CUBE_BOTTOM_TOP.create(
-                                block, mapping, blockModels.modelOutput)))
-        );
     }
 }

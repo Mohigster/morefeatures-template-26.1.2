@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": "minecraft:iron_chain",
+    "D": "morefeatures:stripped_decrepit_log"
+  },
+  "pattern": [
+    "C C",
+    "DDD",
+    "DDD"
+  ],
+  "result": {
+    "id": "morefeatures:decrepit_hanging_sign"
+  }
+}

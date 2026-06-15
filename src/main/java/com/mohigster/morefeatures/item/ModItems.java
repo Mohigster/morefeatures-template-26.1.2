@@ -330,6 +330,33 @@ public class ModItems {
                     )
             );
 
+    public static final DeferredItem<SignItem> PALLID_SIGN =
+            ITEMS.register("pallid_sign", () ->
+                    new SignItem(
+                            ModBlocks.PALLID_SIGN.get(),
+                            ModBlocks.PALLID_WALL_SIGN.get(),
+                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "pallid_sign")))
+                    )
+            );
+
+    public static final DeferredItem<SignItem> DECREPIT_SIGN =
+            ITEMS.register("decrepit_sign", () ->
+                    new SignItem(
+                            ModBlocks.DECREPIT_SIGN.get(),
+                            ModBlocks.DECREPIT_WALL_SIGN.get(),
+                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "decrepit_sign")))
+                    )
+            );
+
+    public static final DeferredItem<SignItem> DECREPIT_HANGING_SIGN =
+            ITEMS.register("decrepit_hanging_sign", () ->
+                    new HangingSignItem(
+                            ModBlocks.DECREPIT_HANGING_SIGN.get(),
+                            ModBlocks.DECREPIT_WALL_HANGING_SIGN.get(),
+                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "decrepit_hanging_sign")))
+                    )
+            );
+
     public static final DeferredItem<BoatItem> PALM_BOAT = ITEMS.registerItem(
             "palm_boat",
             props -> new BoatItem(ModEntityTypes.PALM_BOAT.get(), props)

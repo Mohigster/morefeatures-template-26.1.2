@@ -46,6 +46,7 @@ public class ModBlockFamilies{
                     .button(ModBlocks.DECREPIT_BUTTON.get())
                     .fence(ModBlocks.DECREPIT_FENCE.get())
                     .fenceGate(ModBlocks.DECREPIT_FENCE_GATE.get())
+                    .sign(ModBlocks.DECREPIT_SIGN.get(), ModBlocks.DECREPIT_WALL_SIGN.get())
                     .recipeGroupPrefix("wooden")
                     .recipeUnlockedBy("has_planks")
                     .getFamily();
@@ -63,6 +64,7 @@ public class ModBlockFamilies{
                     .button(ModBlocks.PALLID_BUTTON.get())
                     .fence(ModBlocks.PALLID_FENCE.get())
                     .fenceGate(ModBlocks.PALLID_FENCE_GATE.get())
+                    .sign(ModBlocks.PALLID_SIGN.get(), ModBlocks.PALLID_WALL_SIGN.get())
                     .recipeGroupPrefix("wooden")
                     .recipeUnlockedBy("has_planks")
                     .getFamily();

@@ -58,6 +58,4 @@ public class CarbonTridentRenderer extends ThrownTridentRenderer {
     public ThrownTridentRenderState createRenderState() {
         return new ThrownTridentRenderState();
     }
-
-
 }

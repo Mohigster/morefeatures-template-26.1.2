@@ -27,6 +27,20 @@ public class ModWoodType {
             )
     );
 
+    public static final WoodType DECREPIT = WoodType.register(
+            new WoodType(
+                    MoreFeatures.MODID + ":decrepit",
+                    BlockSetType.OAK
+            )
+    );
+
+    public static final WoodType PALLID = WoodType.register(
+            new WoodType(
+                    MoreFeatures.MODID + ":pallid",
+                    BlockSetType.OAK
+            )
+    );
+
 
     public static void init() {}
 }

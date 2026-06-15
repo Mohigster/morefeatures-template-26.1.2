@@ -177,6 +177,24 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.PALM_WALL_HANGING_SIGN.get(),
                 createSingleItemTable(ModItems.PALM_HANGING_SIGN.asItem()));
 
+        add(ModBlocks.PALLID_SIGN.get(),
+                createSingleItemTable(ModItems.PALLID_SIGN.asItem()));
+
+        add(ModBlocks.PALLID_WALL_SIGN.get(),
+                createSingleItemTable(ModItems.PALLID_SIGN.asItem()));
+
+        add(ModBlocks.DECREPIT_SIGN.get(),
+                createSingleItemTable(ModItems.DECREPIT_SIGN.asItem()));
+
+        add(ModBlocks.DECREPIT_WALL_SIGN.get(),
+                createSingleItemTable(ModItems.DECREPIT_SIGN.asItem()));
+
+        add(ModBlocks.DECREPIT_HANGING_SIGN.get(),
+                createSingleItemTable(ModItems.DECREPIT_HANGING_SIGN.asItem()));
+
+        add(ModBlocks.DECREPIT_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModItems.DECREPIT_HANGING_SIGN.asItem()));
+
         // DOOR
 
         add(ModBlocks.PALM_DOOR.get(), this::createDoorTable);

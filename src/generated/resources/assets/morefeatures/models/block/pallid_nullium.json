@@ -3,6 +3,6 @@
   "textures": {
     "bottom": "minecraft:block/end_stone",
     "side": "morefeatures:block/pallid_nullium_side",
-    "top": "morefeatures:block/pallid_nullium"
+    "top": "morefeatures:block/pallid_nullium_top"
   }
 }

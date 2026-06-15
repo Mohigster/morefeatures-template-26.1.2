@@ -132,6 +132,7 @@
   "block.morefeatures.decrepit_fence_gate": "Decrepit Fence Gate",
   "block.morefeatures.decrepit_leaves": "Decrepit Leaves",
   "block.morefeatures.decrepit_sapling": "Decrepit Sapling",
+  "item.morefeatures.decrepit_sign": "Decrepit Sign",
 
   "block.morefeatures.pallid_nullium": "Pallid Nullium",
   "block.morefeatures.pallid_roots": "Pallid Roots",
@@ -148,6 +149,7 @@
   "block.morefeatures.pallid_fence_gate": "Pallid Fence Gate",
   "block.morefeatures.pallid_leaves": "Pallid Leaves",
   "block.morefeatures.pallid_sapling": "Pallid Sapling",
+  "item.morefeatures.pallid_sign": "Pallid Sign",
 
   "block.morefeatures.void_anchor": "Void Anchor",
 

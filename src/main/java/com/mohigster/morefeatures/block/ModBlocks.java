@@ -839,7 +839,7 @@ public class ModBlocks {
                     }
             );
 
-    // Standing sign
+    // Ceiling sign
     public static final DeferredBlock<Block> PALM_HANGING_SIGN =
             BLOCKS.register("palm_hanging_sign", () ->
                     new CeilingHangingSignBlock(
@@ -1083,6 +1083,76 @@ public class ModBlocks {
                     .offsetType(BlockBehaviour.OffsetType.XZ)
             ));
 
+    public static final DeferredBlock<Block> DECREPIT_SIGN =
+            BLOCKS.register("decrepit_sign", () ->
+                    new StandingSignBlock(
+                            ModWoodType.DECREPIT,
+                            BlockBehaviour.Properties.of()
+                                    .noCollision()
+                                    .strength(1.0f)
+                                    .sound(SoundType.NETHER_WOOD)
+                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "decrepit_sign")))
+                    ){
+                        @Override
+                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+                            return ModBlockEntities.DECREPIT_SIGN_BE.get().create(pos, state); // Prevents game crash (no, literally)
+                        }
+                    }
+            );
+
+    public static final DeferredBlock<Block> DECREPIT_WALL_SIGN =
+            BLOCKS.register("decrepit_wall_sign", () ->
+                    new WallSignBlock(
+                            ModWoodType.DECREPIT,
+                            BlockBehaviour.Properties.of()
+                                    .noCollision()
+                                    .strength(1.0f)
+                                    .sound(SoundType.NETHER_WOOD)
+                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "decrepit_wall_sign")))
+                    ){
+                        @Override
+                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+                            return ModBlockEntities.DECREPIT_SIGN_BE.get().create(pos, state);
+                        }
+                    }
+            );
+
+    // Ceiling sign
+    public static final DeferredBlock<Block> DECREPIT_HANGING_SIGN =
+            BLOCKS.register("decrepit_hanging_sign", () ->
+                    new CeilingHangingSignBlock(
+                            ModWoodType.DECREPIT,
+                            BlockBehaviour.Properties.of()
+                                    .noCollision()
+                                    .strength(1.0f)
+                                    .sound(SoundType.NETHER_WOOD)
+                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "decrepit_hanging_sign")))
+                    ){
+                        @Override
+                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+                            return ModBlockEntities.DECREPIT_HANGING_SIGN_BE.get().create(pos, state); // Prevents game crash (no, literally)
+                        }
+                    }
+            );
+
+    // Wall sign
+    public static final DeferredBlock<Block> DECREPIT_WALL_HANGING_SIGN =
+            BLOCKS.register("decrepit_wall_hanging_sign", () ->
+                    new WallHangingSignBlock(
+                            ModWoodType.DECREPIT,
+                            BlockBehaviour.Properties.of()
+                                    .noCollision()
+                                    .strength(1.0f)
+                                    .sound(SoundType.NETHER_WOOD)
+                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "decrepit_wall_hanging_sign")))
+                    ){
+                        @Override
+                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+                            return ModBlockEntities.DECREPIT_HANGING_SIGN_BE.get().create(pos, state);
+                        }
+                    }
+            );
+
     public static final DeferredBlock<Block> POTTED_DECREPIT_ROOTS = registerBlock("potted_decrepit_roots",
             properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
                     Blocks.FLOWER_POT, DECREPIT_ROOTS, properties
@@ -1275,6 +1345,39 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
             ));
 
+    public static final DeferredBlock<Block> PALLID_SIGN =
+            BLOCKS.register("pallid_sign", () ->
+                    new StandingSignBlock(
+                            ModWoodType.PALLID,
+                            BlockBehaviour.Properties.of()
+                                    .noCollision()
+                                    .strength(1.0f)
+                                    .sound(SoundType.NETHER_WOOD)
+                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "pallid_sign")))
+                    ){
+                        @Override
+                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+                            return ModBlockEntities.PALLID_SIGN_BE.get().create(pos, state); // Prevents game crash (no, literally)
+                        }
+                    }
+            );
+
+    public static final DeferredBlock<Block> PALLID_WALL_SIGN =
+            BLOCKS.register("pallid_wall_sign", () ->
+                    new WallSignBlock(
+                            ModWoodType.PALLID,
+                            BlockBehaviour.Properties.of()
+                                    .noCollision()
+                                    .strength(1.0f)
+                                    .sound(SoundType.NETHER_WOOD)
+                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "pallid_wall_sign"))) // Since we're using BlockBehviour.Properties.of() (Which is necessary for most block entities) the ID is not set automatically. Game will crash if the ID is not set here. Block that use properties -> new /*BlockType*/(properties) do not use .setId and function perfectly with no crash, as that method sets the ID automatically.
+                    ){
+                        @Override
+                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+                            return ModBlockEntities.PALLID_SIGN_BE.get().create(pos, state);
+                        }
+                    }
+            );
 
 
     // Flowers

@@ -41,7 +41,7 @@ public class ModRecipeProvider extends RecipeProvider {
 
         @Override
         public String getName() {
-            return "TutorialMod Recipes";
+            return "MoreFeatures Recipes";
         }
     }
 
@@ -286,6 +286,15 @@ public class ModRecipeProvider extends RecipeProvider {
                 .pattern("PP")
                 .pattern("PP")
                 .define('P', ModBlocks.STRIPPED_DECREPIT_LOG.get())
+                .unlockedBy(getHasName(ModBlocks.STRIPPED_DECREPIT_LOG.get()), has(ModBlocks.STRIPPED_DECREPIT_LOG))
+                .save(output);
+
+        shaped(RecipeCategory.DECORATIONS, ModItems.DECREPIT_HANGING_SIGN.asItem())
+                .pattern("C C")
+                .pattern("DDD")
+                .pattern("DDD")
+                .define('C', Blocks.IRON_CHAIN)
+                .define('D', ModBlocks.STRIPPED_DECREPIT_LOG.get())
                 .unlockedBy(getHasName(ModBlocks.STRIPPED_DECREPIT_LOG.get()), has(ModBlocks.STRIPPED_DECREPIT_LOG))
                 .save(output);
 

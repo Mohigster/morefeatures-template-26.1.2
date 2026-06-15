@@ -3,6 +3,6 @@
   "textures": {
     "bottom": "minecraft:block/end_stone",
     "side": "morefeatures:block/decrepit_nullium_side",
-    "top": "morefeatures:block/decrepit_nullium"
+    "top": "morefeatures:block/decrepit_nullium_top"
   }
 }
