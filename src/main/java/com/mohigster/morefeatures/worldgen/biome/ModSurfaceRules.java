@@ -29,7 +29,6 @@ public class ModSurfaceRules {
 
     // End biomes
     private static final SurfaceRules.RuleSource OBSIDIAN = makeStateRule(Blocks.OBSIDIAN);
-    private static final SurfaceRules.RuleSource END_STONE = makeStateRule(Blocks.END_STONE);
     private static final SurfaceRules.RuleSource PALLID_NULLIUM = makeStateRule(ModBlocks.PALLID_NULLIUM.get());
     private static final SurfaceRules.RuleSource DECREPIT_NULLIUM = makeStateRule(ModBlocks.DECREPIT_NULLIUM.get());
 
@@ -55,8 +54,7 @@ public class ModSurfaceRules {
         return SurfaceRules.sequence(
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(biomes, ModBiomes.BLOODWOOD_FOREST),
                         SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, GRASS_BLOCK),
-                                SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT), STONE)),
-                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, GRASS_BLOCK)
+                                SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT), STONE))
         );
     }
 
@@ -64,9 +62,7 @@ public class ModSurfaceRules {
         return SurfaceRules.sequence(
                 SurfaceRules.ifTrue(SurfaceRules.isBiome(biomes, ModBiomes.TAINTED_FOREST),
                         SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, GRASS_BLOCK),
-                                SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT), STONE)),
-                // Default to Dirt
-                SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,GRASS_BLOCK)
+                                SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, DIRT), STONE))
         );
     }
 
@@ -74,7 +70,7 @@ public class ModSurfaceRules {
         return SurfaceRules.ifTrue(
                 SurfaceRules.isBiome(biomes, ModBiomes.ICE_CAVE),
                 SurfaceRules.ifTrue(
-                        SurfaceRules.yBlockCheck(VerticalAnchor.absolute(-58), 0),
+                        SurfaceRules.yBlockCheck(VerticalAnchor.absolute(-50), 0),
                         SurfaceRules.sequence(
 
                                 // Ceiling / Roof of the cave gets Blue Ice
@@ -82,7 +78,7 @@ public class ModSurfaceRules {
                                 // Floor and walls get Packed Ice
                                 SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, PACKED_ICE),
                                 SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, PACKED_ICE),
-                                // Default filler block inside this biome if it's not a direct floor/ceiling
+
                                 PACKED_ICE
                         )
                 )

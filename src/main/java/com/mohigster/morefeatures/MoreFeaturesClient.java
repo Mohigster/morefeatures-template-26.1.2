@@ -58,16 +58,24 @@ public class MoreFeaturesClient {
     @SubscribeEvent
     public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(
-                ModParticleTypes.PALM_LEAVES.get(),
-                ModFallingLeavesParticle.PalmProvider::new
-        );
-        event.registerSpriteSet(
                 ModParticleTypes.BLOODWOOD_LEAVES.get(),
                 ModFallingLeavesParticle.EvilLeafProvider::new
         );
         event.registerSpriteSet(
                 ModParticleTypes.TAINTED_LEAVES.get(),
                 ModFallingLeavesParticle.EvilLeafProvider::new
+        );
+        event.registerSpriteSet(
+                ModParticleTypes.PALM_LEAVES.get(),
+                ModFallingLeavesParticle.PalmProvider::new
+        );
+        event.registerSpriteSet(
+                ModParticleTypes.DECREPIT_LEAVES.get(),
+                ModFallingLeavesParticle.EndLeafProvider::new
+        );
+        event.registerSpriteSet(
+                ModParticleTypes.PALLID_LEAVES.get(),
+                ModFallingLeavesParticle.EndLeafProvider::new
         );
     }
 

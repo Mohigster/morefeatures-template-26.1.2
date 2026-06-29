@@ -166,4 +166,32 @@ public class ModFallingLeavesParticle extends SingleQuadParticle {
             );
         }
     }
+
+    public static class EndLeafProvider implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet sprites;
+
+        public EndLeafProvider(SpriteSet sprites) {
+            this.sprites = sprites;
+        }
+
+        @Override
+        public Particle createParticle(
+                SimpleParticleType type,
+                ClientLevel level,
+                double x, double y, double z,
+                double xSpeed, double ySpeed, double zSpeed,
+                RandomSource random
+        ) {
+            return new ModFallingLeavesParticle(
+                    level, x, y, z,
+                    this.sprites.get(random),
+                    0.13F,
+                    8.0F,
+                    true,
+                    false,
+                    2.2F,
+                    0.015F
+            );
+        }
+    }
 }

@@ -23,16 +23,12 @@ import net.minecraft.core.*;
 import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.registries.VanillaRegistries;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.world.level.Level;
+import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.fml.startup.Server;
-import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import org.slf4j.Logger;
 
@@ -50,12 +46,15 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import terrablender.api.SurfaceRuleManager;
 
-import java.util.function.Supplier;
+import java.util.List;
+import java.util.function.Predicate;
 
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MoreFeatures.MODID)
 public class MoreFeatures {
+
+    private static boolean rulesAdded = false;
     // Define mod id in a common place for everything to reference
     public static final String MODID = "morefeatures";
     // Directly reference a slf4j logger
@@ -138,9 +137,14 @@ public class MoreFeatures {
 
     // Add the items to a creative mode tab.
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.INGREDIENTS){
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
             event.accept(ModItems.RAW_ALUMINIUM);
             event.accept(ModItems.ALUMINIUM_INGOT);
+            event.accept(ModItems.RAW_MAGNESIUM);
+            event.accept(ModItems.MAGNESIUM_INGOT);
+            event.accept(ModItems.RAW_BISMUTH);
+            event.accept(ModItems.BISMUTH_SCRAP);
+            event.accept(ModItems.BISMUTH);
         }
     }
 
@@ -152,13 +156,15 @@ public class MoreFeatures {
 
     @SubscribeEvent
     public void onServerAboutToStart(ServerAboutToStartEvent event){
-        HolderGetter<Biome> biomeGetter =
-                event.getServer().registryAccess().lookupOrThrow(Registries.BIOME);
+        if (rulesAdded) return;
 
-        // THIS WORKS (FINALLY) Aaaaaand that ends the migration to 26.2 fiasco.
+        HolderGetter<Biome> biomeGetter = event.getServer().registryAccess().lookupOrThrow(Registries.BIOME);
+
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeBloodwoodForestRules(biomeGetter));
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeTaintedForestRules(biomeGetter));
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeIceCaveRules(biomeGetter));
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, ModSurfaceRules.makeEndSurfaceRules(biomeGetter));
+
+        rulesAdded = true;
     }
 }

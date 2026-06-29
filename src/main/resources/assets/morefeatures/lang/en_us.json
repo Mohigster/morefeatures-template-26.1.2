@@ -217,5 +217,6 @@
 
   "item.morefeatures.ice_wand": "Ice Wand",
   "item.morefeatures.fire_wand": "Fire Wand",
-  "item.morefeatures.healing_wand": "Healing Wand"
+  "item.morefeatures.healing_wand": "Healing Wand",
+  "tooltip.morefeatures.evil_portal": "Right click to be transported to the realm of EVIL!"
 }

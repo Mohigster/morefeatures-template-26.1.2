@@ -31,6 +31,18 @@ public class ModParticleTypes {
                     () -> new SimpleParticleType(false)
             );
 
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DECREPIT_LEAVES =
+            PARTICLES.register(
+                    "decrepit_leaves",
+                    () -> new SimpleParticleType(false)
+            );
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PALLID_LEAVES =
+            PARTICLES.register(
+                    "pallid_leaves",
+                    () -> new SimpleParticleType(false)
+            );
+
     public static void register(IEventBus bus) {
         PARTICLES.register(bus);
     }

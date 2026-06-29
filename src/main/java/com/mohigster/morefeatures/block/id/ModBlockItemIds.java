@@ -52,6 +52,7 @@ public class ModBlockItemIds {
     public static final BlockItemId PALLID_FENCE_GATE = create("pallid_fence_gate");
     public static final BlockItemId PALLID_LEAVES = create("pallid_leaves");
     public static final BlockItemId PALLID_SAPLING = create("pallid_sapling");
+    public static final BlockItemId PALLID_NULLIUM = create("pallid_nullium");
 
     // --- Decrepit ---
     public static final BlockItemId DECREPIT_LOG = create("decrepit_log");
@@ -65,6 +66,7 @@ public class ModBlockItemIds {
     public static final BlockItemId DECREPIT_FENCE_GATE = create("decrepit_fence_gate");
     public static final BlockItemId DECREPIT_LEAVES = create("decrepit_leaves");
     public static final BlockItemId DECREPIT_SAPLING = create("decrepit_sapling");
+    public static final BlockItemId DECREPIT_NULLIUM = create("decrepit_nullium");
 
     // --- Aluminium ---
     public static final BlockItemId ALUMINIUM_BLOCK = create("aluminium_block");
