@@ -36,7 +36,7 @@ public class NulliumBlock extends Block implements BonemealableBlock {
         } else {
             // Gets the light blocking value of the block above.
             // If it blocks too much light (like dirt, stone, etc.), the nullium dies.
-            int lightBlocking = LightEngine.getLightBlockInto(state, blockState, Direction.UP, blockState.getLightDampening());
+            int lightBlocking = LightEngine.getLightDampeningInto(state, blockState, Direction.UP, blockState.getLightDampening());
             return lightBlocking < 15;
         }
     }

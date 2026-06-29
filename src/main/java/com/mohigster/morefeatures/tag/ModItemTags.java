@@ -27,6 +27,9 @@ public final class ModItemTags {
     public static final TagKey<Item> PALM_LOGS = morefeaturesTag("palm_logs");
     public static final TagKey<Item> DECREPIT_LOGS = morefeaturesTag("decrepit_logs");
     public static final TagKey<Item> PALLID_LOGS = morefeaturesTag("pallid_logs");
+    public static final TagKey<Item> MUSIC_DISCS = morefeaturesTag("music_discs");
+    public static final TagKey<Item> AIMABLE_WANDS = morefeaturesTag("aimable_wands");
+    public static final TagKey<Item> TARGETING_WANDS = morefeaturesTag("targeting_wands");
 
     private ModItemTags() {
     }

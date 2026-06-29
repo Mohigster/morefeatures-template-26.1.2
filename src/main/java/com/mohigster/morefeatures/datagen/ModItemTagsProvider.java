@@ -1,19 +1,14 @@
 package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.id.ModBlockItemIds;
 import com.mohigster.morefeatures.item.ModItems;
 import com.mohigster.morefeatures.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.tags.BlockTags;
+import net.minecraft.references.BlockItemIds;
+import net.minecraft.references.ItemIds;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Blocks;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
 
 import java.util.concurrent.CompletableFuture;
@@ -27,22 +22,22 @@ public class ModItemTagsProvider extends ItemTagsProvider {
     @Override
     protected void addTags(HolderLookup.Provider provider) {
         tag(ModItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(1).asItem())
-                .add(ModItems.BISMUTH_AXE.get())
-                .add(ModItems.BISMUTH_HOE.get())
-                .add(ModItems.BISMUTH_SHOVEL.get())
-                .add(ModItems.BISMUTH_SPEAR.get())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(1).getKey())
+                .add(ModItems.BISMUTH_AXE.getKey())
+                .add(ModItems.BISMUTH_HOE.getKey())
+                .add(ModItems.BISMUTH_SHOVEL.getKey())
+                .add(ModItems.BISMUTH_SPEAR.getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(3).getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(4).getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).getKey());
 
         tag(ModItemTags.CARBON_INGREDIENTS)
-                .add(Items.STICK)
-                .add(Items.COAL)
-                .add(Items.REDSTONE)
-                .add(Items.DIAMOND)
+                .add(ItemIds.STICK)
+                .add(ItemIds.COAL)
+                .add(BlockItemIds.REDSTONE_DUST.item())
+                .add(ItemIds.DIAMOND)
                 .addTag(ItemTags.LOGS_THAT_BURN)
                 .addTag(ItemTags.LOGS)
                 .addTag(ItemTags.SAPLINGS)
@@ -51,267 +46,274 @@ public class ModItemTagsProvider extends ItemTagsProvider {
                 .addTag(ModItemTags.IS_FOOD);
 
         tag(ModItemTags.BOW_UPGRADE_ENCHANTABLE)
-                .add(ModItems.BISMUTH_BOW.get());
+                .add(ModItems.BISMUTH_BOW.getKey());
 
         tag(ModItemTags.MELEE_WEAPON_UPGRADE_ENCHANTABLE)
-                .add(ModItems.BISMUTH_AXE.get())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
+                .add(ModItems.BISMUTH_AXE.getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).getKey());
 
         tag(ItemTags.TRIDENT_ENCHANTABLE)
-                .add(ModItems.BISMUTH_TRIDENT.get())
-                .add(ModItems.CARBON_TRIDENT.get());
+                .add(ModItems.BISMUTH_TRIDENT.getKey())
+                .add(ModItems.CARBON_TRIDENT.getKey());
 
         tag(ModItemTags.BLOODWOOD_LOGS)
-                .add(ModBlocks.BLOODWOOD.asItem())
-                .add(ModBlocks.BLOODWOOD_LOG.asItem())
-                .add(ModBlocks.STRIPPED_BLOODWOOD.asItem())
-                .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.asItem());
+                .add(ModBlockItemIds.BLOODWOOD.item())
+                .add(ModBlockItemIds.BLOODWOOD_LOG.item())
+                .add(ModBlockItemIds.STRIPPED_BLOODWOOD.item())
+                .add(ModBlockItemIds.STRIPPED_BLOODWOOD_LOG.item());
 
         tag(ModItemTags.TAINTED_LOGS)
-                .add(ModBlocks.TAINTED_LOG.asItem())
-                .add(ModBlocks.TAINTED_WOOD.asItem())
-                .add(ModBlocks.STRIPPED_TAINTED_LOG.asItem())
-                .add(ModBlocks.STRIPPED_TAINTED_WOOD.asItem());
+                .add(ModBlockItemIds.TAINTED_LOG.item())
+                .add(ModBlockItemIds.TAINTED_WOOD.item())
+                .add(ModBlockItemIds.STRIPPED_TAINTED_LOG.item())
+                .add(ModBlockItemIds.STRIPPED_TAINTED_WOOD.item());
 
         tag(ModItemTags.PALM_LOGS)
-                .add(ModBlocks.PALM_LOG.asItem())
-                .add(ModBlocks.PALM_WOOD.asItem())
-                .add(ModBlocks.STRIPPED_PALM_LOG.asItem())
-                .add(ModBlocks.STRIPPED_PALM_WOOD.asItem());
+                .add(ModBlockItemIds.PALM_LOG.item())
+                .add(ModBlockItemIds.PALM_WOOD.item())
+                .add(ModBlockItemIds.STRIPPED_PALM_LOG.item())
+                .add(ModBlockItemIds.STRIPPED_PALM_WOOD.item());
 
         tag(ModItemTags.DECREPIT_LOGS)
-                .add(ModBlocks.DECREPIT_LOG.asItem())
-                .add(ModBlocks.DECREPIT_WOOD.asItem())
-                .add(ModBlocks.STRIPPED_DECREPIT_LOG.asItem())
-                .add(ModBlocks.STRIPPED_DECREPIT_WOOD.asItem());
+                .add(ModBlockItemIds.DECREPIT_LOG.item())
+                .add(ModBlockItemIds.DECREPIT_WOOD.item())
+                .add(ModBlockItemIds.STRIPPED_DECREPIT_LOG.item())
+                .add(ModBlockItemIds.STRIPPED_DECREPIT_WOOD.item());
 
         tag(ModItemTags.PALLID_LOGS)
-                .add(ModBlocks.PALLID_LOG.asItem())
-                .add(ModBlocks.PALLID_WOOD.asItem())
-                .add(ModBlocks.STRIPPED_PALLID_LOG.asItem())
-                .add(ModBlocks.STRIPPED_PALLID_WOOD.asItem());
+                .add(ModBlockItemIds.PALLID_LOG.item())
+                .add(ModBlockItemIds.PALLID_WOOD.item())
+                .add(ModBlockItemIds.STRIPPED_PALLID_LOG.item())
+                .add(ModBlockItemIds.STRIPPED_PALLID_WOOD.item());
 
         tag(ModItemTags.IS_FOOD)
-                .add(Items.APPLE.asItem())
-                .add(Items.BAKED_POTATO.asItem())
-                .add(Items.POTATO.asItem())
-                .add(Items.POISONOUS_POTATO.asItem())
-                .add(Items.MUSHROOM_STEW.asItem())
-                .add(Items.SUSPICIOUS_STEW.asItem())
-                .add(Items.BREAD.asItem())
-                .add(Items.CAKE.asItem())
-                .add(Items.WHEAT.asItem())
-                .add(Items.CARROT.asItem())
-                .add(Items.COOKIE.asItem())
-                .add(Items.BEETROOT.asItem())
-                .add(Items.BEETROOT_SOUP.asItem())
-                .add(Items.GOLDEN_APPLE.asItem())
-                .add(Items.ENCHANTED_GOLDEN_APPLE.asItem())
-                .add(Items.GOLDEN_CARROT.asItem())
-                .add(Items.GLOW_BERRIES.asItem())
-                .add(Items.MELON_SLICE.asItem())
-                .add(Items.MELON.asItem())
-                .add(Items.PUMPKIN.asItem())
-                .add(Items.PUMPKIN_PIE.asItem())
-                .add(Items.CARVED_PUMPKIN.asItem())
-                .add(Items.ROTTEN_FLESH.asItem())
-                .add(Items.SWEET_BERRIES.asItem())
-                .add(Items.SPIDER_EYE.asItem())
-                .add(Items.TROPICAL_FISH.asItem())
-                .add(Items.CHICKEN.asItem())
-                .add(Items.BEEF.asItem())
-                .add(Items.MUTTON.asItem())
-                .add(Items.PORKCHOP.asItem())
-                .add(Items.RABBIT.asItem())
-                .add(Items.COD.asItem())
-                .add(Items.SALMON.asItem())
-                .add(Items.COOKED_CHICKEN.asItem())
-                .add(Items.COOKED_BEEF.asItem())
-                .add(Items.COOKED_MUTTON.asItem())
-                .add(Items.COOKED_PORKCHOP.asItem())
-                .add(Items.COOKED_RABBIT.asItem())
-                .add(Items.COOKED_COD.asItem())
-                .add(Items.COOKED_SALMON.asItem());
+                .add(ItemIds.APPLE)
+                .add(ItemIds.BAKED_POTATO)
+                .add(ItemIds.POISONOUS_POTATO)
+                .add(ItemIds.MUSHROOM_STEW)
+                .add(ItemIds.SUSPICIOUS_STEW)
+                .add(BlockItemIds.PUMPKIN.item())
+                .add(BlockItemIds.CAKE.item())
+                .add(BlockItemIds.CARVED_PUMPKIN.item())
+                .add(ItemIds.BREAD)
+                .add(ItemIds.WHEAT)
+                .add(ItemIds.COOKIE)
+                .add(ItemIds.BEETROOT)
+                .add(ItemIds.BEETROOT_SOUP)
+                .add(ItemIds.GOLDEN_APPLE)
+                .add(ItemIds.ENCHANTED_GOLDEN_APPLE)
+                .add(ItemIds.GOLDEN_CARROT)
+                .add(ItemIds.MELON_SLICE)
+                .add(ItemIds.PUMPKIN_PIE)
+                .add(ItemIds.ROTTEN_FLESH)
+                .add(ItemIds.SPIDER_EYE)
+                .add(ItemIds.TROPICAL_FISH)
+                .add(ItemIds.CHICKEN)
+                .add(ItemIds.BEEF)
+                .add(ItemIds.MUTTON)
+                .add(ItemIds.PORKCHOP)
+                .add(ItemIds.RABBIT)
+                .add(ItemIds.COD)
+                .add(ItemIds.SALMON)
+                .add(ItemIds.COOKED_CHICKEN)
+                .add(ItemIds.COOKED_BEEF)
+                .add(ItemIds.COOKED_MUTTON)
+                .add(ItemIds.COOKED_PORKCHOP)
+                .add(ItemIds.COOKED_RABBIT)
+                .add(ItemIds.COOKED_COD)
+                .add(ItemIds.COOKED_SALMON);
 
         tag(ModItemTags.IS_POTION)
-                .add(Items.SPLASH_POTION)
-                .add(Items.LINGERING_POTION)
-                .add(Items.POTION);
+                .add(ItemIds.SPLASH_POTION)
+                .add(ItemIds.LINGERING_POTION)
+                .add(ItemIds.POTION);
 
         tag(ItemTags.BOW_ENCHANTABLE)
-                .add(ModItems.BISMUTH_BOW.get())
-                .add(ModItems.CARBON_BOW.get());
+                .add(ModItems.BISMUTH_BOW.getKey())
+                .add(ModItems.CARBON_BOW.getKey());
 
         tag(ItemTags.CROSSBOW_ENCHANTABLE)
-                .add(ModItems.CARBON_CROSSBOW.get());
+                .add(ModItems.CARBON_CROSSBOW.getKey());
 
         tag(ModItemTags.BISMUTH_TOOL_MATERIALS)
-                .add(ModItems.BISMUTH.get());
+                .add(ModItems.BISMUTH.getKey());
 
         tag(ModItemTags.IS_GOLD_ARMOR)
-                .add(Items.GOLDEN_CHESTPLATE)
-                .add(Items.GOLDEN_HELMET)
-                .add(Items.GOLDEN_LEGGINGS)
-                .add(Items.GOLDEN_BOOTS);
+                .add(ItemIds.GOLDEN_CHESTPLATE)
+                .add(ItemIds.GOLDEN_HELMET)
+                .add(ItemIds.GOLDEN_LEGGINGS)
+                .add(ItemIds.GOLDEN_BOOTS);
 
         tag(ModItemTags.IS_NON_GOLD_RAW_METAL)
-                .add(Items.RAW_IRON)
-                .add(ModItems.RAW_ALUMINIUM.get())
-                .add(ModItems.RAW_MAGNESIUM.get())
-                .add(Items.RAW_COPPER);
+                .add(ItemIds.RAW_IRON)
+                .add(ModItems.RAW_ALUMINIUM.getKey())
+                .add(ModItems.RAW_MAGNESIUM.getKey())
+                .add(ItemIds.RAW_COPPER);
 
         tag(ModItemTags.IS_NON_GOLD_METAL_BLOCK)
-                .add(Items.IRON_BLOCK)
-                .add(Items.COPPER_BLOCK)
-                .add(Items.EXPOSED_COPPER)
-                .add(Items.WEATHERED_COPPER)
-                .add(Items.OXIDIZED_COPPER)
-                .add(Items.WAXED_COPPER_BLOCK)
-                .add(Items.WAXED_EXPOSED_COPPER)
-                .add(Items.WAXED_WEATHERED_COPPER)
-                .add(Items.WAXED_OXIDIZED_COPPER)
-                .add(ModBlocks.ALUMINIUM_BLOCK.get().asItem())
-                .add(ModBlocks.MAGNESIUM_BLOCK.get().asItem())
-                .add(Items.RAW_IRON_BLOCK)
-                .add(ModBlocks.RAW_ALUMINIUM_BLOCK.get().asItem())
-                .add(ModBlocks.RAW_MAGNESIUM_BLOCK.get().asItem())
-                .add(Items.RAW_COPPER_BLOCK);
+                .add(ModBlockItemIds.ALUMINIUM_BLOCK.item())
+                .add(ModBlockItemIds.MAGNESIUM_BLOCK.item())
+                .add(BlockItemIds.RAW_IRON_BLOCK.item())
+                .add(ModBlockItemIds.RAW_ALUMINIUM_BLOCK.item())
+                .add(ModBlockItemIds.RAW_MAGNESIUM_BLOCK.item())
+                .add(BlockItemIds.RAW_COPPER_BLOCK.item());
 
         tag(ModItemTags.IS_NON_GOLD_INGOT)
-                .add(Items.COPPER_INGOT)
-                .add(ModItems.MAGNESIUM_INGOT.get())
-                .add(ModItems.ALUMINIUM_INGOT.get())
-                .add(Items.IRON_INGOT);
+                .add(ItemIds.COPPER_INGOT)
+                .add(ModItems.MAGNESIUM_INGOT.getKey())
+                .add(ModItems.ALUMINIUM_INGOT.getKey())
+                .add(ItemIds.IRON_INGOT);
 
         tag(ModItemTags.IS_GOLD)
-                .add(Items.RAW_GOLD)
-                .add(Items.GOLD_INGOT);
+                .add(ItemIds.RAW_GOLD)
+                .add(ItemIds.GOLD_INGOT);
 
         tag(ItemTags.SHOVELS)
-                .add(ModItems.BISMUTH_SHOVEL.get());
+                .add(ModItems.BISMUTH_SHOVEL.getKey());
 
         tag(ItemTags.AXES)
-                .add(ModItems.BISMUTH_AXE.get());
+                .add(ModItems.BISMUTH_AXE.getKey());
 
         tag(ItemTags.HOES)
-                .add(ModItems.BISMUTH_HOE.get());
+                .add(ModItems.BISMUTH_HOE.getKey());
 
         tag(ItemTags.PICKAXES)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(1).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(1).getKey());
 
         tag(ItemTags.SWORDS)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).getKey());
 
         tag(ItemTags.SPEARS)
-                .add(ModItems.BISMUTH_SPEAR.get());
+                .add(ModItems.BISMUTH_SPEAR.getKey());
 
         tag(ItemTags.MELEE_WEAPON_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
-                .add(ModItems.BISMUTH_SPEAR.get())
-                .add(ModItems.BISMUTH_AXE.get());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).getKey())
+                .add(ModItems.BISMUTH_SPEAR.getKey())
+                .add(ModItems.BISMUTH_AXE.getKey());
 
         tag(ItemTags.SWEEPING_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).getKey());
 
         tag(ItemTags.MINING_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(1).asItem())
-                .add(ModItems.BISMUTH_AXE.get())
-                .add(ModItems.BISMUTH_SHOVEL.get());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(1).getKey())
+                .add(ModItems.BISMUTH_AXE.getKey())
+                .add(ModItems.BISMUTH_SHOVEL.getKey());
 
         tag(ItemTags.DURABILITY_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(1).asItem())
-                .add(ModItems.BISMUTH_AXE.get())
-                .add(ModItems.BISMUTH_HOE.get())
-                .add(ModItems.BISMUTH_SHOVEL.get())
-                .add(ModItems.CARBON_CROSSBOW.get())
-                .add(ModItems.CARBON_BOW.get())
-                .add(ModItems.BISMUTH_BOW.get())
-                .add(ModItems.BISMUTH_SPEAR.get())
-                .add(ModItems.CARBON_ELYTRA.get())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(1).getKey())
+                .add(ModItems.BISMUTH_AXE.getKey())
+                .add(ModItems.BISMUTH_HOE.getKey())
+                .add(ModItems.BISMUTH_SHOVEL.getKey())
+                .add(ModItems.CARBON_CROSSBOW.getKey())
+                .add(ModItems.CARBON_BOW.getKey())
+                .add(ModItems.BISMUTH_BOW.getKey())
+                .add(ModItems.BISMUTH_SPEAR.getKey())
+                .add(ModItems.CARBON_ELYTRA.getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(3).getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(4).getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).getKey());
 
         tag(ItemTags.LUNGE_ENCHANTABLE)
-                .add(ModItems.BISMUTH_SPEAR.get());
+                .add(ModItems.BISMUTH_SPEAR.getKey());
 
         tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
-                .add(ModItems.BISMUTH_SPEAR.get())
-                .add(ModItems.BISMUTH_AXE.get());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).getKey())
+                .add(ModItems.BISMUTH_SPEAR.getKey())
+                .add(ModItems.BISMUTH_AXE.getKey());
 
         tag(ItemTags.WEAPON_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
-                .add(ModItems.BISMUTH_SPEAR.get())
-                .add(ModItems.BISMUTH_AXE.get());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).getKey())
+                .add(ModItems.BISMUTH_SPEAR.getKey())
+                .add(ModItems.BISMUTH_AXE.getKey());
 
         tag(ItemTags.FIRE_ASPECT_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())
-                .add(ModItems.BISMUTH_SPEAR.get());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(0).getKey())
+                .add(ModItems.BISMUTH_SPEAR.getKey());
 
         tag(ItemTags.ARMOR_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem())
-                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(3).getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(4).getKey())
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).getKey());
 
         tag(ItemTags.HEAD_ARMOR)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).getKey());
 
         tag(ItemTags.CHEST_ARMOR)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(3).getKey());
 
         tag(ItemTags.LEG_ARMOR)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(4).getKey());
 
         tag(ItemTags.FOOT_ARMOR)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).getKey());
 
         tag(ItemTags.HEAD_ARMOR_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(2).getKey());
 
         tag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(3).getKey());
 
         tag(ItemTags.LEG_ARMOR_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(4).getKey());
 
         tag(ItemTags.FOOT_ARMOR_ENCHANTABLE)
-                .add(ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+                .add(ModItems.BISMUTH_EQUIPMENT.get(5).getKey());
 
         tag(ItemTags.SAPLINGS)
-                .add(ModBlocks.TAINTED_SAPLING.get().asItem())
-                .add(ModBlocks.BLOODWOOD_SAPLING.get().asItem())
-                .add(ModBlocks.PALM_SAPLING.get().asItem())
-                .add(ModBlocks.DECREPIT_SAPLING.get().asItem())
-                .add(ModBlocks.PALLID_SAPLING.get().asItem());
+                .add(ModBlockItemIds.TAINTED_SAPLING.item())
+                .add(ModBlockItemIds.BLOODWOOD_SAPLING.item())
+                .add(ModBlockItemIds.PALM_SAPLING.item())
+                .add(ModBlockItemIds.DECREPIT_SAPLING.item())
+                .add(ModBlockItemIds.PALLID_SAPLING.item());
 
         tag(ModItemTags.COMPRESSOR_FUEL)
-                .add(ModItems.AZURITE.get())
-                .add(ModItems.FLUORITE.get())
-                .add(ModItems.EVERFROST.get());
-
-        tag(ItemTags.FLOWERS)
-                .add(ModBlocks.BLUE_ROSE.asItem())
-                .add(ModBlocks.ROSE.asItem());
+                .add(ModItems.AZURITE.getKey())
+                .add(ModItems.FLUORITE.getKey())
+                .add(ModItems.EVERFROST.getKey());
 
         tag(ItemTags.LOGS_THAT_BURN)
-                .add(ModBlocks.TAINTED_WOOD.get().asItem())
-                .add(ModBlocks.TAINTED_LOG.get().asItem())
-                .add(ModBlocks.STRIPPED_TAINTED_WOOD.get().asItem())
-                .add(ModBlocks.STRIPPED_TAINTED_LOG.get().asItem())
-                .add(ModBlocks.BLOODWOOD.get().asItem())
-                .add(ModBlocks.BLOODWOOD_LOG.get().asItem())
-                .add(ModBlocks.STRIPPED_BLOODWOOD.get().asItem())
-                .add(ModBlocks.STRIPPED_BLOODWOOD_LOG.get().asItem());
+                .add(ModBlockItemIds.TAINTED_WOOD.item())
+                .add(ModBlockItemIds.TAINTED_LOG.item())
+                .add(ModBlockItemIds.STRIPPED_TAINTED_WOOD.item())
+                .add(ModBlockItemIds.STRIPPED_TAINTED_LOG.item())
+                .add(ModBlockItemIds.BLOODWOOD.item())
+                .add(ModBlockItemIds.BLOODWOOD_LOG.item())
+                .add(ModBlockItemIds.STRIPPED_BLOODWOOD.item())
+                .add(ModBlockItemIds.STRIPPED_BLOODWOOD_LOG.item());
 
         tag(ItemTags.PLANKS)
-                .add(ModBlocks.TAINTED_PLANKS.get().asItem())
-                .add(ModBlocks.BLOODWOOD_PLANKS.get().asItem())
-                .add(ModBlocks.PALM_PLANKS.get().asItem())
-                .add(ModBlocks.DECREPIT_PLANKS.get().asItem())
-                .add(ModBlocks.PALLID_PLANKS.get().asItem());
+                .add(ModBlockItemIds.TAINTED_PLANKS.item())
+                .add(ModBlockItemIds.BLOODWOOD_PLANKS.item())
+                .add(ModBlockItemIds.PALM_PLANKS.item())
+                .add(ModBlockItemIds.DECREPIT_PLANKS.item())
+                .add(ModBlockItemIds.PALLID_PLANKS.item());
+
+        tag(ModItemTags.MUSIC_DISCS)
+                .addTag(ItemTags.CREEPER_DROP_MUSIC_DISCS)
+                .add(ItemIds.MUSIC_DISC_PIGSTEP)
+                .add(ItemIds.MUSIC_DISC_OTHERSIDE)
+                .add(ItemIds.MUSIC_DISC_PRECIPICE)
+                .add(ItemIds.MUSIC_DISC_5)
+                .add(ItemIds.MUSIC_DISC_CREATOR)
+                .add(ItemIds.MUSIC_DISC_CREATOR_MUSIC_BOX)
+                .add(ItemIds.MUSIC_DISC_RELIC)
+                .add(ItemIds.MUSIC_DISC_TEARS)
+                .add(ItemIds.MUSIC_DISC_LAVA_CHICKEN);
+
+        tag(ItemTags.BEACON_PAYMENT_ITEMS)
+                .add(ModItems.BISMUTH.getKey())
+                .add(ModItems.ALUMINIUM_INGOT.getKey())
+                .add(ModItems.MAGNESIUM_INGOT.getKey())
+                .add(ModItems.AZURITE.getKey())
+                .add(ModItems.FLUORITE.getKey());
+
+        tag(ModItemTags.AIMABLE_WANDS)
+                .add(ModItems.FIRE_WAND.getKey());
+
+        tag(ModItemTags.TARGETING_WANDS)
+                .add(ModItems.ICE_WAND.getKey());
     }
 }

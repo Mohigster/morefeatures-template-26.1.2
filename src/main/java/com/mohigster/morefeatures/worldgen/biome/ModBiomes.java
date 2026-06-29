@@ -22,12 +22,12 @@ public class ModBiomes {
 
     public static void registerBiomes() {
         // Register regions
-        Regions.register(new OverworldRegion(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures_overworld"), 20));
+        Regions.register(new OverworldRegion(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures_overworld"), 30));
 
         // Separate EndBiomeRegistry, as end biomes work differently to overworld ones.
-        EndBiomeRegistry.registerHighlandsBiome(END_ROT, 20);
-        EndBiomeRegistry.registerHighlandsBiome(DECREPIT_FOREST, 10);
-        EndBiomeRegistry.registerHighlandsBiome(PALLID_FOREST, 10);
+        EndBiomeRegistry.registerHighlandsBiome(END_ROT, 10);
+        EndBiomeRegistry.registerHighlandsBiome(DECREPIT_FOREST, 7);
+        EndBiomeRegistry.registerHighlandsBiome(PALLID_FOREST, 7);
     }
 
     public static void bootstrap(BootstrapContext<Biome> context) {

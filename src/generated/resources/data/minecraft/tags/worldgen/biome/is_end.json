@@ -7,6 +7,10 @@
     {
       "id": "morefeatures:decrepit_forest",
       "required": false
+    },
+    {
+      "id": "morefeatures:pallid_forest",
+      "required": false
     }
   ]
 }

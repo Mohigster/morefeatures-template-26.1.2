@@ -1,7 +1,6 @@
 package com.mohigster.morefeatures.worldgen.biome.region;
 
 import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
-import com.mohigster.morefeatures.worldgen.biome.ModOverworldBiomes;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
@@ -16,6 +15,36 @@ import terrablender.api.VanillaParameterOverlayBuilder;
 import java.util.function.Consumer;
 
 public class OverworldRegion extends Region {
+
+    // Custom biome parameters
+
+    private static final float BLOODWOOD_TEMP_MIN = 0.20F;
+    private static final float BLOODWOOD_TEMP_MAX = 0.25F;
+    private static final float BLOODWOOD_EROSION_MIN = 0.45F;
+    private static final float BLOODWOOD_EROSION_MAX = 0.48F;
+    private static final float BLOODWOOD_WEIRD_MIN = -0.6F;
+    private static final float BLOODWOOD_WEIRD_MAX = -0.5F;
+
+    // Bloodwood and tainted forests should NEVER border each other. Their values (specifically their weirdness values) are sset with this in mind
+
+    private static final float TAINTED_TEMP_MIN = -0.25F;
+    private static final float TAINTED_TEMP_MAX = -0.20F;
+    private static final float TAINTED_EROSION_MIN = 0.65F;
+    private static final float TAINTED_EROSION_MAX = 0.68F;
+    private static final float TAINTED_WEIRD_MIN = 0.55F;
+    private static final float TAINTED_WEIRD_MAX = 0.6F;
+
+    private static final float ICE_CAVE_TEMP_MIN = -1.0F;
+    private static final float ICE_CAVE_TEMP_MAX = -0.85F;
+    private static final float ICE_CAVE_EROSION_MIN = -1.0F;
+    private static final float ICE_CAVE_EROSION_MAX = -0.15F;
+    private static final float ICE_CAVE_DEPTH_MIN = 0.75F;
+    private static final float ICE_CAVE_DEPTH_MAX = 1.0F;
+    private static final float ICE_CAVE_WEIRD_MIN_1 = -0.8F;
+    private static final float ICE_CAVE_WEIRD_MIN_2 = 0.7F;
+    private static final float ICE_CAVE_WEIRD_MAX_1 = -0.7F;
+    private static final float ICE_CAVE_WEIRD_MAX_2 = 0.8F;
+
     public OverworldRegion(Identifier name, int weight) {
         super(name, RegionType.OVERWORLD, weight);
     }
@@ -25,36 +54,32 @@ public class OverworldRegion extends Region {
         VanillaParameterOverlayBuilder builder = new VanillaParameterOverlayBuilder();
 
         new ParameterUtils.ParameterPointListBuilder()
-                .temperature(ParameterUtils.Temperature.WARM)
+                .temperature(Climate.Parameter.span(BLOODWOOD_TEMP_MIN, BLOODWOOD_TEMP_MAX))
                 .humidity(ParameterUtils.Humidity.span(ParameterUtils.Humidity.ARID, ParameterUtils.Humidity.DRY))
                 .continentalness(ParameterUtils.Continentalness.FAR_INLAND)
-                .erosion(ParameterUtils.Erosion.EROSION_6)
+                .erosion(Climate.Parameter.span(BLOODWOOD_EROSION_MIN, BLOODWOOD_EROSION_MAX))
                 .depth(ParameterUtils.Depth.SURFACE)
-                .weirdness(ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING)
+                .weirdness(Climate.Parameter.span(BLOODWOOD_WEIRD_MIN, BLOODWOOD_WEIRD_MAX))
                 .build().forEach(point -> builder.add(point, ModBiomes.BLOODWOOD_FOREST));
 
         new ParameterUtils.ParameterPointListBuilder()
-                .temperature(ParameterUtils.Temperature.COOL)
+                .temperature(Climate.Parameter.span(TAINTED_TEMP_MIN, TAINTED_TEMP_MAX))
                 .humidity(ParameterUtils.Humidity.span(ParameterUtils.Humidity.ARID, ParameterUtils.Humidity.DRY))
                 .continentalness(ParameterUtils.Continentalness.FAR_INLAND)
-                .erosion(ParameterUtils.Erosion.EROSION_6)
+                .erosion(Climate.Parameter.span(TAINTED_EROSION_MIN, TAINTED_EROSION_MAX))
                 .depth(ParameterUtils.Depth.SURFACE)
-                .weirdness(ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING)
+                .weirdness(Climate.Parameter.span(TAINTED_WEIRD_MIN, TAINTED_WEIRD_MAX))
                 .build().forEach(point -> builder.add(point, ModBiomes.TAINTED_FOREST));
 
         new ParameterUtils.ParameterPointListBuilder()
-                .temperature(ParameterUtils.Temperature.FROZEN)
-                .humidity(ParameterUtils.Humidity.HUMID)
+                .temperature(Climate.Parameter.span(ICE_CAVE_TEMP_MIN, ICE_CAVE_TEMP_MAX))
+                .humidity(ParameterUtils.Humidity.NEUTRAL)
                 .continentalness(ParameterUtils.Continentalness.span(
                         ParameterUtils.Continentalness.INLAND,
                         ParameterUtils.Continentalness.FAR_INLAND))
-                .erosion(Climate.Parameter.span(-1.0F, -0.15F))
-                .depth(Climate.Parameter.span(0.5f, 1.0f))
-                .weirdness(
-                        ParameterUtils.Weirdness.LOW_SLICE_VARIANT_ASCENDING,
-                        ParameterUtils.Weirdness.MID_SLICE_NORMAL_ASCENDING,
-                        ParameterUtils.Weirdness.LOW_SLICE_NORMAL_DESCENDING,
-                        ParameterUtils.Weirdness.MID_SLICE_NORMAL_DESCENDING)
+                .erosion(Climate.Parameter.span(ICE_CAVE_EROSION_MIN, ICE_CAVE_EROSION_MAX))
+                .depth(Climate.Parameter.span(ICE_CAVE_DEPTH_MIN, ICE_CAVE_DEPTH_MAX))
+                .weirdness(Climate.Parameter.span(ICE_CAVE_WEIRD_MIN_1, ICE_CAVE_WEIRD_MAX_1), Climate.Parameter.span(ICE_CAVE_WEIRD_MIN_2, ICE_CAVE_WEIRD_MAX_2))
                 .build().forEach(point -> builder.add(point, ModBiomes.ICE_CAVE));
 
         // Add our points to the mapper

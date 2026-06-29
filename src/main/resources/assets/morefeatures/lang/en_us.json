@@ -85,6 +85,7 @@
   "block.morefeatures.bloodwood_stairs": "Bloodwood Stairs",
   "block.morefeatures.bloodwood_leaves": "Bloodwood Leaves",
   "block.morefeatures.bloodwood_sapling": "Bloodwood Sapling",
+  "item.morefeatures.bloodwood_hanging_sign": "Bloodwood Hanging Sign",
 
   "block.morefeatures.tainted_wood": "Tainted Wood",
   "block.morefeatures.tainted_log": "Tainted Log",
@@ -133,6 +134,7 @@
   "block.morefeatures.decrepit_leaves": "Decrepit Leaves",
   "block.morefeatures.decrepit_sapling": "Decrepit Sapling",
   "item.morefeatures.decrepit_sign": "Decrepit Sign",
+  "item.morefeatures.decrepit_hanging_sign": "Decrepit Hanging Sign",
 
   "block.morefeatures.pallid_nullium": "Pallid Nullium",
   "block.morefeatures.pallid_roots": "Pallid Roots",
@@ -150,6 +152,8 @@
   "block.morefeatures.pallid_leaves": "Pallid Leaves",
   "block.morefeatures.pallid_sapling": "Pallid Sapling",
   "item.morefeatures.pallid_sign": "Pallid Sign",
+
+  "block.morefeatures.icicle": "Icicle",
 
   "block.morefeatures.void_anchor": "Void Anchor",
 
@@ -171,9 +175,9 @@
   "item.morefeatures.carbon_wolf_armor": "Carbon Reinforced Wolf Armor",
   "item.morefeatures.carbon_trident": "Carbon Reinforced Trident",
 
-  "item.morefeatures.aquamarine_music_disc": "Music Disc",
+  "item.morefeatures.music_disc_aquamarine": "Music Disc",
   "jukebox_song.morefeatures.aquamarine": "Mohigster - Aquamarine",
-  "sound.morefeatures.aquamarine": "Aquamarine",
+  "sounds.morefeatures.aquamarine": "Aquamarine",
 
   "sounds.morefeatures.magic_block_break": "Breaking Magic Block",
   "sounds.morefeatures.magic_block_fall": "Falling on Magic Block",
@@ -204,5 +208,14 @@
   "tooltip.morefeatures.magic_block": "Try throwing a metal, carbon-based organic material, or potion! It's §9MAGIC§r",
 
   "morefeatures.tooltip.liquid.amount.with.capacity": "%s / %s mB",
-  "morefeatures.tooltip.liquid.amount": "%s mB"
+  "morefeatures.tooltip.liquid.amount": "%s mB",
+
+  "item.morefeatures.frosted_core": "Frosted Core",
+
+  "item.morefeatures.iceologer_spawn_egg": "Iceologer Spawn Egg",
+  "entity.morefeatures.iceologer": "Iceologer",
+
+  "item.morefeatures.ice_wand": "Ice Wand",
+  "item.morefeatures.fire_wand": "Fire Wand",
+  "item.morefeatures.healing_wand": "Healing Wand"
 }

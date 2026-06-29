@@ -3,10 +3,13 @@ package com.mohigster.morefeatures;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
 import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
-import com.mohigster.morefeatures.entity.projectile.BismuthTridentModel;
-import com.mohigster.morefeatures.entity.projectile.BismuthTridentRenderer;
-import com.mohigster.morefeatures.entity.projectile.CarbonTridentModel;
-import com.mohigster.morefeatures.entity.projectile.CarbonTridentRenderer;
+import com.mohigster.morefeatures.entity.model.IceologerModel;
+import com.mohigster.morefeatures.entity.model.BismuthTridentModel;
+import com.mohigster.morefeatures.particles.ModFallingLeavesParticle;
+import com.mohigster.morefeatures.particles.ModParticleTypes;
+import com.mohigster.morefeatures.renderer.trident.BismuthTridentRenderer;
+import com.mohigster.morefeatures.entity.model.CarbonTridentModel;
+import com.mohigster.morefeatures.renderer.trident.CarbonTridentRenderer;
 import com.mohigster.morefeatures.menu.ModMenuTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorScreen;
 import com.mohigster.morefeatures.model.ModModelLayer;
@@ -15,28 +18,20 @@ import com.mohigster.morefeatures.renderer.special.BismuthTridentSpecialRenderer
 import com.mohigster.morefeatures.renderer.special.CarbonShieldSpecialRenderer;
 import com.mohigster.morefeatures.renderer.special.CarbonTridentSpecialRenderer;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.model.monster.illager.IllagerModel;
 import net.minecraft.client.model.object.boat.BoatModel;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.ShelfRenderer;
 import net.minecraft.client.renderer.blockentity.StandingSignRenderer;
 import net.minecraft.client.renderer.entity.BoatRenderer;
-import net.minecraft.client.resources.model.sprite.AtlasManager;
 import net.minecraft.data.AtlasIds;
-import net.minecraft.network.chat.FontDescription;
-import net.minecraft.network.chat.contents.objects.AtlasSprite;
 import net.minecraft.resources.Identifier;
-import net.minecraft.world.entity.vehicle.boat.Boat;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
-import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
-import net.neoforged.neoforge.client.event.RegisterSpecialModelRendererEvent;
-import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
+import net.neoforged.neoforge.client.event.*;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
@@ -61,17 +56,35 @@ public class MoreFeaturesClient {
     }
 
     @SubscribeEvent
+    public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
+        event.registerSpriteSet(
+                ModParticleTypes.PALM_LEAVES.get(),
+                ModFallingLeavesParticle.PalmProvider::new
+        );
+        event.registerSpriteSet(
+                ModParticleTypes.BLOODWOOD_LEAVES.get(),
+                ModFallingLeavesParticle.EvilLeafProvider::new
+        );
+        event.registerSpriteSet(
+                ModParticleTypes.TAINTED_LEAVES.get(),
+                ModFallingLeavesParticle.EvilLeafProvider::new
+        );
+    }
+
+    @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(ModModelLayer.CARBON_TRIDENT, CarbonTridentModel::createLayer);
         event.registerLayerDefinition(ModModelLayer.BISMUTH_TRIDENT, BismuthTridentModel::createLayer);
         event.registerLayerDefinition(ModModelLayer.PALM_BOAT, BoatModel::createBoatModel);
         event.registerLayerDefinition(ModModelLayer.PALM_CHEST_BOAT, BoatModel::createChestBoatModel);
+        event.registerLayerDefinition(ModModelLayer.ICEOLOGER, IceologerModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(ModEntityTypes.CARBON_TRIDENT.get(), CarbonTridentRenderer::new);
         event.registerEntityRenderer(ModEntityTypes.BISMUTH_TRIDENT.get(), BismuthTridentRenderer::new);
+        event.registerEntityRenderer(ModEntityTypes.ICEOLOGER.get(), IceologerRenderer::new);
         event.registerEntityRenderer(
                 ModEntityTypes.PALM_BOAT.get(),
                 context -> new BoatRenderer(
@@ -122,8 +135,8 @@ public class MoreFeaturesClient {
     }
 
     @SubscribeEvent
-    public static Identifier onTextureStitch(TextureAtlasStitchedEvent event) {  // or whatever the exact NeoForge event is
-        if (event.getAtlas().location().equals(AtlasIds.SIGNS)) {  // check exact constant
+    public static Identifier onTextureStitch(TextureAtlasStitchedEvent event) {
+        if (event.getAtlas().location().equals(AtlasIds.GUI)) {
             return Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "entity/sign/palm");
         }
         return null;

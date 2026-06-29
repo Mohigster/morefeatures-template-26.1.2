@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_wall_hanging_sign",
+  "textures": {
+    "all": "morefeatures:block/decrepit_hanging_sign",
+    "particle": "morefeatures:block/stripped_decrepit_log"
+  }
+}

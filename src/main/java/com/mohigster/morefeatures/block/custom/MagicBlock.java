@@ -102,7 +102,7 @@ public class MagicBlock extends Block {
 
     private boolean isCarbonItem(ItemStack item) {
         return item.is(Items.COAL) || item.is(ItemTags.SAPLINGS) ||
-                item.is(ItemTags.FLOWERS) || item.is(ItemTags.LOGS_THAT_BURN) ||
+                item.is(ItemTags.LOGS_THAT_BURN) ||
                 item.is(ItemTags.LOGS) || item.is(ModItemTags.IS_FOOD) ||
                 item.is(Items.REDSTONE) || item.is(Items.STICK) ||
                 item.is(ItemTags.WOOL) || item.is(ItemTags.PLANKS);

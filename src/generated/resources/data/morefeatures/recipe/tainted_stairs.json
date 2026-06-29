@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "bloodwood",
+  "group": "wooden_stairs",
   "key": {
     "#": "morefeatures:tainted_planks"
   },

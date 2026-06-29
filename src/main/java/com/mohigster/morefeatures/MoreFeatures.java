@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures;
 
+import com.mohigster.morefeatures.attachment.ModAttachments;
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.block.custom.woodtype.ModWoodType;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
@@ -9,6 +10,7 @@ import com.mohigster.morefeatures.enchantment.ModEnchantmentEffects;
 import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
 import com.mohigster.morefeatures.item.ModItems;
 import com.mohigster.morefeatures.menu.ModMenuTypes;
+import com.mohigster.morefeatures.particles.ModParticleTypes;
 import com.mohigster.morefeatures.recipe.ModRecipes;
 import com.mohigster.morefeatures.sound.ModSounds;
 import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
@@ -17,11 +19,21 @@ import com.mohigster.morefeatures.worldgen.feature.ModFeatures;
 import com.mohigster.morefeatures.worldgen.tree.decorator.ModTreeDecorators;
 import com.mohigster.morefeatures.worldgen.tree.foliage_placer.ModFoliagePlacerType;
 import com.mohigster.morefeatures.worldgen.tree.trunk_placer.ModTrunkPlacerType;
-import net.minecraft.client.renderer.Sheets;
+import net.minecraft.core.*;
 import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.data.registries.VanillaRegistries;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
+import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.fml.startup.Server;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import org.slf4j.Logger;
 
 import com.mojang.logging.LogUtils;
@@ -38,6 +50,8 @@ import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import terrablender.api.SurfaceRuleManager;
 
+import java.util.function.Supplier;
+
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MoreFeatures.MODID)
@@ -51,6 +65,7 @@ public class MoreFeatures {
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public MoreFeatures(IEventBus modEventBus, ModContainer modContainer) {
         // Register the commonSetup method for modloading
+
         modEventBus.addListener(this::commonSetup);
 
         ModCreativeModeTabs.register(modEventBus);
@@ -59,6 +74,8 @@ public class MoreFeatures {
 
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+
+        ModAttachments.register(modEventBus);
 
         ModEntityTypes.register(modEventBus);
         ModSounds.register(modEventBus);
@@ -71,6 +88,8 @@ public class MoreFeatures {
         ModTrunkPlacerType.register(modEventBus);
         ModFoliagePlacerType.register(modEventBus);
         ModFeatures.register(modEventBus);
+
+        ModParticleTypes.register(modEventBus);
 
         ModRecipes.register(modEventBus);
 
@@ -94,6 +113,7 @@ public class MoreFeatures {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
+
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ROSE.getId(), ModBlocks.POTTED_ROSE);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BLUE_ROSE.getId(), ModBlocks.POTTED_BLUE_ROSE);
 
@@ -101,17 +121,9 @@ public class MoreFeatures {
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BLOODWOOD_SAPLING.getId(), ModBlocks.POTTED_BLOODWOOD_SAPLING);
             ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALM_SAPLING.getId(), ModBlocks.POTTED_PALM_SAPLING);
 
-            ModBiomes.registerBiomes();
+            ModBiomes.registerBiomes(); // Register biomes so the SurfaceRules has something to find.
 
-            Sheets.addWoodType(ModWoodType.PALM);
-            Sheets.addWoodType(ModWoodType.BLOODWOOD);
-            Sheets.addWoodType(ModWoodType.TAINTED);
-
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeBloodwoodForestRules());
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeTaintedForestRules());
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeIceCaveRules());
-            SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, ModSurfaceRules.makeEndSurfaceRules());
-
+            // Boats actually spawning when dispensed instead of dropped like an item
             DispenserBlock.registerBehavior(
                     ModItems.PALM_BOAT.get(),
                     new BoatDispenseItemBehavior(ModEntityTypes.PALM_BOAT.get())
@@ -136,5 +148,17 @@ public class MoreFeatures {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
 
+    }
+
+    @SubscribeEvent
+    public void onServerAboutToStart(ServerAboutToStartEvent event){
+        HolderGetter<Biome> biomeGetter =
+                event.getServer().registryAccess().lookupOrThrow(Registries.BIOME);
+
+        // THIS WORKS (FINALLY) Aaaaaand that ends the migration to 26.2 fiasco.
+        SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeBloodwoodForestRules(biomeGetter));
+        SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeTaintedForestRules(biomeGetter));
+        SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeIceCaveRules(biomeGetter));
+        SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, ModSurfaceRules.makeEndSurfaceRules(biomeGetter));
     }
 }

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_sign_rot_0",
+  "textures": {
+    "all": "morefeatures:block/pallid_sign",
+    "particle": "morefeatures:block/pallid_planks"
+  }
+}

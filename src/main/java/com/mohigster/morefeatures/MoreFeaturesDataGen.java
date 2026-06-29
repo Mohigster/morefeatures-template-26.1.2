@@ -15,7 +15,7 @@ import java.util.List;
 @EventBusSubscriber(modid = MoreFeatures.MODID)
 public class MoreFeaturesDataGen {
 
-    // @SubscribeEvent is necessary. Without it, DataGen will fail.
+    // Running datagen in neoforge is an event. Therefore we must annotate the method as a SubscribeEvent method
 
     @SubscribeEvent
     public static void gatherClientData(GatherDataEvent.Client event){
@@ -29,7 +29,9 @@ public class MoreFeaturesDataGen {
         generator.addProvider(true, new ModBlockTagsProvider(packOutput, lookupProvider));
         generator.addProvider(true, new ModItemTagsProvider(packOutput, lookupProvider));
         generator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(),
-                List.of(new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK)), lookupProvider));
+                List.of(
+                        new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK),
+                        new LootTableProvider.SubProviderEntry(ModEntityLootTableProvider::new, LootContextParamSets.ENTITY)), lookupProvider));
         generator.addProvider(true, new ModRecipeProvider.Runner(packOutput, lookupProvider));
         generator.addProvider(true, new ModDatapackProvider(packOutput, lookupProvider));
         generator.addProvider(true, new ModSoundsProvider(packOutput));

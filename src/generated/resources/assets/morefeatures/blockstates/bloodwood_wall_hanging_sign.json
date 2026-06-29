@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
-      "model": "morefeatures:block/bloodwood_hanging_sign"
+    "facing=east": {
+      "model": "morefeatures:block/bloodwood_wall_hanging_sign",
+      "y": 270
+    },
+    "facing=north": {
+      "model": "morefeatures:block/bloodwood_wall_hanging_sign",
+      "y": 180
+    },
+    "facing=south": {
+      "model": "morefeatures:block/bloodwood_wall_hanging_sign"
+    },
+    "facing=west": {
+      "model": "morefeatures:block/bloodwood_wall_hanging_sign",
+      "y": 90
     }
   }
 }

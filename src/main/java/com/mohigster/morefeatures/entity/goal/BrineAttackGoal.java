@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.entity.goal;
 
 import com.mohigster.morefeatures.entity.custom.BrineEntity;
-import com.mohigster.morefeatures.entity.projectile.brine.BrineBallEntity;
+import com.mohigster.morefeatures.entity.custom.projectile.brine.BrineBallEntity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 

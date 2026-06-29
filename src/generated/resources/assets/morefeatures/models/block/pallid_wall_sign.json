@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_wall_sign",
+  "textures": {
+    "all": "morefeatures:block/pallid_sign",
+    "particle": "morefeatures:block/pallid_planks"
+  }
+}

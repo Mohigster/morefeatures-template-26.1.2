@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "category": "misc",
   "group": "aluminium",
   "ingredients": [
     "morefeatures:raw_aluminium_block"

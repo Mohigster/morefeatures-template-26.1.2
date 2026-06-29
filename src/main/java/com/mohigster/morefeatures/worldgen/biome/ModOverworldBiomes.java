@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.worldgen.biome;
 
+import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
 import com.mohigster.morefeatures.worldgen.ModPlacedFeatures;
 import com.mohigster.morefeatures.worldgen.carver.ModCarvers;
 import net.minecraft.core.HolderGetter;
@@ -9,7 +10,7 @@ import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.util.ARGB;
 import net.minecraft.world.attribute.*;
-import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
@@ -23,8 +24,8 @@ public class ModOverworldBiomes {
     public static Biome bloodwoodForest(HolderGetter<PlacedFeature> placedFeatureGetter, HolderGetter<ConfiguredWorldCarver<?>> carverGetter) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(spawnBuilder, 30);
-        spawnBuilder.addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(EntityType.ARMADILLO, 2, 3));
-        spawnBuilder.addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(EntityType.CAMEL, 1, 2));
+        spawnBuilder.addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(EntityTypes.ARMADILLO, 2, 3));
+        spawnBuilder.addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(EntityTypes.CAMEL, 1, 2));
 
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
         BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
@@ -59,8 +60,8 @@ public class ModOverworldBiomes {
     public static Biome taintedForest(HolderGetter<PlacedFeature> placedFeatureGetter, HolderGetter<ConfiguredWorldCarver<?>> carverGetter) {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         BiomeDefaultFeatures.commonSpawns(spawnBuilder, 30);
-        spawnBuilder.addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(EntityType.ARMADILLO, 2, 3));
-        spawnBuilder.addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(EntityType.CAMEL, 1, 2));
+        spawnBuilder.addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(EntityTypes.ARMADILLO, 2, 3));
+        spawnBuilder.addSpawn(MobCategory.CREATURE, 20, new MobSpawnSettings.SpawnerData(EntityTypes.CAMEL, 1, 2));
 
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
         BiomeDefaultFeatures.addDefaultCarversAndLakes(biomeBuilder);
@@ -95,8 +96,9 @@ public class ModOverworldBiomes {
         MobSpawnSettings.Builder spawnBuilder = new MobSpawnSettings.Builder();
         // Spawns tailored for a cold cave environment
         BiomeDefaultFeatures.commonSpawns(spawnBuilder, 30);
-        spawnBuilder.addSpawn(MobCategory.MONSTER, 95, new MobSpawnSettings.SpawnerData(EntityType.STRAY, 4, 4));
-        spawnBuilder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityType.POLAR_BEAR, 1, 2));
+        spawnBuilder.addSpawn(MobCategory.MONSTER, 80, new MobSpawnSettings.SpawnerData(ModEntityTypes.ICEOLOGER.get(), 1, 1));
+        spawnBuilder.addSpawn(MobCategory.MONSTER, 95, new MobSpawnSettings.SpawnerData(EntityTypes.STRAY, 4, 4));
+        spawnBuilder.addSpawn(MobCategory.CREATURE, 10, new MobSpawnSettings.SpawnerData(EntityTypes.POLAR_BEAR, 1, 2));
 
         BiomeGenerationSettings.Builder biomeBuilder = new BiomeGenerationSettings.Builder(placedFeatureGetter, carverGetter);
         biomeBuilder.addCarver(ModCarvers.ICE_CAVE);
@@ -108,6 +110,8 @@ public class ModOverworldBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.SMALL_SNOW_PATCH_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.SNOW_PATCH_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.LARGE_SNOW_PATCH_PLACED_KEY);
+
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, ModPlacedFeatures.ICICLE_CLUSTER_PLACED_KEY);
 
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(true)

@@ -10,6 +10,7 @@ import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.VerticalAnchor;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -50,7 +51,6 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> DECREPIT_FOREST_VEGETATION_RARE_PLACED_KEY = registerKey("decrepit_forest_vegetation_rare_placed");
     public static final ResourceKey<PlacedFeature> PALLID_FOREST_VEGETATION_PLACED_KEY = registerKey("pallid_forest_vegetation_placed");
     public static final ResourceKey<PlacedFeature> PALLID_FOREST_VEGETATION_RARE_PLACED_KEY = registerKey("pallid_forest_vegetation_rare_placed");
-    public static final ResourceKey<PlacedFeature> DECREPIT_BONEMEAL_PLACED_KEY = registerKey("decrepit_bonemeal_placed");
 
     // Ice cave patch resource keys
 
@@ -64,9 +64,13 @@ public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> SNOW_PATCH_PLACED_KEY = registerKey("snow_patch_placed");
     public static final ResourceKey<PlacedFeature> LARGE_SNOW_PATCH_PLACED_KEY = registerKey("large_snow_patch_placed");
 
+    // Other ice cave keys
+
     public static final ResourceKey<PlacedFeature> EVERFROST_ORE_PLACED_KEY = registerKey("everfrost_ore_placed");
 
     public static final ResourceKey<PlacedFeature> ICE_SPIRE_PLACED_KEY = registerKey("iced_spire_placed");
+
+    public static final ResourceKey<PlacedFeature> ICICLE_CLUSTER_PLACED_KEY = registerKey("icicle_cluster_placed");
 
     // Oasis resource key
 
@@ -80,61 +84,61 @@ public class ModPlacedFeatures {
         // PLACE ORES
 
         register(context, AZURITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_AZURITE_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64))));
+                ModOrePlacementUtils.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64))));
 
         register(context, NETHER_AZURITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.NETHER_AZURITE_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
 
         register(context, END_AZURITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_AZURITE_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
 
         register(context, FLUORITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.OVERWORLD_FLUORITE_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64))));
+                ModOrePlacementUtils.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64))));
 
         register(context, NETHER_FLUORITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.NETHER_FLUORITE_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
 
         register(context, END_FLUORITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.END_FLUORITE_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
 
         register(context, ALUMINIUM_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ALUMINIUM_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, MAGNESIUM_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.MAGNESIUM_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(3, HeightRangePlacement.uniform(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(160))));
+                ModOrePlacementUtils.commonOrePlacement(3, HeightRangePlacement.uniform(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(160))));
 
         register(context, BISMUTH_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BISMUTH_ORE_KEY),
-                ModOrePlacement.rareOrePlacement(3, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
+                ModOrePlacementUtils.extraOrePlacement(1, 0.5f, 1, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
 
         register(context, EVERFROST_ORE_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.EVERFROST_ORE_KEY),
-                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
+                ModOrePlacementUtils.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
 
         register(context, SMALL_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_ICE_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, LARGE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LARGE_ICE_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, SMALL_BLUE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_BLUE_ICE_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, BLUE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.BLUE_ICE_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, LARGE_BLUE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LARGE_BLUE_ICE_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, SMALL_SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_SNOW_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SNOW_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, LARGE_SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.LARGE_SNOW_PATCH_KEY),
-                ModOrePlacement.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                ModOrePlacementUtils.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
 
         // PLACE TREES
@@ -144,7 +148,7 @@ public class ModPlacedFeatures {
                         ModBlocks.BLOODWOOD_SAPLING.get()));
 
         register(context, SMALL_BLOODWOOD_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_BLOODWOOD_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.01f, 1),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.01f, 1),
                         ModBlocks.BLOODWOOD_SAPLING.get()));
 
         register(context, FALLEN_BLOODWOOD_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FALLEN_BLOODWOOD_KEY),
@@ -152,11 +156,11 @@ public class ModPlacedFeatures {
                         ModBlocks.BLOODWOOD_SAPLING.get()));
 
         register(context, TAINTED_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.TAINTED_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.01f, 1),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(1, 0.01f, 1),
                         ModBlocks.TAINTED_SAPLING.get()));
 
         register(context, SMALL_TAINTED_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.SMALL_TAINTED_KEY),
-                VegetationPlacements.treePlacement(PlacementUtils.countExtra(2, 0.01f, 1),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(6, 0.01f, 1),
                         ModBlocks.TAINTED_SAPLING.get()));
 
         register(context, FALLEN_TAINTED_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.FALLEN_TAINTED_KEY),
@@ -222,13 +226,21 @@ public class ModPlacedFeatures {
                         BiomeFilter.biome()
                 ));
 
+        register(context, ICICLE_CLUSTER_PLACED_KEY, configuredFeatures.getOrThrow(ModConfiguredFeatures.ICICLE_CLUSTER_KEY),
+                List.of(
+                        CountPlacement.of(UniformInt.of(48, 96)),
+                        InSquarePlacement.spread(),
+                        PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
+                        BiomeFilter.biome()
+                ));
+
         // PLACE SPIRE
 
         PlacementUtils.register(
                 context,
                 ICE_SPIRE_PLACED_KEY,
                 configuredFeatures.getOrThrow(ModConfiguredFeatures.ICE_SPIRE_KEY),
-                RarityFilter.onAverageOnceEvery(2),
+                RarityFilter.onAverageOnceEvery(5),
                 InSquarePlacement.spread(),
 
                 // Check across vertical heightmap

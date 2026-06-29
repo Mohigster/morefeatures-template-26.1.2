@@ -4,18 +4,22 @@ import com.google.common.collect.ImmutableList;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.worldgen.feature.ModFeatures;
+import com.mohigster.morefeatures.worldgen.feature.config.MultiBaseSpeleothemClusterConfiguration;
 import com.mohigster.morefeatures.worldgen.feature.config.OasisConfiguration;
 import com.mohigster.morefeatures.worldgen.tree.decorator.TrunkLightDecorator;
 import com.mohigster.morefeatures.worldgen.tree.foliage_placer.PalmFoliagePlacer;
 import com.mohigster.morefeatures.worldgen.tree.trunk_placer.LeaningTrunkPlacer;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.random.WeightedList;
+import net.minecraft.util.valueproviders.ClampedNormalFloat;
 import net.minecraft.util.valueproviders.ConstantInt;
+import net.minecraft.util.valueproviders.UniformFloat;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -88,6 +92,8 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SNOW_PATCH_KEY = registerKey("large_snow_patch");
     public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_SPIRE_KEY = registerKey("ice_spire");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_CLUSTER_KEY = registerKey("icicle_cluster");
+
     // Oasis
 
     public static final ResourceKey<ConfiguredFeature<?, ?>> OASIS_KEY = registerKey("oasis");
@@ -96,6 +102,11 @@ public class ModConfiguredFeatures {
 
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context){
+        HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);
+
+        BlockState floorBlock = Math.random() < 0.5
+                ? Blocks.PACKED_ICE.defaultBlockState()
+                : Blocks.BLUE_ICE.defaultBlockState();
 
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
@@ -149,13 +160,36 @@ public class ModConfiguredFeatures {
         // Registering ice spire
         register(context, ICE_SPIRE_KEY, ModFeatures.ICE_SPIRE.get(), FeatureConfiguration.NONE);
 
+        register(context, ICICLE_CLUSTER_KEY, ModFeatures.MULTI_BASE_SPELEOTHEM_CLUSTER.get(),
+                new MultiBaseSpeleothemClusterConfiguration(
+                        List.of(
+                                Blocks.PACKED_ICE.defaultBlockState(),
+                                Blocks.BLUE_ICE.defaultBlockState()
+                        ),
+                        ModBlocks.ICICLE.get().defaultBlockState(),
+                        blocks.getOrThrow(BlockTags.DRIPSTONE_REPLACEABLE),
+                        12,
+                        UniformInt.of(3, 6),
+                        UniformInt.of(2, 8),
+                        1,
+                        3,
+                        UniformInt.of(2, 4),
+                        UniformFloat.of(0.3F, 0.7F),
+                        ClampedNormalFloat.of(0.1F, 0.3F, 0.1F, 0.9F),
+                        0.1F,
+                        3,
+                        8
+                ));
+
+
         // Registering tree configured features
         register(context, BLOODWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
                 BlockStateProvider.simple(ModBlocks.BLOODWOOD_LOG.get()),
                 new ForkingTrunkPlacer(4, 4, 3),
                 BlockStateProvider.simple(ModBlocks.BLOODWOOD_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2), 3),
-                new TwoLayersFeatureSize(1, 0, 2))
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.simple(Blocks.DIRT))
                 .ignoreVines()
                 .build()
         );
@@ -164,7 +198,8 @@ public class ModConfiguredFeatures {
                 new StraightTrunkPlacer(4, 2, 0),
                 BlockStateProvider.simple(ModBlocks.BLOODWOOD_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
-                new TwoLayersFeatureSize(1, 0, 1))
+                new TwoLayersFeatureSize(1, 0, 1),
+                BlockStateProvider.simple(Blocks.DIRT))
                 .ignoreVines()
                 .build()
         );
@@ -181,7 +216,8 @@ public class ModConfiguredFeatures {
                 new ForkingTrunkPlacer(4, 4, 3),
                 BlockStateProvider.simple(ModBlocks.TAINTED_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2), 3),
-                new TwoLayersFeatureSize(1, 0, 2))
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.simple(Blocks.DIRT))
                 .ignoreVines()
                 .build()
         );
@@ -190,7 +226,8 @@ public class ModConfiguredFeatures {
                 new StraightTrunkPlacer(4, 2, 0),
                 BlockStateProvider.simple(ModBlocks.TAINTED_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
-                new TwoLayersFeatureSize(1, 0, 1))
+                new TwoLayersFeatureSize(1, 0, 1),
+                BlockStateProvider.simple(Blocks.DIRT))
                 .ignoreVines()
                 .build()
         );
@@ -207,8 +244,8 @@ public class ModConfiguredFeatures {
                 new LeaningTrunkPlacer(5, 2, 2),
                 BlockStateProvider.simple(ModBlocks.PALM_LEAVES.get()),
                 new PalmFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
-                new TwoLayersFeatureSize(1, 0, 2))
-                .belowTrunkProvider(BlockStateProvider.simple(Blocks.SAND))
+                new TwoLayersFeatureSize(1, 0, 2),
+                BlockStateProvider.simple(Blocks.SAND))
                 .ignoreVines()
                 .build()
         );
@@ -222,12 +259,12 @@ public class ModConfiguredFeatures {
         );
         register(context, DECREPIT_KEY, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                    BlockStateProvider.simple(ModBlocks.DECREPIT_LOG.get()),
-                    new DarkOakTrunkPlacer(6, 2, 1),
-                    BlockStateProvider.simple(ModBlocks.DECREPIT_LEAVES.get()),
-                    new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
-                    new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))
-                        .belowTrunkProvider(BlockStateProvider.simple(ModBlocks.DECREPIT_NULLIUM.get()))
+                        BlockStateProvider.simple(ModBlocks.DECREPIT_LOG.get()),
+                        new DarkOakTrunkPlacer(6, 2, 1),
+                        BlockStateProvider.simple(ModBlocks.DECREPIT_LEAVES.get()),
+                        new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()),
+                        BlockStateProvider.simple(ModBlocks.DECREPIT_NULLIUM.get()))
                         .ignoreVines()
                         .decorators(List.of(
                                 new TrunkLightDecorator(0.03f,
@@ -241,8 +278,8 @@ public class ModConfiguredFeatures {
                         new DarkOakTrunkPlacer(6, 2, 1),
                         BlockStateProvider.simple(ModBlocks.PALLID_LEAVES.get()),
                         new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
-                        new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()))
-                        .belowTrunkProvider(BlockStateProvider.simple(ModBlocks.PALLID_NULLIUM.get()))
+                        new ThreeLayersFeatureSize(1, 1, 0, 1, 2, OptionalInt.empty()),
+                        BlockStateProvider.simple(ModBlocks.PALLID_NULLIUM.get()))
                         .ignoreVines()
                         .decorators(List.of(
                                 new TrunkLightDecorator(0.03f,
@@ -285,10 +322,6 @@ public class ModConfiguredFeatures {
         }
 
         return builder;
-    }
-
-    private static FallenTreeConfiguration.FallenTreeConfigurationBuilder registerFallenTaintedTree(){
-        return createFallenTree(ModBlocks.TAINTED_LOG.get(), 4, 9 ,true);
     }
 
     public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name){

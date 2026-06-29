@@ -3,7 +3,6 @@ package com.mohigster.morefeatures.item.custom;
 import com.mohigster.morefeatures.block.ModBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -35,7 +34,7 @@ public class MetalDetectorItem extends Item {
             for(int i = 0; i <= positionClicked.getY() + 64; i++){
                 BlockState blockState = level.getBlockState(positionClicked.below(i));
 
-                if(isValuableBlock(blockState)){
+                if(isMetalOre(blockState)){
                     outputValuableCoordinates(positionClicked.below(i), player, blockState.getBlock());
                     foundBlock = true;
 
@@ -70,7 +69,7 @@ public class MetalDetectorItem extends Item {
                     Math.cos(i * 18) * 0.15d, 0.15d, Math.sin(i * 18) * 0.15d, 0.1);
         }
     }
-    private boolean isValuableBlock(BlockState blockState) {
+    private boolean isMetalOre(BlockState blockState) {
         return(
                 blockState.is(Blocks.IRON_ORE) ||
                 blockState.is(Blocks.DEEPSLATE_IRON_ORE) ||

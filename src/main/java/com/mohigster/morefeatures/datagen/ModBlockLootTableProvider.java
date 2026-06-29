@@ -102,6 +102,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.DECREPIT_ROOTS.get());
         dropSelf(ModBlocks.PALLID_ROOTS.get());
         dropSelf(ModBlocks.VOID_ANCHOR.get());
+        dropSelf(ModBlocks.ICICLE.get());
 
         // POTTED PLANTS
 
@@ -116,8 +117,13 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.POTTED_PALLID_ROOTS.get(), createPotFlowerItemTable(ModBlocks.PALLID_ROOTS.get()));
 
         // SILK TOUCH DROPS
+
         add(ModBlocks.PALLID_NULLIUM.get(), createSingleItemTableWithSilkTouch(ModBlocks.PALLID_NULLIUM.get(), Blocks.END_STONE));
         add(ModBlocks.DECREPIT_NULLIUM.get(), createSingleItemTableWithSilkTouch(ModBlocks.DECREPIT_NULLIUM.get(), Blocks.END_STONE));
+
+        // NO DROP
+
+        add(ModBlocks.CONJURED_ICE.get(), noDrop());
 
         // SLABS
 

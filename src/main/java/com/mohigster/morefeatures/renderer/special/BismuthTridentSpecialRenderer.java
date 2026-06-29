@@ -1,7 +1,6 @@
 package com.mohigster.morefeatures.renderer.special;
 
-import com.mohigster.morefeatures.entity.projectile.BismuthTridentModel;
-import com.mohigster.morefeatures.entity.projectile.CarbonTridentModel;
+import com.mohigster.morefeatures.entity.model.BismuthTridentModel;
 import com.mohigster.morefeatures.model.ModModelLayer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Transformation;
@@ -32,7 +31,7 @@ public class BismuthTridentSpecialRenderer implements NoDataSpecialModelRenderer
             final int outlineColor
     ) {
         submitNodeCollector.submitModelPart(
-                this.model.root(), poseStack, this.model.renderType(BismuthTridentModel.TEXTURE), lightCoords, overlayCoords, null, false, hasFoil, -1, null, outlineColor
+                this.model.root(), poseStack, this.model.renderType(BismuthTridentModel.TEXTURE), lightCoords, overlayCoords, null
         );
     }
 

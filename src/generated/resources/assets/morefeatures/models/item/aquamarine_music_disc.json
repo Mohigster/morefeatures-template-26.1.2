@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "morefeatures:item/aquamarine_music_disc"
-  }
-}

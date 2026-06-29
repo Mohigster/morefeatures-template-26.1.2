@@ -2,24 +2,15 @@ package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
-import com.mohigster.morefeatures.block.custom.VoidAnchorBlock;
 import com.mohigster.morefeatures.block.family.ModBlockFamilies;
 import com.mohigster.morefeatures.datagen.models.ModBlockModelGenerators;
+import com.mohigster.morefeatures.datagen.models.ModItemModelGenerators;
 import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.client.data.models.*;
-import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
-import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
 
-import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.Identifier;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import org.jspecify.annotations.Nullable;
-
-import static net.minecraft.client.data.models.BlockModelGenerators.createSimpleBlock;
-import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
 
 public class ModModelProvider extends ModelProvider {
 
@@ -59,6 +50,11 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.BISMUTH_HOE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(ModItems.EVERFROST.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.RAW_EVERFROST.get(), ModelTemplates.FLAT_ITEM);
+        ModItemModelGenerators.customModelWithFlatInvTexture(itemModels, ModItems.ICE_WAND.get());
+        ModItemModelGenerators.customModelWithFlatInvTexture(itemModels, ModItems.FIRE_WAND.get());
+        ModItemModelGenerators.customModelWithFlatInvTexture(itemModels, ModItems.HEALING_WAND.get());
+        ModItemModelGenerators.customModelWithFlatInvTexture(itemModels, ModItems.EARTH_WAND.get());
+        ModItemModelGenerators.customModelWithFlatInvTexture(itemModels, ModItems.LIGHTNING_WAND.get());
 
         // Used the generateFlatItem() line to get carbon_bow.json, then to prevent datagen deleting it,
         // I moved that file to the permanent resources file instead of the generated resources file.
@@ -85,9 +81,12 @@ public class ModModelProvider extends ModelProvider {
         itemModels.generateFlatItem(ModItems.BISMUTH_NAUTILUS_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.CARBON_WOLF_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateTrident(ModItems.BISMUTH_TRIDENT.get());
-        itemModels.generateFlatItem(ModItems.AQUAMARINE_MUSIC_DISC.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.MUSIC_DISC_AQUAMARINE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.PALM_BOAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(ModItems.PALM_CHEST_BOAT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.FROSTED_CORE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(ModItems.ICEOLOGER_SPAWN_EGG.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.declareCustomModelItem(ModBlocks.ICICLE.asItem());
 
         // BLOCKS
 
@@ -114,6 +113,7 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createTrivialCube(ModBlocks.RAW_BISMUTH_BLOCK.get());
         blockModels.createTrivialCube(ModBlocks.EVERFROST_BLUE_ICE_ORE.get());
         blockModels.createTrivialCube(ModBlocks.EVERFROST_PACKED_ICE_ORE.get());
+        ModBlockModelGenerators.createAge3Block(blockModels, ModBlocks.CONJURED_ICE.get(), true);
         blockModels.woodProvider(ModBlocks.TAINTED_LOG.get()).logWithHorizontal(ModBlocks.TAINTED_LOG.get()).wood(ModBlocks.TAINTED_WOOD.get());
         blockModels.woodProvider(ModBlocks.STRIPPED_TAINTED_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_TAINTED_LOG.get()).wood(ModBlocks.STRIPPED_TAINTED_WOOD.get());
         blockModels.createTrivialBlock(ModBlocks.TAINTED_LEAVES.get(), TexturedModel.LEAVES);
@@ -131,10 +131,10 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createFurnace(ModBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
         blockModels.createPlantWithDefaultItem(ModBlocks.ROSE.get(), ModBlocks.POTTED_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createPlantWithDefaultItem(ModBlocks.BLUE_ROSE.get(), ModBlocks.POTTED_BLUE_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
-        blockModels.createHangingSign(ModBlocks.STRIPPED_PALM_WOOD.get(), ModBlocks.PALM_HANGING_SIGN.get(), ModBlocks.PALM_WALL_HANGING_SIGN.get());
-        blockModels.createHangingSign(ModBlocks.STRIPPED_BLOODWOOD.get(), ModBlocks.BLOODWOOD_HANGING_SIGN.get(), ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.get());
-        blockModels.createHangingSign(ModBlocks.STRIPPED_TAINTED_WOOD.get(), ModBlocks.TAINTED_HANGING_SIGN.get(), ModBlocks.TAINTED_WALL_HANGING_SIGN.get());
-        blockModels.createHangingSign(ModBlocks.STRIPPED_DECREPIT_WOOD.get(), ModBlocks.DECREPIT_HANGING_SIGN.get(), ModBlocks.DECREPIT_WALL_HANGING_SIGN.get());
+//        blockModels.createHangingSign(ModBlocks.STRIPPED_PALM_WOOD.get(), ModBlocks.PALM_HANGING_SIGN.get(), ModBlocks.PALM_WALL_HANGING_SIGN.get());
+//        blockModels.createHangingSign(ModBlocks.STRIPPED_BLOODWOOD.get(), ModBlocks.BLOODWOOD_HANGING_SIGN.get(), ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.get());
+//        blockModels.createHangingSign(ModBlocks.STRIPPED_TAINTED_WOOD.get(), ModBlocks.TAINTED_HANGING_SIGN.get(), ModBlocks.TAINTED_WALL_HANGING_SIGN.get());
+//        blockModels.createHangingSign(ModBlocks.STRIPPED_DECREPIT_WOOD.get(), ModBlocks.DECREPIT_HANGING_SIGN.get(), ModBlocks.DECREPIT_WALL_HANGING_SIGN.get());
         blockModels.createShelf(ModBlocks.PALM_SHELF.get(), ModBlocks.PALM_PLANKS.get());
         blockModels.woodProvider(ModBlocks.DECREPIT_LOG.get()).logWithHorizontal(ModBlocks.DECREPIT_LOG.get()).wood(ModBlocks.DECREPIT_WOOD.get());
         blockModels.woodProvider(ModBlocks.STRIPPED_DECREPIT_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_DECREPIT_LOG.get()).wood(ModBlocks.STRIPPED_DECREPIT_WOOD.get());
@@ -146,6 +146,7 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createPlantWithDefaultItem(ModBlocks.DECREPIT_ROOTS.get(), ModBlocks.POTTED_DECREPIT_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(ModBlocks.PALLID_ROOTS.get(), ModBlocks.POTTED_PALLID_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(ModBlocks.PALLID_SAPLING.get(), ModBlocks.POTTED_PALLID_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createSpeleothem(ModBlocks.ICICLE.get());
         ModBlockModelGenerators.createNyliumLikeBlock(blockModels, ModBlocks.PALLID_NULLIUM.get(), Blocks.END_STONE); // Call blockModels as a parameter so that we can use blockStateOutput and modelOutput. This will be necessary for all custom model generation methods
         ModBlockModelGenerators.createNyliumLikeBlock(blockModels, ModBlocks.DECREPIT_NULLIUM.get(), Blocks.END_STONE);
         ModBlockModelGenerators.createAnchor(blockModels, ModBlocks.VOID_ANCHOR.get());
@@ -162,11 +163,9 @@ public class ModModelProvider extends ModelProvider {
                 .stairs(ModBlocks.FLUORITE_STAIRS.get())
                 .slab(ModBlocks.FLUORITE_SLAB.get());
         blockModels.family(ModBlocks.BLOODWOOD_PLANKS.get())
-                .stairs(ModBlocks.BLOODWOOD_STAIRS.get())
-                .slab(ModBlocks.BLOODWOOD_SLAB.get());
+                .generateFor(ModBlockFamilies.getBloodwoodFamily());
         blockModels.family(ModBlocks.TAINTED_PLANKS.get())
-                .stairs(ModBlocks.TAINTED_STAIRS.get())
-                .slab(ModBlocks.TAINTED_SLAB.get());
+                .generateFor(ModBlockFamilies.getTaintedFamily());
         blockModels.family(ModBlocks.PALM_PLANKS.get())
                 .generateFor(ModBlockFamilies.getPalmFamily());
         blockModels.family(ModBlocks.DECREPIT_PLANKS.get())

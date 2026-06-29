@@ -25,6 +25,7 @@ public class ModBiomeTagProvider extends BiomeTagsProvider {
 
         tag(BiomeTags.IS_END)
                 .addOptional(ModBiomes.END_ROT)
-                .addOptional(ModBiomes.DECREPIT_FOREST);
+                .addOptional(ModBiomes.DECREPIT_FOREST)
+                .addOptional(ModBiomes.PALLID_FOREST);
     }
 }

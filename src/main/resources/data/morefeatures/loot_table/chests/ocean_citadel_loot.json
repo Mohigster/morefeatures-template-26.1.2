@@ -120,7 +120,7 @@
         {
           "type": "minecraft:item",
           "weight": 1,
-          "name": "morefeatures:aquamarine_music_disc",
+          "name": "morefeatures:music_disc_aquamarine",
           "conditions": [
             {
               "condition": "minecraft:random_chance",

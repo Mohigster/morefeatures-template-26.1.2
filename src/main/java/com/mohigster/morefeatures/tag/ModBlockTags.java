@@ -6,7 +6,7 @@ import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
-public class ModBlockTags {
+public final class ModBlockTags {
     public static final TagKey<Block> INCORRECT_FOR_BISMUTH_TOOL = morefeaturesTag("incorrect_for_bismuth_tool");
     public static final TagKey<Block> NEEDS_BISMUTH_TOOL = morefeaturesTag("needs_bismuth_tool");
     public static final TagKey<Block> BLOODWOOD_LOGS = morefeaturesTag("bloodwood_logs");

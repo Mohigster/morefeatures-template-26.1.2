@@ -6,10 +6,8 @@ import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.datacomponent.ModDataComponentTypes;
 import com.mohigster.morefeatures.datagen.ModJukeboxSongs;
 import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
-import com.mohigster.morefeatures.item.custom.BismuthTridentItem;
-import com.mohigster.morefeatures.item.custom.CarbonTridentItem;
-import com.mohigster.morefeatures.item.custom.MetalDetectorItem;
-import com.mohigster.morefeatures.item.custom.ModSmithingTemplateItem;
+import com.mohigster.morefeatures.item.custom.*;
+import com.mohigster.morefeatures.item.custom.wand.*;
 import com.mohigster.morefeatures.toolmaterial.ModArmorMaterials;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
@@ -29,7 +27,6 @@ import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -42,13 +39,12 @@ import static com.mohigster.morefeatures.MoreFeatures.MODID;
 import static com.mohigster.morefeatures.toolmaterial.ModToolMaterial.BISMUTH_TOOL_MATERIAL;
 
 public class ModItems {
+
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
     public static DeferredItem<Item> registerItem(String name, Function<Item.Properties, Item> function, Item.Properties itemProp) {
         return ITEMS.register(name, () -> function.apply(itemProp.setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MODID, name)))));
     }
-
-
 
     // Item registration. JSON files are generated with DataGen. See MoreFeaturesDataGen and classes in the datagen package.
 
@@ -108,6 +104,7 @@ public class ModItems {
             properties -> new MetalDetectorItem(properties
                     .durability(128)
             ){
+                @SuppressWarnings("deprecation")
                 @Override
                 public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
                     builder.accept(Component.translatable("tooltip.morefeatures.metal_detector"));
@@ -115,9 +112,56 @@ public class ModItems {
                 }
             });
 
+    // Frosted core
+    public static final DeferredItem<Item> FROSTED_CORE = ITEMS.registerSimpleItem("frosted_core");
+
+
+    // Wands
+    public static final DeferredItem<Item> ICE_WAND = ITEMS.registerItem("ice_wand",
+            properties -> new IceWandItem(properties
+                    .durability(600)
+                    .repairable(ModItems.FROSTED_CORE.get())
+                    .rarity(Rarity.UNCOMMON)
+            ));
+
+    public static final DeferredItem<Item> FIRE_WAND = ITEMS.registerItem("fire_wand",
+            properties -> new FireWandItem(properties
+                    .durability(600)
+                    .repairable(Items.BLAZE_POWDER)
+                    .rarity(Rarity.UNCOMMON)
+            ));
+
+    public static final DeferredItem<Item> HEALING_WAND = ITEMS.registerItem("healing_wand",
+            properties -> new HealingWandItem(properties
+                    .durability(600)
+                    .repairable(Items.GLISTERING_MELON_SLICE)
+                    .rarity(Rarity.UNCOMMON)
+            ));
+
+    public static final DeferredItem<Item> EARTH_WAND = ITEMS.registerItem("earth_wand",
+            properties -> new EarthWandItem(properties
+                    .durability(600)
+                    .repairable(Items.DEEPSLATE)
+                    .rarity(Rarity.UNCOMMON)
+            ));
+
+    public static final DeferredItem<Item> LIGHTNING_WAND = ITEMS.registerItem("lightning_wand",
+            properties -> new LightningWandItem(properties
+                    .durability(600)
+                    .repairable(Items.REDSTONE)
+                    .rarity(Rarity.UNCOMMON)
+            ));
+
+    // Spawn eggs
+    public static final DeferredItem<Item> ICEOLOGER_SPAWN_EGG = ITEMS.registerItem("iceologer_spawn_egg",
+            properties -> new SpawnEggItem(properties
+                    .spawnEgg(ModEntityTypes.ICEOLOGER.get())
+            ));
+
+
     // Music Discs
 
-    public static final DeferredItem<Item> AQUAMARINE_MUSIC_DISC = ITEMS.registerItem("aquamarine_music_disc",
+    public static final DeferredItem<Item> MUSIC_DISC_AQUAMARINE = ITEMS.registerItem("music_disc_aquamarine",
             properties -> new Item(properties
                     .jukeboxPlayable(ModJukeboxSongs.AQUAMARINE_KEY)
                     .stacksTo(1)
@@ -207,8 +251,6 @@ public class ModItems {
                     .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK)
             ));
 
-
-
     // Bismuth tools and equipment
 
     public static final DeferredItem<Item> BISMUTH_UPGRADE_SMITHING_TEMPLATE = registerItem(
@@ -220,24 +262,24 @@ public class ModItems {
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    .repairable(BISMUTH.get()
-                    )));
+                    .repairable(BISMUTH.get())
+            ));
 
     public static final DeferredItem<Item> BISMUTH_SHOVEL = ITEMS.registerItem("bismuth_shovel",
             properties -> new ShovelItem(BISMUTH_TOOL_MATERIAL, 1f, -3.0f, properties
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    .repairable(BISMUTH.get()
-                    )));
+                    .repairable(BISMUTH.get())
+            ));
 
     public static final DeferredItem<Item> BISMUTH_HOE = ITEMS.registerItem("bismuth_hoe",
             properties -> new HoeItem(BISMUTH_TOOL_MATERIAL, -5.4f, 1f, properties
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    .repairable(BISMUTH.get()
-                    )));
+                    .repairable(BISMUTH.get())
+            ));
 
     public static final DeferredItem<Item> BISMUTH_SPEAR = ITEMS.registerItem("bismuth_spear",
             properties -> new Item(properties
@@ -257,7 +299,7 @@ public class ModItems {
                     .repairable(BISMUTH.get())
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    ));
+            ));
 
     public static final DeferredItem<Item> BISMUTH_BOW = ITEMS.registerItem("bismuth_bow",
             properties -> new BowItem(properties

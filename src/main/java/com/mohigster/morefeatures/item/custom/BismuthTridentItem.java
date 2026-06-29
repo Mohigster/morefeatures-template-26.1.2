@@ -1,7 +1,6 @@
 package com.mohigster.morefeatures.item.custom;
 
-import com.mohigster.morefeatures.entity.custom.trident.ThrownBismuthTrident;
-import com.mohigster.morefeatures.entity.custom.trident.ThrownCarbonTrident;
+import com.mohigster.morefeatures.entity.custom.projectile.trident.ThrownBismuthTrident;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.server.level.ServerLevel;
@@ -65,10 +64,8 @@ public class BismuthTridentItem extends TridentItem {
 
             if (!level.isClientSide() && level instanceof ServerLevel serverLevel) {
 
-                // Hurt the item stack
                 stack.hurtWithoutBreaking(1, player);
 
-                // 2. Spawn your custom entity on the server
                 ThrownBismuthTrident bismuthTrident = new ThrownBismuthTrident(level, player, stack);
                 bismuthTrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, PROJECTILE_SHOOT_POWER, 1.0F);
 

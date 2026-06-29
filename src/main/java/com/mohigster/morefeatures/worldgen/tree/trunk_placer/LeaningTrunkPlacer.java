@@ -46,11 +46,10 @@ public class LeaningTrunkPlacer extends TrunkPlacer {
 
         List<FoliagePlacer.FoliageAttachment> foliageAttachments = Lists.newArrayList();
 
-        // === Main leaning trunk ===
         Direction leanDir = Plane.HORIZONTAL.getRandomDirection(random);
 
         int leanStartHeight = treeHeight - random.nextInt(3) - 1;   // when the lean begins
-        int leanSteps = 1 + random.nextInt(2);                      // how many blocks it shifts (usually 1-3)
+        int leanSteps = 1 + random.nextInt(2);                      // how many blocks it shifts
 
         BlockPos.MutableBlockPos pos = new BlockPos.MutableBlockPos();
         int x = origin.getX();

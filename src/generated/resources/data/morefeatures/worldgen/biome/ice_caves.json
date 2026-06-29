@@ -43,6 +43,9 @@
       "morefeatures:small_snow_patch_placed",
       "morefeatures:snow_patch_placed",
       "morefeatures:large_snow_patch_placed"
+    ],
+    [
+      "morefeatures:icicle_cluster_placed"
     ]
   ],
   "has_precipitation": true,
@@ -114,6 +117,12 @@
         "maxCount": 1,
         "minCount": 1,
         "weight": 5
+      },
+      {
+        "type": "minecraft:pig",
+        "maxCount": 1,
+        "minCount": 1,
+        "weight": 80
       },
       {
         "type": "minecraft:stray",

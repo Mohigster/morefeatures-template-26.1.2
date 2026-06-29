@@ -80,7 +80,6 @@ public class OasisFeature extends Feature<OasisConfiguration> {
         BlockState sandstone = Blocks.SANDSTONE.defaultBlockState();
         BlockState air = Blocks.AIR.defaultBlockState();
 
-        // First pass: Calculate water and sand boundaries with smoothing
         for (int dx = -maxR; dx <= maxR; dx++) {
             for (int dz = -maxR; dz <= maxR; dz++) {
                 double distanceSq = dx * dx + dz * dz;

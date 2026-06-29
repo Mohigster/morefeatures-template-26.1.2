@@ -1,12 +1,10 @@
 package com.mohigster.morefeatures.renderer.special;
 
-import com.mohigster.morefeatures.entity.projectile.CarbonTridentModel;
+import com.mohigster.morefeatures.entity.model.CarbonTridentModel;
 import com.mohigster.morefeatures.model.ModModelLayer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Transformation;
 import com.mojang.serialization.MapCodec;
-import net.minecraft.client.model.geom.ModelLayers;
-import net.minecraft.client.model.object.projectile.TridentModel;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import org.joml.Vector3f;
@@ -33,7 +31,7 @@ public class CarbonTridentSpecialRenderer implements NoDataSpecialModelRenderer 
             final int outlineColor
     ) {
         submitNodeCollector.submitModelPart(
-                this.model.root(), poseStack, this.model.renderType(CarbonTridentModel.TEXTURE), lightCoords, overlayCoords, null, false, hasFoil, -1, null, outlineColor
+                this.model.root(), poseStack, this.model.renderType(CarbonTridentModel.TEXTURE), lightCoords, overlayCoords, null
         );
     }
 

@@ -3,15 +3,14 @@ package com.mohigster.morefeatures.enchantment;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.enchantment.custom.ThunderEnchantmentEffect;
 import com.mohigster.morefeatures.tag.ModItemTags;
-import net.minecraft.advancements.criterion.DamageSourcePredicate;
-import net.minecraft.advancements.criterion.TagPredicate;
+import net.minecraft.advancements.predicates.DamageSourcePredicate;
+import net.minecraft.advancements.predicates.TagPredicate;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.tags.EnchantmentTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentEffectComponents;
@@ -50,7 +49,6 @@ public class ModEnchantments {
                         EnchantmentTarget.VICTIM,
                         new ThunderEnchantmentEffect(1)
                 ));
-
     }
 
 

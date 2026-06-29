@@ -16,7 +16,6 @@ public class ModTrunkPlacerType<P extends TrunkPlacer>{
     public static final DeferredRegister<TrunkPlacerType<?>> TRUNK_PLACER_TYPES =
             DeferredRegister.create(Registries.TRUNK_PLACER_TYPE, MoreFeatures.MODID);
 
-    // Register your specific custom type
     public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<LeaningTrunkPlacer>> LEANING_TRUNK_PLACER =
             TRUNK_PLACER_TYPES.register("leaning_trunk_placer", () -> new TrunkPlacerType<>(LeaningTrunkPlacer.CODEC));
 

@@ -289,15 +289,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(ModBlocks.STRIPPED_DECREPIT_LOG.get()), has(ModBlocks.STRIPPED_DECREPIT_LOG))
                 .save(output);
 
-        shaped(RecipeCategory.DECORATIONS, ModItems.DECREPIT_HANGING_SIGN.asItem())
-                .pattern("C C")
-                .pattern("DDD")
-                .pattern("DDD")
-                .define('C', Blocks.IRON_CHAIN)
-                .define('D', ModBlocks.STRIPPED_DECREPIT_LOG.get())
-                .unlockedBy(getHasName(ModBlocks.STRIPPED_DECREPIT_LOG.get()), has(ModBlocks.STRIPPED_DECREPIT_LOG))
-                .save(output);
-
         // Pallid recipes
 
         shapeless(RecipeCategory.BUILDING_BLOCKS, ModBlocks.PALLID_PLANKS.get(), 4)
@@ -489,16 +480,6 @@ public class ModRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(ModBlocks.FLUORITE_BLOCK.get()), has(ModBlocks.FLUORITE_BLOCK))
                 .group("fluorite").save(output);
         slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.FLUORITE_SLAB.get(), ModBlocks.FLUORITE_BLOCK.get());
-
-        stairBuilder(ModBlocks.BLOODWOOD_STAIRS.get(), Ingredient.of(ModBlocks.BLOODWOOD_PLANKS))
-                .unlockedBy(getHasName(ModBlocks.BLOODWOOD_PLANKS.get()), has(ModBlocks.BLOODWOOD_PLANKS))
-                .group("bloodwood").save(output);
-        slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.BLOODWOOD_SLAB.get(), ModBlocks.BLOODWOOD_PLANKS.get());
-
-        stairBuilder(ModBlocks.TAINTED_STAIRS.get(), Ingredient.of(ModBlocks.TAINTED_PLANKS))
-                .unlockedBy(getHasName(ModBlocks.TAINTED_PLANKS.get()), has(ModBlocks.TAINTED_PLANKS))
-                .group("bloodwood").save(output);
-        slab(RecipeCategory.BUILDING_BLOCKS, ModBlocks.TAINTED_SLAB.get(), ModBlocks.TAINTED_PLANKS.get());
 
         // Buttons and pressure plates
 

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_attached_hanging_sign_rot_0",
+  "textures": {
+    "all": "morefeatures:block/bloodwood_hanging_sign",
+    "particle": "morefeatures:block/stripped_bloodwood_log"
+  }
+}

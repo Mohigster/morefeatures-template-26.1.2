@@ -2,7 +2,9 @@
   "required": true,
   "package": "com.mohigster.morefeatures.mixin",
   "compatibilityLevel": "JAVA_25",
-  "mixins": [],
+  "mixins": [
+    "BowItemMixin"
+  ],
   "injectors": {
     "defaultRequire": 1
   },

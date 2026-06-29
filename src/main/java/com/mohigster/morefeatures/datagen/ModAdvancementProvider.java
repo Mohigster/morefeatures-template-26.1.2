@@ -6,7 +6,7 @@ import com.mohigster.morefeatures.item.ModItems;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
-import net.minecraft.advancements.criterion.ItemPredicate;
+import net.minecraft.advancements.predicates.ItemPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Consumer;
 
-import static net.minecraft.advancements.criterion.InventoryChangeTrigger.TriggerInstance.hasItems;
+import static net.minecraft.advancements.triggers.InventoryChangeTrigger.TriggerInstance.hasItems;
 
 public class ModAdvancementProvider extends AdvancementProvider {
 

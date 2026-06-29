@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.item.custom;
 
-import com.mohigster.morefeatures.entity.custom.trident.ThrownCarbonTrident;
+import com.mohigster.morefeatures.entity.custom.projectile.trident.ThrownCarbonTrident;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
 import net.minecraft.server.level.ServerLevel;
@@ -14,16 +14,13 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
-import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.Level;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Objects;
 
 public class CarbonTridentItem extends TridentItem {
     public static final int THROW_THRESHOLD_TIME = 10;

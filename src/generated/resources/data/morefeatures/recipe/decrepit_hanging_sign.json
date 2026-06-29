@@ -1,16 +1,17 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
+  "group": "wooden_hanging_sign",
   "key": {
-    "C": "minecraft:iron_chain",
-    "D": "morefeatures:stripped_decrepit_log"
+    "#": "morefeatures:stripped_decrepit_log",
+    "X": "minecraft:iron_chain"
   },
   "pattern": [
-    "C C",
-    "DDD",
-    "DDD"
+    "X X",
+    "###",
+    "###"
   ],
   "result": {
+    "count": 6,
     "id": "morefeatures:decrepit_hanging_sign"
   }
 }

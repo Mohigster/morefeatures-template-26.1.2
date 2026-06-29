@@ -1,6 +1,5 @@
 {
   "type": "minecraft:crafting_shaped",
-  "category": "misc",
   "group": "bismuth",
   "key": {
     "B": "morefeatures:bismuth_upgrade_smithing_template",

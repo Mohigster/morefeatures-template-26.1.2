@@ -50,6 +50,9 @@ public class ModCreativeModeTabs {
 
                 // Carbon
                 output.accept(ModItems.CARBON_FIBER);
+
+                // Music disc
+                output.accept(ModItems.MUSIC_DISC_AQUAMARINE);
             })
             .build());
 
@@ -105,12 +108,16 @@ public class ModCreativeModeTabs {
                 // Compressor block
                 output.accept(ModBlocks.COMPRESSOR_BLOCK);
 
+                // Void anchor block
+                output.accept(ModBlocks.VOID_ANCHOR);
+
                 // Decrepit blocks
                 output.accept(ModBlocks.DECREPIT_NULLIUM);
                 output.accept(ModBlocks.DECREPIT_ROOTS);
 
                 // Pallid blocks
                 output.accept(ModBlocks.PALLID_NULLIUM);
+                output.accept(ModBlocks.PALLID_ROOTS);
             })
             .build());
 

@@ -25,7 +25,6 @@ public class PalmFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        // Register this as PALM_FOLIAGE_PLACER in your FoliagePlacerType registry.
         return ModFoliagePlacerType.PALM_FOLIAGE_PLACER.get();
     }
 
@@ -82,8 +81,7 @@ public class PalmFoliagePlacer extends FoliagePlacer {
             // Cluster radius narrows toward the tip for a tapered frond look.
             int clusterRadius = (dist <= FROND_LENGTH - 2) ? 1 : 0;
 
-            // FIX: Drop down first, then move across.
-            // If the Y-level changes, place a bridge block below the PREVIOUS distance block.
+            // If the Y-level changes, place a bridge block below the previous distance block.
             if (dist > 1 && yDrop < -((dist - 1) / 2)) {
                 // Look back 1 block in the horizontal direction, but stay at the current (dropped) Y level.
                 BlockPos bridgePos = frondPos.relative(dir.getOpposite());

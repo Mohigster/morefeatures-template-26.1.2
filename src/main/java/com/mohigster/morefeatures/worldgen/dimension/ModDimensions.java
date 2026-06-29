@@ -4,6 +4,7 @@ import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
 import com.mohigster.morefeatures.worldgen.noise.ModNoiseGeneratorSettings;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.Identifier;
@@ -50,7 +51,7 @@ public class ModDimensions {
                 0,
                 256,
                 256,
-                BlockTags.INFINIBURN_OVERWORLD,
+                HolderSet.direct(),
                 1.0f,
                 new DimensionType.MonsterSettings(ConstantInt.of(0), 0),
                 DimensionType.Skybox.OVERWORLD,

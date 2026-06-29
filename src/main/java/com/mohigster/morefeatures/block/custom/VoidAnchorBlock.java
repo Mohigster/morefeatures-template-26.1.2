@@ -227,7 +227,7 @@ public class VoidAnchorBlock extends Block {
             }
         };
 
-        Vec3 boomPos = pos.getCenter();
+        Vec3 boomPos = Vec3.atCenterOf(pos);
         level.explode(
                 null,
                 level.damageSources().badRespawnPointExplosion(boomPos),

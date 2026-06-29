@@ -3,11 +3,9 @@ package com.mohigster.morefeatures.entity.entity_types;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.entity.custom.BrineEntity;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
-import com.mohigster.morefeatures.entity.custom.boat.PalmBoat;
-import com.mohigster.morefeatures.entity.custom.trident.ThrownBismuthTrident;
-import com.mohigster.morefeatures.entity.custom.trident.ThrownCarbonTrident;
+import com.mohigster.morefeatures.entity.custom.projectile.trident.ThrownBismuthTrident;
+import com.mohigster.morefeatures.entity.custom.projectile.trident.ThrownCarbonTrident;
 import com.mohigster.morefeatures.item.ModItems;
-import net.minecraft.core.Registry;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -16,14 +14,9 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.entity.vehicle.boat.Boat;
 import net.minecraft.world.entity.vehicle.boat.ChestBoat;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
-
-import java.util.function.Supplier;
 
 
 public class ModEntityTypes {
@@ -33,10 +26,10 @@ public class ModEntityTypes {
 
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownCarbonTrident>> CARBON_TRIDENT =
-            ENTITY_TYPES.register("carbon_trident", () -> createCarbonEntityType(ThrownCarbonTrident::new, 4, 20));
+            ENTITY_TYPES.register("carbon_trident", () -> createTridentEntityType(ThrownCarbonTrident::new, 4, 20, 0.5f, 0.5f, 0.13f, "carbon_trident"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBismuthTrident>> BISMUTH_TRIDENT =
-            ENTITY_TYPES.register("bismuth_trident", () -> createBismuthEntityType(ThrownBismuthTrident::new, 4, 20));
+            ENTITY_TYPES.register("bismuth_trident", () -> createTridentEntityType(ThrownBismuthTrident::new, 4, 20, 0.5f, 0.5f, 0.13f, "bismuth_trident"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<BrineEntity>> BRINE_MOB =
             ENTITY_TYPES.register("brine", () -> createBrineEntityType(BrineEntity::new, 4, 20));
@@ -48,6 +41,7 @@ public class ModEntityTypes {
                                     MobCategory.MISC)
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)
+                            .noLootTable()
                             .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "palm_boat"))));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ChestBoat>> PALM_CHEST_BOAT =
@@ -57,43 +51,44 @@ public class ModEntityTypes {
                                     MobCategory.MISC)
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)
+                            .noLootTable()
                             .build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "palm_chest_boat"))));
 
     public static final DeferredHolder<EntityType<?>, EntityType<IceologerEntity>> ICEOLOGER =
-            ENTITY_TYPES.register("iceologer", () -> createIceologerEntityType(IceologerEntity::new, 4, 20));
+            ENTITY_TYPES.register("iceologer", () -> createHostileEntityType(IceologerEntity::new, 8, 10, 1f, 2f, 1.80f, "iceologer"));
 
-    private static <T extends Entity> EntityType<T> createCarbonEntityType(
-            EntityType.EntityFactory<T> factory, int trackingRange, int updateInterval) {
+    private static <T extends Entity> EntityType<T> createHostileEntityType(
+            EntityType.EntityFactory<T> factory, int trackingRange, int updateInterval, float width, float height, float eyeHeight, String path) {
 
         EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
-                .sized(0.5f, 0.5f) // Replaces dimensions(EntityDimensions.changing())
-                .eyeHeight(0.13F)
-                .clientTrackingRange(trackingRange);
+                .sized(width, height)
+                .eyeHeight(eyeHeight)
+                .clientTrackingRange(trackingRange)
+                .notInPeaceful();
 
 
         if (updateInterval != Integer.MAX_VALUE) {
             builder.updateInterval(updateInterval);
         }
 
-        // NeoForge requires standard projectile/misc entities to allow tracking modifications
-        return builder.build(CARBON_TRIDENT.getKey());
+        return builder.build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, path)));
     }
 
-    private static <T extends Entity> EntityType<T> createBismuthEntityType(
-            EntityType.EntityFactory<T> factory, int trackingRange, int updateInterval) {
+    private static <T extends Entity> EntityType<T> createTridentEntityType(
+            EntityType.EntityFactory<T> factory, int trackingRange, int updateInterval, float width, float height, float eyeHeight, String path) {
 
         EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
-                .sized(0.5f, 0.5f) // Replaces dimensions(EntityDimensions.changing())
-                .eyeHeight(0.13F)
-                .clientTrackingRange(trackingRange);
+                .sized(width, height)
+                .eyeHeight(eyeHeight)
+                .clientTrackingRange(trackingRange)
+                .noLootTable();
 
 
         if (updateInterval != Integer.MAX_VALUE) {
             builder.updateInterval(updateInterval);
         }
 
-        // NeoForge requires standard projectile/misc entities to allow tracking modifications
-        return builder.build(BISMUTH_TRIDENT.getKey());
+        return builder.build(ResourceKey.create(Registries.ENTITY_TYPE, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, path)));
     }
 
     private static <T extends Entity> EntityType<T> createBrineEntityType(
@@ -102,7 +97,8 @@ public class ModEntityTypes {
         EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
                 .sized(0.5f, 0.5f) // Replaces dimensions(EntityDimensions.changing())
                 .eyeHeight(0.13F)
-                .clientTrackingRange(trackingRange);
+                .clientTrackingRange(trackingRange)
+                .noLootTable();
 
 
         if (updateInterval != Integer.MAX_VALUE) {
@@ -111,22 +107,6 @@ public class ModEntityTypes {
 
         // NeoForge requires standard projectile/misc entities to allow tracking modifications
         return builder.build(BRINE_MOB.getKey());
-    }
-
-    private static <T extends Entity> EntityType<T> createIceologerEntityType(
-            EntityType.EntityFactory<T> factory, int trackingRange, int updateInterval) {
-
-        EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
-                .sized(0.5f, 0.5f) // Replaces dimensions(EntityDimensions.changing())
-                .eyeHeight(0.13F)
-                .clientTrackingRange(trackingRange);
-
-
-        if (updateInterval != Integer.MAX_VALUE) {
-            builder.updateInterval(updateInterval);
-        }
-
-        return builder.build(ICEOLOGER.getKey());
     }
 
     public static void register(IEventBus modEventBus) {
