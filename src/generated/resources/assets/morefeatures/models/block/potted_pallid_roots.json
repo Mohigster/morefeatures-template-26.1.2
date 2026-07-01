@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/flower_pot_cross",
   "textures": {
-    "plant": "morefeatures:block/pallid_roots"
+    "plant": "morefeatures:block/pallid_roots_pot"
   }
 }

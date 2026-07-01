@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_sign_rot_1",
+  "textures": {
+    "all": "morefeatures:block/bloodwood_sign",
+    "particle": "morefeatures:block/bloodwood_planks"
+  }
+}

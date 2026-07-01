@@ -19,6 +19,7 @@ import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.minecraft.world.item.component.Tool;
 import net.minecraft.world.level.Level;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class CarbonTridentItem extends TridentItem {
         super(properties);
     }
 
+    @NullMarked
     @Override
     public Projectile asProjectile(final Level level, final Position position, final ItemStack itemStack, final Direction direction) {
         ThrownCarbonTrident carbonTrident = new ThrownCarbonTrident(level, position.x(), position.y(), position.z(), itemStack.copyWithCount(1));
@@ -37,6 +39,7 @@ public class CarbonTridentItem extends TridentItem {
         return carbonTrident;
     }
 
+    @NullMarked
     public static ItemAttributeModifiers createAttributes() {
         return ItemAttributeModifiers.builder()
                 .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 9.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
@@ -48,6 +51,7 @@ public class CarbonTridentItem extends TridentItem {
         return new Tool(List.of(), 1.0F, 2, false);
     }
 
+    @NullMarked
     @Override
     public boolean releaseUsing(ItemStack stack, Level level, LivingEntity entity, int timeLeft) {
         if (entity instanceof Player player) {
@@ -56,9 +60,6 @@ public class CarbonTridentItem extends TridentItem {
                 return false;
             }
 
-
-
-            // 1. Play sound on both client and server safely via level.playSound
             level.playSound(null, player.getX(), player.getY(), player.getZ(),
                     SoundEvents.TRIDENT_THROW.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
 

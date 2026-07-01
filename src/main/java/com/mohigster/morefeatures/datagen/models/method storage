@@ -1,0 +1,69 @@
+    public static void createVerticalSlab(BlockModelGenerators blockModels, Block slabBlock, Block fullBlock) {
+        TextureMapping mapping = TextureMapping.cube(fullBlock);
+
+        Identifier straightModel = ModelTemplates.SLAB_BOTTOM.createWithSuffix(slabBlock, "_straight", mapping, blockModels.modelOutput);
+        Identifier innerModel = ModelTemplates.STAIRS_INNER.create(slabBlock, mapping, blockModels.modelOutput);
+        Identifier outerModel = ModelTemplates.STAIRS_OUTER.create(slabBlock, mapping, blockModels.modelOutput);
+        Identifier fullModelId = ModelLocationUtils.getModelLocation(fullBlock);
+
+        var straight = BlockModelGenerators.plainVariant(straightModel)
+                .with(BlockModelGenerators.X_ROT_90)
+                .with(BlockModelGenerators.Y_ROT_180)
+                .with(BlockModelGenerators.UV_LOCK);
+
+        var inner = BlockModelGenerators.plainVariant(innerModel)
+                .with(BlockModelGenerators.X_ROT_90)
+                .with(BlockModelGenerators.Y_ROT_180)
+                .with(BlockModelGenerators.UV_LOCK);
+
+        var outer = BlockModelGenerators.plainVariant(outerModel)
+                .with(BlockModelGenerators.X_ROT_90)
+                .with(BlockModelGenerators.Y_ROT_180)
+                .with(BlockModelGenerators.UV_LOCK);
+
+        var full = BlockModelGenerators.plainVariant(fullModelId);;
+
+        blockModels.blockStateOutput.accept(
+        MultiVariantGenerator.dispatch(slabBlock)
+            .with(PropertyDispatch.initial(VerticalSlabBlock.TYPE, VerticalSlabBlock.SHAPE)
+        // --- DOUBLE TYPE (Maps all 5 shapes to the full block model to satisfy DataGen validation) ---
+                .select(VerticalSlabType.DOUBLE, StairsShape.STRAIGHT, full)
+                .select(VerticalSlabType.DOUBLE, StairsShape.INNER_LEFT, full)
+                .select(VerticalSlabType.DOUBLE, StairsShape.INNER_RIGHT, full)
+                .select(VerticalSlabType.DOUBLE, StairsShape.OUTER_LEFT, full)
+                .select(VerticalSlabType.DOUBLE, StairsShape.OUTER_RIGHT, full)
+
+                // --- STRAIGHT SHAPES ---
+                .select(VerticalSlabType.NORTH, StairsShape.STRAIGHT, straight.with(BlockModelGenerators.Y_ROT_180))
+                .select(VerticalSlabType.SOUTH, StairsShape.STRAIGHT, straight)
+                .select(VerticalSlabType.WEST, StairsShape.STRAIGHT, straight.with(BlockModelGenerators.Y_ROT_90))
+                .select(VerticalSlabType.EAST, StairsShape.STRAIGHT, straight.with(BlockModelGenerators.Y_ROT_270))
+
+                // --- OUTER LEFT CORNERS ---
+                .select(VerticalSlabType.NORTH, StairsShape.OUTER_LEFT, outer.with(BlockModelGenerators.Y_ROT_90))
+                .select(VerticalSlabType.SOUTH, StairsShape.OUTER_LEFT, outer.with(BlockModelGenerators.Y_ROT_270))
+                .select(VerticalSlabType.WEST, StairsShape.OUTER_LEFT, outer)
+                .select(VerticalSlabType.EAST, StairsShape.OUTER_LEFT, outer.with(BlockModelGenerators.Y_ROT_180))
+
+                // --- OUTER RIGHT CORNERS ---
+                .select(VerticalSlabType.NORTH, StairsShape.OUTER_RIGHT, outer.with(BlockModelGenerators.Y_ROT_180))
+                .select(VerticalSlabType.SOUTH, StairsShape.OUTER_RIGHT, outer)
+                .select(VerticalSlabType.WEST, StairsShape.OUTER_RIGHT, outer.with(BlockModelGenerators.Y_ROT_90))
+                .select(VerticalSlabType.EAST, StairsShape.OUTER_RIGHT, outer.with(BlockModelGenerators.Y_ROT_270))
+
+                // --- INNER LEFT CORNERS ---
+                .select(VerticalSlabType.NORTH, StairsShape.INNER_LEFT, inner.with(BlockModelGenerators.Y_ROT_90))
+                .select(VerticalSlabType.SOUTH, StairsShape.INNER_LEFT, inner.with(BlockModelGenerators.Y_ROT_270))
+                .select(VerticalSlabType.WEST, StairsShape.INNER_LEFT, inner)
+                .select(VerticalSlabType.EAST, StairsShape.INNER_LEFT, inner.with(BlockModelGenerators.Y_ROT_180))
+
+                // --- INNER RIGHT CORNERS ---
+                .select(VerticalSlabType.NORTH, StairsShape.INNER_RIGHT, inner.with(BlockModelGenerators.Y_ROT_180))
+                .select(VerticalSlabType.SOUTH, StairsShape.INNER_RIGHT, inner)
+                .select(VerticalSlabType.WEST, StairsShape.INNER_RIGHT, inner.with(BlockModelGenerators.Y_ROT_90))
+                .select(VerticalSlabType.EAST, StairsShape.INNER_RIGHT, inner.with(BlockModelGenerators.Y_ROT_270))
+            )
+        );
+
+        blockModels.registerSimpleItemModel(slabBlock, straightModel);
+    }

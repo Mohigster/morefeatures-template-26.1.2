@@ -18,14 +18,14 @@ public class OverworldRegion extends Region {
 
     // Custom biome parameters
 
+    // Bloodwood and tainted forests should NEVER border each other. Their values (specifically their weirdness values) are set with this in mind
+
     private static final float BLOODWOOD_TEMP_MIN = 0.20F;
     private static final float BLOODWOOD_TEMP_MAX = 0.25F;
     private static final float BLOODWOOD_EROSION_MIN = 0.45F;
     private static final float BLOODWOOD_EROSION_MAX = 0.48F;
     private static final float BLOODWOOD_WEIRD_MIN = -0.6F;
     private static final float BLOODWOOD_WEIRD_MAX = -0.5F;
-
-    // Bloodwood and tainted forests should NEVER border each other. Their values (specifically their weirdness values) are sset with this in mind
 
     private static final float TAINTED_TEMP_MIN = -0.25F;
     private static final float TAINTED_TEMP_MAX = -0.20F;

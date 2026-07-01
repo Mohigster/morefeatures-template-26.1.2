@@ -1,7 +1,10 @@
 package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
+import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabType;
 import com.mohigster.morefeatures.item.ModItems;
+import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
@@ -12,10 +15,14 @@ import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
+import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.functions.ApplyBonusCount;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
+import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
+import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 
 import java.util.Set;
@@ -44,12 +51,20 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.BLOODWOOD_PLANKS.get());
         dropSelf(ModBlocks.BLOODWOOD_LOG.get());
         dropSelf(ModBlocks.BLOODWOOD.get());
+        dropSelf(ModBlocks.BLOODWOOD_FENCE.get());
+        dropSelf(ModBlocks.BLOODWOOD_FENCE_GATE.get());
         dropSelf(ModBlocks.STRIPPED_BLOODWOOD_LOG.get());
         dropSelf(ModBlocks.STRIPPED_BLOODWOOD.get());
         dropSelf(ModBlocks.BLOODWOOD_SAPLING.get());
+        dropSelf(ModBlocks.BLOODWOOD_BUTTON.get());
+        dropSelf(ModBlocks.BLOODWOOD_PRESSURE_PLATE.get());
         dropSelf(ModBlocks.TAINTED_PLANKS.get());
         dropSelf(ModBlocks.TAINTED_LOG.get());
         dropSelf(ModBlocks.TAINTED_WOOD.get());
+        dropSelf(ModBlocks.TAINTED_FENCE.get());
+        dropSelf(ModBlocks.TAINTED_FENCE_GATE.get());
+        dropSelf(ModBlocks.TAINTED_BUTTON.get());
+        dropSelf(ModBlocks.TAINTED_PRESSURE_PLATE.get());
         dropSelf(ModBlocks.STRIPPED_TAINTED_LOG.get());
         dropSelf(ModBlocks.STRIPPED_TAINTED_WOOD.get());
         dropSelf(ModBlocks.TAINTED_SAPLING.get());
@@ -135,6 +150,32 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.DECREPIT_SLAB.get(), this::createSlabItemTable);
         add(ModBlocks.PALLID_SLAB.get(), this::createSlabItemTable);
 
+        // VERTICAL SLABS
+
+        add(ModBlocks.OAK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.SPRUCE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.BIRCH_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.JUNGLE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.ACACIA_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.DARK_OAK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.CRIMSON_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.WARPED_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.MANGROVE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.CHERRY_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.BAMBOO_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.BAMBOO_MOSAIC_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.PALE_OAK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.STONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.COBBLESTONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.MOSSY_COBBLESTONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.SMOOTH_STONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.STONE_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.MOSSY_STONE_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.COBBLED_DEEPSLATE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.POLISHED_DEEPSLATE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.DEEPSLATE_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.DEEPSLATE_TILE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+
         // LEAVES
 
         // Bloodwood
@@ -159,11 +200,23 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         // SIGN
 
+        add(ModBlocks.BLOODWOOD_SIGN.get(),
+                createSingleItemTable(ModItems.BLOODWOOD_SIGN.asItem()));
+
+        add(ModBlocks.BLOODWOOD_WALL_SIGN.get(),
+                createSingleItemTable(ModItems.BLOODWOOD_SIGN.asItem()));
+
         add(ModBlocks.BLOODWOOD_HANGING_SIGN.get(),
                 createSingleItemTable(ModItems.BLOODWOOD_HANGING_SIGN.asItem()));
 
         add(ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(),
                 createSingleItemTable(ModItems.BLOODWOOD_HANGING_SIGN.asItem()));
+
+        add(ModBlocks.TAINTED_SIGN.get(),
+                createSingleItemTable(ModItems.TAINTED_SIGN.asItem()));
+
+        add(ModBlocks.TAINTED_WALL_SIGN.get(),
+                createSingleItemTable(ModItems.TAINTED_SIGN.asItem()));
 
         add(ModBlocks.TAINTED_HANGING_SIGN.get(),
                 createSingleItemTable(ModItems.TAINTED_HANGING_SIGN.asItem()));
@@ -188,6 +241,12 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         add(ModBlocks.PALLID_WALL_SIGN.get(),
                 createSingleItemTable(ModItems.PALLID_SIGN.asItem()));
+
+        add(ModBlocks.PALLID_HANGING_SIGN.get(),
+                createSingleItemTable(ModItems.PALLID_HANGING_SIGN.asItem()));
+
+        add(ModBlocks.PALLID_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(ModItems.PALLID_HANGING_SIGN.asItem()));
 
         add(ModBlocks.DECREPIT_SIGN.get(),
                 createSingleItemTable(ModItems.DECREPIT_SIGN.asItem()));
@@ -269,5 +328,27 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return ModBlocks.BLOCKS.getEntries().stream().map(Holder::value)::iterator;
+    }
+
+    protected LootTable.Builder createVerticalSlabItemTable(Block slab) { // Built pretty much entirely out of the createSlabItemTable method
+        return LootTable.lootTable().withPool(
+                LootPool.lootPool()
+                        .setRolls(ConstantValue.exactly(1.0F))
+                        .add(
+                                this.applyExplosionDecay(
+                                        slab,
+                                        LootItem.lootTableItem(slab).apply(
+                                                SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))
+                                                        .when(
+                                                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(slab)
+                                                                        .setProperties(
+                                                                                StatePropertiesPredicate.Builder.properties()
+                                                                                        .hasProperty(VerticalSlabBlock.TYPE, VerticalSlabType.DOUBLE)
+                                                                        )
+                                                        )
+                                        )
+                                )
+                        )
+        );
     }
 }

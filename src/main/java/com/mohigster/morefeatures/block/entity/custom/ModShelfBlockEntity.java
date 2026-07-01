@@ -13,6 +13,6 @@ public class ModShelfBlockEntity extends ShelfBlockEntity {
 
     @Override
     public BlockEntityType<?> getType() {
-        return ModBlockEntities.PALM_SHELF_BE.get();
+        return ModBlockEntities.MOD_SHELF_BE.get();
     }
 }

@@ -85,6 +85,7 @@
   "block.morefeatures.bloodwood_stairs": "Bloodwood Stairs",
   "block.morefeatures.bloodwood_leaves": "Bloodwood Leaves",
   "block.morefeatures.bloodwood_sapling": "Bloodwood Sapling",
+  "item.morefeatures.bloodwood_sign": "Bloodwood Sign",
   "item.morefeatures.bloodwood_hanging_sign": "Bloodwood Hanging Sign",
 
   "block.morefeatures.tainted_wood": "Tainted Wood",
@@ -96,6 +97,8 @@
   "block.morefeatures.tainted_stairs": "Tainted Stairs",
   "block.morefeatures.tainted_leaves": "Tainted Leaves",
   "block.morefeatures.tainted_sapling": "Tainted Sapling",
+  "item.morefeatures.tainted_sign": "Tainted Sign",
+  "item.morefeatures.tainted_hanging_sign": "Tainted Hanging Sign",
 
   "block.morefeatures.palm_log": "Palm Log",
   "block.morefeatures.palm_wood": "Palm Wood",
@@ -152,6 +155,21 @@
   "block.morefeatures.pallid_leaves": "Pallid Leaves",
   "block.morefeatures.pallid_sapling": "Pallid Sapling",
   "item.morefeatures.pallid_sign": "Pallid Sign",
+  "item.morefeatures.pallid_hanging_sign": "Pallid Hanging Sign",
+
+  "block.morefeatures.oak_vertical_slab": "Oak Vertical Slab",
+  "block.morefeatures.spruce_vertical_slab": "Spruce Vertical Slab",
+  "block.morefeatures.birch_vertical_slab": "Birch Vertical Slab",
+  "block.morefeatures.jungle_vertical_slab": "Jungle Vertical Slab",
+  "block.morefeatures.acacia_vertical_slab": "Acacia Vertical Slab",
+  "block.morefeatures.dark_oak_vertical_slab": "Dark Oak Vertical Slab",
+  "block.morefeatures.crimson_vertical_slab": "Crimson Vertical Slab",
+  "block.morefeatures.warped_vertical_slab": "Warped Vertical Slab",
+  "block.morefeatures.mangrove_vertical_slab": "Mangrove Vertical Slab",
+  "block.morefeatures.cherry_vertical_slab": "Cherry Vertical Slab",
+  "block.morefeatures.bamboo_vertical_slab": "Bamboo Vertical Slab",
+  "block.morefeatures.bamboo_mosaic_vertical_slab": "Bamboo Mosaic Vertical Slab",
+  "block.morefeatures.pale_oak_vertical_slab": "Pale Oak Vertical Slab",
 
   "block.morefeatures.icicle": "Icicle",
 
@@ -184,6 +202,12 @@
   "sounds.morefeatures.magic_block_hit": "Hitting Magic Block",
   "sounds.morefeatures.magic_block_place": "Placing Magic Block",
   "sounds.morefeatures.magic_block_step": "Stepping on Magic Block",
+
+  "sounds.morefeatures.evil_block_break": "Breaking Evil Portal",
+  "sounds.morefeatures.evil_block_fall": "Falling on Evil Portal",
+  "sounds.morefeatures.evil_block_hit": "Hitting Evil Portal",
+  "sounds.morefeatures.evil_block_place": "Placing Evil Portal",
+  "sounds.morefeatures.evil_block_step": "Stepping on Evil Portal",
 
   "container.compression": "Compression",
   "block.morefeatures.compressor": "Compression",
@@ -218,5 +242,6 @@
   "item.morefeatures.ice_wand": "Ice Wand",
   "item.morefeatures.fire_wand": "Fire Wand",
   "item.morefeatures.healing_wand": "Healing Wand",
-  "tooltip.morefeatures.evil_portal": "Right click to be transported to the realm of EVIL!"
+
+  "tooltip.morefeatures.evil_portal": "Right click to be transported to the realm of §c§lEVIL!§r"
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/button",
+  "textures": {
+    "texture": "morefeatures:block/bloodwood_planks"
+  }
+}

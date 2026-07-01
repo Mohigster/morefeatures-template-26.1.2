@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "redstone",
+  "group": "wooden_button",
+  "ingredients": [
+    "morefeatures:tainted_planks"
+  ],
+  "result": {
+    "id": "morefeatures:tainted_button"
+  }
+}

@@ -22,13 +22,11 @@ import com.mohigster.morefeatures.worldgen.tree.trunk_placer.ModTrunkPlacerType;
 import net.minecraft.core.*;
 import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.data.registries.VanillaRegistries;
-import net.minecraft.tags.BiomeTags;
 import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.level.block.FlowerPotBlock;
-import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import org.slf4j.Logger;
 
@@ -45,9 +43,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import terrablender.api.SurfaceRuleManager;
-
-import java.util.List;
-import java.util.function.Predicate;
 
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
@@ -67,7 +62,7 @@ public class MoreFeatures {
 
         modEventBus.addListener(this::commonSetup);
 
-        ModCreativeModeTabs.register(modEventBus);
+        ModCreativeModeTabs.register(modEventBus); // All register methods are declared in the class
 
         ModWoodType.init();
 
@@ -113,26 +108,12 @@ public class MoreFeatures {
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
 
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ROSE.getId(), ModBlocks.POTTED_ROSE);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BLUE_ROSE.getId(), ModBlocks.POTTED_BLUE_ROSE);
-
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.TAINTED_SAPLING.getId(), ModBlocks.POTTED_TAINTED_SAPLING);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BLOODWOOD_SAPLING.getId(), ModBlocks.POTTED_BLOODWOOD_SAPLING);
-            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALM_SAPLING.getId(), ModBlocks.POTTED_PALM_SAPLING);
+            this.registerPottedPlants();
 
             ModBiomes.registerBiomes(); // Register biomes so the SurfaceRules has something to find.
 
-            // Boats actually spawning when dispensed instead of dropped like an item
-            DispenserBlock.registerBehavior(
-                    ModItems.PALM_BOAT.get(),
-                    new BoatDispenseItemBehavior(ModEntityTypes.PALM_BOAT.get())
-            );
-            DispenserBlock.registerBehavior(
-                    ModItems.PALM_CHEST_BOAT.get(),
-                    new BoatDispenseItemBehavior(ModEntityTypes.PALM_CHEST_BOAT.get())
-            );
+            this.registerDispenserBehaviour();
         });
-
     }
 
     // Add the items to a creative mode tab.
@@ -160,11 +141,56 @@ public class MoreFeatures {
 
         HolderGetter<Biome> biomeGetter = event.getServer().registryAccess().lookupOrThrow(Registries.BIOME);
 
-        SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeBloodwoodForestRules(biomeGetter));
-        SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeTaintedForestRules(biomeGetter));
+        this.registerSurfaceRules(biomeGetter);
+
+        rulesAdded = true;
+    }
+
+    // Register functions called in enqueueWork and onServerAboutToStart
+
+    private void registerPottedPlants(){
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.ROSE.getId(), ModBlocks.POTTED_ROSE);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BLUE_ROSE.getId(), ModBlocks.POTTED_BLUE_ROSE);
+
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.TAINTED_SAPLING.getId(), ModBlocks.POTTED_TAINTED_SAPLING);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.BLOODWOOD_SAPLING.getId(), ModBlocks.POTTED_BLOODWOOD_SAPLING);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALM_SAPLING.getId(), ModBlocks.POTTED_PALM_SAPLING);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.DECREPIT_SAPLING.getId(), ModBlocks.POTTED_DECREPIT_SAPLING);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALLID_SAPLING.getId(), ModBlocks.POTTED_PALLID_SAPLING);
+
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.DECREPIT_ROOTS.getId(), ModBlocks.POTTED_DECREPIT_ROOTS);
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(ModBlocks.PALLID_ROOTS.getId(), ModBlocks.POTTED_PALLID_ROOTS);
+    }
+
+    private void registerDispenserBehaviour(){
+        DispenserBlock.registerBehavior(
+                ModItems.PALM_BOAT.get(),
+                new BoatDispenseItemBehavior(ModEntityTypes.PALM_BOAT.get())
+        );
+        DispenserBlock.registerBehavior(
+                ModItems.PALM_CHEST_BOAT.get(),
+                new BoatDispenseItemBehavior(ModEntityTypes.PALM_CHEST_BOAT.get())
+        );
+    }
+
+    private void registerSurfaceRules(HolderGetter<Biome> biomeGetter){
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, ModSurfaceRules.makeIceCaveRules(biomeGetter));
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, ModSurfaceRules.makeEndSurfaceRules(biomeGetter));
 
-        rulesAdded = true;
+        // Fixes several broken vanilla surface rules.
+
+        // I'm not entirely sure what broke, but a bunch of surface rules just stopped working. This caused issues.
+
+        // For example, the desert was entirely grass. The dry shrubs? Growing on grass.
+        // Ice spikes also didn't generate in the Ice Spikes biome because all of the snow was grass.
+        // My own custom surface rules had nothing to do with it, as confirmed when I commented this whole event
+        // including the custom rules registration, and the biomes were still broken.
+
+        // Perhaps a TerraBlender issue, rather than an issue with my mod. If so, I'll update my TerraBlender
+        // version when a new patch releases and see if that patch fixes the issue.
+
+        SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.OVERWORLD, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK, 10, ModSurfaceRules.fixOverworldRules(biomeGetter));
+
+        SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.NETHER, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK, 10, ModSurfaceRules.fixNetherRules(biomeGetter));
     }
 }

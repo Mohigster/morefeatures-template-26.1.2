@@ -26,7 +26,7 @@ public class LightningWandItem extends GenericAOEWandItem {
     }
 
     @Override
-    protected int floorScanDistance() {
+    protected int blocksToScanForFloor() {
         return FLOOR_SCAN_DISTANCE;
     }
 

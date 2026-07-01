@@ -133,13 +133,13 @@ public class ModFallingLeavesParticle extends SingleQuadParticle {
                     8.0F,    // sideAcceleration / wind
                     true,    // swirl
                     false,   // flowAway
-                    1.8F,    // scale (palm leaves are bigger)
+                    2.8F,    // scale (palm leaves are bigger)
                     0.018F   // startVelocity
             );
         }
     }
 
-    public static class EvilLeafProvider implements ParticleProvider<SimpleParticleType> {
+    public static class EvilLeafProvider implements ParticleProvider<SimpleParticleType> { // Bloodwood and tainted leaves both use this
         private final SpriteSet sprites;
 
         public EvilLeafProvider(SpriteSet sprites) {
@@ -167,7 +167,7 @@ public class ModFallingLeavesParticle extends SingleQuadParticle {
         }
     }
 
-    public static class EndLeafProvider implements ParticleProvider<SimpleParticleType> {
+    public static class EndLeafProvider implements ParticleProvider<SimpleParticleType> { // Pallid and decrepit leaves both use this
         private final SpriteSet sprites;
 
         public EndLeafProvider(SpriteSet sprites) {
@@ -186,8 +186,8 @@ public class ModFallingLeavesParticle extends SingleQuadParticle {
                     level, x, y, z,
                     this.sprites.get(random),
                     0.13F,
-                    8.0F,
-                    true,
+                    7.5F,
+                    false,
                     false,
                     2.2F,
                     0.015F

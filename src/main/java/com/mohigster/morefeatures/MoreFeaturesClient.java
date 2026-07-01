@@ -106,38 +106,17 @@ public class MoreFeaturesClient {
                         context,
                         ModModelLayer.PALM_CHEST_BOAT
                 )
-
         );
         event.registerBlockEntityRenderer(
-                ModBlockEntities.PALM_SIGN_BE.get(),
+                ModBlockEntities.MOD_SIGN_BE.get(),
                 StandingSignRenderer::new
         );
         event.registerBlockEntityRenderer(
-                ModBlockEntities.PALM_HANGING_SIGN_BE.get(),
+                ModBlockEntities.MOD_HANGING_SIGN_BE.get(),
                 HangingSignRenderer::new
         );
         event.registerBlockEntityRenderer(
-                ModBlockEntities.PALLID_SIGN_BE.get(),
-                StandingSignRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.DECREPIT_SIGN_BE.get(),
-                StandingSignRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.DECREPIT_HANGING_SIGN_BE.get(),
-                HangingSignRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.BLOODWOOD_HANGING_SIGN_BE.get(),
-                HangingSignRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.TAINTED_HANGING_SIGN_BE.get(),
-                HangingSignRenderer::new
-        );
-        event.registerBlockEntityRenderer(
-                ModBlockEntities.PALM_SHELF_BE.get(),
+                ModBlockEntities.MOD_SHELF_BE.get(),
                 ShelfRenderer::new
         );
     }

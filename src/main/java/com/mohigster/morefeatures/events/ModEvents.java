@@ -6,6 +6,7 @@ import com.mohigster.morefeatures.block.custom.VoidAnchorBlock;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
 import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
 import com.mohigster.morefeatures.item.ModItems;
+import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -98,7 +99,7 @@ public class ModEvents {
 
         if (player.level().isClientSide()) return;
 
-        if (!player.level().getBiome(player.blockPosition()).is(ICE_CAVES)) {
+        if (!player.level().getBiome(player.blockPosition()).is(ModBiomes.ICE_CAVE)) {
             return;
         }
 

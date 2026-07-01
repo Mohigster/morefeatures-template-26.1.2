@@ -29,6 +29,7 @@ import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.Optional;
@@ -105,6 +106,7 @@ public class ModItems {
                     .durability(128)
             ){
                 @SuppressWarnings("deprecation")
+                @NullMarked
                 @Override
                 public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
                     builder.accept(Component.translatable("tooltip.morefeatures.metal_detector"));
@@ -334,7 +336,16 @@ public class ModItems {
                     .component(DataComponents.WEAPON, new Weapon(2))
             ));
 
-    // Sign item
+    // Sign items
+
+    public static final DeferredItem<SignItem> BLOODWOOD_SIGN =
+            ITEMS.register("bloodwood_sign", () ->
+                    new SignItem(
+                            ModBlocks.BLOODWOOD_SIGN.get(),
+                            ModBlocks.BLOODWOOD_WALL_SIGN.get(),
+                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "bloodwood_sign")))
+                    )
+            );
 
     public static final DeferredItem<SignItem> BLOODWOOD_HANGING_SIGN =
             ITEMS.register("bloodwood_hanging_sign", () ->
@@ -342,6 +353,15 @@ public class ModItems {
                             ModBlocks.BLOODWOOD_HANGING_SIGN.get(),
                             ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(),
                             new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "bloodwood_hanging_sign")))
+                    )
+            );
+
+    public static final DeferredItem<SignItem> TAINTED_SIGN =
+            ITEMS.register("tainted_sign", () ->
+                    new SignItem(
+                            ModBlocks.TAINTED_SIGN.get(),
+                            ModBlocks.TAINTED_WALL_SIGN.get(),
+                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "tainted_sign")))
                     )
             );
 
@@ -381,6 +401,15 @@ public class ModItems {
                     )
             );
 
+    public static final DeferredItem<SignItem> PALLID_HANGING_SIGN =
+            ITEMS.register("pallid_hanging_sign", () ->
+                    new HangingSignItem(
+                            ModBlocks.PALLID_HANGING_SIGN.get(),
+                            ModBlocks.PALLID_WALL_HANGING_SIGN.get(),
+                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "pallid_hanging_sign")))
+                    )
+            );
+
     public static final DeferredItem<SignItem> DECREPIT_SIGN =
             ITEMS.register("decrepit_sign", () ->
                     new SignItem(
@@ -398,6 +427,8 @@ public class ModItems {
                             new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "decrepit_hanging_sign")))
                     )
             );
+
+    // Boat items
 
     public static final DeferredItem<BoatItem> PALM_BOAT = ITEMS.registerItem(
             "palm_boat",

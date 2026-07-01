@@ -176,6 +176,14 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.BLOODWOOD_PLANKS);
                 output.accept(ModBlocks.BLOODWOOD_STAIRS);
                 output.accept(ModBlocks.BLOODWOOD_SLAB);
+                output.accept(ModBlocks.BLOODWOOD_FENCE);
+                output.accept(ModBlocks.BLOODWOOD_FENCE_GATE);
+                output.accept(ModBlocks.BLOODWOOD_PRESSURE_PLATE);
+                output.accept(ModBlocks.BLOODWOOD_BUTTON);
+                output.accept(ModBlocks.BLOODWOOD_LEAVES);
+                output.accept(ModBlocks.BLOODWOOD_SAPLING);
+                output.accept(ModItems.BLOODWOOD_SIGN);
+                output.accept(ModItems.BLOODWOOD_HANGING_SIGN);
 
                 // Tainted wood
 
@@ -186,6 +194,14 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.TAINTED_PLANKS);
                 output.accept(ModBlocks.TAINTED_STAIRS);
                 output.accept(ModBlocks.TAINTED_SLAB);
+                output.accept(ModBlocks.TAINTED_FENCE);
+                output.accept(ModBlocks.TAINTED_FENCE_GATE);
+                output.accept(ModBlocks.TAINTED_PRESSURE_PLATE);
+                output.accept(ModBlocks.TAINTED_BUTTON);
+                output.accept(ModBlocks.TAINTED_LEAVES);
+                output.accept(ModBlocks.TAINTED_SAPLING);
+                output.accept(ModItems.TAINTED_SIGN);
+                output.accept(ModItems.TAINTED_HANGING_SIGN);
 
                 // Palm wood
 
@@ -225,6 +241,8 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.DECREPIT_BUTTON);
                 output.accept(ModBlocks.DECREPIT_LEAVES);
                 output.accept(ModBlocks.DECREPIT_SAPLING);
+                output.accept(ModItems.DECREPIT_SIGN);
+                output.accept(ModItems.DECREPIT_HANGING_SIGN);
 
                 // Pallid wood
 
@@ -239,6 +257,8 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.PALLID_BUTTON);
                 output.accept(ModBlocks.PALLID_LEAVES);
                 output.accept(ModBlocks.PALLID_SAPLING);
+                output.accept(ModItems.PALLID_SIGN);
+                output.accept(ModItems.PALM_HANGING_SIGN);
             })
             .build());
 

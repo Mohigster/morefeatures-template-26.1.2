@@ -131,10 +131,6 @@ public class ModModelProvider extends ModelProvider {
         blockModels.createFurnace(ModBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
         blockModels.createPlantWithDefaultItem(ModBlocks.ROSE.get(), ModBlocks.POTTED_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createPlantWithDefaultItem(ModBlocks.BLUE_ROSE.get(), ModBlocks.POTTED_BLUE_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
-//        blockModels.createHangingSign(ModBlocks.STRIPPED_PALM_WOOD.get(), ModBlocks.PALM_HANGING_SIGN.get(), ModBlocks.PALM_WALL_HANGING_SIGN.get());
-//        blockModels.createHangingSign(ModBlocks.STRIPPED_BLOODWOOD.get(), ModBlocks.BLOODWOOD_HANGING_SIGN.get(), ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.get());
-//        blockModels.createHangingSign(ModBlocks.STRIPPED_TAINTED_WOOD.get(), ModBlocks.TAINTED_HANGING_SIGN.get(), ModBlocks.TAINTED_WALL_HANGING_SIGN.get());
-//        blockModels.createHangingSign(ModBlocks.STRIPPED_DECREPIT_WOOD.get(), ModBlocks.DECREPIT_HANGING_SIGN.get(), ModBlocks.DECREPIT_WALL_HANGING_SIGN.get());
         blockModels.createShelf(ModBlocks.PALM_SHELF.get(), ModBlocks.PALM_PLANKS.get());
         blockModels.woodProvider(ModBlocks.DECREPIT_LOG.get()).logWithHorizontal(ModBlocks.DECREPIT_LOG.get()).wood(ModBlocks.DECREPIT_WOOD.get());
         blockModels.woodProvider(ModBlocks.STRIPPED_DECREPIT_LOG.get()).logWithHorizontal(ModBlocks.STRIPPED_DECREPIT_LOG.get()).wood(ModBlocks.STRIPPED_DECREPIT_WOOD.get());
@@ -150,6 +146,34 @@ public class ModModelProvider extends ModelProvider {
         ModBlockModelGenerators.createNyliumLikeBlock(blockModels, ModBlocks.PALLID_NULLIUM.get(), Blocks.END_STONE); // Call blockModels as a parameter so that we can use blockStateOutput and modelOutput. This will be necessary for all custom model generation methods
         ModBlockModelGenerators.createNyliumLikeBlock(blockModels, ModBlocks.DECREPIT_NULLIUM.get(), Blocks.END_STONE);
         ModBlockModelGenerators.createAnchor(blockModels, ModBlocks.VOID_ANCHOR.get());
+
+        /* Vanilla vertical slab models */
+
+        /* WOODEN */
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.OAK_VERTICAL_SLAB.get(), Blocks.OAK_PLANKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.SPRUCE_VERTICAL_SLAB.get(), Blocks.SPRUCE_PLANKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.BIRCH_VERTICAL_SLAB.get(), Blocks.BIRCH_PLANKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.JUNGLE_VERTICAL_SLAB.get(), Blocks.JUNGLE_PLANKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.ACACIA_VERTICAL_SLAB.get(), Blocks.ACACIA_PLANKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.DARK_OAK_VERTICAL_SLAB.get(), Blocks.DARK_OAK_PLANKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.CRIMSON_VERTICAL_SLAB.get(), Blocks.CRIMSON_PLANKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.WARPED_VERTICAL_SLAB.get(), Blocks.WARPED_PLANKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.MANGROVE_VERTICAL_SLAB.get(), Blocks.MANGROVE_PLANKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.CHERRY_VERTICAL_SLAB.get(), Blocks.CHERRY_PLANKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.BAMBOO_VERTICAL_SLAB.get(), Blocks.BAMBOO_PLANKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.BAMBOO_MOSAIC_VERTICAL_SLAB.get(), Blocks.BAMBOO_MOSAIC);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.PALE_OAK_VERTICAL_SLAB.get(), Blocks.PALE_OAK_PLANKS);
+        /* STONE & DEEPSLATE */
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.STONE_VERTICAL_SLAB.get(), Blocks.STONE);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.COBBLESTONE_VERTICAL_SLAB.get(), Blocks.COBBLESTONE);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.MOSSY_COBBLESTONE_VERTICAL_SLAB.get(), Blocks.MOSSY_COBBLESTONE);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.STONE_BRICK_VERTICAL_SLAB.get(), Blocks.STONE_BRICKS);
+        ModBlockModelGenerators.createSmoothStoneVerticalSlab(blockModels);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.MOSSY_STONE_BRICK_VERTICAL_SLAB.get(), Blocks.MOSSY_STONE_BRICKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.COBBLED_DEEPSLATE_VERTICAL_SLAB.get(), Blocks.COBBLED_DEEPSLATE);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.POLISHED_DEEPSLATE_VERTICAL_SLAB.get(), Blocks.POLISHED_DEEPSLATE);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.DEEPSLATE_BRICK_VERTICAL_SLAB.get(), Blocks.DEEPSLATE_BRICKS);
+        ModBlockModelGenerators.createVerticalSlab(blockModels, ModBlocks.DEEPSLATE_TILE_VERTICAL_SLAB.get(), Blocks.DEEPSLATE_TILES);
 
         // Block families—createTrivialCube is unnecessary for Azurite block
         // etc. because their models are created by the block family.

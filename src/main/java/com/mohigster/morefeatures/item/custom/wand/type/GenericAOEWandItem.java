@@ -1,6 +1,5 @@
 package com.mohigster.morefeatures.item.custom.wand.type;
 
-import net.minecraft.client.particle.Particle;
 import net.minecraft.core.BlockPos;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Mth;
@@ -91,7 +90,7 @@ public abstract class GenericAOEWandItem extends AbstractWandItem {
 
         // Scan downward to find a solid floor to plant the spike
         // floorScanDistance() is the maximum distance in blocks that it will scan
-        for (int i = 0; i < floorScanDistance(); i++) {
+        for (int i = 0; i < blocksToScanForFloor(); i++) {
             // Check the block directly beneath our current position
             if (level.getBlockState(pos.below()).isCollisionShapeFullBlock(level, pos.below())) {
                 return pos.getY(); // Found the floor!
@@ -104,7 +103,9 @@ public abstract class GenericAOEWandItem extends AbstractWandItem {
         return startY;
     }
 
-    protected abstract int floorScanDistance();
+    protected abstract int blocksToScanForFloor();
+
+
 
     protected abstract void castAOESpell(Player caster, Level level, BlockPos pos);
 }

@@ -6,6 +6,10 @@
     "morefeatures:decrepit_button",
     "morefeatures:decrepit_pressure_plate",
     "morefeatures:decrepit_fence",
-    "morefeatures:decrepit_fence_gate"
+    "morefeatures:decrepit_fence_gate",
+    "morefeatures:decrepit_sign",
+    "morefeatures:decrepit_wall_sign",
+    "morefeatures:decrepit_hanging_sign",
+    "morefeatures:decrepit_wall_hanging_sign"
   ]
 }

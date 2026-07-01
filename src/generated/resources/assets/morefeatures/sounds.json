@@ -8,6 +8,36 @@
     ],
     "subtitle": "sounds.morefeatures.aquamarine"
   },
+  "evil_block_break": {
+    "sounds": [
+      "morefeatures:magic_block_break"
+    ],
+    "subtitle": "sounds.morefeatures.evil_block_break"
+  },
+  "evil_block_fall": {
+    "sounds": [
+      "morefeatures:magic_block_fall"
+    ],
+    "subtitle": "sounds.morefeatures.evil_block_fall"
+  },
+  "evil_block_hit": {
+    "sounds": [
+      "morefeatures:magic_block_hit"
+    ],
+    "subtitle": "sounds.morefeatures.evil_block_hit"
+  },
+  "evil_block_place": {
+    "sounds": [
+      "morefeatures:magic_block_place"
+    ],
+    "subtitle": "sounds.morefeatures.evil_block_place"
+  },
+  "evil_block_step": {
+    "sounds": [
+      "morefeatures:magic_block_step"
+    ],
+    "subtitle": "sounds.morefeatures.evil_block_step"
+  },
   "magic_block_break": {
     "sounds": [
       "morefeatures:magic_block_break"
@@ -37,5 +67,11 @@
       "morefeatures:magic_block_step"
     ],
     "subtitle": "sounds.morefeatures.magic_block_step"
+  },
+  "music_biome_ice_caves": {
+    "sounds": [
+      ""
+    ],
+    "subtitle": "music.morefeatures.ice_caves"
   }
 }

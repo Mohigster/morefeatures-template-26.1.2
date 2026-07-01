@@ -2,6 +2,9 @@ package com.mohigster.morefeatures.block;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.custom.*;
+import com.mohigster.morefeatures.block.custom.flammable.*;
+import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
+import com.mohigster.morefeatures.block.custom.woodtype.ModBlockSetType;
 import com.mohigster.morefeatures.block.custom.woodtype.ModWoodType;
 import com.mohigster.morefeatures.block.entity.ModBlockEntities;
 import com.mohigster.morefeatures.block.id.ModBlockItemIds;
@@ -10,23 +13,18 @@ import com.mohigster.morefeatures.particles.ModParticleTypes;
 import com.mohigster.morefeatures.sound.ModSounds;
 import com.mohigster.morefeatures.tag.ModBlockTags;
 import com.mohigster.morefeatures.worldgen.tree.ModTreeGrowers;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.references.BlockItemId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -133,63 +131,63 @@ public class ModBlocks {
             ));
 
     //———————————————————————————————————————Azurite Blocks——————————————————————————————————————————————————————————————————————————
-    public static final DeferredBlock<Block> AZURITE_ORE = registerLegacyBlock("azurite_ore",
+    public static final DeferredBlock<Block> AZURITE_ORE = registerBlock(ModBlockItemIds.AZURITE_ORE,
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE)
             ));
 
-    public static final DeferredBlock<Block> DEEPSLATE_AZURITE_ORE = registerLegacyBlock("deepslate_azurite_ore",
+    public static final DeferredBlock<Block> DEEPSLATE_AZURITE_ORE = registerBlock(ModBlockItemIds.DEEPSLATE_AZURITE_ORE,
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.DEEPSLATE)
             ));
 
-    public static final DeferredBlock<Block> NETHER_AZURITE_ORE = registerLegacyBlock("nether_azurite_ore",
+    public static final DeferredBlock<Block> NETHER_AZURITE_ORE = registerBlock(ModBlockItemIds.NETHER_AZURITE_ORE,
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.NETHER_ORE)
             ));
 
-    public static final DeferredBlock<Block> END_AZURITE_ORE = registerLegacyBlock("end_azurite_ore",
+    public static final DeferredBlock<Block> END_AZURITE_ORE = registerBlock(ModBlockItemIds.END_AZURITE_ORE,
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE)
             ));
 
-    public static final DeferredBlock<Block> AZURITE_BLOCK = registerLegacyBlock("azurite_block",
+    public static final DeferredBlock<Block> AZURITE_BLOCK = registerBlock(ModBlockItemIds.AZURITE_BLOCK,
             properties -> new Block(properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
             ));
 
-    public static final DeferredBlock<Block> RAW_AZURITE_BLOCK = registerLegacyBlock("raw_azurite_block",
+    public static final DeferredBlock<Block> RAW_AZURITE_BLOCK = registerBlock(ModBlockItemIds.RAW_AZURITE_BLOCK,
             properties -> new Block(properties
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
             ));
 
-    public static final DeferredBlock<Block> AZURITE_STAIRS = registerLegacyBlock("azurite_stairs",
+    public static final DeferredBlock<Block> AZURITE_STAIRS = registerBlock(ModBlockItemIds.AZURITE_STAIRS,
             properties -> new StairBlock(ModBlocks.AZURITE_BLOCK.get().defaultBlockState(), properties
                     .strength(3f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
             ));
 
-    public static final DeferredBlock<Block> AZURITE_SLAB = registerLegacyBlock("azurite_slab",
+    public static final DeferredBlock<Block> AZURITE_SLAB = registerBlock(ModBlockItemIds.AZURITE_SLAB,
             properties -> new SlabBlock(properties
                     .strength(3f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
             ));
 
-    public static final DeferredBlock<Block> AZURITE_PRESSURE_PLATE = registerLegacyBlock("azurite_pressure_plate",
+    public static final DeferredBlock<Block> AZURITE_PRESSURE_PLATE = registerBlock(ModBlockItemIds.AZURITE_PRESSURE_PLATE,
             properties -> new PressurePlateBlock(BlockSetType.IRON, properties
                     .strength(2f)
                     .requiresCorrectToolForDrops()
@@ -198,7 +196,7 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
             ));
 
-    public static final DeferredBlock<Block> AZURITE_BUTTON = registerLegacyBlock("azurite_button",
+    public static final DeferredBlock<Block> AZURITE_BUTTON = registerBlock(ModBlockItemIds.AZURITE_BUTTON,
             properties -> new ButtonBlock(BlockSetType.IRON, 20, properties
                     .strength(2f)
                     .requiresCorrectToolForDrops()
@@ -266,7 +264,7 @@ public class ModBlocks {
 
     //———————————————————————————————————————Everfrost Blocks————————————————————————————————————————————————————————————————————————
 
-    public static final DeferredBlock<Block> EVERFROST_BLUE_ICE_ORE = registerLegacyBlock("everfrost_blue_ice_ore",
+    public static final DeferredBlock<Block> EVERFROST_BLUE_ICE_ORE = registerBlock(ModBlockItemIds.EVERFROST_BLUE_ICE_ORE,
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
                     .strength(4f, 2f)
                     .requiresCorrectToolForDrops()
@@ -274,7 +272,7 @@ public class ModBlocks {
                     .friction(0.98F)
             ));
 
-    public static final DeferredBlock<Block> EVERFROST_PACKED_ICE_ORE = registerLegacyBlock("everfrost_packed_ice_ore",
+    public static final DeferredBlock<Block> EVERFROST_PACKED_ICE_ORE = registerBlock(ModBlockItemIds.EVERFROST_PACKED_ICE_ORE,
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
                     .strength(4f, 2f)
                     .requiresCorrectToolForDrops()
@@ -353,43 +351,81 @@ public class ModBlocks {
                     .ignitedByLava()
             ));
 
-    // Standing sign
-    public static final DeferredBlock<Block> BLOODWOOD_HANGING_SIGN =
-            registerBlockWithoutItem("bloodwood_hanging_sign", properties ->
-                    new CeilingHangingSignBlock(
-                            ModWoodType.BLOODWOOD,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "bloodwood_hanging_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.BLOODWOOD_HANGING_SIGN_BE.get().create(pos, state); // Prevents game crash (no, literally)
-                        }
-                    }
-            );
+    public static final DeferredBlock<Block> BLOODWOOD_FENCE = registerBlock(ModBlockItemIds.BLOODWOOD_FENCE,
+            properties -> new ModFlammableFenceBlock(properties
+                    .strength(2F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava()
+            ));
+
+    public static final DeferredBlock<Block> BLOODWOOD_FENCE_GATE = registerBlock(ModBlockItemIds.BLOODWOOD_FENCE_GATE,
+            properties -> new ModFlammableFenceGateBlock(ModWoodType.BLOODWOOD, properties
+                    .strength(2F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava()
+            ));
+
+    public static final DeferredBlock<Block> BLOODWOOD_PRESSURE_PLATE = registerBlock(ModBlockItemIds.BLOODWOOD_PRESSURE_PLATE,
+            properties -> new PressurePlateBlock(ModBlockSetType.BLOODWOOD, properties
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> BLOODWOOD_BUTTON = registerBlock(ModBlockItemIds.BLOODWOOD_BUTTON,
+            properties -> new ButtonBlock(ModBlockSetType.BLOODWOOD, 20, properties
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> BLOODWOOD_SIGN = registerBlockWithoutItem("bloodwood_sign",
+            properties -> new ModStandingSignBlock(
+                    ModWoodType.BLOODWOOD,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "bloodwood_sign")))
+            ));
+
+    public static final DeferredBlock<Block> BLOODWOOD_WALL_SIGN = registerBlockWithoutItem("bloodwood_wall_sign",
+            properties -> new ModWallSignBlock(
+                    ModWoodType.BLOODWOOD,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "bloodwood_wall_sign")))
+            ));
+
+    // Ceiling sign
+    public static final DeferredBlock<Block> BLOODWOOD_HANGING_SIGN = registerBlockWithoutItem("bloodwood_hanging_sign",
+            properties -> new ModCeilingHangingSignBlock(
+                    ModWoodType.BLOODWOOD,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "bloodwood_hanging_sign")))
+            ));
 
     // Wall sign
-    public static final DeferredBlock<Block> BLOODWOOD_WALL_HANGING_SIGN =
-            registerBlockWithoutItem("bloodwood_wall_hanging_sign", properties ->
-                    new WallHangingSignBlock(
-                            ModWoodType.BLOODWOOD,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "bloodwood_wall_hanging_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.BLOODWOOD_HANGING_SIGN_BE.get().create(pos, state);
-                        }
-                    }
-            );
+    public static final DeferredBlock<Block> BLOODWOOD_WALL_HANGING_SIGN = registerBlockWithoutItem("bloodwood_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(
+                    ModWoodType.BLOODWOOD,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "bloodwood_wall_hanging_sign")))
+            ));
 
     //———————————————————————————————————————Tainted Wood Blocks—————————————————————————————————————————————————————————————————————
 
@@ -463,43 +499,81 @@ public class ModBlocks {
                     .ignitedByLava()
             ));
 
-    // Standing sign
-    public static final DeferredBlock<Block> TAINTED_HANGING_SIGN =
-            registerBlockWithoutItem("tainted_hanging_sign", properties ->
-                    new CeilingHangingSignBlock(
-                            ModWoodType.TAINTED,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "tainted_hanging_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.TAINTED_HANGING_SIGN_BE.get().create(pos, state); // Prevents game crash (no, literally)
-                        }
-                    }
-            );
+    public static final DeferredBlock<Block> TAINTED_FENCE = registerBlock(ModBlockItemIds.TAINTED_FENCE,
+            properties -> new ModFlammableFenceBlock(properties
+                    .strength(2F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava()
+            ));
+
+    public static final DeferredBlock<Block> TAINTED_FENCE_GATE = registerBlock(ModBlockItemIds.TAINTED_FENCE_GATE,
+            properties -> new ModFlammableFenceGateBlock(ModWoodType.TAINTED, properties
+                    .strength(2F)
+                    .sound(SoundType.WOOD)
+                    .ignitedByLava()
+            ));
+
+    public static final DeferredBlock<Block> TAINTED_PRESSURE_PLATE = registerBlock(ModBlockItemIds.TAINTED_PRESSURE_PLATE,
+            properties -> new PressurePlateBlock(ModBlockSetType.TAINTED, properties
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> TAINTED_BUTTON = registerBlock(ModBlockItemIds.TAINTED_BUTTON,
+            properties -> new ButtonBlock(ModBlockSetType.TAINTED, 20, properties
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> TAINTED_SIGN = registerBlockWithoutItem("tainted_sign",
+            properties -> new ModStandingSignBlock(
+                    ModWoodType.TAINTED,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "tainted_sign")))
+            ));
+
+    public static final DeferredBlock<Block> TAINTED_WALL_SIGN = registerBlockWithoutItem("tainted_wall_sign",
+            properties -> new ModWallSignBlock(
+                    ModWoodType.TAINTED,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0F)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "tainted_wall_sign")))
+            ));
+
+    // Ceiling sign
+    public static final DeferredBlock<Block> TAINTED_HANGING_SIGN = registerBlockWithoutItem("tainted_hanging_sign",
+            properties -> new ModCeilingHangingSignBlock(
+                    ModWoodType.TAINTED,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "tainted_hanging_sign")))
+            ));
 
     // Wall sign
-    public static final DeferredBlock<Block> TAINTED_WALL_HANGING_SIGN =
-            registerBlockWithoutItem("tainted_wall_hanging_sign", properties ->
-                    new WallHangingSignBlock(
-                            ModWoodType.TAINTED,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "tainted_wall_hanging_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.TAINTED_HANGING_SIGN_BE.get().create(pos, state);
-                        }
-                    }
-            );
+    public static final DeferredBlock<Block> TAINTED_WALL_HANGING_SIGN = registerBlockWithoutItem("tainted_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(
+                    ModWoodType.TAINTED,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "tainted_wall_hanging_sign")))
+            ));
 
     //———————————————————————————————————————Palm Wood Blocks————————————————————————————————————————————————————————————————————————
 
@@ -534,7 +608,7 @@ public class ModBlocks {
             ));
 
     public static final DeferredBlock<Block> PALM_LEAVES = registerBlock(ModBlockItemIds.PALM_LEAVES,
-            properties -> new ModLeavesBlock(0.05F, ModParticleTypes.PALM_LEAVES.get(), properties
+            properties -> new ModLeavesBlock(0.01F, ModParticleTypes.PALM_LEAVES.get(), properties
                     .strength(0.2F, 0.2F)
                     .sound(SoundType.GRASS)
                     .noOcclusion()
@@ -573,125 +647,102 @@ public class ModBlocks {
             ));
 
     public static final DeferredBlock<Block> PALM_FENCE = registerBlock(ModBlockItemIds.PALM_FENCE,
-            properties -> new FenceBlock(properties
+            properties -> new ModFlammableFenceBlock(properties
                     .strength(2f, 2f)
                     .sound(SoundType.WOOD)
             ));
 
     public static final DeferredBlock<Block> PALM_FENCE_GATE = registerBlock(ModBlockItemIds.PALM_FENCE_GATE,
-            properties -> new FenceGateBlock(ModWoodType.PALM,
+            properties -> new ModFlammableFenceGateBlock(ModWoodType.PALM,
                     properties
                             .strength(2f, 2f)
                             .sound(SoundType.WOOD)
             ));
 
-    public static final DeferredBlock<Block> PALM_SIGN =
-            registerBlockWithoutItem("palm_sign", properties ->
-                    new StandingSignBlock(
-                            ModWoodType.PALM,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "palm_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.PALM_SIGN_BE.get().create(pos, state); // Prevents game crash (no, literally)
-                        }
-                    }
-            );
+    public static final DeferredBlock<Block> PALM_SIGN = registerBlockWithoutItem("palm_sign",
+            properties -> new ModStandingSignBlock(
+                    ModWoodType.PALM,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "palm_sign")))
+            ));
 
-    public static final DeferredBlock<Block> PALM_WALL_SIGN = // Does not need a BlockItemId because the item and block are registered separately anyway
-            registerBlockWithoutItem("palm_wall_sign", properties ->
-                    new WallSignBlock(
-                            ModWoodType.PALM,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "palm_wall_sign"))) // Since we're using BlockBehviour.Properties.of() (Which is necessary for most block entities) the ID is not set automatically. Game will crash if the ID is not set here. Block that use properties -> new /*BlockType*/(properties) do not use .setId and function perfectly with no crash, as that method sets the ID automatically.
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.PALM_SIGN_BE.get().create(pos, state);
-                        }
-                    }
-            );
+    public static final DeferredBlock<Block> PALM_WALL_SIGN = registerBlockWithoutItem("palm_wall_sign",
+            properties -> new ModWallSignBlock(
+                    ModWoodType.PALM,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "palm_wall_sign")))
+            ));
 
     // Ceiling sign
-    public static final DeferredBlock<Block> PALM_HANGING_SIGN =
-            registerBlockWithoutItem("palm_hanging_sign", properties ->
-                    new CeilingHangingSignBlock(
-                            ModWoodType.PALM,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "palm_hanging_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.PALM_HANGING_SIGN_BE.get().create(pos, state); // Prevents game crash (no, literally)
-                        }
-                    }
-            );
+    public static final DeferredBlock<Block> PALM_HANGING_SIGN = registerBlockWithoutItem("palm_hanging_sign",
+            properties -> new ModCeilingHangingSignBlock(
+                    ModWoodType.PALM,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "palm_hanging_sign")))
+            ));
 
     // Wall sign
-    public static final DeferredBlock<Block> PALM_WALL_HANGING_SIGN =
-            registerBlockWithoutItem("palm_wall_hanging_sign", properties ->
-                    new WallHangingSignBlock(
-                            ModWoodType.PALM,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "palm_wall_hanging_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.PALM_HANGING_SIGN_BE.get().create(pos, state);
-                        }
-                    }
-            );
+    public static final DeferredBlock<Block> PALM_WALL_HANGING_SIGN = registerBlockWithoutItem("palm_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(
+                    ModWoodType.PALM,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "palm_wall_hanging_sign")))
+            ));
 
-    public static final DeferredBlock<Block> PALM_TRAPDOOR = registerLegacyBlock("palm_trapdoor",
+    public static final DeferredBlock<Block> PALM_TRAPDOOR = registerBlock(ModBlockItemIds.PALM_TRAPDOOR,
             properties -> new TrapDoorBlock(BlockSetType.ACACIA, properties
                     .strength(2f, 2f)
                     .noOcclusion()
             ));
 
-    public static final DeferredBlock<Block> PALM_DOOR = registerLegacyBlock("palm_door",
+    public static final DeferredBlock<Block> PALM_DOOR = registerBlock(ModBlockItemIds.PALM_DOOR,
             properties -> new DoorBlock(BlockSetType.ACACIA, properties
                     .strength(2f, 2f)
                     .noOcclusion()
+                    .ignitedByLava()
             ));
 
-    public static final DeferredBlock<Block> PALM_PRESSURE_PLATE = registerLegacyBlock("palm_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.ACACIA, properties
+    public static final DeferredBlock<Block> PALM_PRESSURE_PLATE = registerBlock(ModBlockItemIds.PALM_PRESSURE_PLATE,
+            properties -> new PressurePlateBlock(ModBlockSetType.PALM, properties
                     .strength(2f)
                     .forceSolidOn()
                     .noCollision()
                     .pushReaction(PushReaction.DESTROY)
             ));
 
-    public static final DeferredBlock<Block> PALM_BUTTON = registerLegacyBlock("palm_button",
-            properties -> new ButtonBlock(BlockSetType.ACACIA, 20, properties
+    public static final DeferredBlock<Block> PALM_BUTTON = registerBlock(ModBlockItemIds.PALM_BUTTON,
+            properties -> new ButtonBlock(ModBlockSetType.PALM, 20, properties
                     .strength(2f)
                     .noCollision()
                     .pushReaction(PushReaction.DESTROY)
             ));
 
-    public static final DeferredBlock<Block> PALM_SHELF = registerLegacyBlock("palm_shelf",
+    public static final DeferredBlock<Block> PALM_SHELF = registerBlock(ModBlockItemIds.PALM_SHELF,
             properties -> new ShelfBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "palm_shelf")))){
                 @NullMarked
                 @Override
                 public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                    return ModBlockEntities.PALM_SHELF_BE.get().create(pos, state);
+                    return ModBlockEntities.MOD_SHELF_BE.get().create(pos, state);
                 }
             });
 
@@ -774,34 +825,34 @@ public class ModBlocks {
             ));
 
     public static final DeferredBlock<Block> DECREPIT_FENCE = registerBlock(ModBlockItemIds.DECREPIT_FENCE,
-            properties -> new FenceBlock(properties
+            properties -> new ModFlammableFenceBlock(properties
                     .strength(2f, 2f)
                     .sound(SoundType.NETHER_WOOD)
             ));
 
     public static final DeferredBlock<Block> DECREPIT_FENCE_GATE = registerBlock(ModBlockItemIds.DECREPIT_FENCE_GATE,
-            properties -> new FenceGateBlock(ModWoodType.DECREPIT,
+            properties -> new ModFlammableFenceGateBlock(ModWoodType.DECREPIT,
                     properties
                             .strength(2f, 2f)
                             .sound(SoundType.NETHER_WOOD)
             ));
 
-    public static final DeferredBlock<Block> DECREPIT_PRESSURE_PLATE = registerLegacyBlock("decrepit_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.WARPED, properties
+    public static final DeferredBlock<Block> DECREPIT_PRESSURE_PLATE = registerBlock(ModBlockItemIds.DECREPIT_PRESSURE_PLATE,
+            properties -> new PressurePlateBlock(ModBlockSetType.DECREPIT, properties
                     .strength(2f)
                     .forceSolidOn()
                     .noCollision()
                     .pushReaction(PushReaction.DESTROY)
             ));
 
-    public static final DeferredBlock<Block> DECREPIT_BUTTON = registerLegacyBlock("decrepit_button",
-            properties -> new ButtonBlock(BlockSetType.WARPED, 20, properties
+    public static final DeferredBlock<Block> DECREPIT_BUTTON = registerBlock(ModBlockItemIds.DECREPIT_BUTTON,
+            properties -> new ButtonBlock(ModBlockSetType.DECREPIT, 20, properties
                     .strength(2f)
                     .noCollision()
                     .pushReaction(PushReaction.DESTROY)
             ));
 
-    public static final DeferredBlock<Block> DECREPIT_ROOTS = registerLegacyBlock("decrepit_roots",
+    public static final DeferredBlock<Block> DECREPIT_ROOTS = registerBlock(ModBlockItemIds.DECREPIT_ROOTS,
             properties -> new NetherRootsBlock(ModBlockTags.NULLIUM_BLOCKS, properties
                     .sound(SoundType.ROOTS)
                     .noOcclusion()
@@ -811,86 +862,62 @@ public class ModBlocks {
                     .offsetType(BlockBehaviour.OffsetType.XZ)
             ));
 
-    public static final DeferredBlock<Block> DECREPIT_SIGN =
-            registerBlockWithoutItem("decrepit_sign", properties ->
-                    new StandingSignBlock(
-                            ModWoodType.DECREPIT,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.NETHER_WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "decrepit_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.DECREPIT_SIGN_BE.get().create(pos, state); // Prevents game crash (no, literally)
-                        }
-                    }
-            );
-
-    public static final DeferredBlock<Block> DECREPIT_WALL_SIGN =
-            registerBlockWithoutItem("decrepit_wall_sign", properties ->
-                    new WallSignBlock(
-                            ModWoodType.DECREPIT,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.NETHER_WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "decrepit_wall_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.DECREPIT_SIGN_BE.get().create(pos, state);
-                        }
-                    }
-            );
-
-    // Ceiling sign
-    public static final DeferredBlock<Block> DECREPIT_HANGING_SIGN =
-            registerBlockWithoutItem("decrepit_hanging_sign", properties ->
-                    new CeilingHangingSignBlock(
-                            ModWoodType.DECREPIT,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.NETHER_WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "decrepit_hanging_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.DECREPIT_HANGING_SIGN_BE.get().create(pos, state); // Prevents game crash (no, literally)
-                        }
-                    }
-            );
-
-    // Wall sign
-    public static final DeferredBlock<Block> DECREPIT_WALL_HANGING_SIGN =
-            registerBlockWithoutItem("decrepit_wall_hanging_sign", properties ->
-                    new WallHangingSignBlock(
-                            ModWoodType.DECREPIT,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.NETHER_WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "decrepit_wall_hanging_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.DECREPIT_HANGING_SIGN_BE.get().create(pos, state);
-                        }
-                    }
-            );
-
     public static final DeferredBlock<Block> POTTED_DECREPIT_ROOTS = registerBlockWithoutItem("potted_decrepit_roots",
             properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
                     Blocks.FLOWER_POT, DECREPIT_ROOTS, properties
                     .noOcclusion()
                     .instabreak()
                     .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_SIGN = registerBlockWithoutItem("decrepit_sign",
+            properties -> new ModStandingSignBlock(
+                    ModWoodType.DECREPIT,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.NETHER_WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "decrepit_sign")))
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_WALL_SIGN = registerBlockWithoutItem("decrepit_wall_sign",
+            properties -> new ModWallSignBlock(
+                    ModWoodType.DECREPIT,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.NETHER_WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "decrepit_wall_sign")))
+            ));
+
+    // Ceiling sign
+    public static final DeferredBlock<Block> DECREPIT_HANGING_SIGN = registerBlockWithoutItem("decrepit_hanging_sign",
+            properties -> new ModCeilingHangingSignBlock(
+                    ModWoodType.DECREPIT,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.NETHER_WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "decrepit_hanging_sign")))
+            ));
+
+    // Wall sign
+    public static final DeferredBlock<Block> DECREPIT_WALL_HANGING_SIGN = registerBlockWithoutItem("decrepit_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(
+                    ModWoodType.DECREPIT,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.NETHER_WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "decrepit_wall_hanging_sign")))
             ));
 
     //———————————————————————————————————————Pallid Wood Blocks——————————————————————————————————————————————————————————————————————
@@ -948,9 +975,8 @@ public class ModBlocks {
                     .instabreak()
                     .noOcclusion()
                     .noCollision(),
-                    () -> PALLID_NULLIUM.get()
-            )
-    );
+                    PALLID_NULLIUM
+            ));
 
     public static final DeferredBlock<Block> POTTED_PALLID_SAPLING = registerBlockWithoutItem("potted_pallid_sapling",
             properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
@@ -975,34 +1001,34 @@ public class ModBlocks {
             ));
 
     public static final DeferredBlock<Block> PALLID_FENCE = registerBlock(ModBlockItemIds.PALLID_FENCE,
-            properties -> new FenceBlock(properties
+            properties -> new ModFlammableFenceBlock(properties
                     .strength(2f, 2f)
                     .sound(SoundType.NETHER_WOOD)
             ));
 
     public static final DeferredBlock<Block> PALLID_FENCE_GATE = registerBlock(ModBlockItemIds.PALLID_FENCE_GATE,
-            properties -> new FenceGateBlock(WoodType.WARPED,
+            properties -> new ModFlammableFenceGateBlock(WoodType.WARPED,
                     properties
                             .strength(2f, 2f)
                             .sound(SoundType.NETHER_WOOD)
             ));
 
-    public static final DeferredBlock<Block> PALLID_PRESSURE_PLATE = registerLegacyBlock("pallid_pressure_plate",
-            properties -> new PressurePlateBlock(BlockSetType.WARPED, properties
-                    .strength(2f)
+    public static final DeferredBlock<Block> PALLID_PRESSURE_PLATE = registerBlock(ModBlockItemIds.PALLID_PRESSURE_PLATE,
+            properties -> new PressurePlateBlock(ModBlockSetType.PALLID, properties
+                    .strength(2F)
                     .forceSolidOn()
                     .noCollision()
                     .pushReaction(PushReaction.DESTROY)
             ));
 
-    public static final DeferredBlock<Block> PALLID_BUTTON = registerLegacyBlock("pallid_button",
-            properties -> new ButtonBlock(BlockSetType.WARPED, 20, properties
-                    .strength(2f)
+    public static final DeferredBlock<Block> PALLID_BUTTON = registerBlock(ModBlockItemIds.PALLID_BUTTON,
+            properties -> new ButtonBlock(ModBlockSetType.PALLID, 20, properties
+                    .strength(2F)
                     .noCollision()
                     .pushReaction(PushReaction.DESTROY)
             ));
 
-    public static final DeferredBlock<Block> PALLID_ROOTS = registerLegacyBlock("pallid_roots",
+    public static final DeferredBlock<Block> PALLID_ROOTS = registerBlock(ModBlockItemIds.PALLID_ROOTS,
             properties -> new NetherRootsBlock(ModBlockTags.NULLIUM_BLOCKS, properties
                     .sound(SoundType.ROOTS)
                     .noOcclusion()
@@ -1020,41 +1046,214 @@ public class ModBlocks {
                     .pushReaction(PushReaction.DESTROY)
             ));
 
-    public static final DeferredBlock<Block> PALLID_SIGN =
-            registerBlockWithoutItem("pallid_sign", properties ->
-                    new StandingSignBlock(
-                            ModWoodType.PALLID,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.NETHER_WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "pallid_sign")))
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.PALLID_SIGN_BE.get().create(pos, state); // Prevents game crash (no, literally)
-                        }
-                    }
-            );
+    public static final DeferredBlock<Block> PALLID_SIGN = registerBlockWithoutItem("pallid_sign",
+            properties -> new ModStandingSignBlock(
+                    ModWoodType.PALLID,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.NETHER_WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "pallid_sign")))
+            ));
 
-    public static final DeferredBlock<Block> PALLID_WALL_SIGN =
-            registerBlockWithoutItem("pallid_wall_sign", properties ->
-                    new WallSignBlock(
-                            ModWoodType.PALLID,
-                            BlockBehaviour.Properties.of()
-                                    .noCollision()
-                                    .strength(1.0f)
-                                    .sound(SoundType.NETHER_WOOD)
-                                    .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "pallid_wall_sign"))) // Since we're using BlockBehviour.Properties.of() (Which is necessary for most block entities) the ID is not set automatically. Game will crash if the ID is not set here. Block that use properties -> new /*BlockType*/(properties) do not use .setId and function perfectly with no crash, as that method sets the ID automatically.
-                    ){
-                        @NullMarked
-                        @Override
-                        public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-                            return ModBlockEntities.PALLID_SIGN_BE.get().create(pos, state);
-                        }
-                    }
-            );
+    public static final DeferredBlock<Block> PALLID_WALL_SIGN = registerBlockWithoutItem("pallid_wall_sign",
+            properties -> new ModWallSignBlock(
+                    ModWoodType.PALLID,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0f)
+                            .sound(SoundType.NETHER_WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "pallid_wall_sign")))
+            ));
+
+    public static final DeferredBlock<Block> PALLID_HANGING_SIGN = registerBlockWithoutItem("pallid_hanging_sign",
+            properties -> new ModCeilingHangingSignBlock(
+                    ModWoodType.PALLID,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0F)
+                            .sound(SoundType.NETHER_WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "pallid_hanging_sign")))
+            ));
+
+    public static final DeferredBlock<Block> PALLID_WALL_HANGING_SIGN = registerBlockWithoutItem("pallid_wall_hanging_sign",
+            properties -> new ModWallHangingSignBlock(
+                    ModWoodType.PALLID,
+                    BlockBehaviour.Properties.of()
+                            .noCollision()
+                            .strength(1.0F)
+                            .sound(SoundType.NETHER_WOOD)
+                            .setId(ResourceKey.create(Registries.BLOCK,
+                                    Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
+                                            "pallid_wall_hanging_sign")))
+            ));
+
+    /*
+    Vertical slabs for vanilla block types.
+
+    Because there are so many, I will be subdividing this section into more sections
+     */
+
+
+    /* --- WOOD SLABS --- */
+    public static final DeferredBlock<Block> OAK_VERTICAL_SLAB = registerBlock(ModBlockItemIds.OAK_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(true, properties
+                    .ignitedByLava()
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> SPRUCE_VERTICAL_SLAB = registerBlock(ModBlockItemIds.SPRUCE_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(true, properties
+                    .ignitedByLava()
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> BIRCH_VERTICAL_SLAB = registerBlock(ModBlockItemIds.BIRCH_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(true, properties
+                    .ignitedByLava()
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> JUNGLE_VERTICAL_SLAB = registerBlock(ModBlockItemIds.JUNGLE_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(true, properties
+                    .ignitedByLava()
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> ACACIA_VERTICAL_SLAB = registerBlock(ModBlockItemIds.ACACIA_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(true, properties
+                    .ignitedByLava()
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> DARK_OAK_VERTICAL_SLAB = registerBlock(ModBlockItemIds.DARK_OAK_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(true, properties
+                    .ignitedByLava()
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> CRIMSON_VERTICAL_SLAB = registerBlock(ModBlockItemIds.CRIMSON_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .ignitedByLava()
+                    .sound(SoundType.NETHER_WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> WARPED_VERTICAL_SLAB = registerBlock(ModBlockItemIds.WARPED_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .ignitedByLava()
+                    .sound(SoundType.NETHER_WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> MANGROVE_VERTICAL_SLAB = registerBlock(ModBlockItemIds.MANGROVE_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(true, properties
+                    .ignitedByLava()
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> CHERRY_VERTICAL_SLAB = registerBlock(ModBlockItemIds.CHERRY_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(true, properties
+                    .ignitedByLava()
+                    .sound(SoundType.CHERRY_WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> BAMBOO_VERTICAL_SLAB = registerBlock(ModBlockItemIds.BAMBOO_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(true, properties
+                    .ignitedByLava()
+                    .sound(SoundType.BAMBOO_WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> BAMBOO_MOSAIC_VERTICAL_SLAB = registerBlock(ModBlockItemIds.BAMBOO_MOSAIC_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(true, properties
+                    .ignitedByLava()
+                    .sound(SoundType.BAMBOO_WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> PALE_OAK_VERTICAL_SLAB = registerBlock(ModBlockItemIds.PALE_OAK_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(true, properties
+                    .ignitedByLava()
+                    .sound(SoundType.WOOD)
+                    .strength(2F, 2F)
+            ));
+
+    /* --- STONE SLABS --- */
+
+    public static final DeferredBlock<Block> STONE_VERTICAL_SLAB = registerBlock(ModBlockItemIds.STONE_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .sound(SoundType.STONE)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> COBBLESTONE_VERTICAL_SLAB = registerBlock(ModBlockItemIds.COBBLESTONE_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .sound(SoundType.STONE)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> MOSSY_COBBLESTONE_VERTICAL_SLAB = registerBlock(ModBlockItemIds.MOSSY_COBBLESTONE_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .sound(SoundType.STONE)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> SMOOTH_STONE_VERTICAL_SLAB = registerBlock(ModBlockItemIds.SMOOTH_STONE_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .sound(SoundType.STONE)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> STONE_BRICK_VERTICAL_SLAB = registerBlock(ModBlockItemIds.STONE_BRICK_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .sound(SoundType.STONE)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> MOSSY_STONE_BRICK_VERTICAL_SLAB = registerBlock(ModBlockItemIds.MOSSY_STONE_BRICK_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .sound(SoundType.STONE)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> COBBLED_DEEPSLATE_VERTICAL_SLAB = registerBlock(ModBlockItemIds.COBBLED_DEEPSLATE_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .sound(SoundType.DEEPSLATE)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> POLISHED_DEEPSLATE_VERTICAL_SLAB = registerBlock(ModBlockItemIds.POLISHED_DEEPSLATE_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .sound(SoundType.POLISHED_DEEPSLATE)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> DEEPSLATE_BRICK_VERTICAL_SLAB = registerBlock(ModBlockItemIds.DEEPSLATE_BRICK_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .sound(SoundType.DEEPSLATE_BRICKS)
+                    .strength(2F, 2F)
+            ));
+
+    public static final DeferredBlock<Block> DEEPSLATE_TILE_VERTICAL_SLAB = registerBlock(ModBlockItemIds.DEEPSLATE_TILE_VERTICAL_SLAB,
+            properties -> new VerticalSlabBlock(false, properties
+                    .sound(SoundType.DEEPSLATE_TILES)
+                    .strength(2F, 2F)
+            ));
 
     // Flowers
 
@@ -1102,11 +1301,11 @@ public class ModBlocks {
                     .strength(50f, 1200f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE)
-                    .lightLevel(statex -> VoidAnchorBlock.getScaledChargeLevel(statex, 15))
+                    .lightLevel(state -> VoidAnchorBlock.getScaledChargeLevel(state, 15))
             ));
 
     // Magic block!
-    public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlock(ModBlockItemIds.MAGIC_BLOCK,
+    public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlockWithTooltip(ModBlockItemIds.MAGIC_BLOCK,
             properties -> new MagicBlock(properties
                     .strength(2f)
                     .requiresCorrectToolForDrops()
@@ -1123,14 +1322,14 @@ public class ModBlocks {
             ));
 
     // Portal Block
-    public static final DeferredBlock<Block> EVIL_PORTAL = registerBlock(ModBlockItemIds.EVIL_PORTAL,
+    public static final DeferredBlock<Block> EVIL_PORTAL = registerBlockWithTooltip(ModBlockItemIds.EVIL_PORTAL,
             properties -> new EvilPortalBlock(properties
                     .strength(2f)
-                    .sound(ModSounds.MAGIC_BLOCK_SOUNDS)
+                    .sound(ModSounds.EVIL_PORTAL_SOUNDS)
             ), Component.translatable("tooltip.morefeatures.evil_portal"));
 
     // Conjured Ice
-    public static final DeferredBlock<Block> CONJURED_ICE = registerBlockWithoutItem("conjured_ice", // Blocks without items don't need a BlockItemId. Keep just the string
+    public static final DeferredBlock<Block> CONJURED_ICE = registerBlockWithoutItem("conjured_ice",
             properties -> new ConjuredIceBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.FROSTED_ICE)
                     .setId(ResourceKey.create(Registries.BLOCK, Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "conjured_ice")))));
 
@@ -1155,14 +1354,15 @@ public class ModBlocks {
 
     // Register functions
 
-    private static <T extends Block> DeferredBlock<T> registerBlockWithoutItem(String name, Function<BlockBehaviour.Properties, T> function){ // Blocks without an item don't need a BlockItemId.
+    private static <T extends Block> DeferredBlock<T> registerBlockWithoutItem(String name, Function<BlockBehaviour.Properties, T> function){ // Blocks without an item don't need a BlockItemId. As such, this method accepts just a string
         return BLOCKS.registerBlock(name, function);
     }
 
     /*
     Deprecated methods. Use registerBlock(BlockItemId, Function) instead.
-     */
 
+    I promise, fluorite is being migrated to the new method soon.
+     */
     @Deprecated
     private static <T extends Block> DeferredBlock<T> registerLegacyBlock(String name, Function<BlockBehaviour.Properties, T> function){
         DeferredBlock<T> toReturn = BLOCKS.registerBlock(name, function);
@@ -1175,7 +1375,7 @@ public class ModBlocks {
         ModItems.ITEMS.registerItem(name, (properties -> new BlockItem(block.get(), properties.useBlockDescriptionPrefix())));
     }
 
-    private static <T extends Block> DeferredBlock<T> registerBlock(BlockItemId id, Function<BlockBehaviour.Properties, T> function, Component... components){
+    private static <T extends Block> DeferredBlock<T> registerBlockWithTooltip(BlockItemId id, Function<BlockBehaviour.Properties, T> function, Component... components){
         DeferredBlock<T> toReturn = BLOCKS.registerBlock(id.block().identifier().getPath(),
                 props -> function.apply(props.setId(id.block())));
         registerBlockItem(id, toReturn, components);
@@ -1184,7 +1384,7 @@ public class ModBlocks {
 
     private static <T extends Block> void registerBlockItem(BlockItemId id, DeferredBlock<T> block, Component... components){
         ModItems.ITEMS.registerItem(
-                id.item().identifier().getPath(), // Minecraft uses Identifier over ResourceLocation since 1.21.5. the location() method was replaced with identifier() at the same time.
+                id.item().identifier().getPath(),
                 properties -> new BlockItem(block.get(), properties.setId(id.item()).useBlockDescriptionPrefix()){
             @SuppressWarnings("deprecation")
             @NullMarked
@@ -1197,17 +1397,6 @@ public class ModBlocks {
             }
         });
     }
-
-    /*
-    In 26.2, Mojang changed some things about TagProviders. In my ModItemTagsProvider class, I could no longer
-    call something such as .add(ModBlocks.ALUMINIUM_BLOCK.asItem()). Why? Because .add() now needed a ResourceKey<Item>,
-    instead of a plain Item. The only fix was to shift to BlockItemIds and call .add(ModBlockItemIds.ALUMINIUM_BLOCK.item()).
-    That's what this new method is for. The above methods are deprecated and block registrations will be incrementally
-    shifted to this new method. I will spend ~20 mins per day creating and attaching BlockItemIds this way.
-
-    I have to do this incrementally because this class is ~1500 lines of code long. There are simply too many blocks
-    that I have added in my mod to add all of the BlockItemIds and switch all the registrations all at once.
-     */
 
     private static <T extends Block> DeferredBlock<T> registerBlock(
             BlockItemId id,

@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_vertical_slab_outer",
+  "textures": {
+    "all": "minecraft:block/cobblestone",
+    "particle": "minecraft:block/cobblestone"
+  }
+}

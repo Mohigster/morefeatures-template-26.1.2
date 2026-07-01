@@ -3,6 +3,12 @@
     "morefeatures:tainted_planks",
     "morefeatures:tainted_stairs",
     "morefeatures:tainted_slab",
+    "morefeatures:tainted_button",
+    "morefeatures:tainted_pressure_plate",
+    "morefeatures:tainted_fence",
+    "morefeatures:tainted_fence_gate",
+    "morefeatures:tainted_sign",
+    "morefeatures:tainted_wall_sign",
     "morefeatures:tainted_hanging_sign",
     "morefeatures:tainted_wall_hanging_sign"
   ]

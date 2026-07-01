@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_wall_sign",
+  "textures": {
+    "all": "morefeatures:block/tainted_sign",
+    "particle": "morefeatures:block/tainted_planks"
+  }
+}

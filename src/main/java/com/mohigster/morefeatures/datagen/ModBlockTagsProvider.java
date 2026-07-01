@@ -71,11 +71,15 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .addTag(ModBlockTags.IS_MODDED_WOOD);
 
         tag(BlockTags.FENCES)
+                .add(ModBlocks.BLOODWOOD_FENCE.getKey())
+                .add(ModBlocks.TAINTED_FENCE.getKey())
                 .add(ModBlocks.PALM_FENCE.getKey())
                 .add(ModBlocks.DECREPIT_FENCE.getKey())
                 .add(ModBlocks.PALLID_FENCE.getKey());
 
         tag(BlockTags.FENCE_GATES)
+                .add(ModBlocks.BLOODWOOD_FENCE_GATE.getKey())
+                .add(ModBlocks.TAINTED_FENCE_GATE.getKey())
                 .add(ModBlocks.PALM_FENCE_GATE.getKey())
                 .add(ModBlocks.DECREPIT_FENCE_GATE.getKey())
                 .add(ModBlocks.PALLID_FENCE_GATE.getKey());
@@ -97,6 +101,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.BLOODWOOD_PLANKS.getKey())
                 .add(ModBlocks.BLOODWOOD_STAIRS.getKey())
                 .add(ModBlocks.BLOODWOOD_SLAB.getKey())
+                .add(ModBlocks.BLOODWOOD_BUTTON.getKey())
+                .add(ModBlocks.BLOODWOOD_PRESSURE_PLATE.getKey())
+                .add(ModBlocks.BLOODWOOD_FENCE.getKey())
+                .add(ModBlocks.BLOODWOOD_FENCE_GATE.getKey())
+                .add(ModBlocks.BLOODWOOD_SIGN.getKey())
+                .add(ModBlocks.BLOODWOOD_WALL_SIGN.getKey())
                 .add(ModBlocks.BLOODWOOD_HANGING_SIGN.getKey())
                 .add(ModBlocks.BLOODWOOD_WALL_HANGING_SIGN.getKey());
 
@@ -110,6 +120,12 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.TAINTED_PLANKS.getKey())
                 .add(ModBlocks.TAINTED_STAIRS.getKey())
                 .add(ModBlocks.TAINTED_SLAB.getKey())
+                .add(ModBlocks.TAINTED_BUTTON.getKey())
+                .add(ModBlocks.TAINTED_PRESSURE_PLATE.getKey())
+                .add(ModBlocks.TAINTED_FENCE.getKey())
+                .add(ModBlocks.TAINTED_FENCE_GATE.getKey())
+                .add(ModBlocks.TAINTED_SIGN.getKey())
+                .add(ModBlocks.TAINTED_WALL_SIGN.getKey())
                 .add(ModBlocks.TAINTED_HANGING_SIGN.getKey())
                 .add(ModBlocks.TAINTED_WALL_HANGING_SIGN.getKey());
 
@@ -148,7 +164,11 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.DECREPIT_BUTTON.getKey())
                 .add(ModBlocks.DECREPIT_PRESSURE_PLATE.getKey())
                 .add(ModBlocks.DECREPIT_FENCE.getKey())
-                .add(ModBlocks.DECREPIT_FENCE_GATE.getKey());
+                .add(ModBlocks.DECREPIT_FENCE_GATE.getKey())
+                .add(ModBlocks.DECREPIT_SIGN.getKey())
+                .add(ModBlocks.DECREPIT_WALL_SIGN.getKey())
+                .add(ModBlocks.DECREPIT_HANGING_SIGN.getKey())
+                .add(ModBlocks.DECREPIT_WALL_HANGING_SIGN.getKey());
 
         tag(ModBlockTags.PALLID_LOGS)
                 .add(ModBlocks.STRIPPED_PALLID_LOG.getKey())
@@ -165,7 +185,7 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.PALLID_FENCE.getKey())
                 .add(ModBlocks.PALLID_FENCE_GATE.getKey());
 
-        tag(ModBlockTags.IS_MODDED_WOOD)
+        tag(ModBlockTags.IS_MODDED_WOOD) // This tag allows me to easily distinguish vanilla vs modded wood types in code
                 .addTag(ModBlockTags.BLOODWOOD_LOGS)
                 .addTag(ModBlockTags.BLOODWOOD)
                 .addTag(ModBlockTags.TAINTED_LOGS)
