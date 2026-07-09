@@ -16,9 +16,9 @@ public abstract class SelfInflictingAndTargetingWandItem extends TargetingWandIt
 
     public SelfInflictingAndTargetingWandItem(Properties properties, double radius, int cooldownTicks,
                                               int baseDurabilityCost, int selfInflictingExtraDurabilityCost,
-                                              int durabilityScalingFactor, int maxTargets, float proximityLimit,
+                                              int durabilityScalingFactor, int manaCost, int maxTargets, float proximityLimit,
                                               SoundEvent castSound, float soundVolume, float soundPitch) {
-        super(properties, radius, cooldownTicks, baseDurabilityCost, durabilityScalingFactor, maxTargets, proximityLimit, castSound, soundVolume, soundPitch);
+        super(properties, radius, cooldownTicks, baseDurabilityCost, durabilityScalingFactor, manaCost, maxTargets, proximityLimit, castSound, soundVolume, soundPitch);
         this.selfInflictingExtraDurabilityCost = selfInflictingExtraDurabilityCost;
         this.canUse = true;
     }
@@ -26,7 +26,7 @@ public abstract class SelfInflictingAndTargetingWandItem extends TargetingWandIt
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!level.isClientSide()) {
+        if (!level.isClientSide() && hasEnoughMana(player)) {
             if (player.isShiftKeyDown() && canCastSpellOnSelf(player)){
                 castSelfInflictingSpell(player, level);
                 int durabilityCost = baseDurabilityCost + selfInflictingExtraDurabilityCost;
@@ -43,7 +43,7 @@ public abstract class SelfInflictingAndTargetingWandItem extends TargetingWandIt
                     for (LivingEntity target : targets) {
                         castTargetedSpell(target, player, level);
                     }
-                    int durabilityCost = calculateDurabilityCost(targets.size());
+                    int durabilityCost = totalDurabilityCost(targets.size());
                     applyCastEffects(player, stack, durabilityCost, hand, level);
                     return InteractionResult.SUCCESS_SERVER;
                 }

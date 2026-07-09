@@ -54,7 +54,8 @@ public class ModCreativeModeTabs {
                 // Music disc
                 output.accept(ModItems.MUSIC_DISC_AQUAMARINE);
             })
-            .build());
+            .build()
+    );
 
 
     // May subdivide this blocks tab into natural blocks, building blocks, etc. Depends on what I add and how big these tabs get.
@@ -119,10 +120,11 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.PALLID_NULLIUM);
                 output.accept(ModBlocks.PALLID_ROOTS);
             })
-            .build());
+            .build()
+    );
 
     public static final Supplier<CreativeModeTab> MOREFEATURES_EQUIPMENT_TAB = CREATIVE_MODE_TABS.register("morefeatures_equipment_tab", () -> CreativeModeTab.builder()
-            .icon(() -> new ItemStack(ModItems.BISMUTH_EQUIPMENT.get(0).asItem())) // 0 is Sword
+            .icon(() -> new ItemStack(ModItems.BISMUTH_EQUIPMENT.getFirst().asItem())) // 0 is Sword
             .title(Component.translatable("creativetab.morefeatures.morefeatures_equipment"))
             .withTabsBefore(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "morefeatures_blocks_tab"))
             .displayItems((itemDisplayParameters, output) -> {
@@ -159,7 +161,8 @@ public class ModCreativeModeTabs {
 
                 output.accept(ModItems.METAL_DETECTOR);
             })
-            .build());
+            .build()
+    );
 
     public static final Supplier<CreativeModeTab> MOREFEATURES_WOOD_TAB = CREATIVE_MODE_TABS.register("morefeatures_wood_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(ModBlocks.BLOODWOOD_LOG))
@@ -241,15 +244,19 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.DECREPIT_BUTTON);
                 output.accept(ModBlocks.DECREPIT_LEAVES);
                 output.accept(ModBlocks.DECREPIT_SAPLING);
+                output.accept(ModBlocks.DECREPIT_SHELF);
                 output.accept(ModItems.DECREPIT_SIGN);
                 output.accept(ModItems.DECREPIT_HANGING_SIGN);
 
                 // Pallid wood
 
+                output.accept(ModBlocks.PALLID_LOG);
+                output.accept(ModBlocks.PALLID_WOOD);
                 output.accept(ModBlocks.STRIPPED_PALLID_LOG);
                 output.accept(ModBlocks.STRIPPED_PALLID_WOOD);
                 output.accept(ModBlocks.PALLID_PLANKS);
                 output.accept(ModBlocks.PALLID_STAIRS);
+                output.accept(ModBlocks.PALLID_VERTICAL_SLAB);
                 output.accept(ModBlocks.PALLID_SLAB);
                 output.accept(ModBlocks.PALLID_FENCE);
                 output.accept(ModBlocks.PALLID_FENCE_GATE);
@@ -257,10 +264,12 @@ public class ModCreativeModeTabs {
                 output.accept(ModBlocks.PALLID_BUTTON);
                 output.accept(ModBlocks.PALLID_LEAVES);
                 output.accept(ModBlocks.PALLID_SAPLING);
+                output.accept(ModBlocks.PALLID_SHELF);
                 output.accept(ModItems.PALLID_SIGN);
                 output.accept(ModItems.PALM_HANGING_SIGN);
             })
-            .build());
+            .build()
+    );
 
 
     public static void register(IEventBus eventBus){

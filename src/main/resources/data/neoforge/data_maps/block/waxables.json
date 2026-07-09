@@ -1,0 +1,16 @@
+{
+  "values": {
+    "morefeatures:cut_copper_vertical_slab": {
+      "waxed": "morefeatures:waxed_cut_copper_vertical_slab"
+    },
+    "morefeatures:exposed_cut_copper_vertical_slab": {
+      "waxed": "morefeatures:waxed_exposed_cut_copper_vertical_slab"
+    },
+    "morefeatures:weathered_cut_copper_vertical_slab": {
+      "waxed": "morefeatures:waxed_weathered_cut_copper_vertical_slab"
+    },
+    "morefeatures:oxidized_cut_copper_vertical_slab": {
+      "waxed": "morefeatures:waxed_oxidized_cut_copper_vertical_slab"
+    }
+  }
+}

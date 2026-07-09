@@ -3,5 +3,10 @@
   "item.morefeatures.bismuth_nautilus_armor": "Bismuth Nautilus Armour",
   "item.morefeatures.carbon_wolf_armor": "Carbon Reinforced Wolf Armour",
   "item.minecraft.smithing_template.bismuth_upgrade.base_slot_description": "Add netherite or carbon armour, weapon, or tool",
-  "item.morefeatures.carbon_fiber": "Carbon Fibre"
+  "item.morefeatures.carbon_fiber": "Carbon Fibre",
+  "block.morefeatures.sulfur_vertical_slab": "Sulphur Vertical Slab",
+  "block.morefeatures.polished_sulfur_vertical_slab": "Polished Sulphur Vertical Slab",
+  "block.morefeatures.sulfur_brick_vertical_slab": "Sulphur Brick Vertical Slab",
+  "block.morefeatures.gray_wool_vertical_slab": "Grey Wool Vertical Slab",
+  "block.morefeatures.light_gray_wool_vertical_slab": "Light Grey Wool Vertical Slab"
 }

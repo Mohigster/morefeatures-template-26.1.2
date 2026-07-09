@@ -32,6 +32,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
+
+    public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final EnumProperty<VerticalSlabType> TYPE = EnumProperty.create("type", VerticalSlabType.class);
     public static final EnumProperty<StairsShape> SHAPE = BlockStateProperties.STAIRS_SHAPE;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
@@ -52,6 +54,7 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
 
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(TYPE, VerticalSlabType.NORTH)
+                .setValue(FACING, Direction.NORTH)
                 .setValue(SHAPE, StairsShape.STRAIGHT)
                 .setValue(WATERLOGGED, false));
 
@@ -65,12 +68,17 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
         BlockState existing = context.getLevel().getBlockState(pos);
 
         if (existing.is(this) && existing.getValue(TYPE) != VerticalSlabType.DOUBLE) {
-            return existing.setValue(TYPE, VerticalSlabType.DOUBLE).setValue(WATERLOGGED, false);
+            Direction originalFacing = existing.getValue(FACING);
+            return existing
+                    .setValue(TYPE, VerticalSlabType.DOUBLE)
+                    .setValue(FACING, originalFacing)
+                    .setValue(WATERLOGGED, false);
         }
 
         Direction facing = getFacingFromClick(context);
         BlockState state = this.defaultBlockState()
                 .setValue(TYPE, VerticalSlabType.fromDirection(facing))
+                .setValue(FACING, facing)
                 .setValue(WATERLOGGED, context.getLevel().getFluidState(pos).getType() == Fluids.WATER);
 
         // Apply smart orientation snapping
@@ -136,7 +144,8 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
 
         Direction bestDirection = findBestParallelDirection(state, level, pos);
         if (bestDirection != null) {
-            state = state.setValue(TYPE, VerticalSlabType.fromDirection(bestDirection));
+            state = state.setValue(TYPE, VerticalSlabType.fromDirection(bestDirection))
+                    .setValue(FACING, bestDirection);
         }
 
         return state.setValue(SHAPE, getStairsShape(state, level, pos));
@@ -306,16 +315,22 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
     @Override
     public BlockState rotate(BlockState state, Rotation rotation) {
         VerticalSlabType type = state.getValue(TYPE);
-        if (type == VerticalSlabType.DOUBLE) return state;
-        return state.setValue(TYPE, VerticalSlabType.fromDirection(rotation.rotate(type.toDirection())));
+        if (type == VerticalSlabType.DOUBLE) {
+            return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+        }
+        return state.setValue(TYPE, VerticalSlabType.fromDirection(rotation.rotate(type.toDirection())))
+                .setValue(FACING, rotation.rotate(state.getValue(FACING)));
     }
 
     @NullMarked
     @Override
-    public BlockState mirror(BlockState state, Mirror mirror) {
+    public BlockState mirror(BlockState state, Mirror mirroring) {
         VerticalSlabType type = state.getValue(TYPE);
-        if (type == VerticalSlabType.DOUBLE) return state;
-        return state.setValue(TYPE, VerticalSlabType.fromDirection(mirror.mirror(type.toDirection())));
+        if (type == VerticalSlabType.DOUBLE) {
+            return state.setValue(FACING, mirroring.mirror(state.getValue(FACING)));
+        }
+        return state.setValue(TYPE, VerticalSlabType.fromDirection(mirroring.mirror(type.toDirection())))
+                .setValue(FACING, mirroring.mirror(state.getValue(FACING)));
     }
 
     @Override
@@ -325,7 +340,7 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(TYPE, SHAPE, WATERLOGGED);
+        builder.add(TYPE, FACING, SHAPE, WATERLOGGED);
     }
 
     @Override

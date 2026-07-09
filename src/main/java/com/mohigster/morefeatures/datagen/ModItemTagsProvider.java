@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.block.id.ModBlockItemIds;
+import com.mohigster.morefeatures.block.references.ModBlockItemIds;
 import com.mohigster.morefeatures.item.ModItems;
 import com.mohigster.morefeatures.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;

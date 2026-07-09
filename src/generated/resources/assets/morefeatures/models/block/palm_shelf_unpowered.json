@@ -2,6 +2,6 @@
   "parent": "minecraft:block/template_shelf_unpowered",
   "textures": {
     "all": "morefeatures:block/palm_shelf",
-    "particle": "morefeatures:block/palm_planks"
+    "particle": "morefeatures:block/stripped_palm_log"
   }
 }

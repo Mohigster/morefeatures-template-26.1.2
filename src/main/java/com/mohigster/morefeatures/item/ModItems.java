@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.item;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.asset.ModEquipmentAssets;
 import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.references.ModBlockItemIds;
 import com.mohigster.morefeatures.datacomponent.ModDataComponentTypes;
 import com.mohigster.morefeatures.datagen.ModJukeboxSongs;
 import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
@@ -26,13 +27,17 @@ import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.Equippable;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.WeatheringCopperCollection;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -46,6 +51,8 @@ public class ModItems {
     public static DeferredItem<Item> registerItem(String name, Function<Item.Properties, Item> function, Item.Properties itemProp) {
         return ITEMS.register(name, () -> function.apply(itemProp.setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MODID, name)))));
     }
+
+
 
     // Item registration. JSON files are generated with DataGen. See MoreFeaturesDataGen and classes in the datagen package.
 

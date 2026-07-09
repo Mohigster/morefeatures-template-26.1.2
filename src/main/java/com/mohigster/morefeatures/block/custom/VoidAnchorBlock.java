@@ -133,7 +133,6 @@ public class VoidAnchorBlock extends Block {
             return InteractionResult.CONSUME;
         }
 
-        // Wrong dimension → explode, just like the Respawn Anchor in the Overworld.
         if (!canSetSpawn(serverLevel)) {
             this.explode(state, serverLevel, pos);
             return InteractionResult.SUCCESS_SERVER;
@@ -147,7 +146,6 @@ public class VoidAnchorBlock extends Block {
 
             if (existing == null || !existing.isSamePosition(newRespawnConfig)) {
                 serverPlayer.setRespawnPosition(newRespawnConfig, true);
-                // Reuse the vanilla sound — swap for your own SoundEvent if desired.
                 serverLevel.playSound(
                         null,
                         pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5,
@@ -166,7 +164,7 @@ public class VoidAnchorBlock extends Block {
     // Helpers
     // -------------------------------------------------------------------------
 
-    /** Returns true when the item can be used to charge the Void Anchor. */
+    /* Returns true when the item can be used to charge the Void Anchor. */
     private static boolean isRespawnFuel(ItemStack stack) {
         return stack.is(Items.ENDER_PEARL);
     }
@@ -175,7 +173,7 @@ public class VoidAnchorBlock extends Block {
         return state.getValue(CHARGE) < MAX_CHARGES;
     }
 
-    /**
+    /*
      * The Void Anchor only works in the End.
      * Unlike the vanilla Respawn Anchor, this does NOT delegate to an
      * environment attribute — it checks the dimension directly so there is
@@ -282,7 +280,7 @@ public class VoidAnchorBlock extends Block {
         return true;
     }
 
-    /** Scales the charge level (0–4) to the given maximum, e.g. 15 for a comparator. */
+    /* Scales the charge level (0–4) to the given maximum, e.g. 15 for a comparator. */
     public static int getScaledChargeLevel(BlockState state, int maximum) {
         return Mth.floor((state.getValue(CHARGE) - MIN_CHARGES) / (float) MAX_CHARGES * maximum);
     }

@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_vertical_slab",
+  "textures": {
+    "all": "morefeatures:block/pallid_planks",
+    "particle": "morefeatures:block/pallid_planks"
+  }
+}

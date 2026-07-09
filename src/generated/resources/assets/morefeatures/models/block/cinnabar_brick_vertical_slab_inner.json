@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_vertical_slab_inner",
+  "textures": {
+    "all": "minecraft:block/cinnabar_bricks",
+    "particle": "minecraft:block/cinnabar_bricks"
+  }
+}

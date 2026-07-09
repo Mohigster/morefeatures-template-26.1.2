@@ -11,11 +11,14 @@ import java.util.function.Predicate;
 
 public class HealingWandItem extends SelfInflictingAndTargetingWandItem {
     private static final double RADIUS = 20.0D;
+
     private static final int COOLDOWN = 30;
     private static final int BASE_DURABILITY_COST = 1;
     private static final int SCALING_FACTOR = 2;
     private static final int SELF_INFLICTING_ADDITIONAL_COST = 1;
+    private static final int MANA_COST = 3;
     private static final int MAX_TARGETS = 1;
+
     private static final float PROXIMITY_LIMIT = 0.0F;
     private static final float VOLUME = 0.9F;
     private static final float PITCH = 0.2F;
@@ -24,9 +27,8 @@ public class HealingWandItem extends SelfInflictingAndTargetingWandItem {
     private static final float TARGET_HEALING_AMOUNT = 6.5F;
 
     public HealingWandItem(Properties properties) {
-        super(properties, RADIUS, COOLDOWN, BASE_DURABILITY_COST, SCALING_FACTOR, MAX_TARGETS,
-                SELF_INFLICTING_ADDITIONAL_COST, PROXIMITY_LIMIT, SoundEvents.AMETHYST_BLOCK_RESONATE,
-                VOLUME, PITCH);
+        super(properties, RADIUS, COOLDOWN, BASE_DURABILITY_COST, SELF_INFLICTING_ADDITIONAL_COST, SCALING_FACTOR,
+                MANA_COST, MAX_TARGETS, PROXIMITY_LIMIT, SoundEvents.AMETHYST_BLOCK_RESONATE, VOLUME, PITCH);
     }
 
     @Override

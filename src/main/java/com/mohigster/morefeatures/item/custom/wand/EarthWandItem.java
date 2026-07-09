@@ -11,22 +11,19 @@ import net.minecraft.world.level.Level;
 
 public class EarthWandItem extends GenericAOEWandItem {
     private static final double RADIUS = 12.0D;
+
     private static final int COOLDOWN = 50;
     private static final int DURABILITY_COST = 2;
     private static final int RINGS = 5;
     private static final int FLOOR_SCAN_DISTANCE = 12;
+    private static final int MANA_COST = 3;
+
     private static final float VOLUME = 1.0F;
     private static final float PITCH = 0.5F;
 
     public EarthWandItem(Properties properties) {
         super(properties, RADIUS, COOLDOWN, RINGS, DURABILITY_COST,
-                SoundEvents.DEEPSLATE_BREAK, VOLUME, PITCH);
-    }
-
-
-    @Override
-    protected int blocksToScanForFloor() {
-        return FLOOR_SCAN_DISTANCE;
+                MANA_COST, FLOOR_SCAN_DISTANCE, SoundEvents.DEEPSLATE_BREAK, VOLUME, PITCH);
     }
 
     @Override

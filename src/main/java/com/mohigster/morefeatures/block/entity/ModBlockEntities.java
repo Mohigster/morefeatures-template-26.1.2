@@ -50,7 +50,13 @@ public class ModBlockEntities {
 
     public static final Supplier<BlockEntityType<ModShelfBlockEntity>> MOD_SHELF_BE =
             BLOCK_ENTITIES.register("mod_shelf_be", () -> new BlockEntityType<>(
-                    ModShelfBlockEntity::new, ModBlocks.PALM_SHELF.get()));
+                    ModShelfBlockEntity::new,
+                    ModBlocks.BLOODWOOD_SHELF.get(),
+                    ModBlocks.TAINTED_SHELF.get(),
+                    ModBlocks.PALM_SHELF.get(),
+                    ModBlocks.DECREPIT_SHELF.get(),
+                    ModBlocks.PALLID_SHELF.get()
+            ));
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);

@@ -1,7 +1,10 @@
 {
   "values": [
     "morefeatures:azurite_pressure_plate",
+    "morefeatures:bloodwood_pressure_plate",
+    "morefeatures:tainted_pressure_plate",
     "morefeatures:palm_pressure_plate",
-    "morefeatures:decrepit_pressure_plate"
+    "morefeatures:decrepit_pressure_plate",
+    "morefeatures:pallid_pressure_plate"
   ]
 }

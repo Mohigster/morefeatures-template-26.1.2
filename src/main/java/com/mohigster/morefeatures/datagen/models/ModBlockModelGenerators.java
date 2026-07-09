@@ -13,7 +13,9 @@ import net.minecraft.client.data.models.blockstates.PropertyDispatch;
 import net.minecraft.client.data.models.model.*;
 import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.client.resources.model.sprite.Material;
+import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
@@ -28,6 +30,7 @@ import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant
 
 public final class ModBlockModelGenerators {
     private static final TextureSlot ALL_SLOT = TextureSlot.create("all");
+    private static final TextureSlot CONNECTOR_SLOT = TextureSlot.create("connector");
 
     private static final ModelTemplate VERTICAL_SLAB_STRAIGHT = new ModelTemplate(
             Optional.of(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "block/template_vertical_slab")),
@@ -44,6 +47,21 @@ public final class ModBlockModelGenerators {
             Optional.of("_inner"),
             ALL_SLOT, TextureSlot.PARTICLE);
 
+    private static final ModelTemplate VERTICAL_SLAB_SANDSTONE_STRAIGHT = new ModelTemplate(
+            Optional.of(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "block/template_vertical_sandstone_slab")),
+            Optional.of("_straight"),
+            TextureSlot.SIDE, TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.PARTICLE);
+
+    private static final ModelTemplate VERTICAL_SLAB_SANDSTONE_OUTER = new ModelTemplate(
+            Optional.of(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "block/template_vertical_sandstone_slab_outer")),
+            Optional.of("_outer"),
+            TextureSlot.SIDE, TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.PARTICLE);
+
+    private static final ModelTemplate VERTICAL_SLAB_SANDSTONE_INNER = new ModelTemplate(
+            Optional.of(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "block/template_vertical_sandstone_slab_inner")),
+            Optional.of("_inner"),
+            TextureSlot.SIDE, TextureSlot.BOTTOM, TextureSlot.TOP, TextureSlot.PARTICLE);
+
     private static final ModelTemplate VERTICAL_SLAB_STRAIGHT_COLUMN = new ModelTemplate(
             Optional.of(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "block/template_vertical_slab_column")),
             Optional.of("_straight"),
@@ -52,12 +70,12 @@ public final class ModBlockModelGenerators {
     private static final ModelTemplate VERTICAL_SLAB_OUTER_COLUMN = new ModelTemplate(
             Optional.of(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "block/template_vertical_slab_outer_column")),
             Optional.of("_outer"),
-            TextureSlot.SIDE, TextureSlot.END, TextureSlot.PARTICLE);
+            TextureSlot.SIDE, TextureSlot.END, CONNECTOR_SLOT, TextureSlot.PARTICLE);
 
     private static final ModelTemplate VERTICAL_SLAB_INNER_COLUMN = new ModelTemplate(
             Optional.of(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "block/template_vertical_slab_inner_column")),
             Optional.of("_inner"),
-            TextureSlot.SIDE, TextureSlot.END, TextureSlot.PARTICLE);
+            TextureSlot.SIDE, TextureSlot.END, CONNECTOR_SLOT, TextureSlot.PARTICLE);
 
     private static final ModelTemplate VERTICAL_SLAB_DOUBLE_COLUMN = new ModelTemplate(
             Optional.of(Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "block/template_vertical_slab_double_column")),
@@ -70,14 +88,62 @@ public final class ModBlockModelGenerators {
             throw new IllegalArgumentException("Cannot create a model for " + verticalSlab + ": textureSource must not be null");
         }
 
-        TextureMapping mapping = new TextureMapping()
-                .put(ALL_SLOT, TextureMapping.getBlockTexture(textureSource))
-                .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(textureSource));
+        TextureMapping mapping = new TextureMapping();
 
-        // Generate the three shaped model files.
-        Identifier straightModel = VERTICAL_SLAB_STRAIGHT.create(verticalSlab, mapping, blockModels.modelOutput);
-        Identifier outerModel    = VERTICAL_SLAB_OUTER.create(verticalSlab, mapping, blockModels.modelOutput);
-        Identifier innerModel    = VERTICAL_SLAB_INNER.create(verticalSlab, mapping, blockModels.modelOutput);
+        Identifier straightModel;
+        Identifier outerModel;
+        Identifier innerModel;
+
+        String suffix = textureSource == Blocks.QUARTZ_BLOCK ? "_side" : textureSource == Blocks.SMOOTH_QUARTZ ? "_bottom" : "";
+
+        if (textureSource == Blocks.SMOOTH_SANDSTONE || textureSource == Blocks.SMOOTH_RED_SANDSTONE){
+            Block smoothSource = textureSource == Blocks.SMOOTH_SANDSTONE ? Blocks.SANDSTONE : Blocks.RED_SANDSTONE;
+            mapping.put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(smoothSource, "_top"));
+        } else if (!(suffix.isEmpty())){
+            mapping.put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(Blocks.QUARTZ_BLOCK, suffix));
+        } else{
+            mapping.put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(textureSource));
+        }
+
+        if (textureSource == Blocks.SANDSTONE || textureSource == Blocks.CUT_SANDSTONE ||
+                textureSource == Blocks.SMOOTH_SANDSTONE || textureSource == Blocks.RED_SANDSTONE ||
+        textureSource == Blocks.CUT_RED_SANDSTONE || textureSource == Blocks.SMOOTH_RED_SANDSTONE){
+            Block sourceBlock = textureSource == Blocks.SANDSTONE || textureSource == Blocks.CUT_SANDSTONE
+                    ? Blocks.SANDSTONE
+                    : textureSource == Blocks.RED_SANDSTONE || textureSource == Blocks.CUT_RED_SANDSTONE
+                    ? Blocks.RED_SANDSTONE
+                    : textureSource;
+
+            if (textureSource == Blocks.SMOOTH_SANDSTONE || textureSource == Blocks.SMOOTH_RED_SANDSTONE){
+                Block smoothSource = textureSource == Blocks.SMOOTH_SANDSTONE ? Blocks.SANDSTONE : Blocks.RED_SANDSTONE;
+                mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(smoothSource, "_top"));
+                mapping.put(TextureSlot.TOP, TextureMapping.getBlockTexture(smoothSource, "_top"));
+                mapping.put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(smoothSource, "_top"));
+            } else {
+                mapping.put(TextureSlot.SIDE, TextureMapping.getBlockTexture(textureSource));
+                mapping.put(TextureSlot.TOP, TextureMapping.getBlockTexture(sourceBlock, "_top"));
+
+                if (!(textureSource == Blocks.SANDSTONE || textureSource == Blocks.RED_SANDSTONE)) {
+                    mapping.put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(sourceBlock, "_top"));
+                } else {
+                    mapping.put(TextureSlot.BOTTOM, TextureMapping.getBlockTexture(sourceBlock, "_bottom"));
+                }
+            }
+            straightModel = VERTICAL_SLAB_SANDSTONE_STRAIGHT.create(verticalSlab, mapping, blockModels.modelOutput);
+            outerModel    = VERTICAL_SLAB_SANDSTONE_OUTER.create(verticalSlab, mapping, blockModels.modelOutput);
+            innerModel    = VERTICAL_SLAB_SANDSTONE_INNER.create(verticalSlab, mapping, blockModels.modelOutput);
+
+        } else if (!(suffix.isEmpty())){
+            mapping.put(ALL_SLOT, TextureMapping.getBlockTexture(Blocks.QUARTZ_BLOCK, suffix));
+            straightModel = VERTICAL_SLAB_STRAIGHT.create(verticalSlab, mapping, blockModels.modelOutput);
+            outerModel = VERTICAL_SLAB_OUTER.create(verticalSlab, mapping, blockModels.modelOutput);
+            innerModel = VERTICAL_SLAB_INNER.create(verticalSlab, mapping, blockModels.modelOutput);
+        } else {
+            mapping.put(ALL_SLOT, TextureMapping.getBlockTexture(textureSource));
+            straightModel = VERTICAL_SLAB_STRAIGHT.create(verticalSlab, mapping, blockModels.modelOutput);
+            outerModel    = VERTICAL_SLAB_OUTER.create(verticalSlab, mapping, blockModels.modelOutput);
+            innerModel    = VERTICAL_SLAB_INNER.create(verticalSlab, mapping, blockModels.modelOutput);
+        }
 
         // DOUBLE = full block; reuse the texture-source block's own model so
         // we don't generate a redundant identical file.
@@ -104,7 +170,7 @@ public final class ModBlockModelGenerators {
                                         return variant = variant.with(VariantMutator.Y_ROT.withValue(Quadrant.parseJson(yRot)));
                                     }
 
-                                    return variant ;
+                                    return variant;
                                 }))
         );
 
@@ -120,18 +186,25 @@ public final class ModBlockModelGenerators {
                 .put(TextureSlot.END,      TextureMapping.getBlockTexture(Blocks.SMOOTH_STONE))
                 .put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(Blocks.SMOOTH_STONE_SLAB, "_side"));
 
-        Identifier straightModel = VERTICAL_SLAB_STRAIGHT_COLUMN.create(verticalSlab, mapping, blockModels.modelOutput);
-        Identifier outerModel    = VERTICAL_SLAB_OUTER_COLUMN.create(verticalSlab, mapping, blockModels.modelOutput);
-        Identifier innerModel    = VERTICAL_SLAB_INNER_COLUMN.create(verticalSlab, mapping, blockModels.modelOutput);
+        TextureMapping outerMapping = mapping.put(CONNECTOR_SLOT, TextureMapping.getBlockTexture(verticalSlab, "_connector_outer")); // Needs connectors because of the rotation
+        TextureMapping innerMapping = mapping.put(CONNECTOR_SLOT, TextureMapping.getBlockTexture(verticalSlab, "_connector_inner")); // And the connectors are separate due to separate texture
 
-        Identifier fullModel = VERTICAL_SLAB_DOUBLE_COLUMN.create(verticalSlab, mapping, blockModels.modelOutput);
+        Identifier straightModel = VERTICAL_SLAB_STRAIGHT_COLUMN.create(verticalSlab, mapping, blockModels.modelOutput);
+        Identifier outerModel    = VERTICAL_SLAB_OUTER_COLUMN.create(verticalSlab, outerMapping, blockModels.modelOutput);
+        Identifier innerModel    = VERTICAL_SLAB_INNER_COLUMN.create(verticalSlab, innerMapping, blockModels.modelOutput);
+
+        Identifier fullModel = VERTICAL_SLAB_DOUBLE_COLUMN.create(verticalSlab, mapping, blockModels.modelOutput); // Can't borrow the double smooth stone slab model because it will be rotated incorrectly. Needs its own model
 
         blockModels.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(verticalSlab)
-                        .with(PropertyDispatch.initial(VerticalSlabBlock.TYPE, VerticalSlabBlock.SHAPE)
-                                .generate((type, shape) -> {
+                        .with(PropertyDispatch.initial(VerticalSlabBlock.TYPE, VerticalSlabBlock.FACING, VerticalSlabBlock.SHAPE)
+                                .generate((type, facing, shape) -> {
                                     if (type == VerticalSlabType.DOUBLE) {
-                                        return plainVariant(fullModel);
+                                        int yRot = yRotationForDouble(facing);
+
+                                        MultiVariant variant = plainVariant(fullModel);// No UV_LOCK — stripe must rotate with the block. Unlike above which has one
+                                        if (yRot != 0) variant = variant.with(VariantMutator.Y_ROT.withValue(Quadrant.parseJson(yRot)));
+                                        return variant;
                                     }
 
                                     Identifier model = switch (shape) {
@@ -141,16 +214,24 @@ public final class ModBlockModelGenerators {
                                     };
 
                                     int yRot = yRotationDegrees(type, shape);
-                                    MultiVariant variant = plainVariant(model).with(VariantMutator.UV_LOCK.withValue(true));
-                                    if (yRot != 0) {
-                                        return variant = variant.with(VariantMutator.Y_ROT.withValue(Quadrant.parseJson(yRot)));
-                                    }
+                                    // No UV_LOCK — stripe must rotate with the block
+                                    MultiVariant variant = plainVariant(model);
+                                    if (yRot != 0) variant = variant.with(VariantMutator.Y_ROT.withValue(Quadrant.parseJson(yRot)));
                                     return variant;
-                                })
-                        )
+                                }))
         );
 
         blockModels.registerSimpleItemModel(verticalSlab, straightModel);
+    }
+
+    private static int yRotationForDouble(Direction facing) {
+        return switch (facing) {
+            case NORTH -> 0;
+            case EAST  -> 90;
+            case SOUTH -> 180;
+            case WEST  -> 270;
+            default -> 0;
+        };
     }
 
     private static int yRotationDegrees(VerticalSlabType type, StairsShape shape) {

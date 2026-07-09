@@ -1,5 +1,6 @@
 {
   "values": [
-    "#morefeatures:is_modded_wood"
+    "#morefeatures:is_modded_wood",
+    "#morefeatures:axe_mineable_vertical_slabs"
   ]
 }

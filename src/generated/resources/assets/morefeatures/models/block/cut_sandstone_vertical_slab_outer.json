@@ -1,0 +1,9 @@
+{
+  "parent": "morefeatures:block/template_vertical_sandstone_slab_outer",
+  "textures": {
+    "bottom": "minecraft:block/sandstone_top",
+    "particle": "minecraft:block/cut_sandstone",
+    "side": "minecraft:block/cut_sandstone",
+    "top": "minecraft:block/sandstone_top"
+  }
+}

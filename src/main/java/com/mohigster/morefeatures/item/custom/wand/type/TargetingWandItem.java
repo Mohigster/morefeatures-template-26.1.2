@@ -21,9 +21,9 @@ public abstract class TargetingWandItem extends AbstractWandItem {
     protected final float proximityLimit; // In blocks
 
     public TargetingWandItem(Properties properties, double radius, int cooldownTicks,
-                             int baseDurabilityCost, int durabilityScalingFactor, int maxTargets, float proximityLimit,
-                             SoundEvent castSound, float soundVolume, float soundPitch) {
-        super(properties, radius, cooldownTicks, baseDurabilityCost, durabilityScalingFactor, castSound, soundVolume, soundPitch);
+                             int baseDurabilityCost, int durabilityScalingFactor, int manaCost, int maxTargets,
+                             float proximityLimit, SoundEvent castSound, float soundVolume, float soundPitch) {
+        super(properties, radius, cooldownTicks, baseDurabilityCost, durabilityScalingFactor, manaCost, castSound, soundVolume, soundPitch);
         this.maxTargets = maxTargets;
         this.proximityLimit = proximityLimit;
     }
@@ -66,7 +66,7 @@ public abstract class TargetingWandItem extends AbstractWandItem {
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!level.isClientSide()) {
+        if (!level.isClientSide() && hasEnoughMana(player)) {
             List<LivingEntity> targets = level.getEntitiesOfClass(
                     LivingEntity.class,
                     player.getBoundingBox().inflate(radius),
@@ -83,7 +83,9 @@ public abstract class TargetingWandItem extends AbstractWandItem {
                     castTargetedSpell(target, player, level);
                     targetCount++;
                 }
-                int durabilityCost = calculateDurabilityCost(targets.size());
+                int durabilityCost = totalDurabilityCost(targets.size());
+
+                consumeMana(player);
 
                 applyCastEffects(player, stack, durabilityCost, hand, level);
                 return InteractionResult.SUCCESS_SERVER;

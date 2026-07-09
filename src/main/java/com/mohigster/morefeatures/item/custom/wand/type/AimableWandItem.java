@@ -20,12 +20,12 @@ public abstract class AimableWandItem extends AbstractWandItem {
 
     public AimableWandItem(Properties properties, double spreadRadius, boolean hasVariableSpread,
                            int projectileCount, int bonusShiftingProjCount, int cooldownTicks, int baseDurabilityCost,
-                           SoundEvent castSound, float soundVolume, float soundPitch) {
+                           int manaCost, SoundEvent castSound, float soundVolume, float soundPitch) {
         // Doesn't accept durabilityScalingFactor as a parameter and hardcodes the value as zero. This is because the durability for Aimable wands doesn't scale. Wands extending this class do not define a scaling factor.
         // calculateDurabilityCost in AbstractWandItem checks if the scaling factor is zero before performing division and simply sets extraCost to zero instead of performing division if so. Setting durabilityScalingFactor to 0 is safe.
 
         super(properties, 0.0D, // This could be used as spreadRadius, but the separate variable is used for clarity since spreadRadius fits what it's actually doing more accurately.
-                cooldownTicks, baseDurabilityCost, 0, castSound, soundVolume, soundPitch);
+                cooldownTicks, baseDurabilityCost, 0, manaCost, castSound, soundVolume, soundPitch);
         this.spreadRadius = spreadRadius;
         this.hasVariableSpread = hasVariableSpread;
         this.projectileCount = projectileCount;
@@ -36,11 +36,13 @@ public abstract class AimableWandItem extends AbstractWandItem {
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
 
-        if (!level.isClientSide()){
+        if (!level.isClientSide() && hasEnoughMana(player)){
             Vec3 aim = player.getLookAngle();
             List<Vec3> spreadDirections = calculateSpreadDirections(aim, level.getRandom(), player);
 
             castAimedSpell(player, level, spreadDirections);
+
+            consumeMana(player);
 
             applyCastEffects(player, stack, baseDurabilityCost, hand, level);
 

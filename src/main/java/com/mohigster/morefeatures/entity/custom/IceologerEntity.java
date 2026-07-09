@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.entity.custom;
 
-import com.mohigster.morefeatures.entity.goal.IceologerAttackSpellGoal;
+import com.mohigster.morefeatures.entity.goal.IceologerConjureIceGoal;
+import com.mohigster.morefeatures.entity.goal.IceologerIcicleRainGoal;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -27,13 +28,19 @@ public class IceologerEntity extends AbstractIllager {
         super(type, level);
     }
 
-    private IceologerAttackSpellGoal iceAttackGoal;
+    private IceologerConjureIceGoal iceAttackGoal;
+    private IceologerIcicleRainGoal icicleRainGoal;
+
+    private int attackCooldown = 40; // Ticks before the first attack can occur
+    private boolean useIcicleRainNext = false;
 
     @Override
     protected void registerGoals() {
-        this.iceAttackGoal = new IceologerAttackSpellGoal(this);
+        this.iceAttackGoal = new IceologerConjureIceGoal(this);
+        this.icicleRainGoal = new IceologerIcicleRainGoal(this);
 
         this.goalSelector.addGoal(2, iceAttackGoal);
+        this.goalSelector.addGoal(2, icicleRainGoal);
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
@@ -119,11 +126,27 @@ public class IceologerEntity extends AbstractIllager {
                 .add(Attributes.FOLLOW_RANGE,12.0D);
     }
 
+    public boolean isAttackOnCooldown() {
+        return this.attackCooldown > 0;
+    }
+
+    public void startAttackCooldown(int ticks) {
+        this.attackCooldown = ticks;
+    }
+
+    public boolean shouldUseIcicleRain() {
+        return this.useIcicleRainNext;
+    }
+
+    public void toggleNextAttack() {
+        this.useIcicleRainNext = !this.useIcicleRainNext;
+    }
+
     @Override
     public void aiStep() {
         super.aiStep();
-        if (!this.level().isClientSide() && this.iceAttackGoal != null) {
-            this.iceAttackGoal.decrementCooldown();
+        if (!this.level().isClientSide() && this.attackCooldown > 0) {
+            this.attackCooldown--;
         }
     }
 }

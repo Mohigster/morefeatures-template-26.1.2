@@ -14,26 +14,30 @@ import java.util.List;
 
 public abstract class GenericAOEWandItem extends AbstractWandItem {
     private final int ringCount;
+    private final int floorScanDistance;
 
     public GenericAOEWandItem(Properties properties, double radius, int cooldownTicks, int ringCount,
-                              int baseDurabilityCost,
+                              int baseDurabilityCost, int manaCost, int floorScanDistance,
                                SoundEvent castSound, float soundVolume, float soundPitch) {
         super(properties, radius, cooldownTicks, baseDurabilityCost,
-                0, castSound, soundVolume, soundPitch);
+                0, manaCost, castSound, soundVolume, soundPitch);
 
         this.ringCount = ringCount;
+        this.floorScanDistance = floorScanDistance;
     }
 
     @Override
     public InteractionResult use(Level level, Player player, InteractionHand hand) {
         ItemStack itemStack = player.getItemInHand(hand);
 
-        if (!level.isClientSide()){
+        if (!level.isClientSide() && hasEnoughMana(player)){
             List<BlockPos> affectedPositions = calculateRingPositions(level, player);
 
             for (BlockPos pos : affectedPositions){
                 castAOESpell(player, level, pos);
             }
+
+            consumeMana(player);
 
             applyCastEffects(player, itemStack, baseDurabilityCost, hand, level);
 
@@ -87,10 +91,9 @@ public abstract class GenericAOEWandItem extends AbstractWandItem {
             }
         }
 
-
         // Scan downward to find a solid floor to plant the spike
-        // floorScanDistance() is the maximum distance in blocks that it will scan
-        for (int i = 0; i < blocksToScanForFloor(); i++) {
+        // floorScanDistance is the maximum distance IN BLOCKS that it will scan
+        for (int i = 0; i < floorScanDistance; i++) {
             // Check the block directly beneath our current position
             if (level.getBlockState(pos.below()).isCollisionShapeFullBlock(level, pos.below())) {
                 return pos.getY(); // Found the floor!
@@ -98,14 +101,10 @@ public abstract class GenericAOEWandItem extends AbstractWandItem {
             pos.move(0, -1, 0); // Move down one block
         }
 
-        // Fallback: If we are hanging over a massive ravine or cliff (> 8 blocks deep),
+        // Fallback: If we are hanging over a massive ravine or cliff that is deeper than floorScanDistance,
         // use the standard heightmap or the player's current Y so the spike isn't lost.
         return startY;
     }
-
-    protected abstract int blocksToScanForFloor();
-
-
 
     protected abstract void castAOESpell(Player caster, Level level, BlockPos pos);
 }

@@ -3,9 +3,15 @@
     "morefeatures:pallid_planks",
     "morefeatures:pallid_stairs",
     "morefeatures:pallid_slab",
+    "morefeatures:pallid_vertical_slab",
     "morefeatures:pallid_button",
     "morefeatures:pallid_pressure_plate",
     "morefeatures:pallid_fence",
-    "morefeatures:pallid_fence_gate"
+    "morefeatures:pallid_fence_gate",
+    "morefeatures:pallid_shelf",
+    "morefeatures:pallid_sign",
+    "morefeatures:pallid_wall_sign",
+    "morefeatures:pallid_hanging_sign",
+    "morefeatures:pallid_wall_hanging_sign"
   ]
 }

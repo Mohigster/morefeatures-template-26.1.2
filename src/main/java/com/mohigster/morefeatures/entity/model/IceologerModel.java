@@ -75,7 +75,6 @@ public class IceologerModel extends EntityModel<IceologerRenderState> {
 						.texOffs(4, 39).addBox(-3.0F, -24.0F, -3.0F, 10.0F, 18.0F, 6.0F, new CubeDeformation(0.0F)),
 				PartPose.offset(0.0F, 0.0F, 0.0F));
 
-		// main() group folder
 		PartDefinition mainGroup = body.addOrReplaceChild("main", CubeListBuilder.create(),
 				PartPose.offset(0.0F, 0.0F, 0.0F));
 

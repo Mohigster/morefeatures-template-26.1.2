@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_center",
+  "textures": {
+    "all": "morefeatures:block/tainted_shelf",
+    "particle": "morefeatures:block/stripped_tainted_log"
+  }
+}

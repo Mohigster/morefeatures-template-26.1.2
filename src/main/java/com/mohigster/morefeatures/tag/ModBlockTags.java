@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.tag;
 
+import com.mohigster.morefeatures.block.references.ModBlockItemIds;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockTags;
@@ -7,8 +8,6 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
 public final class ModBlockTags {
-    public static final TagKey<Block> INCORRECT_FOR_BISMUTH_TOOL = morefeaturesTag("incorrect_for_bismuth_tool");
-    public static final TagKey<Block> NEEDS_BISMUTH_TOOL = morefeaturesTag("needs_bismuth_tool");
     public static final TagKey<Block> BLOODWOOD_LOGS = morefeaturesTag("bloodwood_logs");
     public static final TagKey<Block> BLOODWOOD = morefeaturesTag("bloodwood");
     public static final TagKey<Block> TAINTED_LOGS = morefeaturesTag("tainted_logs");
@@ -22,6 +21,11 @@ public final class ModBlockTags {
     public static final TagKey<Block> COMPRESSOR_FLUIDS = morefeaturesTag("is_liquid");
     public static final TagKey<Block> IS_MODDED_WOOD = morefeaturesTag("is_modded_wood");
     public static final TagKey<Block> NULLIUM_BLOCKS = morefeaturesTag("nullium_blocks");
+    public static final TagKey<Block> VERTICAL_SLABS = morefeaturesTag("vertical_slabs");
+    public static final TagKey<Block> AXE_MINEABLE_VERTICAL_SLABS = morefeaturesTag("axe_mineable_vertical_slabs");
+    public static final TagKey<Block> PICKAXE_MINEABLE_VERTICAL_SLABS = morefeaturesTag("pickaxe_mineable_vertical_slabs");
+    public static final TagKey<Block> WOOL_VERTICAL_SLABS = ModBlockItemTags.WOOL_VERTICAL_SLABS.block();
+    public static final TagKey<Block> CUT_COPPER_VERTICAL_SLABS = ModBlockItemTags.CUT_COPPER_VERTICAL_SLABS.block();
 
     private ModBlockTags() {
     }

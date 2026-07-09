@@ -1,0 +1,13 @@
+{
+  "values": {
+    "morefeatures:cut_copper_vertical_slab": {
+      "next_oxidation_stage": "morefeatures:exposed_cut_copper_vertical_slab"
+    },
+    "morefeatures:exposed_cut_copper_vertical_slab": {
+      "next_oxidation_stage": "morefeatures:weathered_cut_copper_vertical_slab"
+    },
+    "morefeatures:weathered_cut_copper_vertical_slab": {
+      "next_oxidation_stage": "morefeatures:oxidized_cut_copper_vertical_slab"
+    }
+  }
+}

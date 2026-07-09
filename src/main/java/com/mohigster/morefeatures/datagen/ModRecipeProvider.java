@@ -4,10 +4,8 @@ import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
 import com.mohigster.morefeatures.block.family.ModBlockFamilies;
 import com.mohigster.morefeatures.item.ModItems;
-import com.mohigster.morefeatures.tag.ModBlockTags;
 import com.mohigster.morefeatures.tag.ModItemTags;
 import net.minecraft.core.HolderLookup;
-import net.minecraft.data.BlockFamily;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
 import net.minecraft.world.flag.FeatureFlagSet;
@@ -19,6 +17,8 @@ import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ColorCollection;
+import net.minecraft.world.level.block.WeatheringCopperCollection;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.List;
@@ -497,20 +497,20 @@ public class ModRecipeProvider extends RecipeProvider {
 
         // This is not technically necessary and is simply for clarity on my part
 
-        carbonBismuthSmithing(ModItems.CARBON_BOW, RecipeCategory.COMBAT, ModItems.BISMUTH_BOW.get());
-        carbonBismuthSmithing(ModItems.CARBON_TRIDENT, RecipeCategory.COMBAT, ModItems.BISMUTH_TRIDENT.get());
-        netheriteBismuthSmithing(Items.NETHERITE_NAUTILUS_ARMOR, RecipeCategory.COMBAT, ModItems.BISMUTH_NAUTILUS_ARMOR.get());
-        netheriteBismuthSmithing(Items.NETHERITE_HORSE_ARMOR, RecipeCategory.COMBAT, ModItems.BISMUTH_HORSE_ARMOR.get());
-        netheriteBismuthSmithing(Items.NETHERITE_SPEAR, RecipeCategory.COMBAT, ModItems.BISMUTH_SPEAR.get());
-        netheriteBismuthSmithing(Items.NETHERITE_AXE, RecipeCategory.COMBAT, ModItems.BISMUTH_AXE.get());
-        netheriteBismuthSmithing(Items.NETHERITE_SHOVEL, RecipeCategory.COMBAT, ModItems.BISMUTH_SHOVEL.get());
-        netheriteBismuthSmithing(Items.NETHERITE_HOE, RecipeCategory.COMBAT, ModItems.BISMUTH_HOE.get());
-        netheriteBismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
-        netheriteBismuthSmithing(Items.NETHERITE_PICKAXE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(1).asItem());
-        netheriteBismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
-        netheriteBismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
-        netheriteBismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
-        netheriteBismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
+        bismuthSmithing(ModItems.CARBON_BOW.get(), RecipeCategory.COMBAT, ModItems.BISMUTH_BOW.get());
+        bismuthSmithing(ModItems.CARBON_TRIDENT.get(), RecipeCategory.COMBAT, ModItems.BISMUTH_TRIDENT.get());
+        bismuthSmithing(Items.NETHERITE_NAUTILUS_ARMOR, RecipeCategory.COMBAT, ModItems.BISMUTH_NAUTILUS_ARMOR.get());
+        bismuthSmithing(Items.NETHERITE_HORSE_ARMOR, RecipeCategory.COMBAT, ModItems.BISMUTH_HORSE_ARMOR.get());
+        bismuthSmithing(Items.NETHERITE_SPEAR, RecipeCategory.COMBAT, ModItems.BISMUTH_SPEAR.get());
+        bismuthSmithing(Items.NETHERITE_AXE, RecipeCategory.COMBAT, ModItems.BISMUTH_AXE.get());
+        bismuthSmithing(Items.NETHERITE_SHOVEL, RecipeCategory.COMBAT, ModItems.BISMUTH_SHOVEL.get());
+        bismuthSmithing(Items.NETHERITE_HOE, RecipeCategory.COMBAT, ModItems.BISMUTH_HOE.get());
+        bismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(0).asItem());
+        bismuthSmithing(Items.NETHERITE_PICKAXE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(1).asItem());
+        bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(2).asItem());
+        bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(3).asItem());
+        bismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(4).asItem());
+        bismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, ModItems.BISMUTH_EQUIPMENT.get(5).asItem());
 
 
         //—————————————————————————————SMELTABLE LISTS———————————————————————————————
@@ -544,7 +544,165 @@ public class ModRecipeProvider extends RecipeProvider {
         // Bismuth
         oreSmelting(BISMUTH_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.BISMUTH_SCRAP.get(), 0.25f, 200, "bismuth");
         oreBlasting(BISMUTH_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, ModItems.BISMUTH_SCRAP.get(), 0.25f, 100, "bismuth");
+
+        //—————————————————————————————VERTICAL SLABS TABLE———————————————————————————
+        verticalSlabCrafting(ModBlocks.OAK_VERTICAL_SLAB, Blocks.OAK_PLANKS);
+        verticalSlabCrafting(ModBlocks.SPRUCE_VERTICAL_SLAB, Blocks.SPRUCE_PLANKS);
+        verticalSlabCrafting(ModBlocks.BIRCH_VERTICAL_SLAB, Blocks.BIRCH_PLANKS);
+        verticalSlabCrafting(ModBlocks.JUNGLE_VERTICAL_SLAB, Blocks.JUNGLE_PLANKS);
+        verticalSlabCrafting(ModBlocks.ACACIA_VERTICAL_SLAB, Blocks.ACACIA_PLANKS);
+        verticalSlabCrafting(ModBlocks.DARK_OAK_VERTICAL_SLAB, Blocks.DARK_OAK_PLANKS);
+        verticalSlabCrafting(ModBlocks.CRIMSON_VERTICAL_SLAB, Blocks.CRIMSON_PLANKS);
+        verticalSlabCrafting(ModBlocks.WARPED_VERTICAL_SLAB, Blocks.WARPED_PLANKS);
+        verticalSlabCrafting(ModBlocks.MANGROVE_VERTICAL_SLAB, Blocks.MANGROVE_PLANKS);
+        verticalSlabCrafting(ModBlocks.CHERRY_VERTICAL_SLAB, Blocks.CHERRY_PLANKS);
+        verticalSlabCrafting(ModBlocks.BAMBOO_VERTICAL_SLAB, Blocks.BAMBOO_PLANKS);
+        verticalSlabCrafting(ModBlocks.BAMBOO_MOSAIC_VERTICAL_SLAB, Blocks.BAMBOO_MOSAIC);
+        verticalSlabCrafting(ModBlocks.PALE_OAK_VERTICAL_SLAB, Blocks.PALE_OAK_PLANKS);
+
+        verticalSlabCrafting(ModBlocks.STONE_VERTICAL_SLAB, Blocks.STONE);
+        verticalSlabCrafting(ModBlocks.COBBLESTONE_VERTICAL_SLAB, Blocks.COBBLESTONE);
+        verticalSlabCrafting(ModBlocks.MOSSY_COBBLESTONE_VERTICAL_SLAB, Blocks.MOSSY_COBBLESTONE);
+        verticalSlabCrafting(ModBlocks.SMOOTH_STONE_VERTICAL_SLAB, Blocks.SMOOTH_STONE);
+        verticalSlabCrafting(ModBlocks.STONE_BRICK_VERTICAL_SLAB, Blocks.STONE_BRICKS);
+        verticalSlabCrafting(ModBlocks.MOSSY_STONE_BRICK_VERTICAL_SLAB, Blocks.MOSSY_STONE_BRICKS);
+        verticalSlabCrafting(ModBlocks.COBBLED_DEEPSLATE_VERTICAL_SLAB, Blocks.COBBLED_DEEPSLATE);
+        verticalSlabCrafting(ModBlocks.POLISHED_DEEPSLATE_VERTICAL_SLAB, Blocks.POLISHED_DEEPSLATE);
+        verticalSlabCrafting(ModBlocks.DEEPSLATE_BRICK_VERTICAL_SLAB, Blocks.DEEPSLATE_BRICKS);
+        verticalSlabCrafting(ModBlocks.DEEPSLATE_TILE_VERTICAL_SLAB, Blocks.DEEPSLATE_TILES);
+
+        verticalSlabCrafting(ModBlocks.GRANITE_VERTICAL_SLAB, Blocks.GRANITE);
+        verticalSlabCrafting(ModBlocks.POLISHED_GRANITE_VERTICAL_SLAB, Blocks.POLISHED_GRANITE);
+        verticalSlabCrafting(ModBlocks.DIORITE_VERTICAL_SLAB, Blocks.DIORITE);
+        verticalSlabCrafting(ModBlocks.POLISHED_DIORITE_VERTICAL_SLAB, Blocks.POLISHED_DIORITE);
+        verticalSlabCrafting(ModBlocks.ANDESITE_VERTICAL_SLAB, Blocks.ANDESITE);
+        verticalSlabCrafting(ModBlocks.POLISHED_ANDESITE_VERTICAL_SLAB, Blocks.POLISHED_ANDESITE);
+        verticalSlabCrafting(ModBlocks.TUFF_VERTICAL_SLAB, Blocks.TUFF);
+        verticalSlabCrafting(ModBlocks.POLISHED_TUFF_VERTICAL_SLAB, Blocks.POLISHED_TUFF);
+        verticalSlabCrafting(ModBlocks.TUFF_BRICK_VERTICAL_SLAB, Blocks.TUFF_BRICKS);
+
+        verticalSlabCrafting(ModBlocks.SANDSTONE_VERTICAL_SLAB, Blocks.SANDSTONE);
+        verticalSlabCrafting(ModBlocks.CUT_SANDSTONE_VERTICAL_SLAB, Blocks.CUT_SANDSTONE);
+        verticalSlabCrafting(ModBlocks.SMOOTH_SANDSTONE_VERTICAL_SLAB, Blocks.SMOOTH_SANDSTONE);
+        verticalSlabCrafting(ModBlocks.RED_SANDSTONE_VERTICAL_SLAB, Blocks.RED_SANDSTONE);
+        verticalSlabCrafting(ModBlocks.CUT_RED_SANDSTONE_VERTICAL_SLAB, Blocks.CUT_RED_SANDSTONE);
+        verticalSlabCrafting(ModBlocks.SMOOTH_RED_SANDSTONE_VERTICAL_SLAB, Blocks.SMOOTH_RED_SANDSTONE);
+
+        verticalSlabCrafting(ModBlocks.SULFUR_VERTICAL_SLAB, Blocks.SULFUR);
+        verticalSlabCrafting(ModBlocks.POLISHED_SULFUR_VERTICAL_SLAB, Blocks.POLISHED_SULFUR);
+        verticalSlabCrafting(ModBlocks.SULFUR_BRICK_VERTICAL_SLAB, Blocks.SULFUR_BRICKS);
+        verticalSlabCrafting(ModBlocks.CINNABAR_VERTICAL_SLAB, Blocks.CINNABAR);
+        verticalSlabCrafting(ModBlocks.POLISHED_CINNABAR_VERTICAL_SLAB, Blocks.POLISHED_CINNABAR);
+        verticalSlabCrafting(ModBlocks.CINNABAR_BRICK_VERTICAL_SLAB, Blocks.CINNABAR_BRICKS);
+
+        verticalSlabCrafting(ModBlocks.NETHER_BRICK_VERTICAL_SLAB, Blocks.NETHER_BRICKS);
+        verticalSlabCrafting(ModBlocks.RED_NETHER_BRICK_VERTICAL_SLAB, Blocks.RED_NETHER_BRICKS);
+        verticalSlabCrafting(ModBlocks.BLACKSTONE_VERTICAL_SLAB, Blocks.BLACKSTONE);
+        verticalSlabCrafting(ModBlocks.POLISHED_BLACKSTONE_VERTICAL_SLAB, Blocks.POLISHED_BLACKSTONE);
+        verticalSlabCrafting(ModBlocks.POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB, Blocks.POLISHED_BLACKSTONE_BRICKS);
+        verticalSlabCrafting(ModBlocks.END_STONE_BRICK_VERTICAL_SLAB, Blocks.END_STONE_BRICKS);
+        verticalSlabCrafting(ModBlocks.PURPUR_VERTICAL_SLAB, Blocks.PURPUR_BLOCK);
+        verticalSlabCrafting(ModBlocks.QUARTZ_VERTICAL_SLAB, Blocks.QUARTZ_BLOCK);
+        verticalSlabCrafting(ModBlocks.SMOOTH_QUARTZ_VERTICAL_SLAB, Blocks.SMOOTH_QUARTZ);
+
+        verticalSlabCrafting(ModBlocks.PRISMARINE_VERTICAL_SLAB, Blocks.PRISMARINE);
+        verticalSlabCrafting(ModBlocks.PRISMARINE_BRICK_VERTICAL_SLAB, Blocks.PRISMARINE_BRICKS);
+        verticalSlabCrafting(ModBlocks.DARK_PRISMARINE_VERTICAL_SLAB, Blocks.DARK_PRISMARINE);
+        verticalSlabCrafting(ModBlocks.BRICK_VERTICAL_SLAB, Blocks.BRICKS);
+        verticalSlabCrafting(ModBlocks.MUD_BRICK_VERTICAL_SLAB, Blocks.MUD_BRICKS);
+        verticalSlabCrafting(ModBlocks.RESIN_BRICK_VERTICAL_SLAB, Blocks.RESIN_BRICKS);
+
+        // Generates the recipe for all states that cut copper vertical slabs can come in, for stonecutting from a regular copper block or a cut copper block, AND the crafting table recipe
+
+        // Thank goodness for the zipApply method. Made this so easy to do.
+
+        WeatheringCopperCollection.zipApply(ModBlocks.CUT_COPPER_VERTICAL_SLAB, Blocks.COPPER_BLOCK, (cutSlab, material) -> this.stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, cutSlab, material, 8));
+        WeatheringCopperCollection.zipApply(ModBlocks.CUT_COPPER_VERTICAL_SLAB, Blocks.CUT_COPPER, (cutSlab, material) -> this.stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, cutSlab, material, 2));
+        WeatheringCopperCollection.zipApply(ModBlocks.CUT_COPPER_VERTICAL_SLAB, Blocks.CUT_COPPER, this::verticalSlabCrafting);
+
+        ColorCollection.VALUES.forEach(colour ->
+                verticalSlabCrafting(ModBlocks.WOOL_VERTICAL_SLAB.pick(colour).get(), Blocks.WOOL.pick(colour)));
+
+        //——————————————————————————VERTICAL SLABS STONECUTTING————————————————————————
+
+        /* All recipes mimic an identical recipe for a horizontal slab */
+        verticalSlabStonecutting(ModBlocks.STONE_VERTICAL_SLAB, Blocks.STONE);
+        verticalSlabStonecutting(ModBlocks.COBBLESTONE_VERTICAL_SLAB, Blocks.STONE);
+        verticalSlabStonecutting(ModBlocks.STONE_BRICK_VERTICAL_SLAB, Blocks.STONE);
+        verticalSlabStonecutting(ModBlocks.COBBLESTONE_VERTICAL_SLAB, Blocks.COBBLESTONE);
+        verticalSlabStonecutting(ModBlocks.STONE_BRICK_VERTICAL_SLAB, Blocks.STONE_BRICKS);
+        verticalSlabStonecutting(ModBlocks.MOSSY_COBBLESTONE_VERTICAL_SLAB, Blocks.MOSSY_COBBLESTONE);
+        verticalSlabStonecutting(ModBlocks.SMOOTH_STONE_VERTICAL_SLAB, Blocks.SMOOTH_STONE);
+        verticalSlabStonecutting(ModBlocks.COBBLED_DEEPSLATE_VERTICAL_SLAB, Blocks.DEEPSLATE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_DEEPSLATE_VERTICAL_SLAB, Blocks.DEEPSLATE);
+        verticalSlabStonecutting(ModBlocks.DEEPSLATE_BRICK_VERTICAL_SLAB, Blocks.DEEPSLATE);
+        verticalSlabStonecutting(ModBlocks.DEEPSLATE_TILE_VERTICAL_SLAB, Blocks.DEEPSLATE);
+        verticalSlabStonecutting(ModBlocks.COBBLED_DEEPSLATE_VERTICAL_SLAB, Blocks.COBBLED_DEEPSLATE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_DEEPSLATE_VERTICAL_SLAB, Blocks.POLISHED_DEEPSLATE);
+        verticalSlabStonecutting(ModBlocks.DEEPSLATE_BRICK_VERTICAL_SLAB, Blocks.DEEPSLATE_BRICKS);
+        verticalSlabStonecutting(ModBlocks.DEEPSLATE_TILE_VERTICAL_SLAB, Blocks.DEEPSLATE_TILES);
+        verticalSlabStonecutting(ModBlocks.DEEPSLATE_BRICK_VERTICAL_SLAB, Blocks.POLISHED_DEEPSLATE);
+        verticalSlabStonecutting(ModBlocks.DEEPSLATE_TILE_VERTICAL_SLAB, Blocks.POLISHED_DEEPSLATE);
+
+        verticalSlabStonecutting(ModBlocks.GRANITE_VERTICAL_SLAB, Blocks.GRANITE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_GRANITE_VERTICAL_SLAB, Blocks.GRANITE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_GRANITE_VERTICAL_SLAB, Blocks.POLISHED_GRANITE);
+        verticalSlabStonecutting(ModBlocks.DIORITE_VERTICAL_SLAB, Blocks.DIORITE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_DIORITE_VERTICAL_SLAB, Blocks.DIORITE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_DIORITE_VERTICAL_SLAB, Blocks.POLISHED_DIORITE);
+        verticalSlabStonecutting(ModBlocks.ANDESITE_VERTICAL_SLAB, Blocks.ANDESITE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_ANDESITE_VERTICAL_SLAB, Blocks.ANDESITE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_ANDESITE_VERTICAL_SLAB, Blocks.POLISHED_ANDESITE);
+        verticalSlabStonecutting(ModBlocks.TUFF_VERTICAL_SLAB, Blocks.TUFF);
+        verticalSlabStonecutting(ModBlocks.POLISHED_TUFF_VERTICAL_SLAB, Blocks.TUFF);
+        verticalSlabStonecutting(ModBlocks.TUFF_BRICK_VERTICAL_SLAB, Blocks.TUFF);
+        verticalSlabStonecutting(ModBlocks.POLISHED_TUFF_VERTICAL_SLAB, Blocks.POLISHED_TUFF);
+        verticalSlabStonecutting(ModBlocks.TUFF_BRICK_VERTICAL_SLAB, Blocks.TUFF_BRICKS);
+        verticalSlabStonecutting(ModBlocks.TUFF_BRICK_VERTICAL_SLAB, Blocks.POLISHED_TUFF);
+
+        verticalSlabStonecutting(ModBlocks.SANDSTONE_VERTICAL_SLAB, Blocks.SANDSTONE);
+        verticalSlabStonecutting(ModBlocks.CUT_SANDSTONE_VERTICAL_SLAB, Blocks.SANDSTONE);
+        verticalSlabStonecutting(ModBlocks.CUT_SANDSTONE_VERTICAL_SLAB, Blocks.CUT_SANDSTONE);
+        verticalSlabStonecutting(ModBlocks.SMOOTH_SANDSTONE_VERTICAL_SLAB, Blocks.SMOOTH_SANDSTONE);
+        verticalSlabStonecutting(ModBlocks.RED_SANDSTONE_VERTICAL_SLAB, Blocks.RED_SANDSTONE);
+        verticalSlabStonecutting(ModBlocks.CUT_RED_SANDSTONE_VERTICAL_SLAB, Blocks.RED_SANDSTONE);
+        verticalSlabStonecutting(ModBlocks.CUT_RED_SANDSTONE_VERTICAL_SLAB, Blocks.CUT_RED_SANDSTONE);
+        verticalSlabStonecutting(ModBlocks.SMOOTH_RED_SANDSTONE_VERTICAL_SLAB, Blocks.SMOOTH_RED_SANDSTONE);
+
+        verticalSlabStonecutting(ModBlocks.SULFUR_VERTICAL_SLAB, Blocks.SULFUR);
+        verticalSlabStonecutting(ModBlocks.POLISHED_SULFUR_VERTICAL_SLAB, Blocks.SULFUR);
+        verticalSlabStonecutting(ModBlocks.SULFUR_BRICK_VERTICAL_SLAB, Blocks.SULFUR);
+        verticalSlabStonecutting(ModBlocks.POLISHED_SULFUR_VERTICAL_SLAB, Blocks.POLISHED_SULFUR);
+        verticalSlabStonecutting(ModBlocks.SULFUR_BRICK_VERTICAL_SLAB, Blocks.SULFUR_BRICKS);
+        verticalSlabStonecutting(ModBlocks.CINNABAR_VERTICAL_SLAB, Blocks.CINNABAR);
+        verticalSlabStonecutting(ModBlocks.POLISHED_CINNABAR_VERTICAL_SLAB, Blocks.CINNABAR);
+        verticalSlabStonecutting(ModBlocks.CINNABAR_BRICK_VERTICAL_SLAB, Blocks.CINNABAR);
+        verticalSlabStonecutting(ModBlocks.POLISHED_CINNABAR_VERTICAL_SLAB, Blocks.POLISHED_CINNABAR);
+        verticalSlabStonecutting(ModBlocks.CINNABAR_BRICK_VERTICAL_SLAB, Blocks.CINNABAR_BRICKS);
+
+        verticalSlabStonecutting(ModBlocks.NETHER_BRICK_VERTICAL_SLAB, Blocks.NETHER_BRICKS);
+        verticalSlabStonecutting(ModBlocks.RED_NETHER_BRICK_VERTICAL_SLAB, Blocks.RED_NETHER_BRICKS);
+        verticalSlabStonecutting(ModBlocks.BLACKSTONE_VERTICAL_SLAB, Blocks.BLACKSTONE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_BLACKSTONE_VERTICAL_SLAB, Blocks.BLACKSTONE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB, Blocks.BLACKSTONE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_BLACKSTONE_VERTICAL_SLAB, Blocks.POLISHED_BLACKSTONE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB, Blocks.POLISHED_BLACKSTONE);
+        verticalSlabStonecutting(ModBlocks.POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB, Blocks.POLISHED_BLACKSTONE_BRICKS);
+        verticalSlabStonecutting(ModBlocks.END_STONE_BRICK_VERTICAL_SLAB, Blocks.END_STONE);
+        verticalSlabStonecutting(ModBlocks.END_STONE_BRICK_VERTICAL_SLAB, Blocks.END_STONE_BRICKS);
+        verticalSlabStonecutting(ModBlocks.PURPUR_VERTICAL_SLAB, Blocks.PURPUR_BLOCK);
+        verticalSlabStonecutting(ModBlocks.QUARTZ_VERTICAL_SLAB, Blocks.QUARTZ_BLOCK);
+        verticalSlabStonecutting(ModBlocks.SMOOTH_QUARTZ_VERTICAL_SLAB, Blocks.SMOOTH_QUARTZ);
+
+        verticalSlabStonecutting(ModBlocks.PRISMARINE_VERTICAL_SLAB, Blocks.PRISMARINE);
+        verticalSlabStonecutting(ModBlocks.PRISMARINE_BRICK_VERTICAL_SLAB, Blocks.PRISMARINE_BRICKS);
+        verticalSlabStonecutting(ModBlocks.DARK_PRISMARINE_VERTICAL_SLAB, Blocks.DARK_PRISMARINE);
+        verticalSlabStonecutting(ModBlocks.BRICK_VERTICAL_SLAB, Blocks.BRICKS);
+        verticalSlabStonecutting(ModBlocks.MUD_BRICK_VERTICAL_SLAB, Blocks.MUD_BRICKS);
+        verticalSlabStonecutting(ModBlocks.RESIN_BRICK_VERTICAL_SLAB, Blocks.RESIN_BRICKS);
     }
+
+
     @Override
     protected <T extends AbstractCookingRecipe> void oreCooking(AbstractCookingRecipe.Factory<T> factory, List<ItemLike> smeltables,
                                                                 RecipeCategory craftingCategory, CookingBookCategory cookingCategory, ItemLike result,
@@ -554,12 +712,26 @@ public class ModRecipeProvider extends RecipeProvider {
                     .save(output, MoreFeatures.MODID + ":" + getItemName(result) + fromDesc + "_" + getItemName(itemlike));
         }
     }
-    protected void netheriteBismuthSmithing(Item base, RecipeCategory category, Item result) {
+
+
+    protected void bismuthSmithing(Item base, RecipeCategory category, Item result) {
         SmithingTransformRecipeBuilder.smithing(Ingredient.of(ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(base), this.tag(ModItemTags.BISMUTH_TOOL_MATERIALS), category, result).unlocks("has_bismuth_ingot", this.has(ModItemTags.BISMUTH_TOOL_MATERIALS)).save(this.output, getItemName(result) + "_smithing");
     }
 
-    protected void carbonBismuthSmithing(DeferredItem<Item> base, RecipeCategory category, Item result) {
-        SmithingTransformRecipeBuilder.smithing(Ingredient.of(ModItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE), Ingredient.of(base), this.tag(ModItemTags.BISMUTH_TOOL_MATERIALS), category, result).unlocks("has_bismuth_ingot", this.has(ModItemTags.BISMUTH_TOOL_MATERIALS)).save(this.output, getItemName(result) + "_smithing");
+    protected void verticalSlabCrafting(ItemLike verticalSlab, ItemLike fullBlock) {
+        shaped(RecipeCategory.BUILDING_BLOCKS, verticalSlab, 6)
+                .pattern("B")
+                .pattern("B")
+                .pattern("B")
+                .define('B', fullBlock)
+                .unlockedBy(getHasName(fullBlock), has(fullBlock))
+                .save(output);
+    }
+
+    protected void verticalSlabStonecutting(ItemLike verticalSlab, ItemLike fullBlock) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(fullBlock), RecipeCategory.BUILDING_BLOCKS, verticalSlab, 2)
+                .unlockedBy(getHasName(fullBlock), has(fullBlock))
+                .save(output, getConversionRecipeName(verticalSlab, fullBlock) + "_stonecutting");
     }
 }
 

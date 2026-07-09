@@ -2,16 +2,26 @@ package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.references.ModBlockItemIds;
+import com.mohigster.morefeatures.tag.ModBlockItemTags;
 import com.mohigster.morefeatures.tag.ModBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.tags.BlockItemTagAppender;
+import net.minecraft.data.tags.BlockItemTagsProvider;
 import net.minecraft.references.BlockIds;
+import net.minecraft.references.BlockItemId;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.ColorCollection;
+import net.minecraft.world.level.block.WeatheringCopperCollection;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 
+import javax.lang.model.element.Element;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 public class ModBlockTagsProvider extends BlockTagsProvider {
@@ -22,6 +32,16 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        /*
+         * This provider generates tags that allow me to apply every
+         * copper or wool vertical slab to any block tag all at once,
+         * without having to add each individual block in the collection
+         */
+        new ModBlockItemTagsProvider(tagId -> BlockItemTagsProvider.wrapForBlocks(this.tag(tagId.block()))).run();
+
+        tag(BlockTags.SHEARS_MAJOR_BREAKING_SPEED)
+                .addTag(ModBlockTags.WOOL_VERTICAL_SLABS);
+
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
                 .add(ModBlocks.ALUMINIUM_BLOCK.getKey())
                 .add(ModBlocks.ALUMINIUM_ORE.getKey())
@@ -58,7 +78,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.BISMUTH_ORE.getKey())
                 .add(ModBlocks.DECREPIT_NULLIUM.getKey())
                 .add(ModBlocks.PALLID_NULLIUM.getKey())
-                .add(ModBlocks.VOID_ANCHOR.getKey());
+                .add(ModBlocks.VOID_ANCHOR.getKey())
+                .addTag(ModBlockTags.PICKAXE_MINEABLE_VERTICAL_SLABS);
 
         tag(ModBlockTags.COMPRESSOR_FLUIDS)
                 .add(BlockIds.WATER);
@@ -68,7 +89,8 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.PALLID_NULLIUM.getKey());
 
         tag(BlockTags.MINEABLE_WITH_AXE)
-                .addTag(ModBlockTags.IS_MODDED_WOOD);
+                .addTag(ModBlockTags.IS_MODDED_WOOD)
+                .addTag(ModBlockTags.AXE_MINEABLE_VERTICAL_SLABS);
 
         tag(BlockTags.FENCES)
                 .add(ModBlocks.BLOODWOOD_FENCE.getKey())
@@ -165,25 +187,32 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.DECREPIT_PRESSURE_PLATE.getKey())
                 .add(ModBlocks.DECREPIT_FENCE.getKey())
                 .add(ModBlocks.DECREPIT_FENCE_GATE.getKey())
+                .add(ModBlocks.DECREPIT_SHELF.getKey())
                 .add(ModBlocks.DECREPIT_SIGN.getKey())
                 .add(ModBlocks.DECREPIT_WALL_SIGN.getKey())
                 .add(ModBlocks.DECREPIT_HANGING_SIGN.getKey())
                 .add(ModBlocks.DECREPIT_WALL_HANGING_SIGN.getKey());
 
         tag(ModBlockTags.PALLID_LOGS)
-                .add(ModBlocks.STRIPPED_PALLID_LOG.getKey())
-                .add(ModBlocks.PALLID_LOG.getKey())
-                .add(ModBlocks.STRIPPED_PALLID_WOOD.getKey())
-                .add(ModBlocks.PALLID_WOOD.getKey());
+                .add(ModBlockItemIds.STRIPPED_PALLID_LOG.block())
+                .add(ModBlockItemIds.PALLID_LOG.block())
+                .add(ModBlockItemIds.STRIPPED_PALLID_WOOD.block())
+                .add(ModBlockItemIds.PALLID_WOOD.block());
 
         tag(ModBlockTags.PALLID)
-                .add(ModBlocks.PALLID_PLANKS.getKey())
-                .add(ModBlocks.PALLID_STAIRS.getKey())
-                .add(ModBlocks.PALLID_SLAB.getKey())
-                .add(ModBlocks.PALLID_BUTTON.getKey())
-                .add(ModBlocks.PALLID_PRESSURE_PLATE.getKey())
-                .add(ModBlocks.PALLID_FENCE.getKey())
-                .add(ModBlocks.PALLID_FENCE_GATE.getKey());
+                .add(ModBlockItemIds.PALLID_PLANKS.block())
+                .add(ModBlockItemIds.PALLID_STAIRS.block())
+                .add(ModBlockItemIds.PALLID_SLAB.block())
+                .add(ModBlockItemIds.PALLID_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.PALLID_BUTTON.block())
+                .add(ModBlockItemIds.PALLID_PRESSURE_PLATE.block())
+                .add(ModBlockItemIds.PALLID_FENCE.block())
+                .add(ModBlockItemIds.PALLID_FENCE_GATE.block())
+                .add(ModBlockItemIds.PALLID_SHELF.block())
+                .add(ModBlocks.PALLID_SIGN.getKey())
+                .add(ModBlocks.PALLID_WALL_SIGN.getKey())
+                .add(ModBlocks.PALLID_HANGING_SIGN.getKey())
+                .add(ModBlocks.PALLID_WALL_HANGING_SIGN.getKey());
 
         tag(ModBlockTags.IS_MODDED_WOOD) // This tag allows me to easily distinguish vanilla vs modded wood types in code
                 .addTag(ModBlockTags.BLOODWOOD_LOGS)
@@ -257,7 +286,6 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.AZURITE_PRESSURE_PLATE.getKey())
                 .add(ModBlocks.DEEPSLATE_FLUORITE_ORE.getKey());
 
-
         tag(BlockTags.BEACON_BASE_BLOCKS)
                 .add(ModBlocks.ALUMINIUM_BLOCK.getKey())
                 .add(ModBlocks.MAGNESIUM_BLOCK.getKey())
@@ -273,21 +301,101 @@ public class ModBlockTagsProvider extends BlockTagsProvider {
                 .add(ModBlocks.PALLID_LOG.getKey());
 
         tag(BlockTags.PRESSURE_PLATES)
-                .add(ModBlocks.AZURITE_PRESSURE_PLATE.getKey())
-                .add(ModBlocks.PALM_PRESSURE_PLATE.getKey())
-                .add(ModBlocks.DECREPIT_PRESSURE_PLATE.getKey());
+                .add(ModBlockItemIds.AZURITE_PRESSURE_PLATE.block())
+                .add(ModBlockItemIds.BLOODWOOD_PRESSURE_PLATE.block())
+                .add(ModBlockItemIds.TAINTED_PRESSURE_PLATE.block())
+                .add(ModBlockItemIds.PALM_PRESSURE_PLATE.block())
+                .add(ModBlockItemIds.DECREPIT_PRESSURE_PLATE.block())
+                .add(ModBlockItemIds.PALLID_PRESSURE_PLATE.block());
 
         tag(BlockTags.BUTTONS)
-                .add(ModBlocks.AZURITE_BUTTON.getKey())
-                .add(ModBlocks.PALM_BUTTON.getKey())
-                .add(ModBlocks.DECREPIT_BUTTON.getKey())
-                .add(ModBlocks.PALLID_BUTTON.getKey());
+                .add(ModBlockItemIds.AZURITE_BUTTON.block())
+                .add(ModBlockItemIds.BLOODWOOD_BUTTON.block())
+                .add(ModBlockItemIds.TAINTED_BUTTON.block())
+                .add(ModBlockItemIds.PALM_BUTTON.block())
+                .add(ModBlockItemIds.DECREPIT_BUTTON.block())
+                .add(ModBlockItemIds.PALLID_BUTTON.block());
 
         tag(BlockTags.FLOWER_POTS)
                 .add(ModBlocks.POTTED_ROSE.getKey())
                 .add(ModBlocks.POTTED_BLUE_ROSE.getKey())
                 .add(ModBlocks.POTTED_TAINTED_SAPLING.getKey())
                 .add(ModBlocks.POTTED_BLOODWOOD_SAPLING.getKey());
+
+        tag(ModBlockTags.VERTICAL_SLABS)
+                .addTag(ModBlockTags.AXE_MINEABLE_VERTICAL_SLABS)
+                .addTag(ModBlockTags.PICKAXE_MINEABLE_VERTICAL_SLABS)
+                .addTag(ModBlockTags.WOOL_VERTICAL_SLABS);
+
+        tag(ModBlockTags.AXE_MINEABLE_VERTICAL_SLABS)
+                .add(ModBlockItemIds.OAK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.SPRUCE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.BIRCH_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.JUNGLE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.ACACIA_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.DARK_OAK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.CRIMSON_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.WARPED_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.MANGROVE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.CHERRY_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.BAMBOO_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.BAMBOO_MOSAIC_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.PALE_OAK_VERTICAL_SLAB.block());
+
+        tag(ModBlockTags.PICKAXE_MINEABLE_VERTICAL_SLABS)
+                .add(ModBlockItemIds.STONE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.COBBLESTONE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.MOSSY_COBBLESTONE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.SMOOTH_STONE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.STONE_BRICK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.MOSSY_STONE_BRICK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.COBBLED_DEEPSLATE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.POLISHED_DEEPSLATE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.DEEPSLATE_BRICK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.DEEPSLATE_TILE_VERTICAL_SLAB.block())
+
+                .add(ModBlockItemIds.GRANITE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.POLISHED_GRANITE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.DIORITE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.POLISHED_DIORITE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.ANDESITE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.POLISHED_ANDESITE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.TUFF_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.POLISHED_TUFF_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.TUFF_BRICK_VERTICAL_SLAB.block())
+
+                .add(ModBlockItemIds.SANDSTONE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.CUT_SANDSTONE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.SMOOTH_SANDSTONE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.RED_SANDSTONE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.CUT_RED_SANDSTONE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.SMOOTH_RED_SANDSTONE_VERTICAL_SLAB.block())
+
+                .add(ModBlockItemIds.SULFUR_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.POLISHED_SULFUR_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.SULFUR_BRICK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.CINNABAR_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.POLISHED_CINNABAR_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.CINNABAR_BRICK_VERTICAL_SLAB.block())
+
+                .add(ModBlockItemIds.NETHER_BRICK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.RED_NETHER_BRICK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.BLACKSTONE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.POLISHED_BLACKSTONE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.END_STONE_BRICK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.PURPUR_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.QUARTZ_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.SMOOTH_QUARTZ_VERTICAL_SLAB.block())
+
+                .add(ModBlockItemIds.PRISMARINE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.PRISMARINE_BRICK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.DARK_PRISMARINE_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.BRICK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.MUD_BRICK_VERTICAL_SLAB.block())
+                .add(ModBlockItemIds.RESIN_BRICK_VERTICAL_SLAB.block())
+
+                .addTag(ModBlockTags.CUT_COPPER_VERTICAL_SLABS);
 
         tag(BlockTags.FLOWERS)
                 .add(ModBlocks.ROSE.getKey())

@@ -12,17 +12,20 @@ import net.minecraft.world.level.Level;
 
 public class IceWandItem extends TargetingWandItem {
     private static final double RADIUS = 10.0D;
+
     private static final int COOLDOWN = 40;
     private static final int BASE_DURABILITY_COST = 1;
     private static final int SCALING_FACTOR = 2;
     private static final int MAX_TARGETS = 20;
+    private static final int MANA_COST = 5;
+
     private static final float PROXIMITY_LIMIT = 2.0F;
     private static final float VOLUME = 1.0F;
     private static final float PITCH = 0.5F;
 
     public IceWandItem(Properties properties) {
-        super(properties, RADIUS, COOLDOWN, BASE_DURABILITY_COST, SCALING_FACTOR, MAX_TARGETS,
-                PROXIMITY_LIMIT, SoundEvents.GLASS_BREAK, VOLUME, PITCH);
+        super(properties, RADIUS, COOLDOWN, BASE_DURABILITY_COST, SCALING_FACTOR, MANA_COST,
+                MAX_TARGETS, PROXIMITY_LIMIT, SoundEvents.GLASS_BREAK, VOLUME, PITCH);
     }
 
     @Override

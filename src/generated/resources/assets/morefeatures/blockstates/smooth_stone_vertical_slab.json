@@ -1,113 +1,378 @@
 {
   "variants": {
-    "shape=inner_left,type=double": {
-      "model": "morefeatures:block/smooth_stone_vertical_slab_double"
-    },
-    "shape=inner_left,type=east": {
-      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
-      "uvlock": true,
+    "facing=east,shape=inner_left,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
       "y": 90
     },
-    "shape=inner_left,type=north": {
+    "facing=east,shape=inner_left,type=east": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
-      "uvlock": true
+      "y": 90
     },
-    "shape=inner_left,type=south": {
+    "facing=east,shape=inner_left,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner"
+    },
+    "facing=east,shape=inner_left,type=south": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
-      "uvlock": true,
       "y": 180
     },
-    "shape=inner_left,type=west": {
+    "facing=east,shape=inner_left,type=west": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
-      "uvlock": true,
       "y": 270
     },
-    "shape=inner_right,type=double": {
-      "model": "morefeatures:block/smooth_stone_vertical_slab_double"
+    "facing=east,shape=inner_right,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 90
     },
-    "shape=inner_right,type=east": {
-      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
-      "uvlock": true
+    "facing=east,shape=inner_right,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner"
     },
-    "shape=inner_right,type=north": {
+    "facing=east,shape=inner_right,type=north": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
-      "uvlock": true,
       "y": 270
     },
-    "shape=inner_right,type=south": {
+    "facing=east,shape=inner_right,type=south": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
-      "uvlock": true,
       "y": 90
     },
-    "shape=inner_right,type=west": {
+    "facing=east,shape=inner_right,type=west": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
-      "uvlock": true,
       "y": 180
     },
-    "shape=outer_left,type=double": {
-      "model": "morefeatures:block/smooth_stone_vertical_slab_double"
-    },
-    "shape=outer_left,type=east": {
-      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
-      "uvlock": true,
+    "facing=east,shape=outer_left,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
       "y": 90
     },
-    "shape=outer_left,type=north": {
+    "facing=east,shape=outer_left,type=east": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
-      "uvlock": true
+      "y": 90
     },
-    "shape=outer_left,type=south": {
+    "facing=east,shape=outer_left,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer"
+    },
+    "facing=east,shape=outer_left,type=south": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
-      "uvlock": true,
       "y": 180
     },
-    "shape=outer_left,type=west": {
+    "facing=east,shape=outer_left,type=west": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
-      "uvlock": true,
       "y": 270
     },
-    "shape=outer_right,type=double": {
-      "model": "morefeatures:block/smooth_stone_vertical_slab_double"
+    "facing=east,shape=outer_right,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 90
     },
-    "shape=outer_right,type=east": {
-      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
-      "uvlock": true
+    "facing=east,shape=outer_right,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer"
     },
-    "shape=outer_right,type=north": {
+    "facing=east,shape=outer_right,type=north": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
-      "uvlock": true,
       "y": 270
     },
-    "shape=outer_right,type=south": {
+    "facing=east,shape=outer_right,type=south": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
-      "uvlock": true,
       "y": 90
     },
-    "shape=outer_right,type=west": {
+    "facing=east,shape=outer_right,type=west": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
-      "uvlock": true,
       "y": 180
     },
-    "shape=straight,type=double": {
+    "facing=east,shape=straight,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 90
+    },
+    "facing=east,shape=straight,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
+      "y": 90
+    },
+    "facing=east,shape=straight,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight"
+    },
+    "facing=east,shape=straight,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
+      "y": 180
+    },
+    "facing=east,shape=straight,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
+      "y": 270
+    },
+    "facing=north,shape=inner_left,type=double": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_double"
     },
-    "shape=straight,type=east": {
-      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
-      "uvlock": true,
+    "facing=north,shape=inner_left,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
       "y": 90
     },
-    "shape=straight,type=north": {
-      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
-      "uvlock": true
+    "facing=north,shape=inner_left,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner"
     },
-    "shape=straight,type=south": {
-      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
-      "uvlock": true,
+    "facing=north,shape=inner_left,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
       "y": 180
     },
-    "shape=straight,type=west": {
+    "facing=north,shape=inner_left,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 270
+    },
+    "facing=north,shape=inner_right,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double"
+    },
+    "facing=north,shape=inner_right,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner"
+    },
+    "facing=north,shape=inner_right,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 270
+    },
+    "facing=north,shape=inner_right,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 90
+    },
+    "facing=north,shape=inner_right,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 180
+    },
+    "facing=north,shape=outer_left,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double"
+    },
+    "facing=north,shape=outer_left,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 90
+    },
+    "facing=north,shape=outer_left,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer"
+    },
+    "facing=north,shape=outer_left,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 180
+    },
+    "facing=north,shape=outer_left,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 270
+    },
+    "facing=north,shape=outer_right,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double"
+    },
+    "facing=north,shape=outer_right,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer"
+    },
+    "facing=north,shape=outer_right,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 270
+    },
+    "facing=north,shape=outer_right,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 90
+    },
+    "facing=north,shape=outer_right,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 180
+    },
+    "facing=north,shape=straight,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double"
+    },
+    "facing=north,shape=straight,type=east": {
       "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
-      "uvlock": true,
+      "y": 90
+    },
+    "facing=north,shape=straight,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight"
+    },
+    "facing=north,shape=straight,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
+      "y": 180
+    },
+    "facing=north,shape=straight,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
+      "y": 270
+    },
+    "facing=south,shape=inner_left,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 180
+    },
+    "facing=south,shape=inner_left,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 90
+    },
+    "facing=south,shape=inner_left,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner"
+    },
+    "facing=south,shape=inner_left,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 180
+    },
+    "facing=south,shape=inner_left,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 270
+    },
+    "facing=south,shape=inner_right,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 180
+    },
+    "facing=south,shape=inner_right,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner"
+    },
+    "facing=south,shape=inner_right,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 270
+    },
+    "facing=south,shape=inner_right,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 90
+    },
+    "facing=south,shape=inner_right,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 180
+    },
+    "facing=south,shape=outer_left,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 180
+    },
+    "facing=south,shape=outer_left,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 90
+    },
+    "facing=south,shape=outer_left,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer"
+    },
+    "facing=south,shape=outer_left,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 180
+    },
+    "facing=south,shape=outer_left,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 270
+    },
+    "facing=south,shape=outer_right,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 180
+    },
+    "facing=south,shape=outer_right,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer"
+    },
+    "facing=south,shape=outer_right,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 270
+    },
+    "facing=south,shape=outer_right,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 90
+    },
+    "facing=south,shape=outer_right,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 180
+    },
+    "facing=south,shape=straight,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 180
+    },
+    "facing=south,shape=straight,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
+      "y": 90
+    },
+    "facing=south,shape=straight,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight"
+    },
+    "facing=south,shape=straight,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
+      "y": 180
+    },
+    "facing=south,shape=straight,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
+      "y": 270
+    },
+    "facing=west,shape=inner_left,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 270
+    },
+    "facing=west,shape=inner_left,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 90
+    },
+    "facing=west,shape=inner_left,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner"
+    },
+    "facing=west,shape=inner_left,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 180
+    },
+    "facing=west,shape=inner_left,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 270
+    },
+    "facing=west,shape=inner_right,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 270
+    },
+    "facing=west,shape=inner_right,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner"
+    },
+    "facing=west,shape=inner_right,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 270
+    },
+    "facing=west,shape=inner_right,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 90
+    },
+    "facing=west,shape=inner_right,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_inner",
+      "y": 180
+    },
+    "facing=west,shape=outer_left,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 270
+    },
+    "facing=west,shape=outer_left,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 90
+    },
+    "facing=west,shape=outer_left,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer"
+    },
+    "facing=west,shape=outer_left,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 180
+    },
+    "facing=west,shape=outer_left,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 270
+    },
+    "facing=west,shape=outer_right,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 270
+    },
+    "facing=west,shape=outer_right,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer"
+    },
+    "facing=west,shape=outer_right,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 270
+    },
+    "facing=west,shape=outer_right,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 90
+    },
+    "facing=west,shape=outer_right,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_outer",
+      "y": 180
+    },
+    "facing=west,shape=straight,type=double": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_double",
+      "y": 270
+    },
+    "facing=west,shape=straight,type=east": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
+      "y": 90
+    },
+    "facing=west,shape=straight,type=north": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight"
+    },
+    "facing=west,shape=straight,type=south": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
+      "y": 180
+    },
+    "facing=west,shape=straight,type=west": {
+      "model": "morefeatures:block/smooth_stone_vertical_slab_straight",
       "y": 270
     }
   }

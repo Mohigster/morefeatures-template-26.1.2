@@ -1,6 +1,7 @@
 {
 	"format_version": "26.2",
 	"credit": "Made by Mohigster using Blockbench",
+	"gui_light": "front",
 	"elements": [
 		{
 			"from": [0, 0, 0],
@@ -8,11 +9,11 @@
 			"color": 9,
 			"faces": {
 				"north": {"uv": [0, 0, 16, 16], "texture": "#end"},
-				"east": {"uv": [0, 0, 8, 16], "texture": "#side", "rotation": 270},
+				"east": {"uv": [0, 0, 16, 8], "texture": "#side", "rotation": 90},
 				"south": {"uv": [0, 0, 16, 16], "texture": "#end"},
-				"west": {"uv": [0, 0, 8, 16], "texture": "#side", "rotation": 270},
-				"up": {"uv": [0, 0, 16, 8], "texture": "#side", "rotation": 0},
-				"down": {"uv": [0, 0, 16, 8], "texture": "#side", "rotation": 0}
+				"west": {"uv": [0, 8, 16, 16], "texture": "#side", "rotation": 90},
+				"up": {"uv": [0, 0, 16, 8], "texture": "#side"},
+				"down": {"uv": [0, 8, 16, 16], "texture": "#side"}
 			}
 		}
 	],

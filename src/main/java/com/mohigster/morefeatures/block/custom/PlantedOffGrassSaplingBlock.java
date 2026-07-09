@@ -12,29 +12,15 @@ import java.util.function.Supplier;
 
 public class PlantedOffGrassSaplingBlock extends SaplingBlock {
 
-    private final Supplier<Block> blockToSurviveOn;
+    private final Block blockToSurviveOn;
 
-    public PlantedOffGrassSaplingBlock(TreeGrower treeGrower, Properties properties, Supplier<Block> blockToSurviveOn) {
+    public PlantedOffGrassSaplingBlock(TreeGrower treeGrower, Properties properties, Block blockToSurviveOn) {
         super(treeGrower, properties);
         this.blockToSurviveOn = blockToSurviveOn;
     }
 
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-        return state.is(blockToSurviveOn.get());
+        return state.is(blockToSurviveOn);
     }
-//    public static final DeferredBlock<Block> PALM_SIGN = registerBlock("palm_sign",
-//            properties -> new StandingSignBlock(WoodType.ACACIA,
-//                    properties
-//                            .sound(SoundType.WOOD)
-//                            .strength(2f, 2f)
-//                            .ignitedByLava()
-//            ));
-//
-//    public static final DeferredBlock<Block> PALM_WALL_SIGN = registerBlock("palm_wall_sign",
-//            properties -> new WallSignBlock(WoodType.ACACIA, properties
-//                    .strength(2f, 2f)
-//                    .sound(SoundType.WOOD)
-//                    .ignitedByLava()
-//            ));
 }

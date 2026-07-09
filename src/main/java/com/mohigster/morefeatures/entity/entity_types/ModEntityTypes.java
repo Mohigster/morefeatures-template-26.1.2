@@ -37,7 +37,7 @@ public class ModEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<Boat>> PALM_BOAT =
             ENTITY_TYPES.register("palm_boat",
                     () -> EntityType.Builder.<Boat>of(
-                                    (type, level) -> new Boat(type, level, () -> ModItems.PALM_BOAT.get()),
+                                    (type, level) -> new Boat(type, level, ModItems.PALM_BOAT::get),
                                     MobCategory.MISC)
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)
@@ -47,7 +47,7 @@ public class ModEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<ChestBoat>> PALM_CHEST_BOAT =
             ENTITY_TYPES.register("palm_chest_boat",
                     () -> EntityType.Builder.<ChestBoat>of(
-                                    (type, level) -> new ChestBoat(type, level, () -> ModItems.PALM_CHEST_BOAT.get()),
+                                    (type, level) -> new ChestBoat(type, level, ModItems.PALM_CHEST_BOAT::get),
                                     MobCategory.MISC)
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)

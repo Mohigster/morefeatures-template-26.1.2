@@ -1,6 +1,8 @@
 {
   "values": [
     "morefeatures:azurite_button",
+    "morefeatures:bloodwood_button",
+    "morefeatures:tainted_button",
     "morefeatures:palm_button",
     "morefeatures:decrepit_button",
     "morefeatures:pallid_button"

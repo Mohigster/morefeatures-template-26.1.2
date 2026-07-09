@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.item.custom.wand.type;
 
+import com.mohigster.morefeatures.attachment.ModAttachments;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -13,18 +14,20 @@ public abstract class AbstractWandItem extends Item {
     protected final int cooldownTicks;
     protected final int baseDurabilityCost;
     protected final int durabilityScalingFactor; // targets.size() / this = extra cost
+    protected final int manaCost;
     protected final SoundEvent castSound;
     protected final float soundVolume;
     protected final float soundPitch;
 
     public AbstractWandItem(Properties properties, double radius, int cooldownTicks,
-                            int baseDurabilityCost, int durabilityScalingFactor,
+                            int baseDurabilityCost, int durabilityScalingFactor, int manaCost,
                             SoundEvent castSound, float soundVolume, float soundPitch) {
         super(properties);
         this.radius = radius;
         this.cooldownTicks = cooldownTicks;
         this.baseDurabilityCost = baseDurabilityCost;
         this.durabilityScalingFactor = durabilityScalingFactor;
+        this.manaCost = manaCost;
         this.castSound = castSound;
         this.soundVolume = soundVolume;
         this.soundPitch = soundPitch;
@@ -39,11 +42,19 @@ public abstract class AbstractWandItem extends Item {
                 this.castSound, SoundSource.PLAYERS, this.soundVolume, this.soundPitch);
     }
 
-    protected int calculateDurabilityCost(int targetCount) {
+    protected int totalDurabilityCost(int targetCount) {
         int extraCost = this.durabilityScalingFactor == 0
                 ? 0 // If durabilityScalingFactor is zero, do NOT attempt division. We don't want to break the universe here. Simply set extraCost to zero.
                 : (int) Math.floor((double) targetCount / this.durabilityScalingFactor); // Else, perform calculation as normal. targetCount / durabilityScalingFactor = extra durability added. E.g. durabilityScalingFactor set to 2 = one additional durability cost for every two entities
 
         return this.baseDurabilityCost + extraCost;
+    }
+
+    protected boolean hasEnoughMana(Player caster){
+        return caster.getData(ModAttachments.MANA) >= manaCost;
+    }
+
+    protected void consumeMana(Player caster) {
+        caster.setData(ModAttachments.MANA, caster.getData(ModAttachments.MANA) - manaCost);
     }
 }

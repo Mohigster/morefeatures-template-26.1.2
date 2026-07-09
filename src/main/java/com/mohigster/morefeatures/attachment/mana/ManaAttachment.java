@@ -12,9 +12,9 @@ public class ManaAttachment {
             instance.group(
                     Codec.INT.fieldOf("mana").forGetter(ManaAttachment::getMana)
             ).apply(instance, mana -> {
-                ManaAttachment a = new ManaAttachment();
-                a.setMana(mana);
-                return a;
+                ManaAttachment attachment= new ManaAttachment();
+                attachment.setMana(mana);
+                return attachment;
             })
     );
 

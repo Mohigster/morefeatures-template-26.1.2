@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_vertical_slab_inner",
+  "textures": {
+    "all": "minecraft:block/red_nether_bricks",
+    "particle": "minecraft:block/red_nether_bricks"
+  }
+}

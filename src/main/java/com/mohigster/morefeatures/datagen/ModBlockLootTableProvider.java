@@ -58,6 +58,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.BLOODWOOD_SAPLING.get());
         dropSelf(ModBlocks.BLOODWOOD_BUTTON.get());
         dropSelf(ModBlocks.BLOODWOOD_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.BLOODWOOD_SHELF.get());
         dropSelf(ModBlocks.TAINTED_PLANKS.get());
         dropSelf(ModBlocks.TAINTED_LOG.get());
         dropSelf(ModBlocks.TAINTED_WOOD.get());
@@ -65,6 +66,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.TAINTED_FENCE_GATE.get());
         dropSelf(ModBlocks.TAINTED_BUTTON.get());
         dropSelf(ModBlocks.TAINTED_PRESSURE_PLATE.get());
+        dropSelf(ModBlocks.TAINTED_SHELF.get());
         dropSelf(ModBlocks.STRIPPED_TAINTED_LOG.get());
         dropSelf(ModBlocks.STRIPPED_TAINTED_WOOD.get());
         dropSelf(ModBlocks.TAINTED_SAPLING.get());
@@ -102,6 +104,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.DECREPIT_STAIRS.get());
         dropSelf(ModBlocks.DECREPIT_FENCE.get());
         dropSelf(ModBlocks.DECREPIT_FENCE_GATE.get());
+        dropSelf(ModBlocks.DECREPIT_SHELF.get());
         dropSelf(ModBlocks.STRIPPED_DECREPIT_WOOD.get());
         dropSelf(ModBlocks.STRIPPED_DECREPIT_LOG.get());
         dropSelf(ModBlocks.PALLID_PLANKS.get());
@@ -112,6 +115,7 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(ModBlocks.PALLID_STAIRS.get());
         dropSelf(ModBlocks.PALLID_FENCE.get());
         dropSelf(ModBlocks.PALLID_FENCE_GATE.get());
+        dropSelf(ModBlocks.PALLID_SHELF.get());
         dropSelf(ModBlocks.STRIPPED_PALLID_WOOD.get());
         dropSelf(ModBlocks.STRIPPED_PALLID_LOG.get());
         dropSelf(ModBlocks.DECREPIT_ROOTS.get());
@@ -152,6 +156,8 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
 
         // VERTICAL SLABS
 
+        add(ModBlocks.DECREPIT_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.PALLID_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
         add(ModBlocks.OAK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
         add(ModBlocks.SPRUCE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
         add(ModBlocks.BIRCH_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
@@ -175,6 +181,46 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
         add(ModBlocks.POLISHED_DEEPSLATE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
         add(ModBlocks.DEEPSLATE_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
         add(ModBlocks.DEEPSLATE_TILE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.GRANITE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.POLISHED_GRANITE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.DIORITE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.POLISHED_DIORITE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.ANDESITE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.POLISHED_ANDESITE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.TUFF_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.POLISHED_TUFF_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.TUFF_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.SULFUR_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.POLISHED_SULFUR_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.SULFUR_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.CINNABAR_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.POLISHED_CINNABAR_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.CINNABAR_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.SANDSTONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.SMOOTH_SANDSTONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.CUT_SANDSTONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.RED_SANDSTONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.SMOOTH_RED_SANDSTONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.CUT_RED_SANDSTONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.NETHER_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.RED_NETHER_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.BLACKSTONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.POLISHED_BLACKSTONE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.END_STONE_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.PURPUR_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.QUARTZ_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.SMOOTH_QUARTZ_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.PRISMARINE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.PRISMARINE_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.DARK_PRISMARINE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.MUD_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(ModBlocks.RESIN_BRICK_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+
+        ModBlocks.CUT_COPPER_VERTICAL_SLAB.forEach(block -> this.add(block.get(), this::createVerticalSlabItemTable));
+        ModBlocks.WOOL_VERTICAL_SLAB.forEach(block -> this.add(block.get(), this::createVerticalSlabItemTable));
+
 
         // LEAVES
 
@@ -331,24 +377,14 @@ public class ModBlockLootTableProvider extends BlockLootSubProvider {
     }
 
     protected LootTable.Builder createVerticalSlabItemTable(Block slab) { // Built pretty much entirely out of the createSlabItemTable method
-        return LootTable.lootTable().withPool(
-                LootPool.lootPool()
-                        .setRolls(ConstantValue.exactly(1.0F))
-                        .add(
-                                this.applyExplosionDecay(
-                                        slab,
-                                        LootItem.lootTableItem(slab).apply(
-                                                SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))
-                                                        .when(
-                                                                LootItemBlockStatePropertyCondition.hasBlockStateProperties(slab)
-                                                                        .setProperties(
-                                                                                StatePropertiesPredicate.Builder.properties()
-                                                                                        .hasProperty(VerticalSlabBlock.TYPE, VerticalSlabType.DOUBLE)
-                                                                        )
-                                                        )
-                                        )
-                                )
+        return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
+                .add(this.applyExplosionDecay(slab, LootItem.lootTableItem(slab).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))
+                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(slab)
+                                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                                        .hasProperty(VerticalSlabBlock.TYPE, VerticalSlabType.DOUBLE)) // These two are the reason a custom method was necessary
+                                ))
                         )
+                )
         );
     }
 }
