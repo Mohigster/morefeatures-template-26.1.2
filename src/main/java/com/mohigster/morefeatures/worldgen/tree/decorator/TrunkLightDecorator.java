@@ -30,7 +30,7 @@ public class TrunkLightDecorator extends TreeDecorator {
 
     @Override
     protected TreeDecoratorType<?> type() {
-        return ModTreeDecorators.TRUNK_LIGHT.get();
+        return MFTreeDecorators.TRUNK_LIGHT.get();
     }
 
     @Override

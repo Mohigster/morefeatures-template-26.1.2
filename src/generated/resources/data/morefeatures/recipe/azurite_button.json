@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
-  "group": "zircon",
+  "group": "azurite",
   "ingredients": [
     "morefeatures:azurite"
   ],

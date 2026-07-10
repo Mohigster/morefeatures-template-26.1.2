@@ -1,10 +1,10 @@
 package com.mohigster.morefeatures.compat.custom;
 
-import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.block.ModBlocks;
-import com.mohigster.morefeatures.compat.ModJEIRecipeTypes;
+import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.compat.MFJEIRecipeTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorScreen;
 import com.mohigster.morefeatures.recipe.custom.CompressionRecipe;
+import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mohigster.morefeatures.renderer.FluidTankRenderer;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
@@ -28,22 +28,21 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 public class CompressionRecipeCategory implements IRecipeCategory<RecipeHolder<CompressionRecipe>> {
-    public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(MoreFeatures.MODID,
-            "textures/gui/compressor/crystallizer_gui.png");
+    public static final Identifier TEXTURE = MFIdentifier.withMfNamespace("textures/gui/compressor/crystallizer_gui.png");
     private final IDrawable icon;
     private final IDrawable overlay;
     private final FluidTankRenderer fluidRenderer;
 
     public CompressionRecipeCategory(IGuiHelper helper) {
         this.overlay = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
-        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(ModBlocks.COMPRESSOR_BLOCK));
+        this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MFBlocks.COMPRESSOR_BLOCK));
 
         fluidRenderer = new FluidTankRenderer(16000, FluidTankRenderer.TooltipMode.SHOW_AMOUNT, 16, 50);
     }
 
     @Override
     public IRecipeType<RecipeHolder<CompressionRecipe>> getRecipeType() {
-        return ModJEIRecipeTypes.COMPRESSION;
+        return MFJEIRecipeTypes.COMPRESSION;
     }
 
     @Override

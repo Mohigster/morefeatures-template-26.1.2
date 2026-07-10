@@ -1,12 +1,11 @@
 package com.mohigster.morefeatures.block.custom;
 
-import com.mohigster.morefeatures.block.ModBlocks;
-import com.mohigster.morefeatures.item.ModItems;
-import com.mohigster.morefeatures.sound.ModSounds;
-import com.mohigster.morefeatures.tag.ModItemTags;
+import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.item.MFItems;
+import com.mohigster.morefeatures.sound.MFSounds;
+import com.mohigster.morefeatures.tag.MFItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.InteractionResult;
@@ -17,7 +16,6 @@ import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.item.equipment.ArmorMaterials;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -36,7 +34,7 @@ public class MagicBlock extends Block {
         level.addParticle(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
                 0, 1, 0);
 
-        level.playSound(player, pos, ModSounds.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 2f, 1f);
+        level.playSound(player, pos, MFSounds.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 2f, 1f);
         return InteractionResult.SUCCESS;
     }
 
@@ -57,7 +55,7 @@ public class MagicBlock extends Block {
                         0, 1, 0);
 
                 level.playSound(null, itemEntity,
-                        ModSounds.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 1.5f, 1f);
+                        MFSounds.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 1.5f, 1f);
 
             }
         }
@@ -69,13 +67,13 @@ public class MagicBlock extends Block {
         int count = item.getCount();
 
         if (isCarbonItem(item)) {
-            return new ItemStack(ModItems.CARBON_FIBER.get(), count);
+            return new ItemStack(MFItems.CARBON_FIBER.get(), count);
         }
         if (isMetalItem(item)) {
-            return new ItemStack(ModItems.BISMUTH_SCRAP.get(), count);
+            return new ItemStack(MFItems.BISMUTH_SCRAP.get(), count);
         }
         if (isMetalBlock(item)) {
-            return new ItemStack(ModBlocks.RAW_BISMUTH_BLOCK.get().asItem(), count);
+            return new ItemStack(MFBlocks.RAW_BISMUTH_BLOCK.get().asItem(), count);
         }
         if (isGoldItem(item)) {
             return new ItemStack(Items.NETHERITE_SCRAP, count);
@@ -103,32 +101,32 @@ public class MagicBlock extends Block {
     private boolean isCarbonItem(ItemStack item) {
         return item.is(Items.COAL) || item.is(ItemTags.SAPLINGS) ||
                 item.is(ItemTags.LOGS_THAT_BURN) ||
-                item.is(ItemTags.LOGS) || item.is(ModItemTags.IS_FOOD) ||
+                item.is(ItemTags.LOGS) || item.is(MFItemTags.IS_FOOD) ||
                 item.is(Items.REDSTONE) || item.is(Items.STICK) ||
                 item.is(ItemTags.WOOL) || item.is(ItemTags.PLANKS);
     }
     private boolean isMetalItem(ItemStack item) {
-        return item.is(ModItemTags.IS_NON_GOLD_INGOT)|| item.is(ModItemTags.IS_NON_GOLD_RAW_METAL);
+        return item.is(MFItemTags.IS_NON_GOLD_INGOT)|| item.is(MFItemTags.IS_NON_GOLD_RAW_METAL);
     }
     private boolean isMetalBlock(ItemStack item){
-        return item.is(ModItemTags.IS_NON_GOLD_METAL_BLOCK);
+        return item.is(MFItemTags.IS_NON_GOLD_METAL_BLOCK);
     }
     private boolean isGoldItem(ItemStack item) {
         return item.is(ItemTags.GOLD_TOOL_MATERIALS) || item.is(ItemTags.GOLD_ORES) ||
-                item.is(ModItemTags.IS_GOLD) || item.is(ModItemTags.IS_GOLD_ARMOR);
+                item.is(MFItemTags.IS_GOLD) || item.is(MFItemTags.IS_GOLD_ARMOR);
     }
     private boolean isGoldBlock(ItemStack item){
         return item.is(Items.RAW_GOLD_BLOCK) || item.is(Items.GOLD_BLOCK);
     }
     private boolean isGemstoneItem(ItemStack item) {
-        return item.is(Items.EMERALD) || item.is(ModItems.AZURITE)
-                || item.is(ModItems.FLUORITE) || item.is(Items.AMETHYST_SHARD);
+        return item.is(Items.EMERALD) || item.is(MFItems.AZURITE)
+                || item.is(MFItems.FLUORITE) || item.is(Items.AMETHYST_SHARD);
     }
     private boolean isPotionItem(ItemStack item) {
         return item.is(Items.POTION) || item.is(Items.SPLASH_POTION);
     }
 
     private boolean isMagicBlock(ItemStack item) {
-        return item.is(ModBlocks.MAGIC_BLOCK.get().asItem());
+        return item.is(MFBlocks.MAGIC_BLOCK.get().asItem());
     }
 }

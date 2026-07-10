@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.worldgen.biome.region;
 
-import com.mohigster.morefeatures.worldgen.biome.ModBiomes;
+import com.mohigster.morefeatures.worldgen.biome.MFBiomes;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;
@@ -60,7 +60,7 @@ public class OverworldRegion extends Region {
                 .erosion(Climate.Parameter.span(BLOODWOOD_EROSION_MIN, BLOODWOOD_EROSION_MAX))
                 .depth(ParameterUtils.Depth.SURFACE)
                 .weirdness(Climate.Parameter.span(BLOODWOOD_WEIRD_MIN, BLOODWOOD_WEIRD_MAX))
-                .build().forEach(point -> builder.add(point, ModBiomes.BLOODWOOD_FOREST));
+                .build().forEach(point -> builder.add(point, MFBiomes.BLOODWOOD_FOREST));
 
         new ParameterUtils.ParameterPointListBuilder()
                 .temperature(Climate.Parameter.span(TAINTED_TEMP_MIN, TAINTED_TEMP_MAX))
@@ -69,7 +69,7 @@ public class OverworldRegion extends Region {
                 .erosion(Climate.Parameter.span(TAINTED_EROSION_MIN, TAINTED_EROSION_MAX))
                 .depth(ParameterUtils.Depth.SURFACE)
                 .weirdness(Climate.Parameter.span(TAINTED_WEIRD_MIN, TAINTED_WEIRD_MAX))
-                .build().forEach(point -> builder.add(point, ModBiomes.TAINTED_FOREST));
+                .build().forEach(point -> builder.add(point, MFBiomes.TAINTED_FOREST));
 
         new ParameterUtils.ParameterPointListBuilder()
                 .temperature(Climate.Parameter.span(ICE_CAVE_TEMP_MIN, ICE_CAVE_TEMP_MAX))
@@ -80,7 +80,7 @@ public class OverworldRegion extends Region {
                 .erosion(Climate.Parameter.span(ICE_CAVE_EROSION_MIN, ICE_CAVE_EROSION_MAX))
                 .depth(Climate.Parameter.span(ICE_CAVE_DEPTH_MIN, ICE_CAVE_DEPTH_MAX))
                 .weirdness(Climate.Parameter.span(ICE_CAVE_WEIRD_MIN_1, ICE_CAVE_WEIRD_MAX_1), Climate.Parameter.span(ICE_CAVE_WEIRD_MIN_2, ICE_CAVE_WEIRD_MAX_2))
-                .build().forEach(point -> builder.add(point, ModBiomes.ICE_CAVE));
+                .build().forEach(point -> builder.add(point, MFBiomes.ICE_CAVES));
 
         // Add our points to the mapper
         builder.build().forEach(mapper);

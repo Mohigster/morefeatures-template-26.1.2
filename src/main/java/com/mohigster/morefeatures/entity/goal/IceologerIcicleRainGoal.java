@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.entity.goal;
 
-import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -13,8 +13,6 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.item.FallingBlockEntity;
 import net.minecraft.world.level.block.SpeleothemBlock;
-import net.minecraft.world.level.block.state.properties.EnumProperty;
-import net.minecraft.world.level.block.state.properties.Property;
 
 import java.util.EnumSet;
 
@@ -84,7 +82,7 @@ public class IceologerIcicleRainGoal extends Goal {
 
             BlockPos spawnPos = BlockPos.containing(x, target.getY() + SPAWN_HEIGHT, z);
 
-            FallingBlockEntity icicle = FallingBlockEntity.fall(level, spawnPos, ModBlocks.ICICLE.get().defaultBlockState().setValue(SpeleothemBlock.TIP_DIRECTION, Direction.DOWN));
+            FallingBlockEntity icicle = FallingBlockEntity.fall(level, spawnPos, MFBlocks.ICICLE.get().defaultBlockState().setValue(SpeleothemBlock.TIP_DIRECTION, Direction.DOWN));
             icicle.setHurtsEntities(5.0F, 20);
             icicle.dropItem = false;
         }

@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom;
 
-import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.MFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -72,7 +72,7 @@ public class NulliumBlock extends Block implements BonemealableBlock {
             BlockPos aboveSpread = spreadPos.above();
 
             // Only place roots on top of Nullium blocks that have air above them
-            if ((spreadState.is(ModBlocks.DECREPIT_NULLIUM) || spreadState.is(ModBlocks.PALLID_NULLIUM))
+            if ((spreadState.is(MFBlocks.DECREPIT_NULLIUM) || spreadState.is(MFBlocks.PALLID_NULLIUM))
                     && serverLevel.getBlockState(aboveSpread).isAir()) {
                 placeRootAbove(serverLevel, spreadState, aboveSpread);
             }
@@ -80,10 +80,10 @@ public class NulliumBlock extends Block implements BonemealableBlock {
     }
 
     private void placeRootAbove(ServerLevel serverLevel, BlockState nulliumState, BlockPos pos) {
-        if (nulliumState.is(ModBlocks.DECREPIT_NULLIUM)) {
-            serverLevel.setBlockAndUpdate(pos, ModBlocks.DECREPIT_ROOTS.get().defaultBlockState());
-        } else if (nulliumState.is(ModBlocks.PALLID_NULLIUM)) {
-            serverLevel.setBlockAndUpdate(pos, ModBlocks.PALLID_ROOTS.get().defaultBlockState());
+        if (nulliumState.is(MFBlocks.DECREPIT_NULLIUM)) {
+            serverLevel.setBlockAndUpdate(pos, MFBlocks.DECREPIT_ROOTS.get().defaultBlockState());
+        } else if (nulliumState.is(MFBlocks.PALLID_NULLIUM)) {
+            serverLevel.setBlockAndUpdate(pos, MFBlocks.PALLID_ROOTS.get().defaultBlockState());
         }
     }
 }

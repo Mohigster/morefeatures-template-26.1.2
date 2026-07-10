@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.menu.custom;
 
-import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mohigster.morefeatures.renderer.EnergyDisplayTooltipArea;
 import com.mohigster.morefeatures.renderer.FluidTankRenderer;
 import com.mohigster.morefeatures.util.MouseUtil;
@@ -14,9 +14,9 @@ import net.neoforged.neoforge.fluids.FluidStack;
 
 public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
     private static final Identifier GUI_TEXTURE =
-            Identifier.fromNamespaceAndPath(MoreFeatures.MODID,"textures/gui/compressor/crystallizer_gui.png");
+            MFIdentifier.withMfNamespace("textures/gui/compressor/crystallizer_gui.png");
     private static final Identifier ARROW_TEXTURE =
-            Identifier.fromNamespaceAndPath(MoreFeatures.MODID,"textures/gui/compressor/arrow_progress.png");
+            MFIdentifier.withMfNamespace("textures/gui/compressor/arrow_progress.png");
     private static final Identifier CRYSTAL_TEXTURE =
             Identifier.parse("textures/block/amethyst_cluster.png");
 

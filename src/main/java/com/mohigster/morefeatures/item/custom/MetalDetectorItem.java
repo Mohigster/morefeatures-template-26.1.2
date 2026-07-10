@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.item.custom;
 
-import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.MFBlocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -73,15 +73,15 @@ public class MetalDetectorItem extends Item {
         return(
                 blockState.is(Blocks.IRON_ORE) ||
                 blockState.is(Blocks.DEEPSLATE_IRON_ORE) ||
-                blockState.is(ModBlocks.BISMUTH_ORE) ||
+                blockState.is(MFBlocks.BISMUTH_ORE) ||
                 blockState.is(Blocks.GOLD_ORE) ||
                 blockState.is(Blocks.DEEPSLATE_GOLD_ORE) ||
                 blockState.is(Blocks.COPPER_ORE) ||
                 blockState.is(Blocks.DEEPSLATE_COPPER_ORE) ||
-                blockState.is(ModBlocks.ALUMINIUM_ORE) ||
-                blockState.is(ModBlocks.DEEPSLATE_ALUMINIUM_ORE) ||
-                blockState.is(ModBlocks.MAGNESIUM_ORE) ||
-                blockState.is(ModBlocks.DEEPSLATE_MAGNESIUM_ORE) ||
+                blockState.is(MFBlocks.ALUMINIUM_ORE) ||
+                blockState.is(MFBlocks.DEEPSLATE_ALUMINIUM_ORE) ||
+                blockState.is(MFBlocks.MAGNESIUM_ORE) ||
+                blockState.is(MFBlocks.DEEPSLATE_MAGNESIUM_ORE) ||
                 blockState.is(Blocks.ANCIENT_DEBRIS) ||
                 blockState.is(Blocks.NETHER_GOLD_ORE)
         );

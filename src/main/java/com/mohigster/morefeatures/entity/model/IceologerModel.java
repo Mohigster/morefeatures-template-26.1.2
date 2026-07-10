@@ -1,21 +1,18 @@
 package com.mohigster.morefeatures.entity.model;
 
-import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.entity.custom.IceologerEntity;
 import com.mohigster.morefeatures.entity.renderstate.IceologerRenderState;
+import com.mohigster.morefeatures.references.MFIdentifier;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
-import net.minecraft.client.renderer.entity.state.IllagerRenderState;
-import net.minecraft.resources.Identifier;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.illager.AbstractIllager;
 
 public class IceologerModel extends EntityModel<IceologerRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
-			Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "iceologer"), "main"
+			MFIdentifier.withMfNamespace("iceologer"), "main"
 	);
 
 	private final ModelPart head;

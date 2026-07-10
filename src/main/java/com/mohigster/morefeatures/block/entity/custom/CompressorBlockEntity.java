@@ -1,13 +1,13 @@
 package com.mohigster.morefeatures.block.entity.custom;
 
 import com.mohigster.morefeatures.block.custom.CompressorBlock;
-import com.mohigster.morefeatures.block.entity.ModBlockEntities;
-import com.mohigster.morefeatures.datacomponent.ModDataComponentTypes;
+import com.mohigster.morefeatures.block.entity.MFBlockEntities;
+import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorMenu;
-import com.mohigster.morefeatures.recipe.ModRecipes;
+import com.mohigster.morefeatures.recipe.MFRecipes;
 import com.mohigster.morefeatures.recipe.custom.CompressionRecipe;
 import com.mohigster.morefeatures.recipe.custom.CompressorRecipeInput;
-import com.mohigster.morefeatures.tag.ModItemTags;
+import com.mohigster.morefeatures.tag.MFItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
@@ -46,14 +46,17 @@ import net.neoforged.neoforge.transfer.fluid.FluidStacksResourceHandler;
 import net.neoforged.neoforge.transfer.item.ItemResource;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.transfer.transaction.Transaction;
+import org.jetbrains.annotations.Contract;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Optional;
 
 public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     public final ItemStacksResourceHandler inventory = new ItemStacksResourceHandler(4) {
         @Override
-        protected void onContentsChanged(int index, ItemStack previousContents) {
+        protected void onContentsChanged(int index, @NonNull ItemStack previousContents) {
             super.onContentsChanged(index, previousContents);
             CompressorBlockEntity.this.setChanged();
         }
@@ -81,27 +84,30 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
         @Override
         protected void onEnergyChanged(int previousAmount) {
             super.onEnergyChanged(previousAmount);
+            assert getLevel() != null;
             getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
         }
     };
 
     private final FluidStacksResourceHandler FLUID_TANK = new FluidStacksResourceHandler(1, 16000) {
         @Override
-        protected void onContentsChanged(int index, FluidStack previousContents) {
+        protected void onContentsChanged(int index, @NonNull FluidStack previousContents) {
             setChanged();
+            assert getLevel() != null;
             if(!getLevel().isClientSide()) {
                 getLevel().sendBlockUpdated(getBlockPos(), getBlockState(), getBlockState(), 3);
             }
         }
 
+        @Contract(pure = true)
         @Override
-        public boolean isValid(int index, FluidResource resource) {
+        public boolean isValid(int index, @NonNull FluidResource resource) {
             return true;
         }
     };
 
     public CompressorBlockEntity(BlockPos worldPosition, BlockState blockState) {
-        super(ModBlockEntities.COMPRESSOR_BE.get(), worldPosition, blockState);
+        super(MFBlockEntities.COMPRESSOR_BE.get(), worldPosition, blockState);
         this.data = new ContainerData() {
             @Override
             public int get(int dataId) {
@@ -127,17 +133,17 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
         };
     }
     @Override
-    public Component getDisplayName() {
+    public @NonNull Component getDisplayName() {
         return Component.translatable("block.morefeatures.compressor");
     }
 
     @Override
-    public @Nullable AbstractContainerMenu createMenu(int containerId, Inventory inventory, Player player) {
+    public @Nullable AbstractContainerMenu createMenu(int containerId, @NonNull Inventory inventory, @NonNull Player player) {
         return new CompressorMenu(containerId, inventory, this, this.inventory, this.data);
     }
 
     @Override
-    protected void saveAdditional(ValueOutput output) {
+    protected void saveAdditional(@NonNull ValueOutput output) {
         super.saveAdditional(output);
         output.putInt("compressor.progress", progress);
         output.putInt("compressor.max_progress", maxProgress);
@@ -149,7 +155,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     @Override
-    protected void loadAdditional(ValueInput input) {
+    protected void loadAdditional(@NonNull ValueInput input) {
         super.loadAdditional(input);
         progress = input.getIntOr("compressor.progress", 0);
         maxProgress = input.getIntOr("compressor.max_progress", 72);
@@ -166,6 +172,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
             ItemAccess itemAccess = ItemAccess.forHandlerIndex(inventory, 0);
             inv.setItem(i, new ItemStack(itemAccess.getResource().getItem(), itemAccess.getAmount()));
         }
+        assert this.level != null;
         Containers.dropContents(this.level, this.worldPosition, inv);
     }
 
@@ -241,8 +248,9 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private Optional<RecipeHolder<CompressionRecipe>> getCurrentRecipe() {
+        assert level != null;
         return ((ServerLevel) level).recipeAccess()
-                .getRecipeFor(ModRecipes.COMPRESSOR_TYPE.get(),
+                .getRecipeFor(MFRecipes.COMPRESSOR_TYPE.get(),
                         new CompressorRecipeInput(inventory.getResource(INPUT_SLOT).toStack()), level);
     }
 
@@ -260,7 +268,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
 
     private void craftItem() {
         Optional<RecipeHolder<CompressionRecipe>> recipe = getCurrentRecipe();
-        ItemStack output = recipe.get().value().output().create();
+        @SuppressWarnings("OptionalGetWithoutIsPresent") ItemStack output = recipe.get().value().output().create();
 
         try(Transaction transaction = Transaction.openRoot()) {
             ItemAccess itemAccess = ItemAccess.forHandlerIndex(inventory, OUTPUT_SLOT);
@@ -319,7 +327,8 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     private void fillUpOnEnergy() {
         ItemStack stack = inventory.getResource(ENERGY_ITEM_SLOT).toStack();
 
-        int energyToInsert = stack.get(ModDataComponentTypes.COMPRESSOR_FUEL_VALUE.get());
+        @SuppressWarnings("DataFlowIssue")
+        int energyToInsert = stack.get(MFDataComponentTypes.COMPRESSOR_FUEL_VALUE.get());
 
         if (energyToInsert <= 0) return;
 
@@ -342,7 +351,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     private boolean hasItemInEnergySlot() {
-        return (inventory.getResource(ENERGY_ITEM_SLOT).is(ModItemTags.COMPRESSOR_FUEL)
+        return (inventory.getResource(ENERGY_ITEM_SLOT).is(MFItemTags.COMPRESSOR_FUEL)
                 && inventory.getAmountAsInt(ENERGY_ITEM_SLOT) > 0);
     }
 
@@ -372,7 +381,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     private boolean hasFluidItemStackInSlot() {
         return !inventory.getResource(FLUID_ITEM_SLOT).isEmpty()
                 && ItemAccess.forHandlerIndex(inventory, FLUID_ITEM_SLOT).getCapability(Capabilities.Fluid.ITEM) != null
-                && ItemAccess.forHandlerIndex(inventory, FLUID_ITEM_SLOT).getCapability(Capabilities.Fluid.ITEM).getAmountAsInt(0) != 0;
+                && Objects.requireNonNull(ItemAccess.forHandlerIndex(inventory, FLUID_ITEM_SLOT).getCapability(Capabilities.Fluid.ITEM)).getAmountAsInt(0) != 0;
     }
 
     private void extractFluidForCrafting() {
@@ -388,13 +397,14 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
 
 
     /* BLOCK ENTITY SYNC STUFF */
+
     @Override
     public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
     @Override
-    public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
+    public @NonNull CompoundTag getUpdateTag(HolderLookup.@NonNull Provider registries) {
         return saveWithoutMetadata(registries);
     }
 }

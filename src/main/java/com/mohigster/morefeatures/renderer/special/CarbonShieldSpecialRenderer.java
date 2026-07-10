@@ -1,7 +1,6 @@
 package com.mohigster.morefeatures.renderer.special;
 
-import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.model.ModModelLayer;
+import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Transformation;
 import com.mojang.serialization.MapCodec;
@@ -30,8 +29,8 @@ import java.util.function.Consumer;
 public class CarbonShieldSpecialRenderer implements SpecialModelRenderer<DataComponentMap> {
     public static final Transformation DEFAULT_TRANSFORMATION = new Transformation(null, null, new Vector3f(1.0F, -1.0F, -1.0F), null);
 
-    public static final SpriteId CARBON_SHIELD_BASE = new SpriteId(Identifier.withDefaultNamespace("textures/atlas/shield_patterns.png"), Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "entity/shield/carbon_shield_base"));
-    public static final SpriteId CARBON_SHIELD_BASE_NO_PATTERN = new SpriteId(Identifier.withDefaultNamespace("textures/atlas/shield_patterns.png"), Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "entity/shield/carbon_shield_base_nopattern"));
+    public static final SpriteId CARBON_SHIELD_BASE = new SpriteId(Identifier.withDefaultNamespace("textures/atlas/shield_patterns.png"), MFIdentifier.withMfNamespace("entity/shield/carbon_shield_base"));
+    public static final SpriteId CARBON_SHIELD_BASE_NO_PATTERN = new SpriteId(Identifier.withDefaultNamespace("textures/atlas/shield_patterns.png"), MFIdentifier.withMfNamespace("entity/shield/carbon_shield_base_nopattern"));
 
     private final SpriteGetter sprites;
     private final ShieldModel model;

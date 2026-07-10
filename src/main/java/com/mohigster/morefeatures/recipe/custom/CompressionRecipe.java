@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.recipe.custom;
 
-import com.mohigster.morefeatures.recipe.ModRecipes;
+import com.mohigster.morefeatures.recipe.MFRecipes;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.NonNullList;
@@ -59,12 +59,12 @@ public record CompressionRecipe(Ingredient inputItem, ItemStackTemplate output) 
 
     @Override
     public RecipeSerializer<? extends Recipe<CompressorRecipeInput>> getSerializer() {
-        return ModRecipes.COMPRESSOR_SERIALIZER.get();
+        return MFRecipes.COMPRESSOR_SERIALIZER.get();
     }
 
     @Override
     public RecipeType<? extends Recipe<CompressorRecipeInput>> getType() {
-        return ModRecipes.COMPRESSOR_TYPE.get();
+        return MFRecipes.COMPRESSOR_TYPE.get();
     }
 
     @Override

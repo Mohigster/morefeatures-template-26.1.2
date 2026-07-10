@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.entity.custom.projectile.trident;
 
-import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
-import com.mohigster.morefeatures.item.ModItems;
+import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
+import com.mohigster.morefeatures.item.MFItems;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
@@ -25,12 +25,12 @@ public class ThrownBismuthTrident extends ThrownTrident {
 
     @Override
     public EntityType<?> getType() {
-        return ModEntityTypes.BISMUTH_TRIDENT.get();
+        return MFEntityTypes.BISMUTH_TRIDENT.get();
     }
 
 
     @Override
     protected ItemStack getDefaultPickupItem() {
-        return new ItemStack(ModItems.BISMUTH_TRIDENT.get());
+        return new ItemStack(MFItems.BISMUTH_TRIDENT.get());
     }
 }

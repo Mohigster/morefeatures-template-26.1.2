@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.item.custom.wand;
 
-import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.item.custom.wand.type.TargetingWandItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
@@ -35,7 +35,7 @@ public class IceWandItem extends TargetingWandItem {
         BlockPos spawnPos = BlockPos.containing(target.getX(), target.getEyeY() + 4.0, target.getZ());
 
         FallingBlockEntity iceChunk = FallingBlockEntity.fall(
-                serverLevel, spawnPos, ModBlocks.CONJURED_ICE.get().defaultBlockState()
+                serverLevel, spawnPos, MFBlocks.CONJURED_ICE.get().defaultBlockState()
         );
 
         iceChunk.setHurtsEntities(5.0F, 30);

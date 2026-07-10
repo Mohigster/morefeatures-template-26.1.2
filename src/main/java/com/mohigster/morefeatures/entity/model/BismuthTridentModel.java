@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.entity.model;
 
-import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.references.MFIdentifier;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
@@ -14,7 +14,7 @@ import net.minecraft.util.Unit;
 
 public class BismuthTridentModel extends Model<Unit> {
 
-    public static final Identifier TEXTURE = Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "textures/entity/trident/bismuth_trident.png");
+    public static final Identifier TEXTURE = MFIdentifier.withMfNamespace("textures/entity/trident/bismuth_trident.png");
 
     public BismuthTridentModel(final ModelPart root) {
         super(root, RenderTypes::entitySolid);

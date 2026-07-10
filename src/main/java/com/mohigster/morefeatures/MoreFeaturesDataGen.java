@@ -25,19 +25,19 @@ public class MoreFeaturesDataGen {
 
         //————————————————————————————Adding providers————————————————————————————
 
-        generator.addProvider(true, new ModModelProvider(packOutput));
-        generator.addProvider(true, new ModBlockTagsProvider(packOutput, lookupProvider));
-        generator.addProvider(true, new ModItemTagsProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new MFModelProvider(packOutput));
+        generator.addProvider(true, new MFBlockTagsProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new MFItemTagsProvider(packOutput, lookupProvider));
         generator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(),
                 List.of(
-                        new LootTableProvider.SubProviderEntry(ModBlockLootTableProvider::new, LootContextParamSets.BLOCK),
-                        new LootTableProvider.SubProviderEntry(ModEntityLootTableProvider::new, LootContextParamSets.ENTITY)), lookupProvider));
-        generator.addProvider(true, new ModRecipeProvider.Runner(packOutput, lookupProvider));
-        generator.addProvider(true, new ModDatapackProvider(packOutput, lookupProvider));
-        generator.addProvider(true, new ModSoundsProvider(packOutput));
-        generator.addProvider(true, new ModAdvancementProvider(packOutput, lookupProvider));
-        generator.addProvider(true, new ModEnchantmentTagProvider(packOutput, lookupProvider));
-        generator.addProvider(true, new ModBiomeTagProvider(packOutput, lookupProvider));
-        generator.addProvider(true, new ModEntityTagsProvider(packOutput, lookupProvider));
+                        new LootTableProvider.SubProviderEntry(MFBlockLootTableProvider::new, LootContextParamSets.BLOCK),
+                        new LootTableProvider.SubProviderEntry(MFEntityLootTableProvider::new, LootContextParamSets.ENTITY)), lookupProvider));
+        generator.addProvider(true, new MFRecipeProvider.Runner(packOutput, lookupProvider));
+        generator.addProvider(true, new MFDatapackProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new MFSoundsProvider(packOutput));
+        generator.addProvider(true, new MFAdvancementProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new MFEnchantmentTagProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new MFBiomeTagProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new MFEntityTagsProvider(packOutput, lookupProvider));
     }
 }

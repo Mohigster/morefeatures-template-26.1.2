@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom;
 
-import com.mohigster.morefeatures.block.entity.ModBlockEntities;
+import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.StandingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -16,6 +16,6 @@ public class ModStandingSignBlock extends StandingSignBlock {
     @NullMarked
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return ModBlockEntities.MOD_SIGN_BE.get().create(pos, state);
+        return MFBlockEntities.MOD_SIGN_BE.get().create(pos, state);
     }
 }

@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": "#morefeatures:bismuth_tools_material",
+  "addition": "#morefeatures:bismuth_tool_materials",
   "base": "minecraft:netherite_hoe",
   "result": {
     "id": "morefeatures:bismuth_hoe"

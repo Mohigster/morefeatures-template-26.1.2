@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom;
 
-import com.mohigster.morefeatures.block.entity.ModBlockEntities;
+import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
@@ -90,7 +90,7 @@ public class CompressorBlock extends BaseEntityBlock {
             return null;
         }
 
-        return createTickerHelper(type, ModBlockEntities.COMPRESSOR_BE.get(), (level1, pos, state, entity) ->
+        return createTickerHelper(type, MFBlockEntities.COMPRESSOR_BE.get(), (level1, pos, state, entity) ->
                 entity.tick(level1, pos, state));
     }
 

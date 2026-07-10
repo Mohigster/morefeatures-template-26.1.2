@@ -1,0 +1,17 @@
+package com.mohigster.morefeatures.asset;
+
+import com.mohigster.morefeatures.references.MFIdentifier;
+import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.item.equipment.EquipmentAsset;
+
+import static net.minecraft.world.item.equipment.EquipmentAssets.ROOT_ID;
+
+public interface MFEquipmentAssets {
+    ResourceKey<EquipmentAsset> BISMUTH = createId("bismuth");
+    ResourceKey<EquipmentAsset> CARBON_ELYTRA = createId("carbon_elytra");
+    ResourceKey<EquipmentAsset> CARBON = createId("carbon");
+
+    static ResourceKey<EquipmentAsset> createId(String name) {
+        return ResourceKey.create(ROOT_ID, MFIdentifier.withMfNamespace(name));
+    }
+}

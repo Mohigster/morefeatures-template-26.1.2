@@ -1,15 +1,14 @@
 package com.mohigster.morefeatures.renderer.trident;
 
-import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.entity.model.CarbonTridentModel;
+import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
-import com.mohigster.morefeatures.model.ModModelLayer;
+import com.mohigster.morefeatures.model.MFModelLayer;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
 import net.minecraft.client.renderer.entity.state.ThrownTridentRenderState;
-import net.minecraft.client.renderer.feature.ItemFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -18,13 +17,13 @@ import net.minecraft.util.Unit;
 
 
 public class CarbonTridentRenderer extends ThrownTridentRenderer {
-    public static final Identifier CARBON_TRIDENT_LOCATION = Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "textures/entity/trident/carbon_trident.png");
+    public static final Identifier CARBON_TRIDENT_LOCATION = MFIdentifier.withMfNamespace("textures/entity/trident/carbon_trident.png");
 
     private final CarbonTridentModel model;
 
     public CarbonTridentRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new CarbonTridentModel(context.bakeLayer(ModModelLayer.CARBON_TRIDENT));
+        this.model = new CarbonTridentModel(context.bakeLayer(MFModelLayer.CARBON_TRIDENT));
     }
 
     @Override

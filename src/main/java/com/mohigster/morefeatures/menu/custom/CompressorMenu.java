@@ -1,8 +1,8 @@
 package com.mohigster.morefeatures.menu.custom;
 
-import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
-import com.mohigster.morefeatures.menu.ModMenuTypes;
+import com.mohigster.morefeatures.menu.MFMenuTypes;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -24,7 +24,7 @@ public class CompressorMenu extends AbstractContainerMenu {
     }
 
     public CompressorMenu(int pContainerId, Inventory inv, BlockEntity entity, ItemStacksResourceHandler handler, ContainerData data) {
-        super(ModMenuTypes.COMPRESSOR_MENU.get(), pContainerId);
+        super(MFMenuTypes.COMPRESSOR_MENU.get(), pContainerId);
 
         blockEntity = ((CompressorBlockEntity) entity);
         this.level = inv.player.level();
@@ -113,7 +113,7 @@ public class CompressorMenu extends AbstractContainerMenu {
     @Override
     public boolean stillValid(Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
-                pPlayer, ModBlocks.COMPRESSOR_BLOCK.get());
+                pPlayer, MFBlocks.COMPRESSOR_BLOCK.get());
     }
     private void addPlayerInventory(Inventory playerInventory) {
         for (int i = 0; i < 3; ++i) {

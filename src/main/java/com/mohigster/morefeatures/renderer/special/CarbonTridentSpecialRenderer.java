@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.renderer.special;
 
 import com.mohigster.morefeatures.entity.model.CarbonTridentModel;
-import com.mohigster.morefeatures.model.ModModelLayer;
+import com.mohigster.morefeatures.model.MFModelLayer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Transformation;
 import com.mojang.serialization.MapCodec;
@@ -50,7 +50,7 @@ public class CarbonTridentSpecialRenderer implements NoDataSpecialModelRenderer 
         }
 
         public CarbonTridentSpecialRenderer bake(final BakingContext context) {
-            return new CarbonTridentSpecialRenderer(new CarbonTridentModel((context.entityModelSet().bakeLayer(ModModelLayer.CARBON_TRIDENT))));
+            return new CarbonTridentSpecialRenderer(new CarbonTridentModel((context.entityModelSet().bakeLayer(MFModelLayer.CARBON_TRIDENT))));
         }
     }
 }

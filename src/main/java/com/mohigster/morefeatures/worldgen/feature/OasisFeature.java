@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.worldgen.feature;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.tag.ModBlockTags;
+import com.mohigster.morefeatures.tag.MFBlockTags;
 import com.mohigster.morefeatures.worldgen.feature.config.OasisConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
@@ -209,7 +209,7 @@ public class OasisFeature extends Feature<OasisConfiguration> {
 
                         boolean replaceable =
                                 state.isAir() ||
-                                        (state.is(BlockTags.REPLACEABLE) && !state.is(ModBlockTags.COMPRESSOR_FLUIDS));
+                                        (state.is(BlockTags.REPLACEABLE) && !state.is(MFBlockTags.COMPRESSOR_FLUIDS));
 
                         if (replaceable) {
                             level.setBlock(n, Blocks.SAND.defaultBlockState(), 3);

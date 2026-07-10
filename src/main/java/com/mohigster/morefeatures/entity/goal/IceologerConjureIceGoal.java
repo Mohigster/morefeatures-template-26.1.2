@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.entity.goal;
 
-import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -84,7 +84,7 @@ public class IceologerConjureIceGoal extends Goal {
          /* Conjured ice works just like Frosted Ice. It ages and then disappears. However, this one melts
           * into air instead of water, unless it's actually touching water, whereas Frosted Ice ALWAYS melts
           * into water. It makes the attack less obtrusive without sacrificing its core functionality. */
-        FallingBlockEntity iceChunk = FallingBlockEntity.fall(level, spawnPos, ModBlocks.CONJURED_ICE.get().defaultBlockState());
+        FallingBlockEntity iceChunk = FallingBlockEntity.fall(level, spawnPos, MFBlocks.CONJURED_ICE.get().defaultBlockState());
 
         iceChunk.setHurtsEntities(5.0F, 20);
 

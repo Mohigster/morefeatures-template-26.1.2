@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom;
 
-import com.mohigster.morefeatures.block.ModBlocks;
+import com.mohigster.morefeatures.block.MFBlocks;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -60,7 +60,7 @@ public class IcicleBlock extends SpeleothemBlock {
     @Override
     public void onBrokenAfterFall(Level level, BlockPos pos, FallingBlockEntity entity) {
         if (!entity.isSilent()) {
-            int blockStateId = getBlockStateId(ModBlocks.ICICLE.get());
+            int blockStateId = getBlockStateId(MFBlocks.ICICLE.get());
             level.levelEvent(this.getStalactiteLandingSound(), pos, blockStateId); // Will make the ice breaking sound and use the icicle textures for particles
         }
     }

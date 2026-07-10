@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.item.custom.wand.type;
 
-import com.mohigster.morefeatures.attachment.ModAttachments;
+import com.mohigster.morefeatures.attachment.MFAttachments;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -51,10 +51,10 @@ public abstract class AbstractWandItem extends Item {
     }
 
     protected boolean hasEnoughMana(Player caster){
-        return caster.getData(ModAttachments.MANA) >= manaCost;
+        return caster.getData(MFAttachments.MANA) >= manaCost;
     }
 
     protected void consumeMana(Player caster) {
-        caster.setData(ModAttachments.MANA, caster.getData(ModAttachments.MANA) - manaCost);
+        caster.setData(MFAttachments.MANA, caster.getData(MFAttachments.MANA) - manaCost);
     }
 }

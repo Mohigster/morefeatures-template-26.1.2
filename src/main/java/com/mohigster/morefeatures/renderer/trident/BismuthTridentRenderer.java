@@ -1,15 +1,14 @@
 package com.mohigster.morefeatures.renderer.trident;
 
-import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.entity.model.BismuthTridentModel;
-import com.mohigster.morefeatures.model.ModModelLayer;
+import com.mohigster.morefeatures.model.MFModelLayer;
+import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
 import net.minecraft.client.renderer.entity.state.ThrownTridentRenderState;
-import net.minecraft.client.renderer.feature.ItemFeatureRenderer;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
@@ -18,13 +17,13 @@ import net.minecraft.util.Unit;
 
 
 public class BismuthTridentRenderer extends ThrownTridentRenderer {
-    public static final Identifier BISMUTH_TRIDENT_LOCATION = Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "textures/entity/trident/bismuth_trident.png");
+    public static final Identifier BISMUTH_TRIDENT_LOCATION = MFIdentifier.withMfNamespace("textures/entity/trident/bismuth_trident.png");
 
     private final BismuthTridentModel model;
 
     public BismuthTridentRenderer(EntityRendererProvider.Context context) {
         super(context);
-        this.model = new BismuthTridentModel(context.bakeLayer(ModModelLayer.BISMUTH_TRIDENT));
+        this.model = new BismuthTridentModel(context.bakeLayer(MFModelLayer.BISMUTH_TRIDENT));
     }
 
     @Override

@@ -29,7 +29,7 @@ public class LeaningTrunkPlacer extends TrunkPlacer {
 
     @Override
     protected TrunkPlacerType<?> type() {
-        return ModTrunkPlacerType.LEANING_TRUNK_PLACER.get();
+        return MFTrunkPlacerType.LEANING_TRUNK_PLACER.get();
     }
 
     @Override

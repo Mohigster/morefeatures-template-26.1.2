@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.block.custom;
 
-import com.mohigster.morefeatures.block.ModBlocks;
-import com.mohigster.morefeatures.worldgen.dimension.ModDimensions;
+import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.worldgen.dimension.MFDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
@@ -42,10 +42,10 @@ public class EvilPortalBlock extends Block implements Portal {
     @Override
     public @Nullable TeleportTransition getPortalDestination(ServerLevel currentLevel, Entity entity, BlockPos portalEntryPos) {
         ResourceKey<Level> currentDimension = currentLevel.dimension();
-        boolean isLeavingCustomDim = currentDimension == ModDimensions.EVILDIM_LEVEL_KEY;
+        boolean isLeavingCustomDim = currentDimension == MFDimensions.EVILDIM_LEVEL_KEY;
 
         LevelData.RespawnData respawnData = currentLevel.getRespawnData();
-        ResourceKey<Level> targetDimensionKey = isLeavingCustomDim ? respawnData.dimension() : ModDimensions.EVILDIM_LEVEL_KEY;
+        ResourceKey<Level> targetDimensionKey = isLeavingCustomDim ? respawnData.dimension() : MFDimensions.EVILDIM_LEVEL_KEY;
         BlockPos baseSpawnPos = isLeavingCustomDim ? respawnData.pos() : ServerLevel.END_SPAWN_POINT.above(14);
 
         ServerLevel targetLevel = currentLevel.getServer().getLevel(targetDimensionKey);
@@ -72,13 +72,13 @@ public class EvilPortalBlock extends Block implements Portal {
             BlockPos platformCenter = BlockPos.containing(exactSpawnPos).below();
             BlockPos portalPos = platformCenter.west(2);
 
-            if(!targetLevel.getBlockState(portalPos.above()).is(ModBlocks.EVIL_PORTAL)) {
+            if(!targetLevel.getBlockState(portalPos.above()).is(MFBlocks.EVIL_PORTAL)) {
                 EndPlatformFeature.createEndPlatform(targetLevel, platformCenter, false);
 
-                targetLevel.setBlockAndUpdate(portalPos.south(1), ModBlocks.TAINTED_PLANKS.get().defaultBlockState());
-                targetLevel.setBlockAndUpdate(portalPos.north(1), ModBlocks.BLOODWOOD_PLANKS.get().defaultBlockState());
+                targetLevel.setBlockAndUpdate(portalPos.south(1), MFBlocks.TAINTED_PLANKS.get().defaultBlockState());
+                targetLevel.setBlockAndUpdate(portalPos.north(1), MFBlocks.BLOODWOOD_PLANKS.get().defaultBlockState());
                 targetLevel.setBlockAndUpdate(portalPos, Blocks.BASALT.defaultBlockState());
-                targetLevel.setBlockAndUpdate(portalPos.above(), ModBlocks.EVIL_PORTAL.get().defaultBlockState());
+                targetLevel.setBlockAndUpdate(portalPos.above(), MFBlocks.EVIL_PORTAL.get().defaultBlockState());
             }
 
             yRot = Direction.WEST.toYRot();

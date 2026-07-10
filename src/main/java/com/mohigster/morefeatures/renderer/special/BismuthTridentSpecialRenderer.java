@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.renderer.special;
 
 import com.mohigster.morefeatures.entity.model.BismuthTridentModel;
-import com.mohigster.morefeatures.model.ModModelLayer;
+import com.mohigster.morefeatures.model.MFModelLayer;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Transformation;
 import com.mojang.serialization.MapCodec;
@@ -50,7 +50,7 @@ public class BismuthTridentSpecialRenderer implements NoDataSpecialModelRenderer
         }
 
         public BismuthTridentSpecialRenderer bake(final BakingContext context) {
-            return new BismuthTridentSpecialRenderer(new BismuthTridentModel((context.entityModelSet().bakeLayer(ModModelLayer.BISMUTH_TRIDENT))));
+            return new BismuthTridentSpecialRenderer(new BismuthTridentModel((context.entityModelSet().bakeLayer(MFModelLayer.BISMUTH_TRIDENT))));
         }
     }
 }

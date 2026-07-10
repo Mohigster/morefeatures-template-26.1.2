@@ -4,6 +4,9 @@
     "#morefeatures:tainted_logs",
     "#morefeatures:palm_logs",
     "#morefeatures:decrepit_logs",
-    "#morefeatures:pallid_logs"
+    "#morefeatures:pallid_logs",
+    "morefeatures:bloodwood_log",
+    "morefeatures:tainted_log",
+    "morefeatures:palm_log"
   ]
 }

@@ -36,10 +36,10 @@
     "base": 5,
     "per_level_above_first": 8
   },
-  "primary_items": "#morefeatures:bow_upgrade_enchantable",
+  "primary_items": "#morefeatures:thunderbolt_enchantable",
   "slots": [
     "mainhand"
   ],
-  "supported_items": "#morefeatures:bow_upgrade_enchantable",
+  "supported_items": "#morefeatures:thunderbolt_enchantable",
   "weight": 5
 }

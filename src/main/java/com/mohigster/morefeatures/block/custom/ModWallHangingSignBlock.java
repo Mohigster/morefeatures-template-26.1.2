@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom;
 
-import com.mohigster.morefeatures.block.entity.ModBlockEntities;
+import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.WallHangingSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -16,6 +16,6 @@ public class ModWallHangingSignBlock extends WallHangingSignBlock {
     @NullMarked
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return ModBlockEntities.MOD_HANGING_SIGN_BE.get().create(pos, state);
+        return MFBlockEntities.MOD_HANGING_SIGN_BE.get().create(pos, state);
     }
 }

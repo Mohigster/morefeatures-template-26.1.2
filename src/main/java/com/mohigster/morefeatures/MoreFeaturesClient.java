@@ -1,18 +1,19 @@
 package com.mohigster.morefeatures;
 
-import com.mohigster.morefeatures.block.entity.ModBlockEntities;
+import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
-import com.mohigster.morefeatures.entity.entity_types.ModEntityTypes;
+import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
 import com.mohigster.morefeatures.entity.model.IceologerModel;
 import com.mohigster.morefeatures.entity.model.BismuthTridentModel;
-import com.mohigster.morefeatures.particles.ModFallingLeavesParticle;
-import com.mohigster.morefeatures.particles.ModParticleTypes;
+import com.mohigster.morefeatures.particles.MFFallingLeavesParticle;
+import com.mohigster.morefeatures.particles.MFParticleTypes;
+import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mohigster.morefeatures.renderer.trident.BismuthTridentRenderer;
 import com.mohigster.morefeatures.entity.model.CarbonTridentModel;
 import com.mohigster.morefeatures.renderer.trident.CarbonTridentRenderer;
-import com.mohigster.morefeatures.menu.ModMenuTypes;
+import com.mohigster.morefeatures.menu.MFMenuTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorScreen;
-import com.mohigster.morefeatures.model.ModModelLayer;
+import com.mohigster.morefeatures.model.MFModelLayer;
 import com.mohigster.morefeatures.renderer.iceologer.IceologerRenderer;
 import com.mohigster.morefeatures.renderer.special.BismuthTridentSpecialRenderer;
 import com.mohigster.morefeatures.renderer.special.CarbonShieldSpecialRenderer;
@@ -58,65 +59,65 @@ public class MoreFeaturesClient {
     @SubscribeEvent
     public static void registerParticleProviders(RegisterParticleProvidersEvent event) {
         event.registerSpriteSet(
-                ModParticleTypes.BLOODWOOD_LEAVES.get(),
-                ModFallingLeavesParticle.EvilLeafProvider::new
+                MFParticleTypes.BLOODWOOD_LEAVES.get(),
+                MFFallingLeavesParticle.EvilLeafProvider::new
         );
         event.registerSpriteSet(
-                ModParticleTypes.TAINTED_LEAVES.get(),
-                ModFallingLeavesParticle.EvilLeafProvider::new
+                MFParticleTypes.TAINTED_LEAVES.get(),
+                MFFallingLeavesParticle.EvilLeafProvider::new
         );
         event.registerSpriteSet(
-                ModParticleTypes.PALM_LEAVES.get(),
-                ModFallingLeavesParticle.PalmProvider::new
+                MFParticleTypes.PALM_LEAVES.get(),
+                MFFallingLeavesParticle.PalmProvider::new
         );
         event.registerSpriteSet(
-                ModParticleTypes.DECREPIT_LEAVES.get(),
-                ModFallingLeavesParticle.EndLeafProvider::new
+                MFParticleTypes.DECREPIT_LEAVES.get(),
+                MFFallingLeavesParticle.EndLeafProvider::new
         );
         event.registerSpriteSet(
-                ModParticleTypes.PALLID_LEAVES.get(),
-                ModFallingLeavesParticle.EndLeafProvider::new
+                MFParticleTypes.PALLID_LEAVES.get(),
+                MFFallingLeavesParticle.EndLeafProvider::new
         );
     }
 
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(ModModelLayer.CARBON_TRIDENT, CarbonTridentModel::createLayer);
-        event.registerLayerDefinition(ModModelLayer.BISMUTH_TRIDENT, BismuthTridentModel::createLayer);
-        event.registerLayerDefinition(ModModelLayer.PALM_BOAT, BoatModel::createBoatModel);
-        event.registerLayerDefinition(ModModelLayer.PALM_CHEST_BOAT, BoatModel::createChestBoatModel);
-        event.registerLayerDefinition(ModModelLayer.ICEOLOGER, IceologerModel::createBodyLayer);
+        event.registerLayerDefinition(MFModelLayer.CARBON_TRIDENT, CarbonTridentModel::createLayer);
+        event.registerLayerDefinition(MFModelLayer.BISMUTH_TRIDENT, BismuthTridentModel::createLayer);
+        event.registerLayerDefinition(MFModelLayer.PALM_BOAT, BoatModel::createBoatModel);
+        event.registerLayerDefinition(MFModelLayer.PALM_CHEST_BOAT, BoatModel::createChestBoatModel);
+        event.registerLayerDefinition(MFModelLayer.ICEOLOGER, IceologerModel::createBodyLayer);
     }
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(ModEntityTypes.CARBON_TRIDENT.get(), CarbonTridentRenderer::new);
-        event.registerEntityRenderer(ModEntityTypes.BISMUTH_TRIDENT.get(), BismuthTridentRenderer::new);
-        event.registerEntityRenderer(ModEntityTypes.ICEOLOGER.get(), IceologerRenderer::new);
+        event.registerEntityRenderer(MFEntityTypes.CARBON_TRIDENT.get(), CarbonTridentRenderer::new);
+        event.registerEntityRenderer(MFEntityTypes.BISMUTH_TRIDENT.get(), BismuthTridentRenderer::new);
+        event.registerEntityRenderer(MFEntityTypes.ICEOLOGER.get(), IceologerRenderer::new);
         event.registerEntityRenderer(
-                ModEntityTypes.PALM_BOAT.get(),
+                MFEntityTypes.PALM_BOAT.get(),
                 context -> new BoatRenderer(
                         context,
-                        ModModelLayer.PALM_BOAT
+                        MFModelLayer.PALM_BOAT
                 )
         );
         event.registerEntityRenderer(
-                ModEntityTypes.PALM_CHEST_BOAT.get(),
+                MFEntityTypes.PALM_CHEST_BOAT.get(),
                 context -> new BoatRenderer(
                         context,
-                        ModModelLayer.PALM_CHEST_BOAT
+                        MFModelLayer.PALM_CHEST_BOAT
                 )
         );
         event.registerBlockEntityRenderer(
-                ModBlockEntities.MOD_SIGN_BE.get(),
+                MFBlockEntities.MOD_SIGN_BE.get(),
                 StandingSignRenderer::new
         );
         event.registerBlockEntityRenderer(
-                ModBlockEntities.MOD_HANGING_SIGN_BE.get(),
+                MFBlockEntities.MOD_HANGING_SIGN_BE.get(),
                 HangingSignRenderer::new
         );
         event.registerBlockEntityRenderer(
-                ModBlockEntities.MOD_SHELF_BE.get(),
+                MFBlockEntities.MOD_SHELF_BE.get(),
                 ShelfRenderer::new
         );
     }
@@ -124,7 +125,7 @@ public class MoreFeaturesClient {
     @SubscribeEvent
     public static Identifier onTextureStitch(TextureAtlasStitchedEvent event) {
         if (event.getAtlas().location().equals(AtlasIds.GUI)) {
-            return Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "entity/sign/palm");
+            return MFIdentifier.withMfNamespace("entity/sign/palm");
         }
         return null;
     }
@@ -132,26 +133,26 @@ public class MoreFeaturesClient {
     @SubscribeEvent
     public static void onRegisterSpecialRenderers(RegisterSpecialModelRendererEvent event) {
         event.register(
-                Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "carbon_trident"),
+                MFIdentifier.withMfNamespace("carbon_trident"),
                 CarbonTridentSpecialRenderer.Unbaked.MAP_CODEC
         );
         event.register(
-                Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "bismuth_trident"),
+                MFIdentifier.withMfNamespace("bismuth_trident"),
                 BismuthTridentSpecialRenderer.Unbaked.MAP_CODEC
         );
         event.register(
-                Identifier.fromNamespaceAndPath(MoreFeatures.MODID, "carbon_shield"),
+                MFIdentifier.withMfNamespace("carbon_shield"),
                 CarbonShieldSpecialRenderer.Unbaked.MAP_CODEC
         );
     }
 
     @SubscribeEvent
     public static void registerScreens(RegisterMenuScreensEvent event) {
-        event.register(ModMenuTypes.COMPRESSOR_MENU.get(), CompressorScreen::new);
+        event.register(MFMenuTypes.COMPRESSOR_MENU.get(), CompressorScreen::new);
     }
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(ModEntityTypes.ICEOLOGER.get(), IceologerEntity.createAttributes().build());
+        event.put(MFEntityTypes.ICEOLOGER.get(), IceologerEntity.createAttributes().build());
     }
 }

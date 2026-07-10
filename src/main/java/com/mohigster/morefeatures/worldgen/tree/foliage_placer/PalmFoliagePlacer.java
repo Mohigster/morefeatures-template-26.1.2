@@ -25,7 +25,7 @@ public class PalmFoliagePlacer extends FoliagePlacer {
 
     @Override
     protected FoliagePlacerType<?> type() {
-        return ModFoliagePlacerType.PALM_FOLIAGE_PLACER.get();
+        return MFFoliagePlacerType.PALM_FOLIAGE_PLACER.get();
     }
 
     @Override

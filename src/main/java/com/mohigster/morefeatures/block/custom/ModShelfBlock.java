@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom;
 
-import com.mohigster.morefeatures.block.entity.ModBlockEntities;
+import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -20,7 +20,7 @@ public class ModShelfBlock extends ShelfBlock {
     @NullMarked
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return ModBlockEntities.MOD_SHELF_BE.get().create(pos, state);
+        return MFBlockEntities.MOD_SHELF_BE.get().create(pos, state);
     }
 
     @NullMarked
