@@ -84,6 +84,10 @@ public class MoreFeaturesClient {
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(MFModelLayer.CARBON_TRIDENT, CarbonTridentModel::createLayer);
         event.registerLayerDefinition(MFModelLayer.BISMUTH_TRIDENT, BismuthTridentModel::createLayer);
+        event.registerLayerDefinition(MFModelLayer.BLOODWOOD_BOAT, BoatModel::createBoatModel);
+        event.registerLayerDefinition(MFModelLayer.BLOODWOOD_CHEST_BOAT, BoatModel::createChestBoatModel);
+        event.registerLayerDefinition(MFModelLayer.TAINTED_BOAT, BoatModel::createBoatModel);
+        event.registerLayerDefinition(MFModelLayer.TAINTED_CHEST_BOAT, BoatModel::createChestBoatModel);
         event.registerLayerDefinition(MFModelLayer.PALM_BOAT, BoatModel::createBoatModel);
         event.registerLayerDefinition(MFModelLayer.PALM_CHEST_BOAT, BoatModel::createChestBoatModel);
         event.registerLayerDefinition(MFModelLayer.ICEOLOGER, IceologerModel::createBodyLayer);
@@ -94,6 +98,34 @@ public class MoreFeaturesClient {
         event.registerEntityRenderer(MFEntityTypes.CARBON_TRIDENT.get(), CarbonTridentRenderer::new);
         event.registerEntityRenderer(MFEntityTypes.BISMUTH_TRIDENT.get(), BismuthTridentRenderer::new);
         event.registerEntityRenderer(MFEntityTypes.ICEOLOGER.get(), IceologerRenderer::new);
+        event.registerEntityRenderer(
+                MFEntityTypes.BLOODWOOD_BOAT.get(),
+                context -> new BoatRenderer(
+                        context,
+                        MFModelLayer.BLOODWOOD_BOAT
+                )
+        );
+        event.registerEntityRenderer(
+                MFEntityTypes.BLOODWOOD_CHEST_BOAT.get(),
+                context -> new BoatRenderer(
+                        context,
+                        MFModelLayer.BLOODWOOD_CHEST_BOAT
+                )
+        );
+        event.registerEntityRenderer(
+                MFEntityTypes.TAINTED_BOAT.get(),
+                context -> new BoatRenderer(
+                        context,
+                        MFModelLayer.TAINTED_BOAT
+                )
+        );
+        event.registerEntityRenderer(
+                MFEntityTypes.TAINTED_CHEST_BOAT.get(),
+                context -> new BoatRenderer(
+                        context,
+                        MFModelLayer.TAINTED_CHEST_BOAT
+                )
+        );
         event.registerEntityRenderer(
                 MFEntityTypes.PALM_BOAT.get(),
                 context -> new BoatRenderer(

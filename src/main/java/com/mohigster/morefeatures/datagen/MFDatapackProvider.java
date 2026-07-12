@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.enchantment.MFEnchantments;
+import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
 import com.mohigster.morefeatures.worldgen.MFBiomeModifiers;
 import com.mohigster.morefeatures.worldgen.MFConfiguredFeatures;
 import com.mohigster.morefeatures.worldgen.MFPlacedFeatures;
@@ -23,6 +24,7 @@ public class MFDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.JUKEBOX_SONG, MFJukeboxSongs::bootstrap)
             .add(Registries.CONFIGURED_FEATURE, MFConfiguredFeatures::bootstrap)
             .add(Registries.PLACED_FEATURE, MFPlacedFeatures::bootstrap)
+            .add(Registries.TRIM_MATERIAL, MFTrimMaterials::bootstrap)
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, MFBiomeModifiers::bootstrap)
             .add(Registries.DIMENSION_TYPE, MFDimensions::bootstrapType)
             .add(Registries.LEVEL_STEM, MFDimensions::bootstrapStem)

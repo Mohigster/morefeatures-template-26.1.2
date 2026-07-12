@@ -1,9 +1,7 @@
 package com.mohigster.morefeatures.item.custom.wand;
 
 import com.mohigster.morefeatures.item.custom.wand.type.GenericAOEWandItem;
-import net.minecraft.client.particle.Particle;
 import net.minecraft.core.BlockPos;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.EvokerFangs;

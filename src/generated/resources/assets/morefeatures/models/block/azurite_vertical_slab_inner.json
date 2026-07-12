@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_vertical_slab_inner",
+  "textures": {
+    "all": "morefeatures:block/azurite_block",
+    "particle": "morefeatures:block/azurite_block"
+  }
+}

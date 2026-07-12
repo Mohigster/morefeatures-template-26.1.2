@@ -56,5 +56,4 @@ public class MFBiomes {
     private static ResourceKey<Biome> registerBiomeKey(String name) {
         return ResourceKey.create(Registries.BIOME, MFIdentifier.withMfNamespace(name));
     }
-
 }

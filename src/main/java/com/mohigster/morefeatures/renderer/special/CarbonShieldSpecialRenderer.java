@@ -86,9 +86,6 @@ public class CarbonShieldSpecialRenderer implements SpecialModelRenderer<DataCom
             );
 
         }
-
-
-
     }
     @Override
     public void getExtents (Consumer < Vector3fc > output) {

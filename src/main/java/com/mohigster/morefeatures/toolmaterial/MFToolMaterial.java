@@ -8,9 +8,6 @@ import static com.mohigster.morefeatures.tag.MFItemTags.BISMUTH_TOOL_MATERIAL_RE
 
 public class MFToolMaterial {
     private MFToolMaterial(){
-
     }
-
     public static final ToolMaterial BISMUTH_TOOL_MATERIAL = new ToolMaterial(BlockTags.INCORRECT_FOR_NETHERITE_TOOL, 2849, 13.5f, 5.5f, 20, BISMUTH_TOOL_MATERIAL_REPAIRABLE);
-
 }

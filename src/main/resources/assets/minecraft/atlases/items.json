@@ -1,0 +1,18 @@
+{
+  "sources": [
+    {
+      "type": "paletted_permutations",
+      "textures": [
+        "trims/items/leggings_trim",
+        "trims/items/chestplate_trim",
+        "trims/items/helmet_trim",
+        "trims/items/boots_trim"
+      ],
+      "palette_key": "trims/color_palettes/trim_palette",
+      "permutations": {
+        "azurite": "morefeatures:trims/color_palettes/azurite",
+        "bismuth": "morefeatures:trims/color_palettes/bismuth"
+      }
+    }
+  ]
+}

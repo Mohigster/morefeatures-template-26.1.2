@@ -26,6 +26,7 @@ public class MFBlockFamilies {
                     .door(MFBlocks.AZURITE_DOOR.get())
                     .trapdoor(MFBlocks.AZURITE_TRAPDOOR.get())
                     .sign(MFBlocks.AZURITE_SIGN.get(), MFBlocks.AZURITE_WALL_SIGN.get())
+                    .hangingSign(MFBlocks.AZURITE_HANGING_SIGN.get(), MFBlocks.AZURITE_WALL_HANGING_SIGN.get())
                     .recipeGroupPrefix("azurite")
                     .recipeUnlockedBy("has_azurite")
                     .getFamily();

@@ -39,5 +39,6 @@ public class MoreFeaturesDataGen {
         generator.addProvider(true, new MFEnchantmentTagProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFBiomeTagProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFEntityTagsProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new MFEquipmentAssetProvider(packOutput));
     }
 }

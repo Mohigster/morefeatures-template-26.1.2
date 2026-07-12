@@ -8,6 +8,7 @@ import com.mohigster.morefeatures.tag.MFItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
@@ -19,6 +20,7 @@ import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColorCollection;
 import net.minecraft.world.level.block.WeatheringCopperCollection;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -33,11 +35,13 @@ public class MFRecipeProvider extends RecipeProvider {
             super(packOutput, registries);
         }
 
+        @NullMarked
         @Override
         protected RecipeProvider createRecipeProvider(HolderLookup.Provider registries, RecipeOutput output) {
             return new MFRecipeProvider(registries, output);
         }
 
+        @NullMarked
         @Override
         public String getName() {
             return "MoreFeatures Recipes";
@@ -160,6 +164,9 @@ public class MFRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(MFBlocks.AZURITE_BLOCK.get()), has(MFBlocks.AZURITE_BLOCK))
                 .group("azurite")
                 .save(output, "morefeatures:azurite_from_blaze_rod_and_breeze_rod_and_brine_rod");
+
+        verticalSlabCrafting(MFBlocks.AZURITE_VERTICAL_SLAB, MFBlocks.AZURITE_BLOCK);
+        verticalSlabStonecutting(MFBlocks.AZURITE_VERTICAL_SLAB, MFBlocks.AZURITE_BLOCK);
 
         // Fluorite recipes
 
@@ -470,6 +477,15 @@ public class MFRecipeProvider extends RecipeProvider {
                 .group("compressor_block")
                 .save(output);
 
+        // Boats and chest boats
+
+        woodenBoat(MFItems.BLOODWOOD_BOAT, MFBlocks.BLOODWOOD_PLANKS);
+        woodenBoat(MFItems.TAINTED_BOAT, MFBlocks.TAINTED_PLANKS);
+        woodenBoat(MFItems.PALM_BOAT, MFBlocks.PALM_PLANKS);
+
+        chestBoat(MFItems.BLOODWOOD_CHEST_BOAT, MFItems.BLOODWOOD_BOAT);
+        chestBoat(MFItems.TAINTED_CHEST_BOAT, MFItems.TAINTED_BOAT);
+        chestBoat(MFItems.PALM_CHEST_BOAT, MFItems.PALM_BOAT);
 
         // Stairs and slabs
 
@@ -508,7 +524,10 @@ public class MFRecipeProvider extends RecipeProvider {
                 .group("azurite")
                 .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
                 .save(output);
-
+        hangingSignBuilder(MFItems.AZURITE_HANGING_SIGN.get(), Ingredient.of(MFItems.RAW_AZURITE.get()))
+                .group("azurite")
+                .unlockedBy(getHasName(MFItems.RAW_AZURITE.get()), has(MFItems.RAW_AZURITE.get()))
+                .save(output);
 
         // Bismuth smithing recipes
 
@@ -522,11 +541,10 @@ public class MFRecipeProvider extends RecipeProvider {
         bismuthSmithing(Items.NETHERITE_HOE, RecipeCategory.COMBAT, MFItems.BISMUTH_HOE.get());
         bismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, MFItems.BISMUTH_EQUIPMENT.get(0).asItem());
         bismuthSmithing(Items.NETHERITE_PICKAXE, RecipeCategory.COMBAT, MFItems.BISMUTH_EQUIPMENT.get(1).asItem());
-        bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, MFItems.BISMUTH_EQUIPMENT.get(2).asItem());
-        bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, MFItems.BISMUTH_EQUIPMENT.get(3).asItem());
-        bismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, MFItems.BISMUTH_EQUIPMENT.get(4).asItem());
-        bismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, MFItems.BISMUTH_EQUIPMENT.get(5).asItem());
-
+        bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, MFItems.BISMUTH_HELMET.get());
+        bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, MFItems.BISMUTH_CHESTPLATE.get());
+        bismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, MFItems.BISMUTH_LEGGINGS.get());
+        bismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, MFItems.BISMUTH_BOOTS.get());
 
         //—————————————————————————————SMELTABLE LISTS———————————————————————————————
 
@@ -736,6 +754,14 @@ public class MFRecipeProvider extends RecipeProvider {
                 this.tag(MFItemTags.BISMUTH_TOOL_MATERIALS),
                 category, result).unlocks("has_bismuth_ingot", this.has(MFItemTags.BISMUTH_TOOL_MATERIALS)).save(output, MoreFeatures.MODID + ":" + getItemName(result) + "_smithing");
     }
+
+//    protected void customTrimming(Item base, RecipeCategory category, Item result, Item trimMaterial) {
+//        SmithingTransformRecipeBuilder.smithing(
+//                ,
+//                Ingredient.of(base),
+//                Ingredient.of(trimMaterial),
+//                category, result).unlocks("has_trim_material", this.has(trimMaterial)).save(output, MoreFeatures.MODID + ":" + getItemName(result) + "_smithing");
+//    }
 
     protected void verticalSlabCrafting(ItemLike verticalSlab, ItemLike fullBlock) {
         shaped(RecipeCategory.BUILDING_BLOCKS, verticalSlab, 6)

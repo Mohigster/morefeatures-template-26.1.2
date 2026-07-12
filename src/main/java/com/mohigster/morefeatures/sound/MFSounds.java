@@ -51,5 +51,4 @@ public class MFSounds {
     public static void register(IEventBus eventBus) {
         SOUND_EVENTS.register(eventBus);
     }
-
 }

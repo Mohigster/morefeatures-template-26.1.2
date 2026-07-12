@@ -21,6 +21,7 @@
   "block.morefeatures.azurite_block": "Block of Azurite",
   "block.morefeatures.azurite_stairs": "Azurite Stairs",
   "block.morefeatures.azurite_slab": "Azurite Slab",
+  "block.morefeatures.azurite_vertical_slab": "Azurite Vertical Slab",
   "block.morefeatures.azurite_button": "Azurite Button",
   "block.morefeatures.azurite_pressure_plate": "Azurite Pressure Plate",
   "block.morefeatures.azurite_door": "Azurite Door",
@@ -32,6 +33,8 @@
   "block.morefeatures.nether_azurite_ore": "Nether Azurite Ore",
   "block.morefeatures.end_azurite_ore": "End Azurite Ore",
   "block.morefeatures.raw_azurite_block": "Block of Raw Azurite",
+  "item.morefeatures.azurite_sign": "Azurite Sign",
+  "item.morefeatures.azurite_hanging_sign": "Azurite Hanging Sign",
 
   "block.morefeatures.fluorite_block": "Block of Fluorite",
   "block.morefeatures.fluorite_stairs": "Fluorite Stairs",
@@ -98,6 +101,8 @@
   "item.morefeatures.bloodwood_sign": "Bloodwood Sign",
   "item.morefeatures.bloodwood_hanging_sign": "Bloodwood Hanging Sign",
   "block.morefeatures.bloodwood_shelf": "Bloodwood Shelf",
+  "item.morefeatures.bloodwood_boat": "Bloodwood Boat",
+  "item.morefeatures.bloodwood_chest_boat": "Bloodwood Boat with Chest",
 
   "block.morefeatures.tainted_wood": "Tainted Wood",
   "block.morefeatures.tainted_log": "Tainted Log",
@@ -275,6 +280,8 @@
 
   "block.morefeatures.void_anchor": "Void Anchor",
 
+  "entity.morefeatures.bloodwood_boat": "Bloodwood Boat",
+  "entity.morefeatures.bloodwood_chest_boat": "Bloodwood Boat with Chest",
   "entity.morefeatures.palm_boat": "Palm Boat",
   "entity.morefeatures.palm_chest_boat": "Palm Boat with Chest",
 
@@ -330,6 +337,10 @@
 
   "tooltip.morefeatures.metal_detector": "Right click a block to start detecting!",
   "tooltip.morefeatures.magic_block": "Try throwing a metal, carbon-based organic material, or potion! It's §9MAGIC§r",
+  "tooltip.morefeatures.evil_portal": "Right click to be transported to the realm of §c§lEVIL!§r",
+
+  "trim_material.morefeatures.azurite": "Azurite Material",
+  "trim_material.morefeatures.bismuth": "Bismuth Material",
 
   "morefeatures.tooltip.liquid.amount.with.capacity": "%s / %s mB",
   "morefeatures.tooltip.liquid.amount": "%s mB",
@@ -341,7 +352,5 @@
 
   "item.morefeatures.ice_wand": "Ice Wand",
   "item.morefeatures.fire_wand": "Fire Wand",
-  "item.morefeatures.healing_wand": "Healing Wand",
-
-  "tooltip.morefeatures.evil_portal": "Right click to be transported to the realm of §c§lEVIL!§r"
+  "item.morefeatures.healing_wand": "Healing Wand"
 }

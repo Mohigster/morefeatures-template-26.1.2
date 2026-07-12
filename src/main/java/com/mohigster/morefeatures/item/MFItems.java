@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.item;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.asset.MFEquipmentAssets;
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
 import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mohigster.morefeatures.references.MFItemIds;
 import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
@@ -68,10 +69,12 @@ public class MFItems {
     public static final DeferredItem<Item> MAGNESIUM_INGOT = registerSimpleItem(MFItemIds.MAGNESIUM_INGOT);
 
     // Azurite items
-    public static final DeferredItem<Item> AZURITE = ITEMS.registerItem("azurite",
+    public static final DeferredItem<Item> AZURITE = registerItem(MFItemIds.AZURITE,
             properties -> new Item(properties
-                    .component(MFDataComponentTypes.COMPRESSOR_FUEL_VALUE.get(), 3200)));
-    public static final DeferredItem<Item> RAW_AZURITE = ITEMS.registerSimpleItem("raw_azurite");
+                    .component(MFDataComponentTypes.COMPRESSOR_FUEL_VALUE.get(), 3200)
+                    .trimMaterial(MFTrimMaterials.AZURITE)
+            ));
+    public static final DeferredItem<Item> RAW_AZURITE = registerSimpleItem(MFItemIds.RAW_AZURITE);
 
     // Fluorite items
     public static final DeferredItem<Item> FLUORITE = ITEMS.registerItem("fluorite",
@@ -80,17 +83,18 @@ public class MFItems {
     public static final DeferredItem<Item> RAW_FLUORITE = ITEMS.registerSimpleItem("raw_fluorite");
 
     // Bismuth items
-    public static final DeferredItem<Item> BISMUTH = ITEMS.registerItem("bismuth",
+    public static final DeferredItem<Item> BISMUTH = registerItem(MFItemIds.BISMUTH,
             properties -> new Item(properties
                     .rarity(Rarity.RARE)
                     .fireResistant()
+                    .trimMaterial(MFTrimMaterials.BISMUTH)
             ));
-    public static final DeferredItem<Item> BISMUTH_SCRAP = ITEMS.registerItem("bismuth_scrap",
+    public static final DeferredItem<Item> BISMUTH_SCRAP = registerItem(MFItemIds.BISMUTH_SCRAP,
             properties -> new Item(properties
                     .rarity(Rarity.UNCOMMON)
                     .fireResistant())
     );
-    public static final DeferredItem<Item> RAW_BISMUTH = ITEMS.registerItem("raw_bismuth",
+    public static final DeferredItem<Item> RAW_BISMUTH = registerItem(MFItemIds.RAW_BISMUTH,
             properties -> new Item(properties
                     .rarity(Rarity.UNCOMMON)
                     .fireResistant())
@@ -121,7 +125,6 @@ public class MFItems {
 
     // Frosted core
     public static final DeferredItem<Item> FROSTED_CORE = ITEMS.registerSimpleItem("frosted_core");
-
 
     // Wands
     public static final DeferredItem<Item> ICE_WAND = ITEMS.registerItem("ice_wand",
@@ -218,10 +221,9 @@ public class MFItems {
                     .component(DataComponents.EQUIPPABLE,
                             Equippable.builder(EquipmentSlot.CHEST)
                                     .setEquipSound(SoundEvents.ARMOR_EQUIP_ELYTRA)
-                                    .setAsset(MFEquipmentAssets.CARBON_ELYTRA)
+                                    .setAsset(MFEquipmentAssets.CARBON)
                                     .setDamageOnHurt(false)
                                     .build()
-
                     )
             ));
 
@@ -264,6 +266,38 @@ public class MFItems {
     public static final DeferredItem<Item> BISMUTH_UPGRADE_SMITHING_TEMPLATE = registerItem(
             "bismuth_upgrade_smithing_template", MFSmithingTemplateItem::createBismuthUpgradeTemplate, new Item.Properties().rarity(Rarity.UNCOMMON)
     );
+
+    public static final DeferredItem<Item> BISMUTH_HELMET = registerItem(MFItemIds.BISMUTH_HELMET,
+            properties -> new Item(properties
+                    .humanoidArmor(MFArmorMaterials.BISMUTH, ArmorType.HELMET)
+                    .rarity(Rarity.RARE)
+                    .fireResistant()
+                    .enchantable(15)
+            ));
+
+    public static final DeferredItem<Item> BISMUTH_CHESTPLATE = registerItem(MFItemIds.BISMUTH_CHESTPLATE,
+            properties -> new Item(properties
+                    .humanoidArmor(MFArmorMaterials.BISMUTH, ArmorType.CHESTPLATE)
+                    .rarity(Rarity.RARE)
+                    .fireResistant()
+                    .enchantable(15)
+            ));
+
+    public static final DeferredItem<Item> BISMUTH_LEGGINGS = registerItem(MFItemIds.BISMUTH_LEGGINGS,
+            properties -> new Item(properties
+                    .humanoidArmor(MFArmorMaterials.BISMUTH, ArmorType.LEGGINGS)
+                    .rarity(Rarity.RARE)
+                    .fireResistant()
+                    .enchantable(15)
+            ));
+
+    public static final DeferredItem<Item> BISMUTH_BOOTS = registerItem(MFItemIds.BISMUTH_BOOTS,
+            properties -> new Item(properties
+                    .humanoidArmor(MFArmorMaterials.BISMUTH, ArmorType.BOOTS)
+                    .rarity(Rarity.RARE)
+                    .fireResistant()
+                    .enchantable(15)
+            ));
 
     public static final DeferredItem<Item> BISMUTH_AXE = registerItem(MFItemIds.BISMUTH_AXE,
             properties -> new AxeItem(BISMUTH_TOOL_MATERIAL, 6f, -3f, properties
@@ -344,7 +378,7 @@ public class MFItems {
 
     // Sign items
 
-    public static final DeferredItem<SignItem> AZURITE_SIGN =
+    public static final DeferredItem<Item> AZURITE_SIGN =
             registerItem(MFItemIds.AZURITE_SIGN, properties ->
                     new SignItem(
                             MFBlocks.AZURITE_SIGN.get(),
@@ -353,111 +387,141 @@ public class MFItems {
                     )
             );
 
-    public static final DeferredItem<SignItem> BLOODWOOD_SIGN =
-            ITEMS.register("bloodwood_sign", () ->
+    public static final DeferredItem<Item> AZURITE_HANGING_SIGN =
+            registerItem(MFItemIds.AZURITE_HANGING_SIGN, properties ->
+                    new HangingSignItem(
+                            MFBlocks.AZURITE_HANGING_SIGN.get(),
+                            MFBlocks.AZURITE_WALL_HANGING_SIGN.get(),
+                            properties.stacksTo(16)
+                    )
+            );
+
+    public static final DeferredItem<Item> BLOODWOOD_SIGN =
+            registerItem(MFItemIds.BLOODWOOD_SIGN, properties ->
                     new SignItem(
                             MFBlocks.BLOODWOOD_SIGN.get(),
                             MFBlocks.BLOODWOOD_WALL_SIGN.get(),
-                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace("bloodwood_sign")))
+                            properties.stacksTo(16)
                     )
             );
 
-    public static final DeferredItem<SignItem> BLOODWOOD_HANGING_SIGN =
-            ITEMS.register("bloodwood_hanging_sign", () ->
+    public static final DeferredItem<Item> BLOODWOOD_HANGING_SIGN =
+            registerItem(MFItemIds.BLOODWOOD_HANGING_SIGN, properties ->
                     new HangingSignItem(
                             MFBlocks.BLOODWOOD_HANGING_SIGN.get(),
                             MFBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(),
-                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace("bloodwood_hanging_sign")))
+                            properties.stacksTo(16)
                     )
             );
 
-    public static final DeferredItem<SignItem> TAINTED_SIGN =
-            ITEMS.register("tainted_sign", () ->
+    public static final DeferredItem<Item> TAINTED_SIGN =
+            registerItem(MFItemIds.TAINTED_SIGN, properties ->
                     new SignItem(
                             MFBlocks.TAINTED_SIGN.get(),
                             MFBlocks.TAINTED_WALL_SIGN.get(),
-                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace("tainted_sign")))
+                            properties.stacksTo(16)
                     )
             );
 
-    public static final DeferredItem<SignItem> TAINTED_HANGING_SIGN =
-            ITEMS.register("tainted_hanging_sign", () ->
+    public static final DeferredItem<Item> TAINTED_HANGING_SIGN =
+            registerItem(MFItemIds.TAINTED_HANGING_SIGN, properties ->
                     new HangingSignItem(
                             MFBlocks.TAINTED_HANGING_SIGN.get(),
                             MFBlocks.TAINTED_WALL_HANGING_SIGN.get(),
-                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace("tainted_hanging_sign")))
+                            properties.stacksTo(16)
                     )
             );
 
-    public static final DeferredItem<SignItem> PALM_SIGN =
-            ITEMS.register("palm_sign", () ->
+    public static final DeferredItem<Item> PALM_SIGN =
+            registerItem(MFItemIds.PALM_SIGN, properties ->
                     new SignItem(
                             MFBlocks.PALM_SIGN.get(),
                             MFBlocks.PALM_WALL_SIGN.get(),
-                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace("palm_sign")))
+                            properties.stacksTo(16)
                     )
             );
 
-    public static final DeferredItem<SignItem> PALM_HANGING_SIGN =
-            ITEMS.register("palm_hanging_sign", () ->
+    public static final DeferredItem<Item> PALM_HANGING_SIGN =
+            registerItem(MFItemIds.PALM_HANGING_SIGN, properties ->
                     new HangingSignItem(
                             MFBlocks.PALM_HANGING_SIGN.get(),
                             MFBlocks.PALM_WALL_HANGING_SIGN.get(),
-                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace("palm_hanging_sign")))
+                            properties.stacksTo(16)
                     )
             );
 
-    public static final DeferredItem<SignItem> PALLID_SIGN =
-            ITEMS.register("pallid_sign", () ->
+    public static final DeferredItem<Item> PALLID_SIGN =
+            registerItem(MFItemIds.PALLID_SIGN, properties ->
                     new SignItem(
                             MFBlocks.PALLID_SIGN.get(),
                             MFBlocks.PALLID_WALL_SIGN.get(),
-                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace("pallid_sign")))
+                            properties.stacksTo(16)
                     )
             );
 
-    public static final DeferredItem<SignItem> PALLID_HANGING_SIGN =
-            ITEMS.register("pallid_hanging_sign", () ->
+    public static final DeferredItem<Item> PALLID_HANGING_SIGN =
+            registerItem(MFItemIds.PALLID_HANGING_SIGN, properties ->
                     new HangingSignItem(
                             MFBlocks.PALLID_HANGING_SIGN.get(),
                             MFBlocks.PALLID_WALL_HANGING_SIGN.get(),
-                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace("pallid_hanging_sign")))
+                            properties.stacksTo(16)
                     )
             );
 
-    public static final DeferredItem<SignItem> DECREPIT_SIGN =
-            ITEMS.register("decrepit_sign", () ->
+    public static final DeferredItem<Item> DECREPIT_SIGN =
+            registerItem(MFItemIds.DECREPIT_SIGN, properties ->
                     new SignItem(
                             MFBlocks.DECREPIT_SIGN.get(),
                             MFBlocks.DECREPIT_WALL_SIGN.get(),
-                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace("decrepit_sign")))
+                            properties.stacksTo(16)
                     )
             );
 
-    public static final DeferredItem<SignItem> DECREPIT_HANGING_SIGN =
-            ITEMS.register("decrepit_hanging_sign", () ->
+    public static final DeferredItem<Item> DECREPIT_HANGING_SIGN =
+            registerItem(MFItemIds.DECREPIT_HANGING_SIGN, properties ->
                     new HangingSignItem(
                             MFBlocks.DECREPIT_HANGING_SIGN.get(),
                             MFBlocks.DECREPIT_WALL_HANGING_SIGN.get(),
-                            new Item.Properties().stacksTo(16).setId(ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace("decrepit_hanging_sign")))
+                            properties.stacksTo(16)
                     )
             );
 
     // Boat items
 
-    public static final DeferredItem<BoatItem> PALM_BOAT = ITEMS.registerItem(
-            "palm_boat",
+    public static final DeferredItem<Item> BLOODWOOD_BOAT = registerItem(
+            MFItemIds.BLOODWOOD_BOAT,
+            props -> new BoatItem(MFEntityTypes.BLOODWOOD_BOAT.get(), props)
+    );
+
+    public static final DeferredItem<Item> BLOODWOOD_CHEST_BOAT = registerItem(
+            MFItemIds.BLOODWOOD_CHEST_BOAT,
+            props -> new BoatItem(MFEntityTypes.BLOODWOOD_CHEST_BOAT.get(), props)
+    );
+
+    public static final DeferredItem<Item> TAINTED_BOAT = registerItem(
+            MFItemIds.TAINTED_BOAT,
+            props -> new BoatItem(MFEntityTypes.TAINTED_BOAT.get(), props)
+    );
+
+    public static final DeferredItem<Item> TAINTED_CHEST_BOAT = registerItem(
+            MFItemIds.TAINTED_CHEST_BOAT,
+            props -> new BoatItem(MFEntityTypes.TAINTED_CHEST_BOAT.get(), props)
+    );
+
+    public static final DeferredItem<Item> PALM_BOAT = registerItem(
+            MFItemIds.PALM_BOAT,
             props -> new BoatItem(MFEntityTypes.PALM_BOAT.get(), props)
     );
 
-    public static final DeferredItem<BoatItem> PALM_CHEST_BOAT = ITEMS.registerItem(
-            "palm_chest_boat",
+    public static final DeferredItem<Item> PALM_CHEST_BOAT = registerItem(
+            MFItemIds.PALM_CHEST_BOAT,
             props -> new BoatItem(MFEntityTypes.PALM_CHEST_BOAT.get(), props)
     );
 
     public static final List<DeferredItem<Item>> BISMUTH_EQUIPMENT = registerEquipmentItems("bismuth", BISMUTH_TOOL_MATERIAL, MFArmorMaterials.BISMUTH,
             new float[]{5.5f, -2.2f}, new float[]{0f, -2.8f},
-            new Item.Properties().rarity(Rarity.RARE).fireResistant().enchantable(15));
+            new Item.Properties().rarity(Rarity.RARE).fireResistant().enchantable(15)
+    );
 
 
     public static List<DeferredItem<Item>> registerEquipmentItems(String name, ToolMaterial toolmaterial, ArmorMaterial armormaterial,
@@ -466,12 +530,12 @@ public class MFItems {
 
         return List.of(
                 registerItem(name + "_sword", (p) -> new Item(p.sword(toolmaterial, swordattr[0], swordattr[1])), itemProp),
-                registerItem(name + "_pickaxe", (p) -> new Item(p.pickaxe(toolmaterial, pickaxeattr[0], pickaxeattr[1])), itemProp),
+                registerItem(name + "_pickaxe", (p) -> new Item(p.pickaxe(toolmaterial, pickaxeattr[0], pickaxeattr[1])), itemProp)
 
-                registerItem(name + "_helmet", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.HELMET)), itemProp),
-                registerItem(name + "_chestplate", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.CHESTPLATE)), itemProp),
-                registerItem(name + "_leggings", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.LEGGINGS)), itemProp),
-                registerItem(name + "_boots", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.BOOTS)), itemProp)
+//                registerItem(name + "_helmet", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.HELMET)), itemProp),
+//                registerItem(name + "_chestplate", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.CHESTPLATE)), itemProp),
+//                registerItem(name + "_leggings", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.LEGGINGS)), itemProp),
+//                registerItem(name + "_boots", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.BOOTS)), itemProp)
         );
     }
 

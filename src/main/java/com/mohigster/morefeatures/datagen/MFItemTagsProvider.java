@@ -33,10 +33,10 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.BISMUTH_HOE)
                 .add(MFItemIds.BISMUTH_SHOVEL)
                 .add(MFItemIds.BISMUTH_SPEAR)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(2).getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(3).getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(4).getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(5).getKey());
+                .add(MFItemIds.BISMUTH_HELMET)
+                .add(MFItemIds.BISMUTH_CHESTPLATE)
+                .add(MFItemIds.BISMUTH_LEGGINGS)
+                .add(MFItemIds.BISMUTH_BOOTS);
 
         tag(MFItemTags.CARBON_INGREDIENTS)
                 .add(ItemIds.STICK)
@@ -215,57 +215,57 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItems.BISMUTH_BOW.getKey())
                 .add(MFItems.BISMUTH_SPEAR.getKey())
                 .add(MFItems.CARBON_ELYTRA.getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(2).getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(3).getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(4).getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(5).getKey());
+                .add(MFItemIds.BISMUTH_HELMET)
+                .add(MFItemIds.BISMUTH_CHESTPLATE)
+                .add(MFItemIds.BISMUTH_LEGGINGS)
+                .add(MFItemIds.BISMUTH_BOOTS);
 
         tag(ItemTags.LUNGE_ENCHANTABLE)
                 .add(MFItems.BISMUTH_SPEAR.getKey());
 
         tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
                 .add(MFItems.BISMUTH_EQUIPMENT.get(0).getKey())
-                .add(MFItems.BISMUTH_SPEAR.getKey())
-                .add(MFItems.BISMUTH_AXE.getKey());
+                .add(MFItemIds.BISMUTH_SPEAR)
+                .add(MFItemIds.BISMUTH_AXE);
 
         tag(ItemTags.WEAPON_ENCHANTABLE)
                 .add(MFItems.BISMUTH_EQUIPMENT.get(0).getKey())
-                .add(MFItems.BISMUTH_SPEAR.getKey())
-                .add(MFItems.BISMUTH_AXE.getKey());
+                .add(MFItemIds.BISMUTH_SPEAR)
+                .add(MFItemIds.BISMUTH_AXE);
 
         tag(ItemTags.FIRE_ASPECT_ENCHANTABLE)
                 .add(MFItems.BISMUTH_EQUIPMENT.get(0).getKey())
-                .add(MFItems.BISMUTH_SPEAR.getKey());
+                .add(MFItemIds.BISMUTH_SPEAR);
 
         tag(ItemTags.ARMOR_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(2).getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(3).getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(4).getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(5).getKey());
+                .add(MFItemIds.BISMUTH_HELMET)
+                .add(MFItemIds.BISMUTH_CHESTPLATE)
+                .add(MFItemIds.BISMUTH_LEGGINGS)
+                .add(MFItemIds.BISMUTH_BOOTS);
 
         tag(ItemTags.HEAD_ARMOR)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(2).getKey());
+                .add(MFItemIds.BISMUTH_HELMET);
 
         tag(ItemTags.CHEST_ARMOR)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(3).getKey());
+                .add(MFItemIds.BISMUTH_CHESTPLATE);
 
         tag(ItemTags.LEG_ARMOR)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(4).getKey());
+                .add(MFItemIds.BISMUTH_LEGGINGS);
 
         tag(ItemTags.FOOT_ARMOR)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(5).getKey());
+                .add(MFItemIds.BISMUTH_BOOTS);
 
         tag(ItemTags.HEAD_ARMOR_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(2).getKey());
+                .add(MFItemIds.BISMUTH_HELMET);
 
         tag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(3).getKey());
+                .add(MFItemIds.BISMUTH_CHESTPLATE);
 
         tag(ItemTags.LEG_ARMOR_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(4).getKey());
+                .add(MFItemIds.BISMUTH_LEGGINGS);
 
         tag(ItemTags.FOOT_ARMOR_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(5).getKey());
+                .add(MFItemIds.BISMUTH_BOOTS);
 
         tag(ItemTags.SAPLINGS)
                 .add(MFBlockItemIds.TAINTED_SAPLING.item())
@@ -383,5 +383,9 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(ItemIds.DIAMOND)
                 .add(ItemIds.LINGERING_POTION)
                 .add(BlockItemIds.BEDROCK.item());
+
+        tag(ItemTags.TRIM_MATERIALS)
+                .add(MFItemIds.AZURITE)
+                .add(MFItemIds.BISMUTH);
     }
 }

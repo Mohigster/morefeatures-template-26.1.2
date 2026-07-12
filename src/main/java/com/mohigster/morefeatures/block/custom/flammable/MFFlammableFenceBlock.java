@@ -29,5 +29,4 @@ public class MFFlammableFenceBlock extends FenceBlock {
     public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
         return 5;
     }
-
 }

@@ -149,10 +149,10 @@ public class MFCreativeModeTabs {
 
                 // Bismuth Armor
 
-                output.accept(MFItems.BISMUTH_EQUIPMENT.get(2).asItem());
-                output.accept(MFItems.BISMUTH_EQUIPMENT.get(3).asItem());
-                output.accept(MFItems.BISMUTH_EQUIPMENT.get(4).asItem());
-                output.accept(MFItems.BISMUTH_EQUIPMENT.get(5).asItem());
+                output.accept(MFItems.BISMUTH_HELMET);
+                output.accept(MFItems.BISMUTH_CHESTPLATE);
+                output.accept(MFItems.BISMUTH_LEGGINGS);
+                output.accept(MFItems.BISMUTH_BOOTS);
                 output.accept(MFItems.BISMUTH_HORSE_ARMOR);
                 output.accept(MFItems.BISMUTH_NAUTILUS_ARMOR);
 
@@ -275,7 +275,6 @@ public class MFCreativeModeTabs {
             })
             .build()
     );
-
 
     public static void register(IEventBus eventBus){
         CREATIVE_MODE_TABS.register(eventBus);

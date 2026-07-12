@@ -24,7 +24,6 @@ public class MFEntityTypes {
     public static final DeferredRegister.Entities ENTITY_TYPES =
             DeferredRegister.createEntities(MoreFeatures.MODID);
 
-
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownCarbonTrident>> CARBON_TRIDENT =
             ENTITY_TYPES.register("carbon_trident", () -> createTridentEntityType(ThrownCarbonTrident::new, "carbon_trident"));
 
@@ -34,25 +33,71 @@ public class MFEntityTypes {
     public static final DeferredHolder<EntityType<?>, EntityType<BrineEntity>> BRINE =
             ENTITY_TYPES.register("brine", () -> createHostileEntityType(BrineEntity::new, 5, 15, 0.8F, 1.5F, 1.3F, "brine"));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<Boat>> PALM_BOAT =
-            ENTITY_TYPES.register("palm_boat",
+    public static final DeferredHolder<EntityType<?>, EntityType<Boat>> BLOODWOOD_BOAT =
+            ENTITY_TYPES.register("bloodwood_boat",
                     () -> EntityType.Builder.<Boat>of(
-                                    (type, level) -> new Boat(type, level, MFItems.PALM_BOAT::get),
+                                    (type, level) -> new Boat(type, level, MFItems.BLOODWOOD_BOAT),
                                     MobCategory.MISC)
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)
                             .noLootTable()
-                            .build(ResourceKey.create(Registries.ENTITY_TYPE, MFIdentifier.withMfNamespace("palm_boat"))));
+                            .build(createKey("bloodwood_boat"))
+            );
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ChestBoat>> BLOODWOOD_CHEST_BOAT =
+            ENTITY_TYPES.register("bloodwood_chest_boat",
+                    () -> EntityType.Builder.<ChestBoat>of(
+                                    (type, level) -> new ChestBoat(type, level, MFItems.BLOODWOOD_CHEST_BOAT),
+                                    MobCategory.MISC)
+                            .sized(1.375F, 0.5625F)
+                            .clientTrackingRange(10)
+                            .noLootTable()
+                            .build(createKey("bloodwood_chest_boat"))
+            );
+
+    public static final DeferredHolder<EntityType<?>, EntityType<Boat>> TAINTED_BOAT =
+            ENTITY_TYPES.register("tainted_boat",
+                    () -> EntityType.Builder.<Boat>of(
+                                    (type, level) -> new Boat(type, level, MFItems.TAINTED_BOAT),
+                                    MobCategory.MISC)
+                            .sized(1.375F, 0.5625F)
+                            .clientTrackingRange(10)
+                            .noLootTable()
+                            .build(createKey("tainted_boat"))
+            );
+
+    public static final DeferredHolder<EntityType<?>, EntityType<ChestBoat>> TAINTED_CHEST_BOAT =
+            ENTITY_TYPES.register("tainted_chest_boat",
+                    () -> EntityType.Builder.<ChestBoat>of(
+                                    (type, level) -> new ChestBoat(type, level, MFItems.TAINTED_CHEST_BOAT),
+                                    MobCategory.MISC)
+                            .sized(1.375F, 0.5625F)
+                            .clientTrackingRange(10)
+                            .noLootTable()
+                            .build(createKey("tainted_chest_boat"))
+            );
+
+    public static final DeferredHolder<EntityType<?>, EntityType<Boat>> PALM_BOAT =
+            ENTITY_TYPES.register("palm_boat",
+                    () -> EntityType.Builder.<Boat>of(
+                                    (type, level) -> new Boat(type, level, MFItems.PALM_BOAT),
+                                    MobCategory.MISC)
+                            .sized(1.375F, 0.5625F)
+                            .clientTrackingRange(10)
+                            .noLootTable()
+                            .build(createKey("palm_boat"))
+            );
 
     public static final DeferredHolder<EntityType<?>, EntityType<ChestBoat>> PALM_CHEST_BOAT =
             ENTITY_TYPES.register("palm_chest_boat",
                     () -> EntityType.Builder.<ChestBoat>of(
-                                    (type, level) -> new ChestBoat(type, level, MFItems.PALM_CHEST_BOAT::get),
+                                    (type, level) -> new ChestBoat(type, level, MFItems.PALM_CHEST_BOAT),
                                     MobCategory.MISC)
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)
                             .noLootTable()
-                            .build(ResourceKey.create(Registries.ENTITY_TYPE, MFIdentifier.withMfNamespace("palm_chest_boat"))));
+                            .build(createKey("palm_chest_boat"))
+            );
 
     public static final DeferredHolder<EntityType<?>, EntityType<IceologerEntity>> ICEOLOGER =
             ENTITY_TYPES.register("iceologer", () -> createHostileEntityType(IceologerEntity::new, 8, 10, 1f, 2f, 1.80f, "iceologer"));
@@ -71,7 +116,7 @@ public class MFEntityTypes {
             builder.updateInterval(updateInterval);
         }
 
-        return builder.build(ResourceKey.create(Registries.ENTITY_TYPE, MFIdentifier.withMfNamespace(path)));
+        return builder.build(createKey(path));
     }
 
     private static <T extends Entity> EntityType<T> createTridentEntityType(
@@ -85,7 +130,11 @@ public class MFEntityTypes {
                 .updateInterval(20);
 
 
-        return builder.build(ResourceKey.create(Registries.ENTITY_TYPE, MFIdentifier.withMfNamespace(path)));
+        return builder.build(createKey(path));
+    }
+
+    private static ResourceKey<EntityType<?>> createKey(String id){
+        return ResourceKey.create(Registries.ENTITY_TYPE, MFIdentifier.withMfNamespace(id));
     }
 
     public static void register(IEventBus modEventBus) {

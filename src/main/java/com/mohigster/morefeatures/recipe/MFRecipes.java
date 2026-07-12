@@ -18,7 +18,7 @@ public class MFRecipes {
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<CompressionRecipe>> COMPRESSOR_SERIALIZER =
             SERIALIZERS.register("compressing", () -> new RecipeSerializer<>(CompressionRecipe.CODEC, CompressionRecipe.STREAM_CODEC));
     public static final DeferredHolder<RecipeType<?>, RecipeType<CompressionRecipe>> COMPRESSOR_TYPE =
-            TYPES.register("compressing", () -> new RecipeType<CompressionRecipe>() {
+            TYPES.register("compressing", () -> new RecipeType<>() {
                 @Override
                 public String toString() {
                     return "compressing";

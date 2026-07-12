@@ -1,0 +1,114 @@
+{
+  "variants": {
+    "shape=inner_left,type=double": {
+      "model": "morefeatures:block/azurite_block"
+    },
+    "shape=inner_left,type=east": {
+      "model": "morefeatures:block/azurite_vertical_slab_inner",
+      "uvlock": true,
+      "y": 90
+    },
+    "shape=inner_left,type=north": {
+      "model": "morefeatures:block/azurite_vertical_slab_inner",
+      "uvlock": true
+    },
+    "shape=inner_left,type=south": {
+      "model": "morefeatures:block/azurite_vertical_slab_inner",
+      "uvlock": true,
+      "y": 180
+    },
+    "shape=inner_left,type=west": {
+      "model": "morefeatures:block/azurite_vertical_slab_inner",
+      "uvlock": true,
+      "y": 270
+    },
+    "shape=inner_right,type=double": {
+      "model": "morefeatures:block/azurite_block"
+    },
+    "shape=inner_right,type=east": {
+      "model": "morefeatures:block/azurite_vertical_slab_inner",
+      "uvlock": true
+    },
+    "shape=inner_right,type=north": {
+      "model": "morefeatures:block/azurite_vertical_slab_inner",
+      "uvlock": true,
+      "y": 270
+    },
+    "shape=inner_right,type=south": {
+      "model": "morefeatures:block/azurite_vertical_slab_inner",
+      "uvlock": true,
+      "y": 90
+    },
+    "shape=inner_right,type=west": {
+      "model": "morefeatures:block/azurite_vertical_slab_inner",
+      "uvlock": true,
+      "y": 180
+    },
+    "shape=outer_left,type=double": {
+      "model": "morefeatures:block/azurite_block"
+    },
+    "shape=outer_left,type=east": {
+      "model": "morefeatures:block/azurite_vertical_slab_outer",
+      "uvlock": true,
+      "y": 90
+    },
+    "shape=outer_left,type=north": {
+      "model": "morefeatures:block/azurite_vertical_slab_outer",
+      "uvlock": true
+    },
+    "shape=outer_left,type=south": {
+      "model": "morefeatures:block/azurite_vertical_slab_outer",
+      "uvlock": true,
+      "y": 180
+    },
+    "shape=outer_left,type=west": {
+      "model": "morefeatures:block/azurite_vertical_slab_outer",
+      "uvlock": true,
+      "y": 270
+    },
+    "shape=outer_right,type=double": {
+      "model": "morefeatures:block/azurite_block"
+    },
+    "shape=outer_right,type=east": {
+      "model": "morefeatures:block/azurite_vertical_slab_outer",
+      "uvlock": true
+    },
+    "shape=outer_right,type=north": {
+      "model": "morefeatures:block/azurite_vertical_slab_outer",
+      "uvlock": true,
+      "y": 270
+    },
+    "shape=outer_right,type=south": {
+      "model": "morefeatures:block/azurite_vertical_slab_outer",
+      "uvlock": true,
+      "y": 90
+    },
+    "shape=outer_right,type=west": {
+      "model": "morefeatures:block/azurite_vertical_slab_outer",
+      "uvlock": true,
+      "y": 180
+    },
+    "shape=straight,type=double": {
+      "model": "morefeatures:block/azurite_block"
+    },
+    "shape=straight,type=east": {
+      "model": "morefeatures:block/azurite_vertical_slab_straight",
+      "uvlock": true,
+      "y": 90
+    },
+    "shape=straight,type=north": {
+      "model": "morefeatures:block/azurite_vertical_slab_straight",
+      "uvlock": true
+    },
+    "shape=straight,type=south": {
+      "model": "morefeatures:block/azurite_vertical_slab_straight",
+      "uvlock": true,
+      "y": 180
+    },
+    "shape=straight,type=west": {
+      "model": "morefeatures:block/azurite_vertical_slab_straight",
+      "uvlock": true,
+      "y": 270
+    }
+  }
+}

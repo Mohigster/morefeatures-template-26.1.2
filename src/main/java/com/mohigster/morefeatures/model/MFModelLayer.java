@@ -12,6 +12,10 @@ public class MFModelLayer {
     public static final ModelLayerLocation CARBON_TRIDENT = register("carbon_trident");
     public static final ModelLayerLocation BISMUTH_TRIDENT = register("bismuth_trident");
     public static final ModelLayerLocation ICEOLOGER = register("iceologer");
+    public static final ModelLayerLocation BLOODWOOD_BOAT = register("boat/bloodwood");
+    public static final ModelLayerLocation BLOODWOOD_CHEST_BOAT = register("chest_boat/bloodwood");
+    public static final ModelLayerLocation TAINTED_BOAT = register("boat/tainted");
+    public static final ModelLayerLocation TAINTED_CHEST_BOAT = register("chest_boat/tainted");
     public static final ModelLayerLocation PALM_BOAT = register("boat/palm");
     public static final ModelLayerLocation PALM_CHEST_BOAT = register("chest_boat/palm");
 
@@ -31,5 +35,4 @@ public class MFModelLayer {
     private static ModelLayerLocation createLocation(final String model, final String layer) {
         return new ModelLayerLocation(MFIdentifier.withMfNamespace(model), layer);
     }
-
 }

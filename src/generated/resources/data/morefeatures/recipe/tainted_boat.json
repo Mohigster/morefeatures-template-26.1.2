@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "boat",
+  "key": {
+    "#": "morefeatures:tainted_planks"
+  },
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "result": {
+    "id": "morefeatures:tainted_boat"
+  }
+}

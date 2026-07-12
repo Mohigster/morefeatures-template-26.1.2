@@ -1,25 +1,32 @@
 package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.asset.MFEquipmentAssets;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.family.MFBlockFamilies;
 import com.mohigster.morefeatures.datagen.models.MFBlockModelGenerators;
 import com.mohigster.morefeatures.datagen.models.MFItemModelGenerators;
 import com.mohigster.morefeatures.item.MFItems;
+import com.mohigster.morefeatures.item.custom.trim.MFMaterialAssetGroups;
+import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
 import net.minecraft.client.data.models.*;
 import net.minecraft.client.data.models.model.*;
 
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.equipment.EquipmentAssets;
+import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
+import net.minecraft.world.item.equipment.trim.TrimMaterials;
 import net.minecraft.world.level.block.*;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import org.apache.commons.lang3.function.TriConsumer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MFModelProvider extends ModelProvider {
 
     public MFModelProvider(PackOutput output) {
         super(output, MoreFeatures.MODID);
     }
-
 
     @Override
     protected void registerModels(BlockModelGenerators blockModels, ItemModelGenerators itemModels) {
@@ -39,10 +46,10 @@ public class MFModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MFItems.BRINE_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(MFItems.BISMUTH_EQUIPMENT.get(0).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(MFItems.BISMUTH_EQUIPMENT.get(1).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        itemModels.generateFlatItem(MFItems.BISMUTH_EQUIPMENT.get(2).asItem(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(MFItems.BISMUTH_EQUIPMENT.get(3).asItem(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(MFItems.BISMUTH_EQUIPMENT.get(4).asItem(), ModelTemplates.FLAT_ITEM);
-        itemModels.generateFlatItem(MFItems.BISMUTH_EQUIPMENT.get(5).asItem(), ModelTemplates.FLAT_ITEM);
+        MFItemModelGenerators.generateTrimmableItem(itemModels, MFItems.BISMUTH_HELMET.get(), MFEquipmentAssets.BISMUTH, ItemModelGenerators.TRIM_PREFIX_HELMET, false);
+        MFItemModelGenerators.generateTrimmableItem(itemModels, MFItems.BISMUTH_CHESTPLATE.get(), MFEquipmentAssets.BISMUTH, ItemModelGenerators.TRIM_PREFIX_CHESTPLATE, false);
+        MFItemModelGenerators.generateTrimmableItem(itemModels, MFItems.BISMUTH_LEGGINGS.get(), MFEquipmentAssets.BISMUTH, ItemModelGenerators.TRIM_PREFIX_LEGGINGS, false);
+        MFItemModelGenerators.generateTrimmableItem(itemModels, MFItems.BISMUTH_BOOTS.get(), MFEquipmentAssets.BISMUTH, ItemModelGenerators.TRIM_PREFIX_BOOTS, false);
         itemModels.generateFlatItem(MFItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.BISMUTH_SCRAP.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.METAL_DETECTOR.get(), ModelTemplates.FLAT_ITEM);
@@ -84,6 +91,10 @@ public class MFModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MFItems.CARBON_WOLF_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateTrident(MFItems.BISMUTH_TRIDENT.get());
         itemModels.generateFlatItem(MFItems.MUSIC_DISC_AQUAMARINE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MFItems.BLOODWOOD_BOAT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MFItems.BLOODWOOD_CHEST_BOAT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MFItems.TAINTED_BOAT.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MFItems.TAINTED_CHEST_BOAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.PALM_BOAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.PALM_CHEST_BOAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.FROSTED_CORE.get(), ModelTemplates.FLAT_ITEM);
@@ -154,6 +165,7 @@ public class MFModelProvider extends ModelProvider {
         blockModels.createPlantWithDefaultItem(MFBlocks.DECREPIT_ROOTS.get(), MFBlocks.POTTED_DECREPIT_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(MFBlocks.PALLID_ROOTS.get(), MFBlocks.POTTED_PALLID_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createSpeleothem(MFBlocks.ICICLE.get());
+        MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.AZURITE_VERTICAL_SLAB.get(), MFBlocks.AZURITE_BLOCK.get());
         MFBlockModelGenerators.createNyliumLikeBlock(blockModels, MFBlocks.PALLID_NULLIUM.get(), Blocks.END_STONE); // Call blockModels as a parameter so that we can use blockStateOutput and modelOutput. This will be necessary for all custom model generation methods
         MFBlockModelGenerators.createNyliumLikeBlock(blockModels, MFBlocks.DECREPIT_NULLIUM.get(), Blocks.END_STONE);
         MFBlockModelGenerators.createAnchor(blockModels, MFBlocks.VOID_ANCHOR.get());

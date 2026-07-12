@@ -107,6 +107,7 @@ public class MFBlockItemIds {
     public static final BlockItemId RAW_AZURITE_BLOCK = createId("raw_azurite_block");
     public static final BlockItemId AZURITE_STAIRS = createId("azurite_stairs");
     public static final BlockItemId AZURITE_SLAB = createId("azurite_slab");
+    public static final BlockItemId AZURITE_VERTICAL_SLAB = createId("azurite_vertical_slab");
     public static final BlockItemId AZURITE_PRESSURE_PLATE = createId("azurite_pressure_plate");
     public static final BlockItemId AZURITE_BUTTON = createId("azurite_button");
     public static final BlockItemId AZURITE_DOOR = createId("azurite_door");

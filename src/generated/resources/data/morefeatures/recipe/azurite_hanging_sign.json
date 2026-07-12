@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "azurite",
+  "key": {
+    "#": "morefeatures:raw_azurite",
+    "X": "minecraft:iron_chain"
+  },
+  "pattern": [
+    "X X",
+    "###",
+    "###"
+  ],
+  "result": {
+    "count": 6,
+    "id": "morefeatures:azurite_hanging_sign"
+  }
+}

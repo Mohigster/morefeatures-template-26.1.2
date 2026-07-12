@@ -156,6 +156,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
 
         // VERTICAL SLABS
 
+        add(MFBlocks.AZURITE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
         add(MFBlocks.BLOODWOOD_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
         add(MFBlocks.TAINTED_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
         add(MFBlocks.PALM_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
@@ -253,6 +254,12 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
                 createSingleItemTable(MFItems.AZURITE_SIGN.asItem()));
 
         add(MFBlocks.AZURITE_WALL_SIGN.get(),
+                createSingleItemTable(MFItems.AZURITE_SIGN.asItem()));
+
+        add(MFBlocks.AZURITE_HANGING_SIGN.get(),
+                createSingleItemTable(MFItems.AZURITE_SIGN.asItem()));
+
+        add(MFBlocks.AZURITE_WALL_HANGING_SIGN.get(),
                 createSingleItemTable(MFItems.AZURITE_SIGN.asItem()));
 
         add(MFBlocks.BLOODWOOD_SIGN.get(),

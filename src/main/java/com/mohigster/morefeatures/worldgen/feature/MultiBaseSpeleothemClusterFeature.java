@@ -22,7 +22,6 @@ import net.minecraft.world.level.levelgen.Column;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import net.minecraft.world.level.levelgen.feature.SpeleothemUtils;
-import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
 
 import java.util.Optional;
 import java.util.OptionalInt;

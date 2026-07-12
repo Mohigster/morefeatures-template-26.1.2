@@ -38,6 +38,8 @@ public class MFBlockEntities {
     public static final Supplier<BlockEntityType<MFHangingSignBlockEntity>> MF_HANGING_SIGN_BE =
             BLOCK_ENTITIES.register("mod_hanging_sign_be", () -> new BlockEntityType<>(
                     MFHangingSignBlockEntity::new,
+                    MFBlocks.AZURITE_HANGING_SIGN.get(),
+                    MFBlocks.AZURITE_WALL_HANGING_SIGN.get(),
                     MFBlocks.BLOODWOOD_HANGING_SIGN.get(),
                     MFBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(),
                     MFBlocks.TAINTED_HANGING_SIGN.get(),

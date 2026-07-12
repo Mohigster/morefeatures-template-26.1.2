@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "boat",
+  "key": {
+    "#": "morefeatures:palm_planks"
+  },
+  "pattern": [
+    "# #",
+    "###"
+  ],
+  "result": {
+    "id": "morefeatures:palm_boat"
+  }
+}

@@ -188,11 +188,14 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> AZURITE_SLAB = registerBlock(MFBlockItemIds.AZURITE_SLAB,
-            properties -> new SlabBlock(properties
-                    .strength(3f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)
-            ));
+            SlabBlock::new,
+            _ -> Properties.ofFullCopy(AZURITE_BLOCK.get())
+    );
+
+    public static final DeferredBlock<Block> AZURITE_VERTICAL_SLAB = registerBlock(MFBlockItemIds.AZURITE_VERTICAL_SLAB,
+            props -> new VerticalSlabBlock(false, props),
+            _ -> Properties.ofFullCopy(AZURITE_BLOCK.get())
+    );
 
     public static final DeferredBlock<Block> AZURITE_PRESSURE_PLATE = registerBlock(MFBlockItemIds.AZURITE_PRESSURE_PLATE,
             properties -> new PressurePlateBlock(MFBlockSetType.AZURITE, properties
@@ -239,13 +242,21 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> AZURITE_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.AZURITE_WALL_SIGN,
-            properties -> new MFWallSignBlock(MFWoodType.AZURITE, properties
-                    .noCollision()
-                    .strength(2F, 6F)
-                    .sound(SoundType.AMETHYST)
-                    .requiresCorrectToolForDrops()
-                    .isRedstoneConductor(MFBlocks::never)
-            ));
+            properties -> new MFWallSignBlock(MFWoodType.AZURITE, properties),
+            _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
+    );
+
+    // Ceiling sign
+    public static final DeferredBlock<Block> AZURITE_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.AZURITE_HANGING_SIGN,
+            properties -> new MFCeilingHangingSignBlock(MFWoodType.AZURITE, properties),
+            _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
+    );
+
+    // Wall sign
+    public static final DeferredBlock<Block> AZURITE_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.AZURITE_WALL_HANGING_SIGN,
+            properties -> new MFWallHangingSignBlock(MFWoodType.AZURITE, properties),
+            _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
+    );
 
     //———————————————————————————————————————Fluorite Blocks—————————————————————————————————————————————————————————————————————————
 
@@ -1532,6 +1543,16 @@ public class MFBlocks {
             throw new IllegalStateException("Could not register the " + id.identifier().getPath() + " block. ID must be within the More Features namespace!");
         }
         return BLOCKS.registerBlock(id.identifier().getPath(), props -> function.apply(props.setId(id)));
+    }
+
+    private static <T extends Block> DeferredBlock<T> registerBlockWithoutItem(ResourceKey<Block> id, Function<BlockBehaviour.Properties, T> function, UnaryOperator<BlockBehaviour.Properties> propertyModifier){
+        if (MFIdentifier.isNotMfNamespace(id.identifier())){
+            throw new IllegalStateException("Could not register the " + id.identifier().getPath() + " block. ID must be within the More Features namespace!");
+        }
+        return BLOCKS.registerBlock(id.identifier().getPath(), baseProps -> {
+            BlockBehaviour.Properties props = propertyModifier.apply(baseProps).setId(id);
+            return function.apply(props);
+        });
     }
 
     private static <T extends Block> DeferredBlock<T> registerBlockWithTooltip(BlockItemId id, Function<BlockBehaviour.Properties, T> function, Component... components){

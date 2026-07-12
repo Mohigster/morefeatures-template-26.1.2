@@ -13,5 +13,4 @@ public class IceologerRenderState extends IllagerRenderState {
         mainArm = HumanoidArm.RIGHT;
         armPose = AbstractIllager.IllagerArmPose.CROSSED;
     }
-
 }

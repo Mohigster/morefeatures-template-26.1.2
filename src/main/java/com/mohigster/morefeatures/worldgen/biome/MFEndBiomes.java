@@ -62,7 +62,4 @@ public class MFEndBiomes {
                 .specialEffects((new BiomeSpecialEffects.Builder().waterColor(0xbda1b4).grassColorOverride(0xbda1b3).build()))
                 .mobSpawnSettings(spawnBuilder.build()).generationSettings(biomeBuilder.build()).build();
     }
-
-
-
 }

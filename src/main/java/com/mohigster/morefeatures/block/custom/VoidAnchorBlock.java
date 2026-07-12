@@ -3,7 +3,7 @@ package com.mohigster.morefeatures.block.custom;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.UnmodifiableIterator;
 import com.mojang.serialization.MapCodec;
-import java.util.Objects;
+
 import java.util.Optional;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

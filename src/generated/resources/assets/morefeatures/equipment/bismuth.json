@@ -10,6 +10,11 @@
         "texture": "morefeatures:bismuth"
       }
     ],
+    "humanoid_baby": [
+      {
+        "texture": "morefeatures:bismuth"
+      }
+    ],
     "humanoid_leggings": [
       {
         "texture": "morefeatures:bismuth"

@@ -5,6 +5,11 @@
         "texture": "morefeatures:carbon_elytra",
         "use_player_texture": true
       }
+    ],
+    "wolf_body": [
+      {
+        "texture": "morefeatures:carbon"
+      }
     ]
   }
 }
