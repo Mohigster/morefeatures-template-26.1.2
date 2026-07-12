@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "group": "azurite",
+  "key": {
+    "#": "morefeatures:azurite",
+    "X": "morefeatures:brine_rod"
+  },
+  "pattern": [
+    "###",
+    "###",
+    " X "
+  ],
+  "result": {
+    "count": 3,
+    "id": "morefeatures:azurite_sign"
+  }
+}

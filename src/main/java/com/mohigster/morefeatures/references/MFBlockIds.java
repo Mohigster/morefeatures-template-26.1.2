@@ -6,6 +6,10 @@ import net.minecraft.world.level.block.Block;
 
 public class MFBlockIds {
 
+    // Azurite
+    public static final ResourceKey<Block> AZURITE_SIGN = createId("azurite_sign");
+    public static final ResourceKey<Block> AZURITE_WALL_SIGN = createId("azurite_wall_sign");
+
     // Bloodwood
     public static final ResourceKey<Block> BLOODWOOD_SIGN = createId("bloodwood_sign");
     public static final ResourceKey<Block> BLOODWOOD_WALL_SIGN = createId("bloodwood_wall_sign");

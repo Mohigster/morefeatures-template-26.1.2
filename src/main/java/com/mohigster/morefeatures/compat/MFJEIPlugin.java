@@ -20,6 +20,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RecipesReceivedEvent;
 import net.neoforged.neoforge.event.OnDatapackSyncEvent;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ public class MFJEIPlugin implements IModPlugin {
     private static RecipeMap syncedRecipes = RecipeMap.EMPTY;
 
     @Override
-    public Identifier getPluginUid() {
+    public @NonNull Identifier getPluginUid() {
         return MFIdentifier.withMfNamespace("jei_plugin");
     }
     @SuppressWarnings({"unchecked", "rawtypes"})

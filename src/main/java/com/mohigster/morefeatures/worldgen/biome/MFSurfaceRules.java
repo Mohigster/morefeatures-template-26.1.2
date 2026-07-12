@@ -54,8 +54,6 @@ public class MFSurfaceRules {
     private static final RuleSource CINNABAR = makeStateRule(Blocks.CINNABAR);
     private static final RuleSource SULFUR = makeStateRule(Blocks.SULFUR);
 
-    // Underground Overworld biomes
-
     // End biomes
     private static final RuleSource OBSIDIAN = makeStateRule(Blocks.OBSIDIAN);
     private static final RuleSource PALLID_NULLIUM = makeStateRule(MFBlocks.PALLID_NULLIUM.get());
@@ -83,7 +81,6 @@ public class MFSurfaceRules {
                 SurfaceRules.ifTrue(
                         SurfaceRules.yBlockCheck(VerticalAnchor.absolute(-50), 0),
                         SurfaceRules.sequence(
-
                                 // Ceiling / Roof of the cave gets Blue Ice
                                 SurfaceRules.ifTrue(SurfaceRules.ON_CEILING, BLUE_ICE),
                                 // Floor and walls get Packed Ice

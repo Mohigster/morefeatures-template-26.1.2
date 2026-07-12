@@ -18,9 +18,11 @@ public class MFBlockEntities {
             BLOCK_ENTITIES.register("compressor_be", () -> new BlockEntityType<>(
                     CompressorBlockEntity::new, MFBlocks.COMPRESSOR_BLOCK.get()));
 
-    public static final Supplier<BlockEntityType<MFSignBlockEntity>> MOD_SIGN_BE =
+    public static final Supplier<BlockEntityType<MFSignBlockEntity>> MF_SIGN_BE =
             BLOCK_ENTITIES.register("mod_sign_be", () -> new BlockEntityType<>(
                     MFSignBlockEntity::new,
+                    MFBlocks.AZURITE_SIGN.get(),
+                    MFBlocks.AZURITE_WALL_SIGN.get(),
                     MFBlocks.BLOODWOOD_SIGN.get(),
                     MFBlocks.BLOODWOOD_WALL_SIGN.get(),
                     MFBlocks.TAINTED_SIGN.get(),
@@ -33,7 +35,7 @@ public class MFBlockEntities {
                     MFBlocks.PALLID_WALL_SIGN.get()
             ));
 
-    public static final Supplier<BlockEntityType<MFHangingSignBlockEntity>> MOD_HANGING_SIGN_BE =
+    public static final Supplier<BlockEntityType<MFHangingSignBlockEntity>> MF_HANGING_SIGN_BE =
             BLOCK_ENTITIES.register("mod_hanging_sign_be", () -> new BlockEntityType<>(
                     MFHangingSignBlockEntity::new,
                     MFBlocks.BLOODWOOD_HANGING_SIGN.get(),
@@ -48,7 +50,7 @@ public class MFBlockEntities {
                     MFBlocks.PALLID_WALL_HANGING_SIGN.get()
             ));
 
-    public static final Supplier<BlockEntityType<MFShelfBlockEntity>> MOD_SHELF_BE =
+    public static final Supplier<BlockEntityType<MFShelfBlockEntity>> MF_SHELF_BE =
             BLOCK_ENTITIES.register("mod_shelf_be", () -> new BlockEntityType<>(
                     MFShelfBlockEntity::new,
                     MFBlocks.BLOODWOOD_SHELF.get(),

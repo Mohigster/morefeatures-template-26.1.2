@@ -3,12 +3,7 @@
   "config": {
     "debug_settings": {
       "air_state": {
-        "Name": "minecraft:warped_button",
-        "Properties": {
-          "face": "wall",
-          "facing": "north",
-          "powered": "false"
-        }
+        "Name": "minecraft:cave_air"
       },
       "barrier_state": {
         "Name": "minecraft:glass"

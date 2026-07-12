@@ -32,7 +32,6 @@ import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -230,6 +229,23 @@ public class MFBlocks {
                     .isRedstoneConductor(MFBlocks::never)
             ));
 
+    public static final DeferredBlock<Block> AZURITE_SIGN = registerBlockWithoutItem(MFBlockIds.AZURITE_SIGN,
+            properties -> new MFStandingSignBlock(MFWoodType.AZURITE, properties
+                    .noCollision()
+                    .strength(2F, 6F)
+                    .sound(SoundType.AMETHYST)
+                    .requiresCorrectToolForDrops()
+                    .isRedstoneConductor(MFBlocks::never)
+            ));
+
+    public static final DeferredBlock<Block> AZURITE_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.AZURITE_WALL_SIGN,
+            properties -> new MFWallSignBlock(MFWoodType.AZURITE, properties
+                    .noCollision()
+                    .strength(2F, 6F)
+                    .sound(SoundType.AMETHYST)
+                    .requiresCorrectToolForDrops()
+                    .isRedstoneConductor(MFBlocks::never)
+            ));
 
     //———————————————————————————————————————Fluorite Blocks—————————————————————————————————————————————————————————————————————————
 
@@ -410,14 +426,14 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> BLOODWOOD_SIGN = registerBlockWithoutItem(MFBlockIds.BLOODWOOD_SIGN,
-            properties -> new ModStandingSignBlock(MFWoodType.BLOODWOOD, properties
+            properties -> new MFStandingSignBlock(MFWoodType.BLOODWOOD, properties
                     .noCollision()
                     .strength(1.0F)
                     .sound(SoundType.WOOD)
             ));
 
     public static final DeferredBlock<Block> BLOODWOOD_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.BLOODWOOD_WALL_SIGN,
-            properties -> new ModWallSignBlock(MFWoodType.BLOODWOOD, properties
+            properties -> new MFWallSignBlock(MFWoodType.BLOODWOOD, properties
                     .noCollision()
                     .strength(1.0F)
                     .sound(SoundType.WOOD)
@@ -425,7 +441,7 @@ public class MFBlocks {
 
     // Ceiling sign
     public static final DeferredBlock<Block> BLOODWOOD_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.BLOODWOOD_HANGING_SIGN,
-            properties -> new ModCeilingHangingSignBlock(MFWoodType.BLOODWOOD, properties
+            properties -> new MFCeilingHangingSignBlock(MFWoodType.BLOODWOOD, properties
                     .noCollision()
                     .strength(1.0F)
                     .sound(SoundType.WOOD)
@@ -433,14 +449,14 @@ public class MFBlocks {
 
     // Wall sign
     public static final DeferredBlock<Block> BLOODWOOD_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.BLOODWOOD_WALL_HANGING_SIGN,
-            properties -> new ModWallHangingSignBlock(MFWoodType.BLOODWOOD, properties
+            properties -> new MFWallHangingSignBlock(MFWoodType.BLOODWOOD, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
             ));
 
     public static final DeferredBlock<Block> BLOODWOOD_SHELF = registerBlock(MFBlockItemIds.BLOODWOOD_SHELF,
-            props -> new ModShelfBlock(true, props),
+            props -> new MFShelfBlock(true, props),
             _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.COLOR_RED)
     );
 
@@ -449,33 +465,34 @@ public class MFBlocks {
 
     public static final DeferredBlock<Block> TAINTED_LOG = registerBlock(MFBlockItemIds.TAINTED_LOG,
             properties -> new MFFlammableRotatedPillarBlock(properties
-                    .strength(2f, 2f)
+                    .mapColor(MapColor.COLOR_PURPLE)
+                    .ignitedByLava()
+                    .instrument(NoteBlockInstrument.BASEDRUM)
+                    .strength(2F, 4F)
                     .sound(SoundType.WOOD)
+                    .isRedstoneConductor(MFBlocks::always)
             ));
 
     public static final DeferredBlock<Block> TAINTED_WOOD = registerBlock(MFBlockItemIds.TAINTED_WOOD,
-            properties -> new MFFlammableRotatedPillarBlock(properties
-                    .strength(2f, 2f)
-                    .sound(SoundType.WOOD)
-            ));
+            MFFlammableRotatedPillarBlock::new,
+            _ -> Properties.ofFullCopy(TAINTED_LOG.get()).mapColor(MapColor.COLOR_GRAY)
+    );
 
     public static final DeferredBlock<Block> STRIPPED_TAINTED_LOG = registerBlock(MFBlockItemIds.STRIPPED_TAINTED_LOG,
-            properties -> new MFFlammableRotatedPillarBlock(properties
-                    .strength(2f, 2f)
-                    .sound(SoundType.WOOD)
-            ));
+            MFFlammableRotatedPillarBlock::new,
+            _ -> Properties.ofFullCopy(TAINTED_LOG.get())
+    );
+
 
     public static final DeferredBlock<Block> STRIPPED_TAINTED_WOOD = registerBlock(MFBlockItemIds.STRIPPED_TAINTED_WOOD,
-            properties -> new MFFlammableRotatedPillarBlock(properties
-                    .strength(2f, 2f)
-                    .sound(SoundType.WOOD)
-            ));
+            MFFlammableRotatedPillarBlock::new,
+            _ -> Properties.ofFullCopy(TAINTED_LOG.get())
+    );
 
     public static final DeferredBlock<Block> TAINTED_PLANKS = registerBlock(MFBlockItemIds.TAINTED_PLANKS,
-            properties -> new MFFlammableBlock(properties
-                    .strength(2f, 2f)
-                    .sound(SoundType.WOOD)
-            ));
+            MFFlammableBlock::new,
+            _ -> Properties.ofFullCopy(TAINTED_LOG.get())
+    );
 
     public static final DeferredBlock<Block> TAINTED_LEAVES = registerBlock(MFBlockItemIds.TAINTED_LEAVES,
             properties -> new MFLeavesBlock(0.03F, MFParticleTypes.TAINTED_LEAVES.get(), properties
@@ -503,18 +520,14 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> TAINTED_STAIRS = registerBlock(MFBlockItemIds.TAINTED_STAIRS,
-            properties -> new MFFlammableStairBlock(MFBlocks.TAINTED_PLANKS.get().defaultBlockState(), properties
-                    .strength(3f)
-                    .ignitedByLava()
-                    .sound(SoundType.WOOD)
-            ));
+            props -> new MFFlammableStairBlock(MFBlocks.TAINTED_PLANKS.get().defaultBlockState(), props),
+            _ -> Properties.ofFullCopy(TAINTED_LOG.get())
+    );
 
     public static final DeferredBlock<Block> TAINTED_SLAB = registerBlock(MFBlockItemIds.TAINTED_SLAB,
-            properties -> new MFFlammableSlabBlock(properties
-                    .strength(1f)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-            ));
+            MFFlammableSlabBlock::new,
+            _ -> Properties.ofFullCopy(TAINTED_LOG.get())
+    );
 
     public static final DeferredBlock<Block> TAINTED_VERTICAL_SLAB = registerBlock(MFBlockItemIds.TAINTED_VERTICAL_SLAB,
             properties -> new VerticalSlabBlock(true, properties),
@@ -548,14 +561,14 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> TAINTED_SIGN = registerBlockWithoutItem(MFBlockIds.TAINTED_SIGN,
-            properties -> new ModStandingSignBlock(MFWoodType.TAINTED, properties
+            properties -> new MFStandingSignBlock(MFWoodType.TAINTED, properties
                     .noCollision()
                     .strength(1.0F)
                     .sound(SoundType.WOOD)
             ));
 
     public static final DeferredBlock<Block> TAINTED_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.TAINTED_WALL_SIGN,
-            properties -> new ModWallSignBlock(MFWoodType.TAINTED, properties
+            properties -> new MFWallSignBlock(MFWoodType.TAINTED, properties
                     .noCollision()
                     .strength(1.0F)
                     .sound(SoundType.WOOD)
@@ -563,7 +576,7 @@ public class MFBlocks {
 
     // Ceiling sign
     public static final DeferredBlock<Block> TAINTED_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.TAINTED_HANGING_SIGN,
-            properties -> new ModCeilingHangingSignBlock(MFWoodType.TAINTED, properties
+            properties -> new MFCeilingHangingSignBlock(MFWoodType.TAINTED, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
@@ -571,14 +584,14 @@ public class MFBlocks {
 
     // Wall sign
     public static final DeferredBlock<Block> TAINTED_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.TAINTED_WALL_HANGING_SIGN,
-            properties -> new ModWallHangingSignBlock(MFWoodType.TAINTED, properties
+            properties -> new MFWallHangingSignBlock(MFWoodType.TAINTED, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
             ));
 
     public static final DeferredBlock<Block> TAINTED_SHELF = registerBlock(MFBlockItemIds.TAINTED_SHELF,
-            props -> new ModShelfBlock(true, props),
+            props -> new MFShelfBlock(true, props),
             _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.COLOR_PURPLE)
     );
 
@@ -670,7 +683,7 @@ public class MFBlocks {
 
     // Standing sign
     public static final DeferredBlock<Block> PALM_SIGN = registerBlockWithoutItem(MFBlockIds.PALM_SIGN,
-            properties -> new ModStandingSignBlock(MFWoodType.PALM, properties
+            properties -> new MFStandingSignBlock(MFWoodType.PALM, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
@@ -678,7 +691,7 @@ public class MFBlocks {
 
     // Wall sign
     public static final DeferredBlock<Block> PALM_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.PALM_WALL_SIGN,
-            properties -> new ModWallSignBlock(MFWoodType.PALM, properties
+            properties -> new MFWallSignBlock(MFWoodType.PALM, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
@@ -686,7 +699,7 @@ public class MFBlocks {
 
     // Ceiling hanging sign
     public static final DeferredBlock<Block> PALM_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.PALM_HANGING_SIGN,
-            properties -> new ModCeilingHangingSignBlock(MFWoodType.PALM, properties
+            properties -> new MFCeilingHangingSignBlock(MFWoodType.PALM, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
@@ -694,7 +707,7 @@ public class MFBlocks {
 
     // Wall hanging sign
     public static final DeferredBlock<Block> PALM_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.PALM_WALL_HANGING_SIGN,
-            properties -> new ModWallHangingSignBlock(MFWoodType.PALM, properties
+            properties -> new MFWallHangingSignBlock(MFWoodType.PALM, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.WOOD)
@@ -729,7 +742,7 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> PALM_SHELF = registerBlock(MFBlockItemIds.PALM_SHELF,
-            props -> new ModShelfBlock(true, props),
+            props -> new MFShelfBlock(true, props),
             _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.COLOR_YELLOW)
     );
 
@@ -864,14 +877,14 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> DECREPIT_SIGN = registerBlockWithoutItem(MFBlockIds.DECREPIT_SIGN,
-            properties -> new ModStandingSignBlock(MFWoodType.DECREPIT, properties
+            properties -> new MFStandingSignBlock(MFWoodType.DECREPIT, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.NETHER_WOOD)
             ));
 
     public static final DeferredBlock<Block> DECREPIT_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.DECREPIT_WALL_SIGN,
-            properties -> new ModWallSignBlock(MFWoodType.DECREPIT, properties
+            properties -> new MFWallSignBlock(MFWoodType.DECREPIT, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.NETHER_WOOD)
@@ -879,7 +892,7 @@ public class MFBlocks {
 
     // Ceiling sign
     public static final DeferredBlock<Block> DECREPIT_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.DECREPIT_HANGING_SIGN,
-            properties -> new ModCeilingHangingSignBlock(MFWoodType.DECREPIT, properties
+            properties -> new MFCeilingHangingSignBlock(MFWoodType.DECREPIT, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.NETHER_WOOD)
@@ -887,14 +900,14 @@ public class MFBlocks {
 
     // Wall sign
     public static final DeferredBlock<Block> DECREPIT_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.DECREPIT_WALL_HANGING_SIGN,
-            properties -> new ModWallHangingSignBlock(MFWoodType.DECREPIT, properties
+            properties -> new MFWallHangingSignBlock(MFWoodType.DECREPIT, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.NETHER_WOOD)
             ));
 
     public static final DeferredBlock<Block> DECREPIT_SHELF = registerBlock(MFBlockItemIds.DECREPIT_SHELF,
-            props -> new ModShelfBlock(true, props),
+            props -> new MFShelfBlock(true, props),
             _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.TERRACOTTA_BLUE)
     );
 
@@ -1030,35 +1043,35 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> PALLID_SIGN = registerBlockWithoutItem(MFBlockIds.PALLID_SIGN,
-            properties -> new ModStandingSignBlock(MFWoodType.PALLID, properties
+            properties -> new MFStandingSignBlock(MFWoodType.PALLID, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.NETHER_WOOD)
             ));
 
     public static final DeferredBlock<Block> PALLID_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.PALLID_WALL_SIGN,
-            properties -> new ModWallSignBlock(MFWoodType.PALLID, properties
+            properties -> new MFWallSignBlock(MFWoodType.PALLID, properties
                     .noCollision()
                     .strength(1.0f)
                     .sound(SoundType.NETHER_WOOD)
             ));
 
     public static final DeferredBlock<Block> PALLID_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.PALLID_HANGING_SIGN,
-            properties -> new ModCeilingHangingSignBlock(MFWoodType.PALLID, properties
+            properties -> new MFCeilingHangingSignBlock(MFWoodType.PALLID, properties
                     .noCollision()
                     .strength(1.0F)
                     .sound(SoundType.NETHER_WOOD)
             ));
 
     public static final DeferredBlock<Block> PALLID_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.PALLID_WALL_HANGING_SIGN,
-            properties -> new ModWallHangingSignBlock(MFWoodType.PALLID, properties
+            properties -> new MFWallHangingSignBlock(MFWoodType.PALLID, properties
                     .noCollision()
                     .strength(1.0F)
                     .sound(SoundType.NETHER_WOOD)
             ));
 
     public static final DeferredBlock<Block> PALLID_SHELF = registerBlock(MFBlockItemIds.PALLID_SHELF,
-            props -> new ModShelfBlock(true, props),
+            props -> new MFShelfBlock(true, props),
             _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.TERRACOTTA_GREEN)
     );
 

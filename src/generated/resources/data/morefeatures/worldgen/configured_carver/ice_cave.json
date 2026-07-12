@@ -3,12 +3,7 @@
   "config": {
     "debug_settings": {
       "air_state": {
-        "Name": "minecraft:crimson_button",
-        "Properties": {
-          "face": "wall",
-          "facing": "north",
-          "powered": "false"
-        }
+        "Name": "minecraft:cave_air"
       },
       "barrier_state": {
         "Name": "minecraft:glass"
@@ -48,7 +43,7 @@
     "y": {
       "type": "minecraft:uniform",
       "max_inclusive": {
-        "absolute": 180
+        "absolute": 0
       },
       "min_inclusive": {
         "above_bottom": 0

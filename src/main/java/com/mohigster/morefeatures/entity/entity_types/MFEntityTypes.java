@@ -26,13 +26,13 @@ public class MFEntityTypes {
 
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownCarbonTrident>> CARBON_TRIDENT =
-            ENTITY_TYPES.register("carbon_trident", () -> createTridentEntityType(ThrownCarbonTrident::new, 4, 20, 0.5f, 0.5f, 0.13f, "carbon_trident"));
+            ENTITY_TYPES.register("carbon_trident", () -> createTridentEntityType(ThrownCarbonTrident::new, "carbon_trident"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownBismuthTrident>> BISMUTH_TRIDENT =
-            ENTITY_TYPES.register("bismuth_trident", () -> createTridentEntityType(ThrownBismuthTrident::new, 4, 20, 0.5f, 0.5f, 0.13f, "bismuth_trident"));
+            ENTITY_TYPES.register("bismuth_trident", () -> createTridentEntityType(ThrownBismuthTrident::new, "bismuth_trident"));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<BrineEntity>> BRINE_MOB =
-            ENTITY_TYPES.register("brine", () -> createBrineEntityType(BrineEntity::new, 4, 20));
+    public static final DeferredHolder<EntityType<?>, EntityType<BrineEntity>> BRINE =
+            ENTITY_TYPES.register("brine", () -> createHostileEntityType(BrineEntity::new, 5, 15, 0.8F, 1.5F, 1.3F, "brine"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Boat>> PALM_BOAT =
             ENTITY_TYPES.register("palm_boat",
@@ -75,37 +75,17 @@ public class MFEntityTypes {
     }
 
     private static <T extends Entity> EntityType<T> createTridentEntityType(
-            EntityType.EntityFactory<T> factory, int trackingRange, int updateInterval, float width, float height, float eyeHeight, String path) {
+            EntityType.EntityFactory<T> factory, String path) {
 
         EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
-                .sized(width, height)
-                .eyeHeight(eyeHeight)
-                .clientTrackingRange(trackingRange)
-                .noLootTable();
+                .sized(0.5F, 0.5F)
+                .eyeHeight(0.13F)
+                .clientTrackingRange(4)
+                .noLootTable()
+                .updateInterval(20);
 
-
-        if (updateInterval != Integer.MAX_VALUE) {
-            builder.updateInterval(updateInterval);
-        }
 
         return builder.build(ResourceKey.create(Registries.ENTITY_TYPE, MFIdentifier.withMfNamespace(path)));
-    }
-
-    private static <T extends Entity> EntityType<T> createBrineEntityType(
-            EntityType.EntityFactory<T> factory, int trackingRange, int updateInterval) {
-
-        EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
-                .sized(0.5f, 0.5f) // Replaces dimensions(EntityDimensions.changing())
-                .eyeHeight(0.13F)
-                .clientTrackingRange(trackingRange)
-                .noLootTable();
-
-
-        if (updateInterval != Integer.MAX_VALUE) {
-            builder.updateInterval(updateInterval);
-        }
-
-        return builder.build(BRINE_MOB.getKey());
     }
 
     public static void register(IEventBus modEventBus) {

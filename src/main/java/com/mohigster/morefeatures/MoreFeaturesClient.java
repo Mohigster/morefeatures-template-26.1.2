@@ -109,15 +109,15 @@ public class MoreFeaturesClient {
                 )
         );
         event.registerBlockEntityRenderer(
-                MFBlockEntities.MOD_SIGN_BE.get(),
+                MFBlockEntities.MF_SIGN_BE.get(),
                 StandingSignRenderer::new
         );
         event.registerBlockEntityRenderer(
-                MFBlockEntities.MOD_HANGING_SIGN_BE.get(),
+                MFBlockEntities.MF_HANGING_SIGN_BE.get(),
                 HangingSignRenderer::new
         );
         event.registerBlockEntityRenderer(
-                MFBlockEntities.MOD_SHELF_BE.get(),
+                MFBlockEntities.MF_SHELF_BE.get(),
                 ShelfRenderer::new
         );
     }

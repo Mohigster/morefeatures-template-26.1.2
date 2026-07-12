@@ -7,12 +7,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MFBlockFamilies {
+    private static BlockFamily azuriteFamily;
     private static BlockFamily bloodwoodFamily;
     private static BlockFamily taintedFamily;
     private static BlockFamily palmFamily;
     private static BlockFamily decrepitFamily;
     private static BlockFamily pallidFamily;
     private static final List<BlockFamily> FAMILIES = new ArrayList<>();
+
+    public static BlockFamily getAzuriteFamily(){
+        if(azuriteFamily == null) {
+            azuriteFamily = new BlockFamily.Builder(MFBlocks.AZURITE_BLOCK.get())
+                    .stairs(MFBlocks.AZURITE_STAIRS.get())
+                    .strippedLog(MFBlocks.RAW_AZURITE_BLOCK.get())
+                    .slab(MFBlocks.AZURITE_SLAB.get())
+                    .button(MFBlocks.AZURITE_BUTTON.get())
+                    .pressurePlate(MFBlocks.AZURITE_PRESSURE_PLATE.get())
+                    .door(MFBlocks.AZURITE_DOOR.get())
+                    .trapdoor(MFBlocks.AZURITE_TRAPDOOR.get())
+                    .sign(MFBlocks.AZURITE_SIGN.get(), MFBlocks.AZURITE_WALL_SIGN.get())
+                    .recipeGroupPrefix("azurite")
+                    .recipeUnlockedBy("has_azurite")
+                    .getFamily();
+        }
+        return azuriteFamily;
+    }
 
     public static BlockFamily getBloodwoodFamily(){
         if (bloodwoodFamily == null) {

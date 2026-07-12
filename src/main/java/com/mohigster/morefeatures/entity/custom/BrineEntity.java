@@ -41,24 +41,13 @@ public class BrineEntity extends Monster {
                 .add(Attributes.FOLLOW_RANGE, 48.0D);
     }
 
-//    @Override
-//    public boolean checkSpawnObstacle(net.minecraft.world.level.LevelReader level) {
-//        return super.checkSpawnObstacle(level);
-//    }
-
     // Custom movement mechanics to simulate a "floating" fluid elemental
     @Override
     public void aiStep() {
         super.aiStep();
         if (this.isInWater()) {
-            // Give it a buoyant, gliding feel in water
             Vec3 delta = this.getDeltaMovement();
             this.setDeltaMovement(delta.x, delta.y * 0.05D + 0.02D, delta.z);
-        }
-
-        // Add custom bubble/splash particles here to mimic the Blaze's smoke or Breeze's wind particles
-        if (this.level().isClientSide()) {
-            // Spawn splash/bubble particles around its body
         }
     }
 }

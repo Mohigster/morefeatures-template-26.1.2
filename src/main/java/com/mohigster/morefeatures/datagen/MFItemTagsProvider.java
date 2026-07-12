@@ -4,6 +4,7 @@ import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.references.MFBlockItemIds;
 import com.mohigster.morefeatures.references.MFItemIds;
 import com.mohigster.morefeatures.item.MFItems;
+import com.mohigster.morefeatures.tag.MFBlockItemTags;
 import com.mohigster.morefeatures.tag.MFItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -28,10 +29,10 @@ public class MFItemTagsProvider extends ItemTagsProvider {
         tag(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
                 .add(MFItems.BISMUTH_EQUIPMENT.get(0).getKey())
                 .add(MFItems.BISMUTH_EQUIPMENT.get(1).getKey())
-                .add(MFItems.BISMUTH_AXE.getKey())
-                .add(MFItems.BISMUTH_HOE.getKey())
-                .add(MFItems.BISMUTH_SHOVEL.getKey())
-                .add(MFItems.BISMUTH_SPEAR.getKey())
+                .add(MFItemIds.BISMUTH_AXE)
+                .add(MFItemIds.BISMUTH_HOE)
+                .add(MFItemIds.BISMUTH_SHOVEL)
+                .add(MFItemIds.BISMUTH_SPEAR)
                 .add(MFItems.BISMUTH_EQUIPMENT.get(2).getKey())
                 .add(MFItems.BISMUTH_EQUIPMENT.get(3).getKey())
                 .add(MFItems.BISMUTH_EQUIPMENT.get(4).getKey())
@@ -286,7 +287,19 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFBlockItemIds.BLOODWOOD.item())
                 .add(MFBlockItemIds.BLOODWOOD_LOG.item())
                 .add(MFBlockItemIds.STRIPPED_BLOODWOOD.item())
-                .add(MFBlockItemIds.STRIPPED_BLOODWOOD_LOG.item());
+                .add(MFBlockItemIds.STRIPPED_BLOODWOOD_LOG.item())
+                .add(MFBlockItemIds.PALM_WOOD.item())
+                .add(MFBlockItemIds.PALM_LOG.item())
+                .add(MFBlockItemIds.STRIPPED_PALM_WOOD.item())
+                .add(MFBlockItemIds.STRIPPED_PALM_LOG.item())
+                .add(MFBlockItemIds.DECREPIT_WOOD.item())
+                .add(MFBlockItemIds.DECREPIT_LOG.item())
+                .add(MFBlockItemIds.STRIPPED_DECREPIT_WOOD.item())
+                .add(MFBlockItemIds.STRIPPED_DECREPIT_LOG.item())
+                .add(MFBlockItemIds.PALLID_WOOD.item())
+                .add(MFBlockItemIds.PALLID_LOG.item())
+                .add(MFBlockItemIds.STRIPPED_PALLID_WOOD.item())
+                .add(MFBlockItemIds.STRIPPED_PALLID_LOG.item());
 
         tag(ItemTags.PLANKS)
                 .add(MFBlockItemIds.TAINTED_PLANKS.item())
@@ -321,5 +334,54 @@ public class MFItemTagsProvider extends ItemTagsProvider {
 
         tag(MFItemTags.TARGETING_WANDS)
                 .add(MFItems.ICE_WAND.getKey());
+
+        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_CARBON)
+                .add(ItemIds.COAL)
+                .addTag(ItemTags.SAPLINGS)
+                .addTag(ItemTags.LOGS)
+                .addTag(ItemTags.LOGS_THAT_BURN)
+                .addTag(ItemTags.WOOL)
+                .addTag(MFBlockItemTags.WOOL_VERTICAL_SLABS.item())
+                .addTag(ItemTags.PLANKS)
+                .addTag(MFItemTags.IS_FOOD)
+                .add(ItemIds.STICK)
+                .add(BlockItemIds.REDSTONE_DUST.item());
+
+        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP)
+                .addTag(MFItemTags.IS_NON_GOLD_RAW_METAL)
+                .addTag(MFItemTags.IS_NON_GOLD_INGOT);
+
+        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_RAW_BISMUTH_BLOCK)
+                .addTag(MFItemTags.IS_NON_GOLD_METAL_BLOCK);
+
+        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_SCRAP)
+                .addTag(ItemTags.GOLD_TOOL_MATERIALS)
+                .addTag(ItemTags.GOLD_ORES)
+                .addTag(MFItemTags.IS_GOLD)
+                .addTag(MFItemTags.IS_GOLD_ARMOR);
+
+        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_INGOT)
+                .add(BlockItemIds.RAW_GOLD_BLOCK.item())
+                .add(BlockItemIds.GOLD_BLOCK.item());
+
+        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_DIAMOND)
+                .add(ItemIds.EMERALD)
+                .add(ItemIds.AMETHYST_SHARD)
+                .add(MFItems.AZURITE.getKey())
+                .add(MFItems.FLUORITE.getKey());
+
+        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_LINGERING_POT)
+                .add(ItemIds.POTION)
+                .add(ItemIds.SPLASH_POTION);
+
+        tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULT)
+                .add(MFItems.CARBON_FIBER.getKey())
+                .add(MFItems.BISMUTH_SCRAP.getKey())
+                .add(MFBlockItemIds.RAW_BISMUTH_BLOCK.item())
+                .add(ItemIds.NETHERITE_SCRAP)
+                .add(ItemIds.NETHERITE_INGOT)
+                .add(ItemIds.DIAMOND)
+                .add(ItemIds.LINGERING_POTION)
+                .add(BlockItemIds.BEDROCK.item());
     }
 }

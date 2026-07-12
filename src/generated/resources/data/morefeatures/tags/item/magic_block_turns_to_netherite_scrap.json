@@ -1,0 +1,8 @@
+{
+  "values": [
+    "#minecraft:gold_tool_materials",
+    "#minecraft:gold_ores",
+    "#morefeatures:is_gold",
+    "#morefeatures:is_gold_armor"
+  ]
+}

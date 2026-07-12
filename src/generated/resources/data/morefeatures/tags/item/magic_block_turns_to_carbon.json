@@ -1,0 +1,14 @@
+{
+  "values": [
+    "minecraft:coal",
+    "#minecraft:saplings",
+    "#minecraft:logs",
+    "#minecraft:logs_that_burn",
+    "#minecraft:wool",
+    "#morefeatures:wool_vertical_slab",
+    "#minecraft:planks",
+    "#morefeatures:is_food",
+    "minecraft:stick",
+    "minecraft:redstone"
+  ]
+}

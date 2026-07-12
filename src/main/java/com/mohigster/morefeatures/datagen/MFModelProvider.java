@@ -230,8 +230,8 @@ public class MFModelProvider extends ModelProvider {
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.MUD_BRICK_VERTICAL_SLAB.get(), Blocks.MUD_BRICKS);
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.RESIN_BRICK_VERTICAL_SLAB.get(), Blocks.RESIN_BRICKS);
 
-        generateWeatheredAndWaxedCopper( // generates all models for every cut copper vertical slab, including all weathered states and their waxed variants.
-                // WeatheringCopperCollection.zipApply cannot be used because the waxed blocks don't have a unique texture, but it assumes they do, causing it to find no texture and default to the placeholder texture
+        MFBlockModelGenerators.generateWeatheredAndWaxedCopper( // generates all models for every cut copper vertical slab, including all weathered states and their waxed variants.
+                // WeatheringCopperCollection.zipApply cannot be used because the waxed blocks don't have a unique texture, but it assumes they do, causing it to find no texture for the waxed variants and default to the placeholder texture
                 blockModels,
                 MFBlocks.CUT_COPPER_VERTICAL_SLAB,
                 Blocks.CUT_COPPER,
@@ -250,12 +250,7 @@ public class MFModelProvider extends ModelProvider {
         // etc. because their models are created by the block family.
 
         blockModels.family(MFBlocks.AZURITE_BLOCK.get())
-                .stairs(MFBlocks.AZURITE_STAIRS.get())
-                .slab(MFBlocks.AZURITE_SLAB.get())
-                .button(MFBlocks.AZURITE_BUTTON.get())
-                .pressurePlate(MFBlocks.AZURITE_PRESSURE_PLATE.get())
-                .door(MFBlocks.AZURITE_DOOR.get())
-                .trapdoor(MFBlocks.AZURITE_TRAPDOOR.get());
+                .generateFor(MFBlockFamilies.getAzuriteFamily());
         blockModels.family(MFBlocks.FLUORITE_BLOCK.get())
                 .stairs(MFBlocks.FLUORITE_STAIRS.get())
                 .slab(MFBlocks.FLUORITE_SLAB.get());
@@ -269,24 +264,5 @@ public class MFModelProvider extends ModelProvider {
                 .generateFor(MFBlockFamilies.getDecrepitFamily());
         blockModels.family(MFBlocks.PALLID_PLANKS.get())
                 .generateFor(MFBlockFamilies.getPallidFamily());
-    }
-
-    private void generateWeatheredAndWaxedCopper(
-            BlockModelGenerators blockModels,
-            WeatheringCopperCollection<DeferredBlock<Block>> newBlockCollection,
-            WeatheringCopperCollection<Block> textureBaseCollection,
-            TriConsumer<BlockModelGenerators, Block, Block> modelGenerator
-    ) {
-        WeatheringCopper.WeatherState.forEach(weatherState -> {
-            Block unwaxedSlab = newBlockCollection.weathering().pick(weatherState).get();
-
-            /* Waxed and unwaxed copper look identical, so the two states can use the exact same base texture */
-            Block base = textureBaseCollection.weathering().pick(weatherState);
-
-            modelGenerator.accept(blockModels, unwaxedSlab, base);
-
-            Block waxedSlab = newBlockCollection.waxed().pick(weatherState).get();
-            modelGenerator.accept(blockModels, waxedSlab, base);
-        });
     }
 }

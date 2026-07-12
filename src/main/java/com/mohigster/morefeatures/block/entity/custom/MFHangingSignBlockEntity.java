@@ -15,6 +15,6 @@ public class MFHangingSignBlockEntity extends HangingSignBlockEntity {
     @NullMarked
     @Override
     public BlockEntityType<?> getType() {
-        return MFBlockEntities.MOD_HANGING_SIGN_BE.get();
+        return MFBlockEntities.MF_HANGING_SIGN_BE.get();
     }
 }

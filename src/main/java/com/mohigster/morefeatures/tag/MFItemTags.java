@@ -30,6 +30,14 @@ public final class MFItemTags {
     public static final TagKey<Item> MUSIC_DISCS = morefeaturesTag("music_discs");
     public static final TagKey<Item> AIMABLE_WANDS = morefeaturesTag("aimable_wands");
     public static final TagKey<Item> TARGETING_WANDS = morefeaturesTag("targeting_wands");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_CARBON = morefeaturesTag("magic_block_turns_to_carbon");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP = morefeaturesTag("magic_block_turns_to_bismuth_scrap");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_RAW_BISMUTH_BLOCK = morefeaturesTag("magic_block_turns_to_raw_bismuth_block");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_NETHERITE_SCRAP = morefeaturesTag("magic_block_turns_to_netherite_scrap");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_NETHERITE_INGOT = morefeaturesTag("magic_block_turns_to_netherite_ingot");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_DIAMOND = morefeaturesTag("magic_block_turns_to_diamond");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_LINGERING_POT = morefeaturesTag("magic_block_turns_to_lingering_pot");
+    public static final TagKey<Item> MAGIC_BLOCK_TRANSMUTATION_RESULT = morefeaturesTag("magic_block_transmutation_result");
 
     private static TagKey<Item> morefeaturesTag(String name) {
         return create(MFIdentifier.withMfNamespace(name));

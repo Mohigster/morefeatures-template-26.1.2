@@ -6,6 +6,17 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.WoodType;
 
 public class MFWoodType {
+    public static final WoodType AZURITE = WoodType.register( // Not *really* a wood type, but it is necessary to add the azurite sign
+            new WoodType(
+                    MoreFeatures.MODID + ":azurite",
+                    MFBlockSetType.AZURITE,
+                    SoundType.AMETHYST,
+                    SoundType.AMETHYST_CLUSTER,
+                    SoundEvents.IRON_TRAPDOOR_CLOSE,
+                    SoundEvents.IRON_TRAPDOOR_OPEN
+            )
+    );
+
     public static final WoodType PALM = WoodType.register(
             new WoodType(
                     MoreFeatures.MODID + ":palm",

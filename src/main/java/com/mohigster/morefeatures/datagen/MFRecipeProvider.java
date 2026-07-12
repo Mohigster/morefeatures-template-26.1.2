@@ -502,6 +502,13 @@ public class MFRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
                 .save(output);
 
+        // Signs and Hanging signs
+
+        specialSignBuilder(MFItems.AZURITE_SIGN.get(), Ingredient.of(MFItems.AZURITE.get()), Ingredient.of(MFItems.BRINE_ROD.get()))
+                .group("azurite")
+                .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
+                .save(output);
+
 
         // Bismuth smithing recipes
 
@@ -622,11 +629,11 @@ public class MFRecipeProvider extends RecipeProvider {
 
         // Generates the recipe for all states that cut copper vertical slabs can come in, for stonecutting from a regular copper block or a cut copper block, AND the crafting table recipe
 
-        // Thank goodness for the zipApply method. Made this so easy to do.
-
-        WeatheringCopperCollection.zipApply(MFBlocks.CUT_COPPER_VERTICAL_SLAB, Blocks.COPPER_BLOCK, (cutSlab, material) -> this.stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, cutSlab, material, 8));
-        WeatheringCopperCollection.zipApply(MFBlocks.CUT_COPPER_VERTICAL_SLAB, Blocks.CUT_COPPER, (cutSlab, material) -> this.stonecutterResultFromBase(RecipeCategory.BUILDING_BLOCKS, cutSlab, material, 2));
+        WeatheringCopperCollection.zipApply(MFBlocks.CUT_COPPER_VERTICAL_SLAB, Blocks.COPPER_BLOCK, this::verticalSlabStonecuttingFromCopper);
+        WeatheringCopperCollection.zipApply(MFBlocks.CUT_COPPER_VERTICAL_SLAB, Blocks.CUT_COPPER, this::verticalSlabStonecutting);
         WeatheringCopperCollection.zipApply(MFBlocks.CUT_COPPER_VERTICAL_SLAB, Blocks.CUT_COPPER, this::verticalSlabCrafting);
+
+        // And this line generates the recipe for all different colours of wool vertical slabs!
 
         ColorCollection.VALUES.forEach(colour ->
                 verticalSlabCrafting(MFBlocks.WOOL_VERTICAL_SLAB.pick(colour).get(), Blocks.WOOL.pick(colour)));
@@ -727,7 +734,7 @@ public class MFRecipeProvider extends RecipeProvider {
                 Ingredient.of(MFItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE),
                 Ingredient.of(base),
                 this.tag(MFItemTags.BISMUTH_TOOL_MATERIALS),
-                category, result).unlocks("has_bismuth_ingot", this.has(MFItemTags.BISMUTH_TOOL_MATERIALS)).save(this.output, getItemName(result) + "_smithing");
+                category, result).unlocks("has_bismuth_ingot", this.has(MFItemTags.BISMUTH_TOOL_MATERIALS)).save(output, MoreFeatures.MODID + ":" + getItemName(result) + "_smithing");
     }
 
     protected void verticalSlabCrafting(ItemLike verticalSlab, ItemLike fullBlock) {
@@ -743,7 +750,17 @@ public class MFRecipeProvider extends RecipeProvider {
     protected void verticalSlabStonecutting(ItemLike verticalSlab, ItemLike fullBlock) {
         SingleItemRecipeBuilder.stonecutting(Ingredient.of(fullBlock), RecipeCategory.BUILDING_BLOCKS, verticalSlab, 2)
                 .unlockedBy(getHasName(fullBlock), has(fullBlock))
-                .save(output, getConversionRecipeName(verticalSlab, fullBlock) + "_stonecutting");
+                .save(output, MoreFeatures.MODID + ":" + getConversionRecipeName(verticalSlab, fullBlock) + "_stonecutting");
+    }
+
+    protected void verticalSlabStonecuttingFromCopper(ItemLike verticalSlab, ItemLike fullBlock) {
+        SingleItemRecipeBuilder.stonecutting(Ingredient.of(fullBlock), RecipeCategory.BUILDING_BLOCKS, verticalSlab, 8)
+                .unlockedBy(getHasName(fullBlock), has(fullBlock))
+                .save(output, MoreFeatures.MODID + ":" + getConversionRecipeName(verticalSlab, fullBlock) + "_stonecutting");
+    }
+
+    protected RecipeBuilder specialSignBuilder(ItemLike result, Ingredient planks, Ingredient stick) {
+        return this.shaped(RecipeCategory.DECORATIONS, result, 3).group("sign").define('#', planks).define('X', stick).pattern("###").pattern("###").pattern(" X ");
     }
 }
 

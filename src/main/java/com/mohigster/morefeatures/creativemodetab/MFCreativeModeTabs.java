@@ -271,7 +271,7 @@ public class MFCreativeModeTabs {
                 output.accept(MFBlocks.PALLID_SAPLING);
                 output.accept(MFBlocks.PALLID_SHELF);
                 output.accept(MFItems.PALLID_SIGN);
-                output.accept(MFItems.PALM_HANGING_SIGN);
+                output.accept(MFItems.PALLID_HANGING_SIGN);
             })
             .build()
     );

@@ -249,6 +249,12 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
 
         // SIGN
 
+        add(MFBlocks.AZURITE_SIGN.get(),
+                createSingleItemTable(MFItems.AZURITE_SIGN.asItem()));
+
+        add(MFBlocks.AZURITE_WALL_SIGN.get(),
+                createSingleItemTable(MFItems.AZURITE_SIGN.asItem()));
+
         add(MFBlocks.BLOODWOOD_SIGN.get(),
                 createSingleItemTable(MFItems.BLOODWOOD_SIGN.asItem()));
 

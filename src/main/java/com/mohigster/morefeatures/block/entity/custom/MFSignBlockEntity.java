@@ -8,11 +8,11 @@ import net.minecraft.world.level.block.state.BlockState;
 
 public class MFSignBlockEntity extends SignBlockEntity {
     public MFSignBlockEntity(BlockPos worldPosition, BlockState blockState) {
-        super(MFBlockEntities.MOD_SIGN_BE.get(), worldPosition, blockState);
+        super(MFBlockEntities.MF_SIGN_BE.get(), worldPosition, blockState);
     }
 
     @Override
     public BlockEntityType<?> getType() {
-        return MFBlockEntities.MOD_SIGN_BE.get();
+        return MFBlockEntities.MF_SIGN_BE.get();
     }
 }

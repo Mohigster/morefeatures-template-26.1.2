@@ -13,6 +13,6 @@ public class MFShelfBlockEntity extends ShelfBlockEntity {
 
     @Override
     public BlockEntityType<?> getType() {
-        return MFBlockEntities.MOD_SHELF_BE.get();
+        return MFBlockEntities.MF_SHELF_BE.get();
     }
 }

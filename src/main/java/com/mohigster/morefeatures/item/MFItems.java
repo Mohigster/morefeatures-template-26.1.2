@@ -344,6 +344,15 @@ public class MFItems {
 
     // Sign items
 
+    public static final DeferredItem<SignItem> AZURITE_SIGN =
+            registerItem(MFItemIds.AZURITE_SIGN, properties ->
+                    new SignItem(
+                            MFBlocks.AZURITE_SIGN.get(),
+                            MFBlocks.AZURITE_WALL_SIGN.get(),
+                            properties.stacksTo(16)
+                    )
+            );
+
     public static final DeferredItem<SignItem> BLOODWOOD_SIGN =
             ITEMS.register("bloodwood_sign", () ->
                     new SignItem(
