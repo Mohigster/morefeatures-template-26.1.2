@@ -60,6 +60,7 @@ public class MFBlockEntities {
             BLOCK_ENTITIES.register("mod_shelf_be", () -> new BlockEntityType<>(
                     MFShelfBlockEntity::new,
                     MFBlocks.AZURITE_SHELF.get(),
+                    MFBlocks.FLUORITE_SHELF.get(),
                     MFBlocks.BLOODWOOD_SHELF.get(),
                     MFBlocks.TAINTED_SHELF.get(),
                     MFBlocks.PALM_SHELF.get(),
