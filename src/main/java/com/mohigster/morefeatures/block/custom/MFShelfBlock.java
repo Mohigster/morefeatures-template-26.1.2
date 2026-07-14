@@ -7,7 +7,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.world.entity.Entity;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -43,12 +43,11 @@ public class MFShelfBlock extends ShelfBlock {
                 }
 
                 level.setBlock(pos, newState, 3);
-                this.getRedstoneSound(level, pos, newState);
+                this.playRedstoneSound(level, pos, newState);
                 level.gameEvent(signal ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos, GameEvent.Context.of(newState));
             }
         }
     }
-
 
     // Identical to the private playSound method within ShelfBlock
     private void playSound(LevelAccessor level, BlockPos pos, SoundEvent sound) {
@@ -56,13 +55,17 @@ public class MFShelfBlock extends ShelfBlock {
     }
 
     // New method that checks which sound to use when the shelf is powered by redstone
-    private void getRedstoneSound(LevelAccessor level, BlockPos pos, BlockState block){
-        boolean signal = level.hasNeighborSignal(pos);
-        if (block.is(MFBlockTags.GEMSTONE_SHELVES)){
+    private void playRedstoneSound(LevelAccessor level, BlockPos pos, BlockState state){
+        if (state.is(MFBlockTags.GEMSTONE_SHELVES)){
             this.playSound(level, pos, SoundEvents.AMETHYST_BLOCK_CHIME);
         } else {
-            this.playSound(level, pos, signal ? SoundEvents.SHELF_ACTIVATE : SoundEvents.SHELF_DEACTIVATE);
+            this.playSound(level, pos, state.getValue(POWERED) ? SoundEvents.SHELF_ACTIVATE : SoundEvents.SHELF_DEACTIVATE);
         }
+    }
+
+    @Override
+    public boolean isConnectable(BlockState state) {
+        return (state.is(BlockTags.WOODEN_SHELVES) || state.is(MFBlockTags.GEMSTONE_SHELVES)) && state.hasProperty(POWERED) && state.getValue(POWERED);
     }
 
     @NullMarked

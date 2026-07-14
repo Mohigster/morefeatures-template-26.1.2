@@ -435,6 +435,13 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.ROSE.block())
                 .add(MFBlockItemIds.BLUE_ROSE.block());
 
+        tag(BlockTags.WOODEN_SHELVES)
+                .add(MFBlockItemIds.BLOODWOOD_SHELF.block())
+                .add(MFBlockItemIds.TAINTED_SHELF.block())
+                .add(MFBlockItemIds.PALM_SHELF.block())
+                .add(MFBlockItemIds.DECREPIT_SHELF.block())
+                .add(MFBlockItemIds.PALLID_SHELF.block());
+
         tag(MFBlockTags.GEMSTONE_SHELVES)
                 .add(MFBlockItemIds.AZURITE_SHELF.block());
 
