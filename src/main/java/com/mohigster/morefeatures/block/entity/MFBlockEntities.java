@@ -19,7 +19,7 @@ public class MFBlockEntities {
                     CompressorBlockEntity::new, MFBlocks.COMPRESSOR_BLOCK.get()));
 
     public static final Supplier<BlockEntityType<MFSignBlockEntity>> MF_SIGN_BE =
-            BLOCK_ENTITIES.register("mod_sign_be", () -> new BlockEntityType<>(
+            BLOCK_ENTITIES.register("mf_sign_be", () -> new BlockEntityType<>(
                     MFSignBlockEntity::new,
                     MFBlocks.AZURITE_SIGN.get(),
                     MFBlocks.AZURITE_WALL_SIGN.get(),
@@ -38,7 +38,7 @@ public class MFBlockEntities {
             ));
 
     public static final Supplier<BlockEntityType<MFHangingSignBlockEntity>> MF_HANGING_SIGN_BE =
-            BLOCK_ENTITIES.register("mod_hanging_sign_be", () -> new BlockEntityType<>(
+            BLOCK_ENTITIES.register("mf_hanging_sign_be", () -> new BlockEntityType<>(
                     MFHangingSignBlockEntity::new,
                     MFBlocks.AZURITE_HANGING_SIGN.get(),
                     MFBlocks.AZURITE_WALL_HANGING_SIGN.get(),
@@ -57,7 +57,7 @@ public class MFBlockEntities {
             ));
 
     public static final Supplier<BlockEntityType<MFShelfBlockEntity>> MF_SHELF_BE =
-            BLOCK_ENTITIES.register("mod_shelf_be", () -> new BlockEntityType<>(
+            BLOCK_ENTITIES.register("mf_shelf_be", () -> new BlockEntityType<>(
                     MFShelfBlockEntity::new,
                     MFBlocks.AZURITE_SHELF.get(),
                     MFBlocks.FLUORITE_SHELF.get(),
