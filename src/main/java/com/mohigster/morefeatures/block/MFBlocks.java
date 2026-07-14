@@ -22,7 +22,6 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
@@ -279,65 +278,42 @@ public class MFBlocks {
     //———————————————————————————————————————Fluorite Blocks—————————————————————————————————————————————————————————————————————————
 
     public static final DeferredBlock<Block> FLUORITE_ORE = registerBlock(MFBlockItemIds.FLUORITE_ORE,
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
-                    .strength(4f, 16f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.STONE)
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .isRedstoneConductor(MFBlocks::always)
-            ));
+            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            _ -> Properties.ofFullCopy(AZURITE_ORE.get())
+    );
 
     public static final DeferredBlock<Block> DEEPSLATE_FLUORITE_ORE = registerBlock(MFBlockItemIds.DEEPSLATE_FLUORITE_ORE,
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
-                    .strength(6f, 24f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.DEEPSLATE)
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .isRedstoneConductor(MFBlocks::always)
-            ));
+            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            _ -> Properties.ofFullCopy(DEEPSLATE_AZURITE_ORE.get())
+    );
 
     public static final DeferredBlock<Block> NETHER_FLUORITE_ORE = registerBlock(MFBlockItemIds.NETHER_FLUORITE_ORE,
             props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            _ -> Properties.ofFullCopy(FLUORITE_ORE.get()).sound(SoundType.NETHER_ORE)
+            _ -> Properties.ofFullCopy(NETHER_AZURITE_ORE.get())
     );
 
     public static final DeferredBlock<Block> END_FLUORITE_ORE = registerBlock(MFBlockItemIds.END_FLUORITE_ORE,
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
-                    .strength(4F, 16F)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.STONE)
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .isRedstoneConductor(MFBlocks::always)
-            ));
+            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            _ -> Properties.ofFullCopy(END_AZURITE_ORE.get()));
 
     public static final DeferredBlock<Block> FLUORITE_BLOCK = registerBlock(MFBlockItemIds.FLUORITE_BLOCK,
-            properties -> new Block(properties
-                    .strength(4f, 4f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)
-            ));
+            Block::new,
+            _ -> Properties.ofFullCopy(AZURITE_BLOCK.get()).mapColor(MapColor.COLOR_GREEN)
+    );
 
     public static final DeferredBlock<Block> RAW_FLUORITE_BLOCK = registerBlock(MFBlockItemIds.RAW_FLUORITE_BLOCK,
-            properties -> new Block(properties
-                    .strength(4f, 4f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)
-            ));
+            Block::new,
+            _ -> Properties.ofFullCopy(FLUORITE_BLOCK.get())
+    );
 
     public static final DeferredBlock<Block> FLUORITE_STAIRS = registerBlock(MFBlockItemIds.FLUORITE_STAIRS,
-            properties -> new StairBlock(MFBlocks.FLUORITE_BLOCK.get().defaultBlockState(), properties
-                    .strength(3f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)
-                    .isRedstoneConductor(MFBlocks::never)
-            ));
+            props -> new StairBlock(MFBlocks.FLUORITE_BLOCK.get().defaultBlockState(), props),
+            _ -> Properties.ofFullCopy(FLUORITE_BLOCK.get())
+    );
 
     public static final DeferredBlock<Block> FLUORITE_SLAB = registerBlock(MFBlockItemIds.FLUORITE_SLAB,
-            properties -> new SlabBlock(properties
-                    .strength(3f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)
-            ));
+            SlabBlock::new,
+            _ -> Properties.ofFullCopy(FLUORITE_BLOCK.get()));
 
     public static final DeferredBlock<Block> FLUORITE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.FLUORITE_VERTICAL_SLAB,
             false,
@@ -371,25 +347,16 @@ public class MFBlocks {
     );
 
     public static final DeferredBlock<Block> FLUORITE_DOOR = registerBlock(MFBlockItemIds.FLUORITE_DOOR,
-            properties -> new DoorBlock(MFBlockSetType.FLUORITE, properties
-                    .strength(2F, 6F)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor(MFBlocks::never)
-            ));
+            properties -> new DoorBlock(MFBlockSetType.FLUORITE, properties),
+            _ -> Properties.ofFullCopy(AZURITE_DOOR.get()));
 
     public static final DeferredBlock<Block> FLUORITE_TRAPDOOR = registerBlock(MFBlockItemIds.FLUORITE_TRAPDOOR,
-            properties -> new TrapDoorBlock(MFBlockSetType.FLUORITE, properties
-                    .strength(2F, 6F)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor(MFBlocks::never)
-            ));
+            props -> new TrapDoorBlock(MFBlockSetType.FLUORITE, props),
+            _ -> Properties.ofFullCopy(AZURITE_TRAPDOOR.get())
+    );
 
     public static final DeferredBlock<Block> FLUORITE_SIGN = registerBlockWithoutItem(MFBlockIds.FLUORITE_SIGN,
-            properties -> new MFStandingSignBlock(MFWoodType.FLUORITE, properties),
+            props -> new MFStandingSignBlock(MFWoodType.FLUORITE, props),
             _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
     );
 
