@@ -433,7 +433,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.PALLID_SHELF.block());
 
         tag(MFBlockTags.GEMSTONE_SHELVES)
-                .add(MFBlockItemIds.AZURITE_SHELF.block());
+                .add(MFBlockItemIds.AZURITE_SHELF.block())
+                .add(MFBlockItemIds.FLUORITE_SHELF.block());
 
         tag(BlockTags.SPELEOTHEMS)
                 .add(MFBlockItemIds.ICICLE.block());
