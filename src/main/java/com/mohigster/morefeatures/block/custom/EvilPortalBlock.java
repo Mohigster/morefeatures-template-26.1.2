@@ -21,8 +21,11 @@ import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.level.storage.LevelData;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class EvilPortalBlock extends Block implements Portal {
@@ -30,17 +33,18 @@ public class EvilPortalBlock extends Block implements Portal {
         super(properties);
     }
 
+    @NullMarked
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if(!level.isClientSide()) {
-            player.teleport(getPortalDestination(((ServerLevel) level), player, pos));
+            player.teleport(Objects.requireNonNull(getPortalDestination(((ServerLevel) level), player, pos)));
         }
 
         return InteractionResult.SUCCESS;
     }
 
     @Override
-    public @Nullable TeleportTransition getPortalDestination(ServerLevel currentLevel, Entity entity, BlockPos portalEntryPos) {
+    public @Nullable TeleportTransition getPortalDestination(ServerLevel currentLevel, @NonNull Entity entity, @NonNull BlockPos portalEntryPos) {
         ResourceKey<Level> currentDimension = currentLevel.dimension();
         boolean isLeavingCustomDim = currentDimension == MFDimensions.EVILDIM_LEVEL_KEY;
 

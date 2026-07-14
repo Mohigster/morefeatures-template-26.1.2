@@ -29,7 +29,7 @@ public class MFShelfBlock extends ShelfBlock {
         this.isFlammable = isFlammable;
     }
 
-    // The only difference between this and the super method is that it always plays the vanilla shelf sounds
+    // The only difference between this and the super method is that vanilla always plays the vanilla shelf sounds
     // Now, it will play gemstone shelf sounds if the shelf is a gemstone shelf
     @NullMarked
     @Override
@@ -65,7 +65,14 @@ public class MFShelfBlock extends ShelfBlock {
 
     @Override
     public boolean isConnectable(BlockState state) {
-        return (state.is(BlockTags.WOODEN_SHELVES) || state.is(MFBlockTags.GEMSTONE_SHELVES)) && state.hasProperty(POWERED) && state.getValue(POWERED);
+        if (!(state.hasProperty(POWERED) && state.getValue(POWERED))){
+            return false;
+        }
+
+        boolean bothGemstoneShelves = this.defaultBlockState().is(MFBlockTags.GEMSTONE_SHELVES) && state.is(MFBlockTags.GEMSTONE_SHELVES);
+        boolean bothWoodenShelves = this.defaultBlockState().is(BlockTags.WOODEN_SHELVES) && state.is(BlockTags.WOODEN_SHELVES);
+
+        return bothWoodenShelves || bothGemstoneShelves;
     }
 
     @NullMarked

@@ -1,7 +1,6 @@
 package com.mohigster.morefeatures.block.custom;
 
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.UnmodifiableIterator;
 import com.mojang.serialization.MapCodec;
 
 import java.util.Optional;
@@ -34,6 +33,7 @@ import net.minecraft.world.level.ExplosionDamageCalculator;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.Level.ExplosionInteraction;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -44,6 +44,8 @@ import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.level.storage.LevelData.RespawnData;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 public class VoidAnchorBlock extends Block {
     public static final MapCodec<VoidAnchorBlock> CODEC = simpleCodec(VoidAnchorBlock::new);
@@ -51,13 +53,9 @@ public class VoidAnchorBlock extends Block {
     public static final int MIN_CHARGES = 0;
     public static final int MAX_CHARGES = 4;
 
-    // Reuses the same block state property as the vanilla Respawn Anchor.
-    // If you want a separate property key, declare a new IntegerProperty here instead.
+
     public static final IntegerProperty CHARGE = BlockStateProperties.RESPAWN_ANCHOR_CHARGES;
 
-    // The dimension this anchor is valid in. Change to your own ResourceKey if needed.
-    public static final net.minecraft.resources.ResourceKey<net.minecraft.world.level.dimension.DimensionType>
-            VALID_DIMENSION_TYPE = net.minecraft.world.level.dimension.BuiltinDimensionTypes.END;
 
     private static final ImmutableList<Vec3i> RESPAWN_HORIZONTAL_OFFSETS = ImmutableList.of(
             new Vec3i(0, 0, -1),
@@ -78,7 +76,7 @@ public class VoidAnchorBlock extends Block {
             .build();
 
     @Override
-    public MapCodec<VoidAnchorBlock> codec() {
+    public @NonNull MapCodec<VoidAnchorBlock> codec() {
         return CODEC;
     }
 
@@ -91,6 +89,7 @@ public class VoidAnchorBlock extends Block {
     // Charging — right-click with an Ender Pearl
     // -------------------------------------------------------------------------
 
+    @NullMarked
     @Override
     protected InteractionResult useItemOn(
             ItemStack itemStack,
@@ -120,6 +119,7 @@ public class VoidAnchorBlock extends Block {
     // Setting the spawn point — right-click with empty hand
     // -------------------------------------------------------------------------
 
+    @NullMarked
     @Override
     protected InteractionResult useWithoutItem(
             BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult
@@ -133,8 +133,8 @@ public class VoidAnchorBlock extends Block {
             return InteractionResult.CONSUME;
         }
 
-        if (!canSetSpawn(serverLevel)) {
-            this.explode(state, serverLevel, pos);
+        if (cannotSetSpawn(serverLevel)) {
+            this.explode(serverLevel, pos);
             return InteractionResult.SUCCESS_SERVER;
         }
 
@@ -179,8 +179,9 @@ public class VoidAnchorBlock extends Block {
      * environment attribute — it checks the dimension directly so there is
      * no need to register a custom attribute.
      */
-    public static boolean canSetSpawn(ServerLevel level) {
-        return level.dimension().equals(Level.END);
+
+    public static boolean cannotSetSpawn(ServerLevel level) {
+        return !level.dimension().equals(Level.END);
     }
 
     // -------------------------------------------------------------------------
@@ -205,7 +206,7 @@ public class VoidAnchorBlock extends Block {
     // Explosion — triggered when used outside the End
     // -------------------------------------------------------------------------
 
-    private void explode(BlockState state, ServerLevel level, BlockPos pos) {
+    private void explode(ServerLevel level, BlockPos pos) {
         level.removeBlock(pos, false);
 
         boolean anyWaterNeighbors = Plane.HORIZONTAL.stream()
@@ -214,13 +215,15 @@ public class VoidAnchorBlock extends Block {
         final boolean inWater = anyWaterNeighbors || level.getFluidState(pos.above()).is(FluidTags.WATER);
 
         ExplosionDamageCalculator damageCalculator = new ExplosionDamageCalculator() {
+            @NullMarked
             @Override
+            @SuppressWarnings("deprecation")
             public Optional<Float> getBlockExplosionResistance(
                     Explosion explosion, BlockGetter levelx, BlockPos testPos,
                     BlockState block, FluidState fluid
             ) {
                 return testPos.equals(pos) && inWater
-                        ? Optional.of(net.minecraft.world.level.block.Blocks.WATER.getExplosionResistance())
+                        ? Optional.of(Blocks.WATER.getExplosionResistance())
                         : super.getBlockExplosionResistance(explosion, levelx, testPos, block, fluid);
             }
         };
@@ -250,6 +253,7 @@ public class VoidAnchorBlock extends Block {
     // Particles & ambient sound
     // -------------------------------------------------------------------------
 
+    @NullMarked
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (state.getValue(CHARGE) == 0) return;
@@ -276,7 +280,7 @@ public class VoidAnchorBlock extends Block {
     }
 
     @Override
-    protected boolean hasAnalogOutputSignal(BlockState state) {
+    protected boolean hasAnalogOutputSignal(@NonNull BlockState state) {
         return true;
     }
 
@@ -285,11 +289,13 @@ public class VoidAnchorBlock extends Block {
         return Mth.floor((state.getValue(CHARGE) - MIN_CHARGES) / (float) MAX_CHARGES * maximum);
     }
 
+    @NullMarked
     @Override
     protected int getAnalogOutputSignal(BlockState state, Level level, BlockPos pos, Direction direction) {
         return getScaledChargeLevel(state, 15);
     }
 
+    @NullMarked
     @Override
     protected boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
@@ -308,9 +314,8 @@ public class VoidAnchorBlock extends Block {
             EntityType<?> type, CollisionGetter level, BlockPos pos, boolean checkDangerous
     ) {
         MutableBlockPos mutable = new MutableBlockPos();
-        UnmodifiableIterator<Vec3i> it = RESPAWN_OFFSETS.iterator();
-        while (it.hasNext()) {
-            mutable.set(pos).move(it.next());
+        for (Vec3i respawnOffset : RESPAWN_OFFSETS) {
+            mutable.set(pos).move(respawnOffset);
             Vec3 position = DismountHelper.findSafeDismountLocation(type, level, mutable, checkDangerous);
             if (position != null) return Optional.of(position);
         }

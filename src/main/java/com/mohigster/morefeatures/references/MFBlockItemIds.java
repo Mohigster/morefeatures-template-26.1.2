@@ -130,6 +130,7 @@ public class MFBlockItemIds {
     public static final BlockItemId FLUORITE_BUTTON = createId("fluorite_button");
     public static final BlockItemId FLUORITE_DOOR = createId("fluorite_door");
     public static final BlockItemId FLUORITE_TRAPDOOR = createId("fluorite_trapdoor");
+    public static final BlockItemId FLUORITE_SHELF = createId("fluorite_shelf");
 
     // --- Aluminium ---
     public static final BlockItemId ALUMINIUM_BLOCK = createId("aluminium_block");

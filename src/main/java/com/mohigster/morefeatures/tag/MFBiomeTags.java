@@ -8,6 +8,8 @@ import net.minecraft.world.level.biome.Biome;
 
 public class MFBiomeTags {
     public static final TagKey<Biome> DESERT = morefeaturesTag("desert");
+    public static final TagKey<Biome> EVIL_FOREST = morefeaturesTag("evil_forest");
+    public static final TagKey<Biome> END_FOREST = morefeaturesTag("end_forest");
 
     private static TagKey<Biome> morefeaturesTag(String name) {
         return create(MFIdentifier.withMfNamespace(name));

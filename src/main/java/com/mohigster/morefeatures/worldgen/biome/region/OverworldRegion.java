@@ -22,17 +22,17 @@ public class OverworldRegion extends Region {
 
     private static final float BLOODWOOD_TEMP_MIN = 0.20F;
     private static final float BLOODWOOD_TEMP_MAX = 0.25F;
-    private static final float BLOODWOOD_EROSION_MIN = 0.45F;
+    private static final float BLOODWOOD_EROSION_MIN = 0.43F;
     private static final float BLOODWOOD_EROSION_MAX = 0.48F;
-    private static final float BLOODWOOD_WEIRD_MIN = -0.6F;
-    private static final float BLOODWOOD_WEIRD_MAX = -0.5F;
+    private static final float BLOODWOOD_WEIRD_MIN = -0.7F;
+    private static final float BLOODWOOD_WEIRD_MAX = -0.6F;
 
     private static final float TAINTED_TEMP_MIN = -0.25F;
     private static final float TAINTED_TEMP_MAX = -0.20F;
-    private static final float TAINTED_EROSION_MIN = 0.65F;
+    private static final float TAINTED_EROSION_MIN = 0.63F;
     private static final float TAINTED_EROSION_MAX = 0.68F;
-    private static final float TAINTED_WEIRD_MIN = 0.55F;
-    private static final float TAINTED_WEIRD_MAX = 0.6F;
+    private static final float TAINTED_WEIRD_MIN = 0.6F;
+    private static final float TAINTED_WEIRD_MAX = 0.7F;
 
     private static final float ICE_CAVE_TEMP_MIN = -1.0F;
     private static final float ICE_CAVE_TEMP_MAX = -0.85F;

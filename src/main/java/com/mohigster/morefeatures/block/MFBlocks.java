@@ -63,6 +63,7 @@ public class MFBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.IRON)
                     .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
+                    .isValidSpawn(MFBlocks::always)
                     .isRedstoneConductor(MFBlocks::always)
             ));
 
@@ -103,41 +104,40 @@ public class MFBlocks {
     );
 
     //———————————————————————————————————————Bismuth Blocks——————————————————————————————————————————————————————————————————————————
-    public static final DeferredBlock<Block> BISMUTH_ORE = registerBlock(MFBlockItemIds.BISMUTH_ORE,
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
-                    .strength(35f, 1200f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.STONE)
-            ));
-
     public static final DeferredBlock<Block> BISMUTH_BLOCK = registerBlock(MFBlockItemIds.BISMUTH_BLOCK,
             properties -> new Block(properties
-                    .strength(60f, 1200f)
+                    .strength(60F, 1200F)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
+                    .mapColor(MapColor.COLOR_MAGENTA)
+                    .instrument(NoteBlockInstrument.HARP)
+                    .isRedstoneConductor(MFBlocks::always)
+                    .isValidSpawn(MFBlocks::always)
+                    .isViewBlocking(MFBlocks::always)
+                    .isSuffocating(MFBlocks::always)
             ));
 
+    public static final DeferredBlock<Block> BISMUTH_ORE = registerBlock(MFBlockItemIds.BISMUTH_ORE,
+            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            _ -> Properties.ofFullCopy(BISMUTH_BLOCK.get())
+                    .sound(SoundType.STONE)
+                    .mapColor(Blocks.END_STONE.defaultMapColor())
+    );
+
     public static final DeferredBlock<Block> RAW_BISMUTH_BLOCK = registerBlock(MFBlockItemIds.RAW_BISMUTH_BLOCK,
-            properties -> new Block(properties
-                    .strength(50f, 1200f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)
-            ));
+            Block::new,
+            _ -> Properties.ofFullCopy(BISMUTH_BLOCK.get())
+    );
 
     //———————————————————————————————————————Azurite Blocks——————————————————————————————————————————————————————————————————————————
     public static final DeferredBlock<Block> AZURITE_ORE = registerBlock(MFBlockItemIds.AZURITE_ORE,
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
-                    .strength(4f, 4f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.STONE)
-            ));
+            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            _ -> Properties.ofFullCopy(BISMUTH_ORE.get()).mapColor(MapColor.STONE));
 
     public static final DeferredBlock<Block> DEEPSLATE_AZURITE_ORE = registerBlock(MFBlockItemIds.DEEPSLATE_AZURITE_ORE,
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
-                    .strength(4f, 4f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.DEEPSLATE)
-            ));
+            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            _ -> Properties.ofFullCopy(AZURITE_ORE.get()).sound(SoundType.DEEPSLATE)
+    );
 
     public static final DeferredBlock<Block> NETHER_AZURITE_ORE = registerBlock(MFBlockItemIds.NETHER_AZURITE_ORE,
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
@@ -160,6 +160,9 @@ public class MFBlocks {
                     .sound(SoundType.AMETHYST)
                     .instrument(NoteBlockInstrument.CHIME)
                     .isRedstoneConductor(MFBlocks::always)
+                    .isValidSpawn(MFBlocks::always)
+                    .isSuffocating(MFBlocks::always)
+                    .isViewBlocking(MFBlocks::always)
                     .mapColor(MapColor.COLOR_BLUE)
             ));
 
@@ -207,6 +210,9 @@ public class MFBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
                     .isRedstoneConductor(MFBlocks::never)
+                    .isViewBlocking(MFBlocks::never)
+                    .isSuffocating(MFBlocks::never)
+                    .isValidSpawn(MFBlocks::never)
                     .noOcclusion()
                     .forceSolidOn()
             ));
@@ -222,7 +228,7 @@ public class MFBlocks {
                     .requiresCorrectToolForDrops()
                     .noOcclusion()
                     .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor(MFBlocks::never) // Same with doors / trapdoors
+                    .isRedstoneConductor(MFBlocks::never)
             ));
 
     public static final DeferredBlock<Block> AZURITE_TRAPDOOR = registerBlock(MFBlockItemIds.AZURITE_TRAPDOOR,
@@ -258,9 +264,11 @@ public class MFBlocks {
 
     public static final DeferredBlock<Block> AZURITE_SHELF = registerBlock(MFBlockItemIds.AZURITE_SHELF,
             props -> new MFShelfBlock(false, props),
-            _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF)
-                    .mapColor(MapColor.COLOR_BLUE)
+            _ -> BlockBehaviour.Properties.ofFullCopy(RAW_AZURITE_BLOCK.get())
                     .sound(SoundType.MEDIUM_AMETHYST_BUD)
+                    .isValidSpawn(MFBlocks::never)
+                    .isRedstoneConductor(MFBlocks::never)
+                    .isSuffocating(MFBlocks::never)
     );
 
     //———————————————————————————————————————Fluorite Blocks—————————————————————————————————————————————————————————————————————————
@@ -284,13 +292,9 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> NETHER_FLUORITE_ORE = registerBlock(MFBlockItemIds.NETHER_FLUORITE_ORE,
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
-                    .strength(4F, 16F)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.NETHER_ORE)
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .isRedstoneConductor(MFBlocks::always)
-            ));
+            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            _ -> Properties.ofFullCopy(FLUORITE_ORE.get()).sound(SoundType.NETHER_ORE)
+    );
 
     public static final DeferredBlock<Block> END_FLUORITE_ORE = registerBlock(MFBlockItemIds.END_FLUORITE_ORE,
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
@@ -367,6 +371,11 @@ public class MFBlocks {
     public static final DeferredBlock<Block> FLUORITE_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.FLUORITE_WALL_HANGING_SIGN,
             properties -> new MFWallHangingSignBlock(MFWoodType.FLUORITE, properties),
             _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
+    );
+
+    public static final DeferredBlock<Block> FLUORITE_SHELF = registerBlock(MFBlockItemIds.FLUORITE_SHELF,
+            props -> new MFShelfBlock(false, props),
+            _ -> Properties.ofFullCopy(AZURITE_SHELF.get())
     );
 
     //———————————————————————————————————————Everfrost Blocks————————————————————————————————————————————————————————————————————————
@@ -1589,6 +1598,11 @@ public class MFBlocks {
             properties -> new EvilPortalBlock(properties
                     .strength(2f)
                     .sound(MFSounds.EVIL_PORTAL_SOUNDS)
+                    .pushReaction(PushReaction.BLOCK)
+                    .isViewBlocking(MFBlocks::always)
+                    .isValidSpawn(MFBlocks::never)
+                    .isSuffocating(MFBlocks::always)
+                    .isRedstoneConductor(MFBlocks::never)
             ), Component.translatable("tooltip.morefeatures.evil_portal"));
 
     // Conjured Ice
@@ -1599,6 +1613,8 @@ public class MFBlocks {
                     .strength(0.5F)
                     .sound(SoundType.GLASS)
                     .noOcclusion()
+                    .isSuffocating(MFBlocks::always)
+                    .isViewBlocking(MFBlocks::never)
                     .isValidSpawn((_, _, _, entityType) -> entityType == EntityTypes.POLAR_BEAR)
                     .isRedstoneConductor(MFBlocks::never)
             ));
@@ -1618,7 +1634,11 @@ public class MFBlocks {
                     .offsetType(BlockBehaviour.OffsetType.XZ)
                     .pushReaction(PushReaction.DESTROY)
                     .noOcclusion()
-                    .instrument(NoteBlockInstrument.BASEDRUM)
+                    .isViewBlocking(MFBlocks::never)
+                    .isValidSpawn(MFBlocks::never)
+                    .isRedstoneConductor(MFBlocks::never)
+                    .isSuffocating(MFBlocks::never)
+                    .instrument(NoteBlockInstrument.CHIME)
                     .friction(0.98F)
             ));
 
@@ -1775,17 +1795,17 @@ public class MFBlocks {
         );
     }
 
-    private static DeferredBlock<VerticalSlabBlock> registerVerticalSlab(
+    private static <T extends Block> DeferredBlock<T> registerVerticalSlab(
             BlockItemId id,
             boolean isFlammable,
-            BiFunction<Boolean, BlockBehaviour.Properties, VerticalSlabBlock> blockFactory,
+            BiFunction<Boolean, BlockBehaviour.Properties, T> blockFactory,
             UnaryOperator<BlockBehaviour.Properties> propertyModifier
     ) {
         if (MFIdentifier.isNotMfNamespace(id.block().identifier())){
             throw new IllegalStateException("Could not register the " + id.block().identifier().getPath() + " block. ID must be within the More Features namespace!");
         }
 
-        DeferredBlock<VerticalSlabBlock> block = BLOCKS.registerBlock(id.block().identifier().getPath(),
+        DeferredBlock<T> block = BLOCKS.registerBlock(id.block().identifier().getPath(),
                 baseProps -> {
                     BlockBehaviour.Properties props = propertyModifier.apply(baseProps).setId(id.block());
                     // Pass both the boolean and the modified properties into the constructor
@@ -1799,6 +1819,8 @@ public class MFBlocks {
 
     // These exact booleans exist in the vanilla Blocks class, but have private access
 
+    // Used by the isRedstoneConductor, isViewBlocking, and isSuffocating properties
+
     private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos blockPos) {
         return true;
     }
@@ -1807,11 +1829,13 @@ public class MFBlocks {
         return false;
     }
 
-    private static Boolean never(final BlockState state, final BlockGetter blockGetter, final BlockPos blockPos, final EntityType<?> entityType) {
+    // Used by the isValidSpawn property
+
+    private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return false;
     }
 
-    private static Boolean always(final BlockState state, final BlockGetter blockGetter, final BlockPos blockPos, final EntityType<?> entityType) {
+    private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return true;
     }
 

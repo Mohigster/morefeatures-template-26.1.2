@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.block.custom;
 
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerLevel;
@@ -12,12 +13,15 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.lighting.LightEngine;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 public class NulliumBlock extends Block implements BonemealableBlock {
     public NulliumBlock(Properties properties) {
         super(properties);
     }
 
+    @NullMarked
     @Override
     protected void randomTick(final BlockState state, final ServerLevel level, final BlockPos pos, final RandomSource random) {
         if (!canBeNullium(state, level, pos)) {
@@ -42,22 +46,24 @@ public class NulliumBlock extends Block implements BonemealableBlock {
     }
 
     @Override
-    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, BlockState blockState) {
+    public boolean isValidBonemealTarget(LevelReader levelReader, BlockPos blockPos, @NonNull BlockState blockState) {
         return levelReader.getBlockState(blockPos.above()).isAir();
     }
 
+    @NullMarked
     @Override
     public boolean isBonemealSuccess(Level level, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
         return true;
     }
 
+    @NullMarked
     @Override
     public void performBonemeal(ServerLevel serverLevel, RandomSource randomSource, BlockPos blockPos, BlockState blockState) {
 
         // Place a root directly above the bonemealed block
         BlockPos abovePos = blockPos.above();
         if (serverLevel.getBlockState(abovePos).isAir()) {
-            placeRootAbove(serverLevel, blockState, abovePos);
+            growRootAbove(serverLevel, blockState, abovePos);
         }
 
         // Spread roots to surrounding Nullium blocks in a 5x3x5 area
@@ -72,14 +78,14 @@ public class NulliumBlock extends Block implements BonemealableBlock {
             BlockPos aboveSpread = spreadPos.above();
 
             // Only place roots on top of Nullium blocks that have air above them
-            if ((spreadState.is(MFBlocks.DECREPIT_NULLIUM) || spreadState.is(MFBlocks.PALLID_NULLIUM))
+            if ((spreadState.is(MFBlockTags.NULLIUM))
                     && serverLevel.getBlockState(aboveSpread).isAir()) {
-                placeRootAbove(serverLevel, spreadState, aboveSpread);
+                growRootAbove(serverLevel, spreadState, aboveSpread);
             }
         }
     }
 
-    private void placeRootAbove(ServerLevel serverLevel, BlockState nulliumState, BlockPos pos) {
+    private void growRootAbove(ServerLevel serverLevel, BlockState nulliumState, BlockPos pos) {
         if (nulliumState.is(MFBlocks.DECREPIT_NULLIUM)) {
             serverLevel.setBlockAndUpdate(pos, MFBlocks.DECREPIT_ROOTS.get().defaultBlockState());
         } else if (nulliumState.is(MFBlocks.PALLID_NULLIUM)) {

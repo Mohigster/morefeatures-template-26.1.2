@@ -20,6 +20,8 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SpeleothemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.SpeleothemThickness;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 
@@ -48,7 +50,7 @@ public class IcicleBlock extends SpeleothemBlock {
     }
 
     @Override
-    public MapCodec<IcicleBlock> codec() {
+    public @NonNull MapCodec<IcicleBlock> codec() {
         return CODEC;
     }
 
@@ -57,6 +59,7 @@ public class IcicleBlock extends SpeleothemBlock {
         return STALACTITE_SOUND_LEVEL_EVENT_ID;
     }
 
+    @NullMarked
     @Override
     public void onBrokenAfterFall(Level level, BlockPos pos, FallingBlockEntity entity) {
         if (!entity.isSilent()) {
@@ -74,6 +77,7 @@ public class IcicleBlock extends SpeleothemBlock {
         return MAX_GROWING_LENGTH;
     }
 
+    @NullMarked
     @Override
     protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
         if (canMelt(state) && world.getBrightness(LightLayer.BLOCK, pos) > 11) {
@@ -90,6 +94,7 @@ public class IcicleBlock extends SpeleothemBlock {
     }
 
     // Icicles that can melt will drip water. Icicles that can NOT melt do not drip water
+    @NullMarked
     @Override
     public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
         // If it's a tip and warm enough to melt, make it drip water!
@@ -106,6 +111,7 @@ public class IcicleBlock extends SpeleothemBlock {
         }
     }
 
+    @NullMarked
     @Override // Make the block deal more fall damage, like dripstone, but I've made it slightly worse (dripstone's damage modifier is 2.0F)
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         if (state.getValue(TIP_DIRECTION) == Direction.UP && state.getValue(THICKNESS) == SpeleothemThickness.TIP) {
@@ -115,6 +121,7 @@ public class IcicleBlock extends SpeleothemBlock {
         }
     }
 
+    @NullMarked
     @Override
     protected boolean canGrow(LevelReader level, BlockPos pos){
         Block blockToCheck = level.getBlockState(pos).getBlock();

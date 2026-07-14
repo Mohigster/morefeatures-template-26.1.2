@@ -227,7 +227,7 @@ public class MFEvents {
         if (!(state.getBlock() instanceof VoidAnchorBlock)) return;
 
         // Confirm the anchor is still in the End and still charged.
-        if (!VoidAnchorBlock.canSetSpawn(anchorLevel)) return;
+        if (VoidAnchorBlock.cannotSetSpawn(anchorLevel)) return;
         if (state.getValue(VoidAnchorBlock.CHARGE) == 0) return;
 
         // Find a safe stand-up position around the anchor.
@@ -265,7 +265,7 @@ public class MFEvents {
 
         ServerLevel currentLevel = (ServerLevel) player.level();
 
-        if (!VoidAnchorBlock.canSetSpawn(currentLevel)) return;
+        if (VoidAnchorBlock.cannotSetSpawn(currentLevel)) return;
 
         // Find the nearest charged Void Anchor within a reasonable search radius.
         // We stored nothing extra, so we find the closest one to the player's

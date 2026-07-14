@@ -4,6 +4,7 @@ import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabType;
 import com.mohigster.morefeatures.item.MFItems;
+import com.mohigster.morefeatures.references.MFBlockItemIds;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -83,6 +84,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MFBlocks.AZURITE_STAIRS.get());
         dropSelf(MFBlocks.AZURITE_TRAPDOOR.get());
         dropSelf(MFBlocks.FLUORITE_STAIRS.get());
+        dropSelf(MFBlocks.FLUORITE_SHELF.get());
         dropSelf(MFBlocks.BLOODWOOD_STAIRS.get());
         dropSelf(MFBlocks.TAINTED_STAIRS.get());
         dropSelf(MFBlocks.PALM_STAIRS.get());

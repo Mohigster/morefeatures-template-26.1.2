@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_left",
+  "textures": {
+    "all": "morefeatures:block/fluorite_shelf",
+    "particle": "morefeatures:block/raw_fluorite_block"
+  }
+}

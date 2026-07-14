@@ -14,7 +14,7 @@ import net.minecraft.world.level.block.FrostedIceBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.redstone.Orientation;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 public class ConjuredIceBlock extends FrostedIceBlock {
@@ -37,14 +37,16 @@ public class ConjuredIceBlock extends FrostedIceBlock {
 
     public ConjuredIceBlock(Properties properties) {
         super(properties);
-        this.registerDefaultState((BlockState)((BlockState)this.stateDefinition.any()).setValue(AGE, 0));
+        this.registerDefaultState((this.stateDefinition.any()).setValue(AGE, 0));
     }
 
+    @NullMarked
     @Override
+    @SuppressWarnings("deprecation")
     public void playerDestroy(Level level, Player player, BlockPos pos, BlockState state, @Nullable BlockEntity blockEntity, ItemStack destroyedWith) {
         super.playerDestroy(level, player, pos, state, blockEntity, destroyedWith);
         if (!EnchantmentHelper.hasTag(destroyedWith, EnchantmentTags.PREVENTS_ICE_MELTING)) {
-            if ((Boolean)level.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos)) {
+            if (level.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos)) {
                 level.removeBlock(pos, false);
                 return;
             }
@@ -56,13 +58,14 @@ public class ConjuredIceBlock extends FrostedIceBlock {
         }
     }
 
+    @NullMarked
     @Override
     protected void melt(BlockState state, Level level, BlockPos pos) {
-        if ((Boolean)level.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos)) {
+        if (level.environmentAttributes().getValue(EnvironmentAttributes.WATER_EVAPORATES, pos)) {
             level.removeBlock(pos, false);
         } else {
             level.setBlockAndUpdate(pos, meltsInto(level, pos));
-            level.neighborChanged(pos, meltsInto(level, pos).getBlock(), (Orientation)null);
+            level.neighborChanged(pos, meltsInto(level, pos).getBlock(), null);
         }
     }
 }

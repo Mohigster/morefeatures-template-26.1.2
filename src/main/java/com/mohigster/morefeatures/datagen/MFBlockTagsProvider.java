@@ -74,7 +74,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockIds.AZURITE_SIGN)
                 .add(MFBlockIds.AZURITE_WALL_SIGN)
                 .add(MFBlockIds.AZURITE_HANGING_SIGN)
-                .add(MFBlockIds.AZURITE_WALL_HANGING_SIGN);
+                .add(MFBlockIds.AZURITE_WALL_HANGING_SIGN)
+                .add(MFBlockItemIds.AZURITE_SHELF.block());
 
         tag(MFBlockTags.FLUORITE)
                 .add(MFBlockItemIds.FLUORITE_ORE.block())
@@ -88,7 +89,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockIds.FLUORITE_SIGN)
                 .add(MFBlockIds.FLUORITE_WALL_SIGN)
                 .add(MFBlockIds.FLUORITE_HANGING_SIGN)
-                .add(MFBlockIds.FLUORITE_WALL_HANGING_SIGN);
+                .add(MFBlockIds.FLUORITE_WALL_HANGING_SIGN)
+                .add(MFBlockItemIds.FLUORITE_SHELF.block());
 
         tag(MFBlockTags.COMPRESSOR_FLUIDS)
                 .add(BlockIds.WATER);
@@ -258,25 +260,13 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.RAW_MAGNESIUM_BLOCK.block())
                 .add(MFBlockItemIds.MAGNESIUM_ORE.block())
                 .add(MFBlockItemIds.DEEPSLATE_MAGNESIUM_ORE.block())
-                .add(MFBlockItemIds.AZURITE_ORE.block())
-                .add(MFBlockItemIds.DEEPSLATE_AZURITE_ORE.block())
-                .add(MFBlockItemIds.NETHER_AZURITE_ORE.block())
-                .add(MFBlockItemIds.END_AZURITE_ORE.block())
-                .add(MFBlockItemIds.RAW_AZURITE_BLOCK.block())
-                .add(MFBlockItemIds.AZURITE_BLOCK.block())
-                .add(MFBlockItemIds.AZURITE_BUTTON.block())
-                .add(MFBlockItemIds.AZURITE_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.FLUORITE_ORE.block())
-                .add(MFBlockItemIds.DEEPSLATE_FLUORITE_ORE.block())
-                .add(MFBlockItemIds.NETHER_FLUORITE_ORE.block())
-                .add(MFBlockItemIds.END_FLUORITE_ORE.block())
-                .add(MFBlockItemIds.RAW_FLUORITE_BLOCK.block())
-                .add(MFBlockItemIds.FLUORITE_BLOCK.block())
                 .add(MFBlockItemIds.COMPRESSOR_BLOCK.block())
                 .add(MFBlockItemIds.EVERFROST_PACKED_ICE_ORE.block())
                 .add(MFBlockItemIds.EVERFROST_BLUE_ICE_ORE.block())
                 .add(MFBlockItemIds.MAGNESIUM_BLOCK.block())
-                .add(MFBlockItemIds.VOID_ANCHOR.block());
+                .add(MFBlockItemIds.VOID_ANCHOR.block())
+                .addTag(MFBlockTags.AZURITE)
+                .addTag(MFBlockTags.FLUORITE);
 
         tag(BlockTags.LEAVES)
                 .add(MFBlocks.TAINTED_LEAVES.getKey())
