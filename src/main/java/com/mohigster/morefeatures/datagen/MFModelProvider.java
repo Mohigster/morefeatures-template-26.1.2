@@ -166,6 +166,7 @@ public class MFModelProvider extends ModelProvider {
         blockModels.createPlantWithDefaultItem(MFBlocks.PALLID_ROOTS.get(), MFBlocks.POTTED_PALLID_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createSpeleothem(MFBlocks.ICICLE.get());
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.AZURITE_VERTICAL_SLAB.get(), MFBlocks.AZURITE_BLOCK.get());
+        blockModels.createShelf(MFBlocks.AZURITE_SHELF.get(), MFBlocks.RAW_AZURITE_BLOCK.get());
         MFBlockModelGenerators.createNyliumLikeBlock(blockModels, MFBlocks.PALLID_NULLIUM.get(), Blocks.END_STONE); // Call blockModels as a parameter so that we can use blockStateOutput and modelOutput. This will be necessary for all custom model generation methods
         MFBlockModelGenerators.createNyliumLikeBlock(blockModels, MFBlocks.DECREPIT_NULLIUM.get(), Blocks.END_STONE);
         MFBlockModelGenerators.createAnchor(blockModels, MFBlocks.VOID_ANCHOR.get());
@@ -264,8 +265,7 @@ public class MFModelProvider extends ModelProvider {
         blockModels.family(MFBlocks.AZURITE_BLOCK.get())
                 .generateFor(MFBlockFamilies.getAzuriteFamily());
         blockModels.family(MFBlocks.FLUORITE_BLOCK.get())
-                .stairs(MFBlocks.FLUORITE_STAIRS.get())
-                .slab(MFBlocks.FLUORITE_SLAB.get());
+                .generateFor(MFBlockFamilies.getFluoriteFamily());
         blockModels.family(MFBlocks.BLOODWOOD_PLANKS.get())
                 .generateFor(MFBlockFamilies.getBloodwoodFamily());
         blockModels.family(MFBlocks.TAINTED_PLANKS.get())

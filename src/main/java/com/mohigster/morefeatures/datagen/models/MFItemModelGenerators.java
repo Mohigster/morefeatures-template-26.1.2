@@ -37,7 +37,10 @@ public final class MFItemModelGenerators {
                     new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.LAPIS, TrimMaterials.LAPIS),
                     new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.AMETHYST, TrimMaterials.AMETHYST),
                     new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.RESIN, TrimMaterials.RESIN),
+                    new ItemModelGenerators.TrimMaterialData(MFMaterialAssetGroups.MAGNESIUM, MFTrimMaterials.MAGNESIUM),
+                    new ItemModelGenerators.TrimMaterialData(MFMaterialAssetGroups.ALUMINIUM, MFTrimMaterials.ALUMINIUM),
                     new ItemModelGenerators.TrimMaterialData(MFMaterialAssetGroups.AZURITE, MFTrimMaterials.AZURITE),
+                    new ItemModelGenerators.TrimMaterialData(MFMaterialAssetGroups.FLUORITE, MFTrimMaterials.FLUORITE),
                     new ItemModelGenerators.TrimMaterialData(MFMaterialAssetGroups.BISMUTH, MFTrimMaterials.BISMUTH)
             )
     );

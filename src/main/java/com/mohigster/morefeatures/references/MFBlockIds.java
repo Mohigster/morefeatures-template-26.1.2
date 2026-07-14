@@ -12,6 +12,12 @@ public class MFBlockIds {
     public static final ResourceKey<Block> AZURITE_HANGING_SIGN = createId("azurite_hanging_sign");
     public static final ResourceKey<Block> AZURITE_WALL_HANGING_SIGN = createId("azurite_wall_hanging_sign");
 
+    // Fluorite
+    public static final ResourceKey<Block> FLUORITE_SIGN = createId("fluorite_sign");
+    public static final ResourceKey<Block> FLUORITE_WALL_SIGN = createId("fluorite_wall_sign");
+    public static final ResourceKey<Block> FLUORITE_HANGING_SIGN = createId("fluorite_hanging_sign");
+    public static final ResourceKey<Block> FLUORITE_WALL_HANGING_SIGN = createId("fluorite_wall_hanging_sign");
+
     // Bloodwood
     public static final ResourceKey<Block> BLOODWOOD_SIGN = createId("bloodwood_sign");
     public static final ResourceKey<Block> BLOODWOOD_WALL_SIGN = createId("bloodwood_wall_sign");

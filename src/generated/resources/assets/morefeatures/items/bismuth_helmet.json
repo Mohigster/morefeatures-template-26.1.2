@@ -82,9 +82,30 @@
       {
         "model": {
           "type": "minecraft:model",
+          "model": "morefeatures:item/bismuth_helmet_magnesium_trim"
+        },
+        "when": "morefeatures:magnesium"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "morefeatures:item/bismuth_helmet_aluminium_trim"
+        },
+        "when": "morefeatures:aluminium"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
           "model": "morefeatures:item/bismuth_helmet_azurite_trim"
         },
         "when": "morefeatures:azurite"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "morefeatures:item/bismuth_helmet_fluorite_trim"
+        },
+        "when": "morefeatures:fluorite"
       },
       {
         "model": {

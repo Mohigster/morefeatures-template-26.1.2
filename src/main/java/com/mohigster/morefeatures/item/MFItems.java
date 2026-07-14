@@ -11,6 +11,7 @@ import com.mohigster.morefeatures.datagen.MFJukeboxSongs;
 import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
 import com.mohigster.morefeatures.item.custom.*;
 import com.mohigster.morefeatures.item.custom.wand.*;
+import com.mohigster.morefeatures.tag.MFItemTags;
 import com.mohigster.morefeatures.toolmaterial.MFArmorMaterials;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
@@ -62,11 +63,17 @@ public class MFItems {
 
     // Aluminium items
     public static final DeferredItem<Item> RAW_ALUMINIUM = registerSimpleItem(MFItemIds.RAW_ALUMINIUM);
-    public static final DeferredItem<Item> ALUMINIUM_INGOT = registerSimpleItem(MFItemIds.ALUMINIUM_INGOT);
+    public static final DeferredItem<Item> ALUMINIUM_INGOT = registerItem(MFItemIds.ALUMINIUM_INGOT,
+            properties -> new Item(properties
+                    .trimMaterial(MFTrimMaterials.ALUMINIUM)
+            ));
 
     // Magnesium items
     public static final DeferredItem<Item> RAW_MAGNESIUM = registerSimpleItem(MFItemIds.RAW_MAGNESIUM);
-    public static final DeferredItem<Item> MAGNESIUM_INGOT = registerSimpleItem(MFItemIds.MAGNESIUM_INGOT);
+    public static final DeferredItem<Item> MAGNESIUM_INGOT = registerItem(MFItemIds.MAGNESIUM_INGOT,
+            properties -> new Item(properties
+                    .trimMaterial(MFTrimMaterials.MAGNESIUM)
+            ));
 
     // Azurite items
     public static final DeferredItem<Item> AZURITE = registerItem(MFItemIds.AZURITE,
@@ -77,10 +84,12 @@ public class MFItems {
     public static final DeferredItem<Item> RAW_AZURITE = registerSimpleItem(MFItemIds.RAW_AZURITE);
 
     // Fluorite items
-    public static final DeferredItem<Item> FLUORITE = ITEMS.registerItem("fluorite",
+    public static final DeferredItem<Item> FLUORITE = registerItem(MFItemIds.FLUORITE,
             properties -> new Item(properties
-                    .component(MFDataComponentTypes.COMPRESSOR_FUEL_VALUE.get(), 3200)));
-    public static final DeferredItem<Item> RAW_FLUORITE = ITEMS.registerSimpleItem("raw_fluorite");
+                    .component(MFDataComponentTypes.COMPRESSOR_FUEL_VALUE.get(), 3200)
+                    .trimMaterial(MFTrimMaterials.FLUORITE)
+            ));
+    public static final DeferredItem<Item> RAW_FLUORITE = registerSimpleItem(MFItemIds.RAW_FLUORITE);
 
     // Bismuth items
     public static final DeferredItem<Item> BISMUTH = registerItem(MFItemIds.BISMUTH,
@@ -273,6 +282,7 @@ public class MFItems {
                     .rarity(Rarity.RARE)
                     .fireResistant()
                     .enchantable(15)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
     public static final DeferredItem<Item> BISMUTH_CHESTPLATE = registerItem(MFItemIds.BISMUTH_CHESTPLATE,
@@ -281,6 +291,7 @@ public class MFItems {
                     .rarity(Rarity.RARE)
                     .fireResistant()
                     .enchantable(15)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
     public static final DeferredItem<Item> BISMUTH_LEGGINGS = registerItem(MFItemIds.BISMUTH_LEGGINGS,
@@ -289,6 +300,7 @@ public class MFItems {
                     .rarity(Rarity.RARE)
                     .fireResistant()
                     .enchantable(15)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
     public static final DeferredItem<Item> BISMUTH_BOOTS = registerItem(MFItemIds.BISMUTH_BOOTS,
@@ -297,6 +309,7 @@ public class MFItems {
                     .rarity(Rarity.RARE)
                     .fireResistant()
                     .enchantable(15)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
     public static final DeferredItem<Item> BISMUTH_AXE = registerItem(MFItemIds.BISMUTH_AXE,
@@ -304,7 +317,7 @@ public class MFItems {
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    .repairable(BISMUTH.get())
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
     public static final DeferredItem<Item> BISMUTH_SHOVEL = ITEMS.registerItem("bismuth_shovel",
@@ -312,7 +325,7 @@ public class MFItems {
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    .repairable(BISMUTH.get())
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
     public static final DeferredItem<Item> BISMUTH_HOE = ITEMS.registerItem("bismuth_hoe",
@@ -320,7 +333,7 @@ public class MFItems {
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    .repairable(BISMUTH.get())
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
     public static final DeferredItem<Item> BISMUTH_SPEAR = ITEMS.registerItem("bismuth_spear",
@@ -338,7 +351,7 @@ public class MFItems {
                             4.8F
                     )
                     .enchantable(15)
-                    .repairable(BISMUTH.get())
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
                     .fireResistant()
                     .rarity(Rarity.RARE)
             ));
@@ -349,6 +362,7 @@ public class MFItems {
                     .fireResistant()
                     .durability(1516)
                     .enchantable(19)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
     public static final DeferredItem<Item> BISMUTH_HORSE_ARMOR = ITEMS.registerItem("bismuth_horse_armor",
@@ -356,6 +370,7 @@ public class MFItems {
                     .horseArmor(MFArmorMaterials.BISMUTH)
                     .rarity(Rarity.RARE)
                     .fireResistant()
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
     public static final DeferredItem<Item> BISMUTH_NAUTILUS_ARMOR = ITEMS.registerItem("bismuth_nautilus_armor",
@@ -392,6 +407,24 @@ public class MFItems {
                     new HangingSignItem(
                             MFBlocks.AZURITE_HANGING_SIGN.get(),
                             MFBlocks.AZURITE_WALL_HANGING_SIGN.get(),
+                            properties.stacksTo(16)
+                    )
+            );
+
+    public static final DeferredItem<Item> FLUORITE_SIGN =
+            registerItem(MFItemIds.FLUORITE_SIGN, properties ->
+                    new SignItem(
+                            MFBlocks.FLUORITE_SIGN.get(),
+                            MFBlocks.FLUORITE_WALL_SIGN.get(),
+                            properties.stacksTo(16)
+                    )
+            );
+
+    public static final DeferredItem<Item> FLUORITE_HANGING_SIGN =
+            registerItem(MFItemIds.FLUORITE_HANGING_SIGN, properties ->
+                    new HangingSignItem(
+                            MFBlocks.FLUORITE_HANGING_SIGN.get(),
+                            MFBlocks.FLUORITE_WALL_HANGING_SIGN.get(),
                             properties.stacksTo(16)
                     )
             );

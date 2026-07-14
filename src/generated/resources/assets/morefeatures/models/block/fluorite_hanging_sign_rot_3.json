@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_hanging_sign_rot_3",
+  "textures": {
+    "all": "morefeatures:block/fluorite_hanging_sign",
+    "particle": "morefeatures:block/raw_fluorite_block"
+  }
+}

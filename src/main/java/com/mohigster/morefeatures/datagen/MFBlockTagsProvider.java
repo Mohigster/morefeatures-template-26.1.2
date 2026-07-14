@@ -43,35 +43,52 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.MAGNESIUM_BLOCK.block())
                 .add(MFBlockItemIds.MAGNESIUM_ORE.block())
                 .add(MFBlockItemIds.DEEPSLATE_MAGNESIUM_ORE.block())
-                .add(MFBlockItemIds.AZURITE_BLOCK.block())
-                .add(MFBlockItemIds.FLUORITE_BLOCK.block())
-                .add(MFBlockItemIds.RAW_AZURITE_BLOCK.block())
-                .add(MFBlockItemIds.RAW_FLUORITE_BLOCK.block())
-                .add(MFBlockItemIds.NETHER_FLUORITE_ORE.block())
-                .add(MFBlockItemIds.NETHER_AZURITE_ORE.block())
-                .add(MFBlockItemIds.DEEPSLATE_AZURITE_ORE.block())
-                .add(MFBlockItemIds.DEEPSLATE_FLUORITE_ORE.block())
-                .add(MFBlockItemIds.END_FLUORITE_ORE.block())
-                .add(MFBlockItemIds.END_AZURITE_ORE.block())
-                .add(MFBlockItemIds.FLUORITE_ORE.block())
-                .add(MFBlockItemIds.AZURITE_ORE.block())
                 .add(MFBlockItemIds.MAGIC_BLOCK.block())
                 .add(MFBlockItemIds.BISMUTH_BLOCK.block())
                 .add(MFBlockItemIds.RAW_BISMUTH_BLOCK.block())
-                .add(MFBlockItemIds.AZURITE_STAIRS.block())
-                .add(MFBlockItemIds.AZURITE_SLAB.block())
-                .add(MFBlockItemIds.AZURITE_BUTTON.block())
-                .add(MFBlockItemIds.AZURITE_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.FLUORITE_STAIRS.block())
-                .add(MFBlockItemIds.FLUORITE_SLAB.block())
                 .add(MFBlockItemIds.COMPRESSOR_BLOCK.block())
                 .add(MFBlockItemIds.EVERFROST_PACKED_ICE_ORE.block())
                 .add(MFBlockItemIds.EVERFROST_BLUE_ICE_ORE.block())
                 .add(MFBlockItemIds.BISMUTH_ORE.block())
-                .add(MFBlockItemIds.DECREPIT_NULLIUM.block())
-                .add(MFBlockItemIds.PALLID_NULLIUM.block())
+                .addTag(MFBlockTags.NULLIUM)
                 .add(MFBlockItemIds.VOID_ANCHOR.block())
+                .addTag(MFBlockTags.AZURITE)
+                .addTag(MFBlockTags.FLUORITE)
                 .addTag(MFBlockTags.PICKAXE_MINEABLE_VERTICAL_SLABS);
+
+        tag(MFBlockTags.AZURITE)
+                .add(MFBlockItemIds.AZURITE_ORE.block())
+                .add(MFBlockItemIds.DEEPSLATE_AZURITE_ORE.block())
+                .add(MFBlockItemIds.NETHER_AZURITE_ORE.block())
+                .add(MFBlockItemIds.END_AZURITE_ORE.block())
+                .add(MFBlockItemIds.AZURITE_BLOCK.block())
+                .add(MFBlockItemIds.RAW_AZURITE_BLOCK.block())
+                .add(MFBlockItemIds.AZURITE_STAIRS.block())
+                .add(MFBlockItemIds.AZURITE_SLAB.block())
+                .add(MFBlockItemIds.AZURITE_VERTICAL_SLAB.block())
+                .add(MFBlockItemIds.AZURITE_PRESSURE_PLATE.block())
+                .add(MFBlockItemIds.AZURITE_BUTTON.block())
+                .add(MFBlockItemIds.AZURITE_DOOR.block())
+                .add(MFBlockItemIds.AZURITE_TRAPDOOR.block())
+                .add(MFBlockItemIds.AZURITE_FENCE.block())
+                .add(MFBlockIds.AZURITE_SIGN)
+                .add(MFBlockIds.AZURITE_WALL_SIGN)
+                .add(MFBlockIds.AZURITE_HANGING_SIGN)
+                .add(MFBlockIds.AZURITE_WALL_HANGING_SIGN);
+
+        tag(MFBlockTags.FLUORITE)
+                .add(MFBlockItemIds.FLUORITE_ORE.block())
+                .add(MFBlockItemIds.DEEPSLATE_FLUORITE_ORE.block())
+                .add(MFBlockItemIds.NETHER_FLUORITE_ORE.block())
+                .add(MFBlockItemIds.END_FLUORITE_ORE.block())
+                .add(MFBlockItemIds.FLUORITE_BLOCK.block())
+                .add(MFBlockItemIds.RAW_FLUORITE_BLOCK.block())
+                .add(MFBlockItemIds.FLUORITE_STAIRS.block())
+                .add(MFBlockItemIds.FLUORITE_SLAB.block())
+                .add(MFBlockIds.FLUORITE_SIGN)
+                .add(MFBlockIds.FLUORITE_WALL_SIGN)
+                .add(MFBlockIds.FLUORITE_HANGING_SIGN)
+                .add(MFBlockIds.FLUORITE_WALL_HANGING_SIGN);
 
         tag(MFBlockTags.COMPRESSOR_FLUIDS)
                 .add(BlockIds.WATER);
@@ -89,6 +106,14 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .addTag(MFBlockTags.AXE_MINEABLE_VERTICAL_SLABS);
 
         tag(BlockTags.FENCES)
+                .add(MFBlockItemIds.AZURITE_FENCE.block())
+                .add(MFBlockItemIds.BLOODWOOD_FENCE.block())
+                .add(MFBlockItemIds.TAINTED_FENCE.block())
+                .add(MFBlockItemIds.PALM_FENCE.block())
+                .add(MFBlockItemIds.DECREPIT_FENCE.block())
+                .add(MFBlockItemIds.PALLID_FENCE.block());
+
+        tag(BlockTags.WOODEN_FENCES)
                 .add(MFBlockItemIds.BLOODWOOD_FENCE.block())
                 .add(MFBlockItemIds.TAINTED_FENCE.block())
                 .add(MFBlockItemIds.PALM_FENCE.block())
@@ -409,6 +434,9 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
         tag(BlockTags.FLOWERS)
                 .add(MFBlockItemIds.ROSE.block())
                 .add(MFBlockItemIds.BLUE_ROSE.block());
+
+        tag(MFBlockTags.GEMSTONE_SHELVES)
+                .add(MFBlockItemIds.AZURITE_SHELF.block());
 
         tag(BlockTags.SPELEOTHEMS)
                 .add(MFBlockItemIds.ICICLE.block());

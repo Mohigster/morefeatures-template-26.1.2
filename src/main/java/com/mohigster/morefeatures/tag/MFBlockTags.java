@@ -7,6 +7,9 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
 
 public final class MFBlockTags {
+    public static final TagKey<Block> AZURITE = morefeaturesTag("azurite");
+    public static final TagKey<Block> FLUORITE = morefeaturesTag("fluorite");
+    public static final TagKey<Block> GEMSTONE_SHELVES = morefeaturesTag("gemstone_shelves");
     public static final TagKey<Block> BLOODWOOD_LOGS = morefeaturesTag("bloodwood_logs");
     public static final TagKey<Block> BLOODWOOD = morefeaturesTag("bloodwood");
     public static final TagKey<Block> TAINTED_LOGS = morefeaturesTag("tainted_logs");

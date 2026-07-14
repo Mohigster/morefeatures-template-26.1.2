@@ -17,6 +17,17 @@ public class MFWoodType {
             )
     );
 
+    public static final WoodType FLUORITE = WoodType.register( // Same as above
+            new WoodType(
+                    MoreFeatures.MODID + ":fluorite",
+                    MFBlockSetType.FLUORITE,
+                    SoundType.AMETHYST,
+                    SoundType.AMETHYST_CLUSTER,
+                    SoundEvents.IRON_TRAPDOOR_CLOSE,
+                    SoundEvents.IRON_TRAPDOOR_OPEN
+            )
+    );
+
     public static final WoodType PALM = WoodType.register(
             new WoodType(
                     MoreFeatures.MODID + ":palm",

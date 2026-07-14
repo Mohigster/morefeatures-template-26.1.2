@@ -1,0 +1,16 @@
+{
+  "values": [
+    "morefeatures:fluorite_ore",
+    "morefeatures:deepslate_fluorite_ore",
+    "morefeatures:nether_fluorite_ore",
+    "morefeatures:end_fluorite_ore",
+    "morefeatures:fluorite_block",
+    "morefeatures:raw_fluorite_block",
+    "morefeatures:fluorite_stairs",
+    "morefeatures:fluorite_slab",
+    "morefeatures:fluorite_sign",
+    "morefeatures:fluorite_wall_sign",
+    "morefeatures:fluorite_hanging_sign",
+    "morefeatures:fluorite_wall_hanging_sign"
+  ]
+}

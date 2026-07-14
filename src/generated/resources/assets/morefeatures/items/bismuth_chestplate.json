@@ -82,9 +82,30 @@
       {
         "model": {
           "type": "minecraft:model",
+          "model": "morefeatures:item/bismuth_chestplate_magnesium_trim"
+        },
+        "when": "morefeatures:magnesium"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "morefeatures:item/bismuth_chestplate_aluminium_trim"
+        },
+        "when": "morefeatures:aluminium"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
           "model": "morefeatures:item/bismuth_chestplate_azurite_trim"
         },
         "when": "morefeatures:azurite"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
+          "model": "morefeatures:item/bismuth_chestplate_fluorite_trim"
+        },
+        "when": "morefeatures:fluorite"
       },
       {
         "model": {

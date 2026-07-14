@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "azurite",
+  "key": {
+    "#": "morefeatures:azurite",
+    "W": "morefeatures:azurite_block"
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "id": "morefeatures:azurite_fence_gate"
+  }
+}

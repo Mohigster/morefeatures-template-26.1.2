@@ -35,6 +35,7 @@
   "block.morefeatures.raw_azurite_block": "Block of Raw Azurite",
   "item.morefeatures.azurite_sign": "Azurite Sign",
   "item.morefeatures.azurite_hanging_sign": "Azurite Hanging Sign",
+  "block.morefeatures.azurite_shelf": "Azurite Shelf",
 
   "block.morefeatures.fluorite_block": "Block of Fluorite",
   "block.morefeatures.fluorite_stairs": "Fluorite Stairs",
@@ -46,6 +47,8 @@
   "block.morefeatures.nether_fluorite_ore": "Nether Fluorite Ore",
   "block.morefeatures.end_fluorite_ore": "End Fluorite Ore",
   "block.morefeatures.raw_fluorite_block": "Block of Raw Fluorite",
+  "item.morefeatures.fluorite_sign": "Fluorite Sign",
+  "item.morefeatures.fluorite_hanging_sign": "Fluorite Hanging Sign",
 
   "block.morefeatures.everfrost_packed_ice_ore": "Packed Ice Everfrost Ore",
   "block.morefeatures.everfrost_blue_ice_ore": "Blue Ice Everfrost Ore",
@@ -121,6 +124,8 @@
   "item.morefeatures.tainted_sign": "Tainted Sign",
   "item.morefeatures.tainted_hanging_sign": "Tainted Hanging Sign",
   "block.morefeatures.tainted_shelf": "Tainted Shelf",
+  "item.morefeatures.tainted_boat": "Tainted Boat",
+  "item.morefeatures.tainted_chest_boat": "Tainted Boat with Chest",
 
   "block.morefeatures.palm_log": "Palm Log",
   "block.morefeatures.palm_wood": "Palm Wood",
@@ -282,6 +287,8 @@
 
   "entity.morefeatures.bloodwood_boat": "Bloodwood Boat",
   "entity.morefeatures.bloodwood_chest_boat": "Bloodwood Boat with Chest",
+  "entity.morefeatures.tainted_boat": "Tainted Boat",
+  "entity.morefeatures.tainted_chest_boat": "Tainted Boat with Chest",
   "entity.morefeatures.palm_boat": "Palm Boat",
   "entity.morefeatures.palm_chest_boat": "Palm Boat with Chest",
 
@@ -339,7 +346,10 @@
   "tooltip.morefeatures.magic_block": "Try throwing a metal, carbon-based organic material, or potion! It's §9MAGIC§r",
   "tooltip.morefeatures.evil_portal": "Right click to be transported to the realm of §c§lEVIL!§r",
 
+  "trim_material.morefeatures.aluminium": "Aluminium Material",
+  "trim_material.morefeatures.magnesium": "Magnesium Material",
   "trim_material.morefeatures.azurite": "Azurite Material",
+  "trim_material.morefeatures.fluorite": "Fluorite Material",
   "trim_material.morefeatures.bismuth": "Bismuth Material",
 
   "morefeatures.tooltip.liquid.amount.with.capacity": "%s / %s mB",

@@ -23,6 +23,8 @@ public class MFBlockEntities {
                     MFSignBlockEntity::new,
                     MFBlocks.AZURITE_SIGN.get(),
                     MFBlocks.AZURITE_WALL_SIGN.get(),
+                    MFBlocks.FLUORITE_SIGN.get(),
+                    MFBlocks.FLUORITE_WALL_SIGN.get(),
                     MFBlocks.BLOODWOOD_SIGN.get(),
                     MFBlocks.BLOODWOOD_WALL_SIGN.get(),
                     MFBlocks.TAINTED_SIGN.get(),
@@ -40,6 +42,8 @@ public class MFBlockEntities {
                     MFHangingSignBlockEntity::new,
                     MFBlocks.AZURITE_HANGING_SIGN.get(),
                     MFBlocks.AZURITE_WALL_HANGING_SIGN.get(),
+                    MFBlocks.FLUORITE_HANGING_SIGN.get(),
+                    MFBlocks.FLUORITE_WALL_HANGING_SIGN.get(),
                     MFBlocks.BLOODWOOD_HANGING_SIGN.get(),
                     MFBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(),
                     MFBlocks.TAINTED_HANGING_SIGN.get(),
@@ -55,6 +59,7 @@ public class MFBlockEntities {
     public static final Supplier<BlockEntityType<MFShelfBlockEntity>> MF_SHELF_BE =
             BLOCK_ENTITIES.register("mod_shelf_be", () -> new BlockEntityType<>(
                     MFShelfBlockEntity::new,
+                    MFBlocks.AZURITE_SHELF.get(),
                     MFBlocks.BLOODWOOD_SHELF.get(),
                     MFBlocks.TAINTED_SHELF.get(),
                     MFBlocks.PALM_SHELF.get(),

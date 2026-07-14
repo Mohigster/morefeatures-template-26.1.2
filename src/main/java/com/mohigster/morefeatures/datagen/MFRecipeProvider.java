@@ -487,6 +487,12 @@ public class MFRecipeProvider extends RecipeProvider {
         chestBoat(MFItems.TAINTED_CHEST_BOAT, MFItems.TAINTED_BOAT);
         chestBoat(MFItems.PALM_CHEST_BOAT, MFItems.PALM_BOAT);
 
+        /*
+         * Azurite and fluorite do not use their blocks for all of their recipes,
+         * but a block family would assume that they do. Because of this, the
+         * recipes are generated separately, not using generateForBlockFamilies()
+         */
+
         // Stairs and slabs
 
         stairBuilder(MFBlocks.AZURITE_STAIRS.get(), Ingredient.of(MFBlocks.AZURITE_BLOCK))
@@ -518,15 +524,45 @@ public class MFRecipeProvider extends RecipeProvider {
                 .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
                 .save(output);
 
+        doorBuilder(MFBlocks.FLUORITE_DOOR.get(), Ingredient.of(MFItems.FLUORITE))
+                .group("fluorite")
+                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
+                .save(output);
+        trapdoorBuilder(MFBlocks.FLUORITE_TRAPDOOR.get(), Ingredient.of(MFItems.FLUORITE))
+                .group("fluorite")
+                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
+                .save(output);
+
         // Signs and Hanging signs
 
-        specialSignBuilder(MFItems.AZURITE_SIGN.get(), Ingredient.of(MFItems.AZURITE.get()), Ingredient.of(MFItems.BRINE_ROD.get()))
+        signBuilder(MFItems.AZURITE_SIGN.get(), Ingredient.of(MFItems.AZURITE.get()))
                 .group("azurite")
                 .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
                 .save(output);
         hangingSignBuilder(MFItems.AZURITE_HANGING_SIGN.get(), Ingredient.of(MFItems.RAW_AZURITE.get()))
                 .group("azurite")
                 .unlockedBy(getHasName(MFItems.RAW_AZURITE.get()), has(MFItems.RAW_AZURITE.get()))
+                .save(output);
+
+        signBuilder(MFItems.FLUORITE_SIGN.get(), Ingredient.of(MFItems.FLUORITE.get()))
+                .group("fluorite")
+                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
+                .save(output);
+        hangingSignBuilder(MFItems.FLUORITE_HANGING_SIGN.get(), Ingredient.of(MFItems.RAW_FLUORITE.get()))
+                .group("fluorite")
+                .unlockedBy(getHasName(MFItems.RAW_FLUORITE.get()), has(MFItems.RAW_FLUORITE.get()))
+                .save(output);
+
+        // Fences and Fence Gates
+
+        specialFenceBuilder(MFBlocks.AZURITE_FENCE.get(), Ingredient.of(MFBlocks.AZURITE_BLOCK), Ingredient.of(MFItems.AZURITE))
+                .group("azurite")
+                .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
+                .save(output);
+
+        specialFenceGateBuilder(MFBlocks.AZURITE_FENCE_GATE.get(), Ingredient.of(MFBlocks.AZURITE_BLOCK), Ingredient.of(MFItems.AZURITE))
+                .group("azurite")
+                .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
                 .save(output);
 
         // Bismuth smithing recipes
@@ -755,14 +791,6 @@ public class MFRecipeProvider extends RecipeProvider {
                 category, result).unlocks("has_bismuth_ingot", this.has(MFItemTags.BISMUTH_TOOL_MATERIALS)).save(output, MoreFeatures.MODID + ":" + getItemName(result) + "_smithing");
     }
 
-//    protected void customTrimming(Item base, RecipeCategory category, Item result, Item trimMaterial) {
-//        SmithingTransformRecipeBuilder.smithing(
-//                ,
-//                Ingredient.of(base),
-//                Ingredient.of(trimMaterial),
-//                category, result).unlocks("has_trim_material", this.has(trimMaterial)).save(output, MoreFeatures.MODID + ":" + getItemName(result) + "_smithing");
-//    }
-
     protected void verticalSlabCrafting(ItemLike verticalSlab, ItemLike fullBlock) {
         shaped(RecipeCategory.BUILDING_BLOCKS, verticalSlab, 6)
                 .pattern("B")
@@ -785,8 +813,12 @@ public class MFRecipeProvider extends RecipeProvider {
                 .save(output, MoreFeatures.MODID + ":" + getConversionRecipeName(verticalSlab, fullBlock) + "_stonecutting");
     }
 
-    protected RecipeBuilder specialSignBuilder(ItemLike result, Ingredient planks, Ingredient stick) {
-        return this.shaped(RecipeCategory.DECORATIONS, result, 3).group("sign").define('#', planks).define('X', stick).pattern("###").pattern("###").pattern(" X ");
+    protected RecipeBuilder specialFenceBuilder(ItemLike result, Ingredient base, Ingredient actingStick) {
+        return this.shaped(RecipeCategory.DECORATIONS, result, 3).define('W', base).define('#', actingStick).pattern("W#W").pattern("W#W");
+    }
+
+    protected RecipeBuilder specialFenceGateBuilder(ItemLike result, Ingredient planks, Ingredient actingStick) {
+        return this.shaped(RecipeCategory.REDSTONE, result).define('#', actingStick).define('W', planks).pattern("#W#").pattern("#W#");
     }
 }
 

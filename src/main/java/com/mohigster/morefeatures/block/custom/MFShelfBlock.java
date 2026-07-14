@@ -1,13 +1,25 @@
 package com.mohigster.morefeatures.block.custom;
 
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
+import com.mohigster.morefeatures.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.ShelfBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.SideChainPart;
+import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.redstone.Orientation;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 public class MFShelfBlock extends ShelfBlock {
     private final boolean isFlammable;
@@ -15,6 +27,42 @@ public class MFShelfBlock extends ShelfBlock {
     public MFShelfBlock(boolean isFlammable, Properties properties) {
         super(properties);
         this.isFlammable = isFlammable;
+    }
+
+    // The only difference between this and the super method is that it always plays the vanilla shelf sounds
+    // Now, it will play gemstone shelf sounds if the shelf is a gemstone shelf
+    @NullMarked
+    @Override
+    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston) {
+        if (!level.isClientSide()) {
+            boolean signal = level.hasNeighborSignal(pos);
+            if (state.getValue(POWERED) != signal) {
+                BlockState newState = state.setValue(POWERED, signal);
+                if (!signal) {
+                    newState = newState.setValue(SIDE_CHAIN_PART, SideChainPart.UNCONNECTED);
+                }
+
+                level.setBlock(pos, newState, 3);
+                this.getRedstoneSound(level, pos, newState);
+                level.gameEvent(signal ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos, GameEvent.Context.of(newState));
+            }
+        }
+    }
+
+
+    // Identical to the private playSound method within ShelfBlock
+    private void playSound(LevelAccessor level, BlockPos pos, SoundEvent sound) {
+        level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
+    }
+
+    // New method that checks which sound to use when the shelf is powered by redstone
+    private void getRedstoneSound(LevelAccessor level, BlockPos pos, BlockState block){
+        boolean signal = level.hasNeighborSignal(pos);
+        if (block.is(MFBlockTags.GEMSTONE_SHELVES)){
+            this.playSound(level, pos, SoundEvents.AMETHYST_BLOCK_CHIME);
+        } else {
+            this.playSound(level, pos, signal ? SoundEvents.SHELF_ACTIVATE : SoundEvents.SHELF_DEACTIVATE);
+        }
     }
 
     @NullMarked

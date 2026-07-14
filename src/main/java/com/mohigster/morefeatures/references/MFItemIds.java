@@ -14,7 +14,11 @@ public class MFItemIds {
     public static final ResourceKey<Item> RAW_AZURITE = createId("raw_azurite");
     public static final ResourceKey<Item> AZURITE = createId("azurite");
 
+    public static final ResourceKey<Item> RAW_FLUORITE = createId("raw_fluorite");
+    public static final ResourceKey<Item> FLUORITE = createId("fluorite");
+
     public static final ResourceKey<Item> AZURITE_SIGN = createId("azurite_sign");
+    public static final ResourceKey<Item> FLUORITE_SIGN = createId("fluorite_sign");
     public static final ResourceKey<Item> BLOODWOOD_SIGN = createId("bloodwood_sign");
     public static final ResourceKey<Item> TAINTED_SIGN = createId("tainted_sign");
     public static final ResourceKey<Item> PALM_SIGN = createId("palm_sign");
@@ -22,6 +26,7 @@ public class MFItemIds {
     public static final ResourceKey<Item> PALLID_SIGN = createId("pallid_sign");
 
     public static final ResourceKey<Item> AZURITE_HANGING_SIGN = createId("azurite_hanging_sign");
+    public static final ResourceKey<Item> FLUORITE_HANGING_SIGN = createId("fluorite_hanging_sign");
     public static final ResourceKey<Item> BLOODWOOD_HANGING_SIGN = createId("bloodwood_hanging_sign");
     public static final ResourceKey<Item> TAINTED_HANGING_SIGN = createId("tainted_hanging_sign");
     public static final ResourceKey<Item> PALM_HANGING_SIGN = createId("palm_hanging_sign");

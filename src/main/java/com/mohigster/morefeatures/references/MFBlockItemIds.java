@@ -108,10 +108,14 @@ public class MFBlockItemIds {
     public static final BlockItemId AZURITE_STAIRS = createId("azurite_stairs");
     public static final BlockItemId AZURITE_SLAB = createId("azurite_slab");
     public static final BlockItemId AZURITE_VERTICAL_SLAB = createId("azurite_vertical_slab");
+    public static final BlockItemId AZURITE_FENCE = createId("azurite_fence");
+    public static final BlockItemId AZURITE_FENCE_GATE = createId("azurite_fence_gate");
+    public static final BlockItemId AZURITE_WALL = createId("azurite_wall");
     public static final BlockItemId AZURITE_PRESSURE_PLATE = createId("azurite_pressure_plate");
     public static final BlockItemId AZURITE_BUTTON = createId("azurite_button");
     public static final BlockItemId AZURITE_DOOR = createId("azurite_door");
     public static final BlockItemId AZURITE_TRAPDOOR = createId("azurite_trapdoor");
+    public static final BlockItemId AZURITE_SHELF = createId("azurite_shelf");
 
     // --- Fluorite ---
     public static final BlockItemId FLUORITE_BLOCK = createId("fluorite_block");
@@ -122,6 +126,10 @@ public class MFBlockItemIds {
     public static final BlockItemId RAW_FLUORITE_BLOCK = createId("raw_fluorite_block");
     public static final BlockItemId FLUORITE_STAIRS = createId("fluorite_stairs");
     public static final BlockItemId FLUORITE_SLAB = createId("fluorite_slab");
+    public static final BlockItemId FLUORITE_PRESSURE_PLATE = createId("fluorite_pressure_plate");
+    public static final BlockItemId FLUORITE_BUTTON = createId("fluorite_button");
+    public static final BlockItemId FLUORITE_DOOR = createId("fluorite_door");
+    public static final BlockItemId FLUORITE_TRAPDOOR = createId("fluorite_trapdoor");
 
     // --- Aluminium ---
     public static final BlockItemId ALUMINIUM_BLOCK = createId("aluminium_block");

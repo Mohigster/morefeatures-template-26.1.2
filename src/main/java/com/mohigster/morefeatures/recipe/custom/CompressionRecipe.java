@@ -25,7 +25,8 @@ public record CompressionRecipe(Ingredient inputItem, ItemStackTemplate output) 
                     ItemStackTemplate.STREAM_CODEC,
                     CompressionRecipe::output,
 
-                    CompressionRecipe::new);
+                    CompressionRecipe::new
+            );
 
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();

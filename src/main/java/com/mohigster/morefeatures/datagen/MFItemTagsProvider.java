@@ -126,7 +126,8 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(ItemIds.COOKED_PORKCHOP)
                 .add(ItemIds.COOKED_RABBIT)
                 .add(ItemIds.COOKED_COD)
-                .add(ItemIds.COOKED_SALMON);
+                .add(ItemIds.COOKED_SALMON)
+                .add(BlockItemIds.SWEET_BERRY_CROP.item());
 
         tag(MFItemTags.IS_POTION)
                 .add(ItemIds.SPLASH_POTION)
@@ -385,7 +386,10 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(BlockItemIds.BEDROCK.item());
 
         tag(ItemTags.TRIM_MATERIALS)
+                .add(MFItemIds.ALUMINIUM_INGOT)
+                .add(MFItemIds.MAGNESIUM_INGOT)
                 .add(MFItemIds.AZURITE)
+                .add(MFItemIds.FLUORITE)
                 .add(MFItemIds.BISMUTH);
     }
 }

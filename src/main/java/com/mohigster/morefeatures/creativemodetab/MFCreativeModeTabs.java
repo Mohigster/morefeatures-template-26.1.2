@@ -83,9 +83,12 @@ public class MFCreativeModeTabs {
                 // Azurite blocks
                 output.accept(MFBlocks.AZURITE_BLOCK);
                 output.accept(MFBlocks.AZURITE_STAIRS);
+                output.accept(MFBlocks.AZURITE_VERTICAL_SLAB);
                 output.accept(MFBlocks.AZURITE_SLAB);
-                output.accept(MFBlocks.AZURITE_BUTTON);
                 output.accept(MFBlocks.AZURITE_PRESSURE_PLATE);
+                output.accept(MFBlocks.AZURITE_BUTTON);
+                output.accept(MFItems.AZURITE_SIGN); // I know it says MFItems, but it IS a block item. It's only registered there because it's shared by two blocks
+                output.accept(MFItems.AZURITE_HANGING_SIGN); // Same goes for hanging signs. Shared by Ceiling hanging sign and Wall hanging sign, so the sign item is registered in MFItems
                 output.accept(MFBlocks.RAW_AZURITE_BLOCK);
                 output.accept(MFBlocks.AZURITE_ORE);
                 output.accept(MFBlocks.DEEPSLATE_AZURITE_ORE);
@@ -96,6 +99,8 @@ public class MFCreativeModeTabs {
                 output.accept(MFBlocks.FLUORITE_BLOCK);
                 output.accept(MFBlocks.FLUORITE_STAIRS);
                 output.accept(MFBlocks.FLUORITE_SLAB);
+                output.accept(MFItems.FLUORITE_SIGN);
+                output.accept(MFItems.FLUORITE_HANGING_SIGN);
                 output.accept(MFBlocks.RAW_FLUORITE_BLOCK);
                 output.accept(MFBlocks.FLUORITE_ORE);
                 output.accept(MFBlocks.DEEPSLATE_FLUORITE_ORE);

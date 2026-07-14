@@ -8,6 +8,7 @@ import java.util.List;
 
 public class MFBlockFamilies {
     private static BlockFamily azuriteFamily;
+    private static BlockFamily fluoriteFamily;
     private static BlockFamily bloodwoodFamily;
     private static BlockFamily taintedFamily;
     private static BlockFamily palmFamily;
@@ -21,6 +22,8 @@ public class MFBlockFamilies {
                     .stairs(MFBlocks.AZURITE_STAIRS.get())
                     .strippedLog(MFBlocks.RAW_AZURITE_BLOCK.get())
                     .slab(MFBlocks.AZURITE_SLAB.get())
+                    .fence(MFBlocks.AZURITE_FENCE.get())
+                    .fenceGate(MFBlocks.AZURITE_FENCE_GATE.get())
                     .button(MFBlocks.AZURITE_BUTTON.get())
                     .pressurePlate(MFBlocks.AZURITE_PRESSURE_PLATE.get())
                     .door(MFBlocks.AZURITE_DOOR.get())
@@ -32,6 +35,25 @@ public class MFBlockFamilies {
                     .getFamily();
         }
         return azuriteFamily;
+    }
+
+    public static BlockFamily getFluoriteFamily(){
+        if(fluoriteFamily == null) {
+            fluoriteFamily = new BlockFamily.Builder(MFBlocks.FLUORITE_BLOCK.get())
+                    .stairs(MFBlocks.FLUORITE_STAIRS.get())
+                    .strippedLog(MFBlocks.RAW_FLUORITE_BLOCK.get())
+                    .slab(MFBlocks.FLUORITE_SLAB.get())
+//                    .button(MFBlocks.AZURITE_BUTTON.get())
+//                    .pressurePlate(MFBlocks.AZURITE_PRESSURE_PLATE.get())
+                    .door(MFBlocks.FLUORITE_DOOR.get())
+                    .trapdoor(MFBlocks.FLUORITE_TRAPDOOR.get())
+                    .sign(MFBlocks.FLUORITE_SIGN.get(), MFBlocks.FLUORITE_WALL_SIGN.get())
+                    .hangingSign(MFBlocks.FLUORITE_HANGING_SIGN.get(), MFBlocks.FLUORITE_WALL_HANGING_SIGN.get())
+                    .recipeGroupPrefix("fluorite")
+                    .recipeUnlockedBy("has_fluorite")
+                    .getFamily();
+        }
+        return fluoriteFamily;
     }
 
     public static BlockFamily getBloodwoodFamily(){

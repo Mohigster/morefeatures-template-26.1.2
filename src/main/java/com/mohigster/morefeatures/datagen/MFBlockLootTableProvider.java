@@ -87,9 +87,13 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MFBlocks.TAINTED_STAIRS.get());
         dropSelf(MFBlocks.PALM_STAIRS.get());
         dropSelf(MFBlocks.PALM_TRAPDOOR.get());
+        dropSelf(MFBlocks.FLUORITE_TRAPDOOR.get());
         dropSelf(MFBlocks.COMPRESSOR_BLOCK.get());
         dropSelf(MFBlocks.AZURITE_BUTTON.get());
         dropSelf(MFBlocks.AZURITE_PRESSURE_PLATE.get());
+        dropSelf(MFBlocks.AZURITE_FENCE.get());
+        dropSelf(MFBlocks.AZURITE_FENCE_GATE.get());
+        dropSelf(MFBlocks.AZURITE_SHELF.get());
         dropSelf(MFBlocks.PALM_PRESSURE_PLATE.get());
         dropSelf(MFBlocks.PALM_BUTTON.get());
         dropSelf(MFBlocks.ROSE.get());
@@ -257,10 +261,22 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
                 createSingleItemTable(MFItems.AZURITE_SIGN.asItem()));
 
         add(MFBlocks.AZURITE_HANGING_SIGN.get(),
-                createSingleItemTable(MFItems.AZURITE_SIGN.asItem()));
+                createSingleItemTable(MFItems.AZURITE_HANGING_SIGN.asItem()));
 
         add(MFBlocks.AZURITE_WALL_HANGING_SIGN.get(),
-                createSingleItemTable(MFItems.AZURITE_SIGN.asItem()));
+                createSingleItemTable(MFItems.AZURITE_HANGING_SIGN.asItem()));
+
+        add(MFBlocks.FLUORITE_SIGN.get(),
+                createSingleItemTable(MFItems.FLUORITE_SIGN.asItem()));
+
+        add(MFBlocks.FLUORITE_WALL_SIGN.get(),
+                createSingleItemTable(MFItems.FLUORITE_SIGN.asItem()));
+
+        add(MFBlocks.FLUORITE_HANGING_SIGN.get(),
+                createSingleItemTable(MFItems.FLUORITE_HANGING_SIGN.asItem()));
+
+        add(MFBlocks.FLUORITE_WALL_HANGING_SIGN.get(),
+                createSingleItemTable(MFItems.FLUORITE_HANGING_SIGN.asItem()));
 
         add(MFBlocks.BLOODWOOD_SIGN.get(),
                 createSingleItemTable(MFItems.BLOODWOOD_SIGN.asItem()));
@@ -325,6 +341,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         // DOOR
 
         add(MFBlocks.AZURITE_DOOR.get(), this::createDoorTable);
+        add(MFBlocks.FLUORITE_DOOR.get(), this::createDoorTable);
         add(MFBlocks.PALM_DOOR.get(), this::createDoorTable);
 
         // ORES
