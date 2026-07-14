@@ -181,8 +181,9 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(AZURITE_BLOCK.get())
     );
 
-    public static final DeferredBlock<Block> AZURITE_VERTICAL_SLAB = registerBlock(MFBlockItemIds.AZURITE_VERTICAL_SLAB,
-            props -> new VerticalSlabBlock(false, props),
+    public static final DeferredBlock<Block> AZURITE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.AZURITE_VERTICAL_SLAB,
+            false,
+            VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(AZURITE_BLOCK.get())
     );
 
@@ -262,8 +263,9 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
     );
 
-    public static final DeferredBlock<Block> AZURITE_SHELF = registerBlock(MFBlockItemIds.AZURITE_SHELF,
-            props -> new MFShelfBlock(false, props),
+    public static final DeferredBlock<Block> AZURITE_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.AZURITE_SHELF,
+            false,
+            MFShelfBlock::new,
             _ -> BlockBehaviour.Properties.ofFullCopy(RAW_AZURITE_BLOCK.get())
                     .sound(SoundType.MEDIUM_AMETHYST_BUD)
                     .isValidSpawn(MFBlocks::never)
@@ -373,8 +375,9 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
     );
 
-    public static final DeferredBlock<Block> FLUORITE_SHELF = registerBlock(MFBlockItemIds.FLUORITE_SHELF,
-            props -> new MFShelfBlock(false, props),
+    public static final DeferredBlock<Block> FLUORITE_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.FLUORITE_SHELF,
+            false,
+            MFShelfBlock::new,
             _ -> Properties.ofFullCopy(AZURITE_SHELF.get())
     );
 
@@ -466,7 +469,7 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(BLOODWOOD_PLANKS.get())
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> BLOODWOOD_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.BLOODWOOD_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> BLOODWOOD_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.BLOODWOOD_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(BLOODWOOD_PLANKS.get())
@@ -519,8 +522,9 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(BLOODWOOD_SIGN.get())
     );
 
-    public static final DeferredBlock<Block> BLOODWOOD_SHELF = registerBlock(MFBlockItemIds.BLOODWOOD_SHELF,
-            props -> new MFShelfBlock(true, props),
+    public static final DeferredBlock<Block> BLOODWOOD_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.BLOODWOOD_SHELF,
+            true,
+            MFShelfBlock::new,
             _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.COLOR_RED)
     );
 
@@ -593,8 +597,9 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(TAINTED_LOG.get())
     );
 
-    public static final DeferredBlock<Block> TAINTED_VERTICAL_SLAB = registerBlock(MFBlockItemIds.TAINTED_VERTICAL_SLAB,
-            properties -> new VerticalSlabBlock(true, properties),
+    public static final DeferredBlock<Block> TAINTED_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.TAINTED_VERTICAL_SLAB,
+            true,
+            VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(TAINTED_PLANKS.get())
     );
 
@@ -654,8 +659,9 @@ public class MFBlocks {
                     .sound(SoundType.WOOD)
             ));
 
-    public static final DeferredBlock<Block> TAINTED_SHELF = registerBlock(MFBlockItemIds.TAINTED_SHELF,
-            props -> new MFShelfBlock(true, props),
+    public static final DeferredBlock<Block> TAINTED_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.TAINTED_SHELF,
+            true,
+            MFShelfBlock::new,
             _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.COLOR_PURPLE)
     );
 
@@ -728,8 +734,9 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(PALM_PLANKS.get())
     );
 
-    public static final DeferredBlock<Block> PALM_VERTICAL_SLAB = registerBlock(MFBlockItemIds.PALM_VERTICAL_SLAB,
-            properties -> new VerticalSlabBlock(true, properties),
+    public static final DeferredBlock<Block> PALM_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.PALM_VERTICAL_SLAB,
+            true,
+            VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(PALM_PLANKS.get())
     );
 
@@ -807,8 +814,9 @@ public class MFBlocks {
                     .isRedstoneConductor(MFBlocks::never)
             ));
 
-    public static final DeferredBlock<Block> PALM_SHELF = registerBlock(MFBlockItemIds.PALM_SHELF,
-            props -> new MFShelfBlock(true, props),
+    public static final DeferredBlock<Block> PALM_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.PALM_SHELF,
+            true,
+            MFShelfBlock::new,
             _ -> Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.COLOR_YELLOW)
     );
 
@@ -892,8 +900,9 @@ public class MFBlocks {
                     .ignitedByLava()
             ));
 
-    public static final DeferredBlock<Block> DECREPIT_VERTICAL_SLAB = registerBlock(MFBlockItemIds.DECREPIT_VERTICAL_SLAB,
-            properties -> new VerticalSlabBlock(true, properties),
+    public static final DeferredBlock<Block> DECREPIT_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.DECREPIT_VERTICAL_SLAB,
+            true,
+            VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(DECREPIT_PLANKS.get())
     );
 
@@ -972,8 +981,9 @@ public class MFBlocks {
                     .sound(SoundType.NETHER_WOOD)
             ));
 
-    public static final DeferredBlock<Block> DECREPIT_SHELF = registerBlock(MFBlockItemIds.DECREPIT_SHELF,
-            props -> new MFShelfBlock(true, props),
+    public static final DeferredBlock<Block> DECREPIT_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.DECREPIT_SHELF,
+            true,
+            MFShelfBlock::new,
             _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.TERRACOTTA_BLUE)
     );
 
@@ -1059,8 +1069,9 @@ public class MFBlocks {
                     .ignitedByLava()
             ));
 
-    public static final DeferredBlock<Block> PALLID_VERTICAL_SLAB = registerBlock(MFBlockItemIds.PALLID_VERTICAL_SLAB,
-            properties -> new VerticalSlabBlock(true, properties),
+    public static final DeferredBlock<Block> PALLID_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.PALLID_VERTICAL_SLAB,
+            true,
+            VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
     );
 
@@ -1136,8 +1147,9 @@ public class MFBlocks {
                     .sound(SoundType.NETHER_WOOD)
             ));
 
-    public static final DeferredBlock<Block> PALLID_SHELF = registerBlock(MFBlockItemIds.PALLID_SHELF,
-            props -> new MFShelfBlock(true, props),
+    public static final DeferredBlock<Block> PALLID_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.PALLID_SHELF,
+            true,
+            MFShelfBlock::new,
             _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.TERRACOTTA_GREEN)
     );
 
@@ -1148,79 +1160,79 @@ public class MFBlocks {
 
     /* --- WOOD SLABS --- */
 
-    public static final DeferredBlock<VerticalSlabBlock> OAK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.OAK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> OAK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.OAK_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.OAK_PLANKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> SPRUCE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.SPRUCE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> SPRUCE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.SPRUCE_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> BIRCH_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.BIRCH_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> BIRCH_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.BIRCH_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.BIRCH_PLANKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> JUNGLE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.JUNGLE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> JUNGLE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.JUNGLE_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.JUNGLE_PLANKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> ACACIA_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.ACACIA_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> ACACIA_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.ACACIA_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.ACACIA_PLANKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> DARK_OAK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.DARK_OAK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> DARK_OAK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.DARK_OAK_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> CRIMSON_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.CRIMSON_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> CRIMSON_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.CRIMSON_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> WARPED_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.WARPED_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> WARPED_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.WARPED_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.WARPED_PLANKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> MANGROVE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.MANGROVE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> MANGROVE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.MANGROVE_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> CHERRY_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.CHERRY_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> CHERRY_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.CHERRY_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.CHERRY_PLANKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> BAMBOO_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.BAMBOO_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> BAMBOO_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.BAMBOO_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.BAMBOO_PLANKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> BAMBOO_MOSAIC_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.BAMBOO_MOSAIC_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> BAMBOO_MOSAIC_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.BAMBOO_MOSAIC_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.BAMBOO_MOSAIC)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> PALE_OAK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.PALE_OAK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> PALE_OAK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.PALE_OAK_VERTICAL_SLAB,
             true,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.PALE_OAK_PLANKS)
@@ -1228,61 +1240,61 @@ public class MFBlocks {
 
     /* --- STONE & DEEPSLATE SLABS --- */
 
-    public static final DeferredBlock<VerticalSlabBlock> STONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.STONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> STONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.STONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.STONE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> COBBLESTONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.COBBLESTONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> COBBLESTONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.COBBLESTONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.COBBLESTONE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> MOSSY_COBBLESTONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.MOSSY_COBBLESTONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> MOSSY_COBBLESTONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.MOSSY_COBBLESTONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.MOSSY_COBBLESTONE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> SMOOTH_STONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.SMOOTH_STONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> SMOOTH_STONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.SMOOTH_STONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.SMOOTH_STONE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> STONE_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.STONE_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> STONE_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.STONE_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.STONE_BRICKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> MOSSY_STONE_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.MOSSY_STONE_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> MOSSY_STONE_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.MOSSY_STONE_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.MOSSY_STONE_BRICKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> COBBLED_DEEPSLATE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.COBBLED_DEEPSLATE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> COBBLED_DEEPSLATE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.COBBLED_DEEPSLATE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.COBBLED_DEEPSLATE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> POLISHED_DEEPSLATE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.POLISHED_DEEPSLATE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> POLISHED_DEEPSLATE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.POLISHED_DEEPSLATE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.POLISHED_DEEPSLATE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> DEEPSLATE_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.DEEPSLATE_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> DEEPSLATE_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.DEEPSLATE_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.DEEPSLATE_BRICKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> DEEPSLATE_TILE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.DEEPSLATE_TILE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> DEEPSLATE_TILE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.DEEPSLATE_TILE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.DEEPSLATE_TILES)
@@ -1290,55 +1302,55 @@ public class MFBlocks {
 
     /* --- OTHER STONE TYPE SLABS --- */
 
-    public static final DeferredBlock<VerticalSlabBlock> GRANITE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.GRANITE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> GRANITE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.GRANITE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.GRANITE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> POLISHED_GRANITE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.POLISHED_GRANITE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> POLISHED_GRANITE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.POLISHED_GRANITE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.POLISHED_GRANITE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> DIORITE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.DIORITE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> DIORITE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.DIORITE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.DIORITE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> POLISHED_DIORITE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.POLISHED_DIORITE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> POLISHED_DIORITE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.POLISHED_DIORITE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.POLISHED_DIORITE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> ANDESITE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.ANDESITE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> ANDESITE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.ANDESITE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.ANDESITE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> POLISHED_ANDESITE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.POLISHED_ANDESITE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> POLISHED_ANDESITE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.POLISHED_ANDESITE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.POLISHED_ANDESITE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> TUFF_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.TUFF_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> TUFF_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.TUFF_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.TUFF)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> POLISHED_TUFF_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.POLISHED_TUFF_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> POLISHED_TUFF_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.POLISHED_TUFF_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.POLISHED_TUFF)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> TUFF_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.TUFF_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> TUFF_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.TUFF_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.TUFF_BRICKS)
@@ -1346,37 +1358,37 @@ public class MFBlocks {
 
     /* --- SANDSTONE SLABS --- */
 
-    public static final DeferredBlock<VerticalSlabBlock> SANDSTONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.SANDSTONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> SANDSTONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.SANDSTONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.SANDSTONE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> SMOOTH_SANDSTONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.SMOOTH_SANDSTONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> SMOOTH_SANDSTONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.SMOOTH_SANDSTONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.SMOOTH_SANDSTONE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> CUT_SANDSTONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.CUT_SANDSTONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> CUT_SANDSTONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.CUT_SANDSTONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.CUT_SANDSTONE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> RED_SANDSTONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.RED_SANDSTONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> RED_SANDSTONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.RED_SANDSTONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.RED_SANDSTONE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> SMOOTH_RED_SANDSTONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.SMOOTH_RED_SANDSTONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> SMOOTH_RED_SANDSTONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.SMOOTH_RED_SANDSTONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.SMOOTH_RED_SANDSTONE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> CUT_RED_SANDSTONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.CUT_RED_SANDSTONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> CUT_RED_SANDSTONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.CUT_RED_SANDSTONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.CUT_RED_SANDSTONE)
@@ -1384,37 +1396,37 @@ public class MFBlocks {
 
     /* --- SULFUR & CINNABAR SLABS --- */
 
-    public static final DeferredBlock<VerticalSlabBlock> SULFUR_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.SULFUR_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> SULFUR_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.SULFUR_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.SULFUR)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> POLISHED_SULFUR_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.POLISHED_SULFUR_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> POLISHED_SULFUR_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.POLISHED_SULFUR_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.POLISHED_SULFUR)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> SULFUR_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.SULFUR_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> SULFUR_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.SULFUR_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.SULFUR_BRICKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> CINNABAR_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.CINNABAR_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> CINNABAR_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.CINNABAR_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.CINNABAR)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> POLISHED_CINNABAR_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.POLISHED_CINNABAR_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> POLISHED_CINNABAR_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.POLISHED_CINNABAR_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.POLISHED_CINNABAR)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> CINNABAR_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.CINNABAR_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> CINNABAR_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.CINNABAR_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.CINNABAR_BRICKS)
@@ -1422,55 +1434,55 @@ public class MFBlocks {
 
     /* --- NETHER & END SLABS --- */
 
-    public static final DeferredBlock<VerticalSlabBlock> NETHER_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.NETHER_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> NETHER_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.NETHER_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.NETHER_BRICKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> RED_NETHER_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.RED_NETHER_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> RED_NETHER_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.RED_NETHER_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.RED_NETHER_BRICKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> BLACKSTONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.BLACKSTONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> BLACKSTONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.BLACKSTONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.BLACKSTONE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> POLISHED_BLACKSTONE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.POLISHED_BLACKSTONE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> POLISHED_BLACKSTONE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.POLISHED_BLACKSTONE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.POLISHED_BLACKSTONE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.POLISHED_BLACKSTONE_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.POLISHED_BLACKSTONE_BRICKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> END_STONE_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.END_STONE_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> END_STONE_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.END_STONE_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.END_STONE_BRICKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> PURPUR_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.PURPUR_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> PURPUR_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.PURPUR_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.PURPUR_BLOCK)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> QUARTZ_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.QUARTZ_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> QUARTZ_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.QUARTZ_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.QUARTZ_BLOCK)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> SMOOTH_QUARTZ_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.SMOOTH_QUARTZ_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> SMOOTH_QUARTZ_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.SMOOTH_QUARTZ_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.SMOOTH_QUARTZ)
@@ -1478,37 +1490,37 @@ public class MFBlocks {
 
     /* --- MISCELLANEOUS SLABS --- */
 
-    public static final DeferredBlock<VerticalSlabBlock> PRISMARINE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.PRISMARINE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> PRISMARINE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.PRISMARINE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.PRISMARINE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> PRISMARINE_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.PRISMARINE_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> PRISMARINE_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.PRISMARINE_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.PRISMARINE_BRICKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> DARK_PRISMARINE_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.DARK_PRISMARINE_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> DARK_PRISMARINE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.DARK_PRISMARINE_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.DARK_PRISMARINE)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.BRICKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> MUD_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.MUD_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> MUD_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.MUD_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.MUD_BRICKS)
     );
 
-    public static final DeferredBlock<VerticalSlabBlock> RESIN_BRICK_VERTICAL_SLAB = registerVerticalSlab(MFBlockItemIds.RESIN_BRICK_VERTICAL_SLAB,
+    public static final DeferredBlock<Block> RESIN_BRICK_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.RESIN_BRICK_VERTICAL_SLAB,
             false,
             VerticalSlabBlock::new,
             _ -> Properties.ofFullCopy(Blocks.RESIN_BRICKS)
@@ -1795,7 +1807,7 @@ public class MFBlocks {
         );
     }
 
-    private static <T extends Block> DeferredBlock<T> registerVerticalSlab(
+    private static <T extends Block> DeferredBlock<T> registerVerticalSlabOrShelf(
             BlockItemId id,
             boolean isFlammable,
             BiFunction<Boolean, BlockBehaviour.Properties, T> blockFactory,
