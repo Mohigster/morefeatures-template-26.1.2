@@ -43,7 +43,7 @@ public class MFShelfBlock extends ShelfBlock {
                 }
 
                 level.setBlock(pos, newState, 3);
-                this.playRedstoneSound(level, pos, newState);
+                this.playSound(level, pos, getRedstoneSound(newState));
                 level.gameEvent(signal ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos, GameEvent.Context.of(newState));
             }
         }
@@ -55,12 +55,12 @@ public class MFShelfBlock extends ShelfBlock {
     }
 
     // New method that checks which sound to use when the shelf is powered by redstone
-    private void playRedstoneSound(LevelAccessor level, BlockPos pos, BlockState state){
+    private SoundEvent getRedstoneSound(BlockState state){
         if (state.is(MFBlockTags.GEMSTONE_SHELVES)){
-            this.playSound(level, pos, SoundEvents.AMETHYST_BLOCK_CHIME);
-        } else {
-            this.playSound(level, pos, state.getValue(POWERED) ? SoundEvents.SHELF_ACTIVATE : SoundEvents.SHELF_DEACTIVATE);
+            return SoundEvents.AMETHYST_BLOCK_CHIME;
         }
+
+        return state.getValue(POWERED) ? SoundEvents.SHELF_ACTIVATE : SoundEvents.SHELF_DEACTIVATE;
     }
 
     @Override
