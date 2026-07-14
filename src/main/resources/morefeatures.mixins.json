@@ -3,7 +3,8 @@
   "package": "com.mohigster.morefeatures.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
-    "BowItemMixin"
+    "BowItemMixin",
+    "FenceConnectionMixin"
   ],
   "injectors": {
     "defaultRequire": 1

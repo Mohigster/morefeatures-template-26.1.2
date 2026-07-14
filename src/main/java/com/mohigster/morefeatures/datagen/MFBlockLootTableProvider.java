@@ -85,6 +85,8 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MFBlocks.AZURITE_TRAPDOOR.get());
         dropSelf(MFBlocks.FLUORITE_STAIRS.get());
         dropSelf(MFBlocks.FLUORITE_SHELF.get());
+        dropSelf(MFBlocks.FLUORITE_FENCE.get());
+        dropSelf(MFBlocks.FLUORITE_FENCE_GATE.get());
         dropSelf(MFBlocks.BLOODWOOD_STAIRS.get());
         dropSelf(MFBlocks.TAINTED_STAIRS.get());
         dropSelf(MFBlocks.PALM_STAIRS.get());
@@ -93,6 +95,9 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MFBlocks.COMPRESSOR_BLOCK.get());
         dropSelf(MFBlocks.AZURITE_BUTTON.get());
         dropSelf(MFBlocks.AZURITE_PRESSURE_PLATE.get());
+        dropSelf(MFBlocks.FLUORITE_BUTTON.get());
+        dropSelf(MFBlocks.FLUORITE_WALL.get());
+        dropSelf(MFBlocks.FLUORITE_PRESSURE_PLATE.get());
         dropSelf(MFBlocks.AZURITE_FENCE.get());
         dropSelf(MFBlocks.AZURITE_FENCE_GATE.get());
         dropSelf(MFBlocks.AZURITE_SHELF.get());
@@ -122,6 +127,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MFBlocks.PALLID_FENCE.get());
         dropSelf(MFBlocks.PALLID_FENCE_GATE.get());
         dropSelf(MFBlocks.PALLID_SHELF.get());
+        dropSelf(MFBlocks.AZURITE_WALL.get());
         dropSelf(MFBlocks.STRIPPED_PALLID_WOOD.get());
         dropSelf(MFBlocks.STRIPPED_PALLID_LOG.get());
         dropSelf(MFBlocks.DECREPIT_ROOTS.get());
@@ -163,6 +169,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         // VERTICAL SLABS
 
         add(MFBlocks.AZURITE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
+        add(MFBlocks.FLUORITE_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
         add(MFBlocks.BLOODWOOD_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
         add(MFBlocks.TAINTED_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);
         add(MFBlocks.PALM_VERTICAL_SLAB.get(), this::createVerticalSlabItemTable);

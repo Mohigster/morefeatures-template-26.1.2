@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "redstone",
+  "group": "fluorite",
+  "key": {
+    "#": "morefeatures:fluorite",
+    "W": "morefeatures:fluorite_block"
+  },
+  "pattern": [
+    "#W#",
+    "#W#"
+  ],
+  "result": {
+    "id": "morefeatures:fluorite_fence_gate"
+  }
+}

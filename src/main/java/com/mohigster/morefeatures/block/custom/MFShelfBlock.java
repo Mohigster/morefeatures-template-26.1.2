@@ -63,6 +63,9 @@ public class MFShelfBlock extends ShelfBlock {
         return state.getValue(POWERED) ? SoundEvents.SHELF_ACTIVATE : SoundEvents.SHELF_DEACTIVATE;
     }
 
+    /**
+     * Gemstone shelves will connect with each other, but not with wooden shelves.
+     */
     @Override
     public boolean isConnectable(BlockState state) {
         if (!(state.hasProperty(POWERED) && state.getValue(POWERED))){

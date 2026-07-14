@@ -2,7 +2,6 @@ package com.mohigster.morefeatures.tag;
 
 import com.mohigster.morefeatures.references.MFIdentifier;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
@@ -40,10 +39,6 @@ public final class MFItemTags {
     public static final TagKey<Item> MAGIC_BLOCK_TRANSMUTATION_RESULT = morefeaturesTag("magic_block_transmutation_result");
 
     private static TagKey<Item> morefeaturesTag(String name) {
-        return create(MFIdentifier.withMfNamespace(name));
-    }
-
-    public static TagKey<Item> create(Identifier id) {
-        return TagKey.create(Registries.ITEM, id);
+        return TagKey.create(Registries.ITEM, MFIdentifier.withMfNamespace(name));
     }
 }

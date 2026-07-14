@@ -209,6 +209,9 @@ public class MFRecipeProvider extends RecipeProvider {
                 .group("fluorite")
                 .save(output, "morefeatures:fluorite_from_blaze_rod_and_breeze_rod_and_brine_rod");
 
+        verticalSlabCrafting(MFBlocks.FLUORITE_VERTICAL_SLAB, MFBlocks.FLUORITE_BLOCK);
+        verticalSlabStonecutting(MFBlocks.FLUORITE_VERTICAL_SLAB, MFBlocks.FLUORITE_BLOCK);
+
         // Bloodwood recipes
         shapeless(RecipeCategory.BUILDING_BLOCKS, MFBlocks.BLOODWOOD_PLANKS.get(), 4)
                 .requires(MFItemTags.BLOODWOOD_LOGS)
@@ -404,6 +407,7 @@ public class MFRecipeProvider extends RecipeProvider {
                 .define('M', MFItems.MAGNESIUM_INGOT.get())
                 .define('I', Items.IRON_INGOT)
                 .unlockedBy(getHasName(MFItems.MAGNESIUM_INGOT.get()), has(MFItems.MAGNESIUM_INGOT))
+                .unlockedBy(getHasName(Items.IRON_INGOT), has(Items.IRON_INGOT))
                 .group("metal_detector")
                 .save(output);
 
@@ -513,6 +517,12 @@ public class MFRecipeProvider extends RecipeProvider {
                 .save(output);
         pressurePlate(MFBlocks.AZURITE_PRESSURE_PLATE.get(), MFItems.AZURITE.get());
 
+        buttonBuilder(MFBlocks.FLUORITE_BUTTON.get(), Ingredient.of(MFItems.FLUORITE))
+                .group("fluorite")
+                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
+                .save(output);
+        pressurePlate(MFBlocks.FLUORITE_PRESSURE_PLATE.get(), MFItems.FLUORITE.get());
+
         // Doors and trapdoors
 
         doorBuilder(MFBlocks.AZURITE_DOOR.get(), Ingredient.of(MFItems.AZURITE))
@@ -559,11 +569,24 @@ public class MFRecipeProvider extends RecipeProvider {
                 .group("azurite")
                 .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
                 .save(output);
-
         specialFenceGateBuilder(MFBlocks.AZURITE_FENCE_GATE.get(), Ingredient.of(MFBlocks.AZURITE_BLOCK), Ingredient.of(MFItems.AZURITE))
                 .group("azurite")
                 .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
                 .save(output);
+
+        specialFenceBuilder(MFBlocks.FLUORITE_FENCE.get(), Ingredient.of(MFBlocks.FLUORITE_BLOCK), Ingredient.of(MFItems.FLUORITE))
+                .group("fluorite")
+                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
+                .save(output);
+        specialFenceGateBuilder(MFBlocks.FLUORITE_FENCE_GATE.get(), Ingredient.of(MFBlocks.FLUORITE_BLOCK), Ingredient.of(MFItems.FLUORITE))
+                .group("fluorite")
+                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
+                .save(output);
+
+        // Walls
+
+        wall(RecipeCategory.DECORATIONS, MFBlocks.AZURITE_WALL, MFBlocks.AZURITE_BLOCK);
+        wall(RecipeCategory.DECORATIONS, MFBlocks.FLUORITE_WALL, MFBlocks.FLUORITE_BLOCK);
 
         // Bismuth smithing recipes
 

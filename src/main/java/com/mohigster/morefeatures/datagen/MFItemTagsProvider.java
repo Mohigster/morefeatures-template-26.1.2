@@ -13,6 +13,7 @@ import net.minecraft.references.BlockItemIds;
 import net.minecraft.references.ItemIds;
 import net.minecraft.tags.ItemTags;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
+import org.jspecify.annotations.NonNull;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -23,7 +24,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.Provider provider) {
+    protected void addTags(HolderLookup.@NonNull Provider provider) {
         new MFBlockItemTagsProvider(tagId -> BlockItemTagsProvider.wrapForItems(this.tag(tagId.item()))).run();
 
         tag(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)

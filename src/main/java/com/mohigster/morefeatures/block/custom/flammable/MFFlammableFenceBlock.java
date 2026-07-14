@@ -1,13 +1,13 @@
 package com.mohigster.morefeatures.block.custom.flammable;
 
+import com.mohigster.morefeatures.block.custom.MFFenceBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
-import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NullMarked;
 
-public class MFFlammableFenceBlock extends FenceBlock {
+public class MFFlammableFenceBlock extends MFFenceBlock {
     public MFFlammableFenceBlock(Properties properties) {
         super(properties);
     }

@@ -140,18 +140,16 @@ public class MFBlocks {
     );
 
     public static final DeferredBlock<Block> NETHER_AZURITE_ORE = registerBlock(MFBlockItemIds.NETHER_AZURITE_ORE,
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
-                    .strength(4f, 4f)
-                    .requiresCorrectToolForDrops()
+            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            _ -> Properties.ofFullCopy(AZURITE_ORE.get())
                     .sound(SoundType.NETHER_ORE)
-            ));
+                    .mapColor(MapColor.NETHER)
+    );
 
     public static final DeferredBlock<Block> END_AZURITE_ORE = registerBlock(MFBlockItemIds.END_AZURITE_ORE,
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties
-                    .strength(4f, 4f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.STONE)
-            ));
+            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties),
+            _ -> Properties.ofFullCopy(AZURITE_ORE.get()).mapColor(Blocks.END_STONE.defaultMapColor())
+    );
 
     public static final DeferredBlock<Block> AZURITE_BLOCK = registerBlock(MFBlockItemIds.AZURITE_BLOCK,
             properties -> new Block(properties
@@ -205,8 +203,13 @@ public class MFBlocks {
                     .isRedstoneConductor(MFBlocks::never) // Buttons do not conduct redstone, even though they can activate it
             ));
 
+    public static final DeferredBlock<Block> AZURITE_WALL = registerBlock(MFBlockItemIds.AZURITE_WALL,
+            WallBlock::new,
+            _ -> Properties.ofFullCopy(AZURITE_BLOCK.get()).forceSolidOn()
+    );
+
     public static final DeferredBlock<Block> AZURITE_FENCE = registerBlock(MFBlockItemIds.AZURITE_FENCE,
-            properties -> new FenceBlock(properties
+            properties -> new MFFenceBlock(properties
                     .strength(2F, 8F)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
@@ -233,7 +236,7 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> AZURITE_TRAPDOOR = registerBlock(MFBlockItemIds.AZURITE_TRAPDOOR,
-            properties -> new TrapDoorBlock(MFBlockSetType.AZURITE, properties),
+            props -> new TrapDoorBlock(MFBlockSetType.AZURITE, props),
             _ -> Properties.ofFullCopy(AZURITE_DOOR.get())
     );
 
@@ -335,6 +338,37 @@ public class MFBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.AMETHYST)
             ));
+
+    public static final DeferredBlock<Block> FLUORITE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.FLUORITE_VERTICAL_SLAB,
+            false,
+            VerticalSlabBlock::new,
+            _ -> Properties.ofFullCopy(FLUORITE_BLOCK.get())
+    );
+
+    public static final DeferredBlock<Block> FLUORITE_WALL = registerBlock(MFBlockItemIds.FLUORITE_WALL,
+            WallBlock::new,
+            _ -> Properties.ofFullCopy(FLUORITE_BLOCK.get()).forceSolidOn()
+    );
+
+    public static final DeferredBlock<Block> FLUORITE_PRESSURE_PLATE = registerBlock(MFBlockItemIds.FLUORITE_PRESSURE_PLATE,
+            properties -> new PressurePlateBlock(MFBlockSetType.FLUORITE, properties),
+            _ -> Properties.ofFullCopy(AZURITE_PRESSURE_PLATE.get())
+    );
+
+    public static final DeferredBlock<Block> FLUORITE_BUTTON = registerBlock(MFBlockItemIds.FLUORITE_BUTTON,
+            properties -> new ButtonBlock(MFBlockSetType.FLUORITE, 20, properties),
+            _ -> Properties.ofFullCopy(AZURITE_BUTTON.get())
+    );
+
+    public static final DeferredBlock<Block> FLUORITE_FENCE = registerBlock(MFBlockItemIds.FLUORITE_FENCE,
+            MFFenceBlock::new,
+            _ -> Properties.ofFullCopy(AZURITE_FENCE.get())
+    );
+
+    public static final DeferredBlock<Block> FLUORITE_FENCE_GATE = registerBlock(MFBlockItemIds.FLUORITE_FENCE_GATE,
+            props -> new FenceGateBlock(MFWoodType.FLUORITE, props),
+            _ -> Properties.ofFullCopy(AZURITE_FENCE_GATE.get())
+    );
 
     public static final DeferredBlock<Block> FLUORITE_DOOR = registerBlock(MFBlockItemIds.FLUORITE_DOOR,
             properties -> new DoorBlock(MFBlockSetType.FLUORITE, properties
@@ -823,10 +857,14 @@ public class MFBlocks {
     //———————————————————————————————————————Decrepit Wood Blocks————————————————————————————————————————————————————————————————————
     public static final DeferredBlock<Block> DECREPIT_LOG = registerBlock(MFBlockItemIds.DECREPIT_LOG,
             properties -> new MFFlammableRotatedPillarBlock(properties
-                    .strength(2f, 2f)
+                    .strength(2F, 8F)
                     .sound(SoundType.STEM)
+                    .isRedstoneConductor(MFBlocks::always)
+                    .isViewBlocking(MFBlocks::always)
+                    .isSuffocating(MFBlocks::always)
+                    .isValidSpawn(MFBlocks::never)
                     .ignitedByLava()
-                    .instrument(NoteBlockInstrument.BASEDRUM)
+                    .instrument(NoteBlockInstrument.BASS)
                     .mapColor(MapColor.TERRACOTTA_BLUE)
             ));
 
@@ -990,84 +1028,58 @@ public class MFBlocks {
     //———————————————————————————————————————Pallid Wood Blocks——————————————————————————————————————————————————————————————————————
 
     public static final DeferredBlock<Block> PALLID_LOG = registerBlock(MFBlockItemIds.PALLID_LOG,
-            properties -> new MFFlammableRotatedPillarBlock(properties
-                    .strength(2f, 2f)
-                    .sound(SoundType.STEM)
-                    .ignitedByLava()
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .mapColor(MapColor.TERRACOTTA_GREEN)
-            ));
+            MFFlammableRotatedPillarBlock::new,
+            _ -> Properties.ofFullCopy(DECREPIT_LOG.get()).mapColor(MapColor.TERRACOTTA_GREEN)
+    );
 
     public static final DeferredBlock<Block> PALLID_WOOD = registerBlock(MFBlockItemIds.PALLID_WOOD,
             MFFlammableRotatedPillarBlock::new,
-            _ -> BlockBehaviour.Properties.ofFullCopy(PALLID_LOG.get()).mapColor(MapColor.COLOR_GRAY)
+            _ -> Properties.ofFullCopy(PALLID_LOG.get()).mapColor(MapColor.COLOR_GRAY)
     );
 
     public static final DeferredBlock<Block> STRIPPED_PALLID_LOG = registerBlock(MFBlockItemIds.STRIPPED_PALLID_LOG,
             MFFlammableRotatedPillarBlock::new,
-            _ -> BlockBehaviour.Properties.ofFullCopy(PALLID_LOG.get())
+            _ -> Properties.ofFullCopy(PALLID_LOG.get())
     );
 
     public static final DeferredBlock<Block> STRIPPED_PALLID_WOOD = registerBlock(MFBlockItemIds.STRIPPED_PALLID_WOOD,
             MFFlammableRotatedPillarBlock::new,
-            _ -> BlockBehaviour.Properties.ofFullCopy(PALLID_LOG.get())
+            _ -> Properties.ofFullCopy(PALLID_LOG.get())
     );
 
     public static final DeferredBlock<Block> PALLID_PLANKS = registerBlock(MFBlockItemIds.PALLID_PLANKS,
             MFFlammableBlock::new,
-            _ -> BlockBehaviour.Properties.ofFullCopy(PALLID_LOG.get()).sound(SoundType.NETHER_WOOD)
+            _ -> Properties.ofFullCopy(DECREPIT_PLANKS.get()).mapColor(MapColor.TERRACOTTA_GREEN)
     );
 
     public static final DeferredBlock<Block> PALLID_LEAVES = registerBlock(MFBlockItemIds.PALLID_LEAVES,
-            properties -> new MFLeavesBlock(0.02F, MFParticleTypes.PALLID_LEAVES.get(), properties
-                    .strength(0.2f, 0.2f)
-                    .sound(SoundType.GRASS)
-                    .noOcclusion()
-                    .ignitedByLava()
-                    .mapColor(Blocks.PALE_OAK_LEAVES.defaultMapColor())
-            ));
+            props -> new MFLeavesBlock(0.02F, MFParticleTypes.PALLID_LEAVES.get(), props),
+            _ -> Properties.ofFullCopy(DECREPIT_LEAVES.get())
+    );
 
     public static final DeferredBlock<Block> PALLID_NULLIUM = registerBlock(MFBlockItemIds.PALLID_NULLIUM,
-            properties -> new NulliumBlock(properties
-                    .sound(SoundType.NYLIUM)
-                    .strength(4f, 4f)
-                    .requiresCorrectToolForDrops()
-                    .randomTicks()
-                    .mapColor(MapColor.TERRACOTTA_GREEN)
-            )
+            NulliumBlock::new,
+            _ -> Properties.ofFullCopy(DECREPIT_NULLIUM.get()).mapColor(MapColor.TERRACOTTA_GREEN)
     );
 
     public static final DeferredBlock<Block> PALLID_SAPLING = registerBlock(MFBlockItemIds.PALLID_SAPLING,
-            properties -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALLID, properties
-                    .sound(SoundType.GRASS)
-                    .instabreak()
-                    .noOcclusion()
-                    .noCollision()
-                    .mapColor(MapColor.PLANT),
-                    MFBlockTags.NULLIUM
-            ));
+            props -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALLID, props, MFBlockTags.NULLIUM),
+            _ -> Properties.ofFullCopy(DECREPIT_SAPLING.get())
+    );
 
     public static final DeferredBlock<Block> POTTED_PALLID_SAPLING = registerBlockWithoutItem(MFBlockIds.POTTED_PALLID_SAPLING,
-            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
-                    Blocks.FLOWER_POT, PALLID_SAPLING, properties
-                    .noOcclusion()
-                    .instabreak()
-                    .pushReaction(PushReaction.DESTROY)
-            ));
+            props -> new FlowerPotBlock(() -> (FlowerPotBlock)Blocks.FLOWER_POT, PALLID_SAPLING, props),
+            _ -> Properties.ofFullCopy(POTTED_DECREPIT_SAPLING.get()));
 
     public static final DeferredBlock<Block> PALLID_STAIRS = registerBlock(MFBlockItemIds.PALLID_STAIRS,
-            properties -> new MFFlammableStairBlock(MFBlocks.DECREPIT_PLANKS.get().defaultBlockState(), properties
-                    .strength(2f, 2f)
-                    .sound(SoundType.NETHER_WOOD)
-                    .ignitedByLava()
-            ));
+            props -> new MFFlammableStairBlock(MFBlocks.PALLID_PLANKS.get().defaultBlockState(), props),
+            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
+    );
 
     public static final DeferredBlock<Block> PALLID_SLAB = registerBlock(MFBlockItemIds.PALLID_SLAB,
-            properties -> new MFFlammableSlabBlock(properties
-                    .strength(2f, 2f)
-                    .sound(SoundType.NETHER_WOOD)
-                    .ignitedByLava()
-            ));
+            MFFlammableSlabBlock::new,
+            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
+    );
 
     public static final DeferredBlock<Block> PALLID_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.PALLID_VERTICAL_SLAB,
             true,
@@ -1081,35 +1093,29 @@ public class MFBlocks {
     );
 
     public static final DeferredBlock<Block> PALLID_FENCE_GATE = registerBlock(MFBlockItemIds.PALLID_FENCE_GATE,
-            properties -> new MFFlammableFenceGateBlock(MFWoodType.PALLID, properties
-                    .strength(2f, 2f)
-                    .sound(SoundType.NETHER_WOOD)
-            ));
+            props -> new MFFlammableFenceGateBlock(MFWoodType.PALLID, props),
+            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
+    );
 
     public static final DeferredBlock<Block> PALLID_PRESSURE_PLATE = registerBlock(MFBlockItemIds.PALLID_PRESSURE_PLATE,
-            properties -> new PressurePlateBlock(MFBlockSetType.PALLID, properties
-                    .strength(2F)
+            props -> new PressurePlateBlock(MFBlockSetType.PALLID, props),
+            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
                     .forceSolidOn()
-                    .noCollision()
                     .pushReaction(PushReaction.DESTROY)
-            ));
+                    .noCollision()
+    );
 
     public static final DeferredBlock<Block> PALLID_BUTTON = registerBlock(MFBlockItemIds.PALLID_BUTTON,
-            properties -> new ButtonBlock(MFBlockSetType.PALLID, 20, properties
-                    .strength(2F)
-                    .noCollision()
+            properties -> new ButtonBlock(MFBlockSetType.PALLID, 20, properties),
+            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
                     .pushReaction(PushReaction.DESTROY)
-            ));
+                    .noCollision()
+    );
 
     public static final DeferredBlock<Block> PALLID_ROOTS = registerBlock(MFBlockItemIds.PALLID_ROOTS,
-            properties -> new NetherRootsBlock(MFBlockTags.SUPPORTS_END_ROOTS, properties
-                    .sound(SoundType.ROOTS)
-                    .noOcclusion()
-                    .noCollision()
-                    .instabreak()
-                    .replaceable()
-                    .offsetType(BlockBehaviour.OffsetType.XZ)
-            ));
+            properties -> new NetherRootsBlock(MFBlockTags.SUPPORTS_END_ROOTS, properties),
+            _ -> Properties.ofFullCopy(DECREPIT_ROOTS.get())
+    );
 
     public static final DeferredBlock<Block> POTTED_PALLID_ROOTS = registerBlockWithoutItem(MFBlockIds.POTTED_PALLID_ROOTS,
             properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
@@ -1551,6 +1557,10 @@ public class MFBlocks {
                     .mapColor(MapColor.PLANT)
                     .instabreak()
                     .noCollision()
+                    .isViewBlocking(MFBlocks::never)
+                    .isSuffocating(MFBlocks::never)
+                    .isSuffocating(MFBlocks::never)
+                    .isRedstoneConductor(MFBlocks::never)
                     .offsetType(BlockBehaviour.OffsetType.XZ)
                     .pushReaction(PushReaction.DESTROY)
                     .sound(SoundType.GRASS)
@@ -1561,6 +1571,10 @@ public class MFBlocks {
                     Blocks.FLOWER_POT, ROSE, properties
                     .noOcclusion()
                     .instabreak()
+                    .isViewBlocking(MFBlocks::never)
+                    .isSuffocating(MFBlocks::never)
+                    .isSuffocating(MFBlocks::never)
+                    .isRedstoneConductor(MFBlocks::never)
                     .pushReaction(PushReaction.DESTROY)
             ));
 
@@ -1570,17 +1584,14 @@ public class MFBlocks {
     );
 
     public static final DeferredBlock<Block> POTTED_BLUE_ROSE = registerBlockWithoutItem(MFBlockIds.POTTED_BLUE_ROSE,
-            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
-                    Blocks.FLOWER_POT, BLUE_ROSE, properties
-                    .noOcclusion()
-                    .instabreak()
-                    .pushReaction(PushReaction.DESTROY)
-            ));
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BLUE_ROSE, properties),
+            _ -> Properties.ofFullCopy(POTTED_ROSE.get())
+    );
 
     // Void anchor block
     public static final DeferredBlock<Block> VOID_ANCHOR = registerBlock(MFBlockItemIds.VOID_ANCHOR,
             properties -> new VoidAnchorBlock(properties
-                    .strength(50f, 1200f)
+                    .strength(50F, 1200F)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.STONE)
                     .lightLevel(state -> VoidAnchorBlock.getScaledChargeLevel(state, 15))
@@ -1590,7 +1601,7 @@ public class MFBlocks {
     public static final DeferredBlock<Block> MAGIC_BLOCK = registerBlockWithTooltip(MFBlockItemIds.MAGIC_BLOCK,
             properties -> new MagicBlock(properties
                     .mapColor(MapColor.COLOR_MAGENTA)
-                    .strength(2f)
+                    .strength(8F, 500F)
                     .requiresCorrectToolForDrops()
                     .sound(MFSounds.MAGIC_BLOCK_SOUNDS)
             ), Component.translatable("tooltip.morefeatures.magic_block"));
@@ -1619,40 +1630,18 @@ public class MFBlocks {
 
     // Conjured Ice
     public static final DeferredBlock<Block> CONJURED_ICE = registerBlockWithoutItem(MFBlockIds.CONJURED_ICE,
-            props -> new ConjuredIceBlock(props
-                    .mapColor(MapColor.ICE)
-                    .friction(0.98F)
-                    .strength(0.5F)
-                    .sound(SoundType.GLASS)
-                    .noOcclusion()
-                    .isSuffocating(MFBlocks::always)
-                    .isViewBlocking(MFBlocks::never)
-                    .isValidSpawn((_, _, _, entityType) -> entityType == EntityTypes.POLAR_BEAR)
-                    .isRedstoneConductor(MFBlocks::never)
-            ));
+            ConjuredIceBlock::new,
+            _ -> Properties.ofFullCopy(Blocks.FROSTED_ICE)
+    );
 
     // Icicle
     public static final DeferredBlock<Block> ICICLE = registerBlock(MFBlockItemIds.ICICLE,
-            properties -> new IcicleBlock(
-                    List.of(
-                            Blocks.PACKED_ICE.defaultBlockState(),
-                            Blocks.BLUE_ICE.defaultBlockState()
-                    ), properties
+            props -> new IcicleBlock(List.of(Blocks.PACKED_ICE.defaultBlockState(), Blocks.BLUE_ICE.defaultBlockState()), props),
+            _ -> Properties.ofFullCopy(Blocks.POINTED_DRIPSTONE)
                     .sound(SoundType.GLASS)
-                    .randomTicks()
-                    .strength(1.5F, 3.0F)
-                    .dynamicShape()
-                    .forceSolidOn()
-                    .offsetType(BlockBehaviour.OffsetType.XZ)
-                    .pushReaction(PushReaction.DESTROY)
-                    .noOcclusion()
-                    .isViewBlocking(MFBlocks::never)
-                    .isValidSpawn(MFBlocks::never)
-                    .isRedstoneConductor(MFBlocks::never)
-                    .isSuffocating(MFBlocks::never)
                     .instrument(NoteBlockInstrument.CHIME)
                     .friction(0.98F)
-            ));
+    );
 
     // Register functions
 

@@ -126,6 +126,10 @@ public class MFBlockItemIds {
     public static final BlockItemId RAW_FLUORITE_BLOCK = createId("raw_fluorite_block");
     public static final BlockItemId FLUORITE_STAIRS = createId("fluorite_stairs");
     public static final BlockItemId FLUORITE_SLAB = createId("fluorite_slab");
+    public static final BlockItemId FLUORITE_VERTICAL_SLAB = createId("fluorite_vertical_slab");
+    public static final BlockItemId FLUORITE_FENCE = createId("fluorite_fence");
+    public static final BlockItemId FLUORITE_FENCE_GATE = createId("fluorite_fence_gate");
+    public static final BlockItemId FLUORITE_WALL = createId("fluorite_wall");
     public static final BlockItemId FLUORITE_PRESSURE_PLATE = createId("fluorite_pressure_plate");
     public static final BlockItemId FLUORITE_BUTTON = createId("fluorite_button");
     public static final BlockItemId FLUORITE_DOOR = createId("fluorite_door");

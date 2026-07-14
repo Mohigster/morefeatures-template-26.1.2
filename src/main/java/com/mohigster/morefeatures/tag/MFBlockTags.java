@@ -10,6 +10,8 @@ public final class MFBlockTags {
     public static final TagKey<Block> AZURITE = morefeaturesTag("azurite");
     public static final TagKey<Block> FLUORITE = morefeaturesTag("fluorite");
     public static final TagKey<Block> GEMSTONE_SHELVES = morefeaturesTag("gemstone_shelves");
+    public static final TagKey<Block> GEMSTONE_FENCES = morefeaturesTag("gemstone_fences");
+    public static final TagKey<Block> WOOD_FENCES = morefeaturesTag("wood_fences");
     public static final TagKey<Block> BLOODWOOD_LOGS = morefeaturesTag("bloodwood_logs");
     public static final TagKey<Block> BLOODWOOD = morefeaturesTag("bloodwood");
     public static final TagKey<Block> TAINTED_LOGS = morefeaturesTag("tainted_logs");

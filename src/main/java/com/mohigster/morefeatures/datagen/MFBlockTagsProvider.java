@@ -71,6 +71,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.AZURITE_DOOR.block())
                 .add(MFBlockItemIds.AZURITE_TRAPDOOR.block())
                 .add(MFBlockItemIds.AZURITE_FENCE.block())
+                .add(MFBlockItemIds.AZURITE_FENCE_GATE.block())
+                .add(MFBlockItemIds.AZURITE_WALL.block())
                 .add(MFBlockIds.AZURITE_SIGN)
                 .add(MFBlockIds.AZURITE_WALL_SIGN)
                 .add(MFBlockIds.AZURITE_HANGING_SIGN)
@@ -86,6 +88,13 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.RAW_FLUORITE_BLOCK.block())
                 .add(MFBlockItemIds.FLUORITE_STAIRS.block())
                 .add(MFBlockItemIds.FLUORITE_SLAB.block())
+                .add(MFBlockItemIds.FLUORITE_PRESSURE_PLATE.block())
+                .add(MFBlockItemIds.FLUORITE_BUTTON.block())
+                .add(MFBlockItemIds.FLUORITE_DOOR.block())
+                .add(MFBlockItemIds.FLUORITE_TRAPDOOR.block())
+                .add(MFBlockItemIds.FLUORITE_FENCE.block())
+                .add(MFBlockItemIds.FLUORITE_FENCE_GATE.block())
+                .add(MFBlockItemIds.FLUORITE_WALL.block())
                 .add(MFBlockIds.FLUORITE_SIGN)
                 .add(MFBlockIds.FLUORITE_WALL_SIGN)
                 .add(MFBlockIds.FLUORITE_HANGING_SIGN)
@@ -108,12 +117,17 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .addTag(MFBlockTags.AXE_MINEABLE_VERTICAL_SLABS);
 
         tag(BlockTags.FENCES)
+                .add(MFBlockItemIds.FLUORITE_FENCE.block())
                 .add(MFBlockItemIds.AZURITE_FENCE.block())
                 .add(MFBlockItemIds.BLOODWOOD_FENCE.block())
                 .add(MFBlockItemIds.TAINTED_FENCE.block())
                 .add(MFBlockItemIds.PALM_FENCE.block())
                 .add(MFBlockItemIds.DECREPIT_FENCE.block())
                 .add(MFBlockItemIds.PALLID_FENCE.block());
+
+        tag(MFBlockTags.GEMSTONE_FENCES)
+                .add(MFBlockItemIds.AZURITE_FENCE.block())
+                .add(MFBlockItemIds.FLUORITE_FENCE.block());
 
         tag(BlockTags.WOODEN_FENCES)
                 .add(MFBlockItemIds.BLOODWOOD_FENCE.block())
@@ -329,11 +343,16 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
 
         tag(BlockTags.BUTTONS)
                 .add(MFBlockItemIds.AZURITE_BUTTON.block())
+                .add(MFBlockItemIds.FLUORITE_BUTTON.block())
                 .add(MFBlockItemIds.BLOODWOOD_BUTTON.block())
                 .add(MFBlockItemIds.TAINTED_BUTTON.block())
                 .add(MFBlockItemIds.PALM_BUTTON.block())
                 .add(MFBlockItemIds.DECREPIT_BUTTON.block())
                 .add(MFBlockItemIds.PALLID_BUTTON.block());
+
+        tag(BlockTags.WALLS)
+                .add(MFBlockItemIds.AZURITE_WALL.block())
+                .add(MFBlockItemIds.FLUORITE_WALL.block());
 
         tag(BlockTags.FLOWER_POTS)
                 .add(MFBlockIds.POTTED_ROSE)
@@ -367,6 +386,9 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.PALLID_VERTICAL_SLAB.block());
 
         tag(MFBlockTags.PICKAXE_MINEABLE_VERTICAL_SLABS)
+                .add(MFBlockItemIds.AZURITE_VERTICAL_SLAB.block())
+                .add(MFBlockItemIds.FLUORITE_VERTICAL_SLAB.block())
+
                 .add(MFBlockItemIds.STONE_VERTICAL_SLAB.block())
                 .add(MFBlockItemIds.COBBLESTONE_VERTICAL_SLAB.block())
                 .add(MFBlockItemIds.MOSSY_COBBLESTONE_VERTICAL_SLAB.block())

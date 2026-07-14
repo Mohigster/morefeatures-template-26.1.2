@@ -167,6 +167,7 @@ public class MFModelProvider extends ModelProvider {
         blockModels.createSpeleothem(MFBlocks.ICICLE.get());
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.AZURITE_VERTICAL_SLAB.get(), MFBlocks.AZURITE_BLOCK.get());
         blockModels.createShelf(MFBlocks.AZURITE_SHELF.get(), MFBlocks.RAW_AZURITE_BLOCK.get());
+        MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.FLUORITE_VERTICAL_SLAB.get(), MFBlocks.FLUORITE_BLOCK.get());
         blockModels.createShelf(MFBlocks.FLUORITE_SHELF.get(), MFBlocks.RAW_FLUORITE_BLOCK.get());
         MFBlockModelGenerators.createNyliumLikeBlock(blockModels, MFBlocks.PALLID_NULLIUM.get(), Blocks.END_STONE); // Call blockModels as a parameter so that we can use blockStateOutput and modelOutput. This will be necessary for all custom model generation methods
         MFBlockModelGenerators.createNyliumLikeBlock(blockModels, MFBlocks.DECREPIT_NULLIUM.get(), Blocks.END_STONE);
