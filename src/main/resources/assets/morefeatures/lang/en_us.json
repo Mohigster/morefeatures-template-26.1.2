@@ -26,6 +26,8 @@
   "block.morefeatures.azurite_pressure_plate": "Azurite Pressure Plate",
   "block.morefeatures.azurite_door": "Azurite Door",
   "block.morefeatures.azurite_trapdoor": "Azurite Trapdoor",
+  "block.morefeatures.azurite_fence": "Azurite Fence",
+  "block.morefeatures.azurite_fence_gate": "Azurite Fence Gate",
   "item.morefeatures.raw_azurite": "Raw Azurite",
   "item.morefeatures.azurite": "Azurite",
   "block.morefeatures.azurite_ore": "Azurite Ore",
@@ -49,6 +51,7 @@
   "block.morefeatures.raw_fluorite_block": "Block of Raw Fluorite",
   "item.morefeatures.fluorite_sign": "Fluorite Sign",
   "item.morefeatures.fluorite_hanging_sign": "Fluorite Hanging Sign",
+  "block.morefeatures.fluorite_shelf": "Fluorite Shelf",
 
   "block.morefeatures.everfrost_packed_ice_ore": "Packed Ice Everfrost Ore",
   "block.morefeatures.everfrost_blue_ice_ore": "Blue Ice Everfrost Ore",
