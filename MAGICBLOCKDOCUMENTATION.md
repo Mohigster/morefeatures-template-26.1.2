@@ -1,7 +1,10 @@
 How to add custom Magic Block transmutations
 =======
 
-For mods:
+The Magic Block is a late-game block that can be highly valuable. When an item entity is thrown onto it, it can be transmuted into a different (often more powerful!) item.
+In this file, you will learn how to add a custom transmutation to the magic block, either as a mod developer or datapack creator.
+
+**Using datagen (Recommended for mod developers)**:
 
 1. Create a custom datagen class that extends MagicBlockTransmutationProvider
 2. in the generate method, for each transmutation, call add(inputTag, outputItem)
@@ -14,7 +17,7 @@ Example class:
 public class MyMagicBlockTransmutationProvider extends MagicBlockTransmutationProvider {
     public MyMagicBlockTransmutationProvider(PackOutput output,
                                              CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, "my_mod_id");
+        super(output, registries, "my_mod_id"); // Like in vanilla datagen classes, the string passed here is the namespace that the JSON files will be generated in.
     }
 
     @Override
@@ -37,9 +40,9 @@ stone_from_magic_block.json
 
 Any name will work, but item_from_magic_block is the convention for this mod and the name that will be output by MagicBlockTransmutationProvider. It is encouraged, though not mandatory, that you also follow this convention.
 
-For datapacks:
+**Manually creating JSONs (only recommended for datapacks)**:
 
-1. Create the following directory: data/namespace/magic_block_transmutations
+1. In your datapack OR in your mod resources folder, create the following directory: `data/namespace/magic_block_transmutations`
 2. In that directory, create a JSON file with the below format:
 
 ```json
@@ -85,16 +88,16 @@ grass_block_from_magic_block.json:
 }
 ```
 
-And finally, don't forget to add your custom transmutation result to the magic_block_transmutation_results item tag!
+And finally, don't forget to add your custom transmutation result to the **magic_block_transmutation_results** item tag!
 
 This tag functions as a failsafe to ensure that your result is the final item in the chain. Even if your item is a part of
 a tag that is accepted as a transmutation input tag, it will not mutate if it is in this tag!
 
 Since it is a More Features tag, you must add it in this EXACT JSON file in this EXACT directory:
 
-data/morefeatures/tags/item/magic_block_transmutation_results.json
+`data/morefeatures/tags/item/magic_block_transmutation_results.json`
 
-Or, mods can add their items to the tag using datagen. 
+Alternatively, mods can add their items to the tag using datagen. 
 
 An example ItemTagsProvider class:
 
