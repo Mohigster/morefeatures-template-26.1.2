@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.block;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.custom.*;
 import com.mohigster.morefeatures.block.custom.flammable.*;
+import com.mohigster.morefeatures.block.custom.magicblock.MagicBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.WeatheringCopperVerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.blocktype.MFBlockSetType;
@@ -403,13 +404,8 @@ public class MFBlocks {
     //———————————————————————————————————————Bloodwood Blocks————————————————————————————————————————————————————————————————————————
 
     public static final DeferredBlock<Block> BLOODWOOD_LOG = registerBlock(MFBlockItemIds.BLOODWOOD_LOG,
-            properties -> new MFFlammableRotatedPillarBlock(properties
-                    .mapColor(MapColor.COLOR_RED)
-                    .strength(2f, 2f)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .instrument(NoteBlockInstrument.BASS)
-            ));
+            MFFlammableRotatedPillarBlock::new,
+            _ -> Properties.ofFullCopy(Blocks.OAK_LOG).mapColor(MapColor.COLOR_RED));
 
     public static final DeferredBlock<Block> BLOODWOOD = registerBlock(MFBlockItemIds.BLOODWOOD,
             MFFlammableRotatedPillarBlock::new,
@@ -432,33 +428,19 @@ public class MFBlocks {
     );
 
     public static final DeferredBlock<Block> BLOODWOOD_LEAVES = registerBlock(MFBlockItemIds.BLOODWOOD_LEAVES,
-            properties -> new MFLeavesBlock(0.03F, MFParticleTypes.BLOODWOOD_LEAVES.get(), properties
-                    .mapColor(MapColor.PLANT)
-                    .strength(0.2f, 0.2f)
-                    .sound(SoundType.GRASS)
-                    .noOcclusion()
-                    .isValidSpawn(MFBlocks::never)
-                    .isRedstoneConductor(MFBlocks::never)
-                    .ignitedByLava()
-            ));
+            props -> new MFLeavesBlock(0.03F, MFParticleTypes.BLOODWOOD_LEAVES.get(), props),
+            _ -> Properties.ofFullCopy(Blocks.OAK_LEAVES)
+    );
 
     public static final DeferredBlock<Block> BLOODWOOD_SAPLING = registerBlock(MFBlockItemIds.BLOODWOOD_SAPLING,
-            properties -> new SaplingBlock(MFTreeGrowers.BLOODWOOD, properties
-                    .mapColor(MapColor.PLANT)
-                    .randomTicks()
-                    .instabreak()
-                    .noCollision()
-                    .pushReaction(PushReaction.DESTROY)
-                    .sound(SoundType.GRASS)
-            ));
+            properties -> new SaplingBlock(MFTreeGrowers.BLOODWOOD, properties),
+            _ -> Properties.ofFullCopy(Blocks.OAK_SAPLING)
+    );
 
     public static final DeferredBlock<Block> POTTED_BLOODWOOD_SAPLING = registerBlockWithoutItem(MFBlockIds.POTTED_BLOODWOOD_SAPLING,
-            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
-                    Blocks.FLOWER_POT, BLOODWOOD_SAPLING, properties
-                    .noOcclusion()
-                    .instabreak()
-                    .pushReaction(PushReaction.DESTROY)
-            ));
+            props -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BLOODWOOD_SAPLING, props),
+            _ -> Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING)
+    );
 
     public static final DeferredBlock<Block> BLOODWOOD_STAIRS = registerBlock(MFBlockItemIds.BLOODWOOD_STAIRS,
             properties -> new MFFlammableStairBlock(MFBlocks.BLOODWOOD_PLANKS.get().defaultBlockState(), properties),
@@ -533,14 +515,9 @@ public class MFBlocks {
 
 
     public static final DeferredBlock<Block> TAINTED_LOG = registerBlock(MFBlockItemIds.TAINTED_LOG,
-            properties -> new MFFlammableRotatedPillarBlock(properties
-                    .mapColor(MapColor.COLOR_PURPLE)
-                    .ignitedByLava()
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-                    .strength(2F, 4F)
-                    .sound(SoundType.WOOD)
-                    .isRedstoneConductor(MFBlocks::always)
-            ));
+            MFFlammableRotatedPillarBlock::new,
+            _ -> Properties.ofFullCopy(BLOODWOOD_LOG.get()).mapColor(MapColor.COLOR_PURPLE)
+    );
 
     public static final DeferredBlock<Block> TAINTED_WOOD = registerBlock(MFBlockItemIds.TAINTED_WOOD,
             MFFlammableRotatedPillarBlock::new,

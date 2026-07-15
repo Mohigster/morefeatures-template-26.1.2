@@ -1,7 +1,5 @@
-package com.mohigster.morefeatures.block.custom;
+package com.mohigster.morefeatures.block.custom.magicblock;
 
-import com.mohigster.morefeatures.block.MFBlocks;
-import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.sound.MFSounds;
 import com.mohigster.morefeatures.tag.MFItemTags;
 import net.minecraft.core.BlockPos;
@@ -14,7 +12,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -72,38 +69,14 @@ public class MagicBlock extends Block {
         super.stepOn(level, pos, onState, entity);
     }
 
+
     private ItemStack getTransmutationResult(ItemStack item) {
-        int count = item.getCount();
-
-        if (item.is(MFItemTags.MAGIC_BLOCK_TURNS_TO_CARBON)) {
-            return new ItemStack(MFItems.CARBON_FIBER.get(), count);
+        // Keep your existing hardcoded cases if you want them fast-pathed / built-in,
+        // or delete them entirely and rely fully on the datapack now.
+        ItemStack dataDrivenResult = MagicBlockTransmutations.INSTANCE.getResult(item);
+        if (!dataDrivenResult.isEmpty()) {
+            return dataDrivenResult;
         }
-        if (item.is(MFItemTags.MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP)) {
-            return new ItemStack(MFItems.BISMUTH_SCRAP.get(), count);
-        }
-        if (item.is(MFItemTags.MAGIC_BLOCK_TURNS_TO_RAW_BISMUTH_BLOCK)) {
-            return new ItemStack(MFBlocks.RAW_BISMUTH_BLOCK.get().asItem(), count);
-        }
-        if (item.is(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_SCRAP)) {
-            return new ItemStack(Items.NETHERITE_SCRAP, count);
-        }
-        if (item.is(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_INGOT)) {
-            return new ItemStack(Items.NETHERITE_INGOT, count);
-        }
-        if (item.is(MFItemTags.MAGIC_BLOCK_TURNS_TO_DIAMOND)) {
-            return new ItemStack(Items.DIAMOND, count);
-        }
-        if (item.is(MFItemTags.MAGIC_BLOCK_TURNS_TO_LINGERING_POT)) {
-            ItemStack lingeringPotion = new ItemStack(Items.LINGERING_POTION, count);
-
-            lingeringPotion.applyComponents(item.getComponents());
-
-            return lingeringPotion;
-        }
-        if (item.is(MFBlocks.MAGIC_BLOCK.asItem())) {
-            return new ItemStack(Items.BEDROCK, count);
-        }
-
         return ItemStack.EMPTY;
     }
 }

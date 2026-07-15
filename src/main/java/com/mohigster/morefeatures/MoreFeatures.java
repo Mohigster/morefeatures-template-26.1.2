@@ -3,15 +3,18 @@ package com.mohigster.morefeatures;
 import com.mohigster.morefeatures.attachment.MFAttachments;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.custom.blocktype.MFWoodType;
+import com.mohigster.morefeatures.block.custom.magicblock.MagicBlockTransmutations;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.creativemodetab.MFCreativeModeTabs;
 import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
+import com.mohigster.morefeatures.datagen.custom.MagicBlockTransmutationProvider;
 import com.mohigster.morefeatures.enchantment.MFEnchantmentEffects;
 import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.menu.MFMenuTypes;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
 import com.mohigster.morefeatures.recipe.MFRecipes;
+import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mohigster.morefeatures.sound.MFSounds;
 import com.mohigster.morefeatures.worldgen.biome.MFBiomes;
 import com.mohigster.morefeatures.worldgen.biome.MFSurfaceRules;
@@ -23,6 +26,7 @@ import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
@@ -34,7 +38,9 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.client.event.AddClientReloadListenersEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
@@ -131,6 +137,14 @@ public class MoreFeatures {
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
 
+    }
+
+    @SubscribeEvent
+    public void onReloadListener(AddServerReloadListenersEvent event){
+        event.addListener(
+                MFIdentifier.withMfNamespace("magic_block_transmutations"),
+                MagicBlockTransmutations.INSTANCE
+        );
     }
 
     @SubscribeEvent

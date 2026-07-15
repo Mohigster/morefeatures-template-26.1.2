@@ -376,6 +376,9 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(ItemIds.POTION)
                 .add(ItemIds.SPLASH_POTION);
 
+        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_BEDROCK)
+                .add(MFBlockItemIds.MAGIC_BLOCK.item());
+
         tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULT)
                 .add(MFItems.CARBON_FIBER.getKey())
                 .add(MFItems.BISMUTH_SCRAP.getKey())
