@@ -1,5 +1,7 @@
 package com.mohigster.morefeatures.block.custom.magicblock;
 
+import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.tag.MFItemTags;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Registry;
@@ -10,14 +12,18 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.item.ItemStack;
+import net.neoforged.neoforge.event.TagsUpdatedEvent;
 import org.jspecify.annotations.NullMarked;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<TransmutationEntry> {
     public static final MagicBlockTransmutations INSTANCE =
             new MagicBlockTransmutations();
+
+    private List<TransmutationEntry> rawEntries = List.of();
 
     private List<TransmutationEntry> entries = List.of();
 
@@ -28,7 +34,27 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
     @NullMarked
     @Override
     protected void apply(Map<Identifier, TransmutationEntry> map, ResourceManager resourceManager, ProfilerFiller profiler) {
-        this.entries = List.copyOf(map.values());
+        this.rawEntries = List.copyOf(map.values());
+    }
+
+    public void onTagsUpdated(TagsUpdatedEvent event) {
+        List<TransmutationEntry> validEntries = new ArrayList<>();
+
+        for (TransmutationEntry entry : rawEntries) {
+            if (!entry.output().builtInRegistryHolder().is(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)) {
+                MoreFeatures.LOGGER.warn(
+                        "Skipping magic block transmutation: output item '{}' is not in the '{}' tag. " +
+                                "Add it to that tag if this transmutation should be allowed.",
+                        entry.output(),
+                        MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS.location()
+                );
+                continue;
+            }
+
+            validEntries.add(entry);
+        }
+
+        this.entries = List.copyOf(validEntries);
     }
 
     public ItemStack getResult(ItemStack input) {
@@ -36,7 +62,7 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
             if (input.is(entry.inputTag())) {
                 ItemStack result = new ItemStack(entry.output(), input.getCount());
                 if (entry.copyComponents()) {
-                    result.applyComponents(input.getComponents()); // preserve components
+                    result.applyComponents(input.getComponents());
                 }
                 return result;
             }

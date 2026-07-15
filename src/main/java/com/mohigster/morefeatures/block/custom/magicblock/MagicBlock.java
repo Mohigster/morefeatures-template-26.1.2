@@ -55,17 +55,13 @@ public class MagicBlock extends Block {
                 ItemStack result = getTransmutationResult(currentItem);
 
                 if (!result.isEmpty()) {
-                    if (result.is(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)) { // To prevent cases of forgetting to add the result to the tag—the tag is an important failsafe!
-                        itemEntity.setItem(result);
+                    itemEntity.setItem(result);
 
-                        level.addParticle(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
+                    level.addParticle(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
                                 0, 1, 0);
 
-                        level.playSound(null, itemEntity,
+                    level.playSound(null, itemEntity,
                                 MFSounds.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 1.5f, 1f);
-                    } else {
-                        MoreFeatures.LOGGER.warn("Magic Block transmutation found for output item {}, but it was rejected because the item is missing from the 'magic_block_transmutation_results' tag!", result.getItem());
-                    }
                 }
             }
         }

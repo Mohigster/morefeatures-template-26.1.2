@@ -61,6 +61,7 @@ public class MoreFeatures {
         // Register the commonSetup method for modloading
 
         modEventBus.addListener(this::commonSetup);
+        NeoForge.EVENT_BUS.addListener(MagicBlockTransmutations.INSTANCE::onTagsUpdated);
 
         MFCreativeModeTabs.register(modEventBus); // All register methods are declared in the class
 
