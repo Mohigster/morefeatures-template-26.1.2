@@ -29,7 +29,7 @@ For mods:
 
 1. Create a custom datagen class that extends MagicBlockTransmutationProvider
 2. in the generate method, for each transmutation, call add(inputTag, outputItem)
-3. In your GatherClientData event, call generator.addProvider(true, new YourDatagenClass(packOutput, LookupProvider))
+3. In your GatherDataEvent.Client event, call generator.addProvider(true, new YourDatagenClass(packOutput, LookupProvider))
 4. Run datagen. The transmutation JSON files will be automatically generated!
 
 Example class:
