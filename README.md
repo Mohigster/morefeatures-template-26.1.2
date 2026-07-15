@@ -52,6 +52,14 @@ public class MyMagicBlockTransmutationProvider extends MagicBlockTransmutationPr
 }
 ```
 
+This class will output the following JSON files:
+
+
+emerald_from_magic_block.json
+diamond_from_magic_block.json
+
+Though any name will suffice.
+
 For datapacks:
 
 1. Create the following directory: data/namespace/magic_block_transmutations
@@ -71,6 +79,10 @@ Important notes:
 "namespace:item" MUST be an existing item. Item registration is not related to magic block transmutations
 
 "copy_components" is OPTIONAL. It can be set to true, false, or left out of the JSON entirely (defaults to false if omitted). When true, any components on the input item (e.g. potion effects, custom data, enchantments) are copied onto the output item. Useful for transmutations where the output item should retain some property of the input, such as turning a custom potion into a lingering variant of itself
+
+The magic block finds JSON files in alphabetical order. e.g. carbon_fiber_from_magic_block will be found before white_concrete_from_magic_block
+
+The last JSON file found is the one used, so if an item is a part of to tags, it will simply use the transmutation that comes last in alphabetical order
 
 Example JSONs:
 

@@ -2,12 +2,14 @@ package com.mohigster.morefeatures.datagen.custom;
 
 import com.mohigster.morefeatures.block.custom.magicblock.TransmutationEntry;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 
@@ -36,11 +38,27 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
         add(inputTag, output, false);
     }
 
+    protected void add(String itemName, TagKey<Item> inputTag, Item output) {
+        add(itemName, inputTag, output, false);
+    }
+
     protected void add(TagKey<Item> inputTag, Item output, boolean copyComponents) {
-        add(Identifier.fromNamespaceAndPath(modId, inputTag.location().getPath()), inputTag, output, copyComponents);
+        String itemName = BuiltInRegistries.ITEM.getKey(output).getPath();
+
+        add(itemName, inputTag, output, copyComponents);
+    }
+
+    protected void add(String specialItemName, TagKey<Item> inputTag, Item output, boolean copyComponents) {
+        String descriptionId = specialItemName + "_from_magic_block";
+
+        add(Identifier.fromNamespaceAndPath(modId, descriptionId), inputTag, output, copyComponents);
     }
 
     protected void add(Identifier id, TagKey<Item> inputTag, Item output, boolean copyComponents) {
+        if (output == Items.AIR) {
+            throw new IllegalArgumentException("Cannot transmute to AIR!");
+        }
+
         TransmutationEntry entry = new TransmutationEntry(inputTag, output, copyComponents);
         TransmutationEntry existing = entries.putIfAbsent(id, entry);
         if (existing != null) {

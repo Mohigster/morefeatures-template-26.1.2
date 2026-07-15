@@ -17,6 +17,7 @@ public class MFMagicBlockTransmutationProvider extends MagicBlockTransmutationPr
 
     @Override
     protected void generate() {
+        add(MFItemTags.TEST_TAG_FOR_MAGIC_BLOCK, MFItems.MUSIC_DISC_AQUAMARINE.get());
         add(MFItemTags.MAGIC_BLOCK_TURNS_TO_CARBON, MFItems.CARBON_FIBER.get());
         add(MFItemTags.MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP, MFItems.BISMUTH_SCRAP.get());
         add(MFItemTags.MAGIC_BLOCK_TURNS_TO_RAW_BISMUTH_BLOCK, MFBlocks.RAW_BISMUTH_BLOCK.get().asItem());
