@@ -19,10 +19,10 @@ public class MyMagicBlockTransmutationProvider extends MagicBlockTransmutationPr
 
     @Override
     protected void generate() {
-        // Turns any item in the "my_mod:magic_to_emerald" tag into emeralds
+        // Turns any item in the "my_mod:magic_to_dirt" tag into dirt
         add(MyItemTags.MAGIC_TO_DIRT, Items.DIRT);
 
-        // Turns any item in the "my_mod:magic_to_diamond" tag into diamonds
+        // Turns any item in the "my_mod:magic_to_stone" tag into stone
         add(MyItemTags.MAGIC_TO_STONE, Items.STONE);
     }
 }
