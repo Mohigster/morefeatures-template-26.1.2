@@ -93,3 +93,23 @@ a tag that is accepted as a transmutation input tag, it will not mutate if it is
 Since it is a More Features tag, you must add it in this EXACT JSON file in this EXACT directory:
 
 data/morefeatures/tags/item/magic_block_transmutation_results.json
+
+Or, mods can add their items to the tag using datagen. 
+
+An example ItemTagsProvider class:
+
+```java
+public class MyItemTagsProvider extends ItemTagsProvider {
+
+    public MyItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
+        super(output, lookupProvider, "my_mod_id");
+    }
+
+    @Override
+    protected void addTags(HolderLookup.@NonNull Provider provider) {
+        tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)
+                .add(ItemIds.DIRT)
+                .add(ItemIds.STONE);
+    }
+}
+```

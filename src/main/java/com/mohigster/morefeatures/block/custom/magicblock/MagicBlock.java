@@ -50,7 +50,7 @@ public class MagicBlock extends Block {
 
         if(entity instanceof ItemEntity itemEntity) {
             ItemStack currentItem = itemEntity.getItem();
-            if (!currentItem.is(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULT)) { // A failsafe. If an item is a possible result of a magic block transmutation, it shouldn't even attempt to find a transmutation result
+            if (!currentItem.is(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)) { // A failsafe. If an item is a possible result of a magic block transmutation, it shouldn't even attempt to find a transmutation result
                 ItemStack result = getTransmutationResult(currentItem);
 
                 if (!result.isEmpty()) {

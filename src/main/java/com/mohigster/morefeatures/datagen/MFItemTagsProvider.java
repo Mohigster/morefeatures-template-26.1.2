@@ -382,7 +382,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
         tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC)
                 .add(ItemIds.MUSIC_DISC_BOUNCE);
 
-        tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULT)
+        tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)
                 .add(MFItems.CARBON_FIBER.getKey())
                 .add(MFItems.BISMUTH_SCRAP.getKey())
                 .add(MFBlockItemIds.RAW_BISMUTH_BLOCK.item())
@@ -390,6 +390,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(ItemIds.NETHERITE_INGOT)
                 .add(ItemIds.DIAMOND)
                 .add(ItemIds.LINGERING_POTION)
+                .add(MFItemIds.MUSIC_DISC_AQUAMARINE)
                 .add(BlockItemIds.BEDROCK.item());
 
         tag(ItemTags.TRIM_MATERIALS)
