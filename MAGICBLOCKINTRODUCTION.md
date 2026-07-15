@@ -20,10 +20,10 @@ public class MyMagicBlockTransmutationProvider extends MagicBlockTransmutationPr
     @Override
     protected void generate() {
         // Turns any item in the "my_mod:magic_to_emerald" tag into emeralds
-        add(MyItemTags.MAGIC_TO_EMERALD, Items.EMERALD);
+        add(MyItemTags.MAGIC_TO_DIRT, Items.DIRT);
 
         // Turns any item in the "my_mod:magic_to_diamond" tag into diamonds
-        add(MyItemTags.MAGIC_TO_DIAMOND, Items.DIAMOND);
+        add(MyItemTags.MAGIC_TO_STONE, Items.STONE);
     }
 }
 ```
@@ -31,10 +31,11 @@ public class MyMagicBlockTransmutationProvider extends MagicBlockTransmutationPr
 This class will output the following JSON files:
 
 
-emerald_from_magic_block.json
-diamond_from_magic_block.json
+dirt_from_magic_block.json
 
-Though any name will suffice.
+stone_from_magic_block.json
+
+Any name will work, but item_from_magic_block is the convention for this mod and the name that will be output by MagicBlockTransmutationProvider. It is encouraged, though not mandatory, that you also follow this convention.
 
 For datapacks:
 
@@ -56,9 +57,9 @@ Important notes:
 
 "copy_components" is OPTIONAL. It can be set to true, false, or left out of the JSON entirely (defaults to false if omitted). When true, any components on the input item (e.g. potion effects, custom data, enchantments) are copied onto the output item. Useful for transmutations where the output item should retain some property of the input, such as turning a custom potion into a lingering variant of itself
 
-Example JSONs:
+Example JSONs. These may not necessarily actually be in the mod:
 
-magic_block_turns_to_carbon.json:
+carbon_fiber_from_magic_block.json:
 ```json
 {
   "input_tag": "morefeatures:magic_block_turns_to_carbon",
@@ -66,7 +67,7 @@ magic_block_turns_to_carbon.json:
 }
 ```
 
-magic_block_turns_to_lingering_potion.json:
+lingering_potion_from_magic_block.json:
 ```json
 {
   "input_tag": "morefeatures:magic_block_turns_to_lingering_pot",
@@ -75,10 +76,10 @@ magic_block_turns_to_lingering_potion.json:
 }
 ```
 
-magic_block_turns_to_emerald.json: // Not actually in the mod
+grass_block_from_magic_block.json:
 ```json
 {
-  "input_tag": "minecraft:wool",
-  "output_item": "minecraft:emerald"
+  "input_tag": "minecraft:nylium",
+  "output_item": "minecraft:grass_block"
 }
 ```
