@@ -45,7 +45,8 @@ For datapacks:
 ```json
 {
     "input_tag": "namespace:item_tag",
-    "output_item": "namespace:item"
+    "output_item": "namespace:item",
+    "copy_components": false
 }
 ```
 
