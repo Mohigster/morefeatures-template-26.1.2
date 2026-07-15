@@ -40,8 +40,8 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
         add(inputTag, output, false);
     }
 
-    protected void add(String itemName, TagKey<Item> inputTag, Item output) {
-        add(itemName, inputTag, output, false);
+    protected void add(String transmutationName, TagKey<Item> inputTag, Item output) {
+        add(transmutationName, inputTag, output, false);
     }
 
     protected void add(TagKey<Item> inputTag, Item output, boolean copyComponents) {
@@ -63,6 +63,7 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
 
         TransmutationEntry entry = new TransmutationEntry(inputTag, output, copyComponents);
         TransmutationEntry existing = entries.putIfAbsent(id, entry);
+
         if (existing != null) {
             throw new IllegalStateException("Duplicate magic block transmutation id: " + id);
         }

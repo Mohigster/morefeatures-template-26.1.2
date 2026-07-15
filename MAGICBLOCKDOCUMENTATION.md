@@ -97,6 +97,8 @@ Since it is a More Features tag, you must add it in this EXACT JSON file in this
 
 `data/morefeatures/tags/item/magic_block_transmutation_results.json`
 
+To prevent developers from forgetting to add the result to the item tag, the Magic Block will reject the transmutation if the result item is not in the tag!
+
 Alternatively, mods can add their items to the tag using datagen. 
 
 An example ItemTagsProvider class:
