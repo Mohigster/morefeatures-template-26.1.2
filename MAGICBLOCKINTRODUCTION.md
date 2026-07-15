@@ -106,7 +106,7 @@ public class MyItemTagsProvider extends ItemTagsProvider {
     }
 
     @Override
-    protected void addTags(HolderLookup.@NonNull Provider provider) {
+    protected void addTags(HolderLookup.Provider provider) {
         tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)
                 .add(ItemIds.DIRT)
                 .add(ItemIds.STONE);
