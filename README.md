@@ -29,7 +29,7 @@ For mods:
 
 1. Create a custom datagen class that extends MagicBlockTransmutationProvider
 2. in the generate method, for each transmutation, call add(inputTag, outputItem)
-3. In your GatherClientData event, call generator.addProvider(true, new YourDatagenClass(packOutput, LookupProvider))
+3. In your GatherDataEvent.Client event, call generator.addProvider(true, new YourDatagenClass(packOutput, LookupProvider))
 4. Run datagen. The transmutation JSON files will be automatically generated!
 
 Example class:
@@ -79,10 +79,6 @@ Important notes:
 "namespace:item" MUST be an existing item. Item registration is not related to magic block transmutations
 
 "copy_components" is OPTIONAL. It can be set to true, false, or left out of the JSON entirely (defaults to false if omitted). When true, any components on the input item (e.g. potion effects, custom data, enchantments) are copied onto the output item. Useful for transmutations where the output item should retain some property of the input, such as turning a custom potion into a lingering variant of itself
-
-The magic block finds JSON files in alphabetical order. e.g. carbon_fiber_from_magic_block will be found before white_concrete_from_magic_block
-
-The last JSON file found is the one used, so if an item is a part of to tags, it will simply use the transmutation that comes last in alphabetical order
 
 Example JSONs:
 
