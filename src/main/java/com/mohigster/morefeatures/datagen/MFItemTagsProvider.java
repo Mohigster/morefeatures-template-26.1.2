@@ -379,7 +379,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
         tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_BEDROCK)
                 .add(MFBlockItemIds.MAGIC_BLOCK.item());
 
-        tag(MFItemTags.TEST_TAG_FOR_MAGIC_BLOCK)
+        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC)
                 .add(ItemIds.MUSIC_DISC_BOUNCE);
 
         tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULT)

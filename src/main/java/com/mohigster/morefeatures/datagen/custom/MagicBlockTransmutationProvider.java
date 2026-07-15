@@ -24,9 +24,11 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
     private final String modId;
     private final Map<Identifier, TransmutationEntry> entries = new HashMap<>();
 
-    protected MagicBlockTransmutationProvider(PackOutput output,
-                                              CompletableFuture<HolderLookup.Provider> registries,
-                                              String modId) {
+    protected MagicBlockTransmutationProvider(
+            PackOutput output,
+            CompletableFuture<HolderLookup.Provider> registries,
+            String modId
+    ) {
         this.output = output;
         this.registries = registries;
         this.modId = modId;
@@ -48,8 +50,8 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
         add(itemName, inputTag, output, copyComponents);
     }
 
-    protected void add(String specialItemName, TagKey<Item> inputTag, Item output, boolean copyComponents) {
-        String descriptionId = specialItemName + "_from_magic_block";
+    protected void add(String transmutationName, TagKey<Item> inputTag, Item output, boolean copyComponents) {
+        String descriptionId = transmutationName + "_from_magic_block";
 
         add(Identifier.fromNamespaceAndPath(modId, descriptionId), inputTag, output, copyComponents);
     }

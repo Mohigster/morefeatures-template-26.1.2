@@ -84,3 +84,12 @@ grass_block_from_magic_block.json:
   "output_item": "minecraft:grass_block"
 }
 ```
+
+And finally, don't forget to add your custom transmutation result to the magic_block_transmutation_results item tag!
+
+This tag functions as a failsafe to ensure that your result is the final item in the chain. Even if your item is a part of
+a tag that is accepted as a transmutation input tag, it will not mutate if it is in this tag!
+
+Since it is a More Features tag, you must add it in this EXACT JSON file in this EXACT directory:
+
+data/morefeatures/tags/item/magic_block_transmutation_results.json

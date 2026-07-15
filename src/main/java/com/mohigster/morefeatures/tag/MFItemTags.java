@@ -29,7 +29,7 @@ public final class MFItemTags {
     public static final TagKey<Item> MUSIC_DISCS = morefeaturesTag("music_discs");
     public static final TagKey<Item> AIMABLE_WANDS = morefeaturesTag("aimable_wands");
     public static final TagKey<Item> TARGETING_WANDS = morefeaturesTag("targeting_wands");
-    public static final TagKey<Item> TEST_TAG_FOR_MAGIC_BLOCK = morefeaturesTag("test_tag_for_magic_block");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC = morefeaturesTag("magic_block_turns_to_aquamarine_disc");
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_CARBON = morefeaturesTag("magic_block_turns_to_carbon");
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP = morefeaturesTag("magic_block_turns_to_bismuth_scrap");
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_RAW_BISMUTH_BLOCK = morefeaturesTag("magic_block_turns_to_raw_bismuth_block");
