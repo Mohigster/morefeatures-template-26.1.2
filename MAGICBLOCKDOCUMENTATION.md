@@ -34,9 +34,9 @@ public class MyMagicBlockTransmutationProvider extends MagicBlockTransmutationPr
 This class will output the following JSON files:
 
 
-dirt_from_magic_block.json
+`dirt_from_magic_block.json`
 
-stone_from_magic_block.json
+`stone_from_magic_block.json`
 
 Any name will work, but item_from_magic_block is the convention for this mod and the name that will be output by MagicBlockTransmutationProvider. It is encouraged, though not mandatory, that you also follow this convention.
 
@@ -55,15 +55,15 @@ Any name will work, but item_from_magic_block is the convention for this mod and
 
 Important notes:
 
-"namespace:item_tag" MUST be an existing item tag. This can be a custom tag, or a vanilla tag
+`"namespace:item_tag"` MUST be an existing item tag. This can be a custom tag, or a vanilla tag
 
-"namespace:item" MUST be an existing item. Item registration is not related to magic block transmutations
+`"namespace:item"` MUST be an existing item. Item registration is not related to magic block transmutations
 
-"copy_components" is OPTIONAL. It can be set to true, false, or left out of the JSON entirely (defaults to false if omitted). When true, any components on the input item (e.g. potion effects, custom data, enchantments) are copied onto the output item. Useful for transmutations where the output item should retain some property of the input, such as turning a custom potion into a lingering variant of itself
+`"copy_components"` is OPTIONAL. It can be set to true, false, or left out of the JSON entirely (defaults to false if omitted). When true, any components on the input item (e.g. potion effects, custom data, enchantments) are copied onto the output item. Useful for transmutations where the output item should retain some property of the input, such as turning a custom potion into a lingering variant of itself
 
 Example JSONs. These may not necessarily actually be in the mod:
 
-carbon_fiber_from_magic_block.json:
+`carbon_fiber_from_magic_block.json`:
 ```json
 {
   "input_tag": "morefeatures:magic_block_turns_to_carbon",
@@ -71,7 +71,7 @@ carbon_fiber_from_magic_block.json:
 }
 ```
 
-lingering_potion_from_magic_block.json:
+`lingering_potion_from_magic_block.json`:
 ```json
 {
   "input_tag": "morefeatures:magic_block_turns_to_lingering_pot",
@@ -80,7 +80,7 @@ lingering_potion_from_magic_block.json:
 }
 ```
 
-grass_block_from_magic_block.json:
+`grass_block_from_magic_block.json`:
 ```json
 {
   "input_tag": "minecraft:nylium",
