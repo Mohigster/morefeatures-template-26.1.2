@@ -23,7 +23,7 @@ public class MFMagicBlockTransmutationProvider extends MagicBlockTransmutationPr
         add(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_SCRAP, Items.NETHERITE_SCRAP);
         add(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_INGOT, Items.NETHERITE_INGOT);
         add(MFItemTags.MAGIC_BLOCK_TURNS_TO_DIAMOND, Items.DIAMOND);
-        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_LINGERING_POT, Items.LINGERING_POTION);
+        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_LINGERING_POT, Items.LINGERING_POTION, true);
         add(MFItemTags.MAGIC_BLOCK_TURNS_TO_BEDROCK, Items.BEDROCK);
     }
 }

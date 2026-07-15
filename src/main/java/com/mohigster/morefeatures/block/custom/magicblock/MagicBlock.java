@@ -71,8 +71,6 @@ public class MagicBlock extends Block {
 
 
     private ItemStack getTransmutationResult(ItemStack item) {
-        // Keep your existing hardcoded cases if you want them fast-pathed / built-in,
-        // or delete them entirely and rely fully on the datapack now.
         ItemStack dataDrivenResult = MagicBlockTransmutations.INSTANCE.getResult(item);
         if (!dataDrivenResult.isEmpty()) {
             return dataDrivenResult;

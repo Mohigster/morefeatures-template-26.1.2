@@ -35,8 +35,8 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
         for (TransmutationEntry entry : entries) {
             if (input.is(entry.inputTag())) {
                 ItemStack result = new ItemStack(entry.output(), input.getCount());
-                if (entry.output() instanceof net.minecraft.world.item.PotionItem) {
-                    result.applyComponents(input.getComponents()); // preserve potion data, if relevant
+                if (entry.copyComponents()) {
+                    result.applyComponents(input.getComponents()); // preserve components
                 }
                 return result;
             }

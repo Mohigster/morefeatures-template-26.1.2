@@ -33,11 +33,15 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
     protected abstract void generate();
 
     protected void add(TagKey<Item> inputTag, Item output) {
-        add(Identifier.fromNamespaceAndPath(modId, inputTag.location().getPath()), inputTag, output);
+        add(inputTag, output, false);
     }
 
-    protected void add(Identifier id, TagKey<Item> inputTag, Item output) {
-        TransmutationEntry entry = new TransmutationEntry(inputTag, output);
+    protected void add(TagKey<Item> inputTag, Item output, boolean copyComponents) {
+        add(Identifier.fromNamespaceAndPath(modId, inputTag.location().getPath()), inputTag, output, copyComponents);
+    }
+
+    protected void add(Identifier id, TagKey<Item> inputTag, Item output, boolean copyComponents) {
+        TransmutationEntry entry = new TransmutationEntry(inputTag, output, copyComponents);
         TransmutationEntry existing = entries.putIfAbsent(id, entry);
         if (existing != null) {
             throw new IllegalStateException("Duplicate magic block transmutation id: " + id);
