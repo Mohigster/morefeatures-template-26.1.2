@@ -64,6 +64,7 @@ public class MFModelProvider extends ModelProvider {
         MFItemModelGenerators.customModelWithFlatInvTexture(itemModels, MFItems.HEALING_WAND.get());
         MFItemModelGenerators.customModelWithFlatInvTexture(itemModels, MFItems.EARTH_WAND.get());
         MFItemModelGenerators.customModelWithFlatInvTexture(itemModels, MFItems.LIGHTNING_WAND.get());
+        MFItemModelGenerators.customModelWithFlatInvTexture(itemModels, MFItems.TIME_WAND.get());
 
         // Used the generateFlatItem() line to get carbon_bow.json, then to prevent datagen deleting it,
         // I moved that file to the permanent resources file instead of the generated resources file.
@@ -91,6 +92,7 @@ public class MFModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MFItems.CARBON_WOLF_ARMOR.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateTrident(MFItems.BISMUTH_TRIDENT.get());
         itemModels.generateFlatItem(MFItems.MUSIC_DISC_AQUAMARINE.get(), ModelTemplates.FLAT_ITEM);
+        itemModels.generateFlatItem(MFItems.MUSIC_DISC_SNOW_QUEEN.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.BLOODWOOD_BOAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.BLOODWOOD_CHEST_BOAT.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.TAINTED_BOAT.get(), ModelTemplates.FLAT_ITEM);

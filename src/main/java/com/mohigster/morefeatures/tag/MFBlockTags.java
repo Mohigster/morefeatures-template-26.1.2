@@ -4,6 +4,7 @@ import com.mohigster.morefeatures.references.MFIdentifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 
 public final class MFBlockTags {
@@ -29,6 +30,11 @@ public final class MFBlockTags {
     public static final TagKey<Block> VERTICAL_SLABS = morefeaturesTag("vertical_slabs");
     public static final TagKey<Block> AXE_MINEABLE_VERTICAL_SLABS = morefeaturesTag("axe_mineable_vertical_slabs");
     public static final TagKey<Block> PICKAXE_MINEABLE_VERTICAL_SLABS = morefeaturesTag("pickaxe_mineable_vertical_slabs");
+    public static final TagKey<Block> METAL_DETECTOR_FINDABLE = morefeaturesTag("metal_detector_findable");
+    public static final TagKey<Block> METAL_DETECTOR_LOW_COST = morefeaturesTag("metal_detector_low_cost");
+    public static final TagKey<Block> METAL_DETECTOR_MEDIUM_COST = morefeaturesTag("metal_detector_medium_cost");
+    public static final TagKey<Block> METAL_DETECTOR_HIGH_COST = morefeaturesTag("metal_detector_high_cost");
+    public static final TagKey<Block> METAL_DETECTOR_BISMUTH_COST = morefeaturesTag("metal_detector_bismuth_cost");
     public static final TagKey<Block> WOOL_VERTICAL_SLABS = MFBlockItemTags.WOOL_VERTICAL_SLABS.block();
     public static final TagKey<Block> CUT_COPPER_VERTICAL_SLABS = MFBlockItemTags.CUT_COPPER_VERTICAL_SLABS.block();
 

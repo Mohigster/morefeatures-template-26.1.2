@@ -17,6 +17,11 @@ public class MFItemIds {
     public static final ResourceKey<Item> RAW_FLUORITE = createId("raw_fluorite");
     public static final ResourceKey<Item> FLUORITE = createId("fluorite");
 
+    public static final ResourceKey<Item> RAW_EVERFROST = createId("raw_everfrost");
+    public static final ResourceKey<Item> EVERFROST = createId("everfrost");
+
+    public static final ResourceKey<Item> METAL_DETECTOR = createId("metal_detector");
+
     public static final ResourceKey<Item> AZURITE_SIGN = createId("azurite_sign");
     public static final ResourceKey<Item> FLUORITE_SIGN = createId("fluorite_sign");
     public static final ResourceKey<Item> BLOODWOOD_SIGN = createId("bloodwood_sign");
@@ -55,6 +60,7 @@ public class MFItemIds {
     public static final ResourceKey<Item> BISMUTH_SPEAR = createId("bismuth_spear");
 
     public static final ResourceKey<Item> MUSIC_DISC_AQUAMARINE = createId("music_disc_aquamarine");
+    public static final ResourceKey<Item> MUSIC_DISC_SNOW_QUEEN = createId("music_disc_snow_queen");
 
     private static ResourceKey<Item> createId(String name) {
         return ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace(name));

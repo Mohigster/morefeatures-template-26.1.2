@@ -311,8 +311,12 @@
   "item.morefeatures.carbon_trident": "Carbon Reinforced Trident",
 
   "item.morefeatures.music_disc_aquamarine": "Music Disc",
+  "item.morefeatures.music_disc_snow_queen": "Music Disc",
   "jukebox_song.morefeatures.aquamarine": "Mohigster - Aquamarine",
+  "jukebox_song.morefeatures.snow_queen": "Kevin MacLeod - The Snow Queen",
   "sounds.morefeatures.aquamarine": "Aquamarine",
+  "sounds.morefeatures.snow_queen": "The Snow Queen",
+  "music.morefeatures.ice_caves": "Ice Caves Ambient Music",
 
   "sounds.morefeatures.magic_block_break": "Breaking Magic Block",
   "sounds.morefeatures.magic_block_fall": "Falling on Magic Block",

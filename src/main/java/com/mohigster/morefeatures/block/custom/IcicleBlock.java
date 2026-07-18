@@ -20,6 +20,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SpeleothemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.SpeleothemThickness;
+import net.minecraft.world.phys.Vec3;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 
@@ -34,6 +35,11 @@ public class IcicleBlock extends SpeleothemBlock {
 
     // 2001 allows you to set a custom sound, hence its usage here.
     private static final int STALACTITE_SOUND_LEVEL_EVENT_ID = 2001;
+    private static final int MELTING_LIGHT_LEVEL = 11;
+
+    private static final double STALACTITE_DRIP_START_PIXEL = SHAPE_TIP_DOWN.min(Direction.Axis.Y);
+    private static final double DRIP_PIXEL_SIZE = 0.0625D;
+    private static final double STALAGMITE_DRIP_XZ_OFFSET_RANGE = 0.3D;
 
     private static final float FALL_DAMAGE_MODIFIER = 2.5F;
 
@@ -45,7 +51,7 @@ public class IcicleBlock extends SpeleothemBlock {
     ).apply(i, IcicleBlock::new));
 
     public IcicleBlock(List<BlockState> blocksToGrowOn, Properties properties) {
-        super(Blocks.PACKED_ICE.defaultBlockState(), properties); // Passing Blocks.PACKED_ICE.defaultBlockState() into the super is just to keep the compiler happy because the base class wants a singular block state, not a list. This block state is unused by this class. Feel free to swap it out to whatever block you want, as a joke or whatever.
+        super(Blocks.PACKED_ICE.defaultBlockState(), properties); // Passing Blocks.PACKED_ICE.defaultBlockState() into the super is just to keep the compiler happy because the base class wants a singular block state, not a list. This block state is unused by this class.
         this.blocksToGrowOn = blocksToGrowOn;
     }
 
@@ -79,40 +85,41 @@ public class IcicleBlock extends SpeleothemBlock {
 
     @NullMarked
     @Override
-    protected void randomTick(BlockState state, ServerLevel world, BlockPos pos, RandomSource random) {
-        if (canMelt(state) && world.getBrightness(LightLayer.BLOCK, pos) > 11) {
-            this.melt(world, pos);
+    protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (canMelt(level, state, pos)){
+            this.melt(level, pos);
         } else {
-            super.randomTick(state, world, pos, random);
+            super.randomTick(state, level, pos, random);
         }
     }
 
-    private boolean canMelt(BlockState state){
+    protected int meltingLightLevel(){
+        return MELTING_LIGHT_LEVEL;
+    }
+
+    private boolean canMelt(Level level, BlockState state, BlockPos pos){
         SpeleothemThickness thickness = state.getValue(THICKNESS);
 
-        return thickness == SpeleothemThickness.TIP || thickness == SpeleothemThickness.TIP_MERGE;
+        return (thickness == SpeleothemThickness.TIP || thickness == SpeleothemThickness.TIP_MERGE)
+                && isBrightEnoughToMelt(level, pos);
     }
 
-    // Icicles that can melt will drip water. Icicles that can NOT melt do not drip water
+    protected boolean isBrightEnoughToMelt(Level level, BlockPos pos){
+        return level.getBrightness(LightLayer.BLOCK, pos) > meltingLightLevel();
+    }
+
+    // Icicles will only drip water if they are in danger of melting!
     @NullMarked
     @Override
-    public void animateTick(BlockState state, Level world, BlockPos pos, RandomSource random) {
-        // If it's a tip and warm enough to melt, make it drip water!
-        if (canMelt(state) && world.getBrightness(LightLayer.BLOCK, pos) > 11) {
-            // Only drip occasionally so it doesn't create a waterfall of particles
-            if (random.nextFloat() < 0.15F) {
-                double x = pos.getX() + random.nextDouble();
-                // Spawn particle just slightly below the bottom of the block
-                double y = pos.getY() - 0.05;
-                double z = pos.getZ() + random.nextDouble();
-
-                world.addParticle(ParticleTypes.DRIPPING_WATER, x, y, z, 0.0, 0.0, 0.0);
-            }
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (canMelt(level, state, pos) && random.nextFloat() < 0.15F){
+            spawnDripParticle(level, pos, state, random);
         }
+        else super.animateTick(state, level, pos, random);
     }
 
     @NullMarked
-    @Override // Make the block deal more fall damage, like dripstone, but I've made it slightly worse (dripstone's damage modifier is 2.0F)
+    @Override // Make the block deal more fall damage, like dripstone, but I've made it slightly worse (dripstone's damage modifier is 2.0F, this is 2.5F)
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         if (state.getValue(TIP_DIRECTION) == Direction.UP && state.getValue(THICKNESS) == SpeleothemThickness.TIP) {
             entity.causeFallDamage(fallDistance + 2.5, FALL_DAMAGE_MODIFIER, level.damageSources().stalagmite());
@@ -128,10 +135,24 @@ public class IcicleBlock extends SpeleothemBlock {
         return this.blocksToGrowOn.stream().anyMatch(state -> state.is(blockToCheck));
     }
 
-    protected void melt(Level world, BlockPos pos) {
-        world.playSound(null, pos, SoundEvents.POINTED_DRIPSTONE_DRIP_WATER, SoundSource.BLOCKS, 0.5F, 1.5F);
+    protected void spawnDripParticle(Level level, BlockPos stalactiteTipPos, BlockState stalactiteTipState, RandomSource random){
+        Vec3 offset = stalactiteTipState.getOffset(stalactiteTipPos);
+        double x = stalactiteTipPos.getX() + 0.5D + offset.x;
+        double y = stalactiteTipPos.getY() + STALACTITE_DRIP_START_PIXEL - DRIP_PIXEL_SIZE;
+        double z = stalactiteTipPos.getZ() + 0.5D + offset.z;
 
-        world.addParticle(ParticleTypes.SPLASH,
+        if (stalactiteTipState.getValue(TIP_DIRECTION) == Direction.UP) {
+            x += (random.nextDouble() - 0.5D) * STALAGMITE_DRIP_XZ_OFFSET_RANGE;
+            z += (random.nextDouble() - 0.5D) * STALAGMITE_DRIP_XZ_OFFSET_RANGE;
+        }
+
+        level.addParticle(ParticleTypes.DRIPPING_DRIPSTONE_WATER, x, y, z, 0.0D, 0.0D, 0.0D);
+    }
+
+    protected void melt(Level level, BlockPos pos) {
+        level.playSound(null, pos, SoundEvents.POINTED_DRIPSTONE_DRIP_WATER, SoundSource.BLOCKS, 0.5F, 1.5F);
+
+        level.addParticle(ParticleTypes.SPLASH,
                 pos.getX() + 0.5,
                 pos.getY() + 0.1,
                 pos.getZ() + 0.5,
@@ -140,6 +161,6 @@ public class IcicleBlock extends SpeleothemBlock {
                 0.1
         );
 
-        world.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+        level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
     }
 }

@@ -3,8 +3,8 @@ package com.mohigster.morefeatures.item;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.asset.MFEquipmentAssets;
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorItem;
 import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
-import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mohigster.morefeatures.references.MFItemIds;
 import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
 import com.mohigster.morefeatures.datagen.MFJukeboxSongs;
@@ -101,36 +101,25 @@ public class MFItems {
     public static final DeferredItem<Item> BISMUTH_SCRAP = registerItem(MFItemIds.BISMUTH_SCRAP,
             properties -> new Item(properties
                     .rarity(Rarity.UNCOMMON)
-                    .fireResistant())
-    );
+                    .fireResistant()
+            ));
     public static final DeferredItem<Item> RAW_BISMUTH = registerItem(MFItemIds.RAW_BISMUTH,
             properties -> new Item(properties
                     .rarity(Rarity.UNCOMMON)
-                    .fireResistant())
-    );
+                    .fireResistant()
+            ));
 
     // Everfrost items
-    public static final DeferredItem<Item> EVERFROST = ITEMS.registerItem("everfrost",
+    public static final DeferredItem<Item> EVERFROST = registerItem(MFItemIds.EVERFROST,
             properties -> new Item(properties
                     .component(MFDataComponentTypes.COMPRESSOR_FUEL_VALUE.get(), 6400)));
-    public static final DeferredItem<Item> RAW_EVERFROST = ITEMS.registerSimpleItem("raw_everfrost");
+    public static final DeferredItem<Item> RAW_EVERFROST = registerSimpleItem(MFItemIds.RAW_EVERFROST);
 
     // Elemental rods
     public static final DeferredItem<Item> BRINE_ROD = ITEMS.registerSimpleItem("brine_rod");
 
     // Metal detector
-    public static final DeferredItem<Item> METAL_DETECTOR = ITEMS.registerItem("metal_detector",
-            properties -> new MetalDetectorItem(properties
-                    .durability(128)
-            ){
-                @SuppressWarnings("deprecation")
-                @NullMarked
-                @Override
-                public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
-                    builder.accept(Component.translatable("tooltip.morefeatures.metal_detector"));
-                    super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
-                }
-            });
+    public static final DeferredItem<MetalDetectorItem> METAL_DETECTOR = registerMetalDetector(MFItemIds.METAL_DETECTOR, Component.translatable("tooltip.morefeatures.metal_detector"));
 
     // Frosted core
     public static final DeferredItem<Item> FROSTED_CORE = ITEMS.registerSimpleItem("frosted_core");
@@ -138,36 +127,43 @@ public class MFItems {
     // Wands
     public static final DeferredItem<Item> ICE_WAND = ITEMS.registerItem("ice_wand",
             properties -> new IceWandItem(properties
-                    .durability(600)
+                    .durability(636)
                     .repairable(MFItems.FROSTED_CORE.get())
                     .rarity(Rarity.UNCOMMON)
             ));
 
     public static final DeferredItem<Item> FIRE_WAND = ITEMS.registerItem("fire_wand",
             properties -> new FireWandItem(properties
-                    .durability(600)
+                    .durability(636)
                     .repairable(Items.BLAZE_POWDER)
                     .rarity(Rarity.UNCOMMON)
             ));
 
     public static final DeferredItem<Item> HEALING_WAND = ITEMS.registerItem("healing_wand",
             properties -> new HealingWandItem(properties
-                    .durability(600)
+                    .durability(636)
                     .repairable(Items.GLISTERING_MELON_SLICE)
                     .rarity(Rarity.UNCOMMON)
             ));
 
     public static final DeferredItem<Item> EARTH_WAND = ITEMS.registerItem("earth_wand",
             properties -> new EarthWandItem(properties
-                    .durability(600)
+                    .durability(636)
                     .repairable(Items.DEEPSLATE)
                     .rarity(Rarity.UNCOMMON)
             ));
 
     public static final DeferredItem<Item> LIGHTNING_WAND = ITEMS.registerItem("lightning_wand",
             properties -> new LightningWandItem(properties
-                    .durability(600)
+                    .durability(636)
                     .repairable(Items.REDSTONE)
+                    .rarity(Rarity.UNCOMMON)
+            ));
+
+    public static final DeferredItem<Item> TIME_WAND = ITEMS.registerItem("time_wand",
+            properties -> new TimeWandItem(properties
+                    .durability(636)
+                    .repairable(Items.CLOCK)
                     .rarity(Rarity.UNCOMMON)
             ));
 
@@ -183,6 +179,13 @@ public class MFItems {
     public static final DeferredItem<Item> MUSIC_DISC_AQUAMARINE = registerItem(MFItemIds.MUSIC_DISC_AQUAMARINE,
             properties -> new Item(properties
                     .jukeboxPlayable(MFJukeboxSongs.AQUAMARINE_KEY)
+                    .stacksTo(1)
+                    .rarity(Rarity.RARE)
+            ));
+
+    public static final DeferredItem<Item> MUSIC_DISC_SNOW_QUEEN = registerItem(MFItemIds.MUSIC_DISC_SNOW_QUEEN,
+            properties -> new Item(properties
+                    .jukeboxPlayable(MFJukeboxSongs.SNOW_QUEEN_KEY)
                     .stacksTo(1)
                     .rarity(Rarity.RARE)
             ));
@@ -564,16 +567,25 @@ public class MFItems {
         return List.of(
                 registerItem(name + "_sword", (p) -> new Item(p.sword(toolmaterial, swordattr[0], swordattr[1])), itemProp),
                 registerItem(name + "_pickaxe", (p) -> new Item(p.pickaxe(toolmaterial, pickaxeattr[0], pickaxeattr[1])), itemProp)
-
-//                registerItem(name + "_helmet", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.HELMET)), itemProp),
-//                registerItem(name + "_chestplate", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.CHESTPLATE)), itemProp),
-//                registerItem(name + "_leggings", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.LEGGINGS)), itemProp),
-//                registerItem(name + "_boots", (p) -> new Item(p.humanoidArmor(armormaterial, ArmorType.BOOTS)), itemProp)
         );
     }
 
     private static <T extends Item> DeferredItem<T> registerItem(ResourceKey<Item> id, Function<Item.Properties, T> function){
         return ITEMS.registerItem(id.identifier().getPath(), props -> function.apply(props.setId(id)));
+    }
+
+    private static <T extends Item> DeferredItem<MetalDetectorItem> registerMetalDetector(ResourceKey<Item> id, Component... components){
+        return ITEMS.registerItem(id.identifier().getPath(), props -> new MetalDetectorItem(props.setId(id).durability(256)){
+            @SuppressWarnings("deprecation")
+            @NullMarked
+            @Override
+            public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
+                for(var component : components) {
+                    builder.accept(component);
+                }
+                super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
+            }
+        });
     }
 
     private static DeferredItem<Item> registerSimpleItem(ResourceKey<Item> id){

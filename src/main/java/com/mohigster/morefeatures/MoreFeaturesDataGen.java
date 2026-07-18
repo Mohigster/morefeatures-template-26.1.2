@@ -2,6 +2,7 @@ package com.mohigster.morefeatures;
 
 import com.mohigster.morefeatures.datagen.*;
 import com.mohigster.morefeatures.datagen.custom.MFMagicBlockTransmutationProvider;
+import com.mohigster.morefeatures.datagen.custom.MFMetalDetectorCostProvider;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.loot.LootTableProvider;
@@ -42,5 +43,6 @@ public class MoreFeaturesDataGen {
         generator.addProvider(true, new MFEntityTagsProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFEquipmentAssetProvider(packOutput));
         generator.addProvider(true, new MFMagicBlockTransmutationProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new MFMetalDetectorCostProvider(packOutput, lookupProvider));
     }
 }

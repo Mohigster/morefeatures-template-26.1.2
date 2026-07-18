@@ -1,0 +1,8 @@
+{
+  "comparator_output": 15,
+  "description": {
+    "translate": "jukebox_song.morefeatures.snow_queen"
+  },
+  "length_in_seconds": 220.0,
+  "sound_event": "morefeatures:snow_queen"
+}

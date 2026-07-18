@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.worldgen.biome;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableList.Builder;
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.worldgen.noise.MFNoises;
 import net.minecraft.core.*;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
@@ -76,6 +77,12 @@ public class MFSurfaceRules {
     }
 
     public static RuleSource makeIceCaveRules(HolderGetter<Biome> biomes) {
+        RuleSource iceCaveBands = SurfaceRules.sequence(
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition3d(MFNoises.ICE_CAVE_GRADIENT, -0.4F, -0.1F), PACKED_ICE),
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition3d(MFNoises.ICE_CAVE_GRADIENT, 0.0, 0.4F), SNOW_BLOCK),
+                SurfaceRules.ifTrue(SurfaceRules.noiseCondition3d(MFNoises.ICE_CAVE_GRADIENT, 0.4F), PACKED_ICE)
+        );
+
         return SurfaceRules.ifTrue(
                 SurfaceRules.isBiome(biomes, MFBiomes.ICE_CAVES),
                 SurfaceRules.ifTrue(
@@ -85,9 +92,9 @@ public class MFSurfaceRules {
                                 SurfaceRules.ifTrue(SurfaceRules.ON_CEILING, BLUE_ICE),
                                 // Floor and walls get Packed Ice
                                 SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR, PACKED_ICE),
-                                SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR, PACKED_ICE),
+                                SurfaceRules.ifTrue(SurfaceRules.VERY_DEEP_UNDER_FLOOR, PACKED_ICE),
 
-                                PACKED_ICE
+                                iceCaveBands
                         )
                 )
         );

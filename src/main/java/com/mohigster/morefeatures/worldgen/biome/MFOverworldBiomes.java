@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.worldgen.biome;
 
 import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
+import com.mohigster.morefeatures.sound.MFSounds;
 import com.mohigster.morefeatures.worldgen.MFPlacedFeatures;
 import com.mohigster.morefeatures.worldgen.carver.MFCarvers;
 import net.minecraft.core.HolderGetter;
@@ -111,6 +112,16 @@ public class MFOverworldBiomes {
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MFPlacedFeatures.SNOW_PATCH_PLACED_KEY);
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MFPlacedFeatures.LARGE_SNOW_PATCH_PLACED_KEY);
 
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MFPlacedFeatures.SMALL_ICE_PATCH_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MFPlacedFeatures.ICE_PATCH_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MFPlacedFeatures.LARGE_ICE_PATCH_PLACED_KEY);
+
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MFPlacedFeatures.SMALL_BLUE_ICE_PATCH_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MFPlacedFeatures.BLUE_ICE_PATCH_PLACED_KEY);
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MFPlacedFeatures.LARGE_BLUE_ICE_PATCH_PLACED_KEY);
+
+        biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_ORES, MFPlacedFeatures.EVERFROST_ORE_PLACED_KEY);
+
         biomeBuilder.addFeature(GenerationStep.Decoration.UNDERGROUND_DECORATION, MFPlacedFeatures.ICICLE_CLUSTER_PLACED_KEY);
 
         return new Biome.BiomeBuilder()
@@ -122,9 +133,9 @@ public class MFOverworldBiomes {
                         .build()))
                 .mobSpawnSettings(spawnBuilder.build())
                 .generationSettings(biomeBuilder.build())
-                .setAttribute(EnvironmentAttributes.FOG_COLOR, -4138753)     // Light ice blue fog
+                .setAttribute(EnvironmentAttributes.FOG_COLOR, -4138753)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, -8871425)
-                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(SoundEvents.MUSIC_BIOME_DEEP_DARK))
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(MFSounds.MUSIC_BIOME_ICE_CAVES))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.WHITE_ASH, 0.01F))
                 .build();
     }

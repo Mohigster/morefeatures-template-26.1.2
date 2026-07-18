@@ -5,10 +5,12 @@ import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.references.MFBlockIds;
 import com.mohigster.morefeatures.references.MFBlockItemIds;
 import com.mohigster.morefeatures.tag.MFBlockTags;
+import com.mohigster.morefeatures.tag.MFItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.tags.BlockItemTagsProvider;
 import net.minecraft.references.BlockIds;
+import net.minecraft.references.BlockItemIds;
 import net.minecraft.tags.BlockTags;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
@@ -460,5 +462,37 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
 
         tag(BlockTags.SPELEOTHEMS)
                 .add(MFBlockItemIds.ICICLE.block());
+
+        tag(MFBlockTags.METAL_DETECTOR_FINDABLE)
+                .add(MFBlockItemIds.ALUMINIUM_ORE.block())
+                .add(MFBlockItemIds.MAGNESIUM_ORE.block())
+                .add(MFBlockItemIds.DEEPSLATE_ALUMINIUM_ORE.block())
+                .add(MFBlockItemIds.DEEPSLATE_MAGNESIUM_ORE.block())
+                .add(MFBlockItemIds.BISMUTH_ORE.block())
+                .add(BlockItemIds.IRON_ORE.block())
+                .add(BlockItemIds.COPPER_ORE.block())
+                .add(BlockItemIds.GOLD_ORE.block())
+                .add(BlockItemIds.DEEPSLATE_IRON_ORE.block())
+                .add(BlockItemIds.DEEPSLATE_COPPER_ORE.block())
+                .add(BlockItemIds.DEEPSLATE_GOLD_ORE.block())
+                .add(BlockItemIds.ANCIENT_DEBRIS.block())
+                .add(BlockItemIds.NETHER_GOLD_ORE.block());
+
+        tag(MFBlockTags.METAL_DETECTOR_LOW_COST)
+                .add(MFBlockItemIds.MAGNESIUM_ORE.block())
+                .add(MFBlockItemIds.DEEPSLATE_MAGNESIUM_ORE.block())
+                .add(BlockItemIds.IRON_ORE.block())
+                .add(BlockItemIds.DEEPSLATE_IRON_ORE.block());
+
+        tag(MFBlockTags.METAL_DETECTOR_MEDIUM_COST)
+                .add(BlockItemIds.GOLD_ORE.block())
+                .add(BlockItemIds.NETHER_GOLD_ORE.block())
+                .add(BlockItemIds.DEEPSLATE_GOLD_ORE.block());
+
+        tag(MFBlockTags.METAL_DETECTOR_HIGH_COST)
+                .add(BlockItemIds.ANCIENT_DEBRIS.block());
+
+        tag(MFBlockTags.METAL_DETECTOR_BISMUTH_COST)
+                .add(MFBlockItemIds.BISMUTH_ORE.block());
     }
 }

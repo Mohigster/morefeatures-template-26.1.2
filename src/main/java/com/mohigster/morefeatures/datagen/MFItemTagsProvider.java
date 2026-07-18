@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.references.MFBlockItemIds;
 import com.mohigster.morefeatures.references.MFItemIds;
 import com.mohigster.morefeatures.item.MFItems;
@@ -12,6 +13,7 @@ import net.minecraft.data.tags.BlockItemTagsProvider;
 import net.minecraft.references.BlockItemIds;
 import net.minecraft.references.ItemIds;
 import net.minecraft.tags.ItemTags;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import org.jspecify.annotations.NonNull;
 
@@ -277,9 +279,9 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFBlockItemIds.PALLID_SAPLING.item());
 
         tag(MFItemTags.COMPRESSOR_FUEL)
-                .add(MFItems.AZURITE.getKey())
-                .add(MFItems.FLUORITE.getKey())
-                .add(MFItems.EVERFROST.getKey());
+                .add(MFItemIds.AZURITE)
+                .add(MFItemIds.FLUORITE)
+                .add(MFItemIds.EVERFROST);
 
         tag(ItemTags.LOGS_THAT_BURN)
                 .add(MFBlockItemIds.TAINTED_WOOD.item())
@@ -372,6 +374,11 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItems.AZURITE.getKey())
                 .add(MFItems.FLUORITE.getKey());
 
+        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_STONE)
+                .add(BlockItemIds.GRANITE.item())
+                .add(BlockItemIds.DIORITE.item())
+                .add(BlockItemIds.ANDESITE.item());
+
         tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_LINGERING_POT)
                 .add(ItemIds.POTION)
                 .add(ItemIds.SPLASH_POTION);
@@ -389,9 +396,25 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(ItemIds.NETHERITE_SCRAP)
                 .add(ItemIds.NETHERITE_INGOT)
                 .add(ItemIds.DIAMOND)
+                .add(BlockItemIds.STONE.item())
                 .add(ItemIds.LINGERING_POTION)
                 .add(MFItemIds.MUSIC_DISC_AQUAMARINE)
                 .add(BlockItemIds.BEDROCK.item());
+
+        tag(MFItemTags.METAL_DETECTOR_FINDABLE)
+                .add(MFBlockItemIds.ALUMINIUM_ORE.item())
+                .add(MFBlockItemIds.MAGNESIUM_ORE.item())
+                .add(MFBlockItemIds.DEEPSLATE_ALUMINIUM_ORE.item())
+                .add(MFBlockItemIds.DEEPSLATE_MAGNESIUM_ORE.item())
+                .add(MFBlockItemIds.BISMUTH_ORE.item())
+                .add(BlockItemIds.IRON_ORE.item())
+                .add(BlockItemIds.COPPER_ORE.item())
+                .add(BlockItemIds.GOLD_ORE.item())
+                .add(BlockItemIds.DEEPSLATE_IRON_ORE.item())
+                .add(BlockItemIds.DEEPSLATE_COPPER_ORE.item())
+                .add(BlockItemIds.DEEPSLATE_GOLD_ORE.item())
+                .add(BlockItemIds.ANCIENT_DEBRIS.item())
+                .add(BlockItemIds.NETHER_GOLD_ORE.item());
 
         tag(ItemTags.TRIM_MATERIALS)
                 .add(MFItemIds.ALUMINIUM_INGOT)

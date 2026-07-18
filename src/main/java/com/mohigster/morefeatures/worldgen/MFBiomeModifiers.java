@@ -23,13 +23,6 @@ public class MFBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_ALUMINIUM_ORE = registerKey("add_aluminium_ore");
     public static final ResourceKey<BiomeModifier> ADD_MAGNESIUM_ORE = registerKey("add_magnesium_ore");
     public static final ResourceKey<BiomeModifier> ADD_BISMUTH_ORE = registerKey("add_bismuth_ore");
-    public static final ResourceKey<BiomeModifier> ADD_SMALL_ICE_PATCH = registerKey("add_small_ice_patch");
-    public static final ResourceKey<BiomeModifier> ADD_ICE_PATCH = registerKey("add_ice_patch");
-    public static final ResourceKey<BiomeModifier> ADD_LARGE_ICE_PATCH = registerKey("add_large_ice_patch");
-    public static final ResourceKey<BiomeModifier> ADD_SMALL_BLUE_ICE_PATCH = registerKey("add_small_blue_ice_patch");
-    public static final ResourceKey<BiomeModifier> ADD_BLUE_ICE_PATCH = registerKey("add_blue_ice_patch");
-    public static final ResourceKey<BiomeModifier> ADD_LARGE_BLUE_ICE_PATCH = registerKey("add_large_blue_ice_patch");
-    public static final ResourceKey<BiomeModifier> ADD_EVERFROST_ORE = registerKey("add_everfrost_ore");
     public static final ResourceKey<BiomeModifier> ADD_OASIS = registerKey("add_oasis");
     public static final ResourceKey<BiomeModifier> ADD_PALM_TREE = registerKey("add_palm_tree");
     public static final ResourceKey<BiomeModifier> ADD_FALLEN_PALM = registerKey("add_fallen_palm");
@@ -82,41 +75,6 @@ public class MFBiomeModifiers {
         context.register(ADD_BISMUTH_ORE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_END),
                 HolderSet.direct(placedFeatures.getOrThrow(MFPlacedFeatures.BISMUTH_ORE_PLACED_KEY)),
-                GenerationStep.Decoration.UNDERGROUND_ORES
-        ));
-        context.register(ADD_SMALL_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(MFBiomes.ICE_CAVES)),
-                HolderSet.direct(placedFeatures.getOrThrow(MFPlacedFeatures.SMALL_ICE_PATCH_PLACED_KEY)),
-                GenerationStep.Decoration.UNDERGROUND_ORES
-        ));
-        context.register(ADD_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(MFBiomes.ICE_CAVES)),
-                HolderSet.direct(placedFeatures.getOrThrow(MFPlacedFeatures.ICE_PATCH_PLACED_KEY)),
-                GenerationStep.Decoration.UNDERGROUND_ORES
-        ));
-        context.register(ADD_LARGE_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(MFBiomes.ICE_CAVES)),
-                HolderSet.direct(placedFeatures.getOrThrow(MFPlacedFeatures.LARGE_ICE_PATCH_PLACED_KEY)),
-                GenerationStep.Decoration.UNDERGROUND_ORES
-        ));
-        context.register(ADD_SMALL_BLUE_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(MFBiomes.ICE_CAVES)),
-                HolderSet.direct(placedFeatures.getOrThrow(MFPlacedFeatures.SMALL_BLUE_ICE_PATCH_PLACED_KEY)),
-                GenerationStep.Decoration.UNDERGROUND_ORES
-        ));
-        context.register(ADD_BLUE_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(MFBiomes.ICE_CAVES)),
-                HolderSet.direct(placedFeatures.getOrThrow(MFPlacedFeatures.BLUE_ICE_PATCH_PLACED_KEY)),
-                GenerationStep.Decoration.UNDERGROUND_ORES
-        ));
-        context.register(ADD_LARGE_BLUE_ICE_PATCH, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(MFBiomes.ICE_CAVES)),
-                HolderSet.direct(placedFeatures.getOrThrow(MFPlacedFeatures.LARGE_BLUE_ICE_PATCH_PLACED_KEY)),
-                GenerationStep.Decoration.UNDERGROUND_ORES
-        ));
-        context.register(ADD_EVERFROST_ORE, new BiomeModifiers.AddFeaturesBiomeModifier(
-                HolderSet.direct(biomes.getOrThrow(MFBiomes.ICE_CAVES)),
-                HolderSet.direct(placedFeatures.getOrThrow(MFPlacedFeatures.EVERFROST_ORE_PLACED_KEY)),
                 GenerationStep.Decoration.UNDERGROUND_ORES
         ));
         context.register(ADD_PALM_TREE, new BiomeModifiers.AddFeaturesBiomeModifier(

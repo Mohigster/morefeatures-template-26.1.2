@@ -52,29 +52,27 @@ public class MagicBlock extends Block {
         if(entity instanceof ItemEntity itemEntity) {
             ItemStack currentItem = itemEntity.getItem();
             if (!currentItem.is(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)) { // A failsafe. If an item is a possible result of a magic block transmutation, it shouldn't even attempt to find a transmutation result
-                ItemStack result = getTransmutationResult(currentItem);
-
-                if (!result.isEmpty()) {
-                    itemEntity.setItem(result);
-
-                    level.addParticle(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
-                                0, 1, 0);
-
-                    level.playSound(null, itemEntity,
-                                MFSounds.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 1.5f, 1f);
-                }
+                this.performTransmutationEffects(itemEntity, getTransmutationResult(currentItem), level, pos);
             }
         }
 
         super.stepOn(level, pos, onState, entity);
     }
 
+    protected ItemStack getTransmutationResult(ItemStack item) {
+        ItemStack result = MagicBlockTransmutations.INSTANCE.getResult(item);
+        return result.isEmpty() ? ItemStack.EMPTY : result;
+    }
 
-    private ItemStack getTransmutationResult(ItemStack item) {
-        ItemStack dataDrivenResult = MagicBlockTransmutations.INSTANCE.getResult(item);
-        if (!dataDrivenResult.isEmpty()) {
-            return dataDrivenResult;
+    private void performTransmutationEffects(ItemEntity entity, ItemStack item, Level level, BlockPos pos){
+        if (!item.isEmpty()) {
+            entity.setItem(item);
+
+            level.addParticle(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
+                    0, 1, 0);
+
+            level.playSound(null, entity,
+                    MFSounds.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 1.5f, 1f);
         }
-        return ItemStack.EMPTY;
     }
 }

@@ -36,9 +36,11 @@ public final class MFItemTags {
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_NETHERITE_SCRAP = morefeaturesTag("magic_block_turns_to_netherite_scrap");
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_NETHERITE_INGOT = morefeaturesTag("magic_block_turns_to_netherite_ingot");
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_DIAMOND = morefeaturesTag("magic_block_turns_to_diamond");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_STONE = morefeaturesTag("magic_block_turns_to_stone");
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_LINGERING_POT = morefeaturesTag("magic_block_turns_to_lingering_pot");
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_BEDROCK = morefeaturesTag("magic_block_turns_to_bedrock");
     public static final TagKey<Item> MAGIC_BLOCK_TRANSMUTATION_RESULTS = morefeaturesTag("magic_block_transmutation_results");
+    public static final TagKey<Item> METAL_DETECTOR_FINDABLE = morefeaturesTag("metal_detector_findable");
 
     private static TagKey<Item> morefeaturesTag(String name) {
         return TagKey.create(Registries.ITEM, MFIdentifier.withMfNamespace(name));

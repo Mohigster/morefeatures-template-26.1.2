@@ -2,7 +2,7 @@
   "aquamarine": {
     "sounds": [
       {
-        "name": "morefeatures:aquamarine",
+        "name": "morefeatures:music/disc/aquamarine",
         "stream": true
       }
     ],
@@ -70,8 +70,24 @@
   },
   "music_biome_ice_caves": {
     "sounds": [
-      "morefeatures:"
+      {
+        "name": "morefeatures:music/background/frozen_star",
+        "stream": true
+      },
+      {
+        "name": "morefeatures:music/background/frost_waltz",
+        "stream": true
+      }
     ],
     "subtitle": "music.morefeatures.ice_caves"
+  },
+  "snow_queen": {
+    "sounds": [
+      {
+        "name": "morefeatures:music/disc/the_snow_queen",
+        "stream": true
+      }
+    ],
+    "subtitle": "sounds.morefeatures.snow_queen"
   }
 }

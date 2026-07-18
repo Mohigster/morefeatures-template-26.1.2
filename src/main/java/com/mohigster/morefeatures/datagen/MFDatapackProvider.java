@@ -9,6 +9,7 @@ import com.mohigster.morefeatures.worldgen.MFPlacedFeatures;
 import com.mohigster.morefeatures.worldgen.biome.MFBiomes;
 import com.mohigster.morefeatures.worldgen.carver.MFCarvers;
 import com.mohigster.morefeatures.worldgen.dimension.MFDimensions;
+import com.mohigster.morefeatures.worldgen.noise.MFNoiseData;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
@@ -26,6 +27,7 @@ public class MFDatapackProvider extends DatapackBuiltinEntriesProvider {
             .add(Registries.PLACED_FEATURE, MFPlacedFeatures::bootstrap)
             .add(Registries.TRIM_MATERIAL, MFTrimMaterials::bootstrap)
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, MFBiomeModifiers::bootstrap)
+            .add(Registries.NOISE, MFNoiseData::bootstrap)
             .add(Registries.DIMENSION_TYPE, MFDimensions::bootstrapType)
             .add(Registries.LEVEL_STEM, MFDimensions::bootstrapStem)
             .add(Registries.ENCHANTMENT, MFEnchantments::bootstrap)

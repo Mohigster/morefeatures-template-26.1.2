@@ -4,7 +4,7 @@
       "default": {
         "max_delay": 24000,
         "min_delay": 12000,
-        "sound": "minecraft:music.overworld.deep_dark"
+        "sound": "morefeatures:music_biome_ice_caves"
       }
     },
     "minecraft:visual/ambient_particles": [
@@ -42,7 +42,14 @@
     [
       "morefeatures:small_snow_patch_placed",
       "morefeatures:snow_patch_placed",
-      "morefeatures:large_snow_patch_placed"
+      "morefeatures:large_snow_patch_placed",
+      "morefeatures:small_ice_patch_placed",
+      "morefeatures:ice_patch_placed",
+      "morefeatures:large_ice_patch_placed",
+      "morefeatures:small_blue_ice_patch_placed",
+      "morefeatures:blue_ice_patch_placed",
+      "morefeatures:large_blue_ice_patch_placed",
+      "morefeatures:everfrost_ore_placed"
     ],
     [
       "morefeatures:icicle_cluster_placed"

@@ -1,4 +1,4 @@
 {
-  "input_tag": "minecraft:beds",
+  "input_tag": "morefeatures:magic_block_turns_to_stone",
   "output_item": "minecraft:stone"
 }

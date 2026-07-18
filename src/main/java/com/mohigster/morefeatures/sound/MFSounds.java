@@ -17,6 +17,7 @@ public class MFSounds {
             DeferredRegister.create(BuiltInRegistries.SOUND_EVENT, MoreFeatures.MODID);
 
     public static final DeferredHolder<SoundEvent, SoundEvent> AQUAMARINE = registerMusicSoundEvent("aquamarine");
+    public static final DeferredHolder<SoundEvent, SoundEvent> SNOW_QUEEN = registerMusicSoundEvent("snow_queen");
 
     public static final DeferredHolder<SoundEvent, SoundEvent> MUSIC_BIOME_ICE_CAVES = registerMusicSoundEvent("music_biome_ice_caves");
 

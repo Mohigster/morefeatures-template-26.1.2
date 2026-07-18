@@ -10,6 +10,7 @@ import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
 import com.mohigster.morefeatures.enchantment.MFEnchantmentEffects;
 import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
 import com.mohigster.morefeatures.item.MFItems;
+import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorCosts;
 import com.mohigster.morefeatures.menu.MFMenuTypes;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
 import com.mohigster.morefeatures.recipe.MFRecipes;
@@ -142,6 +143,10 @@ public class MoreFeatures {
         event.addListener(
                 MFIdentifier.withMfNamespace("magic_block_transmutations"),
                 MagicBlockTransmutations.INSTANCE
+        );
+        event.addListener(
+                MFIdentifier.withMfNamespace("metal_detector_costs"),
+                MetalDetectorCosts.INSTANCE
         );
     }
 

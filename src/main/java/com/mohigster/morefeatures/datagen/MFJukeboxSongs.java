@@ -14,9 +14,11 @@ import net.minecraft.world.item.JukeboxSong;
 public class MFJukeboxSongs {
 
     public static final ResourceKey<JukeboxSong> AQUAMARINE_KEY = createKey("aquamarine");
+    public static final ResourceKey<JukeboxSong> SNOW_QUEEN_KEY = createKey("snow_queen");
 
     public static void bootstrap(BootstrapContext<JukeboxSong> context) {
         register(context, AQUAMARINE_KEY, ((Holder.Reference<SoundEvent>) MFSounds.AQUAMARINE.getDelegate()), 192, 15);
+        register(context, SNOW_QUEEN_KEY, ((Holder.Reference<SoundEvent>) MFSounds.SNOW_QUEEN.getDelegate()), 220, 15);
     }
 
     private static ResourceKey<JukeboxSong> createKey(String name) {

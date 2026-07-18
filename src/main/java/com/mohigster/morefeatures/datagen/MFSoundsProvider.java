@@ -18,10 +18,17 @@ public class MFSoundsProvider extends SoundDefinitionsProvider {
         // Music disc
 
         add(MFSounds.AQUAMARINE.get(), definition().subtitle("sounds.morefeatures.aquamarine")
-                .with(sound(withMfNamespace("aquamarine")).stream()));
+                .with(sound(withMfNamespace("music/disc/aquamarine")).stream()));
+
+        add(MFSounds.SNOW_QUEEN.get(), definition().subtitle("sounds.morefeatures.snow_queen")
+                .with(sound(withMfNamespace("music/disc/the_snow_queen")).stream()));
 
         add(MFSounds.MUSIC_BIOME_ICE_CAVES.get(), definition().subtitle("music.morefeatures.ice_caves")
-                .with(sound(withMfNamespace(""))));
+                .with(
+                        sound(withMfNamespace("music/background/frozen_star")).stream(),
+                        sound(withMfNamespace("music/background/frost_waltz")).stream()
+                )
+        );
 
         // Magic block sounds
 
@@ -35,6 +42,9 @@ public class MFSoundsProvider extends SoundDefinitionsProvider {
                 .with(sound(withMfNamespace("magic_block_hit"))));
         add(MFSounds.MAGIC_BLOCK_FALL.get(), definition().subtitle("sounds.morefeatures.magic_block_fall")
                 .with(sound(withMfNamespace("magic_block_fall"))));
+
+        // These sounds events use the same OGG files as the magic block, but with different volume and pitch.
+        // The volume and pitch have been defined in the MFSounds class, rather than this datagen class.
 
         add(MFSounds.EVIL_PORTAL_BREAK.get(), definition().subtitle("sounds.morefeatures.evil_block_break")
                 .with(sound(withMfNamespace("magic_block_break"))));

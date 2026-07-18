@@ -1,6 +1,7 @@
-package com.mohigster.morefeatures.item.custom;
+package com.mohigster.morefeatures.item.custom.metaldetector;
 
-import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
@@ -14,7 +15,6 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class MetalDetectorItem extends Item {
@@ -35,15 +35,20 @@ public class MetalDetectorItem extends Item {
                 BlockState blockState = level.getBlockState(positionClicked.below(i));
 
                 if(isMetalOre(blockState)){
+                    assert player != null;
                     outputValuableCoordinates(positionClicked.below(i), player, blockState.getBlock());
                     foundBlock = true;
 
-                    // Damage the item
-                    context.getItemInHand().hurtAndBreak(1, player, context.getHand());
-                    // Play sound
+                    // Calculate damage cost based on data-driven costs (defaults to 1 if a cost is not defined)
+                    int damageCost = this.getCost(blockState);
+
+                    MoreFeatures.LOGGER.debug("damageCost: " + damageCost);
+
+                    context.getItemInHand().hurtAndBreak(damageCost, player, context.getHand());
+
                     level.playSound(null, positionClicked,
                             SoundEvents.AMETHYST_BLOCK_CHIME, SoundSource.BLOCKS, 1.5f, 1f);
-                    // Spawn particles
+
                     spawnFoundParticles(level, positionClicked, blockState);
 
                     break;
@@ -69,23 +74,19 @@ public class MetalDetectorItem extends Item {
                     Math.cos(i * 18) * 0.15d, 0.15d, Math.sin(i * 18) * 0.15d, 0.1);
         }
     }
-    private boolean isMetalOre(BlockState blockState) {
-        return(
-                blockState.is(Blocks.IRON_ORE) ||
-                blockState.is(Blocks.DEEPSLATE_IRON_ORE) ||
-                blockState.is(MFBlocks.BISMUTH_ORE) ||
-                blockState.is(Blocks.GOLD_ORE) ||
-                blockState.is(Blocks.DEEPSLATE_GOLD_ORE) ||
-                blockState.is(Blocks.COPPER_ORE) ||
-                blockState.is(Blocks.DEEPSLATE_COPPER_ORE) ||
-                blockState.is(MFBlocks.ALUMINIUM_ORE) ||
-                blockState.is(MFBlocks.DEEPSLATE_ALUMINIUM_ORE) ||
-                blockState.is(MFBlocks.MAGNESIUM_ORE) ||
-                blockState.is(MFBlocks.DEEPSLATE_MAGNESIUM_ORE) ||
-                blockState.is(Blocks.ANCIENT_DEBRIS) ||
-                blockState.is(Blocks.NETHER_GOLD_ORE)
-        );
 
+    private int getCost(BlockState state){
+        int totalCost = MetalDetectorCosts.INSTANCE.getCost(state);
+
+        if (totalCost == 0){
+            throw new IllegalStateException("Metal detector durability cost must not be zero! Check that MetalDetectorCosts is calculating the durability cost properly, because it is supposed to return a minimum of one!");
+        }
+
+        return totalCost;
+    }
+
+    private boolean isMetalOre(BlockState blockState) {
+        return blockState.is(MFBlockTags.METAL_DETECTOR_FINDABLE);
     }
 
     private void outputNoValuablesFound(Player player) {

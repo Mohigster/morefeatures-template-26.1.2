@@ -18,7 +18,7 @@ public class MFMagicBlockTransmutationProvider extends MagicBlockTransmutationPr
 
     @Override
     protected void generate() {
-        add(ItemTags.BEDS, Items.STONE); // This is purely to test if tag validation works
+        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_STONE, Items.STONE);
         add(MFItemTags.MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC, MFItems.MUSIC_DISC_AQUAMARINE.get());
         add(MFItemTags.MAGIC_BLOCK_TURNS_TO_CARBON, MFItems.CARBON_FIBER.get());
         add(MFItemTags.MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP, MFItems.BISMUTH_SCRAP.get());

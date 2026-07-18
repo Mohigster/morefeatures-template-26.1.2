@@ -37,6 +37,7 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
         this.rawEntries = List.copyOf(map.values());
     }
 
+    @SuppressWarnings("deprecation")
     public void onTagsUpdated(TagsUpdatedEvent event) {
         List<TransmutationEntry> validEntries = new ArrayList<>();
 

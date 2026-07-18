@@ -1,0 +1,17 @@
+{
+  "values": [
+    "morefeatures:aluminium_ore",
+    "morefeatures:magnesium_ore",
+    "morefeatures:deepslate_aluminium_ore",
+    "morefeatures:deepslate_magnesium_ore",
+    "morefeatures:bismuth_ore",
+    "minecraft:iron_ore",
+    "minecraft:copper_ore",
+    "minecraft:gold_ore",
+    "minecraft:deepslate_iron_ore",
+    "minecraft:deepslate_copper_ore",
+    "minecraft:deepslate_gold_ore",
+    "minecraft:ancient_debris",
+    "minecraft:nether_gold_ore"
+  ]
+}
