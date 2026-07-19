@@ -1,6 +1,5 @@
 package com.mohigster.morefeatures.block.custom;
 
-import com.mohigster.morefeatures.block.MFBlocks;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -42,6 +41,7 @@ public class IcicleBlock extends SpeleothemBlock {
     private static final double STALAGMITE_DRIP_XZ_OFFSET_RANGE = 0.3D;
 
     private static final float FALL_DAMAGE_MODIFIER = 2.5F;
+    private static final float PARTICLE_SPAWN_PERCENT_CHANCE = 7.5F; // 7.5% chance
 
     private final List<BlockState> blocksToGrowOn;
 
@@ -69,7 +69,7 @@ public class IcicleBlock extends SpeleothemBlock {
     @Override
     public void onBrokenAfterFall(Level level, BlockPos pos, FallingBlockEntity entity) {
         if (!entity.isSilent()) {
-            int blockStateId = getBlockStateId(MFBlocks.ICICLE.get());
+            int blockStateId = getBlockStateId(entity.getBlockState().getBlock());
             level.levelEvent(this.getStalactiteLandingSound(), pos, blockStateId); // Will make the ice breaking sound and use the icicle textures for particles
         }
     }
@@ -93,29 +93,33 @@ public class IcicleBlock extends SpeleothemBlock {
         }
     }
 
-    protected int meltingLightLevel(){
+    protected int minimumLightLevelToTriggerMelting(){
         return MELTING_LIGHT_LEVEL;
     }
 
     private boolean canMelt(Level level, BlockState state, BlockPos pos){
+        return isTipOrMerge(state) && isBrightEnoughToMelt(level, pos);
+    }
+
+    protected boolean isTipOrMerge(BlockState state){
         SpeleothemThickness thickness = state.getValue(THICKNESS);
 
-        return (thickness == SpeleothemThickness.TIP || thickness == SpeleothemThickness.TIP_MERGE)
-                && isBrightEnoughToMelt(level, pos);
+        return thickness == SpeleothemThickness.TIP || thickness == SpeleothemThickness.TIP_MERGE;
     }
 
     protected boolean isBrightEnoughToMelt(Level level, BlockPos pos){
-        return level.getBrightness(LightLayer.BLOCK, pos) > meltingLightLevel();
+        return level.getBrightness(LightLayer.BLOCK, pos) >= minimumLightLevelToTriggerMelting();
     }
 
     // Icicles will only drip water if they are in danger of melting!
     @NullMarked
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (canMelt(level, state, pos) && random.nextFloat() < 0.15F){
+        if (canMelt(level, state, pos) && random.nextFloat() < (PARTICLE_SPAWN_PERCENT_CHANCE / 100)){
             spawnDripParticle(level, pos, state, random);
+        } else {
+            super.animateTick(state, level, pos, random);
         }
-        else super.animateTick(state, level, pos, random);
     }
 
     @NullMarked
@@ -131,7 +135,7 @@ public class IcicleBlock extends SpeleothemBlock {
     @NullMarked
     @Override
     protected boolean canGrow(LevelReader level, BlockPos pos){
-        Block blockToCheck = level.getBlockState(pos).getBlock();
+        Block blockToCheck = level.getBlockState(pos.above()).getBlock();
         return this.blocksToGrowOn.stream().anyMatch(state -> state.is(blockToCheck));
     }
 
