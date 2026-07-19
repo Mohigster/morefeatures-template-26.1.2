@@ -577,8 +577,8 @@ public class MFItems {
         return ITEMS.registerItem(id.identifier().getPath(), props -> function.apply(props.setId(id)));
     }
 
-    @SuppressWarnings({"unused", "SameParameterValue"})
-    private static <T extends Item> DeferredItem<MetalDetectorItem> registerMetalDetector(ResourceKey<Item> id, Component... components){
+    @SuppressWarnings("SameParameterValue")
+    private static DeferredItem<MetalDetectorItem> registerMetalDetector(ResourceKey<Item> id, Component... components){
         return ITEMS.registerItem(id.identifier().getPath(), props -> new MetalDetectorItem(props.setId(id).durability(256)){
             @SuppressWarnings("deprecation")
             @NullMarked
