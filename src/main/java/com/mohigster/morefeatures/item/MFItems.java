@@ -52,8 +52,6 @@ public class MFItems {
         return ITEMS.register(name, () -> function.apply(itemProp.setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MODID, name)))));
     }
 
-
-
     // Item registration. JSON files are generated with DataGen. See MoreFeaturesDataGen and classes in the datagen package.
 
     // Texture files and language data still must be manually added.
@@ -396,6 +394,10 @@ public class MFItems {
 
     // Sign items
 
+    // Most block items are registered automatically in the registerBlock method.
+    // However, sign items are shared by two blocks, (wall and standing / ceiling)
+    // so they have to be registered separately to their respective blocks.
+
     public static final DeferredItem<Item> AZURITE_SIGN =
             registerItem(MFItemIds.AZURITE_SIGN, properties ->
                     new SignItem(
@@ -560,6 +562,7 @@ public class MFItems {
     );
 
 
+    @SuppressWarnings("unused")
     public static List<DeferredItem<Item>> registerEquipmentItems(String name, ToolMaterial toolmaterial, ArmorMaterial armormaterial,
                                                             float[] swordattr, float[] pickaxeattr,
                                                             Item.Properties itemProp) {
@@ -574,6 +577,7 @@ public class MFItems {
         return ITEMS.registerItem(id.identifier().getPath(), props -> function.apply(props.setId(id)));
     }
 
+    @SuppressWarnings({"unused", "SameParameterValue"})
     private static <T extends Item> DeferredItem<MetalDetectorItem> registerMetalDetector(ResourceKey<Item> id, Component... components){
         return ITEMS.registerItem(id.identifier().getPath(), props -> new MetalDetectorItem(props.setId(id).durability(256)){
             @SuppressWarnings("deprecation")

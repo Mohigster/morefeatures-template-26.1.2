@@ -23,5 +23,6 @@ public class MFDataComponentTypes {
 
     public static void register(IEventBus modEventBus) {
         DATA_COMPONENT_TYPES.register(modEventBus);
+        MoreFeatures.LOGGER.info("Mod Data Components registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

@@ -17,5 +17,6 @@ public class MFTreeDecorators {
 
     public static void register(IEventBus modEventBus) {
         TREE_DECORATORS.register(modEventBus);
+        MoreFeatures.LOGGER.info("Mod Tree Decorators registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

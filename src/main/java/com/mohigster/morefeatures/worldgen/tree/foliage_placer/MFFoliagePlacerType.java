@@ -16,5 +16,6 @@ public class MFFoliagePlacerType {
 
     public static void register(IEventBus eventBus){
         FOLIAGE_PLACER_TYPES.register(eventBus);
+        MoreFeatures.LOGGER.info("Mod Foliage Placer registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

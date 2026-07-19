@@ -28,5 +28,6 @@ public class MFFeatures {
 
     public static void register(IEventBus eventBus){
         FEATURES.register(eventBus);
+        MoreFeatures.LOGGER.info("Mod Features registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

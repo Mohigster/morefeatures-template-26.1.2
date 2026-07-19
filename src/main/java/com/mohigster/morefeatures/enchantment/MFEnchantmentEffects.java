@@ -14,6 +14,7 @@ public class MFEnchantmentEffects {
     public static final DeferredRegister<MapCodec<? extends EnchantmentEntityEffect>> ENTITY_ENCHANTMENT_EFFECTS =
             DeferredRegister.create(Registries.ENCHANTMENT_ENTITY_EFFECT_TYPE, MoreFeatures.MODID);
 
+    @SuppressWarnings("unused")
     public static final Supplier<MapCodec<? extends EnchantmentEntityEffect>> THUNDER =
             ENTITY_ENCHANTMENT_EFFECTS.register("thunder", () -> ThunderEnchantmentEffect.CODEC);
 
@@ -22,5 +23,6 @@ public class MFEnchantmentEffects {
 
     public static void register(IEventBus eventBus) {
         ENTITY_ENCHANTMENT_EFFECTS.register(eventBus);
+        MoreFeatures.LOGGER.info("Mod Enchantment Effects registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

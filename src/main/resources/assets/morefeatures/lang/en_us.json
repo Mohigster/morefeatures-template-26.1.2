@@ -42,6 +42,7 @@
   "block.morefeatures.fluorite_block": "Block of Fluorite",
   "block.morefeatures.fluorite_stairs": "Fluorite Stairs",
   "block.morefeatures.fluorite_slab": "Fluorite Slab",
+  "block.morefeatures.fluorite_vertical_slab": "Fluorite Vertical Slab",
   "item.morefeatures.raw_fluorite": "Raw Fluorite",
   "item.morefeatures.fluorite": "Fluorite",
   "block.morefeatures.fluorite_ore": "Fluorite Ore",
@@ -314,8 +315,8 @@
   "item.morefeatures.music_disc_snow_queen": "Music Disc",
   "jukebox_song.morefeatures.aquamarine": "Mohigster - Aquamarine",
   "jukebox_song.morefeatures.snow_queen": "Kevin MacLeod - The Snow Queen",
-  "sounds.morefeatures.aquamarine": "Aquamarine",
-  "sounds.morefeatures.snow_queen": "The Snow Queen",
+  "music.morefeatures.aquamarine": "Aquamarine",
+  "music.morefeatures.snow_queen": "The Snow Queen",
   "music.morefeatures.ice_caves": "Ice Caves Ambient Music",
 
   "sounds.morefeatures.magic_block_break": "Breaking Magic Block",

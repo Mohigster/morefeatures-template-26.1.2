@@ -18,12 +18,13 @@ public class MFCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MoreFeatures.MODID);
 
+    @SuppressWarnings("unused")
     public static final Supplier<CreativeModeTab> MOREFEATURES_ITEMS_TAB = CREATIVE_MODE_TABS.register("morefeatures_items_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(MFItems.RAW_ALUMINIUM.get()))
             .title(Component.translatable("creativetab.morefeatures.morefeatures_items"))
             .withTabsBefore(CreativeModeTabs.INGREDIENTS)
             .withTabsAfter(MFIdentifier.withMfNamespace("morefeatures_blocks_tab"))
-            .displayItems((itemDisplayParameters, output) -> {
+            .displayItems((_, output) -> {
 
                 // Aluminium items
                 output.accept(MFItems.RAW_ALUMINIUM);
@@ -58,10 +59,11 @@ public class MFCreativeModeTabs {
 
 
     // May subdivide this blocks tab into natural blocks, building blocks, etc. Depends on what I add and how big these tabs get.
+    @SuppressWarnings("unused")
     public static final Supplier<CreativeModeTab> MOREFEATURES_BLOCKS_TAB = CREATIVE_MODE_TABS.register("morefeatures_blocks_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(MFBlocks.ALUMINIUM_ORE.get()))
             .title(Component.translatable("creativetab.morefeatures.morefeatures_blocks"))
-            .displayItems((itemDisplayParameters, output) -> {
+            .displayItems((_, output) -> {
 
                 // Aluminium blocks
                 output.accept(MFBlocks.ALUMINIUM_BLOCK);
@@ -85,8 +87,11 @@ public class MFCreativeModeTabs {
                 output.accept(MFBlocks.AZURITE_STAIRS);
                 output.accept(MFBlocks.AZURITE_VERTICAL_SLAB);
                 output.accept(MFBlocks.AZURITE_SLAB);
+                output.accept(MFBlocks.AZURITE_FENCE);
+                output.accept(MFBlocks.AZURITE_FENCE_GATE);
                 output.accept(MFBlocks.AZURITE_PRESSURE_PLATE);
                 output.accept(MFBlocks.AZURITE_BUTTON);
+                output.accept(MFBlocks.AZURITE_SHELF);
                 output.accept(MFItems.AZURITE_SIGN); // I know it says MFItems, but it IS a block item. It's only registered there because it's shared by two blocks
                 output.accept(MFItems.AZURITE_HANGING_SIGN); // Same goes for hanging signs. Shared by Ceiling hanging sign and Wall hanging sign, so the sign item is registered in MFItems
                 output.accept(MFBlocks.RAW_AZURITE_BLOCK);
@@ -98,7 +103,13 @@ public class MFCreativeModeTabs {
                 // Fluorite blocks
                 output.accept(MFBlocks.FLUORITE_BLOCK);
                 output.accept(MFBlocks.FLUORITE_STAIRS);
+                output.accept(MFBlocks.FLUORITE_VERTICAL_SLAB);
                 output.accept(MFBlocks.FLUORITE_SLAB);
+                output.accept(MFBlocks.FLUORITE_FENCE);
+                output.accept(MFBlocks.FLUORITE_FENCE_GATE);
+                output.accept(MFBlocks.FLUORITE_PRESSURE_PLATE);
+                output.accept(MFBlocks.FLUORITE_BUTTON);
+                output.accept(MFBlocks.FLUORITE_SHELF);
                 output.accept(MFItems.FLUORITE_SIGN);
                 output.accept(MFItems.FLUORITE_HANGING_SIGN);
                 output.accept(MFBlocks.RAW_FLUORITE_BLOCK);
@@ -127,11 +138,12 @@ public class MFCreativeModeTabs {
             .build()
     );
 
+    @SuppressWarnings("unused")
     public static final Supplier<CreativeModeTab> MOREFEATURES_EQUIPMENT_TAB = CREATIVE_MODE_TABS.register("morefeatures_equipment_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(MFItems.BISMUTH_EQUIPMENT.getFirst().asItem())) // 0 is Sword
             .title(Component.translatable("creativetab.morefeatures.morefeatures_equipment"))
             .withTabsBefore(MFIdentifier.withMfNamespace("morefeatures_blocks_tab"))
-            .displayItems((itemDisplayParameters, output) -> {
+            .displayItems((_, output) -> {
 
                 // Carbon tools and equipment
 
@@ -168,11 +180,12 @@ public class MFCreativeModeTabs {
             .build()
     );
 
+    @SuppressWarnings("unused")
     public static final Supplier<CreativeModeTab> MOREFEATURES_WOOD_TAB = CREATIVE_MODE_TABS.register("morefeatures_wood_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(MFBlocks.BLOODWOOD_LOG))
             .title(Component.translatable("creativetab.morefeatures.morefeatures_wood"))
             .withTabsBefore(MFIdentifier.withMfNamespace("morefeatures_equipment_tab"))
-            .displayItems((itemDisplayParameters, output) -> {
+            .displayItems((_, output) -> {
 
                 // Bloodwood
 
@@ -283,5 +296,6 @@ public class MFCreativeModeTabs {
 
     public static void register(IEventBus eventBus){
         CREATIVE_MODE_TABS.register(eventBus);
+        MoreFeatures.LOGGER.info("Mod Creative Tabs registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

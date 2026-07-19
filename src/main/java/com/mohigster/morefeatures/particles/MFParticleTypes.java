@@ -45,5 +45,6 @@ public class MFParticleTypes {
 
     public static void register(IEventBus bus) {
         PARTICLES.register(bus);
+        MoreFeatures.LOGGER.info("Mod Particles registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

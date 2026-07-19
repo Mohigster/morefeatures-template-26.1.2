@@ -17,10 +17,10 @@ public class MFSoundsProvider extends SoundDefinitionsProvider {
 
         // Music disc
 
-        add(MFSounds.AQUAMARINE.get(), definition().subtitle("sounds.morefeatures.aquamarine")
+        add(MFSounds.AQUAMARINE.get(), definition().subtitle("music.morefeatures.aquamarine")
                 .with(sound(withMfNamespace("music/disc/aquamarine")).stream()));
 
-        add(MFSounds.SNOW_QUEEN.get(), definition().subtitle("sounds.morefeatures.snow_queen")
+        add(MFSounds.SNOW_QUEEN.get(), definition().subtitle("music.morefeatures.snow_queen")
                 .with(sound(withMfNamespace("music/disc/the_snow_queen")).stream()));
 
         add(MFSounds.MUSIC_BIOME_ICE_CAVES.get(), definition().subtitle("music.morefeatures.ice_caves")

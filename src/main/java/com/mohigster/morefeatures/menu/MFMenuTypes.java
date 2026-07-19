@@ -18,6 +18,7 @@ public class MFMenuTypes {
     public static final DeferredHolder<MenuType<?>, MenuType<CompressorMenu>> COMPRESSOR_MENU =
             registerMenuType("compressor_menu", CompressorMenu::new);
 
+    @SuppressWarnings("SameParameterValue")
     private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name,
                                                                                                                IContainerFactory<T> factory) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));
@@ -25,6 +26,7 @@ public class MFMenuTypes {
 
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);
+        MoreFeatures.LOGGER.info("Mod Menu Types -> Performed by: " + MoreFeatures.MODID);
     }
 }
 

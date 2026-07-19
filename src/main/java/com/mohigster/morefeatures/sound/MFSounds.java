@@ -51,5 +51,6 @@ public class MFSounds {
 
     public static void register(IEventBus eventBus) {
         SOUND_EVENTS.register(eventBus);
+        MoreFeatures.LOGGER.info("Mod Sounds registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

@@ -7,6 +7,8 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.block.WeatheringCopper;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 public class WeatheringCopperVerticalSlabBlock extends VerticalSlabBlock implements WeatheringCopper {
 
@@ -20,25 +22,28 @@ public class WeatheringCopperVerticalSlabBlock extends VerticalSlabBlock impleme
     private final WeatherState weatherState;
 
     public WeatheringCopperVerticalSlabBlock(WeatherState weatherState, Properties properties) {
-        super(false, properties); // Copper slabs are not flammable, so we hard code this value to false
+        super(false, properties); // Copper slabs are not flammable, so we always set this value to false
         this.weatherState = weatherState;
     }
 
+    @NullMarked
     @Override
     public MapCodec<WeatheringCopperVerticalSlabBlock> codec() {
         return CODEC;
     }
 
+    @NullMarked
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         this.changeOverTime(state, level, pos, random);
     }
 
     @Override
-    protected boolean isRandomlyTicking(BlockState state) {
+    protected boolean isRandomlyTicking(@NonNull BlockState state) {
         return this.weatherState != WeatherState.OXIDIZED;
     }
 
+    @NullMarked
     @Override
     public WeatheringCopper.WeatherState getAge() {
         return this.weatherState;

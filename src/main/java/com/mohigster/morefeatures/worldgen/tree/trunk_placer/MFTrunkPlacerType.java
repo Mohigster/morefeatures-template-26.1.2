@@ -8,6 +8,7 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+@SuppressWarnings("unused")
 public class MFTrunkPlacerType<P extends TrunkPlacer>{
 
     public static final DeferredRegister<TrunkPlacerType<?>> TRUNK_PLACER_TYPES =
@@ -18,5 +19,6 @@ public class MFTrunkPlacerType<P extends TrunkPlacer>{
 
     public static void register(IEventBus eventBus){
         TRUNK_PLACER_TYPES.register(eventBus);
+        MoreFeatures.LOGGER.info("Mod Trunk Placers registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

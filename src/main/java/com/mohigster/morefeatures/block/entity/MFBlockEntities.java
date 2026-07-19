@@ -70,5 +70,6 @@ public class MFBlockEntities {
 
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
+        MoreFeatures.LOGGER.info("Mod Block Entities registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

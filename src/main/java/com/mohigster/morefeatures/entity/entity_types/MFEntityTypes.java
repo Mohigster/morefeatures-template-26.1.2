@@ -139,5 +139,6 @@ public class MFEntityTypes {
 
     public static void register(IEventBus modEventBus) {
         ENTITY_TYPES.register(modEventBus);
+        MoreFeatures.LOGGER.info("Mod Entity Types registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

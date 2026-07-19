@@ -20,5 +20,6 @@ public class MFAttachments {
 
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);
+        MoreFeatures.LOGGER.info("Mod Attachments registered -> Performed by: " + MoreFeatures.MODID);
     }
 }

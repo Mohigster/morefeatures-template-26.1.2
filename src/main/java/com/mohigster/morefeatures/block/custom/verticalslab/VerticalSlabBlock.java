@@ -178,15 +178,15 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
         Direction d1 = getParallelFacing(n1);
         Direction d2 = getParallelFacing(n2);
 
-        if (d1 != null && d2 != null && d1 == d2) {
+        if (d2 != null && d1 == d2) {
             return d1;
         }
         return null;
     }
 
     private static Direction getParallelFacing(BlockState neighbor) {
-        if (!isVerticalSlab(neighbor)) return null;
-        return neighbor.getValue(TYPE).toDirection();
+        if (isVerticalSlab(neighbor)) return neighbor.getValue(TYPE).toDirection();
+        return null;
     }
 
     private static StairsShape getStairsShape(BlockState state, BlockGetter level, BlockPos pos) {
@@ -344,18 +344,24 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     @Override
-    public boolean canBeReplaced(BlockState state, BlockPlaceContext useContext) {
-        ItemStack held = useContext.getItemInHand();
+    public boolean canBeReplaced(BlockState state, BlockPlaceContext context) {
+        ItemStack held = context.getItemInHand();
         VerticalSlabType type = state.getValue(TYPE);
 
         if (type == VerticalSlabType.DOUBLE || !held.is(this.asItem())) {
             return false;
         }
 
-        if (useContext.replacingClickedOnBlock()) {
+        if (state.getValue(SHAPE) != StairsShape.STRAIGHT) {
+            if (context.getPlayer() == null || !context.getPlayer().isShiftKeyDown()) {
+                return false;
+            }
+        }
+
+        if (context.replacingClickedOnBlock()) {
             // Only allow combining when the player clicks the open face —
             // i.e. the side opposite to where the slab is sitting.
-            return useContext.getClickedFace() == type.toDirection().getOpposite();
+            return context.getClickedFace() == type.toDirection().getOpposite();
         }
 
         return true;
