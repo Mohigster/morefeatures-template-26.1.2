@@ -7,6 +7,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeType;
 
+@SuppressWarnings({"unused", "rawtypes"})
 public interface MFRecipeType extends RecipeType {
     RecipeType<CompressionRecipe> COMPRESSION = register("compression");
 

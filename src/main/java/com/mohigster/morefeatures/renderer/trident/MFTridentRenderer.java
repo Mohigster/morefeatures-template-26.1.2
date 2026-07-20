@@ -1,10 +1,10 @@
 package com.mohigster.morefeatures.renderer.trident;
 
-import com.mohigster.morefeatures.entity.model.BismuthTridentModel;
-import com.mohigster.morefeatures.model.MFModelLayer;
-import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.entity.model.MFTridentModel;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
+import com.mohigster.morefeatures.model.MFModelLayer;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.renderer.SubmitNodeCollector;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.ThrownTridentRenderer;
@@ -13,17 +13,21 @@ import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.client.renderer.state.level.CameraRenderState;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EntityType;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 
-public class BismuthTridentRenderer extends ThrownTridentRenderer {
-    public static final Identifier BISMUTH_TRIDENT_LOCATION = MFIdentifier.withMfNamespace("textures/entity/trident/bismuth_trident.png");
+public class MFTridentRenderer extends ThrownTridentRenderer {
+    private final MFTridentModel model;
+    private final ResourceKey<EntityType<?>> tridentKey;
 
-    private final BismuthTridentModel model;
-
-    public BismuthTridentRenderer(EntityRendererProvider.Context context) {
+    public MFTridentRenderer(EntityRendererProvider.Context context, ResourceKey<EntityType<?>> tridentKey, ModelLayerLocation layerToBake) {
         super(context);
-        this.model = new BismuthTridentModel(context.bakeLayer(MFModelLayer.BISMUTH_TRIDENT));
+        this.tridentKey = tridentKey;
+        this.model = new MFTridentModel(context.bakeLayer(layerToBake), MFTridentModel.getTexture(tridentKey));
     }
 
     @Override
@@ -31,13 +35,13 @@ public class BismuthTridentRenderer extends ThrownTridentRenderer {
             ThrownTridentRenderState state,
             PoseStack poseStack,
             SubmitNodeCollector submitNodeCollector,
-            CameraRenderState camera
+            @NonNull CameraRenderState camera
     ) {
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(state.xRot + 90.0F));
         submitNodeCollector.order(0)
-                .submitModel(this.model, Unit.INSTANCE, poseStack, BISMUTH_TRIDENT_LOCATION, state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+                .submitModel(this.model, Unit.INSTANCE, poseStack, MFTridentModel.getTexture(tridentKey), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
         if (state.isFoil) {
             submitNodeCollector.order(1)
                     .submitModel(
@@ -54,6 +58,7 @@ public class BismuthTridentRenderer extends ThrownTridentRenderer {
         poseStack.popPose();
     }
 
+    @NullMarked
     @Override
     public ThrownTridentRenderState createRenderState() {
         return new ThrownTridentRenderState();

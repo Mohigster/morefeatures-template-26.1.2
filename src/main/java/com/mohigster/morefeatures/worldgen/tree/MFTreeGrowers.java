@@ -41,6 +41,7 @@ public class MFTreeGrowers {
             MoreFeatures.MODID + "decrepit",
             Optional.of(MFConfiguredFeatures.DECREPIT_KEY), Optional.empty(), Optional.empty()
     );
+
     public static final TreeGrower PALLID = new TreeGrower(
             MoreFeatures.MODID + "decrepit",
             Optional.of(MFConfiguredFeatures.PALLID_KEY), Optional.empty(), Optional.empty()

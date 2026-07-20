@@ -1,12 +1,15 @@
-package com.mohigster.morefeatures.item.custom;
+package com.mohigster.morefeatures.item.custom.trident;
 
-import com.mohigster.morefeatures.entity.custom.projectile.trident.ThrownCarbonTrident;
+import com.mohigster.morefeatures.entity.custom.projectile.trident.ThrownMFTrident;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Position;
+import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EquipmentSlotGroup;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
@@ -14,6 +17,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TridentItem;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
@@ -23,32 +28,39 @@ import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 
-public class CarbonTridentItem extends TridentItem {
+public class MFTridentItem extends TridentItem {
+    private final EntityType<? extends  ThrownTrident> tridentEntity;
+    private final Identifier tridentId;
+
     public static final int THROW_THRESHOLD_TIME = 10;
     public static final float PROJECTILE_SHOOT_POWER = 2.5F;
 
-    public CarbonTridentItem(Properties properties) {
+    public MFTridentItem(Properties properties, EntityType<? extends ThrownTrident> tridentEntity, Identifier tridentId) {
         super(properties);
+        this.tridentEntity = tridentEntity;
+        this.tridentId = tridentId;
     }
 
     @NullMarked
     @Override
     public Projectile asProjectile(final Level level, final Position position, final ItemStack itemStack, final Direction direction) {
-        ThrownCarbonTrident carbonTrident = new ThrownCarbonTrident(level, position.x(), position.y(), position.z(), itemStack.copyWithCount(1));
-        carbonTrident.pickup = AbstractArrow.Pickup.ALLOWED;
-        return carbonTrident;
+        System.out.println(tridentId);
+
+        ThrownMFTrident trident = new ThrownMFTrident(level, position.x(), position.y(), position.z(), itemStack.copyWithCount(1), tridentEntity, tridentId);
+        trident.pickup = AbstractArrow.Pickup.ALLOWED;
+        return trident;
     }
 
-    @NullMarked
-    public static ItemAttributeModifiers createAttributes() {
+
+    public static ItemAttributeModifiers createAttributes(double damageAmount, double attackSpeedModifier) {
         return ItemAttributeModifiers.builder()
-                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, 9.0, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-                .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, -2.4F, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, damageAmount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, attackSpeedModifier, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .build();
     }
 
-    public static Tool createToolProperties() {
-        return new Tool(List.of(), 1.0F, 2, false);
+    public static Tool createToolProperties(int damagePerBlock) {
+        return new Tool(List.of(), 1.0F, damagePerBlock, false);
     }
 
     @NullMarked
@@ -68,22 +80,20 @@ public class CarbonTridentItem extends TridentItem {
                 // Hurt the item stack
                 stack.hurtWithoutBreaking(1, player);
 
-                // 2. Spawn your custom entity on the server
-                ThrownCarbonTrident carbonTrident = new ThrownCarbonTrident(level, player, stack);
-                carbonTrident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, PROJECTILE_SHOOT_POWER, 1.0F);
+                ThrownMFTrident trident = new ThrownMFTrident(level, player, stack, tridentEntity, tridentId);
+                trident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, PROJECTILE_SHOOT_POWER, 1.0F);
 
                 if (player.hasInfiniteMaterials()) {
-                    carbonTrident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
+                    trident.pickup = AbstractArrow.Pickup.CREATIVE_ONLY;
                 }
 
                 // Add to level
-                serverLevel.addFreshEntity(carbonTrident);
+                serverLevel.addFreshEntity(trident);
 
                 // Track stats
                 player.awardStat(Stats.ITEM_USED.get(this));
             }
 
-            // 3. Consume the item from the inventory if they aren't in creative
             if (!player.hasInfiniteMaterials()) {
                 stack.shrink(1);
             }

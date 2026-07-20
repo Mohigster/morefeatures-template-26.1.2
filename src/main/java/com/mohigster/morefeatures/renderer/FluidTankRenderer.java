@@ -111,7 +111,7 @@ public class FluidTankRenderer {
                 tooltip.add(amountString.withStyle(ChatFormatting.GRAY));
             }
         } catch (RuntimeException e) {
-            MoreFeatures.LOGGER.error("Failed to get tooltip for fluid: " + e);
+            MoreFeatures.LOGGER.error("Failed to get tooltip for fluid: {}", String.valueOf(e));
         }
 
         return tooltip;

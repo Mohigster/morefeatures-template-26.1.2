@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.entity.model;
 
+import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.references.MFIdentifier;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
@@ -10,14 +11,32 @@ import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Unit;
+import net.minecraft.world.entity.EntityType;
 
-public class CarbonTridentModel extends Model<Unit> {
+public class MFTridentModel extends Model<Unit> {
 
-    public static final Identifier TEXTURE = MFIdentifier.withMfNamespace("textures/entity/trident/carbon_trident.png");
+    private final Identifier texture;
 
-    public CarbonTridentModel(final ModelPart root) {
+    public MFTridentModel(final ModelPart root, Identifier textureLocation) {
         super(root, RenderTypes::entitySolid);
+        this.texture = textureLocation;
+    }
+
+    public Identifier getTexture(){
+        return this.texture;
+    }
+
+    // The entity key path is simply the trident e.g. the carbon trident is simply "carbon_trident"
+    // So, adding textures/entity/trident/ at the start and .png at the end gives the correct texture location
+    public static Identifier getTexture(ResourceKey<EntityType<?>> tridentEntityKey){
+        return tridentEntityKey.identifier().withPath("textures/entity/trident/" + tridentEntityKey.identifier().getPath() + ".png");
+    }
+
+    public static void printTextureLocation(ResourceKey<EntityType<?>> tridentEntityKey){
+        Identifier textureLocation = getTexture(tridentEntityKey);
+        MoreFeatures.LOGGER.debug("The correct location for custom trident texture: {}/{}", textureLocation.getNamespace(), textureLocation.getPath());
     }
 
     public static LayerDefinition createLayer() {

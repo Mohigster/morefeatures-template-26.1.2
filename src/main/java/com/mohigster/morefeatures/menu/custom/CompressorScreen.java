@@ -11,6 +11,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.entity.player.Inventory;
 import net.neoforged.neoforge.fluids.FluidStack;
+import org.jspecify.annotations.NonNull;
 
 public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
     private static final Identifier GUI_TEXTURE =
@@ -51,6 +52,7 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
         }
     }
 
+    @SuppressWarnings("SameParameterValue")
     private void renderFluidTooltipArea(GuiGraphicsExtractor guiGraphics, int pMouseX, int pMouseY, int x, int y,
                                         FluidStack stack, int offsetX, int offsetY, FluidTankRenderer renderer) {
         if(isMouseAboveArea(pMouseX, pMouseY, x, y, offsetX, offsetY, renderer)) {
@@ -59,7 +61,7 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
     }
 
     @Override
-    protected void extractLabels(GuiGraphicsExtractor graphics, int xm, int ym) {
+    protected void extractLabels(@NonNull GuiGraphicsExtractor graphics, int xm, int ym) {
         super.extractLabels(graphics, xm, ym);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;
@@ -69,7 +71,7 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
     }
 
     @Override
-    public void extractBackground(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
+    public void extractBackground(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractBackground(graphics, mouseX, mouseY, a);
         int x = (width - imageWidth) / 2;
         int y = (height - imageHeight) / 2;

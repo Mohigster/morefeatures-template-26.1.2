@@ -12,6 +12,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.neoforged.neoforge.transfer.item.ItemStacksResourceHandler;
 import net.neoforged.neoforge.transfer.item.ResourceHandlerSlot;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 public class CompressorMenu extends AbstractContainerMenu {
     public final CompressorBlockEntity blockEntity;
@@ -37,7 +39,7 @@ public class CompressorMenu extends AbstractContainerMenu {
         this.addSlot(new ResourceHandlerSlot(handler, handler::set,1, 54,  34));
         this.addSlot(new ResourceHandlerSlot(handler, handler::set,2, 104, 34) {
             @Override
-            public boolean mayPlace(ItemStack itemStack) {
+            public boolean mayPlace(@NonNull ItemStack itemStack) {
                 return false;
             }
         });
@@ -74,13 +76,14 @@ public class CompressorMenu extends AbstractContainerMenu {
     private static final int VANILLA_FIRST_SLOT_INDEX = 0;
     private static final int TE_INVENTORY_FIRST_SLOT_INDEX = VANILLA_FIRST_SLOT_INDEX + VANILLA_SLOT_COUNT;
 
-    // THIS YOU HAVE TO DEFINE!
+    // THIS MUST BE DEFINED!
     private static final int TE_INVENTORY_SLOT_COUNT = 4;  // must be the number of slots you have!
 
+    @NullMarked
     @Override
     public ItemStack quickMoveStack(Player playerIn, int pIndex) {
         Slot sourceSlot = slots.get(pIndex);
-        if (sourceSlot == null || !sourceSlot.hasItem()) return ItemStack.EMPTY;  //EMPTY_ITEM
+        if (!sourceSlot.hasItem()) return ItemStack.EMPTY;  // EMPTY_ITEM
         ItemStack sourceStack = sourceSlot.getItem();
         ItemStack copyOfSourceStack = sourceStack.copy();
 
@@ -111,7 +114,7 @@ public class CompressorMenu extends AbstractContainerMenu {
     }
 
     @Override
-    public boolean stillValid(Player pPlayer) {
+    public boolean stillValid(@NonNull Player pPlayer) {
         return stillValid(ContainerLevelAccess.create(level, blockEntity.getBlockPos()),
                 pPlayer, MFBlocks.COMPRESSOR_BLOCK.get());
     }

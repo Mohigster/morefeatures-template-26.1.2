@@ -23,6 +23,7 @@ public class MFModelLayer {
         return register(model, DEFAULT_LAYER);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static ModelLayerLocation register(final String model, final String layer) {
         ModelLayerLocation result = createLocation(model, layer);
         if (!ALL_MODELS.add(result)) {

@@ -21,14 +21,14 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BannerPatternLayers;
 import org.joml.Vector3f;
 import org.joml.Vector3fc;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Objects;
 import java.util.function.Consumer;
 
 public class CarbonShieldSpecialRenderer implements SpecialModelRenderer<DataComponentMap> {
-    public static final Transformation DEFAULT_TRANSFORMATION = new Transformation(null, null, new Vector3f(1.0F, -1.0F, -1.0F), null);
-
     public static final SpriteId CARBON_SHIELD_BASE = new SpriteId(Identifier.withDefaultNamespace("textures/atlas/shield_patterns.png"), MFIdentifier.withMfNamespace("entity/shield/carbon_shield_base"));
     public static final SpriteId CARBON_SHIELD_BASE_NO_PATTERN = new SpriteId(Identifier.withDefaultNamespace("textures/atlas/shield_patterns.png"), MFIdentifier.withMfNamespace("entity/shield/carbon_shield_base_nopattern"));
 
@@ -49,7 +49,7 @@ public class CarbonShieldSpecialRenderer implements SpecialModelRenderer<DataCom
     @Override
     public void submit(
             final @Nullable DataComponentMap components,
-            final PoseStack poseStack,
+            final @NonNull PoseStack poseStack,
             final SubmitNodeCollector submitNodeCollector,
             final int lightCoords,
             final int overlayCoords,
@@ -87,6 +87,8 @@ public class CarbonShieldSpecialRenderer implements SpecialModelRenderer<DataCom
 
         }
     }
+
+    @NullMarked
     @Override
     public void getExtents (Consumer < Vector3fc > output) {
         PoseStack poseStack = new PoseStack();
@@ -97,6 +99,7 @@ public class CarbonShieldSpecialRenderer implements SpecialModelRenderer<DataCom
         public static final CarbonShieldSpecialRenderer.Unbaked INSTANCE = new CarbonShieldSpecialRenderer.Unbaked();
         public static final MapCodec<CarbonShieldSpecialRenderer.Unbaked> MAP_CODEC = MapCodec.unit(INSTANCE);
 
+        @NullMarked
         @Override
         public MapCodec<CarbonShieldSpecialRenderer.Unbaked> type() {
             return MAP_CODEC;

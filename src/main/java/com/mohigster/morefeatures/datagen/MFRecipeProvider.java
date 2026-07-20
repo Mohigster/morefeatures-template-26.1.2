@@ -598,8 +598,8 @@ public class MFRecipeProvider extends RecipeProvider {
         bismuthSmithing(Items.NETHERITE_AXE, RecipeCategory.COMBAT, MFItems.BISMUTH_AXE.get());
         bismuthSmithing(Items.NETHERITE_SHOVEL, RecipeCategory.COMBAT, MFItems.BISMUTH_SHOVEL.get());
         bismuthSmithing(Items.NETHERITE_HOE, RecipeCategory.COMBAT, MFItems.BISMUTH_HOE.get());
-        bismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, MFItems.BISMUTH_EQUIPMENT.get(0).asItem());
-        bismuthSmithing(Items.NETHERITE_PICKAXE, RecipeCategory.COMBAT, MFItems.BISMUTH_EQUIPMENT.get(1).asItem());
+        bismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, MFItems.BISMUTH_EQUIPMENT.getFirst().asItem());
+        bismuthSmithing(Items.NETHERITE_PICKAXE, RecipeCategory.COMBAT, MFItems.BISMUTH_PICKAXE.get());
         bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, MFItems.BISMUTH_HELMET.get());
         bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, MFItems.BISMUTH_CHESTPLATE.get());
         bismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, MFItems.BISMUTH_LEGGINGS.get());
@@ -612,8 +612,6 @@ public class MFRecipeProvider extends RecipeProvider {
         List<ItemLike> AZURITE_SMELTABLES = List.of(MFItems.RAW_AZURITE, MFBlocks.AZURITE_ORE, MFBlocks.DEEPSLATE_AZURITE_ORE, MFBlocks.END_AZURITE_ORE, MFBlocks.NETHER_AZURITE_ORE);
         List<ItemLike> FLUORITE_SMELTABLES = List.of(MFItems.RAW_FLUORITE, MFBlocks.FLUORITE_ORE, MFBlocks.DEEPSLATE_FLUORITE_ORE, MFBlocks.NETHER_FLUORITE_ORE, MFBlocks.END_FLUORITE_ORE);
         List<ItemLike> BISMUTH_SMELTABLES = List.of(MFItems.RAW_BISMUTH, MFBlocks.BISMUTH_ORE);
-
-
 
         //——————————————————————SMELTING RECIPE DATA GENERATION——————————————————————
 

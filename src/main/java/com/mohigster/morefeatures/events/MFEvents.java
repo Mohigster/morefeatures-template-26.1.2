@@ -43,6 +43,7 @@ import net.neoforged.neoforge.event.tick.PlayerTickEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @EventBusSubscriber(modid = MoreFeatures.MODID)
@@ -92,7 +93,7 @@ public class MFEvents {
             return;
         }
 
-        if(!player.gameMode().isSurvival()) return;
+        if(!Objects.requireNonNull(player.gameMode()).isSurvival()) return;
 
         if (!player.isInWater()) {
             return;
@@ -263,7 +264,7 @@ public class MFEvents {
         // If the player already has a valid respawn config, nothing to do.
         if (player.getRespawnConfig() != null) return;
 
-        ServerLevel currentLevel = (ServerLevel) player.level();
+        ServerLevel currentLevel = player.level();
 
         if (VoidAnchorBlock.cannotSetSpawn(currentLevel)) return;
 

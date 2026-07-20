@@ -3,7 +3,6 @@ package com.mohigster.morefeatures.item.custom.wand;
 import com.mohigster.morefeatures.item.custom.wand.type.TargetingBlockWandItem;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.block.state.BlockState;

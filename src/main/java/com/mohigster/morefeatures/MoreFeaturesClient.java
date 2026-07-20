@@ -7,10 +7,10 @@ import com.mohigster.morefeatures.entity.model.IceologerModel;
 import com.mohigster.morefeatures.entity.model.BismuthTridentModel;
 import com.mohigster.morefeatures.particles.MFFallingLeavesParticle;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
+import com.mohigster.morefeatures.references.MFEntityTypeIds;
 import com.mohigster.morefeatures.references.MFIdentifier;
-import com.mohigster.morefeatures.renderer.trident.BismuthTridentRenderer;
-import com.mohigster.morefeatures.entity.model.CarbonTridentModel;
-import com.mohigster.morefeatures.renderer.trident.CarbonTridentRenderer;
+import com.mohigster.morefeatures.entity.model.MFTridentModel;
+import com.mohigster.morefeatures.renderer.trident.MFTridentRenderer;
 import com.mohigster.morefeatures.menu.MFMenuTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorScreen;
 import com.mohigster.morefeatures.model.MFModelLayer;
@@ -82,8 +82,8 @@ public class MoreFeaturesClient {
 
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
-        event.registerLayerDefinition(MFModelLayer.CARBON_TRIDENT, CarbonTridentModel::createLayer);
-        event.registerLayerDefinition(MFModelLayer.BISMUTH_TRIDENT, BismuthTridentModel::createLayer);
+        event.registerLayerDefinition(MFModelLayer.CARBON_TRIDENT, MFTridentModel::createLayer);
+        event.registerLayerDefinition(MFModelLayer.BISMUTH_TRIDENT, MFTridentModel::createLayer);
         event.registerLayerDefinition(MFModelLayer.BLOODWOOD_BOAT, BoatModel::createBoatModel);
         event.registerLayerDefinition(MFModelLayer.BLOODWOOD_CHEST_BOAT, BoatModel::createChestBoatModel);
         event.registerLayerDefinition(MFModelLayer.TAINTED_BOAT, BoatModel::createBoatModel);
@@ -95,9 +95,31 @@ public class MoreFeaturesClient {
 
     @SubscribeEvent
     public static void registerRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerEntityRenderer(MFEntityTypes.CARBON_TRIDENT.get(), CarbonTridentRenderer::new);
-        event.registerEntityRenderer(MFEntityTypes.BISMUTH_TRIDENT.get(), BismuthTridentRenderer::new);
-        event.registerEntityRenderer(MFEntityTypes.ICEOLOGER.get(), IceologerRenderer::new);
+        event.registerEntityRenderer(
+                MFEntityTypes.CARBON_TRIDENT.get(),
+                context -> new MFTridentRenderer(
+                        context,
+                        MFEntityTypeIds.CARBON_TRIDENT,
+                        MFModelLayer.CARBON_TRIDENT
+                )
+        );
+        event.registerEntityRenderer(
+                MFEntityTypes.BISMUTH_TRIDENT.get(),
+                context -> new MFTridentRenderer(
+                        context,
+                        MFEntityTypeIds.BISMUTH_TRIDENT,
+                        MFModelLayer.BISMUTH_TRIDENT
+                )
+        );
+
+        MFTridentModel.printTextureLocation(MFEntityTypeIds.CARBON_TRIDENT);
+        MFTridentModel.printTextureLocation(MFEntityTypeIds.BISMUTH_TRIDENT);
+
+        event.registerEntityRenderer(
+                MFEntityTypes.ICEOLOGER.get(),
+                IceologerRenderer::new
+        );
+
         event.registerEntityRenderer(
                 MFEntityTypes.BLOODWOOD_BOAT.get(),
                 context -> new BoatRenderer(
@@ -140,6 +162,7 @@ public class MoreFeaturesClient {
                         MFModelLayer.PALM_CHEST_BOAT
                 )
         );
+
         event.registerBlockEntityRenderer(
                 MFBlockEntities.MF_SIGN_BE.get(),
                 StandingSignRenderer::new

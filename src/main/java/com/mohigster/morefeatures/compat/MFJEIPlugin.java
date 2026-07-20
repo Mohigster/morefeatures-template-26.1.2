@@ -66,6 +66,7 @@ public class MFJEIPlugin implements IModPlugin {
             event.sendRecipes(
                     MFRecipes.COMPRESSOR_TYPE.get()
             );
+            MoreFeatures.LOGGER.info("Mod JEI Recipes synced! Performed by -> " + MoreFeatures.MODID);
         }
     }
 

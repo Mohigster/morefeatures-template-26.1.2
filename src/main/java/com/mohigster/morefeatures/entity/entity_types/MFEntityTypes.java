@@ -3,10 +3,10 @@ package com.mohigster.morefeatures.entity.entity_types;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.entity.custom.BrineEntity;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
-import com.mohigster.morefeatures.entity.custom.projectile.trident.ThrownBismuthTrident;
-import com.mohigster.morefeatures.entity.custom.projectile.trident.ThrownCarbonTrident;
+import com.mohigster.morefeatures.entity.custom.projectile.trident.ThrownMFTrident;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.references.MFItemIds;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.Entity;
@@ -24,11 +24,11 @@ public class MFEntityTypes {
     public static final DeferredRegister.Entities ENTITY_TYPES =
             DeferredRegister.createEntities(MoreFeatures.MODID);
 
-    public static final DeferredHolder<EntityType<?>, EntityType<ThrownCarbonTrident>> CARBON_TRIDENT =
-            ENTITY_TYPES.register("carbon_trident", () -> createTridentEntityType(ThrownCarbonTrident::new, "carbon_trident"));
+    public static final DeferredHolder<EntityType<?>, EntityType<ThrownMFTrident>> CARBON_TRIDENT =
+            ENTITY_TYPES.register("carbon_trident", () -> createTridentEntityType((type, level) -> new ThrownMFTrident(type, level, MFItemIds.CARBON_TRIDENT.identifier()), "carbon_trident"));
 
-    public static final DeferredHolder<EntityType<?>, EntityType<ThrownBismuthTrident>> BISMUTH_TRIDENT =
-            ENTITY_TYPES.register("bismuth_trident", () -> createTridentEntityType(ThrownBismuthTrident::new, "bismuth_trident"));
+    public static final DeferredHolder<EntityType<?>, EntityType<ThrownMFTrident>> BISMUTH_TRIDENT =
+            ENTITY_TYPES.register("bismuth_trident", () -> createTridentEntityType((type, level) -> new ThrownMFTrident(type, level, MFItemIds.BISMUTH_TRIDENT.identifier()), "bismuth_trident"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<BrineEntity>> BRINE =
             ENTITY_TYPES.register("brine", () -> createHostileEntityType(BrineEntity::new, 5, 15, 0.8F, 1.5F, 1.3F, "brine"));

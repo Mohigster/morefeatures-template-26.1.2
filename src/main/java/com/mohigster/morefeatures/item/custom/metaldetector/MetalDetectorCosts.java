@@ -1,17 +1,12 @@
 package com.mohigster.morefeatures.item.custom.metaldetector;
 
-import com.mojang.serialization.Codec;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.block.state.BlockState;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 

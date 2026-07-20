@@ -18,6 +18,7 @@ public class MFOrePlacementUtils {
         return orePlacement(PlacementUtils.countExtra(pCount, pChance, pExtra), pHeightRange);
     }
 
+    @SuppressWarnings("unused")
     public static List<PlacementModifier> rareOrePlacement(int pChance, PlacementModifier pHeightRange) {
         return orePlacement(RarityFilter.onAverageOnceEvery(pChance), pHeightRange);
     }

@@ -16,12 +16,14 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NullMarked;
 
 public class MetalDetectorItem extends Item {
     public MetalDetectorItem(Properties properties) {
         super(properties);
     }
 
+    @NullMarked
     @Override
     public InteractionResult useOn(UseOnContext context) {
         Level level = context.getLevel();
@@ -56,6 +58,7 @@ public class MetalDetectorItem extends Item {
             }
 
             if(!foundBlock){
+                assert player != null;
                 outputNoValuablesFound(player);
                 level.playSound(null, positionClicked,
                         SoundEvents.EGG_THROW, SoundSource.BLOCKS, 1.5f, 1f);

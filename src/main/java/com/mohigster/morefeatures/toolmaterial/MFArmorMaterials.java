@@ -2,7 +2,6 @@ package com.mohigster.morefeatures.toolmaterial;
 
 import com.google.common.collect.Maps;
 import com.mohigster.morefeatures.asset.MFEquipmentAssets;
-import com.mohigster.morefeatures.datagen.MFItemTagsProvider;
 import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mohigster.morefeatures.tag.MFItemTags;
 import net.minecraft.core.Registry;
@@ -28,6 +27,7 @@ public class MFArmorMaterials {
         return ResourceKey.create(ROOT_ID, MFIdentifier.withMfNamespace(name));
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static Map<ArmorType, Integer> makeDefense(int boots, int legs, int chest, int helm, int body) {
         return Maps.newEnumMap(Map.of(ArmorType.BOOTS, boots, ArmorType.LEGGINGS, legs, ArmorType.CHESTPLATE, chest, ArmorType.HELMET, helm, ArmorType.BODY, body));
     }

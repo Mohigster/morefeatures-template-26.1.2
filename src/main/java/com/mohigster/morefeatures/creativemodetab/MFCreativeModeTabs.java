@@ -155,8 +155,8 @@ public class MFCreativeModeTabs {
 
                 // Bismuth Tools
 
-                output.accept(MFItems.BISMUTH_EQUIPMENT.get(0).asItem());
-                output.accept(MFItems.BISMUTH_EQUIPMENT.get(1).asItem());
+                output.accept(MFItems.BISMUTH_EQUIPMENT.getFirst().asItem());
+                output.accept(MFItems.BISMUTH_PICKAXE);
                 output.accept(MFItems.BISMUTH_AXE);
                 output.accept(MFItems.BISMUTH_SHOVEL);
                 output.accept(MFItems.BISMUTH_HOE);

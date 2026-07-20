@@ -10,6 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecorator;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class TrunkLightDecorator extends TreeDecorator {
         this.blockProvider = blockProvider;
     }
 
+    @NullMarked
     @Override
     protected TreeDecoratorType<?> type() {
         return MFTreeDecorators.TRUNK_LIGHT.get();

@@ -13,6 +13,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.TreeConfigurati
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacer;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.OptionalInt;
@@ -27,11 +28,13 @@ public class LeaningTrunkPlacer extends TrunkPlacer {
         super(baseHeight, heightRandA, heightRandB);
     }
 
+    @NullMarked
     @Override
     protected TrunkPlacerType<?> type() {
         return MFTrunkPlacerType.LEANING_TRUNK_PLACER.get();
     }
 
+    @NullMarked
     @Override
     public List<FoliagePlacer.FoliageAttachment> placeTrunk(
             WorldGenLevel level,

@@ -24,6 +24,7 @@ public class EnergyDisplayTooltipArea {
     private final int height;
     private final EnergyHandler energy;
 
+    @SuppressWarnings("unused")
     public EnergyDisplayTooltipArea(int xMin, int yMin, EnergyHandler energy)  {
         this(xMin, yMin, energy,8,64);
     }

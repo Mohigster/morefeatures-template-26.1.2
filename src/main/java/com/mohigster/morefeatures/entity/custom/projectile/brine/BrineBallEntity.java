@@ -11,7 +11,9 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NonNull;
 
+@SuppressWarnings("unused")
 public class BrineBallEntity extends ThrowableProjectile {
     protected BrineBallEntity(EntityType<? extends ThrowableProjectile> type, Level level) {
         super(type, level);
@@ -21,8 +23,9 @@ public class BrineBallEntity extends ThrowableProjectile {
         super(EntityTypes.SNOWBALL, level); // Replace with your registered EntityType later
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    protected void onHitEntity(EntityHitResult result) {
+    protected void onHitEntity(@NonNull EntityHitResult result) {
         super.onHitEntity(result);
         if (!this.level().isClientSide() && result.getEntity() instanceof LivingEntity target) {
             // Deal damage
@@ -38,7 +41,7 @@ public class BrineBallEntity extends ThrowableProjectile {
     }
 
     @Override
-    protected void onHit(HitResult result) {
+    protected void onHit(@NonNull HitResult result) {
         super.onHit(result);
         if (!this.level().isClientSide()) {
             // Extinguish fire on hit, crack open like a splash potion

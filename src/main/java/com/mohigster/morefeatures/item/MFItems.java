@@ -4,6 +4,7 @@ import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.asset.MFEquipmentAssets;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorItem;
+import com.mohigster.morefeatures.item.custom.trident.MFTridentItem;
 import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
 import com.mohigster.morefeatures.references.MFItemIds;
 import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
@@ -27,7 +28,6 @@ import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.component.TooltipDisplay;
 import net.minecraft.world.item.component.Weapon;
-import net.minecraft.world.item.equipment.ArmorMaterial;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.bus.api.IEventBus;
@@ -114,51 +114,51 @@ public class MFItems {
     public static final DeferredItem<Item> RAW_EVERFROST = registerSimpleItem(MFItemIds.RAW_EVERFROST);
 
     // Elemental rods
-    public static final DeferredItem<Item> BRINE_ROD = ITEMS.registerSimpleItem("brine_rod");
+    public static final DeferredItem<Item> BRINE_ROD = registerSimpleItem(MFItemIds.BRINE_ROD);
 
     // Metal detector
     public static final DeferredItem<MetalDetectorItem> METAL_DETECTOR = registerMetalDetector(MFItemIds.METAL_DETECTOR, Component.translatable("tooltip.morefeatures.metal_detector"));
 
     // Frosted core
-    public static final DeferredItem<Item> FROSTED_CORE = ITEMS.registerSimpleItem("frosted_core");
+    public static final DeferredItem<Item> FROSTED_CORE = registerSimpleItem(MFItemIds.FROSTED_CORE);
 
     // Wands
-    public static final DeferredItem<Item> ICE_WAND = ITEMS.registerItem("ice_wand",
+    public static final DeferredItem<Item> ICE_WAND = registerItem(MFItemIds.ICE_WAND,
             properties -> new IceWandItem(properties
                     .durability(636)
                     .repairable(MFItems.FROSTED_CORE.get())
                     .rarity(Rarity.UNCOMMON)
             ));
 
-    public static final DeferredItem<Item> FIRE_WAND = ITEMS.registerItem("fire_wand",
+    public static final DeferredItem<Item> FIRE_WAND = registerItem(MFItemIds.FIRE_WAND,
             properties -> new FireWandItem(properties
                     .durability(636)
                     .repairable(Items.BLAZE_POWDER)
                     .rarity(Rarity.UNCOMMON)
             ));
 
-    public static final DeferredItem<Item> HEALING_WAND = ITEMS.registerItem("healing_wand",
+    public static final DeferredItem<Item> HEALING_WAND = registerItem(MFItemIds.HEALING_WAND,
             properties -> new HealingWandItem(properties
                     .durability(636)
                     .repairable(Items.GLISTERING_MELON_SLICE)
                     .rarity(Rarity.UNCOMMON)
             ));
 
-    public static final DeferredItem<Item> EARTH_WAND = ITEMS.registerItem("earth_wand",
+    public static final DeferredItem<Item> EARTH_WAND = registerItem(MFItemIds.EARTH_WAND,
             properties -> new EarthWandItem(properties
                     .durability(636)
                     .repairable(Items.DEEPSLATE)
                     .rarity(Rarity.UNCOMMON)
             ));
 
-    public static final DeferredItem<Item> LIGHTNING_WAND = ITEMS.registerItem("lightning_wand",
+    public static final DeferredItem<Item> LIGHTNING_WAND = registerItem(MFItemIds.LIGHTNING_WAND,
             properties -> new LightningWandItem(properties
                     .durability(636)
                     .repairable(Items.REDSTONE)
                     .rarity(Rarity.UNCOMMON)
             ));
 
-    public static final DeferredItem<Item> TIME_WAND = ITEMS.registerItem("time_wand",
+    public static final DeferredItem<Item> TIME_WAND = registerItem(MFItemIds.TIME_WAND,
             properties -> new TimeWandItem(properties
                     .durability(636)
                     .repairable(Items.CLOCK)
@@ -166,11 +166,10 @@ public class MFItems {
             ));
 
     // Spawn eggs
-    public static final DeferredItem<Item> ICEOLOGER_SPAWN_EGG = ITEMS.registerItem("iceologer_spawn_egg",
+    public static final DeferredItem<Item> ICEOLOGER_SPAWN_EGG = registerItem(MFItemIds.ICEOLOGER_SPAWN_EGG,
             properties -> new SpawnEggItem(properties
                     .spawnEgg(MFEntityTypes.ICEOLOGER.get())
             ));
-
 
     // Music Discs
 
@@ -237,16 +236,18 @@ public class MFItems {
                     )
             ));
 
-    public static final DeferredItem<Item> CARBON_TRIDENT = ITEMS.registerItem("carbon_trident",
-            properties -> new CarbonTridentItem(properties
+    public static final DeferredItem<Item> CARBON_TRIDENT = registerItem(MFItemIds.CARBON_TRIDENT,
+            properties -> new MFTridentItem(properties
                     .fireResistant()
                     .enchantable(15)
                     .durability(594)
                     .repairable(CARBON_FIBER.get())
-                    .attributes(CarbonTridentItem.createAttributes())
+                    .attributes(MFTridentItem.createAttributes(9.0D, -2.4D))
                     .rarity(Rarity.RARE)
-                    .component(DataComponents.TOOL, CarbonTridentItem.createToolProperties())
-                    .component(DataComponents.WEAPON, new Weapon(1))
+                    .component(DataComponents.TOOL, MFTridentItem.createToolProperties(2))
+                    .component(DataComponents.WEAPON, new Weapon(1)),
+                    MFEntityTypes.CARBON_TRIDENT.get(),
+                    MFItemIds.CARBON_TRIDENT.identifier()
             ));
 
     public static final DeferredItem<Item> CARBON_SHIELD = ITEMS.registerItem("carbon_shield",
@@ -313,6 +314,19 @@ public class MFItems {
                     .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
+    public static final DeferredItem<Item> BISMUTH_PICKAXE = registerItem(MFItemIds.BISMUTH_PICKAXE,
+            properties -> new Item(properties
+                    .pickaxe(
+                            BISMUTH_TOOL_MATERIAL,
+                            0F,
+                            -2.8F
+                    )
+                    .enchantable(15)
+                    .fireResistant()
+                    .rarity(Rarity.RARE)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+            ));
+
     public static final DeferredItem<Item> BISMUTH_AXE = registerItem(MFItemIds.BISMUTH_AXE,
             properties -> new AxeItem(BISMUTH_TOOL_MATERIAL, 6f, -3f, properties
                     .enchantable(15)
@@ -337,7 +351,7 @@ public class MFItems {
                     .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
-    public static final DeferredItem<Item> BISMUTH_SPEAR = ITEMS.registerItem("bismuth_spear",
+    public static final DeferredItem<Item> BISMUTH_SPEAR = registerItem(MFItemIds.BISMUTH_SPEAR,
             properties -> new Item(properties
                     .spear(
                             BISMUTH_TOOL_MATERIAL,
@@ -374,22 +388,24 @@ public class MFItems {
                     .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
-    public static final DeferredItem<Item> BISMUTH_NAUTILUS_ARMOR = ITEMS.registerItem("bismuth_nautilus_armor",
+    public static final DeferredItem<Item> BISMUTH_NAUTILUS_ARMOR = registerItem(MFItemIds.BISMUTH_NAUTILUS_ARMOR,
             properties -> new Item(properties
                     .nautilusArmor(MFArmorMaterials.BISMUTH)
                     .rarity(Rarity.RARE)
                     .fireResistant()
             ));
 
-    public static final DeferredItem<Item> BISMUTH_TRIDENT = ITEMS.registerItem("bismuth_trident",
-            properties -> new BismuthTridentItem(properties
+    public static final DeferredItem<Item> BISMUTH_TRIDENT = registerItem(MFItemIds.BISMUTH_TRIDENT,
+            properties -> new MFTridentItem(properties
                     .fireResistant()
                     .enchantable(15)
                     .durability(997)
-                    .attributes(BismuthTridentItem.createAttributes())
+                    .attributes(MFTridentItem.createAttributes(11.0D, 2.1D))
                     .rarity(Rarity.RARE)
-                    .component(DataComponents.TOOL, BismuthTridentItem.createToolProperties())
-                    .component(DataComponents.WEAPON, new Weapon(2))
+                    .component(DataComponents.TOOL, MFTridentItem.createToolProperties(3))
+                    .component(DataComponents.WEAPON, new Weapon(2)),
+                    MFEntityTypes.BISMUTH_TRIDENT.get(),
+                    MFItemIds.BISMUTH_TRIDENT.identifier()
             ));
 
     // Sign items
@@ -556,20 +572,18 @@ public class MFItems {
             props -> new BoatItem(MFEntityTypes.PALM_CHEST_BOAT.get(), props)
     );
 
-    public static final List<DeferredItem<Item>> BISMUTH_EQUIPMENT = registerEquipmentItems("bismuth", BISMUTH_TOOL_MATERIAL, MFArmorMaterials.BISMUTH,
-            new float[]{5.5f, -2.2f}, new float[]{0f, -2.8f},
+    public static final List<DeferredItem<Item>> BISMUTH_EQUIPMENT = registerEquipmentItems("bismuth", BISMUTH_TOOL_MATERIAL,
+            new float[]{5.5f, -2.2f},
             new Item.Properties().rarity(Rarity.RARE).fireResistant().enchantable(15)
     );
 
 
-    @SuppressWarnings("unused")
-    public static List<DeferredItem<Item>> registerEquipmentItems(String name, ToolMaterial toolmaterial, ArmorMaterial armormaterial,
-                                                            float[] swordattr, float[] pickaxeattr,
+    public static List<DeferredItem<Item>> registerEquipmentItems(String name, ToolMaterial toolmaterial,
+                                                            float[] swordattr,
                                                             Item.Properties itemProp) {
 
         return List.of(
-                registerItem(name + "_sword", (p) -> new Item(p.sword(toolmaterial, swordattr[0], swordattr[1])), itemProp),
-                registerItem(name + "_pickaxe", (p) -> new Item(p.pickaxe(toolmaterial, pickaxeattr[0], pickaxeattr[1])), itemProp)
+                registerItem(name + "_sword", (p) -> new Item(p.sword(toolmaterial, swordattr[0], swordattr[1])), itemProp)
         );
     }
 

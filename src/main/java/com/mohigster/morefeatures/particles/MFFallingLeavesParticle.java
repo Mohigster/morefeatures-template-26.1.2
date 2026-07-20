@@ -8,6 +8,7 @@ import net.minecraft.client.particle.SpriteSet;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.particles.SimpleParticleType;
 import net.minecraft.util.RandomSource;
+import org.jspecify.annotations.NullMarked;
 
 
 public class MFFallingLeavesParticle extends SingleQuadParticle {
@@ -58,6 +59,7 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
         this.swirlPeriod = Math.toRadians(1000.0F + particleRandom * 3000.0F);
     }
 
+    @NullMarked
     @Override
     public SingleQuadParticle.Layer getLayer() {
         return SingleQuadParticle.Layer.OPAQUE;
@@ -118,6 +120,7 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
             this.sprites = sprites;
         }
 
+        @NullMarked
         @Override
         public Particle createParticle(
                 SimpleParticleType type,
@@ -146,6 +149,7 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
             this.sprites = sprites;
         }
 
+        @NullMarked
         @Override
         public Particle createParticle(
                 SimpleParticleType type,
@@ -174,6 +178,7 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
             this.sprites = sprites;
         }
 
+        @NullMarked
         @Override
         public Particle createParticle(
                 SimpleParticleType type,

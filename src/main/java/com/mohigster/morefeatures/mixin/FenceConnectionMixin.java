@@ -1,6 +1,5 @@
 package com.mohigster.morefeatures.mixin;
 
-import com.mohigster.morefeatures.block.custom.MFFenceBlock;
 import com.mohigster.morefeatures.tag.MFBlockTags;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;

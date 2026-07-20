@@ -10,6 +10,8 @@ import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.levelgen.feature.configurations.TreeConfiguration;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacer;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 public class PalmFoliagePlacer extends FoliagePlacer {
     public static final MapCodec<PalmFoliagePlacer> CODEC = RecordCodecBuilder.mapCodec(
@@ -23,17 +25,20 @@ public class PalmFoliagePlacer extends FoliagePlacer {
         super(radius, offset);
     }
 
+    @NullMarked
     @Override
     protected FoliagePlacerType<?> type() {
         return MFFoliagePlacerType.PALM_FOLIAGE_PLACER.get();
     }
 
+    @NullMarked
     @Override
     public int foliageHeight(RandomSource random, int treeHeight, TreeConfiguration config) {
         // The crown is essentially flat with a slight droop; no additional height needed.
         return 0;
     }
 
+    @NullMarked
     @Override
     protected void createFoliage(
             WorldGenLevel level,
@@ -99,7 +104,7 @@ public class PalmFoliagePlacer extends FoliagePlacer {
      */
     @Override
     protected boolean shouldSkipLocation(
-            RandomSource random,
+            @NonNull RandomSource random,
             int dx, int y, int dz,
             int currentRadius,
             boolean doubleTrunk

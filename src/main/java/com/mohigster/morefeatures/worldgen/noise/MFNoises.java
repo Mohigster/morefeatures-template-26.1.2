@@ -10,6 +10,7 @@ public class MFNoises {
 
     public static final ResourceKey<NormalNoise.NoiseParameters> ICE_CAVE_GRADIENT = createKey("ice_cave_gradient");
 
+    @SuppressWarnings("SameParameterValue")
     private static ResourceKey<NormalNoise.NoiseParameters> createKey(String name){
         return ResourceKey.create(Registries.NOISE, MFIdentifier.withMfNamespace(name));
     }

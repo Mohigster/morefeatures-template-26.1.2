@@ -1,7 +1,6 @@
 package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.references.MFBlockItemIds;
 import com.mohigster.morefeatures.references.MFItemIds;
 import com.mohigster.morefeatures.item.MFItems;
@@ -13,7 +12,6 @@ import net.minecraft.data.tags.BlockItemTagsProvider;
 import net.minecraft.references.BlockItemIds;
 import net.minecraft.references.ItemIds;
 import net.minecraft.tags.ItemTags;
-import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.ItemTagsProvider;
 import org.jspecify.annotations.NonNull;
 
@@ -30,8 +28,8 @@ public class MFItemTagsProvider extends ItemTagsProvider {
         new MFBlockItemTagsProvider(tagId -> BlockItemTagsProvider.wrapForItems(this.tag(tagId.item()))).run();
 
         tag(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(0).getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(1).getKey())
+                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
+                .add(MFItemIds.BISMUTH_PICKAXE)
                 .add(MFItemIds.BISMUTH_AXE)
                 .add(MFItemIds.BISMUTH_HOE)
                 .add(MFItemIds.BISMUTH_SHOVEL)
@@ -187,37 +185,37 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItems.BISMUTH_HOE.getKey());
 
         tag(ItemTags.PICKAXES)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(1).getKey());
+                .add(MFItemIds.BISMUTH_PICKAXE);
 
         tag(ItemTags.SWORDS)
                 .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey());
 
         tag(ItemTags.SPEARS)
-                .add(MFItems.BISMUTH_SPEAR.getKey());
+                .add(MFItemIds.BISMUTH_SPEAR);
 
         tag(ItemTags.MELEE_WEAPON_ENCHANTABLE)
                 .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
-                .add(MFItems.BISMUTH_SPEAR.getKey())
-                .add(MFItems.BISMUTH_AXE.getKey());
+                .add(MFItemIds.BISMUTH_SPEAR)
+                .add(MFItemIds.BISMUTH_AXE);
 
         tag(ItemTags.SWEEPING_ENCHANTABLE)
                 .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey());
 
         tag(ItemTags.MINING_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(1).getKey())
-                .add(MFItems.BISMUTH_AXE.getKey())
-                .add(MFItems.BISMUTH_SHOVEL.getKey());
+                .add(MFItemIds.BISMUTH_PICKAXE)
+                .add(MFItemIds.BISMUTH_AXE)
+                .add(MFItemIds.BISMUTH_SHOVEL);
 
         tag(ItemTags.DURABILITY_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(0).getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.get(1).getKey())
-                .add(MFItems.BISMUTH_AXE.getKey())
-                .add(MFItems.BISMUTH_HOE.getKey())
-                .add(MFItems.BISMUTH_SHOVEL.getKey())
+                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
+                .add(MFItemIds.BISMUTH_PICKAXE)
+                .add(MFItemIds.BISMUTH_AXE)
+                .add(MFItemIds.BISMUTH_HOE)
+                .add(MFItemIds.BISMUTH_SHOVEL)
                 .add(MFItems.CARBON_CROSSBOW.getKey())
                 .add(MFItems.CARBON_BOW.getKey())
                 .add(MFItems.BISMUTH_BOW.getKey())
-                .add(MFItems.BISMUTH_SPEAR.getKey())
+                .add(MFItemIds.BISMUTH_SPEAR)
                 .add(MFItems.CARBON_ELYTRA.getKey())
                 .add(MFItemIds.BISMUTH_HELMET)
                 .add(MFItemIds.BISMUTH_CHESTPLATE)
@@ -228,17 +226,17 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItems.BISMUTH_SPEAR.getKey());
 
         tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(0).getKey())
+                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
                 .add(MFItemIds.BISMUTH_SPEAR)
                 .add(MFItemIds.BISMUTH_AXE);
 
         tag(ItemTags.WEAPON_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(0).getKey())
+                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
                 .add(MFItemIds.BISMUTH_SPEAR)
                 .add(MFItemIds.BISMUTH_AXE);
 
         tag(ItemTags.FIRE_ASPECT_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.get(0).getKey())
+                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
                 .add(MFItemIds.BISMUTH_SPEAR);
 
         tag(ItemTags.ARMOR_ENCHANTABLE)
@@ -391,7 +389,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
 
         tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)
                 .add(MFItems.CARBON_FIBER.getKey())
-                .add(MFItems.BISMUTH_SCRAP.getKey())
+                .add(MFItemIds.BISMUTH_SCRAP)
                 .add(MFBlockItemIds.RAW_BISMUTH_BLOCK.item())
                 .add(ItemIds.NETHERITE_SCRAP)
                 .add(ItemIds.NETHERITE_INGOT)

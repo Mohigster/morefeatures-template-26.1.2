@@ -45,7 +45,18 @@ public class MFItemIds {
     public static final ResourceKey<Item> PALM_BOAT = createId("palm_boat");
     public static final ResourceKey<Item> PALM_CHEST_BOAT = createId("palm_chest_boat");
 
+    public static final ResourceKey<Item> BRINE_ROD = createId("brine_rod");
     public static final ResourceKey<Item> CARBON_FIBER = createId("carbon_fiber");
+    public static final ResourceKey<Item> FROSTED_CORE = createId("frosted_core");
+
+    public static final ResourceKey<Item> ICEOLOGER_SPAWN_EGG = createId("iceologer_spawn_egg");
+
+    public static final ResourceKey<Item> ICE_WAND = createId("ice_wand");
+    public static final ResourceKey<Item> FIRE_WAND = createId("fire_wand");
+    public static final ResourceKey<Item> HEALING_WAND = createId("healing_wand");
+    public static final ResourceKey<Item> EARTH_WAND = createId("earth_wand");
+    public static final ResourceKey<Item> LIGHTNING_WAND = createId("lightning_wand");
+    public static final ResourceKey<Item> TIME_WAND = createId("time_wand");
 
     public static final ResourceKey<Item> RAW_BISMUTH = createId("raw_bismuth");
     public static final ResourceKey<Item> BISMUTH = createId("bismuth");
@@ -54,10 +65,15 @@ public class MFItemIds {
     public static final ResourceKey<Item> BISMUTH_CHESTPLATE = createId("bismuth_chestplate");
     public static final ResourceKey<Item> BISMUTH_LEGGINGS = createId("bismuth_leggings");
     public static final ResourceKey<Item> BISMUTH_BOOTS = createId("bismuth_boots");
+    public static final ResourceKey<Item> BISMUTH_NAUTILUS_ARMOR = createId("bismuth_nautilus_armor");
+    public static final ResourceKey<Item> BISMUTH_PICKAXE = createId("bismuth_pickaxe");
     public static final ResourceKey<Item> BISMUTH_AXE = createId("bismuth_axe");
     public static final ResourceKey<Item> BISMUTH_HOE = createId("bismuth_hoe");
     public static final ResourceKey<Item> BISMUTH_SHOVEL = createId("bismuth_shovel");
     public static final ResourceKey<Item> BISMUTH_SPEAR = createId("bismuth_spear");
+
+    public static final ResourceKey<Item> CARBON_TRIDENT = createId("carbon_trident");
+    public static final ResourceKey<Item> BISMUTH_TRIDENT = createId("bismuth_trident");
 
     public static final ResourceKey<Item> MUSIC_DISC_AQUAMARINE = createId("music_disc_aquamarine");
     public static final ResourceKey<Item> MUSIC_DISC_SNOW_QUEEN = createId("music_disc_snow_queen");

@@ -45,7 +45,7 @@ public class MFModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MFItems.FLUORITE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.BRINE_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(MFItems.BISMUTH_EQUIPMENT.get(0).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        itemModels.generateFlatItem(MFItems.BISMUTH_EQUIPMENT.get(1).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(MFItems.BISMUTH_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         MFItemModelGenerators.generateTrimmableItem(itemModels, MFItems.BISMUTH_HELMET.get(), MFEquipmentAssets.BISMUTH, ItemModelGenerators.TRIM_PREFIX_HELMET, false);
         MFItemModelGenerators.generateTrimmableItem(itemModels, MFItems.BISMUTH_CHESTPLATE.get(), MFEquipmentAssets.BISMUTH, ItemModelGenerators.TRIM_PREFIX_CHESTPLATE, false);
         MFItemModelGenerators.generateTrimmableItem(itemModels, MFItems.BISMUTH_LEGGINGS.get(), MFEquipmentAssets.BISMUTH, ItemModelGenerators.TRIM_PREFIX_LEGGINGS, false);

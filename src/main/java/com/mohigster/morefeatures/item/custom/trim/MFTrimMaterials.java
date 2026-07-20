@@ -1,12 +1,10 @@
 package com.mohigster.morefeatures.item.custom.trim;
 
-import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.references.MFIdentifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.Style;
-import net.minecraft.network.chat.TextColor;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;

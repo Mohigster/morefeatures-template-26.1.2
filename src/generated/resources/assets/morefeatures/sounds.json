@@ -6,7 +6,7 @@
         "stream": true
       }
     ],
-    "subtitle": "sounds.morefeatures.aquamarine"
+    "subtitle": "music.morefeatures.aquamarine"
   },
   "evil_block_break": {
     "sounds": [
@@ -88,6 +88,6 @@
         "stream": true
       }
     ],
-    "subtitle": "sounds.morefeatures.snow_queen"
+    "subtitle": "music.morefeatures.snow_queen"
   }
 }

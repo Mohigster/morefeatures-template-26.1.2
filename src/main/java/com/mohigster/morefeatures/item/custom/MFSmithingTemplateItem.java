@@ -16,6 +16,7 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 import java.util.function.Consumer;
 
+@SuppressWarnings("unused")
 public class MFSmithingTemplateItem extends Item {
     // This code is taken from vanilla and modified so that it displays the correct info.
     // This is necessary because vanilla Minecraft has hardcoded description values.
@@ -37,7 +38,7 @@ public class MFSmithingTemplateItem extends Item {
     private static final Component BISMUTH_UPGRADE_APPLIES_TO = Component.translatable(
             Util.makeDescriptionId("item", MFIdentifier.withMfNamespace("smithing_template.bismuth_upgrade.applies_to"))
     )
-            .withStyle(DESCRIPTION_FORMAT);;
+            .withStyle(DESCRIPTION_FORMAT);
     private static final Component BISMUTH_UPGRADE_INGREDIENTS = Component.translatable(
             Util.makeDescriptionId("item", MFIdentifier.withMfNamespace("smithing_template.bismuth_upgrade.ingredients"))
     )

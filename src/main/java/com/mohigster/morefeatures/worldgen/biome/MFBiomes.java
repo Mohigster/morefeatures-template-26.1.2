@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.worldgen.biome;
 
 import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.worldgen.biome.region.NetherRegion;
 import com.mohigster.morefeatures.worldgen.biome.region.OverworldRegion;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
@@ -15,6 +16,8 @@ public class MFBiomes {
 
     public static final ResourceKey<Biome> ICE_CAVES = registerBiomeKey("ice_caves");
 
+    public static final ResourceKey<Biome> CHARRED_FOREST = registerBiomeKey("charred_forest");
+
     public static final ResourceKey<Biome> END_ROT = registerBiomeKey("end_rot");
     public static final ResourceKey<Biome> DECREPIT_FOREST = registerBiomeKey("decrepit_forest");
     public static final ResourceKey<Biome> PALLID_FOREST = registerBiomeKey("pallid_forest");
@@ -22,6 +25,7 @@ public class MFBiomes {
     public static void registerBiomes() {
         // Register regions
         Regions.register(new OverworldRegion(MFIdentifier.withMfNamespace("overworld"), 30));
+        Regions.register(new NetherRegion(MFIdentifier.withMfNamespace("nether"), 50));
 
         // Separate EndBiomeRegistry, as end biomes work differently to overworld ones.
         EndBiomeRegistry.registerHighlandsBiome(END_ROT, 10);
@@ -41,6 +45,10 @@ public class MFBiomes {
         // Underground Overworld Biomes
 
         register(context, ICE_CAVES, MFOverworldBiomes.iceCave(placedFeatures, carver));
+
+        // Nether Biomes
+
+        register(context, CHARRED_FOREST, MFNetherBiomes.charredForest(placedFeatures, carver));
 
         // End Biomes
 
