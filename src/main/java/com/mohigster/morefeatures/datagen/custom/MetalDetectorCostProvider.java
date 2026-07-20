@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.datagen.custom;
 
+import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.item.custom.metaldetector.DetectorCostEntry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.CachedOutput;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("unused")
 public abstract class MetalDetectorCostProvider implements DataProvider {
     private final PackOutput output;
     private final CompletableFuture<HolderLookup.Provider> registries;
@@ -26,6 +28,12 @@ public abstract class MetalDetectorCostProvider implements DataProvider {
         this.output = output;
         this.registries = registries;
         this.modId = modId;
+    }
+
+    protected MetalDetectorCostProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+        this.output = output;
+        this.registries = registries;
+        this.modId = MoreFeatures.MODID;
     }
 
     protected abstract void generate();

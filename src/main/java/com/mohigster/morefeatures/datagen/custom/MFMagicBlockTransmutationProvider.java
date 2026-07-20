@@ -1,19 +1,17 @@
 package com.mohigster.morefeatures.datagen.custom;
 
-import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.tag.MFItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
 
 public class MFMagicBlockTransmutationProvider extends MagicBlockTransmutationProvider{
     public MFMagicBlockTransmutationProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, MoreFeatures.MODID);
+        super(output, registries);
     }
 
     @Override

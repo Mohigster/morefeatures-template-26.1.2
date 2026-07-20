@@ -6,6 +6,7 @@ import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.Map;
@@ -19,6 +20,7 @@ public class MetalDetectorCosts extends SimpleJsonResourceReloadListener<Detecto
         super(DetectorCostEntry.CODEC, FileToIdConverter.json("metal_detector_costs"));
     }
 
+    @NullMarked
     @Override
     protected void apply(Map<Identifier, DetectorCostEntry> map, ResourceManager resourceManager, ProfilerFiller profiler) {
         this.entries = map.values().stream()

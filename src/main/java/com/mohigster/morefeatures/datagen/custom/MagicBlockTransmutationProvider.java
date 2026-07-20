@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.datagen.custom;
 
+import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.custom.magicblock.TransmutationEntry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
 
+@SuppressWarnings("unused")
 public abstract class MagicBlockTransmutationProvider implements DataProvider {
     private final PackOutput output;
     private final CompletableFuture<HolderLookup.Provider> registries;
@@ -34,26 +36,35 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
         this.modId = modId;
     }
 
+    protected MagicBlockTransmutationProvider(
+            PackOutput output,
+            CompletableFuture<HolderLookup.Provider> registries
+    ) {
+        this.output = output;
+        this.registries = registries;
+        this.modId = MoreFeatures.MODID;
+    }
+
     protected abstract void generate();
 
     protected void add(TagKey<Item> inputTag, Item output) {
-        add(inputTag, output, false);
+        this.add(inputTag, output, false);
     }
 
     protected void add(String transmutationName, TagKey<Item> inputTag, Item output) {
-        add(transmutationName, inputTag, output, false);
+        this.add(transmutationName, inputTag, output, false);
     }
 
     protected void add(TagKey<Item> inputTag, Item output, boolean copyComponents) {
         String itemName = BuiltInRegistries.ITEM.getKey(output).getPath();
 
-        add(itemName, inputTag, output, copyComponents);
+        this.add(itemName, inputTag, output, copyComponents);
     }
 
     protected void add(String transmutationName, TagKey<Item> inputTag, Item output, boolean copyComponents) {
         String descriptionId = transmutationName + "_from_magic_block";
 
-        add(Identifier.fromNamespaceAndPath(modId, descriptionId), inputTag, output, copyComponents);
+        this.add(Identifier.fromNamespaceAndPath(modId, descriptionId), inputTag, output, copyComponents);
     }
 
     protected void add(Identifier id, TagKey<Item> inputTag, Item output, boolean copyComponents) {

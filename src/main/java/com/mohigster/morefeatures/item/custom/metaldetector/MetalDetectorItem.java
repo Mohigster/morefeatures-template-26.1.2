@@ -44,7 +44,7 @@ public class MetalDetectorItem extends Item {
                     // Calculate damage cost based on data-driven costs (defaults to 1 if a cost is not defined)
                     int damageCost = this.getCost(blockState);
 
-                    MoreFeatures.LOGGER.debug("damageCost: " + damageCost);
+                    MoreFeatures.LOGGER.debug("damageCost: {}", damageCost);
 
                     context.getItemInHand().hurtAndBreak(damageCost, player, context.getHand());
 

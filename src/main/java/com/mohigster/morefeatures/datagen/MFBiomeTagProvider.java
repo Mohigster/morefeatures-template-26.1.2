@@ -31,6 +31,14 @@ public class MFBiomeTagProvider extends TagsProvider<Biome> {
                 .addOptional(MFBiomes.DECREPIT_FOREST)
                 .addOptional(MFBiomes.PALLID_FOREST);
 
+        tag(BiomeTags.IS_NETHER)
+                .addOptional(MFBiomes.CHARRED_FOREST);
+
+        tag(MFBiomeTags.NETHER_FOREST)
+                .addOptional(MFBiomes.CHARRED_FOREST)
+                .addOptional(Biomes.WARPED_FOREST)
+                .addOptional(Biomes.CRIMSON_FOREST);
+
         tag(MFBiomeTags.EVIL_FOREST)
                 .addOptional(MFBiomes.BLOODWOOD_FOREST)
                 .addOptional(MFBiomes.TAINTED_FOREST);

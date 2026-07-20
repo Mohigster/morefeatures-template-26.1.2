@@ -2,12 +2,8 @@ package com.mohigster.morefeatures.block.custom.magicblock;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.tag.MFItemTags;
-import com.mojang.serialization.Codec;
-import net.minecraft.core.HolderLookup;
-import net.minecraft.core.Registry;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.packs.resources.ResourceManager;
 import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
 import net.minecraft.util.profiling.ProfilerFiller;
@@ -37,15 +33,14 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
         this.rawEntries = List.copyOf(map.values());
     }
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings({"deprecation", "unused"})
     public void onTagsUpdated(TagsUpdatedEvent event) {
         List<TransmutationEntry> validEntries = new ArrayList<>();
 
         for (TransmutationEntry entry : rawEntries) {
             if (!entry.output().builtInRegistryHolder().is(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)) {
                 MoreFeatures.LOGGER.warn(
-                        "Skipping magic block transmutation: output item '{}' is not in the '{}' tag. " +
-                                "Add it to that tag if this transmutation should be allowed.",
+                        "Skipping magic block transmutation: output item '{}' is not in the '{}' tag. Add it to that tag if this transmutation should be allowed.",
                         entry.output(),
                         MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS.location()
                 );
