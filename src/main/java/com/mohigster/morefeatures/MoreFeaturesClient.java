@@ -4,7 +4,6 @@ import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
 import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
 import com.mohigster.morefeatures.entity.model.IceologerModel;
-import com.mohigster.morefeatures.entity.model.BismuthTridentModel;
 import com.mohigster.morefeatures.particles.MFFallingLeavesParticle;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
 import com.mohigster.morefeatures.references.MFEntityTypeIds;

@@ -10,6 +10,7 @@ import net.minecraft.world.entity.EntityTypes;
 import net.minecraft.world.item.enchantment.EnchantedItemInUse;
 import net.minecraft.world.item.enchantment.effects.EnchantmentEntityEffect;
 import net.minecraft.world.phys.Vec3;
+import org.jspecify.annotations.NullMarked;
 
 public record ThunderEnchantmentEffect(int level) implements EnchantmentEntityEffect {
     public static final MapCodec<ThunderEnchantmentEffect> CODEC = RecordCodecBuilder.mapCodec(instance ->
@@ -17,6 +18,7 @@ public record ThunderEnchantmentEffect(int level) implements EnchantmentEntityEf
                     Codec.INT.fieldOf("level").forGetter(ThunderEnchantmentEffect::level)
             ).apply(instance, ThunderEnchantmentEffect::new));
 
+    @NullMarked
     @Override
     public void apply(ServerLevel serverLevel, int enchantmentLevel, EnchantedItemInUse enchantedItemInUse, Entity entity, Vec3 vec3) {
         if(enchantmentLevel == 1) {
@@ -29,6 +31,7 @@ public record ThunderEnchantmentEffect(int level) implements EnchantmentEntityEf
         }
     }
 
+    @NullMarked
     @Override
     public MapCodec<? extends EnchantmentEntityEffect> codec() {
         return CODEC;

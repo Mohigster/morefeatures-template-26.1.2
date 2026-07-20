@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.util;
 
+@SuppressWarnings("unused")
 public class MouseUtil {
     public static boolean isMouseOver(double mouseX, double mouseY, int x, int y) {
         return isMouseOver(mouseX, mouseY, x, y, 16);

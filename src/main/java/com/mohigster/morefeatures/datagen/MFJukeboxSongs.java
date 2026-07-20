@@ -25,6 +25,7 @@ public class MFJukeboxSongs {
         return ResourceKey.create(Registries.JUKEBOX_SONG, MFIdentifier.withMfNamespace(name));
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static void register(BootstrapContext<JukeboxSong> context, ResourceKey<JukeboxSong> registryKey,
                                  final Holder.Reference<SoundEvent> soundEvent, int lengthInSeconds, int comparatorOutput) {
         context.register(registryKey, new JukeboxSong(soundEvent,

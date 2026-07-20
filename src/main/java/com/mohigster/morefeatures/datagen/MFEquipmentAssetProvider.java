@@ -54,6 +54,7 @@ public class MFEquipmentAssetProvider implements DataProvider {
         return "More Features Equipment Definitions";
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static EquipmentClientInfo.Layer createLayer(String name){
         return new EquipmentClientInfo.Layer(MFIdentifier.withMfNamespace(name));
     }

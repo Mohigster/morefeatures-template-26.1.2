@@ -1675,6 +1675,7 @@ public class MFBlocks {
         return block;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static WeatheringCopperCollection<DeferredBlock<Block>> registerCopperBlockSet(
             WeatheringCopperCollection<BlockItemId> ids,
             BiFunction<WeatheringCopper.WeatherState, Properties, ? extends Block> weatheringFactory,
@@ -1716,6 +1717,7 @@ public class MFBlocks {
         );
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static ColorCollection<DeferredBlock<Block>> registerColouredBlockSet(
             ColorCollection<BlockItemId> ids,
             BiFunction<DyeColor, Properties, ? extends Block> factory,

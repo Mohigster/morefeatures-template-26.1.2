@@ -23,6 +23,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.material.Fluids;
 import net.neoforged.neoforge.fluids.FluidStack;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -40,11 +42,13 @@ public class CompressionRecipeCategory implements IRecipeCategory<RecipeHolder<C
         fluidRenderer = new FluidTankRenderer(16000, FluidTankRenderer.TooltipMode.SHOW_AMOUNT, 16, 50);
     }
 
+    @NullMarked
     @Override
     public IRecipeType<RecipeHolder<CompressionRecipe>> getRecipeType() {
         return MFJEIRecipeTypes.COMPRESSION;
     }
 
+    @NullMarked
     @Override
     public Component getTitle() {
         return Component.translatable("block.morefeatures.compressor");
@@ -66,12 +70,13 @@ public class CompressionRecipeCategory implements IRecipeCategory<RecipeHolder<C
     }
 
     @Override
-    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<CompressionRecipe> recipe, IFocusGroup focuses) {
+    public void setRecipe(IRecipeLayoutBuilder builder, RecipeHolder<CompressionRecipe> recipe, @NonNull IFocusGroup focuses) {
         builder.addSlot(RecipeIngredientRole.INPUT, 54, 34).add(recipe.value().inputItem());
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 104, 34).add(recipe.value().output());
     }
 
+    @NullMarked
     @Override
     public void draw(RecipeHolder<CompressionRecipe> recipe, IRecipeSlotsView recipeSlotsView, GuiGraphicsExtractor guiGraphics, double mouseX, double mouseY) {
         this.overlay.draw(guiGraphics, 0, 0);

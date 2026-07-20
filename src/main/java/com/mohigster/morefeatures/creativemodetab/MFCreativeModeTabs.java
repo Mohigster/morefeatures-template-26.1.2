@@ -14,11 +14,11 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Supplier;
 
+@SuppressWarnings("unused")
 public class MFCreativeModeTabs {
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
             DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MoreFeatures.MODID);
 
-    @SuppressWarnings("unused")
     public static final Supplier<CreativeModeTab> MOREFEATURES_ITEMS_TAB = CREATIVE_MODE_TABS.register("morefeatures_items_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(MFItems.RAW_ALUMINIUM.get()))
             .title(Component.translatable("creativetab.morefeatures.morefeatures_items"))
@@ -59,7 +59,6 @@ public class MFCreativeModeTabs {
 
 
     // May subdivide this blocks tab into natural blocks, building blocks, etc. Depends on what I add and how big these tabs get.
-    @SuppressWarnings("unused")
     public static final Supplier<CreativeModeTab> MOREFEATURES_BLOCKS_TAB = CREATIVE_MODE_TABS.register("morefeatures_blocks_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(MFBlocks.ALUMINIUM_ORE.get()))
             .title(Component.translatable("creativetab.morefeatures.morefeatures_blocks"))
@@ -138,7 +137,6 @@ public class MFCreativeModeTabs {
             .build()
     );
 
-    @SuppressWarnings("unused")
     public static final Supplier<CreativeModeTab> MOREFEATURES_EQUIPMENT_TAB = CREATIVE_MODE_TABS.register("morefeatures_equipment_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(MFItems.BISMUTH_EQUIPMENT.getFirst().asItem())) // 0 is Sword
             .title(Component.translatable("creativetab.morefeatures.morefeatures_equipment"))
@@ -180,7 +178,6 @@ public class MFCreativeModeTabs {
             .build()
     );
 
-    @SuppressWarnings("unused")
     public static final Supplier<CreativeModeTab> MOREFEATURES_WOOD_TAB = CREATIVE_MODE_TABS.register("morefeatures_wood_tab", () -> CreativeModeTab.builder()
             .icon(() -> new ItemStack(MFBlocks.BLOODWOOD_LOG))
             .title(Component.translatable("creativetab.morefeatures.morefeatures_wood"))

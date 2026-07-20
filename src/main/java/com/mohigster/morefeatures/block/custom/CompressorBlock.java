@@ -29,8 +29,10 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
 import net.minecraft.world.level.material.FluidState;
 import net.minecraft.world.phys.BlockHitResult;
+import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
+@SuppressWarnings("unused")
 public class CompressorBlock extends BaseEntityBlock {
 
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
@@ -52,16 +54,19 @@ public class CompressorBlock extends BaseEntityBlock {
         builder.add(FACING, LIT);
     }
 
+    @NullMarked
     @Override
     protected MapCodec<? extends BaseEntityBlock> codec() {
         return CODEC;
     }
 
+    @NullMarked
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos worldPosition, BlockState blockState) {
         return new CompressorBlockEntity(worldPosition, blockState);
     }
 
+    @NullMarked
     @Override
     public boolean onDestroyedByPlayer(BlockState state, Level level, BlockPos pos, Player player, ItemStack toolStack, boolean willHarvest, FluidState fluid) {
         BlockEntity blockEntity = level.getBlockEntity(pos);
@@ -71,6 +76,7 @@ public class CompressorBlock extends BaseEntityBlock {
         return super.onDestroyedByPlayer(state, level, pos, player, toolStack, willHarvest, fluid);
     }
 
+    @NullMarked
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
         if (!level.isClientSide()) {
@@ -84,6 +90,7 @@ public class CompressorBlock extends BaseEntityBlock {
         return InteractionResult.SUCCESS;
     }
 
+    @NullMarked
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState blockState, BlockEntityType<T> type) {
         if(level.isClientSide()) {
@@ -94,6 +101,7 @@ public class CompressorBlock extends BaseEntityBlock {
                 entity.tick(level1, pos, state));
     }
 
+    @NullMarked
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (!state.getValue(LIT)) {

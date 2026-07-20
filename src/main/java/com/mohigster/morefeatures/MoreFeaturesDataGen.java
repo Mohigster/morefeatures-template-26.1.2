@@ -33,7 +33,10 @@ public class MoreFeaturesDataGen {
         generator.addProvider(true, new LootTableProvider(packOutput, Collections.emptySet(),
                 List.of(
                         new LootTableProvider.SubProviderEntry(MFBlockLootTableProvider::new, LootContextParamSets.BLOCK),
-                        new LootTableProvider.SubProviderEntry(MFEntityLootTableProvider::new, LootContextParamSets.ENTITY)), lookupProvider));
+                        new LootTableProvider.SubProviderEntry(MFEntityLootTableProvider::new, LootContextParamSets.ENTITY)
+                ),
+                lookupProvider)
+        );
         generator.addProvider(true, new MFRecipeProvider.Runner(packOutput, lookupProvider));
         generator.addProvider(true, new MFDatapackProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFSoundsProvider(packOutput));

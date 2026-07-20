@@ -22,25 +22,21 @@ import net.minecraft.world.entity.monster.Monster;
 import net.minecraft.world.entity.monster.illager.AbstractIllager;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.NullMarked;
 
 public class IceologerEntity extends AbstractIllager {
     public IceologerEntity(EntityType<? extends AbstractIllager> type, Level level) {
         super(type, level);
     }
 
-    private IceologerConjureIceGoal iceAttackGoal;
-    private IceologerIcicleRainGoal icicleRainGoal;
-
     private int attackCooldown = 40; // Ticks before the first attack can occur
     private boolean useIcicleRainNext = false;
 
     @Override
     protected void registerGoals() {
-        this.iceAttackGoal = new IceologerConjureIceGoal(this);
-        this.icicleRainGoal = new IceologerIcicleRainGoal(this);
-
-        this.goalSelector.addGoal(2, iceAttackGoal);
-        this.goalSelector.addGoal(2, icicleRainGoal);
+        this.goalSelector.addGoal(2, new IceologerConjureIceGoal(this));
+        this.goalSelector.addGoal(2, new IceologerIcicleRainGoal(this));
         this.goalSelector.addGoal(1, new FloatGoal(this));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 8.0F));
         this.goalSelector.addGoal(6, new RandomLookAroundGoal(this));
@@ -57,7 +53,7 @@ public class IceologerEntity extends AbstractIllager {
             SynchedEntityData.defineId(IceologerEntity.class, EntityDataSerializers.BOOLEAN);
 
     @Override
-    protected void defineSynchedData(SynchedEntityData.Builder builder) {
+    protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
         super.defineSynchedData(builder);
         builder.define(DATA_IS_CASTING_SPELL, false);
         builder.define(IS_CELEBRATING, false);
@@ -76,6 +72,7 @@ public class IceologerEntity extends AbstractIllager {
         return false;
     }
 
+    @NullMarked
     @Override
     public IllagerArmPose getArmPose(){
         if (isCastingSpell()) {
@@ -93,6 +90,7 @@ public class IceologerEntity extends AbstractIllager {
         this.entityData.set(IS_CELEBRATING, celebrating);
     }
 
+    @NullMarked
     @Override
     public void applyRaidBuffs(ServerLevel serverLevel, int i, boolean b) {
 
@@ -103,16 +101,19 @@ public class IceologerEntity extends AbstractIllager {
         return SoundEvents.EVOKER_AMBIENT;
     }
 
+    @NullMarked
     @Override
     protected SoundEvent getDeathSound() {
         return SoundEvents.EVOKER_DEATH;
     }
 
+    @NullMarked
     @Override
     protected SoundEvent getHurtSound(final DamageSource source) {
         return SoundEvents.EVOKER_HURT;
     }
 
+    @NullMarked
     @Override
     public SoundEvent getCelebrateSound() {
         return SoundEvents.EVOKER_CELEBRATE;
@@ -126,6 +127,7 @@ public class IceologerEntity extends AbstractIllager {
                 .add(Attributes.FOLLOW_RANGE,12.0D);
     }
 
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isAttackOnCooldown() {
         return this.attackCooldown > 0;
     }

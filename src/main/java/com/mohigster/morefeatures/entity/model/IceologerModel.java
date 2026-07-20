@@ -9,7 +9,9 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.monster.illager.AbstractIllager;
+import org.jspecify.annotations.NonNull;
 
+@SuppressWarnings({"unused", "FieldCanBeLocal"})
 public class IceologerModel extends EntityModel<IceologerRenderState> {
 	public static final ModelLayerLocation LAYER_LOCATION = new ModelLayerLocation(
 			MFIdentifier.withMfNamespace("iceologer"), "main"
@@ -111,7 +113,7 @@ public class IceologerModel extends EntityModel<IceologerRenderState> {
 	}
 
 	@Override
-	public void setupAnim(IceologerRenderState renderState) {
+	public void setupAnim(@NonNull IceologerRenderState renderState) {
 		super.setupAnim(renderState);
 		float animationSpeed = renderState.walkAnimationSpeed;
 		float animationPos = renderState.walkAnimationPos;

@@ -8,7 +8,6 @@ import com.mohigster.morefeatures.tag.MFItemTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.*;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
@@ -793,6 +792,7 @@ public class MFRecipeProvider extends RecipeProvider {
     }
 
 
+    @NullMarked
     @Override
     protected <T extends AbstractCookingRecipe> void oreCooking(AbstractCookingRecipe.Factory<T> factory, List<ItemLike> smeltables,
                                                                 RecipeCategory craftingCategory, CookingBookCategory cookingCategory, ItemLike result,
@@ -803,7 +803,7 @@ public class MFRecipeProvider extends RecipeProvider {
         }
     }
 
-
+    @SuppressWarnings("SameParameterValue")
     protected void bismuthSmithing(Item base, RecipeCategory category, Item result) {
         SmithingTransformRecipeBuilder.smithing(
                 Ingredient.of(MFItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE),

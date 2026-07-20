@@ -14,6 +14,7 @@ import net.minecraft.data.advancements.AdvancementProvider;
 import net.minecraft.data.advancements.AdvancementSubProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.Identifier;
+import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -27,9 +28,10 @@ public class MFAdvancementProvider extends AdvancementProvider {
         super(output, registries, List.of(new ModAdvancements()));
     }
 
+    @SuppressWarnings("unused")
     public static class ModAdvancements implements AdvancementSubProvider {
         @Override
-        public void generate(HolderLookup.Provider registries, Consumer<AdvancementHolder> output) {
+        public void generate(HolderLookup.Provider registries, @NonNull Consumer<AdvancementHolder> output) {
             var items = registries.lookupOrThrow(Registries.ITEM);
 
             AdvancementHolder root = Advancement.Builder.advancement()

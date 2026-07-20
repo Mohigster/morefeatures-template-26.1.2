@@ -253,10 +253,12 @@ public class MFBlockItemIds {
         return BlockItemId.create(id, id);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static ColorCollection<BlockItemId> createSimpleColouredId(String name) {
         return ColorCollection.prefixWithColor(ColorCollection.create(name)).map(MFBlockItemIds::createId);
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static WeatheringCopperCollection<BlockItemId> createSimpleCopperId(String name) {
         return WeatheringCopperCollection.prefixWithState(WeatheringCopperCollection.create(name)).map(MFBlockItemIds::createId);
     }

@@ -303,6 +303,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
 
     /* ENERGY */
 
+    @SuppressWarnings("unused")
     public EnergyHandler getEnergyStorage(@Nullable Direction direction) {
         return this.ENERGY_STORAGE;
     }
@@ -356,6 +357,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
     }
 
     /* FLUID */
+    @SuppressWarnings("unused")
     public FluidStacksResourceHandler getFluidTank(@Nullable Direction direction) {
         return this.FLUID_TANK;
     }
@@ -364,6 +366,7 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
         return new FluidStack(FLUID_TANK.getResource(0).getFluid(), FLUID_TANK.getAmountAsInt(0));
     }
 
+    @SuppressWarnings("unused")
     private void transferFluidFromItemToTank() {
         try(Transaction transaction = Transaction.openRoot()) {
             ItemAccess itemAccess = ItemAccess.forHandlerIndex(inventory, FLUID_ITEM_SLOT);

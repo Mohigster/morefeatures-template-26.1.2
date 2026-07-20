@@ -7,20 +7,12 @@ import com.mohigster.morefeatures.block.family.MFBlockFamilies;
 import com.mohigster.morefeatures.datagen.models.MFBlockModelGenerators;
 import com.mohigster.morefeatures.datagen.models.MFItemModelGenerators;
 import com.mohigster.morefeatures.item.MFItems;
-import com.mohigster.morefeatures.item.custom.trim.MFMaterialAssetGroups;
-import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
 import net.minecraft.client.data.models.*;
 import net.minecraft.client.data.models.model.*;
 
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.item.equipment.EquipmentAssets;
-import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
-import net.minecraft.world.item.equipment.trim.TrimMaterials;
 import net.minecraft.world.level.block.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 public class MFModelProvider extends ModelProvider {
 
@@ -44,7 +36,7 @@ public class MFModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MFItems.RAW_FLUORITE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.FLUORITE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.BRINE_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        itemModels.generateFlatItem(MFItems.BISMUTH_EQUIPMENT.get(0).asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(MFItems.BISMUTH_EQUIPMENT.getFirst().asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(MFItems.BISMUTH_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         MFItemModelGenerators.generateTrimmableItem(itemModels, MFItems.BISMUTH_HELMET.get(), MFEquipmentAssets.BISMUTH, ItemModelGenerators.TRIM_PREFIX_HELMET, false);
         MFItemModelGenerators.generateTrimmableItem(itemModels, MFItems.BISMUTH_CHESTPLATE.get(), MFEquipmentAssets.BISMUTH, ItemModelGenerators.TRIM_PREFIX_CHESTPLATE, false);
@@ -68,7 +60,7 @@ public class MFModelProvider extends ModelProvider {
 
         // Used the generateFlatItem() line to get carbon_bow.json, then to prevent datagen deleting it,
         // I moved that file to the permanent resources file instead of the generated resources file.
-        // I then ran the generateBow() line. Keeping generateFlatItem() commented there for reference
+        // I then ran the generateBow() line.
 
         // Must do this because generateBow() gives the models for when the bow is being pulled,
         // but generateFlatItem() gives the model for when it isn't. However, using both methods
@@ -76,10 +68,6 @@ public class MFModelProvider extends ModelProvider {
 
         // Same logic applies to crossbow and elytra, and their bismuth equivalents
 
-//        itemModels.generateFlatItem(ModItems.CARBON_BOW.get(), ModelTemplates.BOW);
-//        itemModels.generateFlatItem(ModItems.CARBON_CROSSBOW.get(), ModelTemplates.CROSSBOW);
-//        itemModels.generateFlatItem(ModItems.CARBON_ELYTRA.get(), ModelTemplates.FLAT_ITEM);
-//        itemModels.generateFlatItem(ModItems.BISMUTH_BOW.get(), ModelTemplates.BOW);
         itemModels.generateBow(MFItems.CARBON_BOW.get());
         itemModels.generateCrossbow(MFItems.CARBON_CROSSBOW.get());
         itemModels.generateElytra(MFItems.CARBON_ELYTRA.get());

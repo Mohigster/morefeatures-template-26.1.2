@@ -1,6 +1,5 @@
 package com.mohigster.morefeatures.block.custom.magicblock;
 
-import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.sound.MFSounds;
 import com.mohigster.morefeatures.tag.MFItemTags;
 import net.minecraft.core.BlockPos;

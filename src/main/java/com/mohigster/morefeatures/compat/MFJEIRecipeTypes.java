@@ -14,6 +14,7 @@ public class MFJEIRecipeTypes {
 
     // From Occultism: https://github.com/klikli-dev/occultism/blob/version/26.1.2/src/main/java/com/klikli_dev/occultism/integration/jei/impl/JeiRecipeTypes.java
     // Under MIT-License
+    @SuppressWarnings("unused")
     public static <R extends Recipe<?>> IRecipeType<RecipeHolder<R>> create(String name, Class<? extends R> recipeClass) {
         Identifier uid = MFIdentifier.withMfNamespace(name);
         @SuppressWarnings({"unchecked", "RedundantCast"})

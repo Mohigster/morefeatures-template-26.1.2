@@ -3,7 +3,6 @@ package com.mohigster.morefeatures.worldgen.noise;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
-import org.jspecify.annotations.NullMarked;
 
 public class MFNoiseData {
     public static void bootstrap(BootstrapContext<NormalNoise.NoiseParameters> context) {

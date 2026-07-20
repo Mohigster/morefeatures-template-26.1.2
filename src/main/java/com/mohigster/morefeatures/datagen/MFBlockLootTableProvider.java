@@ -4,7 +4,6 @@ import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabType;
 import com.mohigster.morefeatures.item.MFItems;
-import com.mohigster.morefeatures.references.MFBlockItemIds;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
@@ -24,6 +23,7 @@ import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePropertyCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
+import org.jspecify.annotations.NullMarked;
 
 import java.util.Set;
 
@@ -414,6 +414,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
                         .apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE)))));
     }
 
+    @NullMarked
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return MFBlocks.BLOCKS.getEntries().stream().map(Holder::value)::iterator;

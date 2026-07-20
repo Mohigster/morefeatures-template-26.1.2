@@ -1,7 +1,6 @@
 package com.mohigster.morefeatures.entity.model;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.references.MFIdentifier;
 import net.minecraft.client.model.Model;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;

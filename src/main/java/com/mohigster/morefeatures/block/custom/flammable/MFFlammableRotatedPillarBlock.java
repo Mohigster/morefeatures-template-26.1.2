@@ -9,6 +9,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.RotatedPillarBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.common.ItemAbility;
+import org.jspecify.annotations.NullMarked;
 
 import javax.annotation.Nullable;
 
@@ -18,21 +19,25 @@ public class MFFlammableRotatedPillarBlock extends RotatedPillarBlock {
         super(properties);
     }
 
+    @NullMarked
     @Override
     public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
         return true;
     }
 
+    @NullMarked
     @Override
     public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
         return 5;
     }
 
+    @NullMarked
     @Override
     public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction){
         return 5;
     }
 
+    @NullMarked
     @Override
     public @Nullable BlockState getToolModifiedState(BlockState state, UseOnContext context,
                                                      ItemAbility itemAbility, boolean simulate){

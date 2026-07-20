@@ -169,7 +169,7 @@ public final class MFBlockModelGenerators {
 
                                     MultiVariant variant = plainVariant(model).with(VariantMutator.UV_LOCK.withValue(true));
                                     if (yRot != 0) {
-                                        return variant = variant.with(VariantMutator.Y_ROT.withValue(Quadrant.parseJson(yRot)));
+                                        return variant.with(VariantMutator.Y_ROT.withValue(Quadrant.parseJson(yRot)));
                                     }
 
                                     return variant;
@@ -226,6 +226,7 @@ public final class MFBlockModelGenerators {
         blockModels.registerSimpleItemModel(verticalSlab, straightModel);
     }
 
+    @SuppressWarnings("DuplicateBranchesInSwitch")
     private static int yRotationForDouble(Direction facing) {
         return switch (facing) {
             case NORTH -> 0;

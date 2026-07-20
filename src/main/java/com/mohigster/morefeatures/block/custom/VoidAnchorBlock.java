@@ -53,9 +53,7 @@ public class VoidAnchorBlock extends Block {
     public static final int MIN_CHARGES = 0;
     public static final int MAX_CHARGES = 4;
 
-
     public static final IntegerProperty CHARGE = BlockStateProperties.RESPAWN_ANCHOR_CHARGES;
-
 
     private static final ImmutableList<Vec3i> RESPAWN_HORIZONTAL_OFFSETS = ImmutableList.of(
             new Vec3i(0, 0, -1),

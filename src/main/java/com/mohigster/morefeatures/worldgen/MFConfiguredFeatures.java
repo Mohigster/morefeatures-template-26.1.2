@@ -103,10 +103,6 @@ public class MFConfiguredFeatures {
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context){
         HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);
 
-        BlockState floorBlock = Math.random() < 0.5
-                ? Blocks.PACKED_ICE.defaultBlockState()
-                : Blocks.BLUE_ICE.defaultBlockState();
-
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         RuleTest netherrackReplaceables = new BlockMatchTest(Blocks.NETHERRACK);
@@ -302,6 +298,7 @@ public class MFConfiguredFeatures {
                         .getOrThrow(MFConfiguredFeatures.PALM_TREE_KEY)));
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static FallenTreeConfiguration.FallenTreeConfigurationBuilder createFallenTree(Block logBlock, final int minLength, final int maxLength, boolean hasVines){
         FallenTreeConfiguration.FallenTreeConfigurationBuilder builder = new FallenTreeConfiguration.FallenTreeConfigurationBuilder(BlockStateProvider.simple(logBlock), UniformInt.of(minLength, maxLength))
                 .logDecorators(
