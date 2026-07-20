@@ -50,7 +50,6 @@ public class MFEnchantments {
                 ));
     }
 
-
     private static ResourceKey<Enchantment> registerKey(String id) {
         return ResourceKey.create(Registries.ENCHANTMENT, MFIdentifier.withMfNamespace(id));
     }

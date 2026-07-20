@@ -246,6 +246,7 @@ public class MFItems {
                     .rarity(Rarity.RARE)
                     .component(DataComponents.TOOL, MFTridentItem.createToolProperties(2))
                     .component(DataComponents.WEAPON, new Weapon(1)),
+                    9.5F,
                     MFEntityTypes.CARBON_TRIDENT.get(),
                     MFItemIds.CARBON_TRIDENT.identifier()
             ));
@@ -400,10 +401,11 @@ public class MFItems {
                     .fireResistant()
                     .enchantable(15)
                     .durability(997)
-                    .attributes(MFTridentItem.createAttributes(11.0D, 2.1D))
+                    .attributes(MFTridentItem.createAttributes(11.0D, -1.9D))
                     .rarity(Rarity.RARE)
                     .component(DataComponents.TOOL, MFTridentItem.createToolProperties(3))
                     .component(DataComponents.WEAPON, new Weapon(2)),
+                    11.75F,
                     MFEntityTypes.BISMUTH_TRIDENT.get(),
                     MFItemIds.BISMUTH_TRIDENT.identifier()
             ));
@@ -577,7 +579,6 @@ public class MFItems {
             new Item.Properties().rarity(Rarity.RARE).fireResistant().enchantable(15)
     );
 
-
     public static List<DeferredItem<Item>> registerEquipmentItems(String name, ToolMaterial toolmaterial,
                                                             float[] swordattr,
                                                             Item.Properties itemProp) {
@@ -586,6 +587,9 @@ public class MFItems {
                 registerItem(name + "_sword", (p) -> new Item(p.sword(toolmaterial, swordattr[0], swordattr[1])), itemProp)
         );
     }
+
+    // Keep in mind, Block Items (except for signs because their items are shared by two blocks, wall and standing/ceiling) are registered automatically by the registerBlock method in MFBlocks.
+    // As such, there is no Block Items being registered here in this class. See MFBlocks if you want to look at how they are registered
 
     private static <T extends Item> DeferredItem<T> registerItem(ResourceKey<Item> id, Function<Item.Properties, T> function){
         return ITEMS.registerItem(id.identifier().getPath(), props -> function.apply(props.setId(id)));

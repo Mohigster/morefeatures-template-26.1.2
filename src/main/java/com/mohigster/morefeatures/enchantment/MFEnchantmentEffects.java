@@ -18,9 +18,6 @@ public class MFEnchantmentEffects {
     public static final Supplier<MapCodec<? extends EnchantmentEntityEffect>> THUNDER =
             ENTITY_ENCHANTMENT_EFFECTS.register("thunder", () -> ThunderEnchantmentEffect.CODEC);
 
-
-
-
     public static void register(IEventBus eventBus) {
         ENTITY_ENCHANTMENT_EFFECTS.register(eventBus);
         MoreFeatures.LOGGER.info("Mod Enchantment Effects registered -> Performed by: " + MoreFeatures.MODID);

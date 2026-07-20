@@ -59,8 +59,8 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey());
 
         tag(ItemTags.TRIDENT_ENCHANTABLE)
-                .add(MFItems.BISMUTH_TRIDENT.getKey())
-                .add(MFItems.CARBON_TRIDENT.getKey());
+                .add(MFItemIds.BISMUTH_TRIDENT)
+                .add(MFItemIds.CARBON_TRIDENT);
 
         tag(MFItemTags.BLOODWOOD_LOGS)
                 .add(MFBlockItemIds.BLOODWOOD.item())
