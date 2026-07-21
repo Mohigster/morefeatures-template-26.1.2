@@ -13,7 +13,7 @@ import com.mohigster.morefeatures.references.MFBlockItemIds;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
 import com.mohigster.morefeatures.references.MFIdentifier;
-import com.mohigster.morefeatures.sound.MFSounds;
+import com.mohigster.morefeatures.sound.MFSoundTypes;
 import com.mohigster.morefeatures.tag.MFBlockTags;
 import com.mohigster.morefeatures.worldgen.tree.MFTreeGrowers;
 import net.minecraft.core.BlockPos;
@@ -95,12 +95,12 @@ public class MFBlocks {
 
     public static final DeferredBlock<Block> MAGNESIUM_ORE = registerBlock(MFBlockItemIds.MAGNESIUM_ORE,
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties),
-            _ -> Properties.ofFullCopy(RAW_MAGNESIUM_BLOCK.get())
+            _ -> Properties.ofFullCopy(RAW_MAGNESIUM_BLOCK.get()).mapColor(MapColor.STONE)
     );
 
     public static final DeferredBlock<Block> DEEPSLATE_MAGNESIUM_ORE = registerBlock(MFBlockItemIds.DEEPSLATE_MAGNESIUM_ORE,
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties),
-            _ -> Properties.ofFullCopy(RAW_MAGNESIUM_BLOCK.get()).sound(SoundType.DEEPSLATE)
+            _ -> Properties.ofFullCopy(MAGNESIUM_ORE.get()).sound(SoundType.DEEPSLATE).mapColor(MapColor.DEEPSLATE)
     );
 
     //———————————————————————————————————————Bismuth Blocks——————————————————————————————————————————————————————————————————————————
@@ -136,7 +136,9 @@ public class MFBlocks {
 
     public static final DeferredBlock<Block> DEEPSLATE_AZURITE_ORE = registerBlock(MFBlockItemIds.DEEPSLATE_AZURITE_ORE,
             props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            _ -> Properties.ofFullCopy(AZURITE_ORE.get()).sound(SoundType.DEEPSLATE)
+            _ -> Properties.ofFullCopy(AZURITE_ORE.get())
+                    .sound(SoundType.DEEPSLATE)
+                    .mapColor(MapColor.DEEPSLATE)
     );
 
     public static final DeferredBlock<Block> NETHER_AZURITE_ORE = registerBlock(MFBlockItemIds.NETHER_AZURITE_ORE,
@@ -148,7 +150,7 @@ public class MFBlocks {
 
     public static final DeferredBlock<Block> END_AZURITE_ORE = registerBlock(MFBlockItemIds.END_AZURITE_ORE,
             properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties),
-            _ -> Properties.ofFullCopy(AZURITE_ORE.get()).mapColor(Blocks.END_STONE.defaultMapColor())
+            _ -> Properties.ofFullCopy(AZURITE_ORE.get()).mapColor(MapColor.SAND)
     );
 
     public static final DeferredBlock<Block> AZURITE_BLOCK = registerBlock(MFBlockItemIds.AZURITE_BLOCK,
@@ -186,22 +188,13 @@ public class MFBlocks {
     );
 
     public static final DeferredBlock<Block> AZURITE_PRESSURE_PLATE = registerBlock(MFBlockItemIds.AZURITE_PRESSURE_PLATE,
-            properties -> new PressurePlateBlock(MFBlockSetType.AZURITE, properties
-                    .strength(2f)
-                    .requiresCorrectToolForDrops()
-                    .forceSolidOn()
-                    .noCollision()
-                    .pushReaction(PushReaction.DESTROY)
-            ));
+            properties -> new PressurePlateBlock(MFBlockSetType.AZURITE, properties),
+            _ -> Properties.ofFullCopy(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE)
+    );
 
     public static final DeferredBlock<Block> AZURITE_BUTTON = registerBlock(MFBlockItemIds.AZURITE_BUTTON,
-            properties -> new ButtonBlock(MFBlockSetType.AZURITE, 20, properties
-                    .strength(2f)
-                    .requiresCorrectToolForDrops()
-                    .noCollision()
-                    .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor(MFBlocks::never) // Buttons do not conduct redstone, even though they can activate it
-            ));
+            properties -> new ButtonBlock(MFBlockSetType.AZURITE, 20, properties),
+            _ -> Properties.ofFullCopy(Blocks.STONE_BUTTON));
 
     public static final DeferredBlock<Block> AZURITE_WALL = registerBlock(MFBlockItemIds.AZURITE_WALL,
             WallBlock::new,
@@ -1496,31 +1489,14 @@ public class MFBlocks {
     // Flowers
 
     public static final DeferredBlock<Block> ROSE = registerBlock(MFBlockItemIds.ROSE,
-            properties -> new FlowerBlock(
-                    MobEffects.SLOW_FALLING, 10, properties
-                    .mapColor(MapColor.PLANT)
-                    .instabreak()
-                    .noCollision()
-                    .isViewBlocking(MFBlocks::never)
-                    .isSuffocating(MFBlocks::never)
-                    .isSuffocating(MFBlocks::never)
-                    .isRedstoneConductor(MFBlocks::never)
-                    .offsetType(BlockBehaviour.OffsetType.XZ)
-                    .pushReaction(PushReaction.DESTROY)
-                    .sound(SoundType.GRASS)
-            ));
+            properties -> new FlowerBlock(MobEffects.SLOW_FALLING, 10, properties),
+            _ -> Properties.ofFullCopy(Blocks.POPPY)
+    );
 
     public static final DeferredBlock<Block> POTTED_ROSE = registerBlockWithoutItem(MFBlockIds.POTTED_ROSE,
-            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
-                    Blocks.FLOWER_POT, ROSE, properties
-                    .noOcclusion()
-                    .instabreak()
-                    .isViewBlocking(MFBlocks::never)
-                    .isSuffocating(MFBlocks::never)
-                    .isSuffocating(MFBlocks::never)
-                    .isRedstoneConductor(MFBlocks::never)
-                    .pushReaction(PushReaction.DESTROY)
-            ));
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, ROSE, properties),
+            _ -> Properties.ofFullCopy(Blocks.POTTED_POPPY)
+    );
 
     public static final DeferredBlock<Block> BLUE_ROSE = registerBlock(MFBlockItemIds.BLUE_ROSE,
             properties -> new FlowerBlock(MobEffects.SPEED, 10, properties),
@@ -1547,7 +1523,7 @@ public class MFBlocks {
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .strength(8F, 500F)
                     .requiresCorrectToolForDrops()
-                    .sound(MFSounds.MAGIC_BLOCK_SOUNDS)
+                    .sound(MFSoundTypes.MAGIC_BLOCK_SOUNDS)
             ), Component.translatable("tooltip.morefeatures.magic_block"));
 
 
@@ -1564,7 +1540,7 @@ public class MFBlocks {
     public static final DeferredBlock<Block> EVIL_PORTAL = registerBlockWithTooltip(MFBlockItemIds.EVIL_PORTAL,
             properties -> new EvilPortalBlock(properties
                     .strength(2f)
-                    .sound(MFSounds.EVIL_PORTAL_SOUNDS)
+                    .sound(MFSoundTypes.EVIL_PORTAL_SOUNDS)
                     .pushReaction(PushReaction.BLOCK)
                     .isViewBlocking(MFBlocks::always)
                     .isValidSpawn(MFBlocks::never)

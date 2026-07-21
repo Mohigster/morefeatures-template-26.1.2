@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom.magicblock;
 
-import com.mohigster.morefeatures.sound.MFSounds;
+import com.mohigster.morefeatures.sound.MFSoundEvents;
 import com.mohigster.morefeatures.tag.MFItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
@@ -34,7 +34,7 @@ public class MagicBlock extends Block {
         level.addParticle(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
                 0, 1, 0);
 
-        level.playSound(player, pos, MFSounds.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 2f, 1f);
+        level.playSound(player, pos, MFSoundEvents.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 2f, 1f);
         return InteractionResult.SUCCESS;
     }
 
@@ -71,7 +71,7 @@ public class MagicBlock extends Block {
                     0, 1, 0);
 
             level.playSound(null, entity,
-                    MFSounds.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 1.5f, 1f);
+                    MFSoundEvents.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 1.5f, 1f);
         }
     }
 }

@@ -110,6 +110,13 @@
       {
         "model": {
           "type": "minecraft:model",
+          "model": "morefeatures:item/bismuth_chestplate_carbon_trim"
+        },
+        "when": "morefeatures:carbon"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
           "model": "morefeatures:item/bismuth_chestplate_bismuth_trim"
         },
         "when": "morefeatures:bismuth"

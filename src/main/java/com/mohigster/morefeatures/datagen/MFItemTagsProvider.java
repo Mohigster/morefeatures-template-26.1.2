@@ -419,6 +419,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.MAGNESIUM_INGOT)
                 .add(MFItemIds.AZURITE)
                 .add(MFItemIds.FLUORITE)
+                .add(MFItemIds.CARBON_FIBER)
                 .add(MFItemIds.BISMUTH);
     }
 }

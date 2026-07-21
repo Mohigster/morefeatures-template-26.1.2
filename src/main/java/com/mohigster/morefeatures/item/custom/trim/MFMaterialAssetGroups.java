@@ -7,5 +7,6 @@ public class MFMaterialAssetGroups {
     public static final MaterialAssetGroup MAGNESIUM = MaterialAssetGroup.create("magnesium");
     public static final MaterialAssetGroup AZURITE = MaterialAssetGroup.create("azurite");
     public static final MaterialAssetGroup FLUORITE = MaterialAssetGroup.create("fluorite");
+    public static final MaterialAssetGroup CARBON = MaterialAssetGroup.create("carbon");
     public static final MaterialAssetGroup BISMUTH = MaterialAssetGroup.create("bismuth");
 }

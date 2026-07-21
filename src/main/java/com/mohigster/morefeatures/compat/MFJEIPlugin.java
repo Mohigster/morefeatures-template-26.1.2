@@ -32,6 +32,7 @@ public class MFJEIPlugin implements IModPlugin {
     public @NonNull Identifier getPluginUid() {
         return MFIdentifier.withMfNamespace("jei_plugin");
     }
+
     @SuppressWarnings({"unchecked", "rawtypes"})
     private <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> getRecipes(RecipeMap recipeMap, RecipeType<T> type) {
         return (List) recipeMap.byType(type);
@@ -75,6 +76,7 @@ public class MFJEIPlugin implements IModPlugin {
         @SubscribeEvent
         public static void onRecipeReceived(RecipesReceivedEvent event) {
             syncedRecipes = event.getRecipeMap();
+            MoreFeatures.LOGGER.info("Mod JEI Recipes received! Performed by -> " + MoreFeatures.MODID);
         }
     }
 }

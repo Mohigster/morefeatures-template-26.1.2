@@ -15,7 +15,7 @@ import com.mohigster.morefeatures.menu.MFMenuTypes;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
 import com.mohigster.morefeatures.recipe.MFRecipes;
 import com.mohigster.morefeatures.references.MFIdentifier;
-import com.mohigster.morefeatures.sound.MFSounds;
+import com.mohigster.morefeatures.sound.MFSoundEvents;
 import com.mohigster.morefeatures.worldgen.biome.MFBiomes;
 import com.mohigster.morefeatures.worldgen.biome.MFSurfaceRules;
 import com.mohigster.morefeatures.worldgen.feature.MFFeatures;
@@ -74,7 +74,7 @@ public class MoreFeatures {
         MFAttachments.register(modEventBus);
 
         MFEntityTypes.register(modEventBus);
-        MFSounds.register(modEventBus);
+        MFSoundEvents.register(modEventBus);
 
         MFEnchantmentEffects.register(modEventBus);
 

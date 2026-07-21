@@ -36,16 +36,16 @@ public class MFTridentItem extends TridentItem {
     private final EntityType<? extends  ThrownTrident> tridentEntity;
     private final Identifier tridentId;
 
-    private final float riptideDamage;
+    private final float projectileDamage;
 
     public static final int THROW_THRESHOLD_TIME = 10;
     public static final float PROJECTILE_SHOOT_POWER = 2.5F;
 
-    public MFTridentItem(Properties properties, float riptideDamage, EntityType<? extends ThrownTrident> tridentEntity, Identifier tridentId) {
+    public MFTridentItem(Properties properties, float projectileDamage, EntityType<? extends ThrownTrident> tridentEntity, Identifier tridentId) {
         super(properties);
         this.tridentEntity = tridentEntity;
         this.tridentId = tridentId;
-        this.riptideDamage = riptideDamage;
+        this.projectileDamage = projectileDamage;
     }
 
     @NullMarked
@@ -53,7 +53,7 @@ public class MFTridentItem extends TridentItem {
     public Projectile asProjectile(final Level level, final Position position, final ItemStack itemStack, final Direction direction) {
         System.out.println(tridentId);
 
-        ThrownMFTrident trident = new ThrownMFTrident(level, position.x(), position.y(), position.z(), itemStack.copyWithCount(1), tridentEntity, tridentId);
+        ThrownMFTrident trident = new ThrownMFTrident(level, position.x(), position.y(), position.z(), itemStack.copyWithCount(1), tridentEntity, tridentId, projectileDamage);
         trident.pickup = AbstractArrow.Pickup.ALLOWED;
         return trident;
     }
@@ -94,7 +94,7 @@ public class MFTridentItem extends TridentItem {
                 stack.hurtWithoutBreaking(1, player);
 
                 if (riptideLevel <= 0) {
-                    ThrownMFTrident trident = new ThrownMFTrident(level, player, stack, tridentEntity, tridentId);
+                    ThrownMFTrident trident = new ThrownMFTrident(level, player, stack, tridentEntity, tridentId, projectileDamage);
                     trident.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, PROJECTILE_SHOOT_POWER, 1.0F);
 
                     if (player.hasInfiniteMaterials()) {
@@ -134,7 +134,7 @@ public class MFTridentItem extends TridentItem {
                 Holder<SoundEvent> soundEvent = riptideLevel >= 3 ? SoundEvents.TRIDENT_RIPTIDE_3 : (riptideLevel == 2 ? SoundEvents.TRIDENT_RIPTIDE_2 : SoundEvents.TRIDENT_RIPTIDE_1);
                 level.playSound(null, player, soundEvent.value(), SoundSource.PLAYERS, 1.0F, 1.0F);
 
-                player.startAutoSpinAttack(20, riptideDamage, stack);
+                player.startAutoSpinAttack(20, projectileDamage, stack);
 
                 player.awardStat(Stats.ITEM_USED.get(this));
             }

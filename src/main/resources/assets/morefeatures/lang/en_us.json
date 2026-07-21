@@ -358,6 +358,7 @@
   "trim_material.morefeatures.magnesium": "Magnesium Material",
   "trim_material.morefeatures.azurite": "Azurite Material",
   "trim_material.morefeatures.fluorite": "Fluorite Material",
+  "trim_material.morefeatures.carbon": "Carbon Material",
   "trim_material.morefeatures.bismuth": "Bismuth Material",
 
   "morefeatures.tooltip.liquid.amount.with.capacity": "%s / %s mB",

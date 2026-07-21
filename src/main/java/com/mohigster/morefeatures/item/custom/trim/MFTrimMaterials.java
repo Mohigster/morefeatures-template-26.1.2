@@ -15,6 +15,7 @@ public class MFTrimMaterials {
     public static final ResourceKey<TrimMaterial> MAGNESIUM = createId("magnesium");
     public static final ResourceKey<TrimMaterial> AZURITE = createId("azurite");
     public static final ResourceKey<TrimMaterial> FLUORITE = createId("fluorite");
+    public static final ResourceKey<TrimMaterial> CARBON = createId("carbon");
     public static final ResourceKey<TrimMaterial> BISMUTH = createId("bismuth");
 
     public static void bootstrap(BootstrapContext<TrimMaterial> context) {
@@ -22,6 +23,7 @@ public class MFTrimMaterials {
         register(context, MAGNESIUM, Style.EMPTY.withColor(2636355), MFMaterialAssetGroups.MAGNESIUM);
         register(context, AZURITE, Style.EMPTY.withColor(6651320), MFMaterialAssetGroups.AZURITE);
         register(context, FLUORITE, Style.EMPTY.withColor(4380324), MFMaterialAssetGroups.FLUORITE);
+        register(context, CARBON, Style.EMPTY.withColor(6513507), MFMaterialAssetGroups.CARBON);
         register(context, BISMUTH, Style.EMPTY.withColor(16738740), MFMaterialAssetGroups.BISMUTH);
     }
 

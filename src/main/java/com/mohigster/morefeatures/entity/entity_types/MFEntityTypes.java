@@ -25,10 +25,10 @@ public class MFEntityTypes {
             DeferredRegister.createEntities(MoreFeatures.MODID);
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownMFTrident>> CARBON_TRIDENT =
-            ENTITY_TYPES.register("carbon_trident", () -> createTridentEntityType((type, level) -> new ThrownMFTrident(type, level, MFItemIds.CARBON_TRIDENT.identifier()), "carbon_trident"));
+            ENTITY_TYPES.register("carbon_trident", () -> createTridentEntityType((type, level) -> new ThrownMFTrident(type, level, MFItemIds.CARBON_TRIDENT.identifier(), 9.5F), "carbon_trident"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownMFTrident>> BISMUTH_TRIDENT =
-            ENTITY_TYPES.register("bismuth_trident", () -> createTridentEntityType((type, level) -> new ThrownMFTrident(type, level, MFItemIds.BISMUTH_TRIDENT.identifier()), "bismuth_trident"));
+            ENTITY_TYPES.register("bismuth_trident", () -> createTridentEntityType((type, level) -> new ThrownMFTrident(type, level, MFItemIds.BISMUTH_TRIDENT.identifier(), 11.75F), "bismuth_trident"));
 
     public static final DeferredHolder<EntityType<?>, EntityType<BrineEntity>> BRINE =
             ENTITY_TYPES.register("brine", () -> createHostileEntityType(BrineEntity::new, 5, 15, 0.8F, 1.5F, 1.3F, "brine"));

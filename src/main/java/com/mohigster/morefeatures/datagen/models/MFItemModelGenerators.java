@@ -41,6 +41,7 @@ public final class MFItemModelGenerators {
                     new ItemModelGenerators.TrimMaterialData(MFMaterialAssetGroups.ALUMINIUM, MFTrimMaterials.ALUMINIUM),
                     new ItemModelGenerators.TrimMaterialData(MFMaterialAssetGroups.AZURITE, MFTrimMaterials.AZURITE),
                     new ItemModelGenerators.TrimMaterialData(MFMaterialAssetGroups.FLUORITE, MFTrimMaterials.FLUORITE),
+                    new ItemModelGenerators.TrimMaterialData(MFMaterialAssetGroups.CARBON, MFTrimMaterials.CARBON),
                     new ItemModelGenerators.TrimMaterialData(MFMaterialAssetGroups.BISMUTH, MFTrimMaterials.BISMUTH)
             )
     );

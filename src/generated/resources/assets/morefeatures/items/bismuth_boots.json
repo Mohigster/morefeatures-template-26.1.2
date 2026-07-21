@@ -110,6 +110,13 @@
       {
         "model": {
           "type": "minecraft:model",
+          "model": "morefeatures:item/bismuth_boots_carbon_trim"
+        },
+        "when": "morefeatures:carbon"
+      },
+      {
+        "model": {
+          "type": "minecraft:model",
           "model": "morefeatures:item/bismuth_boots_bismuth_trim"
         },
         "when": "morefeatures:bismuth"

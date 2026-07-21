@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.worldgen.biome;
 
 import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
-import com.mohigster.morefeatures.sound.MFSounds;
+import com.mohigster.morefeatures.sound.MFSoundEvents;
 import com.mohigster.morefeatures.worldgen.MFPlacedFeatures;
 import com.mohigster.morefeatures.worldgen.carver.MFCarvers;
 import net.minecraft.core.HolderGetter;
@@ -136,7 +136,7 @@ public class MFOverworldBiomes {
                 .generationSettings(biomeBuilder.build())
                 .setAttribute(EnvironmentAttributes.FOG_COLOR, -4138753)
                 .setAttribute(EnvironmentAttributes.SKY_COLOR, -8871425)
-                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(MFSounds.MUSIC_BIOME_ICE_CAVES))
+                .setAttribute(EnvironmentAttributes.BACKGROUND_MUSIC, new BackgroundMusic(MFSoundEvents.MUSIC_BIOME_ICE_CAVES))
                 .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES, AmbientParticle.of(ParticleTypes.WHITE_ASH, 0.01F))
                 .build();
     }

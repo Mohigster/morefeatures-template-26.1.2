@@ -191,6 +191,7 @@ public class MFItems {
     public static final DeferredItem<Item> CARBON_FIBER = registerItem(MFItemIds.CARBON_FIBER,
             properties -> new Item(properties
                     .fireResistant()
+                    .trimMaterial(MFTrimMaterials.CARBON)
             ));
 
     public static final DeferredItem<Item> CARBON_BOW = ITEMS.registerItem("carbon_bow",

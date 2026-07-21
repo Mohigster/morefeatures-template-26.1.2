@@ -114,6 +114,7 @@ neoForge {
             sourceSet(sourceSets.main)
         }
     }
+    accessTransformers.from 'src/main/resources/META-INF/accesstransformer.cfg'
 }
 
 // Sets up a dependency configuration called 'localRuntime'.
