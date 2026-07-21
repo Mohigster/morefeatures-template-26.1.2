@@ -2,7 +2,7 @@ package com.mohigster.morefeatures;
 
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
-import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
+import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.entity.model.IceologerModel;
 import com.mohigster.morefeatures.particles.MFFallingLeavesParticle;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
@@ -110,9 +110,6 @@ public class MoreFeaturesClient {
                         MFModelLayer.BISMUTH_TRIDENT
                 )
         );
-
-        MFTridentModel.printTextureLocation(MFEntityTypeIds.CARBON_TRIDENT);
-        MFTridentModel.printTextureLocation(MFEntityTypeIds.BISMUTH_TRIDENT);
 
         event.registerEntityRenderer(
                 MFEntityTypes.ICEOLOGER.get(),

@@ -8,7 +8,7 @@ import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.creativemodetab.MFCreativeModeTabs;
 import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
 import com.mohigster.morefeatures.enchantment.MFEnchantmentEffects;
-import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
+import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorCosts;
 import com.mohigster.morefeatures.menu.MFMenuTypes;

@@ -1,24 +1,9 @@
 {
   "values": [
-    "morefeatures:tainted_wood",
-    "morefeatures:tainted_log",
-    "morefeatures:stripped_tainted_wood",
-    "morefeatures:stripped_tainted_log",
-    "morefeatures:bloodwood",
-    "morefeatures:bloodwood_log",
-    "morefeatures:stripped_bloodwood",
-    "morefeatures:stripped_bloodwood_log",
-    "morefeatures:palm_wood",
-    "morefeatures:palm_log",
-    "morefeatures:stripped_palm_wood",
-    "morefeatures:stripped_palm_log",
-    "morefeatures:decrepit_wood",
-    "morefeatures:decrepit_log",
-    "morefeatures:stripped_decrepit_wood",
-    "morefeatures:stripped_decrepit_log",
-    "morefeatures:pallid_wood",
-    "morefeatures:pallid_log",
-    "morefeatures:stripped_pallid_wood",
-    "morefeatures:stripped_pallid_log"
+    "#morefeatures:bloodwood_logs",
+    "#morefeatures:tainted_logs",
+    "#morefeatures:palm_logs",
+    "#morefeatures:decrepit_logs",
+    "#morefeatures:pallid_logs"
   ]
 }

@@ -70,6 +70,12 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MFBlocks.STRIPPED_TAINTED_LOG.get());
         dropSelf(MFBlocks.STRIPPED_TAINTED_WOOD.get());
         dropSelf(MFBlocks.TAINTED_SAPLING.get());
+        dropSelf(MFBlocks.CHARRED_PLANKS.get());
+        dropSelf(MFBlocks.CHARRED_STAIRS.get());
+        dropSelf(MFBlocks.CHARRED_STEM.get());
+        dropSelf(MFBlocks.CHARRED_HYPHAE.get());
+        dropSelf(MFBlocks.STRIPPED_CHARRED_STEM.get());
+        dropSelf(MFBlocks.STRIPPED_CHARRED_HYPHAE.get());
         dropSelf(MFBlocks.PALM_LOG.get());
         dropSelf(MFBlocks.PALM_WOOD.get());
         dropSelf(MFBlocks.STRIPPED_PALM_LOG.get());
@@ -163,6 +169,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         add(MFBlocks.BLOODWOOD_SLAB.get(), this::createSlabItemTable);
         add(MFBlocks.TAINTED_SLAB.get(), this::createSlabItemTable);
         add(MFBlocks.PALM_SLAB.get(), this::createSlabItemTable);
+        add(MFBlocks.CHARRED_SLAB.get(), this::createSlabItemTable);
         add(MFBlocks.DECREPIT_SLAB.get(), this::createSlabItemTable);
         add(MFBlocks.PALLID_SLAB.get(), this::createSlabItemTable);
 

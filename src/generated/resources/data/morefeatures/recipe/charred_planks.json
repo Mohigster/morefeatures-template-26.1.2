@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "group": "charred",
+  "ingredients": [
+    "#morefeatures:charred_stems"
+  ],
+  "result": {
+    "count": 4,
+    "id": "morefeatures:charred_planks"
+  }
+}

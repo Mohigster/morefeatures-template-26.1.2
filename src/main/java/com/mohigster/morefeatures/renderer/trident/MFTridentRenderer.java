@@ -25,7 +25,7 @@ public class MFTridentRenderer extends ThrownTridentRenderer {
     public MFTridentRenderer(EntityRendererProvider.Context context, ResourceKey<EntityType<?>> tridentKey, ModelLayerLocation layerToBake) {
         super(context);
         this.tridentKey = tridentKey;
-        this.model = new MFTridentModel(context.bakeLayer(layerToBake), MFTridentModel.getTexture(tridentKey));
+        this.model = new MFTridentModel(context.bakeLayer(layerToBake));
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.worldgen.biome;
 
-import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
+import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.sound.MFSoundEvents;
 import com.mohigster.morefeatures.worldgen.MFPlacedFeatures;
 import com.mohigster.morefeatures.worldgen.carver.MFCarvers;

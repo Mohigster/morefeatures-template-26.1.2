@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "morefeatures:block/stripped_charred_hyphae",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "morefeatures:block/stripped_charred_hyphae"
+    },
+    "axis=z": {
+      "model": "morefeatures:block/stripped_charred_hyphae",
+      "x": 90
+    }
+  }
+}

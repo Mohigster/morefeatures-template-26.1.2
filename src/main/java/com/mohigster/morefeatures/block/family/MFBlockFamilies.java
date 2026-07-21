@@ -12,6 +12,7 @@ public class MFBlockFamilies {
     private static BlockFamily bloodwoodFamily;
     private static BlockFamily taintedFamily;
     private static BlockFamily palmFamily;
+    private static BlockFamily charredFamily;
     private static BlockFamily decrepitFamily;
     private static BlockFamily pallidFamily;
     private static final List<BlockFamily> FAMILIES = new ArrayList<>();
@@ -79,6 +80,21 @@ public class MFBlockFamilies {
             FAMILIES.add(bloodwoodFamily);
         }
         return bloodwoodFamily;
+    }
+
+    public static BlockFamily getCharredFamily(){
+        if (charredFamily == null) {
+            charredFamily = new BlockFamily.Builder(MFBlocks.CHARRED_PLANKS.get())
+                    .log(MFBlocks.CHARRED_STEM.get())
+                    .strippedLog(MFBlocks.STRIPPED_CHARRED_STEM.get())
+                    .stairs(MFBlocks.CHARRED_STAIRS.get())
+                    .slab(MFBlocks.CHARRED_SLAB.get())
+                    .recipeGroupPrefix("wooden")
+                    .recipeUnlockedBy("has_planks")
+                    .getFamily();
+            FAMILIES.add(charredFamily);
+        }
+        return charredFamily;
     }
 
     public static BlockFamily getTaintedFamily(){
@@ -167,10 +183,15 @@ public class MFBlockFamilies {
         return pallidFamily;
     }
 
-    public static List<BlockFamily> getAllFamilies() {
+    // Azurite and fluorite has special recipes declared in the Recipes class.
+    // This method is used to grab all block families so that the RecipeProvider
+    // can generate recipes without manual input. Since Azurite and Fluorite
+    // fences, signs, etc. are crafted using custom recipes, they are not called here.
+    public static List<BlockFamily> getAllNonGemstoneFamilies() {
         getBloodwoodFamily();
         getTaintedFamily();
         getPalmFamily();
+        getCharredFamily();
         getDecrepitFamily();
         getPallidFamily();
         return FAMILIES;

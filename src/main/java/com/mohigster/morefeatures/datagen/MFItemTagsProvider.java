@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.references.MFBlockItemIds;
 import com.mohigster.morefeatures.references.MFItemIds;
 import com.mohigster.morefeatures.item.MFItems;
@@ -79,6 +80,12 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFBlockItemIds.PALM_WOOD.item())
                 .add(MFBlockItemIds.STRIPPED_PALM_LOG.item())
                 .add(MFBlockItemIds.STRIPPED_PALM_WOOD.item());
+
+        tag(MFItemTags.CHARRED_STEMS)
+                .add(MFBlockItemIds.CHARRED_STEM.item())
+                .add(MFBlockItemIds.CHARRED_HYPHAE.item())
+                .add(MFBlockItemIds.STRIPPED_CHARRED_STEM.item())
+                .add(MFBlockItemIds.STRIPPED_CHARRED_HYPHAE.item());
 
         tag(MFItemTags.DECREPIT_LOGS)
                 .add(MFBlockItemIds.DECREPIT_LOG.item())
@@ -282,26 +289,11 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.EVERFROST);
 
         tag(ItemTags.LOGS_THAT_BURN)
-                .add(MFBlockItemIds.TAINTED_WOOD.item())
-                .add(MFBlockItemIds.TAINTED_LOG.item())
-                .add(MFBlockItemIds.STRIPPED_TAINTED_WOOD.item())
-                .add(MFBlockItemIds.STRIPPED_TAINTED_LOG.item())
-                .add(MFBlockItemIds.BLOODWOOD.item())
-                .add(MFBlockItemIds.BLOODWOOD_LOG.item())
-                .add(MFBlockItemIds.STRIPPED_BLOODWOOD.item())
-                .add(MFBlockItemIds.STRIPPED_BLOODWOOD_LOG.item())
-                .add(MFBlockItemIds.PALM_WOOD.item())
-                .add(MFBlockItemIds.PALM_LOG.item())
-                .add(MFBlockItemIds.STRIPPED_PALM_WOOD.item())
-                .add(MFBlockItemIds.STRIPPED_PALM_LOG.item())
-                .add(MFBlockItemIds.DECREPIT_WOOD.item())
-                .add(MFBlockItemIds.DECREPIT_LOG.item())
-                .add(MFBlockItemIds.STRIPPED_DECREPIT_WOOD.item())
-                .add(MFBlockItemIds.STRIPPED_DECREPIT_LOG.item())
-                .add(MFBlockItemIds.PALLID_WOOD.item())
-                .add(MFBlockItemIds.PALLID_LOG.item())
-                .add(MFBlockItemIds.STRIPPED_PALLID_WOOD.item())
-                .add(MFBlockItemIds.STRIPPED_PALLID_LOG.item());
+                .addTag(MFItemTags.BLOODWOOD_LOGS)
+                .addTag(MFItemTags.TAINTED_LOGS)
+                .addTag(MFItemTags.PALM_LOGS)
+                .addTag(MFItemTags.DECREPIT_LOGS)
+                .addTag(MFItemTags.PALLID_LOGS);
 
         tag(ItemTags.PLANKS)
                 .add(MFBlockItemIds.TAINTED_PLANKS.item())

@@ -22,7 +22,7 @@ public class BismuthTridentSpecialRenderer extends MFTridentSpecialRenderer {
         }
 
         public BismuthTridentSpecialRenderer bake(final BakingContext context) {
-            return new BismuthTridentSpecialRenderer(new MFTridentModel((context.entityModelSet().bakeLayer(MFModelLayer.BISMUTH_TRIDENT)), MFTridentModel.getTexture(MFEntityTypeIds.BISMUTH_TRIDENT)));
+            return new BismuthTridentSpecialRenderer(new MFTridentModel((context.entityModelSet().bakeLayer(MFModelLayer.BISMUTH_TRIDENT))));
         }
     }
 }

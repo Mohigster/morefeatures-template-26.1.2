@@ -23,24 +23,24 @@ public class ThrownMFTrident extends ThrownTrident {
     private final Identifier pickupItem;
     private final float projectileDamage;
 
-    public ThrownMFTrident(Level level, LivingEntity shooter, ItemStack stack, EntityType<? extends ThrownTrident> tridentEntity, Identifier pickupItem, float projectileDamage) {
+    public ThrownMFTrident(Level level, LivingEntity shooter, ItemStack stack, EntityType<? extends ThrownTrident> tridentEntity, Identifier pickupItemId, float projectileDamage) {
         super(level, shooter, stack);
         this.tridentEntity = tridentEntity;
-        this.pickupItem = pickupItem;
+        this.pickupItem = pickupItemId;
         this.projectileDamage = projectileDamage;
     }
 
-    public ThrownMFTrident(EntityType<? extends ThrownTrident> tridentEntity, Level level, Identifier pickupItem, float projectileDamage) {
+    public ThrownMFTrident(EntityType<? extends ThrownTrident> tridentEntity, Level level, Identifier pickupItemId, float projectileDamage) {
         super(tridentEntity, level);
         this.tridentEntity = tridentEntity;
-        this.pickupItem = pickupItem;
+        this.pickupItem = pickupItemId;
         this.projectileDamage = projectileDamage;
     }
 
-    public ThrownMFTrident(Level level, double x, double y, double z, ItemStack itemStack, EntityType<? extends ThrownTrident> tridentEntity, Identifier pickupItem, float projectileDamage) {
+    public ThrownMFTrident(Level level, double x, double y, double z, ItemStack itemStack, EntityType<? extends ThrownTrident> tridentEntity, Identifier pickupItemId, float projectileDamage) {
         super(level, x, y, z, itemStack);
         this.tridentEntity = tridentEntity;
-        this.pickupItem = pickupItem;
+        this.pickupItem = pickupItemId;
         this.projectileDamage = projectileDamage;
     }
 

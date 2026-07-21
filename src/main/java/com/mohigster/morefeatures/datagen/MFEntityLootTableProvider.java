@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.datagen;
 
-import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
+import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.item.MFItems;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;

@@ -116,42 +116,52 @@ public class MFModelProvider extends ModelProvider {
         blockModels.createTrivialCube(MFBlocks.RAW_BISMUTH_BLOCK.get());
         blockModels.createTrivialCube(MFBlocks.EVERFROST_BLUE_ICE_ORE.get());
         blockModels.createTrivialCube(MFBlocks.EVERFROST_PACKED_ICE_ORE.get());
+
         MFBlockModelGenerators.createAge3Block(blockModels, MFBlocks.CONJURED_ICE.get(), true);
+
         blockModels.woodProvider(MFBlocks.TAINTED_LOG.get()).logWithHorizontal(MFBlocks.TAINTED_LOG.get()).wood(MFBlocks.TAINTED_WOOD.get());
         blockModels.woodProvider(MFBlocks.STRIPPED_TAINTED_LOG.get()).logWithHorizontal(MFBlocks.STRIPPED_TAINTED_LOG.get()).wood(MFBlocks.STRIPPED_TAINTED_WOOD.get());
         blockModels.createShelf(MFBlocks.TAINTED_SHELF.get(), MFBlocks.STRIPPED_TAINTED_LOG.get());
         blockModels.createTrivialBlock(MFBlocks.TAINTED_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createPlantWithDefaultItem(MFBlocks.TAINTED_SAPLING.get(), MFBlocks.POTTED_TAINTED_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.TAINTED_VERTICAL_SLAB.get(), MFBlocks.TAINTED_PLANKS.get());
+
         blockModels.woodProvider(MFBlocks.BLOODWOOD_LOG.get()).logWithHorizontal(MFBlocks.BLOODWOOD_LOG.get()).wood(MFBlocks.BLOODWOOD.get());
         blockModels.woodProvider(MFBlocks.STRIPPED_BLOODWOOD_LOG.get()).logWithHorizontal(MFBlocks.STRIPPED_BLOODWOOD_LOG.get()).wood(MFBlocks.STRIPPED_BLOODWOOD.get());
         blockModels.createShelf(MFBlocks.BLOODWOOD_SHELF.get(), MFBlocks.STRIPPED_BLOODWOOD_LOG.get());
         blockModels.createTrivialBlock(MFBlocks.BLOODWOOD_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createPlantWithDefaultItem(MFBlocks.BLOODWOOD_SAPLING.get(), MFBlocks.POTTED_BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.BLOODWOOD_VERTICAL_SLAB.get(), MFBlocks.BLOODWOOD_PLANKS.get());
+
         blockModels.woodProvider(MFBlocks.PALM_LOG.get()).logWithHorizontal(MFBlocks.PALM_LOG.get()).wood(MFBlocks.PALM_WOOD.get());
         blockModels.woodProvider(MFBlocks.STRIPPED_PALM_LOG.get()).logWithHorizontal(MFBlocks.STRIPPED_PALM_LOG.get()).wood(MFBlocks.STRIPPED_PALM_WOOD.get());
         blockModels.createShelf(MFBlocks.PALM_SHELF.get(), MFBlocks.STRIPPED_PALM_LOG.get());
         blockModels.createTrivialBlock(MFBlocks.PALM_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createPlantWithDefaultItem(MFBlocks.PALM_SAPLING.get(), MFBlocks.POTTED_PALM_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.PALM_VERTICAL_SLAB.get(), MFBlocks.PALM_PLANKS.get());
-        blockModels.createTrivialCube(MFBlocks.MAGIC_BLOCK.get());
-        blockModels.createTrivialCube(MFBlocks.EVIL_PORTAL.get());
-        blockModels.createFurnace(MFBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
-        blockModels.createPlantWithDefaultItem(MFBlocks.ROSE.get(), MFBlocks.POTTED_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
-        blockModels.createPlantWithDefaultItem(MFBlocks.BLUE_ROSE.get(), MFBlocks.POTTED_BLUE_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
+
+        blockModels.woodProvider(MFBlocks.CHARRED_STEM.get()).logWithHorizontal(MFBlocks.CHARRED_STEM.get()).wood(MFBlocks.CHARRED_HYPHAE.get());
+        blockModels.woodProvider(MFBlocks.STRIPPED_CHARRED_STEM.get()).logWithHorizontal(MFBlocks.STRIPPED_CHARRED_STEM.get()).wood(MFBlocks.STRIPPED_CHARRED_HYPHAE.get());
+
         blockModels.woodProvider(MFBlocks.DECREPIT_LOG.get()).logWithHorizontal(MFBlocks.DECREPIT_LOG.get()).wood(MFBlocks.DECREPIT_WOOD.get());
         blockModels.woodProvider(MFBlocks.STRIPPED_DECREPIT_LOG.get()).logWithHorizontal(MFBlocks.STRIPPED_DECREPIT_LOG.get()).wood(MFBlocks.STRIPPED_DECREPIT_WOOD.get());
         blockModels.createShelf(MFBlocks.DECREPIT_SHELF.get(), MFBlocks.STRIPPED_DECREPIT_LOG.get());
         blockModels.createTrivialBlock(MFBlocks.DECREPIT_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createPlantWithDefaultItem(MFBlocks.DECREPIT_SAPLING.get(), MFBlocks.POTTED_DECREPIT_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.DECREPIT_VERTICAL_SLAB.get(), MFBlocks.DECREPIT_PLANKS.get());
+
         blockModels.woodProvider(MFBlocks.PALLID_LOG.get()).logWithHorizontal(MFBlocks.PALLID_LOG.get()).wood(MFBlocks.PALLID_WOOD.get());
         blockModels.woodProvider(MFBlocks.STRIPPED_PALLID_LOG.get()).logWithHorizontal(MFBlocks.STRIPPED_PALLID_LOG.get()).wood(MFBlocks.STRIPPED_PALLID_WOOD.get());
         blockModels.createShelf(MFBlocks.PALLID_SHELF.get(), MFBlocks.STRIPPED_PALLID_LOG.get());
         blockModels.createTrivialBlock(MFBlocks.PALLID_LEAVES.get(), TexturedModel.LEAVES);
         blockModels.createPlantWithDefaultItem(MFBlocks.PALLID_SAPLING.get(), MFBlocks.POTTED_PALLID_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.PALLID_VERTICAL_SLAB.get(), MFBlocks.PALLID_PLANKS.get());
+
+        blockModels.createTrivialCube(MFBlocks.MAGIC_BLOCK.get());
+        blockModels.createTrivialCube(MFBlocks.EVIL_PORTAL.get());
+        blockModels.createFurnace(MFBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
+        blockModels.createPlantWithDefaultItem(MFBlocks.ROSE.get(), MFBlocks.POTTED_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
+        blockModels.createPlantWithDefaultItem(MFBlocks.BLUE_ROSE.get(), MFBlocks.POTTED_BLUE_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createPlantWithDefaultItem(MFBlocks.DECREPIT_ROOTS.get(), MFBlocks.POTTED_DECREPIT_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(MFBlocks.PALLID_ROOTS.get(), MFBlocks.POTTED_PALLID_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createSpeleothem(MFBlocks.ICICLE.get());
@@ -264,6 +274,8 @@ public class MFModelProvider extends ModelProvider {
                 .generateFor(MFBlockFamilies.getTaintedFamily());
         blockModels.family(MFBlocks.PALM_PLANKS.get())
                 .generateFor(MFBlockFamilies.getPalmFamily());
+        blockModels.family(MFBlocks.CHARRED_PLANKS.get())
+                .generateFor(MFBlockFamilies.getCharredFamily());
         blockModels.family(MFBlocks.DECREPIT_PLANKS.get())
                 .generateFor(MFBlockFamilies.getDecrepitFamily());
         blockModels.family(MFBlocks.PALLID_PLANKS.get())

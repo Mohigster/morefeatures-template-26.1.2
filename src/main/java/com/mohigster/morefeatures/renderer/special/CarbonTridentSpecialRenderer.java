@@ -22,7 +22,7 @@ public class CarbonTridentSpecialRenderer extends MFTridentSpecialRenderer {
         }
 
         public CarbonTridentSpecialRenderer bake(final BakingContext context) {
-            return new CarbonTridentSpecialRenderer(new MFTridentModel((context.entityModelSet().bakeLayer(MFModelLayer.CARBON_TRIDENT)), MFTridentModel.getTexture(MFEntityTypeIds.CARBON_TRIDENT)));
+            return new CarbonTridentSpecialRenderer(new MFTridentModel((context.entityModelSet().bakeLayer(MFModelLayer.CARBON_TRIDENT))));
         }
     }
 }

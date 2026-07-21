@@ -24,6 +24,7 @@ public final class MFItemTags {
     public static final TagKey<Item> BLOODWOOD_LOGS = morefeaturesTag("bloodwood_logs");
     public static final TagKey<Item> TAINTED_LOGS = morefeaturesTag("tainted_logs");
     public static final TagKey<Item> PALM_LOGS = morefeaturesTag("palm_logs");
+    public static final TagKey<Item> CHARRED_STEMS = morefeaturesTag("charred_stems");
     public static final TagKey<Item> DECREPIT_LOGS = morefeaturesTag("decrepit_logs");
     public static final TagKey<Item> PALLID_LOGS = morefeaturesTag("pallid_logs");
     public static final TagKey<Item> MUSIC_DISCS = morefeaturesTag("music_discs");

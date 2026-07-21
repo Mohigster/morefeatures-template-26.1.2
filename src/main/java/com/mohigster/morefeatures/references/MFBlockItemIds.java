@@ -60,6 +60,14 @@ public class MFBlockItemIds {
     public static final BlockItemId PALM_LEAVES = createId("palm_leaves");
     public static final BlockItemId PALM_SAPLING = createId("palm_sapling");
 
+    public static final BlockItemId CHARRED_STEM = createId("charred_stem");
+    public static final BlockItemId CHARRED_HYPHAE = createId("charred_hyphae");
+    public static final BlockItemId CHARRED_PLANKS = createId("charred_planks");
+    public static final BlockItemId STRIPPED_CHARRED_STEM = createId("stripped_charred_stem");
+    public static final BlockItemId STRIPPED_CHARRED_HYPHAE = createId("stripped_charred_hyphae");
+    public static final BlockItemId CHARRED_STAIRS = createId("charred_stairs");
+    public static final BlockItemId CHARRED_SLAB = createId("charred_slab");
+
     // --- Decrepit ---
     public static final BlockItemId DECREPIT_LOG = createId("decrepit_log");
     public static final BlockItemId DECREPIT_WOOD = createId("decrepit_wood");

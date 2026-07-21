@@ -48,7 +48,7 @@ public class MFRecipeProvider extends RecipeProvider {
     }
 
     protected void generateForBlockFamilies(FeatureFlagSet flagSet) {
-        MFBlockFamilies.getAllFamilies()
+        MFBlockFamilies.getAllNonGemstoneFamilies()
                 .forEach(family -> this.generateRecipes(family, flagSet));
     }
 
@@ -275,6 +275,28 @@ public class MFRecipeProvider extends RecipeProvider {
                 .pattern("PP")
                 .define('P', MFBlocks.STRIPPED_PALM_LOG.get())
                 .unlockedBy(getHasName(MFBlocks.STRIPPED_PALM_LOG.get()), has(MFBlocks.STRIPPED_PALM_LOG))
+                .save(output);
+
+        // Charred recipes
+
+        shapeless(RecipeCategory.BUILDING_BLOCKS, MFBlocks.CHARRED_PLANKS.get(), 4)
+                .requires(MFItemTags.CHARRED_STEMS)
+                .unlockedBy(getHasName(MFBlocks.CHARRED_STEM.get()), has(MFBlocks.CHARRED_STEM.get()))
+                .group("charred")
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.CHARRED_HYPHAE.get(), 3)
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', MFBlocks.CHARRED_STEM.get())
+                .unlockedBy(getHasName(MFBlocks.CHARRED_STEM.get()), has(MFBlocks.CHARRED_STEM))
+                .save(output);
+
+        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.STRIPPED_CHARRED_HYPHAE.get(), 3)
+                .pattern("BB")
+                .pattern("BB")
+                .define('B', MFBlocks.STRIPPED_CHARRED_STEM.get())
+                .unlockedBy(getHasName(MFBlocks.STRIPPED_CHARRED_STEM.get()), has(MFBlocks.STRIPPED_CHARRED_STEM))
                 .save(output);
 
         // Decrepit recipes

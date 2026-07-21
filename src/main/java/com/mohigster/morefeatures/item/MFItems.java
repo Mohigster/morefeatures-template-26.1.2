@@ -9,7 +9,7 @@ import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
 import com.mohigster.morefeatures.references.MFItemIds;
 import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
 import com.mohigster.morefeatures.datagen.MFJukeboxSongs;
-import com.mohigster.morefeatures.entity.entity_types.MFEntityTypes;
+import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.item.custom.*;
 import com.mohigster.morefeatures.item.custom.wand.*;
 import com.mohigster.morefeatures.tag.MFItemTags;

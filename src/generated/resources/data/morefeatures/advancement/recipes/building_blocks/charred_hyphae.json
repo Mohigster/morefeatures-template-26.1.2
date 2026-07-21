@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_charred_stem": {
+      "conditions": {
+        "items": [
+          {
+            "items": "morefeatures:charred_stem"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "morefeatures:charred_hyphae"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_charred_stem"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "morefeatures:charred_hyphae"
+    ]
+  }
+}

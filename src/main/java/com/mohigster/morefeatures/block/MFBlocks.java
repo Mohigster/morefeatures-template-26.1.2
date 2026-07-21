@@ -42,10 +42,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
-import java.util.function.UnaryOperator;
+import java.util.function.*;
 
 import static net.minecraft.world.level.block.WeatheringCopperCollection.zipMap;
 
@@ -171,10 +168,7 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(AZURITE_BLOCK.get())
     );
 
-    public static final DeferredBlock<Block> AZURITE_STAIRS = registerBlock(MFBlockItemIds.AZURITE_STAIRS,
-            props -> new StairBlock(MFBlocks.AZURITE_BLOCK.get().defaultBlockState(), props),
-            _ -> Properties.ofFullCopy(AZURITE_BLOCK.get())
-    );
+    public static final DeferredBlock<StairBlock> AZURITE_STAIRS = registerStair(MFBlockItemIds.AZURITE_STAIRS, AZURITE_BLOCK);
 
     public static final DeferredBlock<Block> AZURITE_SLAB = registerBlock(MFBlockItemIds.AZURITE_SLAB,
             SlabBlock::new,
@@ -300,10 +294,7 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(FLUORITE_BLOCK.get())
     );
 
-    public static final DeferredBlock<Block> FLUORITE_STAIRS = registerBlock(MFBlockItemIds.FLUORITE_STAIRS,
-            props -> new StairBlock(MFBlocks.FLUORITE_BLOCK.get().defaultBlockState(), props),
-            _ -> Properties.ofFullCopy(FLUORITE_BLOCK.get())
-    );
+    public static final DeferredBlock<StairBlock> FLUORITE_STAIRS = registerStair(MFBlockItemIds.FLUORITE_STAIRS, FLUORITE_BLOCK);
 
     public static final DeferredBlock<Block> FLUORITE_SLAB = registerBlock(MFBlockItemIds.FLUORITE_SLAB,
             SlabBlock::new,
@@ -398,7 +389,8 @@ public class MFBlocks {
 
     public static final DeferredBlock<Block> BLOODWOOD_LOG = registerBlock(MFBlockItemIds.BLOODWOOD_LOG,
             MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.OAK_LOG).mapColor(MapColor.COLOR_RED));
+            _ -> logProperties(MapColor.COLOR_RED, true).ignitedByLava()
+    );
 
     public static final DeferredBlock<Block> BLOODWOOD = registerBlock(MFBlockItemIds.BLOODWOOD,
             MFFlammableRotatedPillarBlock::new,
@@ -435,10 +427,7 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING)
     );
 
-    public static final DeferredBlock<Block> BLOODWOOD_STAIRS = registerBlock(MFBlockItemIds.BLOODWOOD_STAIRS,
-            properties -> new MFFlammableStairBlock(MFBlocks.BLOODWOOD_PLANKS.get().defaultBlockState(), properties),
-            _ -> Properties.ofFullCopy(BLOODWOOD_PLANKS.get())
-    );
+    public static final DeferredBlock<StairBlock> BLOODWOOD_STAIRS = registerFlammableStair(MFBlockItemIds.BLOODWOOD_STAIRS, BLOODWOOD_PLANKS);
 
     public static final DeferredBlock<Block> BLOODWOOD_SLAB = registerBlock(MFBlockItemIds.BLOODWOOD_SLAB,
             MFFlammableSlabBlock::new,
@@ -558,10 +547,7 @@ public class MFBlocks {
                     .pushReaction(PushReaction.DESTROY)
             ));
 
-    public static final DeferredBlock<Block> TAINTED_STAIRS = registerBlock(MFBlockItemIds.TAINTED_STAIRS,
-            props -> new MFFlammableStairBlock(MFBlocks.TAINTED_PLANKS.get().defaultBlockState(), props),
-            _ -> Properties.ofFullCopy(TAINTED_LOG.get())
-    );
+    public static final DeferredBlock<StairBlock> TAINTED_STAIRS = registerFlammableStair(MFBlockItemIds.TAINTED_STAIRS, TAINTED_PLANKS);
 
     public static final DeferredBlock<Block> TAINTED_SLAB = registerBlock(MFBlockItemIds.TAINTED_SLAB,
             MFFlammableSlabBlock::new,
@@ -639,14 +625,9 @@ public class MFBlocks {
     //———————————————————————————————————————Palm Wood Blocks————————————————————————————————————————————————————————————————————————
 
     public static final DeferredBlock<Block> PALM_LOG = registerBlock(MFBlockItemIds.PALM_LOG,
-            properties -> new MFFlammableRotatedPillarBlock(properties
-                    .mapColor(MapColor.COLOR_YELLOW)
-                    .strength(2f, 2f)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-                    .isRedstoneConductor(MFBlocks::always)
-                    .instrument(NoteBlockInstrument.BASEDRUM)
-            ));
+            MFFlammableRotatedPillarBlock::new,
+            _ -> logProperties(MapColor.COLOR_YELLOW, true).ignitedByLava()
+    );
 
     public static final DeferredBlock<Block> PALM_WOOD = registerBlock(MFBlockItemIds.PALM_WOOD,
             MFFlammableRotatedPillarBlock::new,
@@ -693,17 +674,9 @@ public class MFBlocks {
                     .pushReaction(PushReaction.DESTROY)
             ));
 
-    public static final DeferredBlock<Block> PALM_STAIRS = registerBlock(MFBlockItemIds.PALM_STAIRS,
-            properties -> new MFFlammableStairBlock(MFBlocks.PALM_PLANKS.get().defaultBlockState(), properties
-                    .strength(3f)
-                    .ignitedByLava()
-                    .sound(SoundType.WOOD)
-            ));
+    public static final DeferredBlock<StairBlock> PALM_STAIRS = registerFlammableStair(MFBlockItemIds.PALM_STAIRS, PALM_PLANKS);
 
-    public static final DeferredBlock<Block> PALM_SLAB = registerBlock(MFBlockItemIds.PALM_SLAB,
-            MFFlammableSlabBlock::new,
-            _ -> Properties.ofFullCopy(PALM_PLANKS.get())
-    );
+    public static final DeferredBlock<SlabBlock> PALM_SLAB = registerFlammableSlab(MFBlockItemIds.PALM_SLAB, PALM_PLANKS);
 
     public static final DeferredBlock<Block> PALM_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.PALM_VERTICAL_SLAB,
             true,
@@ -791,19 +764,44 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.COLOR_YELLOW)
     );
 
+    //———————————————————————————————————————Charred Wood Blocks—————————————————————————————————————————————————————————————————————
+    public static final DeferredBlock<Block> CHARRED_STEM = registerBlock(MFBlockItemIds.CHARRED_STEM,
+            RotatedPillarBlock::new,
+            _ -> logProperties(MapColor.COLOR_BLACK, false)
+    );
+
+    public static final DeferredBlock<Block> CHARRED_HYPHAE = registerBlock(MFBlockItemIds.CHARRED_HYPHAE,
+            RotatedPillarBlock::new,
+            _ -> Properties.ofFullCopy(CHARRED_STEM.get())
+    );
+
+    public static final DeferredBlock<Block> STRIPPED_CHARRED_STEM = registerBlock(MFBlockItemIds.STRIPPED_CHARRED_STEM,
+            RotatedPillarBlock::new,
+            _ -> Properties.ofFullCopy(CHARRED_STEM.get())
+    );
+
+    public static final DeferredBlock<Block> STRIPPED_CHARRED_HYPHAE = registerBlock(MFBlockItemIds.STRIPPED_CHARRED_HYPHAE,
+            RotatedPillarBlock::new,
+            _ -> Properties.ofFullCopy(CHARRED_STEM.get())
+    );
+
+    public static final DeferredBlock<Block> CHARRED_PLANKS = registerBlock(MFBlockItemIds.CHARRED_PLANKS,
+            Block::new,
+            _ -> Properties.ofFullCopy(CHARRED_STEM.get()).sound(SoundType.NETHER_WOOD)
+    );
+
+    public static final DeferredBlock<StairBlock> CHARRED_STAIRS = registerStair(MFBlockItemIds.CHARRED_STAIRS, CHARRED_PLANKS);
+
+    public static final DeferredBlock<Block> CHARRED_SLAB = registerBlock(MFBlockItemIds.CHARRED_SLAB,
+            SlabBlock::new,
+            _ -> Properties.ofFullCopy(CHARRED_PLANKS.get())
+    );
+
     //———————————————————————————————————————Decrepit Wood Blocks————————————————————————————————————————————————————————————————————
     public static final DeferredBlock<Block> DECREPIT_LOG = registerBlock(MFBlockItemIds.DECREPIT_LOG,
-            properties -> new MFFlammableRotatedPillarBlock(properties
-                    .strength(2F, 8F)
-                    .sound(SoundType.STEM)
-                    .isRedstoneConductor(MFBlocks::always)
-                    .isViewBlocking(MFBlocks::always)
-                    .isSuffocating(MFBlocks::always)
-                    .isValidSpawn(MFBlocks::never)
-                    .ignitedByLava()
-                    .instrument(NoteBlockInstrument.BASS)
-                    .mapColor(MapColor.TERRACOTTA_BLUE)
-            ));
+            MFFlammableRotatedPillarBlock::new,
+            _ -> logProperties(MapColor.TERRACOTTA_BLUE, false).ignitedByLava()
+    );
 
     public static final DeferredBlock<Block> DECREPIT_WOOD = registerBlock(MFBlockItemIds.DECREPIT_WOOD,
             MFFlammableRotatedPillarBlock::new,
@@ -861,19 +859,9 @@ public class MFBlocks {
                     .pushReaction(PushReaction.DESTROY)
             ));
 
-    public static final DeferredBlock<Block> DECREPIT_STAIRS = registerBlock(MFBlockItemIds.DECREPIT_STAIRS,
-            properties -> new MFFlammableStairBlock(MFBlocks.DECREPIT_PLANKS.get().defaultBlockState(), properties
-                    .strength(2f, 2f)
-                    .ignitedByLava()
-                    .sound(SoundType.NETHER_WOOD)
-            ));
+    public static final DeferredBlock<StairBlock> DECREPIT_STAIRS = registerFlammableStair(MFBlockItemIds.DECREPIT_STAIRS, DECREPIT_PLANKS);
 
-    public static final DeferredBlock<Block> DECREPIT_SLAB = registerBlock(MFBlockItemIds.DECREPIT_SLAB,
-            properties -> new MFFlammableSlabBlock(properties
-                    .strength(2f, 2f)
-                    .sound(SoundType.NETHER_WOOD)
-                    .ignitedByLava()
-            ));
+    public static final DeferredBlock<SlabBlock> DECREPIT_SLAB = registerFlammableSlab(MFBlockItemIds.DECREPIT_SLAB, DECREPIT_PLANKS);
 
     public static final DeferredBlock<Block> DECREPIT_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.DECREPIT_VERTICAL_SLAB,
             true,
@@ -966,7 +954,7 @@ public class MFBlocks {
 
     public static final DeferredBlock<Block> PALLID_LOG = registerBlock(MFBlockItemIds.PALLID_LOG,
             MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(DECREPIT_LOG.get()).mapColor(MapColor.TERRACOTTA_GREEN)
+            _ -> logProperties(MapColor.TERRACOTTA_GREEN, false).ignitedByLava()
     );
 
     public static final DeferredBlock<Block> PALLID_WOOD = registerBlock(MFBlockItemIds.PALLID_WOOD,
@@ -1008,15 +996,9 @@ public class MFBlocks {
             props -> new FlowerPotBlock(() -> (FlowerPotBlock)Blocks.FLOWER_POT, PALLID_SAPLING, props),
             _ -> Properties.ofFullCopy(POTTED_DECREPIT_SAPLING.get()));
 
-    public static final DeferredBlock<Block> PALLID_STAIRS = registerBlock(MFBlockItemIds.PALLID_STAIRS,
-            props -> new MFFlammableStairBlock(MFBlocks.PALLID_PLANKS.get().defaultBlockState(), props),
-            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
-    );
+    public static final DeferredBlock<StairBlock> PALLID_STAIRS = registerFlammableStair(MFBlockItemIds.PALLID_STAIRS, PALLID_PLANKS);
 
-    public static final DeferredBlock<Block> PALLID_SLAB = registerBlock(MFBlockItemIds.PALLID_SLAB,
-            MFFlammableSlabBlock::new,
-            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
-    );
+    public static final DeferredBlock<SlabBlock> PALLID_SLAB = registerFlammableSlab(MFBlockItemIds.PALLID_SLAB, PALLID_PLANKS);
 
     public static final DeferredBlock<Block> PALLID_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.PALLID_VERTICAL_SLAB,
             true,
@@ -1740,6 +1722,26 @@ public class MFBlocks {
         return block;
     }
 
+    private static DeferredBlock<StairBlock> registerStair(BlockItemId stairId, Supplier<Block> fullBlock){
+        return registerBlock(stairId, props -> new StairBlock(fullBlock.get().defaultBlockState(), props),
+                _ -> Properties.ofFullCopy(fullBlock.get()));
+    }
+
+    private static DeferredBlock<StairBlock> registerFlammableStair(BlockItemId stairId, Supplier<Block> plank){
+        return registerBlock(stairId, props -> new MFFlammableStairBlock(plank.get().defaultBlockState(), props),
+                _ -> Properties.ofFullCopy(plank.get()));
+    }
+
+    private static DeferredBlock<SlabBlock> registerSlab(BlockItemId slabId, Supplier<Block> fullBlock){
+        return registerBlock(slabId, SlabBlock::new,
+                _ -> Properties.ofFullCopy(fullBlock.get()));
+    }
+
+    private static DeferredBlock<SlabBlock> registerFlammableSlab(BlockItemId slabId, Supplier<Block> plank){
+        return registerBlock(slabId, MFFlammableSlabBlock::new,
+                _ -> Properties.ofFullCopy(plank.get()));
+    }
+
     // These exact booleans exist in the vanilla Blocks class, but have private access
 
     // Used by the isRedstoneConductor, isViewBlocking, and isSuffocating properties
@@ -1761,6 +1763,17 @@ public class MFBlocks {
     private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
         return true;
     }
+
+    private static Properties logProperties(MapColor mapColor, boolean overworldWood){
+        return Properties.of().strength(2F, 8F)
+                .sound(overworldWood ? SoundType.WOOD : SoundType.STEM)
+                .isRedstoneConductor(MFBlocks::always)
+                .isViewBlocking(MFBlocks::always)
+                .isSuffocating(MFBlocks::always)
+                .isValidSpawn(MFBlocks::never)
+                .instrument(NoteBlockInstrument.BASS)
+                .mapColor(mapColor);
+    };
 
     // Register method called in the mod event bus
 

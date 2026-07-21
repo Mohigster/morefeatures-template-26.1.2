@@ -153,6 +153,11 @@
   "item.morefeatures.palm_boat": "Palm Boat",
   "item.morefeatures.palm_chest_boat": "Palm Boat with Chest",
 
+  "block.morefeatures.charred_stem": "Charred Stem",
+  "block.morefeatures.charred_hyphae": "Charred Hyphae",
+  "block.morefeatures.stripped_charred_stem": "Stripped Charred Stem",
+  "block.morefeatures.stripped_charred_hyphae": "Stripped Charred Hyphae",
+
   "block.morefeatures.decrepit_nullium": "Decrepit Nullium",
   "block.morefeatures.decrepit_roots": "Decrepit Roots",
   "block.morefeatures.decrepit_log": "Decrepit Log",

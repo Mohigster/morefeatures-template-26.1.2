@@ -1,10 +1,11 @@
-package com.mohigster.morefeatures.entity.entity_types;
+package com.mohigster.morefeatures.entity;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.entity.custom.BrineEntity;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
 import com.mohigster.morefeatures.entity.custom.projectile.trident.ThrownMFTrident;
 import com.mohigster.morefeatures.item.MFItems;
+import com.mohigster.morefeatures.references.MFEntityTypeIds;
 import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mohigster.morefeatures.references.MFItemIds;
 import net.minecraft.core.registries.Registries;
@@ -25,13 +26,13 @@ public class MFEntityTypes {
             DeferredRegister.createEntities(MoreFeatures.MODID);
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownMFTrident>> CARBON_TRIDENT =
-            ENTITY_TYPES.register("carbon_trident", () -> createTridentEntityType((type, level) -> new ThrownMFTrident(type, level, MFItemIds.CARBON_TRIDENT.identifier(), 9.5F), "carbon_trident"));
+            ENTITY_TYPES.register("carbon_trident", () -> createTridentEntityType((type, level) -> new ThrownMFTrident(type, level, MFItemIds.CARBON_TRIDENT.identifier(), 9.5F), MFEntityTypeIds.CARBON_TRIDENT));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownMFTrident>> BISMUTH_TRIDENT =
-            ENTITY_TYPES.register("bismuth_trident", () -> createTridentEntityType((type, level) -> new ThrownMFTrident(type, level, MFItemIds.BISMUTH_TRIDENT.identifier(), 11.75F), "bismuth_trident"));
+            ENTITY_TYPES.register("bismuth_trident", () -> createTridentEntityType((type, level) -> new ThrownMFTrident(type, level, MFItemIds.BISMUTH_TRIDENT.identifier(), 11.75F), MFEntityTypeIds.BISMUTH_TRIDENT));
 
     public static final DeferredHolder<EntityType<?>, EntityType<BrineEntity>> BRINE =
-            ENTITY_TYPES.register("brine", () -> createHostileEntityType(BrineEntity::new, 5, 15, 0.8F, 1.5F, 1.3F, "brine"));
+            ENTITY_TYPES.register("brine", () -> createHostileEntityType(BrineEntity::new, 5, 15, 0.8F, 1.5F, 1.3F, MFEntityTypeIds.BRINE));
 
     public static final DeferredHolder<EntityType<?>, EntityType<Boat>> BLOODWOOD_BOAT =
             ENTITY_TYPES.register("bloodwood_boat",
@@ -41,7 +42,7 @@ public class MFEntityTypes {
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)
                             .noLootTable()
-                            .build(createKey("bloodwood_boat"))
+                            .build(MFEntityTypeIds.BLOODWOOD_BOAT)
             );
 
     public static final DeferredHolder<EntityType<?>, EntityType<ChestBoat>> BLOODWOOD_CHEST_BOAT =
@@ -52,7 +53,7 @@ public class MFEntityTypes {
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)
                             .noLootTable()
-                            .build(createKey("bloodwood_chest_boat"))
+                            .build(MFEntityTypeIds.BLOODWOOD_CHEST_BOAT)
             );
 
     public static final DeferredHolder<EntityType<?>, EntityType<Boat>> TAINTED_BOAT =
@@ -63,7 +64,7 @@ public class MFEntityTypes {
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)
                             .noLootTable()
-                            .build(createKey("tainted_boat"))
+                            .build(MFEntityTypeIds.TAINTED_BOAT)
             );
 
     public static final DeferredHolder<EntityType<?>, EntityType<ChestBoat>> TAINTED_CHEST_BOAT =
@@ -74,7 +75,7 @@ public class MFEntityTypes {
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)
                             .noLootTable()
-                            .build(createKey("tainted_chest_boat"))
+                            .build(MFEntityTypeIds.TAINTED_CHEST_BOAT)
             );
 
     public static final DeferredHolder<EntityType<?>, EntityType<Boat>> PALM_BOAT =
@@ -85,7 +86,7 @@ public class MFEntityTypes {
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)
                             .noLootTable()
-                            .build(createKey("palm_boat"))
+                            .build(MFEntityTypeIds.PALM_BOAT)
             );
 
     public static final DeferredHolder<EntityType<?>, EntityType<ChestBoat>> PALM_CHEST_BOAT =
@@ -96,14 +97,16 @@ public class MFEntityTypes {
                             .sized(1.375F, 0.5625F)
                             .clientTrackingRange(10)
                             .noLootTable()
-                            .build(createKey("palm_chest_boat"))
+                            .build(MFEntityTypeIds.PALM_CHEST_BOAT)
             );
 
     public static final DeferredHolder<EntityType<?>, EntityType<IceologerEntity>> ICEOLOGER =
-            ENTITY_TYPES.register("iceologer", () -> createHostileEntityType(IceologerEntity::new, 8, 10, 1f, 2f, 1.80f, "iceologer"));
+            ENTITY_TYPES.register("iceologer", () -> createHostileEntityType(IceologerEntity::new, 8, 10, 1f, 2f, 1.80f, MFEntityTypeIds.ICEOLOGER));
 
     private static <T extends Entity> EntityType<T> createHostileEntityType(
-            EntityType.EntityFactory<T> factory, int trackingRange, int updateInterval, float width, float height, float eyeHeight, String path) {
+            EntityType.EntityFactory<T> factory, int trackingRange,
+            int updateInterval, float width, float height, float eyeHeight,
+            ResourceKey<EntityType<?>> entityId) {
 
         EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
                 .sized(width, height)
@@ -116,11 +119,11 @@ public class MFEntityTypes {
             builder.updateInterval(updateInterval);
         }
 
-        return builder.build(createKey(path));
+        return builder.build(entityId);
     }
 
     private static <T extends Entity> EntityType<T> createTridentEntityType(
-            EntityType.EntityFactory<T> factory, String path) {
+            EntityType.EntityFactory<T> factory, ResourceKey<EntityType<?>> entityId) {
 
         EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
                 .sized(0.5F, 0.5F)
@@ -130,11 +133,7 @@ public class MFEntityTypes {
                 .updateInterval(20);
 
 
-        return builder.build(createKey(path));
-    }
-
-    private static ResourceKey<EntityType<?>> createKey(String id){
-        return ResourceKey.create(Registries.ENTITY_TYPE, MFIdentifier.withMfNamespace(id));
+        return builder.build(entityId);
     }
 
     public static void register(IEventBus modEventBus) {
