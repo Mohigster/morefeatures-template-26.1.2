@@ -66,7 +66,7 @@ Example JSONs. These may not necessarily actually be in the mod:
 `carbon_fiber_from_magic_block.json`:
 ```json
 {
-  "input_tag": "morefeatures:magic_block_turns_to_carbon",
+  "input_tag": "morefeatures:magic_block_transmutations/carbon",
   "output_item": "morefeatures:carbon_fiber"
 }
 ```
@@ -74,7 +74,7 @@ Example JSONs. These may not necessarily actually be in the mod:
 `lingering_potion_from_magic_block.json`:
 ```json
 {
-  "input_tag": "morefeatures:magic_block_turns_to_lingering_pot",
+  "input_tag": "morefeatures:magic_block_transmutations/lingering_pot",
   "output_item": "minecraft:lingering_potion",
   "copy_components": true
 }
@@ -83,19 +83,19 @@ Example JSONs. These may not necessarily actually be in the mod:
 `grass_block_from_magic_block.json`:
 ```json
 {
-  "input_tag": "minecraft:nylium",
+  "input_tag": "minecraft:wooden_stairs",
   "output_item": "minecraft:grass_block"
 }
 ```
 
-And finally, don't forget to add your custom transmutation result to the **magic_block_transmutation_results** item tag!
+And finally, don't forget to add your custom transmutation result to the **results** item tag!
 
 This tag functions as a failsafe to ensure that your result is the final item in the chain. Even if your item is a part of
 a tag that is accepted as a transmutation input tag, it will not mutate if it is in this tag!
 
 Since it is a More Features tag, you must add it in this EXACT JSON file in this EXACT directory:
 
-`data/morefeatures/tags/item/magic_block_transmutation_results.json`
+`data/morefeatures/tags/item/magic_block_transmutations/results.json`
 
 To prevent developers from forgetting to add the result to the item tag, the Magic Block will reject the transmutation if the result item is not in the tag!
 
@@ -118,3 +118,9 @@ public class MyItemTagsProvider extends ItemTagsProvider {
     }
 }
 ```
+
+Tag names are generally simple.
+
+In this mod, all magic block transmutation tags are names simply after the output item, and located within the tags/item/magic_block_transmutations folder
+
+e.g. `tags/item/magic_block_transmutations/bedrock` is the tag to turn an item into bedrock using the magic block.

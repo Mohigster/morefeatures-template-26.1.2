@@ -16,12 +16,8 @@ import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.WeatheringCopper;
-import net.minecraft.world.level.block.WeatheringCopperCollection;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.StairsShape;
-import net.neoforged.neoforge.registries.DeferredBlock;
-import org.apache.commons.lang3.function.TriConsumer;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
@@ -301,24 +297,5 @@ public final class MFBlockModelGenerators {
                         .select(3, plainVariant(blockModels.createSuffixedVariant(textureSource, "_3", ModelTemplates.CUBE_ALL, TextureMapping::cube)))
                 )
         );
-    }
-
-    public static void generateWeatheredAndWaxedCopper(
-            BlockModelGenerators blockModels,
-            WeatheringCopperCollection<DeferredBlock<Block>> newBlockCollection,
-            WeatheringCopperCollection<Block> textureBaseCollection,
-            TriConsumer<BlockModelGenerators, Block, Block> modelGenerator
-    ) {
-        WeatheringCopper.WeatherState.forEach(weatherState -> {
-            Block unwaxedSlab = newBlockCollection.weathering().pick(weatherState).get();
-
-            /* Waxed and unwaxed copper look identical, so the two states can use the exact same base texture */
-            Block base = textureBaseCollection.weathering().pick(weatherState);
-
-            modelGenerator.accept(blockModels, unwaxedSlab, base);
-
-            Block waxedSlab = newBlockCollection.waxed().pick(weatherState).get();
-            modelGenerator.accept(blockModels, waxedSlab, base);
-        });
     }
 }

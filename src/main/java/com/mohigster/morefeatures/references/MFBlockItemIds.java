@@ -67,6 +67,7 @@ public class MFBlockItemIds {
     public static final BlockItemId STRIPPED_CHARRED_HYPHAE = createId("stripped_charred_hyphae");
     public static final BlockItemId CHARRED_STAIRS = createId("charred_stairs");
     public static final BlockItemId CHARRED_SLAB = createId("charred_slab");
+    public static final BlockItemId CHARRED_NYLIUM = createId("charred_nylium");
 
     // --- Decrepit ---
     public static final BlockItemId DECREPIT_LOG = createId("decrepit_log");

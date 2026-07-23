@@ -36,7 +36,7 @@ public class MFModelProvider extends ModelProvider {
         itemModels.generateFlatItem(MFItems.RAW_FLUORITE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.FLUORITE.get(), ModelTemplates.FLAT_ITEM);
         itemModels.generateFlatItem(MFItems.BRINE_ROD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
-        itemModels.generateFlatItem(MFItems.BISMUTH_EQUIPMENT.getFirst().asItem(), ModelTemplates.FLAT_HANDHELD_ITEM);
+        itemModels.generateFlatItem(MFItems.BISMUTH_SWORD.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         itemModels.generateFlatItem(MFItems.BISMUTH_PICKAXE.get(), ModelTemplates.FLAT_HANDHELD_ITEM);
         MFItemModelGenerators.generateTrimmableItem(itemModels, MFItems.BISMUTH_HELMET.get(), MFEquipmentAssets.BISMUTH, ItemModelGenerators.TRIM_PREFIX_HELMET, false);
         MFItemModelGenerators.generateTrimmableItem(itemModels, MFItems.BISMUTH_CHESTPLATE.get(), MFEquipmentAssets.BISMUTH, ItemModelGenerators.TRIM_PREFIX_CHESTPLATE, false);
@@ -164,13 +164,20 @@ public class MFModelProvider extends ModelProvider {
         blockModels.createPlantWithDefaultItem(MFBlocks.BLUE_ROSE.get(), MFBlocks.POTTED_BLUE_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createPlantWithDefaultItem(MFBlocks.DECREPIT_ROOTS.get(), MFBlocks.POTTED_DECREPIT_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(MFBlocks.PALLID_ROOTS.get(), MFBlocks.POTTED_PALLID_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+
         blockModels.createSpeleothem(MFBlocks.ICICLE.get());
+
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.AZURITE_VERTICAL_SLAB.get(), MFBlocks.AZURITE_BLOCK.get());
         blockModels.createShelf(MFBlocks.AZURITE_SHELF.get(), MFBlocks.RAW_AZURITE_BLOCK.get());
+
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.FLUORITE_VERTICAL_SLAB.get(), MFBlocks.FLUORITE_BLOCK.get());
         blockModels.createShelf(MFBlocks.FLUORITE_SHELF.get(), MFBlocks.RAW_FLUORITE_BLOCK.get());
+
         MFBlockModelGenerators.createNyliumLikeBlock(blockModels, MFBlocks.PALLID_NULLIUM.get(), Blocks.END_STONE); // Call blockModels as a parameter so that we can use blockStateOutput and modelOutput. This will be necessary for all custom model generation methods
         MFBlockModelGenerators.createNyliumLikeBlock(blockModels, MFBlocks.DECREPIT_NULLIUM.get(), Blocks.END_STONE);
+
+        blockModels.createNyliumBlock(MFBlocks.CHARRED_NYLIUM.get());
+
         MFBlockModelGenerators.createAnchor(blockModels, MFBlocks.VOID_ANCHOR.get());
 
         /* Vanilla vertical slab models */
@@ -245,12 +252,17 @@ public class MFModelProvider extends ModelProvider {
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.MUD_BRICK_VERTICAL_SLAB.get(), Blocks.MUD_BRICKS);
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.RESIN_BRICK_VERTICAL_SLAB.get(), Blocks.RESIN_BRICKS);
 
-        MFBlockModelGenerators.generateWeatheredAndWaxedCopper( // generates all models for every cut copper vertical slab, including all weathered states and their waxed variants.
-                // WeatheringCopperCollection.zipApply cannot be used because the waxed blocks don't have a unique texture, but it assumes they do, causing it to find no texture for the waxed variants and default to the placeholder texture
-                blockModels,
-                MFBlocks.CUT_COPPER_VERTICAL_SLAB,
-                Blocks.CUT_COPPER,
-                MFBlockModelGenerators::createVerticalSlab
+        WeatheringCopperCollection.STATES.forEach(
+                state -> {
+                    Block unwaxedSlab = MFBlocks.CUT_COPPER_VERTICAL_SLAB.weathering().pick(state).get();
+
+                    Block waxedSlab = MFBlocks.CUT_COPPER_VERTICAL_SLAB.waxed().pick(state).get();
+
+                    Block textureSource = Blocks.CUT_COPPER.weathering().pick(state);
+
+                    MFBlockModelGenerators.createVerticalSlab(blockModels, unwaxedSlab, textureSource);
+                    MFBlockModelGenerators.createVerticalSlab(blockModels, waxedSlab, textureSource);
+                }
         );
 
         ColorCollection.VALUES.forEach( // This one call generates all the models for every wool colour, and dynamically adapts if Mojang ever adds a new wool colour to the game. No new code necessary at all!

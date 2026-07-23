@@ -1,4 +1,4 @@
 {
-  "input_tag": "morefeatures:magic_block_turns_to_bedrock",
+  "input_tag": "morefeatures:magic_block_transmutations/bedrock",
   "output_item": "minecraft:bedrock"
 }

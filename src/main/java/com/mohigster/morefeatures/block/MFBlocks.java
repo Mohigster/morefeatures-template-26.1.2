@@ -170,10 +170,7 @@ public class MFBlocks {
 
     public static final DeferredBlock<StairBlock> AZURITE_STAIRS = registerStair(MFBlockItemIds.AZURITE_STAIRS, AZURITE_BLOCK);
 
-    public static final DeferredBlock<Block> AZURITE_SLAB = registerBlock(MFBlockItemIds.AZURITE_SLAB,
-            SlabBlock::new,
-            _ -> Properties.ofFullCopy(AZURITE_BLOCK.get())
-    );
+    public static final DeferredBlock<SlabBlock> AZURITE_SLAB = registerSlab(MFBlockItemIds.AZURITE_SLAB, AZURITE_BLOCK);
 
     public static final DeferredBlock<Block> AZURITE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.AZURITE_VERTICAL_SLAB,
             false,
@@ -296,9 +293,7 @@ public class MFBlocks {
 
     public static final DeferredBlock<StairBlock> FLUORITE_STAIRS = registerStair(MFBlockItemIds.FLUORITE_STAIRS, FLUORITE_BLOCK);
 
-    public static final DeferredBlock<Block> FLUORITE_SLAB = registerBlock(MFBlockItemIds.FLUORITE_SLAB,
-            SlabBlock::new,
-            _ -> Properties.ofFullCopy(FLUORITE_BLOCK.get()));
+    public static final DeferredBlock<SlabBlock> FLUORITE_SLAB = registerSlab(MFBlockItemIds.FLUORITE_SLAB, FLUORITE_BLOCK);
 
     public static final DeferredBlock<Block> FLUORITE_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.FLUORITE_VERTICAL_SLAB,
             false,
@@ -429,10 +424,7 @@ public class MFBlocks {
 
     public static final DeferredBlock<StairBlock> BLOODWOOD_STAIRS = registerFlammableStair(MFBlockItemIds.BLOODWOOD_STAIRS, BLOODWOOD_PLANKS);
 
-    public static final DeferredBlock<Block> BLOODWOOD_SLAB = registerBlock(MFBlockItemIds.BLOODWOOD_SLAB,
-            MFFlammableSlabBlock::new,
-            _ -> Properties.ofFullCopy(BLOODWOOD_PLANKS.get())
-    );
+    public static final DeferredBlock<SlabBlock> BLOODWOOD_SLAB = registerFlammableSlab(MFBlockItemIds.BLOODWOOD_SLAB, BLOODWOOD_PLANKS);
 
     public static final DeferredBlock<Block> BLOODWOOD_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.BLOODWOOD_VERTICAL_SLAB,
             true,
@@ -549,10 +541,7 @@ public class MFBlocks {
 
     public static final DeferredBlock<StairBlock> TAINTED_STAIRS = registerFlammableStair(MFBlockItemIds.TAINTED_STAIRS, TAINTED_PLANKS);
 
-    public static final DeferredBlock<Block> TAINTED_SLAB = registerBlock(MFBlockItemIds.TAINTED_SLAB,
-            MFFlammableSlabBlock::new,
-            _ -> Properties.ofFullCopy(TAINTED_LOG.get())
-    );
+    public static final DeferredBlock<SlabBlock> TAINTED_SLAB = registerFlammableSlab(MFBlockItemIds.TAINTED_SLAB, TAINTED_PLANKS);
 
     public static final DeferredBlock<Block> TAINTED_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.TAINTED_VERTICAL_SLAB,
             true,
@@ -792,9 +781,11 @@ public class MFBlocks {
 
     public static final DeferredBlock<StairBlock> CHARRED_STAIRS = registerStair(MFBlockItemIds.CHARRED_STAIRS, CHARRED_PLANKS);
 
-    public static final DeferredBlock<Block> CHARRED_SLAB = registerBlock(MFBlockItemIds.CHARRED_SLAB,
-            SlabBlock::new,
-            _ -> Properties.ofFullCopy(CHARRED_PLANKS.get())
+    public static final DeferredBlock<SlabBlock> CHARRED_SLAB = registerSlab(MFBlockItemIds.CHARRED_SLAB, CHARRED_PLANKS);
+
+    public static final DeferredBlock<Block> CHARRED_NYLIUM = registerBlock(MFBlockItemIds.CHARRED_NYLIUM,
+            NyliumBlock::new,
+            _ -> Properties.ofFullCopy(Blocks.WARPED_NYLIUM).mapColor(MapColor.COLOR_BLACK)
     );
 
     //———————————————————————————————————————Decrepit Wood Blocks————————————————————————————————————————————————————————————————————
@@ -1773,7 +1764,7 @@ public class MFBlocks {
                 .isValidSpawn(MFBlocks::never)
                 .instrument(NoteBlockInstrument.BASS)
                 .mapColor(mapColor);
-    };
+    }
 
     // Register method called in the mod event bus
 

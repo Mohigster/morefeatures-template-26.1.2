@@ -619,7 +619,7 @@ public class MFRecipeProvider extends RecipeProvider {
         bismuthSmithing(Items.NETHERITE_AXE, RecipeCategory.COMBAT, MFItems.BISMUTH_AXE.get());
         bismuthSmithing(Items.NETHERITE_SHOVEL, RecipeCategory.COMBAT, MFItems.BISMUTH_SHOVEL.get());
         bismuthSmithing(Items.NETHERITE_HOE, RecipeCategory.COMBAT, MFItems.BISMUTH_HOE.get());
-        bismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, MFItems.BISMUTH_EQUIPMENT.getFirst().asItem());
+        bismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, MFItems.BISMUTH_SWORD.get());
         bismuthSmithing(Items.NETHERITE_PICKAXE, RecipeCategory.COMBAT, MFItems.BISMUTH_PICKAXE.get());
         bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, MFItems.BISMUTH_HELMET.get());
         bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, MFItems.BISMUTH_CHESTPLATE.get());

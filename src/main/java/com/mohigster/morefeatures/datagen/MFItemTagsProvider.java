@@ -1,7 +1,6 @@
 package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.references.MFBlockItemIds;
 import com.mohigster.morefeatures.references.MFItemIds;
 import com.mohigster.morefeatures.item.MFItems;
@@ -29,7 +28,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
         new MFBlockItemTagsProvider(tagId -> BlockItemTagsProvider.wrapForItems(this.tag(tagId.item()))).run();
 
         tag(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
+                .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_PICKAXE)
                 .add(MFItemIds.BISMUTH_AXE)
                 .add(MFItemIds.BISMUTH_HOE)
@@ -56,8 +55,8 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItems.BISMUTH_BOW.getKey());
 
         tag(MFItemTags.THUNDERING_ENCHANTABLE)
-                .add(MFItems.BISMUTH_AXE.getKey())
-                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey());
+                .add(MFItemIds.BISMUTH_AXE)
+                .add(MFItemIds.BISMUTH_SWORD);
 
         tag(ItemTags.TRIDENT_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_TRIDENT)
@@ -195,18 +194,18 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.BISMUTH_PICKAXE);
 
         tag(ItemTags.SWORDS)
-                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey());
+                .add(MFItemIds.BISMUTH_SWORD);
 
         tag(ItemTags.SPEARS)
                 .add(MFItemIds.BISMUTH_SPEAR);
 
         tag(ItemTags.MELEE_WEAPON_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
+                .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_SPEAR)
                 .add(MFItemIds.BISMUTH_AXE);
 
         tag(ItemTags.SWEEPING_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey());
+                .add(MFItemIds.BISMUTH_SWORD);
 
         tag(ItemTags.MINING_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_PICKAXE)
@@ -214,7 +213,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.BISMUTH_SHOVEL);
 
         tag(ItemTags.DURABILITY_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
+                .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_PICKAXE)
                 .add(MFItemIds.BISMUTH_AXE)
                 .add(MFItemIds.BISMUTH_HOE)
@@ -233,17 +232,17 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItems.BISMUTH_SPEAR.getKey());
 
         tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
+                .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_SPEAR)
                 .add(MFItemIds.BISMUTH_AXE);
 
         tag(ItemTags.WEAPON_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
+                .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_SPEAR)
                 .add(MFItemIds.BISMUTH_AXE);
 
         tag(ItemTags.FIRE_ASPECT_ENCHANTABLE)
-                .add(MFItems.BISMUTH_EQUIPMENT.getFirst().getKey())
+                .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_SPEAR);
 
         tag(ItemTags.ARMOR_ENCHANTABLE)
@@ -335,6 +334,11 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .addTag(ItemTags.LOGS)
                 .addTag(ItemTags.LOGS_THAT_BURN)
                 .addTag(ItemTags.WOOL)
+                .addTag(MFItemTags.WOODEN_VERTICAL_SLABS)
+                .addTag(ItemTags.WOODEN_SLABS)
+                .add(BlockItemIds.BAMBOO_MOSAIC_SLAB.item())
+                .addTag(ItemTags.WOODEN_STAIRS)
+                .add(BlockItemIds.BAMBOO_MOSAIC_STAIRS.item())
                 .addTag(MFBlockItemTags.WOOL_VERTICAL_SLABS.item())
                 .addTag(ItemTags.PLANKS)
                 .addTag(MFItemTags.IS_FOOD)
@@ -405,6 +409,40 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(BlockItemIds.DEEPSLATE_GOLD_ORE.item())
                 .add(BlockItemIds.ANCIENT_DEBRIS.item())
                 .add(BlockItemIds.NETHER_GOLD_ORE.item());
+
+        tag(MFItemTags.WOODEN_VERTICAL_SLABS)
+                .add(MFBlockItemIds.OAK_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.SPRUCE_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.BIRCH_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.JUNGLE_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.ACACIA_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.DARK_OAK_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.CRIMSON_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.WARPED_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.MANGROVE_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.CHERRY_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.BAMBOO_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.BAMBOO_MOSAIC_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.PALE_OAK_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.BLOODWOOD_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.TAINTED_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.PALM_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.DECREPIT_VERTICAL_SLAB.item())
+                .add(MFBlockItemIds.PALLID_VERTICAL_SLAB.item());
+
+        tag(ItemTags.WOODEN_STAIRS)
+                .add(MFBlockItemIds.BLOODWOOD_STAIRS.item())
+                .add(MFBlockItemIds.TAINTED_STAIRS.item())
+                .add(MFBlockItemIds.PALM_STAIRS.item())
+                .add(MFBlockItemIds.DECREPIT_STAIRS.item())
+                .add(MFBlockItemIds.PALLID_STAIRS.item());
+
+        tag(ItemTags.WOODEN_SLABS)
+                .add(MFBlockItemIds.BLOODWOOD_SLAB.item())
+                .add(MFBlockItemIds.TAINTED_SLAB.item())
+                .add(MFBlockItemIds.PALM_SLAB.item())
+                .add(MFBlockItemIds.DECREPIT_SLAB.item())
+                .add(MFBlockItemIds.PALLID_SLAB.item());
 
         tag(ItemTags.TRIM_MATERIALS)
                 .add(MFItemIds.ALUMINIUM_INGOT)

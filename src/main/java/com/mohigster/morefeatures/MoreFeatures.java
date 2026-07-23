@@ -28,6 +28,7 @@ import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.block.*;
@@ -59,10 +60,11 @@ public class MoreFeatures {
     // The constructor for the mod class is the first code that is run when your mod is loaded.
     // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public MoreFeatures(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup method for modloading
+        // Register the commonSetup method for mod loading
 
         modEventBus.addListener(this::commonSetup);
-        NeoForge.EVENT_BUS.addListener(MagicBlockTransmutations.INSTANCE::onTagsUpdated);
+
+        NeoForge.EVENT_BUS.addListener(MagicBlockTransmutations.INSTANCE::ignoreTransmutationResultsNotInResultsTag);
 
         MFCreativeModeTabs.register(modEventBus); // All register methods are declared in the class
 
@@ -109,7 +111,6 @@ public class MoreFeatures {
 
     private void commonSetup(FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
-
             this.registerPottedPlants();
 
             MFBiomes.registerBiomes(); // Register biomes so the SurfaceRules has something to find.
@@ -117,21 +118,6 @@ public class MoreFeatures {
             this.registerDispenserBehaviour();
         });
     }
-
-    // Add the items to a creative mode tab.
-    private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        addOresAndIngots(event);
-
-        addWoodenVerticalSlabs(event);
-        addStoneAndDeepslateVerticalSlabs(event);
-        addStoneVariantVerticalSlabs(event);
-        addSandstoneVerticalSlabs(event);
-        addSulfurAndCinnabarVerticalSlabs(event);
-        addNetherAndEndVerticalSlabs(event);
-        addMiscVerticalSlabs(event);
-        addWoolAndCopperVerticalSlabs(event);
-    }
-
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
@@ -180,6 +166,24 @@ public class MoreFeatures {
 
     private void registerDispenserBehaviour(){
         DispenserBlock.registerBehavior(
+                MFItems.BLOODWOOD_BOAT.get(),
+                new BoatDispenseItemBehavior(MFEntityTypes.BLOODWOOD_BOAT.get())
+        );
+        DispenserBlock.registerBehavior(
+                MFItems.BLOODWOOD_CHEST_BOAT.get(),
+                new BoatDispenseItemBehavior(MFEntityTypes.BLOODWOOD_CHEST_BOAT.get())
+        );
+
+        DispenserBlock.registerBehavior(
+                MFItems.TAINTED_BOAT.get(),
+                new BoatDispenseItemBehavior(MFEntityTypes.TAINTED_BOAT.get())
+        );
+        DispenserBlock.registerBehavior(
+                MFItems.TAINTED_CHEST_BOAT.get(),
+                new BoatDispenseItemBehavior(MFEntityTypes.TAINTED_CHEST_BOAT.get())
+        );
+
+        DispenserBlock.registerBehavior(
                 MFItems.PALM_BOAT.get(),
                 new BoatDispenseItemBehavior(MFEntityTypes.PALM_BOAT.get())
         );
@@ -209,6 +213,27 @@ public class MoreFeatures {
 
         SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.NETHER, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK, 10, MFSurfaceRules.fixNetherRules(biomeGetter));
     }
+
+    // I have broken down the creative tab event into many separate methods for readability
+
+    // Add the items to a creative mode tab.
+    private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        addArmorAndTools(event);
+        addOresAndIngots(event);
+        addAllVerticalSlabs(event);
+    }
+
+    private void addAllVerticalSlabs(BuildCreativeModeTabContentsEvent event){
+        addWoodenVerticalSlabs(event);
+        addStoneAndDeepslateVerticalSlabs(event);
+        addStoneVariantVerticalSlabs(event);
+        addSandstoneVerticalSlabs(event);
+        addSulfurAndCinnabarVerticalSlabs(event);
+        addNetherAndEndVerticalSlabs(event);
+        addMiscVerticalSlabs(event);
+        addWoolAndCopperVerticalSlabs(event);
+    }
+
 
     private void addWoodenVerticalSlabs(BuildCreativeModeTabContentsEvent event){
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
@@ -315,6 +340,27 @@ public class MoreFeatures {
         if(event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){
             WeatheringCopper.WeatherState.forEach(state -> event.insertBefore(Items.CUT_COPPER_SLAB.weathering().unaffected().getDefaultInstance(), MFBlocks.CUT_COPPER_VERTICAL_SLAB.weathering().pick(state).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
             WeatheringCopper.WeatherState.forEach(state -> event.insertBefore(Items.CUT_COPPER_SLAB.waxed().unaffected().getDefaultInstance(), MFBlocks.CUT_COPPER_VERTICAL_SLAB.waxed().pick(state).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS));
+        }
+    }
+
+    private void addArmorAndTools(BuildCreativeModeTabContentsEvent event){
+        if (event.getTabKey() == CreativeModeTabs.COMBAT){
+            ItemStack bismuthHelmet = MFItems.BISMUTH_HELMET.toStack();
+            ItemStack bismuthChest = MFItems.BISMUTH_CHESTPLATE.toStack();
+            ItemStack bismuthLegs = MFItems.BISMUTH_LEGGINGS.toStack();
+            ItemStack bismuthBoots = MFItems.BISMUTH_BOOTS.toStack();
+
+            event.insertAfter(Items.NETHERITE_BOOTS.getDefaultInstance(), bismuthHelmet, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(bismuthHelmet, bismuthChest, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(bismuthChest, bismuthLegs, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(bismuthLegs, bismuthBoots, CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+
+            event.insertAfter(Items.NETHERITE_SWORD.getDefaultInstance(), MFItems.BISMUTH_SWORD.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(Items.NETHERITE_SPEAR.getDefaultInstance(), MFItems.BISMUTH_SPEAR.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(Items.NETHERITE_AXE.getDefaultInstance(), MFItems.BISMUTH_AXE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        }
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES){
+            event.insertAfter(Items.NETHERITE_PICKAXE.getDefaultInstance(), MFItems.BISMUTH_PICKAXE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
 

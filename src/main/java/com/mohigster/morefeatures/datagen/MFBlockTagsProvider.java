@@ -383,6 +383,9 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.BAMBOO_VERTICAL_SLAB.block())
                 .add(MFBlockItemIds.BAMBOO_MOSAIC_VERTICAL_SLAB.block())
                 .add(MFBlockItemIds.PALE_OAK_VERTICAL_SLAB.block())
+                .add(MFBlockItemIds.BLOODWOOD_VERTICAL_SLAB.block())
+                .add(MFBlockItemIds.TAINTED_VERTICAL_SLAB.block())
+                .add(MFBlockItemIds.PALM_VERTICAL_SLAB.block())
                 .add(MFBlockItemIds.DECREPIT_VERTICAL_SLAB.block())
                 .add(MFBlockItemIds.PALLID_VERTICAL_SLAB.block());
 

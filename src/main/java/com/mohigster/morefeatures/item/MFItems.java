@@ -48,6 +48,7 @@ public class MFItems {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
+    @SuppressWarnings("SameParameterValue")
     private static DeferredItem<Item> registerItem(String name, Function<Item.Properties, Item> function, Item.Properties itemProp) {
         return ITEMS.register(name, () -> function.apply(itemProp.setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MODID, name)))));
     }
@@ -329,6 +330,19 @@ public class MFItems {
                     .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
             ));
 
+    public static final DeferredItem<Item> BISMUTH_SWORD = registerItem(MFItemIds.BISMUTH_SWORD,
+            properties -> new Item(properties
+                    .sword(
+                            BISMUTH_TOOL_MATERIAL,
+                            0F,
+                            -2.8F
+                    )
+                    .enchantable(15)
+                    .fireResistant()
+                    .rarity(Rarity.RARE)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+            ));
+
     public static final DeferredItem<Item> BISMUTH_AXE = registerItem(MFItemIds.BISMUTH_AXE,
             properties -> new AxeItem(BISMUTH_TOOL_MATERIAL, 6f, -3f, properties
                     .enchantable(15)
@@ -574,20 +588,6 @@ public class MFItems {
             MFItemIds.PALM_CHEST_BOAT,
             props -> new BoatItem(MFEntityTypes.PALM_CHEST_BOAT.get(), props)
     );
-
-    public static final List<DeferredItem<Item>> BISMUTH_EQUIPMENT = registerEquipmentItems("bismuth", BISMUTH_TOOL_MATERIAL,
-            new float[]{5.5f, -2.2f},
-            new Item.Properties().rarity(Rarity.RARE).fireResistant().enchantable(15)
-    );
-
-    public static List<DeferredItem<Item>> registerEquipmentItems(String name, ToolMaterial toolmaterial,
-                                                            float[] swordattr,
-                                                            Item.Properties itemProp) {
-
-        return List.of(
-                registerItem(name + "_sword", (p) -> new Item(p.sword(toolmaterial, swordattr[0], swordattr[1])), itemProp)
-        );
-    }
 
     // Keep in mind, Block Items (except for signs because their items are shared by two blocks, wall and standing/ceiling) are registered automatically by the registerBlock method in MFBlocks.
     // As such, there is no Block Items being registered here in this class. See MFBlocks if you want to look at how they are registered

@@ -19,12 +19,13 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SpeleothemBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.SpeleothemThickness;
+import net.minecraft.world.level.pathfinder.PathComputationType;
 import net.minecraft.world.phys.Vec3;
-import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 
+@NullMarked
 public class IcicleBlock extends SpeleothemBlock {
     private static final int MAX_GROWING_LENGTH = 5;
 
@@ -52,11 +53,14 @@ public class IcicleBlock extends SpeleothemBlock {
 
     public IcicleBlock(List<BlockState> blocksToGrowOn, Properties properties) {
         super(Blocks.PACKED_ICE.defaultBlockState(), properties); // Passing Blocks.PACKED_ICE.defaultBlockState() into the super is just to keep the compiler happy because the base class wants a singular block state, not a list. This block state is unused by this class.
-        this.blocksToGrowOn = blocksToGrowOn;
+                                                                  // I have checked SpeleothemBlock. Within that class, the blockToGrowIn Block State passed in here is ONLY used in the canGrow method. Since we override that to use the list, this will have no side effects.
+
+        if(blocksToGrowOn.isEmpty()) this.blocksToGrowOn = this.defaultValidGrowthBlocks();
+        else this.blocksToGrowOn = blocksToGrowOn;
     }
 
     @Override
-    public @NonNull MapCodec<IcicleBlock> codec() {
+    public MapCodec<IcicleBlock> codec() {
         return CODEC;
     }
 
@@ -65,17 +69,11 @@ public class IcicleBlock extends SpeleothemBlock {
         return STALACTITE_SOUND_LEVEL_EVENT_ID;
     }
 
-    @NullMarked
     @Override
     public void onBrokenAfterFall(Level level, BlockPos pos, FallingBlockEntity entity) {
         if (!entity.isSilent()) {
-            int blockStateId = getBlockStateId(entity.getBlockState().getBlock());
-            level.levelEvent(this.getStalactiteLandingSound(), pos, blockStateId); // Will make the ice breaking sound and use the icicle textures for particles
+            level.levelEvent(this.getStalactiteLandingSound(), pos, Block.getId(entity.getBlockState())); // Will make the ice breaking sound and use the icicle textures for particles
         }
-    }
-
-    protected int getBlockStateId(Block block){
-        return Block.getId(block.defaultBlockState());
     }
 
     @Override
@@ -83,7 +81,6 @@ public class IcicleBlock extends SpeleothemBlock {
         return MAX_GROWING_LENGTH;
     }
 
-    @NullMarked
     @Override
     protected void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
         if (canMelt(level, state, pos)){
@@ -101,6 +98,9 @@ public class IcicleBlock extends SpeleothemBlock {
         return isTipOrMerge(state) && isBrightEnoughToMelt(level, pos);
     }
 
+
+    // SpeleothemBlock does hav an isTip boolean with a parameter to determine to include merge tips, but it has private access
+    // Since I never check only for the tip, and always check for both tip and merge, this method is fine
     protected boolean isTipOrMerge(BlockState state){
         SpeleothemThickness thickness = state.getValue(THICKNESS);
 
@@ -112,7 +112,6 @@ public class IcicleBlock extends SpeleothemBlock {
     }
 
     // Icicles will only drip water if they are in danger of melting!
-    @NullMarked
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
         if (canMelt(level, state, pos) && random.nextFloat() < (PARTICLE_SPAWN_PERCENT_CHANCE / 100)){
@@ -122,7 +121,6 @@ public class IcicleBlock extends SpeleothemBlock {
         }
     }
 
-    @NullMarked
     @Override // Make the block deal more fall damage, like dripstone, but I've made it slightly worse (dripstone's damage modifier is 2.0F, this is 2.5F)
     public void fallOn(Level level, BlockState state, BlockPos pos, Entity entity, double fallDistance) {
         if (state.getValue(TIP_DIRECTION) == Direction.UP && state.getValue(THICKNESS) == SpeleothemThickness.TIP) {
@@ -132,7 +130,6 @@ public class IcicleBlock extends SpeleothemBlock {
         }
     }
 
-    @NullMarked
     @Override
     protected boolean canGrow(LevelReader level, BlockPos pos){
         Block blockToCheck = level.getBlockState(pos.above()).getBlock();
@@ -166,5 +163,19 @@ public class IcicleBlock extends SpeleothemBlock {
         );
 
         level.setBlockAndUpdate(pos, Blocks.AIR.defaultBlockState());
+    }
+
+    @Override
+    public boolean isPathfindable(BlockState state, PathComputationType type){
+        return false;
+    }
+
+    // This is simply the default blocks that the Icicle can row on. Intentionally declared as protected instead of private so
+    // that subclasses can override if need be, especially if another modder wants to use this as a base and change the defaults
+    protected List<BlockState> defaultValidGrowthBlocks(){
+        return List.of(
+                Blocks.PACKED_ICE.defaultBlockState(),
+                Blocks.BLUE_ICE.defaultBlockState()
+        );
     }
 }

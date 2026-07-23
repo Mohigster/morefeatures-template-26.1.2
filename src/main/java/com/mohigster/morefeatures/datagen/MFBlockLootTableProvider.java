@@ -155,8 +155,10 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
 
         // SILK TOUCH DROPS
 
-        add(MFBlocks.PALLID_NULLIUM.get(), createSingleItemTableWithSilkTouch(MFBlocks.PALLID_NULLIUM.get(), Blocks.END_STONE));
-        add(MFBlocks.DECREPIT_NULLIUM.get(), createSingleItemTableWithSilkTouch(MFBlocks.DECREPIT_NULLIUM.get(), Blocks.END_STONE));
+        dropOtherWhenNoSilkTouch(MFBlocks.CHARRED_NYLIUM.get(), Blocks.NETHERRACK);
+
+        dropOtherWhenNoSilkTouch(MFBlocks.PALLID_NULLIUM.get(), Blocks.END_STONE);
+        dropOtherWhenNoSilkTouch(MFBlocks.DECREPIT_NULLIUM.get(), Blocks.END_STONE);
 
         // NO DROP
 
@@ -421,21 +423,26 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
                         .apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE)))));
     }
 
+
+
     @NullMarked
     @Override
     protected Iterable<Block> getKnownBlocks() {
         return MFBlocks.BLOCKS.getEntries().stream().map(Holder::value)::iterator;
     }
 
-    protected LootTable.Builder createVerticalSlabItemTable(Block slab) { // Built pretty much entirely out of the createSlabItemTable method
+    protected LootTable.Builder createVerticalSlabItemTable(Block verticalSlab) { // Built pretty much entirely out of the createSlabItemTable method
         return LootTable.lootTable().withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1.0F))
-                .add(this.applyExplosionDecay(slab, LootItem.lootTableItem(slab).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))
-                                .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(slab)
-                                                .setProperties(StatePropertiesPredicate.Builder.properties()
-                                                        .hasProperty(VerticalSlabBlock.TYPE, VerticalSlabType.DOUBLE)) // These two are the reason a custom method was necessary
-                                ))
-                        )
-                )
+                .add(this.applyExplosionDecay(verticalSlab, LootItem.lootTableItem(verticalSlab).apply(SetItemCountFunction.setCount(ConstantValue.exactly(2.0F))
+                        .when(LootItemBlockStatePropertyCondition.hasBlockStateProperties(verticalSlab)
+                                .setProperties(StatePropertiesPredicate.Builder.properties()
+                                        .hasProperty(VerticalSlabBlock.TYPE, VerticalSlabType.DOUBLE)) // These two are the reason a custom method was necessary
+                        ))
+                ))
         );
+    }
+
+    protected void dropOtherWhenNoSilkTouch(Block block, Block other){
+        this.add(block, createSingleItemTableWithSilkTouch(block, other));
     }
 }

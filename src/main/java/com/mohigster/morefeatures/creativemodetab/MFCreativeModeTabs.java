@@ -138,7 +138,7 @@ public class MFCreativeModeTabs {
     );
 
     public static final Supplier<CreativeModeTab> MOREFEATURES_EQUIPMENT_TAB = CREATIVE_MODE_TABS.register("morefeatures_equipment_tab", () -> CreativeModeTab.builder()
-            .icon(() -> new ItemStack(MFItems.BISMUTH_EQUIPMENT.getFirst().asItem())) // 0 is Sword
+            .icon(() -> new ItemStack(MFItems.BISMUTH_SWORD.get())) // 0 is Sword
             .title(Component.translatable("creativetab.morefeatures.morefeatures_equipment"))
             .withTabsBefore(MFIdentifier.withMfNamespace("morefeatures_blocks_tab"))
             .displayItems((_, output) -> {
@@ -153,7 +153,7 @@ public class MFCreativeModeTabs {
 
                 // Bismuth Tools
 
-                output.accept(MFItems.BISMUTH_EQUIPMENT.getFirst().asItem());
+                output.accept(MFItems.BISMUTH_SWORD);
                 output.accept(MFItems.BISMUTH_PICKAXE);
                 output.accept(MFItems.BISMUTH_AXE);
                 output.accept(MFItems.BISMUTH_SHOVEL);

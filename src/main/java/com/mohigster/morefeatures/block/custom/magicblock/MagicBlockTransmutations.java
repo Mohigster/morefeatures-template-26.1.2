@@ -33,8 +33,10 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
         this.rawEntries = List.copyOf(map.values());
     }
 
+    // TagsUpdatedEvent used to delay the check of if a block is in the correct tag to after the tag is populated
+    // Despite this, the event parameter is actually never used in the method. Still, it is the correct event to use.
     @SuppressWarnings({"deprecation", "unused"})
-    public void onTagsUpdated(TagsUpdatedEvent event) {
+    public void ignoreTransmutationResultsNotInResultsTag(TagsUpdatedEvent event) {
         List<TransmutationEntry> validEntries = new ArrayList<>();
 
         for (TransmutationEntry entry : rawEntries) {
