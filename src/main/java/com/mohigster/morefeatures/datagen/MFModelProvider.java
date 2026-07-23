@@ -252,6 +252,8 @@ public class MFModelProvider extends ModelProvider {
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.MUD_BRICK_VERTICAL_SLAB.get(), Blocks.MUD_BRICKS);
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.RESIN_BRICK_VERTICAL_SLAB.get(), Blocks.RESIN_BRICKS);
 
+        MFBlockModelGenerators.createPillar(blockModels, MFBlocks.TEST_PILLAR_BLOCK.get(), Blocks.OAK_PLANKS);
+
         WeatheringCopperCollection.STATES.forEach(
                 state -> {
                     Block unwaxedSlab = MFBlocks.CUT_COPPER_VERTICAL_SLAB.weathering().pick(state).get();

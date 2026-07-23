@@ -28,6 +28,8 @@ public final class MFBlockTags {
     public static final TagKey<Block> VERTICAL_SLABS = morefeaturesTag("vertical_slabs");
     public static final TagKey<Block> AXE_MINEABLE_VERTICAL_SLABS = morefeaturesTag("axe_mineable_vertical_slabs");
     public static final TagKey<Block> PICKAXE_MINEABLE_VERTICAL_SLABS = morefeaturesTag("pickaxe_mineable_vertical_slabs");
+    public static final TagKey<Block> VERTICAL_SLAB_CONNECTABLE = morefeaturesTag("connectable/vertical_slab");
+    public static final TagKey<Block> PILLAR_CONNECTABLE = morefeaturesTag("connectable/pillar");
     public static final TagKey<Block> METAL_DETECTOR_FINDABLE = morefeaturesTag("metal_detector_findable");
     public static final TagKey<Block> METAL_DETECTOR_LOW_COST = morefeaturesTag("metal_detector_low_cost");
     public static final TagKey<Block> METAL_DETECTOR_MEDIUM_COST = morefeaturesTag("metal_detector_medium_cost");

@@ -67,7 +67,7 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
         this.add(Identifier.fromNamespaceAndPath(modId, descriptionId), inputTag, output, copyComponents);
     }
 
-    protected void add(Identifier id, TagKey<Item> inputTag, Item output, boolean copyComponents) {
+    private void add(Identifier id, TagKey<Item> inputTag, Item output, boolean copyComponents) {
         if (output == Items.AIR) {
             throw new IllegalArgumentException("Cannot transmute to AIR!");
         }

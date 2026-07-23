@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.datagen.models;
 
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.custom.VoidAnchorBlock;
+import com.mohigster.morefeatures.block.custom.pillar.PillarBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabType;
 import com.mojang.math.Quadrant;
@@ -29,6 +30,26 @@ import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant
 public final class MFBlockModelGenerators {
     private static final TextureSlot ALL_SLOT = TextureSlot.create("all");
     private static final TextureSlot CONNECTOR_SLOT = TextureSlot.create("connector");
+
+    private static final ModelTemplate PILLAR_FULL = new ModelTemplate(
+            Optional.of(withMfNamespace("block/template_pillar")),
+            Optional.empty(),
+            ALL_SLOT, TextureSlot.PARTICLE);
+
+    private static final ModelTemplate PILLAR_BOTTOM = new ModelTemplate(
+            Optional.of(withMfNamespace("block/template_pillar_bottom")),
+            Optional.of("_bottom"),
+            ALL_SLOT, TextureSlot.PARTICLE);
+
+    private static final ModelTemplate PILLAR_TOP = new ModelTemplate(
+            Optional.of(withMfNamespace("block/template_pillar_top")),
+            Optional.of("_top"),
+            ALL_SLOT, TextureSlot.PARTICLE);
+
+    private static final ModelTemplate PILLAR_MIDDLE = new ModelTemplate(
+            Optional.of(withMfNamespace("block/template_pillar_middle")),
+            Optional.of("_middle"),
+            ALL_SLOT, TextureSlot.PARTICLE);
 
     private static final ModelTemplate VERTICAL_SLAB_STRAIGHT = new ModelTemplate(
             Optional.of(withMfNamespace("block/template_vertical_slab")),
@@ -173,6 +194,45 @@ public final class MFBlockModelGenerators {
         );
 
         blockModels.registerSimpleItemModel(verticalSlab, straightModel);
+    }
+
+    public static void createPillar(BlockModelGenerators blockModels, Block pillar, Block textureSource) {
+        if (textureSource == null){
+            throw new IllegalArgumentException("Cannot create a model for " + pillar + ": textureSource must not be null");
+        }
+
+        TextureMapping mapping = new TextureMapping();
+
+        Identifier fullModel;
+        Identifier middleModel;
+        Identifier topModel;
+        Identifier bottomModel;
+
+        mapping.put(TextureSlot.PARTICLE, TextureMapping.getBlockTexture(textureSource));
+        mapping.put(ALL_SLOT, TextureMapping.getBlockTexture(textureSource));
+        fullModel      = PILLAR_FULL.create(pillar, mapping, blockModels.modelOutput);
+        middleModel    = PILLAR_MIDDLE.create(pillar, mapping, blockModels.modelOutput);
+        bottomModel    = PILLAR_BOTTOM.create(pillar, mapping, blockModels.modelOutput);
+        topModel       = PILLAR_TOP.create(pillar, mapping, blockModels.modelOutput);
+
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator.dispatch(pillar)
+                        .with(PropertyDispatch.initial(PillarBlock.SHAPE)
+                                .generate((shape) -> {
+
+                                    Identifier model = switch (shape) {
+                                        case FULL   -> fullModel;
+                                        case MIDDLE -> middleModel;
+                                        case BOTTOM -> bottomModel;
+                                        case TOP    -> topModel;
+                                    };
+
+                                    return plainVariant(model).with(VariantMutator.UV_LOCK.withValue(true));
+                                })
+                        )
+        );
+
+        blockModels.registerSimpleItemModel(pillar, fullModel);
     }
 
     @SuppressWarnings("deprecation")

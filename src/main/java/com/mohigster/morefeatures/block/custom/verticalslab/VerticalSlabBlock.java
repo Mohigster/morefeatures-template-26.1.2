@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.block.custom.verticalslab;
 
+import com.mohigster.morefeatures.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -185,7 +186,7 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     private static Direction getParallelFacing(BlockState neighbor) {
-        if (isVerticalSlab(neighbor)) return neighbor.getValue(TYPE).toDirection();
+        if (canConnectToVerticalSlab(neighbor)) return neighbor.getValue(TYPE).toDirection();
         return null;
     }
 
@@ -209,7 +210,7 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
     }
 
     private static Direction getPerpendicularNeighborFacing(BlockState neighbor, Direction facing) {
-        if (!isVerticalSlab(neighbor)) return null;
+        if (!canConnectToVerticalSlab(neighbor)) return null;
         Direction neighborFacing = neighbor.getValue(TYPE).toDirection();
         if (neighborFacing.getAxis() == facing.getAxis()) return null;
         return neighborFacing;
@@ -217,11 +218,21 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
 
     private static boolean canTakeShape(BlockState state, BlockGetter level, BlockPos pos, Direction towards) {
         BlockState adjacent = level.getBlockState(pos.relative(towards));
-        return !isVerticalSlab(adjacent) || adjacent.getValue(TYPE).toDirection().getAxis() == state.getValue(TYPE).toDirection().getAxis();
+        return !canConnectToVerticalSlab(adjacent) || adjacent.getValue(TYPE).toDirection().getAxis() == state.getValue(TYPE).toDirection().getAxis();
     }
 
-    private static boolean isVerticalSlab(BlockState state) {
-        return state.getBlock() instanceof VerticalSlabBlock && state.getValue(TYPE) != VerticalSlabType.DOUBLE;
+    // A block can connect to other blocks if:
+
+    // The block is a non-double vertical slab
+    // OR the block is in the vertical slab connectable tag
+    // Vertical slabs being in the tag does nothing.
+    // This is intentional to prevent double connections caused by a vertical slab in the tag
+    private static boolean canConnectToVerticalSlab(BlockState state) {
+        return (state.getBlock() instanceof VerticalSlabBlock
+                && state.getValue(TYPE) != VerticalSlabType.DOUBLE)
+                || (state.is(MFBlockTags.VERTICAL_SLAB_CONNECTABLE)
+                && !(state.getBlock() instanceof VerticalSlabBlock)
+        );
     }
 
     private static Direction rotateClockwise(Direction facing) {

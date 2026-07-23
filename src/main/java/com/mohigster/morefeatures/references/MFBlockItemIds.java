@@ -257,6 +257,8 @@ public class MFBlockItemIds {
     public static final WeatheringCopperCollection<BlockItemId> CUT_COPPER_VERTICAL_SLAB = createSimpleCopperId("cut_copper_vertical_slab");
     public static final ColorCollection<BlockItemId> WOOL_VERTICAL_SLAB = createSimpleColouredId("wool_vertical_slab");
 
+    public static final BlockItemId TEST_COLUMN = createId("test_column");
+
     private static BlockItemId createId(String name) {
         Identifier id = MFIdentifier.withMfNamespace(name);
         return BlockItemId.create(id, id);

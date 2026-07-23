@@ -16,15 +16,15 @@ public class MFMagicBlockTransmutationProvider extends MagicBlockTransmutationPr
 
     @Override
     protected void generate() {
-        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_STONE, Items.STONE);
-        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC, MFItems.MUSIC_DISC_AQUAMARINE.get());
-        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_CARBON, MFItems.CARBON_FIBER.get());
-        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP, MFItems.BISMUTH_SCRAP.get());
-        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_RAW_BISMUTH_BLOCK, MFBlocks.RAW_BISMUTH_BLOCK.get().asItem());
-        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_SCRAP, Items.NETHERITE_SCRAP);
-        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_INGOT, Items.NETHERITE_INGOT);
-        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_DIAMOND, Items.DIAMOND);
-        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_LINGERING_POT, Items.LINGERING_POTION, true);
-        add(MFItemTags.MAGIC_BLOCK_TURNS_TO_BEDROCK, Items.BEDROCK);
+        this.add(MFItemTags.MAGIC_BLOCK_TURNS_TO_STONE, Items.STONE);
+        this.add(MFItemTags.MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC, MFItems.MUSIC_DISC_AQUAMARINE.get());
+        this.add(MFItemTags.MAGIC_BLOCK_TURNS_TO_CARBON, MFItems.CARBON_FIBER.get());
+        this.add(MFItemTags.MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP, MFItems.BISMUTH_SCRAP.get());
+        this.add(MFItemTags.MAGIC_BLOCK_TURNS_TO_RAW_BISMUTH_BLOCK, MFBlocks.RAW_BISMUTH_BLOCK.get().asItem());
+        this.add(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_SCRAP, Items.NETHERITE_SCRAP);
+        this.add(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_INGOT, Items.NETHERITE_INGOT);
+        this.add(MFItemTags.MAGIC_BLOCK_TURNS_TO_DIAMOND, Items.DIAMOND);
+        this.add(MFItemTags.MAGIC_BLOCK_TURNS_TO_LINGERING_POT, Items.LINGERING_POTION, true);
+        this.add(MFItemTags.MAGIC_BLOCK_TURNS_TO_BEDROCK, Items.BEDROCK);
     }
 }

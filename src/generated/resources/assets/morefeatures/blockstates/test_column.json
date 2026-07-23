@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "shape=bottom": {
+      "model": "morefeatures:block/test_column_bottom",
+      "uvlock": true
+    },
+    "shape=full": {
+      "model": "morefeatures:block/test_column",
+      "uvlock": true
+    },
+    "shape=middle": {
+      "model": "morefeatures:block/test_column_middle",
+      "uvlock": true
+    },
+    "shape=top": {
+      "model": "morefeatures:block/test_column_top",
+      "uvlock": true
+    }
+  }
+}

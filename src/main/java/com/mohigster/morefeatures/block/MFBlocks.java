@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.block;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.custom.*;
+import com.mohigster.morefeatures.block.custom.pillar.PillarBlock;
 import com.mohigster.morefeatures.block.custom.flammable.*;
 import com.mohigster.morefeatures.block.custom.magicblock.MagicBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
@@ -1459,6 +1460,11 @@ public class MFBlocks {
                     colour -> Properties.ofFullCopy(Blocks.WOOL.pick(colour))
             );
 
+    public static final DeferredBlock<Block> TEST_PILLAR_BLOCK = registerBlock(MFBlockItemIds.TEST_COLUMN,
+            PillarBlock::new,
+            _ -> Properties.ofFullCopy(Blocks.OAK_PLANKS)
+    );
+
     // Flowers
 
     public static final DeferredBlock<Block> ROSE = registerBlock(MFBlockItemIds.ROSE,
@@ -1610,6 +1616,8 @@ public class MFBlocks {
             Function<BlockBehaviour.Properties, T> blockFactory,
             UnaryOperator<BlockBehaviour.Properties> propertyModifier
     ) {
+
+        // This register method is private, so ensuring all blocks in this class are registered in the More Features namespace only forces me to follow good practice without hindering other devs
         if (MFIdentifier.isNotMfNamespace(id.block().identifier())){
             throw new IllegalStateException("Could not register the " + id.block().identifier().getPath() + " block. ID must be within the More Features namespace!");
         }
@@ -1756,7 +1764,8 @@ public class MFBlocks {
     }
 
     private static Properties logProperties(MapColor mapColor, boolean overworldWood){
-        return Properties.of().strength(2F, 8F)
+        return Properties.of()
+                .strength(2F, 8F)
                 .sound(overworldWood ? SoundType.WOOD : SoundType.STEM)
                 .isRedstoneConductor(MFBlocks::always)
                 .isViewBlocking(MFBlocks::always)

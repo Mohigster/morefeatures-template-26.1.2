@@ -287,7 +287,7 @@ public class MFItems {
                     .rarity(Rarity.RARE)
                     .fireResistant()
                     .enchantable(15)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.REPAIRS_BISMUTH_ARMOR)
             ));
 
     public static final DeferredItem<Item> BISMUTH_CHESTPLATE = registerItem(MFItemIds.BISMUTH_CHESTPLATE,
@@ -296,7 +296,7 @@ public class MFItems {
                     .rarity(Rarity.RARE)
                     .fireResistant()
                     .enchantable(15)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.REPAIRS_BISMUTH_ARMOR)
             ));
 
     public static final DeferredItem<Item> BISMUTH_LEGGINGS = registerItem(MFItemIds.BISMUTH_LEGGINGS,
@@ -305,7 +305,7 @@ public class MFItems {
                     .rarity(Rarity.RARE)
                     .fireResistant()
                     .enchantable(15)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.REPAIRS_BISMUTH_ARMOR)
             ));
 
     public static final DeferredItem<Item> BISMUTH_BOOTS = registerItem(MFItemIds.BISMUTH_BOOTS,
@@ -314,7 +314,7 @@ public class MFItems {
                     .rarity(Rarity.RARE)
                     .fireResistant()
                     .enchantable(15)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.REPAIRS_BISMUTH_ARMOR)
             ));
 
     public static final DeferredItem<Item> BISMUTH_PICKAXE = registerItem(MFItemIds.BISMUTH_PICKAXE,
@@ -327,7 +327,7 @@ public class MFItems {
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
             ));
 
     public static final DeferredItem<Item> BISMUTH_SWORD = registerItem(MFItemIds.BISMUTH_SWORD,
@@ -340,7 +340,7 @@ public class MFItems {
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
             ));
 
     public static final DeferredItem<Item> BISMUTH_AXE = registerItem(MFItemIds.BISMUTH_AXE,
@@ -348,7 +348,7 @@ public class MFItems {
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
             ));
 
     public static final DeferredItem<Item> BISMUTH_SHOVEL = ITEMS.registerItem("bismuth_shovel",
@@ -356,7 +356,7 @@ public class MFItems {
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
             ));
 
     public static final DeferredItem<Item> BISMUTH_HOE = ITEMS.registerItem("bismuth_hoe",
@@ -364,7 +364,7 @@ public class MFItems {
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
             ));
 
     public static final DeferredItem<Item> BISMUTH_SPEAR = registerItem(MFItemIds.BISMUTH_SPEAR,
@@ -382,7 +382,7 @@ public class MFItems {
                             4.8F
                     )
                     .enchantable(15)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
                     .fireResistant()
                     .rarity(Rarity.RARE)
             ));
@@ -393,7 +393,7 @@ public class MFItems {
                     .fireResistant()
                     .durability(1516)
                     .enchantable(19)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
             ));
 
     public static final DeferredItem<Item> BISMUTH_HORSE_ARMOR = ITEMS.registerItem("bismuth_horse_armor",
@@ -401,7 +401,7 @@ public class MFItems {
                     .horseArmor(MFArmorMaterials.BISMUTH)
                     .rarity(Rarity.RARE)
                     .fireResistant()
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
             ));
 
     public static final DeferredItem<Item> BISMUTH_NAUTILUS_ARMOR = registerItem(MFItemIds.BISMUTH_NAUTILUS_ARMOR,
@@ -416,6 +416,7 @@ public class MFItems {
                     .fireResistant()
                     .enchantable(15)
                     .durability(997)
+                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
                     .attributes(MFTridentItem.createAttributes(11.0D, -1.9D))
                     .rarity(Rarity.RARE)
                     .component(DataComponents.TOOL, MFTridentItem.createToolProperties(3))

@@ -122,6 +122,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MFBlocks.DECREPIT_FENCE.get());
         dropSelf(MFBlocks.DECREPIT_FENCE_GATE.get());
         dropSelf(MFBlocks.DECREPIT_SHELF.get());
+        dropSelf(MFBlocks.TEST_PILLAR_BLOCK.get());
         dropSelf(MFBlocks.STRIPPED_DECREPIT_WOOD.get());
         dropSelf(MFBlocks.STRIPPED_DECREPIT_LOG.get());
         dropSelf(MFBlocks.PALLID_PLANKS.get());
