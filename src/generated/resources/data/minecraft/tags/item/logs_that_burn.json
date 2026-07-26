@@ -1,9 +1,9 @@
 {
   "values": [
-    "#morefeatures:bloodwood_logs",
-    "#morefeatures:tainted_logs",
-    "#morefeatures:palm_logs",
-    "#morefeatures:decrepit_logs",
-    "#morefeatures:pallid_logs"
+    "#morefeatures:logs/bloodwood",
+    "#morefeatures:logs/tainted",
+    "#morefeatures:logs/palm",
+    "#morefeatures:logs/decrepit",
+    "#morefeatures:logs/pallid"
   ]
 }

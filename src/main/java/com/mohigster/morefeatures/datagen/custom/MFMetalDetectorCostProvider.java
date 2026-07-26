@@ -13,9 +13,9 @@ public class MFMetalDetectorCostProvider extends MetalDetectorCostProvider{
 
     @Override
     protected void generate() {
-        add(MFBlockTags.METAL_DETECTOR_LOW_COST, 2);
-        add(MFBlockTags.METAL_DETECTOR_MEDIUM_COST, 3);
-        add(MFBlockTags.METAL_DETECTOR_HIGH_COST, 4);
-        add(MFBlockTags.METAL_DETECTOR_BISMUTH_COST, 5);
+        this.add(MFBlockTags.METAL_DETECTOR_LOW_COST, 2);
+        this.add(MFBlockTags.METAL_DETECTOR_MEDIUM_COST, 3);
+        this.add(MFBlockTags.METAL_DETECTOR_HIGH_COST, 4);
+        this.add(MFBlockTags.METAL_DETECTOR_BISMUTH_COST, 5);
     }
 }

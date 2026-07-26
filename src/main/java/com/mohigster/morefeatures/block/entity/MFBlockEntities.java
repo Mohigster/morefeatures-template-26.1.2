@@ -18,6 +18,10 @@ public class MFBlockEntities {
             BLOCK_ENTITIES.register("compressor_be", () -> new BlockEntityType<>(
                     CompressorBlockEntity::new, MFBlocks.COMPRESSOR_BLOCK.get()));
 
+    public static final Supplier<BlockEntityType<TemporalDilatorBlockEntity>> TEMPORAL_DILATOR_BE =
+            BLOCK_ENTITIES.register("temporal_dilator_be", () -> new BlockEntityType<>(
+                    TemporalDilatorBlockEntity::new, MFBlocks.TEMPORAL_DILATOR.get()));
+
     public static final Supplier<BlockEntityType<MFSignBlockEntity>> MF_SIGN_BE =
             BLOCK_ENTITIES.register("mf_sign_be", () -> new BlockEntityType<>(
                     MFSignBlockEntity::new,

@@ -3,7 +3,7 @@
   "category": "building",
   "group": "charred",
   "ingredients": [
-    "#morefeatures:charred_stems"
+    "#morefeatures:logs/charred"
   ],
   "result": {
     "count": 4,

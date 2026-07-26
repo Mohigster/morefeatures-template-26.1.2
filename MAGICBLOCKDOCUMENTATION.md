@@ -83,10 +83,15 @@ Example JSONs. These may not necessarily actually be in the mod:
 `grass_block_from_magic_block.json`:
 ```json
 {
-  "input_tag": "minecraft:wooden_stairs",
+  "input_tag": "minecraft:sand",
   "output_item": "minecraft:grass_block"
 }
 ```
+
+Keep in mind that while vanilla tags do work, it is better to make your own specifically for use as an input tag. That way, you have complete control over what items are valid.
+
+For example, if you remove an item from a vanilla tag in order to use that tag as an input without that item, you may inadvertently affect vanilla behaviour. Using a custom tag avoids this possibility, and is therefore HIGHLY recommended.
+
 
 And finally, don't forget to add your custom transmutation result to the **results** item tag!
 
@@ -124,3 +129,5 @@ Tag names are generally simple.
 In this mod, all magic block transmutation tags are names simply after the output item, and located within the tags/item/magic_block_transmutations folder
 
 e.g. `tags/item/magic_block_transmutations/bedrock` is the tag to turn an item into bedrock using the magic block.
+
+I recommend you follow a similar convention.

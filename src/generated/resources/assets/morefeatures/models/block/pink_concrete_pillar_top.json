@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_pillar_top",
+  "textures": {
+    "all": "minecraft:block/pink_concrete",
+    "particle": "minecraft:block/pink_concrete"
+  }
+}

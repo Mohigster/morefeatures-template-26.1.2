@@ -29,16 +29,18 @@ public final class MFItemTags {
     public static final TagKey<Item> THUNDERBOLT_ENCHANTABLE = morefeaturesTag("thunderbolt_enchantable");
     public static final TagKey<Item> THUNDERING_ENCHANTABLE = morefeaturesTag("thundering_enchantable");
     public static final TagKey<Item> CARBON_INGREDIENTS = morefeaturesTag("carbon_ingredients");
-    public static final TagKey<Item> BLOODWOOD_LOGS = morefeaturesTag("bloodwood_logs");
-    public static final TagKey<Item> TAINTED_LOGS = morefeaturesTag("tainted_logs");
-    public static final TagKey<Item> PALM_LOGS = morefeaturesTag("palm_logs");
-    public static final TagKey<Item> CHARRED_STEMS = morefeaturesTag("charred_stems");
-    public static final TagKey<Item> DECREPIT_LOGS = morefeaturesTag("decrepit_logs");
-    public static final TagKey<Item> PALLID_LOGS = morefeaturesTag("pallid_logs");
+    public static final TagKey<Item> BLOODWOOD_LOGS = morefeaturesTag("logs/bloodwood");
+    public static final TagKey<Item> TAINTED_LOGS = morefeaturesTag("logs/tainted");
+    public static final TagKey<Item> PALM_LOGS = morefeaturesTag("logs/palm");
+    public static final TagKey<Item> CHARRED_STEMS = morefeaturesTag("logs/charred");
+    public static final TagKey<Item> DECREPIT_LOGS = morefeaturesTag("logs/decrepit");
+    public static final TagKey<Item> PALLID_LOGS = morefeaturesTag("logs/pallid");
     public static final TagKey<Item> MUSIC_DISCS = morefeaturesTag("music_discs");
-    public static final TagKey<Item> AIMABLE_WANDS = morefeaturesTag("aimable_wands");
-    public static final TagKey<Item> TARGETING_WANDS = morefeaturesTag("targeting_wands");
-    public static final TagKey<Item> WOODEN_VERTICAL_SLABS = morefeaturesTag("wooden_vertical_slabs");
+    public static final TagKey<Item> AIMABLE_WANDS = morefeaturesTag("wands/aimable");
+    public static final TagKey<Item> AOE_WANDS = morefeaturesTag("wands/aoe_generic");
+    public static final TagKey<Item> TARGETING_ENTITY_WANDS = morefeaturesTag("wands/targeting/entity");
+    public static final TagKey<Item> TARGETING_BLOCK_WANDS = morefeaturesTag("wands/targeting/block");
+    public static final TagKey<Item> WOODEN_VERTICAL_SLABS = morefeaturesTag("vertical_slabs/wooden");
 
     // Magic block tags
 

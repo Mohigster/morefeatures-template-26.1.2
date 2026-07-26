@@ -36,26 +36,20 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .addTag(MFBlockTags.WOOL_VERTICAL_SLABS);
 
         tag(BlockTags.MINEABLE_WITH_PICKAXE)
-                .add(MFBlockItemIds.ALUMINIUM_BLOCK.block())
-                .add(MFBlockItemIds.ALUMINIUM_ORE.block())
-                .add(MFBlockItemIds.DEEPSLATE_ALUMINIUM_ORE.block())
-                .add(MFBlockItemIds.RAW_ALUMINIUM_BLOCK.block())
-                .add(MFBlockItemIds.RAW_MAGNESIUM_BLOCK.block())
-                .add(MFBlockItemIds.MAGNESIUM_BLOCK.block())
-                .add(MFBlockItemIds.MAGNESIUM_ORE.block())
-                .add(MFBlockItemIds.DEEPSLATE_MAGNESIUM_ORE.block())
+                .addTag(MFBlockTags.ALUMINIUM)
+                .addTag(MFBlockTags.MAGNESIUM)
+                .addTag(MFBlockTags.BISMUTH)
+                .addTag(MFBlockTags.AZURITE)
+                .addTag(MFBlockTags.FLUORITE)
+                .addTag(MFBlockTags.NULLIUM)
+                .addTag(MFBlockTags.PICKAXE_MINEABLE_VERTICAL_SLABS)
+                .addTag(MFBlockTags.CONCRETE_PILLARS)
+                .addTag(MFBlockTags.CUT_COPPER_PILLARS)
                 .add(MFBlockItemIds.MAGIC_BLOCK.block())
-                .add(MFBlockItemIds.BISMUTH_BLOCK.block())
-                .add(MFBlockItemIds.RAW_BISMUTH_BLOCK.block())
                 .add(MFBlockItemIds.COMPRESSOR_BLOCK.block())
                 .add(MFBlockItemIds.EVERFROST_PACKED_ICE_ORE.block())
                 .add(MFBlockItemIds.EVERFROST_BLUE_ICE_ORE.block())
-                .add(MFBlockItemIds.BISMUTH_ORE.block())
-                .addTag(MFBlockTags.NULLIUM)
-                .add(MFBlockItemIds.VOID_ANCHOR.block())
-                .addTag(MFBlockTags.AZURITE)
-                .addTag(MFBlockTags.FLUORITE)
-                .addTag(MFBlockTags.PICKAXE_MINEABLE_VERTICAL_SLABS);
+                .add(MFBlockItemIds.VOID_ANCHOR.block());
 
         tag(MFBlockTags.AZURITE)
                 .add(MFBlockItemIds.AZURITE_ORE.block())
@@ -101,6 +95,23 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockIds.FLUORITE_HANGING_SIGN)
                 .add(MFBlockIds.FLUORITE_WALL_HANGING_SIGN)
                 .add(MFBlockItemIds.FLUORITE_SHELF.block());
+
+        tag(MFBlockTags.ALUMINIUM)
+                .add(MFBlockItemIds.ALUMINIUM_BLOCK.block())
+                .add(MFBlockItemIds.ALUMINIUM_ORE.block())
+                .add(MFBlockItemIds.DEEPSLATE_ALUMINIUM_ORE.block())
+                .add(MFBlockItemIds.RAW_ALUMINIUM_BLOCK.block());
+
+        tag(MFBlockTags.MAGNESIUM)
+                .add(MFBlockItemIds.MAGNESIUM_BLOCK.block())
+                .add(MFBlockItemIds.MAGNESIUM_ORE.block())
+                .add(MFBlockItemIds.DEEPSLATE_MAGNESIUM_ORE.block())
+                .add(MFBlockItemIds.RAW_MAGNESIUM_BLOCK.block());
+
+        tag(MFBlockTags.BISMUTH)
+                .add(MFBlockItemIds.BISMUTH_BLOCK.block())
+                .add(MFBlockItemIds.BISMUTH_ORE.block())
+                .add(MFBlockItemIds.RAW_BISMUTH_BLOCK.block());
 
         tag(MFBlockTags.COMPRESSOR_FLUIDS)
                 .add(BlockIds.WATER);

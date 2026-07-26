@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "dilator_direction=down": {
+      "model": "morefeatures:block/temporal_dilator_down"
+    },
+    "dilator_direction=up": {
+      "model": "morefeatures:block/temporal_dilator_up"
+    }
+  }
+}

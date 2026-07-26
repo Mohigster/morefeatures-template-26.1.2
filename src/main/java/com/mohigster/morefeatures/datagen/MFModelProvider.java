@@ -253,17 +253,23 @@ public class MFModelProvider extends ModelProvider {
         MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.RESIN_BRICK_VERTICAL_SLAB.get(), Blocks.RESIN_BRICKS);
 
         MFBlockModelGenerators.createPillar(blockModels, MFBlocks.TEST_PILLAR_BLOCK.get(), Blocks.OAK_PLANKS);
+        MFBlockModelGenerators.createTemporalDilator(blockModels, MFBlocks.TEMPORAL_DILATOR.get());
 
         WeatheringCopperCollection.STATES.forEach(
                 state -> {
-                    Block unwaxedSlab = MFBlocks.CUT_COPPER_VERTICAL_SLAB.weathering().pick(state).get();
-
-                    Block waxedSlab = MFBlocks.CUT_COPPER_VERTICAL_SLAB.waxed().pick(state).get();
-
+                    // Waxed variants reuse the weathering texture, so the texture source is the same for both
                     Block textureSource = Blocks.CUT_COPPER.weathering().pick(state);
 
-                    MFBlockModelGenerators.createVerticalSlab(blockModels, unwaxedSlab, textureSource);
-                    MFBlockModelGenerators.createVerticalSlab(blockModels, waxedSlab, textureSource);
+                    MFBlockModelGenerators.createVerticalSlab(
+                            blockModels,
+                            MFBlocks.CUT_COPPER_VERTICAL_SLAB.weathering().pick(state).get(),
+                            textureSource
+                    );
+                    MFBlockModelGenerators.createVerticalSlab(
+                            blockModels,
+                            MFBlocks.CUT_COPPER_VERTICAL_SLAB.waxed().pick(state).get(),
+                            textureSource
+                    );
                 }
         );
 
@@ -272,6 +278,32 @@ public class MFModelProvider extends ModelProvider {
                         blockModels,
                         MFBlocks.WOOL_VERTICAL_SLAB.pick(colour).get(),
                         Blocks.WOOL.pick(colour)
+                )
+        );
+
+        WeatheringCopperCollection.STATES.forEach(
+                state -> {
+                    Block textureSource = Blocks.CUT_COPPER.weathering().pick(state);
+
+                    MFBlockModelGenerators.createPillar(
+                            blockModels,
+                            MFBlocks.CUT_COPPER_PILLAR.weathering().pick(state).get(),
+                            textureSource
+                    );
+
+                    MFBlockModelGenerators.createPillar(
+                            blockModels,
+                            MFBlocks.CUT_COPPER_PILLAR.waxed().pick(state).get(),
+                            textureSource
+                    );
+                }
+        );
+
+        ColorCollection.VALUES.forEach(
+                colour -> MFBlockModelGenerators.createPillar(
+                        blockModels,
+                        MFBlocks.CONCRETE_PILLAR.pick(colour).get(),
+                        Blocks.CONCRETE.pick(colour)
                 )
         );
 

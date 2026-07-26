@@ -36,13 +36,13 @@ public class MetalDetectorItem extends Item {
             for(int i = 0; i <= positionClicked.getY() + 64; i++){
                 BlockState blockState = level.getBlockState(positionClicked.below(i));
 
-                if(isMetalOre(blockState)){
+                if(isValidTarget(blockState)){
                     assert player != null;
                     outputValuableCoordinates(positionClicked.below(i), player, blockState.getBlock());
                     foundBlock = true;
 
                     // Calculate damage cost based on data-driven costs (defaults to 1 if a cost is not defined)
-                    int damageCost = this.getCost(blockState);
+                    int damageCost = getDamageCost(blockState);
 
                     MoreFeatures.LOGGER.debug("damageCost: {}", damageCost);
 
@@ -78,17 +78,17 @@ public class MetalDetectorItem extends Item {
         }
     }
 
-    private int getCost(BlockState state){
+    private int getDamageCost(BlockState state){
         int totalCost = MetalDetectorCosts.INSTANCE.getCost(state);
 
         if (totalCost == 0){
-            throw new IllegalStateException("Metal detector durability cost must not be zero! Check that MetalDetectorCosts is calculating the durability cost properly, because it is supposed to return a minimum of one!");
+            throw new IllegalStateException("Metal detector durability cost must not be zero! If the value is not zero within the JSON file, report the issue on GitHub.");
         }
 
         return totalCost;
     }
 
-    private boolean isMetalOre(BlockState blockState) {
+    private boolean isValidTarget(BlockState blockState) {
         return blockState.is(MFBlockTags.METAL_DETECTOR_FINDABLE);
     }
 

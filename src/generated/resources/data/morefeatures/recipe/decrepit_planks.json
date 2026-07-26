@@ -3,7 +3,7 @@
   "category": "building",
   "group": "palm_planks",
   "ingredients": [
-    "#morefeatures:decrepit_logs"
+    "#morefeatures:logs/decrepit"
   ],
   "result": {
     "count": 4,

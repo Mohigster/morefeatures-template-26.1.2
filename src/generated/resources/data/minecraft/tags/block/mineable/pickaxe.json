@@ -1,24 +1,18 @@
 {
   "values": [
-    "morefeatures:aluminium_block",
-    "morefeatures:aluminium_ore",
-    "morefeatures:deepslate_aluminium_ore",
-    "morefeatures:raw_aluminium_block",
-    "morefeatures:raw_magnesium_block",
-    "morefeatures:magnesium_block",
-    "morefeatures:magnesium_ore",
-    "morefeatures:deepslate_magnesium_ore",
+    "#morefeatures:ores/aluminium",
+    "#morefeatures:ores/magnesium",
+    "#morefeatures:ores/bismuth",
+    "#morefeatures:ores/azurite",
+    "#morefeatures:ores/fluorite",
+    "#morefeatures:nullium",
+    "#morefeatures:vertical_slabs/mineable/pickaxe",
+    "#morefeatures:pillars/concrete",
+    "#morefeatures:pillars/cut_copper",
     "morefeatures:magic_block",
-    "morefeatures:bismuth_block",
-    "morefeatures:raw_bismuth_block",
     "morefeatures:compressor_block",
     "morefeatures:everfrost_packed_ice_ore",
     "morefeatures:everfrost_blue_ice_ore",
-    "morefeatures:bismuth_ore",
-    "#morefeatures:nullium",
-    "morefeatures:void_anchor",
-    "#morefeatures:azurite",
-    "#morefeatures:fluorite",
-    "#morefeatures:pickaxe_mineable_vertical_slabs"
+    "morefeatures:void_anchor"
   ]
 }

@@ -7,8 +7,10 @@ import net.minecraft.tags.BlockItemTagId;
 import net.minecraft.tags.TagKey;
 
 public class MFBlockItemTags {
-    public static final BlockItemTagId WOOL_VERTICAL_SLABS = morefeaturesTag("wool_vertical_slab");
-    public static final BlockItemTagId CUT_COPPER_VERTICAL_SLABS = morefeaturesTag("cut_copper_vertical_slab");
+    public static final BlockItemTagId WOOL_VERTICAL_SLABS = morefeaturesTag("vertical_slabs/wool");
+    public static final BlockItemTagId CUT_COPPER_VERTICAL_SLABS = morefeaturesTag("vertical_slabs/cut_copper");
+    public static final BlockItemTagId CUT_COPPER_PILLARS = morefeaturesTag("pillars/cut_copper");
+    public static final BlockItemTagId CONCRETE_PILLARS = morefeaturesTag("pillars/concrete");
 
     private static BlockItemTagId morefeaturesTag(String name) {
         Identifier id = MFIdentifier.withMfNamespace(name);

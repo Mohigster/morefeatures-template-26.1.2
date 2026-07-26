@@ -49,5 +49,8 @@ public class MFBiomeTagProvider extends TagsProvider<Biome> {
 
         tag(MFBiomeTags.DESERT)
                 .addOptional(Biomes.DESERT);
+
+        tag(MFBiomeTags.OCEAN_CITADEL_BIOMES)
+                .addOptionalTag(BiomeTags.IS_OCEAN);
     }
 }

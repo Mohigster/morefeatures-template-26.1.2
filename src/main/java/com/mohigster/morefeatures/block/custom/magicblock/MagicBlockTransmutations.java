@@ -60,7 +60,7 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
             if (input.is(entry.inputTag())) {
                 ItemStack result = new ItemStack(entry.output(), input.getCount());
                 if (entry.copyComponents()) {
-                    result.applyComponents(input.getComponents());
+                    result.applyComponents(input.getComponentsPatch()); // Use getComponentsPatch instead of getComponents so that the model can still change (models are a component as of 1.21.2 so getComponents will copy the model)
                 }
                 return result;
             }

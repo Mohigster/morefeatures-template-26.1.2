@@ -5,6 +5,8 @@ import com.mohigster.morefeatures.block.custom.*;
 import com.mohigster.morefeatures.block.custom.pillar.PillarBlock;
 import com.mohigster.morefeatures.block.custom.flammable.*;
 import com.mohigster.morefeatures.block.custom.magicblock.MagicBlock;
+import com.mohigster.morefeatures.block.custom.pillar.WeatheringCopperPillarBlock;
+import com.mohigster.morefeatures.block.custom.temporaldilator.TemporalDilatorBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.WeatheringCopperVerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.blocktype.MFBlockSetType;
@@ -1456,14 +1458,32 @@ public class MFBlocks {
     public static final ColorCollection<DeferredBlock<Block>> WOOL_VERTICAL_SLAB =
             registerColouredBlockSet(
                     MFBlockItemIds.WOOL_VERTICAL_SLAB,
-                    (_, props) -> new VerticalSlabBlock(true, props),
+                    props -> new VerticalSlabBlock(true, props),
                     colour -> Properties.ofFullCopy(Blocks.WOOL.pick(colour))
             );
+
+
+    // PILLARS
 
     public static final DeferredBlock<Block> TEST_PILLAR_BLOCK = registerBlock(MFBlockItemIds.TEST_COLUMN,
             PillarBlock::new,
             _ -> Properties.ofFullCopy(Blocks.OAK_PLANKS)
     );
+
+    public static final ColorCollection<DeferredBlock<Block>> CONCRETE_PILLAR =
+            registerColouredBlockSet(
+                    MFBlockItemIds.CONCRETE_PILLAR,
+                    PillarBlock::new,
+                    colour -> Properties.ofFullCopy(Blocks.CONCRETE.pick(colour))
+            );
+
+    public static final WeatheringCopperCollection<DeferredBlock<Block>> CUT_COPPER_PILLAR =
+            registerCopperBlockSet(
+                    MFBlockItemIds.CUT_COPPER_PILLAR,
+                    WeatheringCopperPillarBlock::new,
+                    WeatheringCopperPillarBlock::new,
+                    state -> Properties.ofFullCopy(Blocks.CUT_COPPER.weathering().pick(state))
+            );
 
     // Flowers
 
@@ -1505,7 +1525,6 @@ public class MFBlocks {
                     .sound(MFSoundTypes.MAGIC_BLOCK_SOUNDS)
             ), Component.translatable("tooltip.morefeatures.magic_block"));
 
-
     // Compressor block
     public static final DeferredBlock<Block> COMPRESSOR_BLOCK = registerBlock(MFBlockItemIds.COMPRESSOR_BLOCK,
             properties -> new CompressorBlock(properties
@@ -1532,6 +1551,15 @@ public class MFBlocks {
             ConjuredIceBlock::new,
             _ -> Properties.ofFullCopy(Blocks.FROSTED_ICE)
     );
+
+    public static final DeferredBlock<Block> TEMPORAL_DILATOR = registerBlock(MFBlockItemIds.TEMPORAL_DILATOR,
+            props -> new TemporalDilatorBlock(props
+                    .noOcclusion()
+                    .requiresCorrectToolForDrops()
+                    .forceSolidOn()
+                    .strength(9.5F, -1F)
+                    .lightLevel(TemporalDilatorBlock::getLightLevel)
+            ));
 
     // Icicle
     public static final DeferredBlock<Block> ICICLE = registerBlock(MFBlockItemIds.ICICLE,
@@ -1674,10 +1702,9 @@ public class MFBlocks {
         );
     }
 
-    @SuppressWarnings("SameParameterValue")
     private static ColorCollection<DeferredBlock<Block>> registerColouredBlockSet(
             ColorCollection<BlockItemId> ids,
-            BiFunction<DyeColor, Properties, ? extends Block> factory,
+            Function<Properties, ? extends Block> factory,
             Function<DyeColor, Properties> propertiesSupplier){
 
         return ColorCollection.zipMap(
@@ -1689,7 +1716,7 @@ public class MFBlocks {
                         throw new IllegalStateException("Failed to register " + name + " within a coloured block set. ID must be within the More Features namespace!");
                     }
                     Properties props = propertiesSupplier.apply(color).setId(id.block());
-                    DeferredBlock<Block> block = BLOCKS.register(name, () -> factory.apply(color, props));
+                    DeferredBlock<Block> block = BLOCKS.register(name, () -> factory.apply(props));
 
                     // Register the BlockItem, just like with copper
                     registerBlockItem(id, block);

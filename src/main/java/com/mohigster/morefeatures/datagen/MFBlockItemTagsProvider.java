@@ -17,6 +17,8 @@ public class MFBlockItemTagsProvider extends BlockItemTagsProvider {
     protected void run() {
         tag(MFBlockItemTags.WOOL_VERTICAL_SLABS).addAll(MFBlockItemIds.WOOL_VERTICAL_SLAB.asList());
         tag(MFBlockItemTags.CUT_COPPER_VERTICAL_SLABS).addAll(MFBlockItemIds.CUT_COPPER_VERTICAL_SLAB.asList());
+        tag(MFBlockItemTags.CUT_COPPER_PILLARS).addAll(MFBlockItemIds.CUT_COPPER_PILLAR.asList());
+        tag(MFBlockItemTags.CONCRETE_PILLARS).addAll(MFBlockItemIds.CONCRETE_PILLAR.asList());
         tag(BlockItemTags.COMPLETES_FIND_TREE_TUTORIAL).add(
                 MFBlockItemIds.BLOODWOOD_LOG,
                 MFBlockItemIds.TAINTED_LOG,

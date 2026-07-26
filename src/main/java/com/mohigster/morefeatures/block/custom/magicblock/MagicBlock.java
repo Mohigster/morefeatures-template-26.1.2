@@ -60,6 +60,7 @@ public class MagicBlock extends Block {
 
     protected ItemStack getTransmutationResult(ItemStack item) {
         ItemStack result = MagicBlockTransmutations.INSTANCE.getResult(item);
+
         return result.isEmpty() ? ItemStack.EMPTY : result;
     }
 

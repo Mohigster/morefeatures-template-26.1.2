@@ -69,6 +69,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         dropSelf(MFBlocks.TAINTED_SHELF.get());
         dropSelf(MFBlocks.STRIPPED_TAINTED_LOG.get());
         dropSelf(MFBlocks.STRIPPED_TAINTED_WOOD.get());
+        dropSelf(MFBlocks.TEMPORAL_DILATOR.get());
         dropSelf(MFBlocks.TAINTED_SAPLING.get());
         dropSelf(MFBlocks.CHARRED_PLANKS.get());
         dropSelf(MFBlocks.CHARRED_STAIRS.get());
@@ -248,6 +249,8 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         MFBlocks.CUT_COPPER_VERTICAL_SLAB.forEach(block -> this.add(block.get(), this::createVerticalSlabItemTable));
         MFBlocks.WOOL_VERTICAL_SLAB.forEach(block -> this.add(block.get(), this::createVerticalSlabItemTable));
 
+        MFBlocks.CUT_COPPER_PILLAR.forEach(block -> this.dropSelf(block.get()));
+        MFBlocks.CONCRETE_PILLAR.forEach(block -> this.dropSelf(block.get()));
 
         // LEAVES
 

@@ -72,6 +72,7 @@ public class MFItemIds {
     public static final ResourceKey<Item> BISMUTH_HOE = createId("bismuth_hoe");
     public static final ResourceKey<Item> BISMUTH_SHOVEL = createId("bismuth_shovel");
     public static final ResourceKey<Item> BISMUTH_SPEAR = createId("bismuth_spear");
+    public static final ResourceKey<Item> BISMUTH_BOW = createId("bismuth_bow");
 
     public static final ResourceKey<Item> CARBON_TRIDENT = createId("carbon_trident");
     public static final ResourceKey<Item> BISMUTH_TRIDENT = createId("bismuth_trident");

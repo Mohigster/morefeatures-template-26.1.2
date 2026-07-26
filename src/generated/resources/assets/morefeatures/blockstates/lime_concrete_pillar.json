@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "shape=bottom": {
+      "model": "morefeatures:block/lime_concrete_pillar_bottom",
+      "uvlock": true
+    },
+    "shape=full": {
+      "model": "morefeatures:block/lime_concrete_pillar",
+      "uvlock": true
+    },
+    "shape=middle": {
+      "model": "morefeatures:block/lime_concrete_pillar_middle",
+      "uvlock": true
+    },
+    "shape=top": {
+      "model": "morefeatures:block/lime_concrete_pillar_top",
+      "uvlock": true
+    }
+  }
+}

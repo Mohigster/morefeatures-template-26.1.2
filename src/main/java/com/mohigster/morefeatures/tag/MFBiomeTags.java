@@ -11,6 +11,7 @@ public class MFBiomeTags {
     public static final TagKey<Biome> EVIL_FOREST = morefeaturesTag("evil_forest");
     public static final TagKey<Biome> END_FOREST = morefeaturesTag("end_forest");
     public static final TagKey<Biome> NETHER_FOREST = morefeaturesTag("nether_forest");
+    public static final TagKey<Biome> OCEAN_CITADEL_BIOMES = morefeaturesTag("has_structure/ocean_citadel_biomes");
 
     private static TagKey<Biome> morefeaturesTag(String name) {
         return create(MFIdentifier.withMfNamespace(name));

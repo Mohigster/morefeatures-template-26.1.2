@@ -3,7 +3,7 @@
   "category": "building",
   "group": "palm_planks",
   "ingredients": [
-    "#morefeatures:pallid_logs"
+    "#morefeatures:logs/pallid"
   ],
   "result": {
     "count": 4,

@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.datagen.models;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.custom.VoidAnchorBlock;
 import com.mohigster.morefeatures.block.custom.pillar.PillarBlock;
+import com.mohigster.morefeatures.block.custom.temporaldilator.TemporalDilatorBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabType;
 import com.mojang.math.Quadrant;
@@ -50,6 +51,14 @@ public final class MFBlockModelGenerators {
             Optional.of(withMfNamespace("block/template_pillar_middle")),
             Optional.of("_middle"),
             ALL_SLOT, TextureSlot.PARTICLE);
+
+    private static final ModelTemplate TEMPORAL_DILATOR_UP = new ModelTemplate(
+            Optional.of(withMfNamespace("block/template_temporal_dilator_up")),
+            Optional.of("_up"));
+
+    private static final ModelTemplate TEMPORAL_DILATOR_DOWN = new ModelTemplate(
+            Optional.of(withMfNamespace("block/template_temporal_dilator_down")),
+            Optional.of("_down"));
 
     private static final ModelTemplate VERTICAL_SLAB_STRAIGHT = new ModelTemplate(
             Optional.of(withMfNamespace("block/template_vertical_slab")),
@@ -200,6 +209,9 @@ public final class MFBlockModelGenerators {
         if (textureSource == null){
             throw new IllegalArgumentException("Cannot create a model for " + pillar + ": textureSource must not be null");
         }
+        if (blockModels == null){
+            throw new IllegalArgumentException("Failed to find the Block State Output and Model Output for " + pillar);
+        }
 
         TextureMapping mapping = new TextureMapping();
 
@@ -233,6 +245,32 @@ public final class MFBlockModelGenerators {
         );
 
         blockModels.registerSimpleItemModel(pillar, fullModel);
+    }
+
+    public static void createTemporalDilator(BlockModelGenerators blockModels, Block temporalDilator){
+        TextureMapping mapping = new TextureMapping();
+
+        Identifier upModel;
+        Identifier downModel;
+
+        upModel   = TEMPORAL_DILATOR_UP.create(temporalDilator, mapping, blockModels.modelOutput);
+        downModel = TEMPORAL_DILATOR_DOWN.create(temporalDilator, mapping, blockModels.modelOutput);
+
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator.dispatch(temporalDilator)
+                        .with(PropertyDispatch.initial(TemporalDilatorBlock.DIRECTION)
+                                .generate(direction -> {
+                                    Identifier model = switch (direction) {
+                                        case UP   -> upModel;
+                                        case DOWN -> downModel;
+                                    };
+
+                                    return plainVariant(model);
+                                })
+                        )
+        );
+
+        blockModels.registerSimpleItemModel(temporalDilator, upModel);
     }
 
     @SuppressWarnings("deprecation")

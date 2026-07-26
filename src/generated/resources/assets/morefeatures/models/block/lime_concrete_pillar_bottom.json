@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_pillar_bottom",
+  "textures": {
+    "all": "minecraft:block/lime_concrete",
+    "particle": "minecraft:block/lime_concrete"
+  }
+}

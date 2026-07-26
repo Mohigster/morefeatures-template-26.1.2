@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_pillar_middle",
+  "textures": {
+    "all": "minecraft:block/weathered_cut_copper",
+    "particle": "minecraft:block/weathered_cut_copper"
+  }
+}

@@ -176,6 +176,7 @@ public class MFBlockItemIds {
     public static final BlockItemId MAGIC_BLOCK = createId("magic_block");
     public static final BlockItemId EVIL_PORTAL = createId("evil_portal");
     public static final BlockItemId ICICLE = createId("icicle");
+    public static final BlockItemId TEMPORAL_DILATOR = createId("temporal_dilator");
 
     // ----- VANILLA VERTICAL SLABS -----
 
@@ -257,6 +258,9 @@ public class MFBlockItemIds {
     public static final WeatheringCopperCollection<BlockItemId> CUT_COPPER_VERTICAL_SLAB = createSimpleCopperId("cut_copper_vertical_slab");
     public static final ColorCollection<BlockItemId> WOOL_VERTICAL_SLAB = createSimpleColouredId("wool_vertical_slab");
 
+    public static final WeatheringCopperCollection<BlockItemId> CUT_COPPER_PILLAR = createSimpleCopperId("cut_copper_pillar");
+    public static final ColorCollection<BlockItemId> CONCRETE_PILLAR = createSimpleColouredId("concrete_pillar");
+
     public static final BlockItemId TEST_COLUMN = createId("test_column");
 
     private static BlockItemId createId(String name) {
@@ -264,12 +268,10 @@ public class MFBlockItemIds {
         return BlockItemId.create(id, id);
     }
 
-    @SuppressWarnings("SameParameterValue")
     private static ColorCollection<BlockItemId> createSimpleColouredId(String name) {
         return ColorCollection.prefixWithColor(ColorCollection.create(name)).map(MFBlockItemIds::createId);
     }
 
-    @SuppressWarnings("SameParameterValue")
     private static WeatheringCopperCollection<BlockItemId> createSimpleCopperId(String name) {
         return WeatheringCopperCollection.prefixWithState(WeatheringCopperCollection.create(name)).map(MFBlockItemIds::createId);
     }

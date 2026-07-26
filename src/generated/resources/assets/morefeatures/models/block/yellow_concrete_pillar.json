@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_pillar",
+  "textures": {
+    "all": "minecraft:block/yellow_concrete",
+    "particle": "minecraft:block/yellow_concrete"
+  }
+}

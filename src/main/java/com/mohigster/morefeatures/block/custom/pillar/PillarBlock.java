@@ -13,7 +13,11 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
+import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.level.material.FluidState;
+import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -21,6 +25,7 @@ import org.jspecify.annotations.NullMarked;
 
 public class PillarBlock extends Block implements SimpleWaterloggedBlock {
     public static final EnumProperty<PillarShape> SHAPE = EnumProperty.create("shape", PillarShape.class);
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     private static final VoxelShape CENTER_PILLAR_SHAPE = Block.box(2, 0, 2, 14, 16, 14);
 
@@ -35,12 +40,21 @@ public class PillarBlock extends Block implements SimpleWaterloggedBlock {
     public PillarBlock(Properties properties) {
         super(properties);
 
-        this.registerDefaultState(this.stateDefinition.any().setValue(SHAPE, PillarShape.FULL));
+        this.registerDefaultState(this.stateDefinition.any()
+                .setValue(SHAPE, PillarShape.FULL)
+                .setValue(WATERLOGGED, false)
+        );
     }
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(SHAPE);
+        builder.add(SHAPE, WATERLOGGED);
+    }
+
+    @NullMarked
+    @Override
+    public FluidState getFluidState(BlockState state) {
+        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
     }
 
     @NullMarked
@@ -59,31 +73,36 @@ public class PillarBlock extends Block implements SimpleWaterloggedBlock {
         LevelAccessor level = context.getLevel();
         BlockPos pos = context.getClickedPos();
 
-        return calculateShape(level, pos);
+        FluidState fluidState = level.getFluidState(pos);
+
+        return calculateShape(level, pos, fluidState);
     }
 
     @NullMarked
     @Override
     public BlockState updateShape(BlockState state, LevelReader level, ScheduledTickAccess ticks, BlockPos currentPos, Direction directionToNeighbour, BlockPos neighborPos, BlockState neighborState, RandomSource random) {
+        if (state.getValue(WATERLOGGED)) {
+            ticks.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+        }
         if (directionToNeighbour == Direction.UP || directionToNeighbour == Direction.DOWN) {
-            return calculateShape(level, currentPos);
+            return calculateShape(level, currentPos, level.getFluidState(currentPos));
         }
         return super.updateShape(state, level, ticks, currentPos, directionToNeighbour, neighborPos, neighborState, random);
     }
 
     // Helper method to determine shape based on vertical neighbors
-    private BlockState calculateShape(LevelReader level, BlockPos pos) {
+    private BlockState calculateShape(LevelReader level, BlockPos pos, FluidState fluidState) {
         boolean connectAbove = canConnectTo(level.getBlockState(pos.above()));
         boolean connectBelow = canConnectTo(level.getBlockState(pos.below()));
 
         if (connectAbove && connectBelow) {
-            return this.defaultBlockState().setValue(SHAPE, PillarShape.MIDDLE);
+            return this.defaultBlockState().setValue(SHAPE, PillarShape.MIDDLE).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
         } else if (connectAbove) {
-            return this.defaultBlockState().setValue(SHAPE, PillarShape.BOTTOM);
+            return this.defaultBlockState().setValue(SHAPE, PillarShape.BOTTOM).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
         } else if (connectBelow) {
-            return this.defaultBlockState().setValue(SHAPE, PillarShape.TOP);
+            return this.defaultBlockState().setValue(SHAPE, PillarShape.TOP).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
         } else {
-            return this.defaultBlockState().setValue(SHAPE, PillarShape.FULL);
+            return this.defaultBlockState().setValue(SHAPE, PillarShape.FULL).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
         }
     }
 

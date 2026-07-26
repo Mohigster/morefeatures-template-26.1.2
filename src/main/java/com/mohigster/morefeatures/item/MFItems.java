@@ -13,7 +13,7 @@ import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.item.custom.*;
 import com.mohigster.morefeatures.item.custom.wand.*;
 import com.mohigster.morefeatures.tag.MFItemTags;
-import com.mohigster.morefeatures.toolmaterial.MFArmorMaterials;
+import com.mohigster.morefeatures.material.MFArmorMaterials;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Unit;
@@ -42,7 +42,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import static com.mohigster.morefeatures.MoreFeatures.MODID;
-import static com.mohigster.morefeatures.toolmaterial.MFToolMaterial.BISMUTH_TOOL_MATERIAL;
+import static com.mohigster.morefeatures.material.MFToolMaterial.BISMUTH_TOOL_MATERIAL;
 
 public class MFItems {
 
@@ -387,7 +387,7 @@ public class MFItems {
                     .rarity(Rarity.RARE)
             ));
 
-    public static final DeferredItem<Item> BISMUTH_BOW = ITEMS.registerItem("bismuth_bow",
+    public static final DeferredItem<Item> BISMUTH_BOW = registerItem(MFItemIds.BISMUTH_BOW,
             properties -> new BowItem(properties
                     .rarity(Rarity.RARE)
                     .fireResistant()

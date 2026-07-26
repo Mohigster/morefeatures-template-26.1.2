@@ -39,7 +39,7 @@ public abstract class MetalDetectorCostProvider implements DataProvider {
     protected abstract void generate();
 
     protected void add(TagKey<Block> tag, int cost) {
-        String costName = tag.location().getPath() + "_" + cost;
+        String costName = "durability_cost_of_" + cost;
 
         add(Identifier.fromNamespaceAndPath(modId, costName), tag, cost);
     }

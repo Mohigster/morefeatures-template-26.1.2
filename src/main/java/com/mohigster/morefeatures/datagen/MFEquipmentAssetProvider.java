@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.references.MFIdentifier;
-import com.mohigster.morefeatures.toolmaterial.MFArmorMaterials;
+import com.mohigster.morefeatures.material.MFArmorMaterials;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;

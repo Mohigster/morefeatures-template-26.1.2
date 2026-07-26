@@ -220,7 +220,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.BISMUTH_SHOVEL)
                 .add(MFItems.CARBON_CROSSBOW.getKey())
                 .add(MFItems.CARBON_BOW.getKey())
-                .add(MFItems.BISMUTH_BOW.getKey())
+                .add(MFItemIds.BISMUTH_BOW)
                 .add(MFItemIds.BISMUTH_SPEAR)
                 .add(MFItems.CARBON_ELYTRA.getKey())
                 .add(MFItemIds.BISMUTH_HELMET)
@@ -229,7 +229,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.BISMUTH_BOOTS);
 
         tag(ItemTags.LUNGE_ENCHANTABLE)
-                .add(MFItems.BISMUTH_SPEAR.getKey());
+                .add(MFItemIds.BISMUTH_SPEAR);
 
         tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_SWORD)
@@ -316,17 +316,25 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.MUSIC_DISC_AQUAMARINE);
 
         tag(ItemTags.BEACON_PAYMENT_ITEMS)
-                .add(MFItems.BISMUTH.getKey())
-                .add(MFItems.ALUMINIUM_INGOT.getKey())
-                .add(MFItems.MAGNESIUM_INGOT.getKey())
-                .add(MFItems.AZURITE.getKey())
-                .add(MFItems.FLUORITE.getKey());
+                .add(MFItemIds.BISMUTH)
+                .add(MFItemIds.ALUMINIUM_INGOT)
+                .add(MFItemIds.MAGNESIUM_INGOT)
+                .add(MFItemIds.AZURITE)
+                .add(MFItemIds.FLUORITE);
 
         tag(MFItemTags.AIMABLE_WANDS)
                 .add(MFItems.FIRE_WAND.getKey());
 
-        tag(MFItemTags.TARGETING_WANDS)
-                .add(MFItems.ICE_WAND.getKey());
+        tag(MFItemTags.TARGETING_ENTITY_WANDS)
+                .add(MFItemIds.ICE_WAND)
+                .add(MFItemIds.HEALING_WAND);
+
+        tag(MFItemTags.AOE_WANDS)
+                .add(MFItemIds.LIGHTNING_WAND)
+                .add(MFItemIds.EARTH_WAND);
+
+        tag(MFItemTags.TARGETING_BLOCK_WANDS)
+                .add(MFItemIds.TIME_WAND);
 
         tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_CARBON)
                 .add(ItemIds.COAL)
