@@ -2,6 +2,8 @@ package com.mohigster.morefeatures.block;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.custom.*;
+import com.mohigster.morefeatures.block.custom.modified.*;
+import com.mohigster.morefeatures.block.custom.nylium.NulliumBlock;
 import com.mohigster.morefeatures.block.custom.pillar.PillarBlock;
 import com.mohigster.morefeatures.block.custom.flammable.*;
 import com.mohigster.morefeatures.block.custom.magicblock.MagicBlock;
@@ -826,15 +828,6 @@ public class MFBlocks {
                     .mapColor(Blocks.PALE_OAK_LEAVES.defaultMapColor())
             ));
 
-    public static final DeferredBlock<Block> DECREPIT_NULLIUM = registerBlock(MFBlockItemIds.DECREPIT_NULLIUM,
-            properties -> new NulliumBlock(properties
-                    .sound(SoundType.NYLIUM)
-                    .strength(4f, 4f)
-                    .requiresCorrectToolForDrops()
-                    .randomTicks()
-                    .mapColor(MapColor.TERRACOTTA_BLUE)
-            ));
-
     public static final DeferredBlock<Block> DECREPIT_SAPLING = registerBlock(MFBlockItemIds.DECREPIT_SAPLING,
             properties -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.DECREPIT, properties
                     .sound(SoundType.GRASS)
@@ -908,6 +901,16 @@ public class MFBlocks {
                     .pushReaction(PushReaction.DESTROY)
             ));
 
+    public static final DeferredBlock<Block> DECREPIT_NULLIUM = registerBlock(MFBlockItemIds.DECREPIT_NULLIUM,
+            properties -> new NulliumBlock(properties
+                    .sound(SoundType.NYLIUM)
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .randomTicks()
+                    .mapColor(MapColor.TERRACOTTA_BLUE),
+                    DECREPIT_ROOTS
+            ));
+
     public static final DeferredBlock<Block> DECREPIT_SIGN = registerBlockWithoutItem(MFBlockIds.DECREPIT_SIGN,
             properties -> new MFStandingSignBlock(MFWoodType.DECREPIT, properties
                     .noCollision()
@@ -976,11 +979,6 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(DECREPIT_LEAVES.get())
     );
 
-    public static final DeferredBlock<Block> PALLID_NULLIUM = registerBlock(MFBlockItemIds.PALLID_NULLIUM,
-            NulliumBlock::new,
-            _ -> Properties.ofFullCopy(DECREPIT_NULLIUM.get()).mapColor(MapColor.TERRACOTTA_GREEN)
-    );
-
     public static final DeferredBlock<Block> PALLID_SAPLING = registerBlock(MFBlockItemIds.PALLID_SAPLING,
             props -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALLID, props, MFBlockTags.NULLIUM),
             _ -> Properties.ofFullCopy(DECREPIT_SAPLING.get())
@@ -1037,6 +1035,11 @@ public class MFBlocks {
                     .instabreak()
                     .pushReaction(PushReaction.DESTROY)
             ));
+
+    public static final DeferredBlock<Block> PALLID_NULLIUM = registerBlock(MFBlockItemIds.PALLID_NULLIUM,
+            props -> new NulliumBlock(props, PALLID_ROOTS),
+            _ -> Properties.ofFullCopy(DECREPIT_NULLIUM.get()).mapColor(MapColor.TERRACOTTA_GREEN)
+    );
 
     public static final DeferredBlock<Block> PALLID_SIGN = registerBlockWithoutItem(MFBlockIds.PALLID_SIGN,
             properties -> new MFStandingSignBlock(MFWoodType.PALLID, properties
@@ -1462,6 +1465,13 @@ public class MFBlocks {
                     colour -> Properties.ofFullCopy(Blocks.WOOL.pick(colour))
             );
 
+    public static final ColorCollection<DeferredBlock<Block>> CONCRETE_VERTICAL_SLAB =
+            registerColouredBlockSet(
+                    MFBlockItemIds.CONCRETE_VERTICAL_SLAB,
+                    props -> new VerticalSlabBlock(false, props),
+                    colour -> Properties.ofFullCopy(Blocks.CONCRETE.pick(colour))
+            );
+
 
     // PILLARS
 
@@ -1483,6 +1493,22 @@ public class MFBlocks {
                     WeatheringCopperPillarBlock::new,
                     WeatheringCopperPillarBlock::new,
                     state -> Properties.ofFullCopy(Blocks.CUT_COPPER.weathering().pick(state))
+            );
+
+    // Concrete slabs and stairs
+
+    public static final ColorCollection<DeferredBlock<Block>> CONCRETE_SLAB =
+            registerColouredBlockSet(
+                    MFBlockItemIds.CONCRETE_SLAB,
+                    SlabBlock::new,
+                    colour -> Properties.ofFullCopy(Blocks.CONCRETE.pick(colour))
+            );
+
+    public static final ColorCollection<DeferredBlock<Block>> CONCRETE_STAIRS =
+            registerColouredBlockSet(
+                    MFBlockItemIds.CONCRETE_STAIRS,
+                    props -> new StairBlock(Blocks.CONCRETE.white().defaultBlockState(), props),
+                    colour -> Properties.ofFullCopy(Blocks.CONCRETE.pick(colour))
             );
 
     // Flowers
@@ -1569,6 +1595,15 @@ public class MFBlocks {
                     .instrument(NoteBlockInstrument.CHIME)
                     .friction(0.98F)
     );
+
+    // Bush blocks
+    public static final DeferredBlock<Block> BLUE_BERRY_BUSH = registerBlockWithoutItem(MFBlockIds.BLUE_BERRY_BUSH,
+            properties -> new BlueBerryBushBlock(properties
+                    .sound(SoundType.SWEET_BERRY_BUSH)
+                    .randomTicks()
+                    .noCollision()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
 
     // Register functions
 

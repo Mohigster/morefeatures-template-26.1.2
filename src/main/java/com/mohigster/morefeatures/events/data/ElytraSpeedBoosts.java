@@ -1,0 +1,79 @@
+package com.mohigster.morefeatures.events.data;
+
+import net.minecraft.core.Holder;
+import net.minecraft.resources.FileToIdConverter;
+import net.minecraft.resources.Identifier;
+import net.minecraft.server.packs.resources.ResourceManager;
+import net.minecraft.server.packs.resources.SimpleJsonResourceReloadListener;
+import net.minecraft.util.profiling.ProfilerFiller;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import org.jspecify.annotations.NullMarked;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class ElytraSpeedBoosts extends SimpleJsonResourceReloadListener<ElytraSpeedEntry> {
+    private static final double MAX_SPEED_SCALING_FACTOR = 130.0D;
+    private static final double MAX_SPEED_REDUCTION_BEFORE_SCALE = 0.1D;
+    private static final double MIN_MAX_SPEED = 1.0D; // The effective minimum value for the max speed parameter
+
+    public static final ElytraSpeedBoosts INSTANCE = new ElytraSpeedBoosts();
+
+    private List<ElytraSpeedEntry> entries = List.of();
+
+    private Set<Item> elytraEntries = Collections.emptySet();
+
+    protected ElytraSpeedBoosts() {
+        super(ElytraSpeedEntry.CODEC, FileToIdConverter.json("elytra_speed_boosts"));
+    }
+
+    @NullMarked
+    @Override
+    protected void apply(Map<Identifier, ElytraSpeedEntry> map, ResourceManager resourceManager, ProfilerFiller profiler) {
+        this.entries = map.values().stream()
+                .sorted(Comparator.comparingDouble(ElytraSpeedEntry::percentSpeedBoost))
+                .toList();
+
+        this.elytraEntries = this.entries.stream()
+                .flatMap(entry -> entry.elytra().stream())
+                .map(Holder::value)
+                .collect(Collectors.toSet());
+    }
+
+    public double getSpeed(ItemStack stack){
+        for (ElytraSpeedEntry entry : this.entries){
+            if (entry.elytra().contains(stack.typeHolder())){
+                return entry.percentSpeedBoost() / 100; // To make it more readable for other mod devs and datapack creators, the speed boost is divided by 100 before being returned. This allows them to input a percentage boost (e.g 18 for 18%)
+            }
+        }
+
+        return 0; // default fallback
+    }
+
+    public double getMaxSpeed(ItemStack stack){
+        for (ElytraSpeedEntry entry : this.entries){
+            if (entry.elytra().contains(stack.typeHolder())){
+                if (entry.maximumSpeed() == 0.0D) {
+                    double maxSpeed = (this.getSpeed(stack) - MAX_SPEED_REDUCTION_BEFORE_SCALE) * MAX_SPEED_SCALING_FACTOR;
+
+                    // Use the simple, less precise rounding method. This is just an elytra max speed, not cybersecurity software. Ultra-precision is unnecessary
+                    double roundedMaxSpeed = this.roundToTwoDecimals(maxSpeed);
+
+                    return Math.max(roundedMaxSpeed, MIN_MAX_SPEED);
+                }
+                return this.roundToTwoDecimals(entry.maximumSpeed());
+            }
+        }
+
+        return MIN_MAX_SPEED; // Fallback
+    }
+
+    public Set<Item> getElytraEntries(){
+        return this.elytraEntries;
+    }
+
+    private double roundToTwoDecimals(double valueToRound){
+        return (double) Math.round(valueToRound / 100) * 100;
+    }
+}

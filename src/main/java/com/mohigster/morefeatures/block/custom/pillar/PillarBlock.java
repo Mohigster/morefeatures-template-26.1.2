@@ -90,7 +90,7 @@ public class PillarBlock extends Block implements SimpleWaterloggedBlock {
         return super.updateShape(state, level, ticks, currentPos, directionToNeighbour, neighborPos, neighborState, random);
     }
 
-    // Helper method to determine shape based on vertical neighbors
+    // Helper method to determine shape based on vertical neighbours
     private BlockState calculateShape(LevelReader level, BlockPos pos, FluidState fluidState) {
         boolean connectAbove = canConnectTo(level.getBlockState(pos.above()));
         boolean connectBelow = canConnectTo(level.getBlockState(pos.below()));

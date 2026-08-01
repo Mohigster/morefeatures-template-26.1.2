@@ -61,12 +61,16 @@ public class MagicBlock extends Block {
     protected ItemStack getTransmutationResult(ItemStack item) {
         ItemStack result = MagicBlockTransmutations.INSTANCE.getResult(item);
 
+        if(item.is(MFItemTags.MAGIC_BLOCK_MULTIPLIES_RESULT)) {
+            return MagicBlockTransmutations.INSTANCE.applyExtraAmounts(result);
+        }
+
         return result.isEmpty() ? ItemStack.EMPTY : result;
     }
 
-    private void performTransmutationEffects(ItemEntity entity, ItemStack item, Level level, BlockPos pos){
-        if (!item.isEmpty()) {
-            entity.setItem(item);
+    private void performTransmutationEffects(ItemEntity entity, ItemStack transmutationResult, Level level, BlockPos pos){
+        if (!transmutationResult.isEmpty()) {
+            entity.setItem(transmutationResult);
 
             level.addParticle(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
                     0, 1, 0);

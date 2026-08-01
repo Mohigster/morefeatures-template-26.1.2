@@ -821,7 +821,7 @@ public class MFRecipeProvider extends RecipeProvider {
                                                                 float experience, int cookingTime, String group, String fromDesc) {
         for(ItemLike itemlike : smeltables) {
             SimpleCookingRecipeBuilder.generic(Ingredient.of(itemlike), craftingCategory, cookingCategory, result, experience, cookingTime, factory).group(group).unlockedBy(getHasName(itemlike), has(itemlike))
-                    .save(output, MoreFeatures.MODID + ":" + getItemName(result) + fromDesc + "_" + getItemName(itemlike));
+                    .save(this.output, MoreFeatures.MODID + ":" + getItemName(result) + fromDesc + "_" + getItemName(itemlike));
         }
     }
 

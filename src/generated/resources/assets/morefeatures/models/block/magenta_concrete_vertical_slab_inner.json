@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_vertical_slab_inner",
+  "textures": {
+    "all": "minecraft:block/magenta_concrete",
+    "particle": "minecraft:block/magenta_concrete"
+  }
+}

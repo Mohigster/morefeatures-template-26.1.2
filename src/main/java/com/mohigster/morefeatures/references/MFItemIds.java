@@ -74,11 +74,16 @@ public class MFItemIds {
     public static final ResourceKey<Item> BISMUTH_SPEAR = createId("bismuth_spear");
     public static final ResourceKey<Item> BISMUTH_BOW = createId("bismuth_bow");
 
+    public static final ResourceKey<Item> CARBON_ELYTRA = createId("carbon_elytra");
+    public static final ResourceKey<Item> BISMUTH_ELYTRA = createId("bismuth_elytra");
+
     public static final ResourceKey<Item> CARBON_TRIDENT = createId("carbon_trident");
     public static final ResourceKey<Item> BISMUTH_TRIDENT = createId("bismuth_trident");
 
     public static final ResourceKey<Item> MUSIC_DISC_AQUAMARINE = createId("music_disc_aquamarine");
     public static final ResourceKey<Item> MUSIC_DISC_SNOW_QUEEN = createId("music_disc_snow_queen");
+
+    public static final ResourceKey<Item> BLUE_BERRY = createId("blue_berry");
 
     private static ResourceKey<Item> createId(String name) {
         return ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace(name));

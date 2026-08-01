@@ -8,6 +8,9 @@ import net.minecraft.tags.TagKey;
 
 public class MFBlockItemTags {
     public static final BlockItemTagId WOOL_VERTICAL_SLABS = morefeaturesTag("vertical_slabs/wool");
+    public static final BlockItemTagId CONCRETE_VERTICAL_SLABS = morefeaturesTag("vertical_slabs/concrete");
+    public static final BlockItemTagId CONCRETE_SLABS = morefeaturesTag("concrete_slabs");
+    public static final BlockItemTagId CONCRETE_STAIRS = morefeaturesTag("concrete_stairs");
     public static final BlockItemTagId CUT_COPPER_VERTICAL_SLABS = morefeaturesTag("vertical_slabs/cut_copper");
     public static final BlockItemTagId CUT_COPPER_PILLARS = morefeaturesTag("pillars/cut_copper");
     public static final BlockItemTagId CONCRETE_PILLARS = morefeaturesTag("pillars/concrete");

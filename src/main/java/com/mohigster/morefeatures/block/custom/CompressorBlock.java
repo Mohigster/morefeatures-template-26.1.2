@@ -34,7 +34,6 @@ import org.jspecify.annotations.Nullable;
 
 @SuppressWarnings("unused")
 public class CompressorBlock extends BaseEntityBlock {
-
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final MapCodec<CompressorBlock> CODEC = simpleCodec(CompressorBlock::new);
     public static final BooleanProperty LIT = BlockStateProperties.LIT;

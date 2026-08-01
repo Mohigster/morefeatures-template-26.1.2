@@ -1,0 +1,17 @@
+{
+  "values": {
+    "minecraft:end_stone": {
+      "variants": [
+        "morefeatures:decrepit_nullium",
+        "morefeatures:pallid_nullium"
+      ]
+    },
+    "minecraft:netherrack": {
+      "variants": [
+        "morefeatures:charred_nylium",
+        "minecraft:crimson_nylium",
+        "minecraft:warped_nylium"
+      ]
+    }
+  }
+}

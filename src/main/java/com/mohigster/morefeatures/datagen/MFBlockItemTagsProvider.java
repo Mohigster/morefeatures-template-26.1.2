@@ -16,6 +16,9 @@ public class MFBlockItemTagsProvider extends BlockItemTagsProvider {
     @Override
     protected void run() {
         tag(MFBlockItemTags.WOOL_VERTICAL_SLABS).addAll(MFBlockItemIds.WOOL_VERTICAL_SLAB.asList());
+        tag(MFBlockItemTags.CONCRETE_VERTICAL_SLABS).addAll(MFBlockItemIds.CONCRETE_VERTICAL_SLAB.asList());
+        tag(MFBlockItemTags.CONCRETE_SLABS).addAll(MFBlockItemIds.CONCRETE_SLAB.asList());
+        tag(MFBlockItemTags.CONCRETE_STAIRS).addAll(MFBlockItemIds.CONCRETE_STAIRS.asList());
         tag(MFBlockItemTags.CUT_COPPER_VERTICAL_SLABS).addAll(MFBlockItemIds.CUT_COPPER_VERTICAL_SLAB.asList());
         tag(MFBlockItemTags.CUT_COPPER_PILLARS).addAll(MFBlockItemIds.CUT_COPPER_PILLAR.asList());
         tag(MFBlockItemTags.CONCRETE_PILLARS).addAll(MFBlockItemIds.CONCRETE_PILLAR.asList());

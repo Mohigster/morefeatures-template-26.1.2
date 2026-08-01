@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.worldgen.biome;
 
+import com.mohigster.morefeatures.particles.MFParticleTypes;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.sounds.SoundEvents;
@@ -45,7 +46,9 @@ public class MFNetherBiomes {
                                 List.of(new AmbientAdditionsSettings(SoundEvents.AMBIENT_CRIMSON_FOREST_ADDITIONS, 0.0111))
                         )
                 )
-                .specialEffects(new BiomeSpecialEffects.Builder().waterColor(108350).build())
+                .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES,
+                        AmbientParticle.of(MFParticleTypes.CHARRED_SPORE.get(), 0.02F))
+                .specialEffects(new BiomeSpecialEffects.Builder().waterColor(108350).grassColorOverride(4671303).build())
                 .build();
     }
 }

@@ -36,7 +36,7 @@ public final class MFBlockTags {
     public static final TagKey<Block> METAL_DETECTOR_LOW_COST = morefeaturesTag("metal_detector/cost/low");
     public static final TagKey<Block> METAL_DETECTOR_MEDIUM_COST = morefeaturesTag("metal_detector/cost/medium");
     public static final TagKey<Block> METAL_DETECTOR_HIGH_COST = morefeaturesTag("metal_detector/cost/high");
-    public static final TagKey<Block> METAL_DETECTOR_BISMUTH_COST = morefeaturesTag("metal_detector/cost/bismuth");
+    public static final TagKey<Block> METAL_DETECTOR_BISMUTH_COST = morefeaturesTag("metal_detector/cost/bismuth"); // Bismuth is exceptionally rare and gets its own tag and cost
     public static final TagKey<Block> WOOL_VERTICAL_SLABS = MFBlockItemTags.WOOL_VERTICAL_SLABS.block();
     public static final TagKey<Block> CUT_COPPER_VERTICAL_SLABS = MFBlockItemTags.CUT_COPPER_VERTICAL_SLABS.block();
     public static final TagKey<Block> CUT_COPPER_PILLARS = MFBlockItemTags.CUT_COPPER_PILLARS.block();

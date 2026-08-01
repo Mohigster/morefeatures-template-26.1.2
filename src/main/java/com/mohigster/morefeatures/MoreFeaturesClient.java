@@ -6,13 +6,14 @@ import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.entity.model.IceologerModel;
 import com.mohigster.morefeatures.particles.MFFallingLeavesParticle;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
+import com.mohigster.morefeatures.particles.MFSuspendedParticles;
 import com.mohigster.morefeatures.references.MFEntityTypeIds;
 import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mohigster.morefeatures.entity.model.MFTridentModel;
 import com.mohigster.morefeatures.renderer.trident.MFTridentRenderer;
 import com.mohigster.morefeatures.menu.MFMenuTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorScreen;
-import com.mohigster.morefeatures.model.MFModelLayer;
+import com.mohigster.morefeatures.entity.model.MFModelLayer;
 import com.mohigster.morefeatures.renderer.iceologer.IceologerRenderer;
 import com.mohigster.morefeatures.renderer.special.BismuthTridentSpecialRenderer;
 import com.mohigster.morefeatures.renderer.special.CarbonShieldSpecialRenderer;
@@ -77,18 +78,25 @@ public class MoreFeaturesClient {
                 MFParticleTypes.PALLID_LEAVES.get(),
                 MFFallingLeavesParticle.EndLeafProvider::new
         );
+        event.registerSpriteSet(
+                MFParticleTypes.CHARRED_SPORE.get(),
+                MFSuspendedParticles.CharredSporeProvider::new
+        );
     }
 
     @SubscribeEvent
     public static void registerLayerDefinitions(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(MFModelLayer.CARBON_TRIDENT, MFTridentModel::createLayer);
         event.registerLayerDefinition(MFModelLayer.BISMUTH_TRIDENT, MFTridentModel::createLayer);
+
+        // Boats
         event.registerLayerDefinition(MFModelLayer.BLOODWOOD_BOAT, BoatModel::createBoatModel);
         event.registerLayerDefinition(MFModelLayer.BLOODWOOD_CHEST_BOAT, BoatModel::createChestBoatModel);
         event.registerLayerDefinition(MFModelLayer.TAINTED_BOAT, BoatModel::createBoatModel);
         event.registerLayerDefinition(MFModelLayer.TAINTED_CHEST_BOAT, BoatModel::createChestBoatModel);
         event.registerLayerDefinition(MFModelLayer.PALM_BOAT, BoatModel::createBoatModel);
         event.registerLayerDefinition(MFModelLayer.PALM_CHEST_BOAT, BoatModel::createChestBoatModel);
+
         event.registerLayerDefinition(MFModelLayer.ICEOLOGER, IceologerModel::createBodyLayer);
     }
 

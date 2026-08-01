@@ -7,9 +7,11 @@ import net.minecraft.world.item.Item;
 
 public final class MFItemTags {
     public static final TagKey<Item> BISMUTH_TOOL_MATERIAL_REPAIRABLE = morefeaturesTag("bismuth_tool_material_repairable");
+    public static final TagKey<Item> CARBON_TOOL_MATERIAL_REPAIRABLE = morefeaturesTag("carbon_tool_material_repairable");
     public static final TagKey<Item> REPAIRS_BISMUTH_ARMOR = morefeaturesTag("repairs_bismuth_armor");
     public static final TagKey<Item> REPAIRS_CARBON_ARMOR = morefeaturesTag("repairs_carbon_armor");
     public static final TagKey<Item> BISMUTH_TOOL_MATERIALS = morefeaturesTag("bismuth_tool_materials");
+    public static final TagKey<Item> CARBON_TOOL_MATERIALS = morefeaturesTag("carbon_tool_materials");
 
     // Magic block tags are quite big, so a lot of their items are broken up into smaller tags to make the magic block tag itself easier to read
 
@@ -55,8 +57,10 @@ public final class MFItemTags {
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_LINGERING_POT = morefeaturesTag("magic_block_transmutations/lingering_pot");
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_BEDROCK = morefeaturesTag("magic_block_transmutations/bedrock");
     public static final TagKey<Item> MAGIC_BLOCK_TRANSMUTATION_RESULTS = morefeaturesTag("magic_block_transmutations/results");
+    public static final TagKey<Item> MAGIC_BLOCK_MULTIPLIES_RESULT = morefeaturesTag("magic_block_transmutations/mulitplied_result");
 
     public static final TagKey<Item> METAL_DETECTOR_FINDABLE = morefeaturesTag("metal_detector_findable");
+
 
     private static TagKey<Item> morefeaturesTag(String name) {
         return TagKey.create(Registries.ITEM, MFIdentifier.withMfNamespace(name));

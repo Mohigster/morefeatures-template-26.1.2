@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom.flammable;
 
-import com.mohigster.morefeatures.block.custom.MFFenceBlock;
+import com.mohigster.morefeatures.block.custom.modified.MFFenceBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;

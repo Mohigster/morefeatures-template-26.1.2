@@ -16,6 +16,8 @@ import net.minecraft.client.renderer.block.dispatch.VariantMutator;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -25,8 +27,7 @@ import org.jspecify.annotations.Nullable;
 import java.util.Optional;
 
 import static com.mohigster.morefeatures.references.MFIdentifier.withMfNamespace;
-import static net.minecraft.client.data.models.BlockModelGenerators.createSimpleBlock;
-import static net.minecraft.client.data.models.BlockModelGenerators.plainVariant;
+import static net.minecraft.client.data.models.BlockModelGenerators.*;
 
 public final class MFBlockModelGenerators {
     private static final TextureSlot ALL_SLOT = TextureSlot.create("all");
@@ -365,9 +366,21 @@ public final class MFBlockModelGenerators {
         blockModels.registerSimpleItemModel(anchorBlock, chargeLevelModels[0]);
     }
 
-    // vanilla createNyliumBlock's bottom block texture is hard coded as Netherrack. My Nullium Blocks need an End Stone bottom, thus needing a custom method
+    public static void createBerryBush(BlockModelGenerators blockModels, Block berry, Item berryItem) {
+        blockModels.registerSimpleFlatItemModel(berryItem);
+        blockModels.blockStateOutput.accept(
+                MultiVariantGenerator.dispatch(berry).with(PropertyDispatch.initial(
+                        BlockStateProperties.AGE_3).generate((age) -> plainVariant(
+                                blockModels.createSuffixedVariant(berry, "_stage" + age,
+                                        ModelTemplates.CROSS, TextureMapping::cross)))));
+    }
+
+    /**
+     * This method is derived from vanilla's createNyliumBlock method. The only difference is that this method allows you to pass in any block as the texture to use for the bottom block.
+     * You can also use a custom texture by passing in null for the borrowedBottomTexture. Keep in mind that the custom texture must be names block_bottom.png
+     * e.g. pallid_nullium_bottom.png would be the name for the texture png file for Pallid Nullium's bottom texture.
+     */
     public static void createNyliumLikeBlock(BlockModelGenerators blockModels, Block block, @Nullable Block borrowedBottomTexture){ // Whilst I only ever use this for end stone, passing the bottom block as a parameter is better practice
-        // Note that BlockModelGenerators is passed in as a parameter. This instantiates it in a static context which is necessary to call blockStateOutput and modelOutput.
         Material bottom = borrowedBottomTexture != null
                 ? TextureMapping.getBlockTexture(borrowedBottomTexture)   // If borrowedBottomTexture isn't null, borrow the specified block's texture to use on the bottom of the block
                 : TextureMapping.getBlockTexture(block, "_bottom"); // Otherwise set it to a custom texture

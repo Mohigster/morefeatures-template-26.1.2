@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_vertical_slab_inner",
+  "textures": {
+    "all": "minecraft:block/light_blue_concrete",
+    "particle": "minecraft:block/light_blue_concrete"
+  }
+}

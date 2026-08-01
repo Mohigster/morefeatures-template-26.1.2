@@ -6,6 +6,8 @@ import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorItem;
 import com.mohigster.morefeatures.item.custom.trident.MFTridentItem;
 import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
+import com.mohigster.morefeatures.item.food.MFFoods;
+import com.mohigster.morefeatures.material.MFToolMaterial;
 import com.mohigster.morefeatures.references.MFItemIds;
 import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
 import com.mohigster.morefeatures.datagen.MFJukeboxSongs;
@@ -15,7 +17,9 @@ import com.mohigster.morefeatures.item.custom.wand.*;
 import com.mohigster.morefeatures.tag.MFItemTags;
 import com.mohigster.morefeatures.material.MFArmorMaterials;
 import net.minecraft.network.chat.Component;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.DamageTypeTags;
+import net.minecraft.tags.TagKey;
 import net.minecraft.util.Unit;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -198,7 +202,7 @@ public class MFItems {
     public static final DeferredItem<Item> CARBON_BOW = ITEMS.registerItem("carbon_bow",
             properties -> new BowItem(properties
                     .durability(856)
-                    .repairable(CARBON_FIBER.get())
+                    .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
                     .enchantable(15)
                     .fireResistant()
             ));
@@ -206,7 +210,7 @@ public class MFItems {
     public static final DeferredItem<Item> CARBON_CROSSBOW = ITEMS.registerItem("carbon_crossbow",
             properties -> new CrossbowItem(properties
                     .durability(885)
-                    .repairable(CARBON_FIBER.get())
+                    .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
                     .enchantable(15)
                     .component(DataComponents.CHARGED_PROJECTILES, ChargedProjectiles.EMPTY)
                     .fireResistant()
@@ -215,7 +219,7 @@ public class MFItems {
     public static final DeferredItem<Item> CARBON_WOLF_ARMOR = ITEMS.registerItem("carbon_wolf_armor",
             properties -> new Item(properties
                     .durability(256)
-                    .repairable(CARBON_FIBER.get())
+                    .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
                     .enchantable(15)
                     .fireResistant()
                     .wolfArmor(MFArmorMaterials.CARBON)
@@ -224,7 +228,7 @@ public class MFItems {
     public static final DeferredItem<Item> CARBON_ELYTRA = ITEMS.registerItem("carbon_elytra",
             properties -> new Item(properties
                     .durability(893)
-                    .repairable(CARBON_FIBER.get())
+                    .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.EPIC)
@@ -243,7 +247,8 @@ public class MFItems {
                     .fireResistant()
                     .enchantable(15)
                     .durability(594)
-                    .repairable(CARBON_FIBER.get())
+                    .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
+                    .tool(MFToolMaterial.CARBON_TOOL_MATERIAL, BlockTags.MINEABLE_WITH_HOE, 2.0F, 6F, 0.5F)
                     .attributes(MFTridentItem.createAttributes(9.0D, -2.4D))
                     .rarity(Rarity.RARE)
                     .component(DataComponents.TOOL, MFTridentItem.createToolProperties(2))
@@ -258,7 +263,7 @@ public class MFItems {
                     .fireResistant()
                     .enchantable(15)
                     .durability(685)
-                    .repairable(CARBON_FIBER.get())
+                    .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
                     .equippableUnswappable(EquipmentSlot.OFFHAND)
                     .delayedComponent(
                             DataComponents.BLOCKS_ATTACKS,
@@ -409,6 +414,23 @@ public class MFItems {
                     .nautilusArmor(MFArmorMaterials.BISMUTH)
                     .rarity(Rarity.RARE)
                     .fireResistant()
+            ));
+
+    public static final DeferredItem<Item> BISMUTH_ELYTRA = registerItem(MFItemIds.BISMUTH_ELYTRA,
+            properties -> new Item(properties
+                    .durability(893)
+                    .repairable(BISMUTH.get())
+                    .enchantable(15)
+                    .fireResistant()
+                    .rarity(Rarity.EPIC)
+                    .component(DataComponents.GLIDER, Unit.INSTANCE)
+                    .component(DataComponents.EQUIPPABLE,
+                            Equippable.builder(EquipmentSlot.CHEST)
+                                    .setEquipSound(SoundEvents.ARMOR_EQUIP_ELYTRA)
+                                    .setAsset(MFEquipmentAssets.BISMUTH)
+                                    .setDamageOnHurt(false)
+                                    .build()
+                    )
             ));
 
     public static final DeferredItem<Item> BISMUTH_TRIDENT = registerItem(MFItemIds.BISMUTH_TRIDENT,
@@ -588,6 +610,10 @@ public class MFItems {
     public static final DeferredItem<Item> PALM_CHEST_BOAT = registerItem(
             MFItemIds.PALM_CHEST_BOAT,
             props -> new BoatItem(MFEntityTypes.PALM_CHEST_BOAT.get(), props)
+    );
+
+    public static final DeferredItem<Item> BLUE_BERRY = registerItem(MFItemIds.BLUE_BERRY,
+            properties -> new BlockItem(MFBlocks.BLUE_BERRY_BUSH.get(), properties.food(MFFoods.BLUE_BERRY))
     );
 
     // Keep in mind, Block Items (except for signs because their items are shared by two blocks, wall and standing/ceiling) are registered automatically by the registerBlock method in MFBlocks.

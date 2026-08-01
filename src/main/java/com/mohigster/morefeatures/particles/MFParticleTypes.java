@@ -13,35 +13,23 @@ public class MFParticleTypes {
     public static final DeferredRegister<ParticleType<?>> PARTICLES =
             DeferredRegister.create(BuiltInRegistries.PARTICLE_TYPE, MoreFeatures.MODID);
 
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> BLOODWOOD_LEAVES =
-            PARTICLES.register(
-                    "bloodwood_leaves",
-                    () -> new SimpleParticleType(false)
-            );
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> BLOODWOOD_LEAVES = registerSimple("bloodwood_leaves");
 
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TAINTED_LEAVES =
-            PARTICLES.register(
-                    "tainted_leaves",
-                    () -> new SimpleParticleType(false)
-            );
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TAINTED_LEAVES = registerSimple("tainted_leaves");
 
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PALM_LEAVES =
-            PARTICLES.register(
-                    "palm_leaves",
-                    () -> new SimpleParticleType(false)
-            );
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PALM_LEAVES = registerSimple("palm_leaves");
 
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DECREPIT_LEAVES =
-            PARTICLES.register(
-                    "decrepit_leaves",
-                    () -> new SimpleParticleType(false)
-            );
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DECREPIT_LEAVES = registerSimple("decrepit_leaves");
 
-    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PALLID_LEAVES =
-            PARTICLES.register(
-                    "pallid_leaves",
-                    () -> new SimpleParticleType(false)
-            );
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PALLID_LEAVES = registerSimple("pallid_leaves");
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> CHARRED_SPORE = registerSimple("charred_spore");
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> TEMPORAL_DISTORTIONS = registerSimple("temporal_distortions");
+
+    private static DeferredHolder<ParticleType<?>, SimpleParticleType> registerSimple(String name){
+        return PARTICLES.register(name, () -> new SimpleParticleType(false));
+    }
 
     public static void register(IEventBus bus) {
         PARTICLES.register(bus);

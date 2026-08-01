@@ -20,11 +20,20 @@
         "sound": "minecraft:music.nether.crimson_forest"
       }
     },
+    "minecraft:visual/ambient_particles": [
+      {
+        "particle": {
+          "type": "morefeatures:charred_spore"
+        },
+        "probability": 0.02
+      }
+    ],
     "minecraft:visual/fog_color": "#181a19"
   },
   "carvers": [],
   "downfall": 0.0,
   "effects": {
+    "grass_color": "#474747",
     "water_color": "#01a73e"
   },
   "features": [

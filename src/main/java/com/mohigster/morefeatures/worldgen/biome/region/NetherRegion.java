@@ -30,6 +30,6 @@ public class NetherRegion extends Region {
                 .erosion(Climate.Parameter.span(0.4F, 0.6F))
                 .depth(ParameterUtils.Depth.SURFACE)
                 .weirdness(Climate.Parameter.span(0.4F, 0.6F))
-                .build().forEach(point -> builder.add(point, MFBiomes.BLOODWOOD_FOREST));
+                .build().forEach(point -> builder.add(point, MFBiomes.CHARRED_FOREST));
     }
 }

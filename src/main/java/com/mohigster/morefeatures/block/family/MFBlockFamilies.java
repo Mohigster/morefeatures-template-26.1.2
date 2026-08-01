@@ -1,7 +1,10 @@
 package com.mohigster.morefeatures.block.family;
 
 import com.mohigster.morefeatures.block.MFBlocks;
+import net.minecraft.data.BlockFamilies;
 import net.minecraft.data.BlockFamily;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ColorCollection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +18,7 @@ public class MFBlockFamilies {
     private static BlockFamily charredFamily;
     private static BlockFamily decrepitFamily;
     private static BlockFamily pallidFamily;
+    private static ColorCollection<BlockFamily> concreteFamily;
     private static final List<BlockFamily> FAMILIES = new ArrayList<>();
 
     public static BlockFamily getAzuriteFamily(){
@@ -56,6 +60,7 @@ public class MFBlockFamilies {
                     .hangingSign(MFBlocks.FLUORITE_HANGING_SIGN.get(), MFBlocks.FLUORITE_WALL_HANGING_SIGN.get())
                     .recipeGroupPrefix("fluorite")
                     .recipeUnlockedBy("has_fluorite")
+                    .generateStonecutterRecipe()
                     .getFamily();
         }
         return fluoriteFamily;
@@ -183,6 +188,22 @@ public class MFBlockFamilies {
         return pallidFamily;
     }
 
+    // Concrete is a color collection. However, since it doesn't have any variations in vanilla (stairs, slab etc.) it doesn't have an existing block family. I can add my own
+    public static ColorCollection<BlockFamily> getConcreteFamily() {
+        if (concreteFamily == null) {
+            concreteFamily = ColorCollection.VALUES.map(
+                    colour -> new BlockFamily.Builder(Blocks.CONCRETE.pick(colour))
+                            .slab(MFBlocks.CONCRETE_SLAB.pick(colour).get())
+                            .stairs(MFBlocks.CONCRETE_STAIRS.pick(colour).get())
+                            .recipeGroupPrefix("concrete")
+                            .recipeUnlockedBy("has_full_block")
+                            .getFamily()
+                    );
+            concreteFamily.forEach(FAMILIES::add);
+        }
+        return concreteFamily;
+    }
+
     // Azurite and fluorite has special recipes declared in the Recipes class.
     // This method is used to grab all block families so that the RecipeProvider
     // can generate recipes without manual input. Since Azurite and Fluorite
@@ -194,6 +215,7 @@ public class MFBlockFamilies {
         getCharredFamily();
         getDecrepitFamily();
         getPallidFamily();
+        getConcreteFamily().asList();
         return FAMILIES;
     }
 }

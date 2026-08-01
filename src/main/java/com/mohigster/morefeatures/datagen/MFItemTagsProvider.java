@@ -149,7 +149,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItems.CARBON_CROSSBOW.getKey());
 
         tag(MFItemTags.BISMUTH_TOOL_MATERIALS)
-                .add(MFItems.BISMUTH.getKey());
+                .add(MFItemIds.BISMUTH);
 
         tag(MFItemTags.IS_GOLD_ARMOR)
                 .add(ItemIds.GOLDEN_CHESTPLATE)
@@ -459,5 +459,8 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.FLUORITE)
                 .add(MFItemIds.CARBON_FIBER)
                 .add(MFItemIds.BISMUTH);
+
+        tag(MFItemTags.MAGIC_BLOCK_MULTIPLIES_RESULT)
+                .addTag(ItemTags.PLANKS);
     }
 }

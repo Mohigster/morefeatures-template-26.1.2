@@ -3,12 +3,16 @@ package com.mohigster.morefeatures;
 import com.mohigster.morefeatures.attachment.MFAttachments;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.custom.blocktype.MFWoodType;
+import com.mohigster.morefeatures.block.custom.data.BonemealMorphData;
+import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
 import com.mohigster.morefeatures.block.custom.magicblock.MagicBlockTransmutations;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.creativemodetab.MFCreativeModeTabs;
 import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
 import com.mohigster.morefeatures.enchantment.MFEnchantmentEffects;
 import com.mohigster.morefeatures.entity.MFEntityTypes;
+import com.mohigster.morefeatures.events.data.BowDamageBonuses;
+import com.mohigster.morefeatures.events.data.ElytraSpeedBoosts;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorCosts;
 import com.mohigster.morefeatures.menu.MFMenuTypes;
@@ -64,7 +68,8 @@ public class MoreFeatures {
 
         modEventBus.addListener(this::commonSetup);
 
-        NeoForge.EVENT_BUS.addListener(MagicBlockTransmutations.INSTANCE::ignoreTransmutationResultsNotInResultsTag);
+        NeoForge.EVENT_BUS.addListener(MagicBlockTransmutations.INSTANCE::ignoreResultsNotInTag);
+        modEventBus.addListener(MFDataMaps::registerDataMaps);
 
         MFCreativeModeTabs.register(modEventBus); // All register methods are declared in the class
 
@@ -133,6 +138,14 @@ public class MoreFeatures {
         event.addListener(
                 MFIdentifier.withMfNamespace("metal_detector_costs"),
                 MetalDetectorCosts.INSTANCE
+        );
+        event.addListener(
+                MFIdentifier.withMfNamespace("elytra_speed_boosts"),
+                ElytraSpeedBoosts.INSTANCE
+        );
+        event.addListener(
+                MFIdentifier.withMfNamespace("bow_damage_bonuses"),
+                BowDamageBonuses.INSTANCE
         );
     }
 
@@ -218,20 +231,20 @@ public class MoreFeatures {
 
     // Add the items to a creative mode tab.
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        addArmorAndTools(event);
-        addOresAndIngots(event);
-        addAllVerticalSlabs(event);
+        this.addArmorAndTools(event);
+        this.addOresAndIngots(event);
+        this.addAllVerticalSlabs(event);
     }
 
     private void addAllVerticalSlabs(BuildCreativeModeTabContentsEvent event){
-        addWoodenVerticalSlabs(event);
-        addStoneAndDeepslateVerticalSlabs(event);
-        addStoneVariantVerticalSlabs(event);
-        addSandstoneVerticalSlabs(event);
-        addSulfurAndCinnabarVerticalSlabs(event);
-        addNetherAndEndVerticalSlabs(event);
-        addMiscVerticalSlabs(event);
-        addWoolAndCopperVerticalSlabs(event);
+        this.addWoodenVerticalSlabs(event);
+        this.addStoneAndDeepslateVerticalSlabs(event);
+        this.addStoneVariantVerticalSlabs(event);
+        this.addSandstoneVerticalSlabs(event);
+        this.addSulfurAndCinnabarVerticalSlabs(event);
+        this.addNetherAndEndVerticalSlabs(event);
+        this.addMiscVerticalSlabs(event);
+        this.addWoolAndCopperVerticalSlabs(event);
     }
 
 

@@ -32,6 +32,6 @@ public class PlantedOffGrassSaplingBlock extends SaplingBlock {
     @NullMarked
     @Override
     protected boolean mayPlaceOn(BlockState state, BlockGetter level, BlockPos pos) {
-        return constructedWithTag ? state.is(blocksToSurviveOn) : state.is(blockToSurviveOn);
+        return this.constructedWithTag ? state.is(this.blocksToSurviveOn) : state.is(this.blockToSurviveOn);
     }
 }

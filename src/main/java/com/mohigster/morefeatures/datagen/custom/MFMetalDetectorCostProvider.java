@@ -1,12 +1,13 @@
 package com.mohigster.morefeatures.datagen.custom;
 
+import com.mohigster.morefeatures.datagen.custom.providers.MetalDetectorCostProvider;
 import com.mohigster.morefeatures.tag.MFBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 
 import java.util.concurrent.CompletableFuture;
 
-public class MFMetalDetectorCostProvider extends MetalDetectorCostProvider{
+public class MFMetalDetectorCostProvider extends MetalDetectorCostProvider {
     public MFMetalDetectorCostProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, registries);
     }

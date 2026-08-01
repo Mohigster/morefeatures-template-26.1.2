@@ -8,11 +8,13 @@ import com.mohigster.morefeatures.datagen.models.MFBlockModelGenerators;
 import com.mohigster.morefeatures.datagen.models.MFItemModelGenerators;
 import com.mohigster.morefeatures.item.MFItems;
 import net.minecraft.client.data.models.*;
+import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.model.*;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.*;
 
+import static net.minecraft.client.data.models.BlockModelGenerators.createSlab;
 
 public class MFModelProvider extends ModelProvider {
 
@@ -71,6 +73,7 @@ public class MFModelProvider extends ModelProvider {
         itemModels.generateBow(MFItems.CARBON_BOW.get());
         itemModels.generateCrossbow(MFItems.CARBON_CROSSBOW.get());
         itemModels.generateElytra(MFItems.CARBON_ELYTRA.get());
+        itemModels.generateElytra(MFItems.BISMUTH_ELYTRA.get());
         itemModels.generateBow(MFItems.BISMUTH_BOW.get());
         itemModels.generateSpear(MFItems.BISMUTH_SPEAR.get());
         itemModels.generateShield(MFItems.CARBON_SHIELD.get());
@@ -116,6 +119,8 @@ public class MFModelProvider extends ModelProvider {
         blockModels.createTrivialCube(MFBlocks.RAW_BISMUTH_BLOCK.get());
         blockModels.createTrivialCube(MFBlocks.EVERFROST_BLUE_ICE_ORE.get());
         blockModels.createTrivialCube(MFBlocks.EVERFROST_PACKED_ICE_ORE.get());
+
+        MFBlockModelGenerators.createBerryBush(blockModels, MFBlocks.BLUE_BERRY_BUSH.get(), MFItems.BLUE_BERRY.get());
 
         MFBlockModelGenerators.createAge3Block(blockModels, MFBlocks.CONJURED_ICE.get(), true);
 
@@ -281,6 +286,14 @@ public class MFModelProvider extends ModelProvider {
                 )
         );
 
+        ColorCollection.VALUES.forEach(
+                colour -> MFBlockModelGenerators.createVerticalSlab(
+                        blockModels,
+                        MFBlocks.CONCRETE_VERTICAL_SLAB.pick(colour).get(),
+                        Blocks.CONCRETE.pick(colour)
+                )
+        );
+
         WeatheringCopperCollection.STATES.forEach(
                 state -> {
                     Block textureSource = Blocks.CUT_COPPER.weathering().pick(state);
@@ -326,5 +339,9 @@ public class MFModelProvider extends ModelProvider {
                 .generateFor(MFBlockFamilies.getDecrepitFamily());
         blockModels.family(MFBlocks.PALLID_PLANKS.get())
                 .generateFor(MFBlockFamilies.getPallidFamily());
+
+        ColorCollection.VALUES.forEach(colour ->
+                blockModels.family(Blocks.CONCRETE.pick(colour))
+                        .generateFor(MFBlockFamilies.getConcreteFamily().pick(colour)));
     }
 }

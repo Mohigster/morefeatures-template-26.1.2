@@ -17,8 +17,8 @@ public class MFDataComponentTypes {
     // This registers a data component that holds an Integer (the energy value)
     public static final Supplier<DataComponentType<Integer>> COMPRESSOR_FUEL_VALUE =
             DATA_COMPONENT_TYPES.register("compressor_fuel_value", () -> DataComponentType.<Integer>builder()
-                    .persistent(Codec.INT) // Tells Minecraft how to save it to NBT / JSON
-                    .networkSynchronized(ByteBufCodecs.VAR_INT) // Syncs it smoothly to the client
+                    .persistent(Codec.INT)
+                    .networkSynchronized(ByteBufCodecs.VAR_INT)
                     .build());
 
     public static void register(IEventBus modEventBus) {

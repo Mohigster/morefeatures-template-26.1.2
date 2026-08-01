@@ -1,0 +1,40 @@
+{
+  "values": {
+    "morefeatures:bloodwood": {
+      "stripped_block": "morefeatures:stripped_bloodwood"
+    },
+    "morefeatures:bloodwood_log": {
+      "stripped_block": "morefeatures:stripped_bloodwood_log"
+    },
+    "morefeatures:charred_hyphae": {
+      "stripped_block": "morefeatures:stripped_charred_hyphae"
+    },
+    "morefeatures:charred_stem": {
+      "stripped_block": "morefeatures:stripped_charred_stem"
+    },
+    "morefeatures:decrepit_log": {
+      "stripped_block": "morefeatures:stripped_decrepit_log"
+    },
+    "morefeatures:decrepit_wood": {
+      "stripped_block": "morefeatures:stripped_decrepit_wood"
+    },
+    "morefeatures:pallid_log": {
+      "stripped_block": "morefeatures:stripped_pallid_log"
+    },
+    "morefeatures:pallid_wood": {
+      "stripped_block": "morefeatures:stripped_pallid_wood"
+    },
+    "morefeatures:palm_log": {
+      "stripped_block": "morefeatures:stripped_palm_log"
+    },
+    "morefeatures:palm_wood": {
+      "stripped_block": "morefeatures:stripped_palm_wood"
+    },
+    "morefeatures:tainted_log": {
+      "stripped_block": "morefeatures:stripped_tainted_log"
+    },
+    "morefeatures:tainted_wood": {
+      "stripped_block": "morefeatures:stripped_tainted_wood"
+    }
+  }
+}

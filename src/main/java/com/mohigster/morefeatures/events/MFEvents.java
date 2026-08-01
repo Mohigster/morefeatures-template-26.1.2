@@ -1,11 +1,13 @@
 package com.mohigster.morefeatures.events;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.custom.VoidAnchorBlock;
+import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
+import com.mohigster.morefeatures.block.custom.data.BonemealMorphData;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
-import com.mohigster.morefeatures.item.MFItems;
+import com.mohigster.morefeatures.events.data.BowDamageBonuses;
+import com.mohigster.morefeatures.events.data.ElytraSpeedBoosts;
 import com.mohigster.morefeatures.worldgen.biome.MFBiomes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -24,7 +26,6 @@ import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.portal.TeleportTransition;
 import net.minecraft.world.level.storage.LevelData;
@@ -49,8 +50,13 @@ import java.util.Optional;
 @EventBusSubscriber(modid = MoreFeatures.MODID)
 public class MFEvents {
 
+    private static boolean sharedAllElytraEntries;
+    private static boolean sharedAllBowEntries;
+
+    // Both elytra speed and bow damage are data-driven
+
     @SubscribeEvent
-    public static void onPlayerTick(PlayerTickEvent.Post event) {
+    public static void onPlayerTickElytra(PlayerTickEvent.Post event) {
 
         Player player = event.getEntity();
 
@@ -58,27 +64,31 @@ public class MFEvents {
 
         ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
 
-        if (!chest.is(MFItems.CARBON_ELYTRA.get())) return;
+        if (!ElytraSpeedBoosts.INSTANCE.getElytraEntries().contains(chest.getItem())) return;
 
-        List<FireworkRocketEntity> rockets =
-                player.level().getEntitiesOfClass(
-                        FireworkRocketEntity.class,
-                        player.getBoundingBox().inflate(3)
+        // This boolean prevents the logger from being spammed for every tick that the player is flying
+        if(!sharedAllElytraEntries) {
+            MoreFeatures.LOGGER.debug("All Elytra Entries: {}", ElytraSpeedBoosts.INSTANCE.getElytraEntries());
+            sharedAllElytraEntries = true;
+        }
+
+        boolean hasActiveRocket = !player.level().getEntitiesOfClass(
+                FireworkRocketEntity.class,
+                player.getBoundingBox().inflate(3),
+                rocket -> rocket.getOwner() == player
+        ).isEmpty();
+
+        if (hasActiveRocket) {
+            double speedBoost = ElytraSpeedBoosts.INSTANCE.getSpeed(chest);
+            double maxSpeed = ElytraSpeedBoosts.INSTANCE.getMaxSpeed(chest);
+            Vec3 currentVelocity = player.getDeltaMovement();
+
+            if (currentVelocity.length() < maxSpeed) {
+                player.push(
+                        currentVelocity.x * speedBoost,
+                        currentVelocity.y * speedBoost,
+                        currentVelocity.z * speedBoost
                 );
-
-        for (FireworkRocketEntity rocket : rockets) {
-
-            if (rocket.getOwner() == player) {
-                double maxSpeed = 8.5;
-                Vec3 movement = player.getDeltaMovement();
-
-                if (movement.length() <= maxSpeed) {
-                    player.push(
-                            movement.x * 0.185,
-                            movement.y * 0.185,
-                            movement.z * 0.185
-                    );
-                }
             }
         }
     }
@@ -89,50 +99,38 @@ public class MFEvents {
 
         if (player.level().isClientSide()) return;
 
-        if (!player.level().getBiome(player.blockPosition()).is(MFBiomes.ICE_CAVES)) {
-            return;
-        }
+        if (!player.level().getBiome(player.blockPosition()).is(MFBiomes.ICE_CAVES)) return;
 
-        if(!Objects.requireNonNull(player.gameMode()).isSurvival()) return;
+        if (!Objects.requireNonNull(player.gameMode()).isSurvival()) return;
 
-        if (!player.isInWater()) {
-            return;
-        }
+        if (!player.isInWater() && !player.isInPowderSnow) return;
 
         int currentFrozen = player.getTicksFrozen();
         int required = player.getTicksRequiredToFreeze();
 
-        player.setTicksFrozen(Math.min(currentFrozen + 3, required + 20));
+        int requiredModifier = player.isInWater() ? 20 : 5;
+
+        player.setTicksFrozen(Math.min(currentFrozen + 3, required + requiredModifier));
     }
 
     @SubscribeEvent
     public static void onArrowSpawn(EntityJoinLevelEvent event) {
-
-        if (!(event.getEntity() instanceof AbstractArrow arrow)) {
-            return;
-        }
-
-        if (!(arrow.getOwner() instanceof Player player)) {
-            MoreFeatures.LOGGER.info("Shooter was not a player");
-            return;
-        }
-
-        Vec3 movement = arrow.getDeltaMovement();
-
-        double velBonus = movement.length();
-
-        double baseDamage = 2.0 * velBonus;
+        if (!(event.getEntity() instanceof AbstractArrow arrow)) return;
+        if (!(arrow.getOwner() instanceof Player player)) return;
 
         ItemStack weapon = player.getUseItem();
 
+        if (!BowDamageBonuses.INSTANCE.getBowEntries().contains(weapon.getItem())) return;
 
-        if (weapon.is(MFItems.CARBON_BOW.get())) { // Carbon Bow damage boost
-            MoreFeatures.LOGGER.debug("Carbon damage multiplier applied");
-            arrow.setBaseDamage(baseDamage * 0.75);
-        } else if (weapon.is(MFItems.BISMUTH_BOW.get())) { // Bismuth Bow damage boost
-            MoreFeatures.LOGGER.debug("Bismuth damage multiplier applied");
-            arrow.setBaseDamage(baseDamage * 1.05);
+        if (!sharedAllBowEntries){
+            MoreFeatures.LOGGER.debug("All Bow Entries: {}", BowDamageBonuses.INSTANCE.getBowEntries());
+            sharedAllBowEntries = true;
         }
+
+        double baseDamage = 2.0F + arrow.getRandom().triangle(arrow.level().getDifficulty().getId() * 0.11, 0.57425);
+        double totalDamage = getBowDamage(baseDamage, weapon);
+
+        arrow.setBaseDamage(totalDamage == 0 ? baseDamage : totalDamage);
     }
 
     @SubscribeEvent
@@ -141,74 +139,48 @@ public class MFEvents {
             if(player.getMainHandItem().getItem() == Items.END_ROD) {
                 player.sendSystemMessage(Component.literal(player.getName().getString() + " just hit this sheep with an End Rod? YOU SICK FUCK!"));
                 player.getMainHandItem().shrink(1);
+                player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 150, 3));
                 sheep.addEffect(new MobEffectInstance(MobEffects.POISON, 600, 6));
             }
         }
     }
 
+    @SuppressWarnings("deprecation")
     @SubscribeEvent
     public static void onBonemeal(BonemealEvent event) {
+        Level level = event.getLevel();
+        BlockPos pos = event.getPos();
+        BlockState targetState = event.getState();
 
-        final int SCAN_RADIUS = 1;
+        BonemealMorphData data = targetState.getBlock().builtInRegistryHolder().getData(MFDataMaps.BONEMEAL_MORPHS);
 
-        RandomSource random = RandomSource.create();
-        // Only act on End Stone
-        BlockState state = event.getState();
-        if (!state.is(Blocks.END_STONE)) {
+        if (data == null || data.variants().isEmpty()) {
             return;
         }
 
-        // Only run server-side
-        if (!(event.getLevel() instanceof ServerLevel serverLevel)) {
-            return;
-        }
+        if (!level.isClientSide()) {
+            RandomSource random = level.getRandom();
+            List<Block> availableVariants = new ArrayList<>();
 
-        BlockPos center = event.getPos();
+            for (BlockPos testPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+                BlockState nearbyState = level.getBlockState(testPos);
 
-        boolean foundPallid  = false;
-        boolean foundDecrepit = false;
-
-        // Scan the 3x3x3 cube centred on the bone-mealed End Stone
-        for (int dx = -SCAN_RADIUS; dx <= SCAN_RADIUS; dx++) {
-            for (int dy = -SCAN_RADIUS; dy <= SCAN_RADIUS; dy++) {
-                for (int dz = -SCAN_RADIUS; dz <= SCAN_RADIUS; dz++) {
-                    BlockState neighbour = serverLevel.getBlockState(center.offset(dx, dy, dz));
-
-                    if (neighbour.is(MFBlocks.PALLID_NULLIUM.get())) {
-                        foundPallid = true;
+                for (Block variantBlock : data.variants()) {
+                    if (nearbyState.is(variantBlock) && !availableVariants.contains(variantBlock)) {
+                        availableVariants.add(variantBlock);
                     }
-                    if (neighbour.is(MFBlocks.DECREPIT_NULLIUM.get())) {
-                        foundDecrepit = true;
-                    }
-
-                    // Early-exit once both variants are found
-                    if (foundPallid && foundDecrepit) break;
                 }
-                if (foundPallid && foundDecrepit) break;
             }
-            if (foundPallid && foundDecrepit) break;
+
+            if (!availableVariants.isEmpty()) {
+                Block chosenVariant = availableVariants.get(random.nextInt(availableVariants.size()));
+
+                level.setBlock(pos, chosenVariant.defaultBlockState(), Block.UPDATE_ALL);
+
+                event.setSuccessful(true);
+                event.setCanceled(true);
+            }
         }
-
-        // Nothing nearby — don't consume bone meal, let default behaviour run
-        if (!foundPallid && !foundDecrepit) {
-            return;
-        }
-
-        // Build the candidate list exactly as vanilla does:
-        // if both variants are present the game picks one at random.
-        List<Block> candidates = new ArrayList<>();
-        if (foundPallid)   candidates.add(MFBlocks.PALLID_NULLIUM.get());
-        if (foundDecrepit) candidates.add(MFBlocks.DECREPIT_NULLIUM.get());
-
-        Block chosen = candidates.get(random.nextInt(candidates.size()));
-
-        // Replace only the exact bone-mealed End Stone block
-        serverLevel.setBlock(center, chosen.defaultBlockState(), Block.UPDATE_ALL);
-
-        // Tell NeoForge we handled the event — this consumes the bone meal
-        // and prevents other handlers (including vanilla) from also firing.
-        event.setSuccessful(true);
-        event.setCanceled(true);
     }
 
     @SubscribeEvent
@@ -305,5 +277,15 @@ public class MFEvents {
         event.registerBlockEntity(Capabilities.Energy.BLOCK, MFBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getEnergyStorage);
 
         event.registerBlockEntity(Capabilities.Fluid.BLOCK, MFBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getFluidTank);
+    }
+
+    private static double getBowDamage(double baseDamage, ItemStack weapon){
+        double damage = baseDamage * BowDamageBonuses.INSTANCE.getDamage(weapon);
+
+        if (damage != 0){
+            return baseDamage * BowDamageBonuses.INSTANCE.getDamage(weapon);
+        }
+
+        throw new IllegalStateException("Bow damage multiplier cannot be 0!");
     }
 }

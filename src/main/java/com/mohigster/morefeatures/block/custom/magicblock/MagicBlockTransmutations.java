@@ -16,8 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<TransmutationEntry> {
-    public static final MagicBlockTransmutations INSTANCE =
-            new MagicBlockTransmutations();
+    public static final MagicBlockTransmutations INSTANCE = new MagicBlockTransmutations();
 
     private List<TransmutationEntry> rawEntries = List.of();
 
@@ -33,13 +32,15 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
         this.rawEntries = List.copyOf(map.values());
     }
 
-    // TagsUpdatedEvent used to delay the check of if a block is in the correct tag to after the tag is populated
-    // Despite this, the event parameter is actually never used in the method. Still, it is the correct event to use.
+    /**
+     * TagsUpdatedEvent is used to delay the check of whether or not a block is in the results tag to after the tag is populated.
+     * Despite this, the event parameter is actually never used in the method. Still, it is the correct event to use.
+     */
     @SuppressWarnings({"deprecation", "unused"})
-    public void ignoreTransmutationResultsNotInResultsTag(TagsUpdatedEvent event) {
+    public void ignoreResultsNotInTag(TagsUpdatedEvent event) {
         List<TransmutationEntry> validEntries = new ArrayList<>();
 
-        for (TransmutationEntry entry : rawEntries) {
+        for (TransmutationEntry entry : this.rawEntries) {
             if (!entry.output().builtInRegistryHolder().is(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)) {
                 MoreFeatures.LOGGER.warn(
                         "Skipping magic block transmutation: output item '{}' is not in the '{}' tag. Add it to that tag if this transmutation should be allowed.",
@@ -56,7 +57,7 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
     }
 
     public ItemStack getResult(ItemStack input) {
-        for (TransmutationEntry entry : entries) {
+        for (TransmutationEntry entry : this.entries) {
             if (input.is(entry.inputTag())) {
                 ItemStack result = new ItemStack(entry.output(), input.getCount());
                 if (entry.copyComponents()) {
@@ -66,5 +67,14 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
             }
         }
         return ItemStack.EMPTY;
+    }
+
+    // This method is separate so that the extra amounts are applied to individual input items separately from the input tag itself
+    public ItemStack applyExtraAmounts(ItemStack input) {
+        for (TransmutationEntry entry : this.entries){
+            if (input.is(entry.inputTag())) input.setCount(entry.extraItems() + 1);
+        }
+
+        return input;
     }
 }

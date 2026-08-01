@@ -62,6 +62,8 @@ public class MFBlockIds {
     // Conjured ice
     public static final ResourceKey<Block> CONJURED_ICE = createId("conjured_ice");
 
+    public static final ResourceKey<Block> BLUE_BERRY_BUSH = createId("blue_berry_bush");
+
     private static ResourceKey<Block> createId(String name) {
         return ResourceKey.create(Registries.BLOCK, MFIdentifier.withMfNamespace(name));
     }

@@ -254,12 +254,16 @@ public class MFBlockItemIds {
     public static final BlockItemId MUD_BRICK_VERTICAL_SLAB = createId("mud_brick_vertical_slab");
     public static final BlockItemId RESIN_BRICK_VERTICAL_SLAB = createId("resin_brick_vertical_slab");
 
-    // --- Block collections ---
+    // ----- BLOCK COLLECTIONS -----
     public static final WeatheringCopperCollection<BlockItemId> CUT_COPPER_VERTICAL_SLAB = createSimpleCopperId("cut_copper_vertical_slab");
     public static final ColorCollection<BlockItemId> WOOL_VERTICAL_SLAB = createSimpleColouredId("wool_vertical_slab");
+    public static final ColorCollection<BlockItemId> CONCRETE_VERTICAL_SLAB = createSimpleColouredId("concrete_vertical_slab");
 
     public static final WeatheringCopperCollection<BlockItemId> CUT_COPPER_PILLAR = createSimpleCopperId("cut_copper_pillar");
     public static final ColorCollection<BlockItemId> CONCRETE_PILLAR = createSimpleColouredId("concrete_pillar");
+
+    public static final ColorCollection<BlockItemId> CONCRETE_SLAB = createSimpleColouredId("concrete_slab");
+    public static final ColorCollection<BlockItemId> CONCRETE_STAIRS = createSimpleColouredId("concrete_stairs");
 
     public static final BlockItemId TEST_COLUMN = createId("test_column");
 
