@@ -39,6 +39,8 @@ public class MFBlockIds {
     public static final ResourceKey<Block> PALM_WALL_HANGING_SIGN = createId("palm_wall_hanging_sign");
     public static final ResourceKey<Block> POTTED_PALM_SAPLING = createId("potted_palm_sapling");
 
+    public static final ResourceKey<Block> POTTED_CHARRED_ROOTS = createId("potted_charred_roots");
+
     // Decrepit
     public static final ResourceKey<Block> DECREPIT_SIGN = createId("decrepit_sign");
     public static final ResourceKey<Block> DECREPIT_WALL_SIGN = createId("decrepit_wall_sign");

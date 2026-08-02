@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.block;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.custom.*;
 import com.mohigster.morefeatures.block.custom.modified.*;
+import com.mohigster.morefeatures.block.custom.nylium.MFNyliumBlock;
 import com.mohigster.morefeatures.block.custom.nylium.NulliumBlock;
 import com.mohigster.morefeatures.block.custom.pillar.PillarBlock;
 import com.mohigster.morefeatures.block.custom.flammable.*;
@@ -657,7 +658,7 @@ public class MFBlocks {
                     .instabreak()
                     .noOcclusion()
                     .noCollision(),
-                    Blocks.SAND // The block that the sapling can be planted on. You can also pass in a block tag here.
+                    () -> Blocks.SAND // The block that the sapling can be planted on. You can also pass in a block tag here.
             ));
 
     public static final DeferredBlock<Block> POTTED_PALM_SAPLING = registerBlockWithoutItem(MFBlockIds.POTTED_PALM_SAPLING,
@@ -788,8 +789,27 @@ public class MFBlocks {
 
     public static final DeferredBlock<SlabBlock> CHARRED_SLAB = registerSlab(MFBlockItemIds.CHARRED_SLAB, CHARRED_PLANKS);
 
+    public static final DeferredBlock<Block> CHARRED_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.CHARRED_VERTICAL_SLAB,
+            false,
+            VerticalSlabBlock::new,
+            _ -> Properties.ofFullCopy(CHARRED_PLANKS.get())
+    );
+
+    public static final DeferredBlock<Block> CHARRED_ROOTS = registerBlock(MFBlockItemIds.CHARRED_ROOTS,
+            props -> new NetherRootsBlock(MFBlockTags.SUPPORTS_CHARRED_ROOTS, props),
+            _ -> Properties.ofFullCopy(Blocks.WARPED_ROOTS)
+    );
+
+    public static final DeferredBlock<Block> POTTED_CHARRED_ROOTS = registerBlockWithoutItem(MFBlockIds.POTTED_CHARRED_ROOTS,
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, CHARRED_ROOTS, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
     public static final DeferredBlock<Block> CHARRED_NYLIUM = registerBlock(MFBlockItemIds.CHARRED_NYLIUM,
-            NyliumBlock::new,
+            props -> new MFNyliumBlock(props, CHARRED_ROOTS),
             _ -> Properties.ofFullCopy(Blocks.WARPED_NYLIUM).mapColor(MapColor.COLOR_BLACK)
     );
 

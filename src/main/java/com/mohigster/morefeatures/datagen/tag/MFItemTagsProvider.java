@@ -1,4 +1,4 @@
-package com.mohigster.morefeatures.datagen;
+package com.mohigster.morefeatures.datagen.tag;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.references.MFBlockItemIds;
@@ -27,7 +27,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
     protected void addTags(HolderLookup.@NonNull Provider provider) {
         new MFBlockItemTagsProvider(tagId -> BlockItemTagsProvider.wrapForItems(this.tag(tagId.item()))).run();
 
-        tag(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
+        this.tag(MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE)
                 .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_PICKAXE)
                 .add(MFItemIds.BISMUTH_AXE)
@@ -39,7 +39,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.BISMUTH_LEGGINGS)
                 .add(MFItemIds.BISMUTH_BOOTS);
 
-        tag(MFItemTags.CARBON_INGREDIENTS)
+        this.tag(MFItemTags.CARBON_INGREDIENTS)
                 .add(ItemIds.STICK)
                 .add(ItemIds.COAL)
                 .add(BlockItemIds.REDSTONE_DUST.item())
@@ -51,54 +51,54 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .addTag(ItemTags.WOOL)
                 .addTag(MFItemTags.IS_FOOD);
 
-        tag(MFItemTags.THUNDERBOLT_ENCHANTABLE)
+        this.tag(MFItemTags.THUNDERBOLT_ENCHANTABLE)
                 .add(MFItems.BISMUTH_BOW.getKey());
 
-        tag(MFItemTags.THUNDERING_ENCHANTABLE)
+        this.tag(MFItemTags.THUNDERING_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_AXE)
                 .add(MFItemIds.BISMUTH_SWORD);
 
-        tag(ItemTags.TRIDENT_ENCHANTABLE)
+        this.tag(ItemTags.TRIDENT_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_TRIDENT)
                 .add(MFItemIds.CARBON_TRIDENT);
 
-        tag(MFItemTags.BLOODWOOD_LOGS)
+        this.tag(MFItemTags.BLOODWOOD_LOGS)
                 .add(MFBlockItemIds.BLOODWOOD.item())
                 .add(MFBlockItemIds.BLOODWOOD_LOG.item())
                 .add(MFBlockItemIds.STRIPPED_BLOODWOOD.item())
                 .add(MFBlockItemIds.STRIPPED_BLOODWOOD_LOG.item());
 
-        tag(MFItemTags.TAINTED_LOGS)
+        this.tag(MFItemTags.TAINTED_LOGS)
                 .add(MFBlockItemIds.TAINTED_LOG.item())
                 .add(MFBlockItemIds.TAINTED_WOOD.item())
                 .add(MFBlockItemIds.STRIPPED_TAINTED_LOG.item())
                 .add(MFBlockItemIds.STRIPPED_TAINTED_WOOD.item());
 
-        tag(MFItemTags.PALM_LOGS)
+        this.tag(MFItemTags.PALM_LOGS)
                 .add(MFBlockItemIds.PALM_LOG.item())
                 .add(MFBlockItemIds.PALM_WOOD.item())
                 .add(MFBlockItemIds.STRIPPED_PALM_LOG.item())
                 .add(MFBlockItemIds.STRIPPED_PALM_WOOD.item());
 
-        tag(MFItemTags.CHARRED_STEMS)
+        this.tag(MFItemTags.CHARRED_STEMS)
                 .add(MFBlockItemIds.CHARRED_STEM.item())
                 .add(MFBlockItemIds.CHARRED_HYPHAE.item())
                 .add(MFBlockItemIds.STRIPPED_CHARRED_STEM.item())
                 .add(MFBlockItemIds.STRIPPED_CHARRED_HYPHAE.item());
 
-        tag(MFItemTags.DECREPIT_LOGS)
+        this.tag(MFItemTags.DECREPIT_LOGS)
                 .add(MFBlockItemIds.DECREPIT_LOG.item())
                 .add(MFBlockItemIds.DECREPIT_WOOD.item())
                 .add(MFBlockItemIds.STRIPPED_DECREPIT_LOG.item())
                 .add(MFBlockItemIds.STRIPPED_DECREPIT_WOOD.item());
 
-        tag(MFItemTags.PALLID_LOGS)
+        this.tag(MFItemTags.PALLID_LOGS)
                 .add(MFBlockItemIds.PALLID_LOG.item())
                 .add(MFBlockItemIds.PALLID_WOOD.item())
                 .add(MFBlockItemIds.STRIPPED_PALLID_LOG.item())
                 .add(MFBlockItemIds.STRIPPED_PALLID_WOOD.item());
 
-        tag(MFItemTags.IS_FOOD)
+        this.tag(MFItemTags.IS_FOOD)
                 .add(ItemIds.APPLE)
                 .add(ItemIds.BAKED_POTATO)
                 .add(ItemIds.POISONOUS_POTATO)
@@ -136,34 +136,34 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(ItemIds.COOKED_SALMON)
                 .add(BlockItemIds.SWEET_BERRY_CROP.item());
 
-        tag(MFItemTags.IS_POTION)
+        this.tag(MFItemTags.IS_POTION)
                 .add(ItemIds.SPLASH_POTION)
                 .add(ItemIds.LINGERING_POTION)
                 .add(ItemIds.POTION);
 
-        tag(ItemTags.BOW_ENCHANTABLE)
+        this.tag(ItemTags.BOW_ENCHANTABLE)
                 .add(MFItems.BISMUTH_BOW.getKey())
                 .add(MFItems.CARBON_BOW.getKey());
 
-        tag(ItemTags.CROSSBOW_ENCHANTABLE)
+        this.tag(ItemTags.CROSSBOW_ENCHANTABLE)
                 .add(MFItems.CARBON_CROSSBOW.getKey());
 
-        tag(MFItemTags.BISMUTH_TOOL_MATERIALS)
+        this.tag(MFItemTags.BISMUTH_TOOL_MATERIALS)
                 .add(MFItemIds.BISMUTH);
 
-        tag(MFItemTags.IS_GOLD_ARMOR)
+        this.tag(MFItemTags.IS_GOLD_ARMOR)
                 .add(ItemIds.GOLDEN_CHESTPLATE)
                 .add(ItemIds.GOLDEN_HELMET)
                 .add(ItemIds.GOLDEN_LEGGINGS)
                 .add(ItemIds.GOLDEN_BOOTS);
 
-        tag(MFItemTags.IS_NON_GOLD_RAW_METAL)
+        this.tag(MFItemTags.IS_NON_GOLD_RAW_METAL)
                 .add(ItemIds.RAW_IRON)
                 .add(MFItemIds.RAW_ALUMINIUM)
                 .add(MFItemIds.RAW_MAGNESIUM)
                 .add(ItemIds.RAW_COPPER);
 
-        tag(MFItemTags.IS_NON_GOLD_METAL_BLOCK)
+        this.tag(MFItemTags.IS_NON_GOLD_METAL_BLOCK)
                 .add(MFBlockItemIds.ALUMINIUM_BLOCK.item())
                 .add(MFBlockItemIds.MAGNESIUM_BLOCK.item())
                 .add(BlockItemIds.RAW_IRON_BLOCK.item())
@@ -171,48 +171,48 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFBlockItemIds.RAW_MAGNESIUM_BLOCK.item())
                 .add(BlockItemIds.RAW_COPPER_BLOCK.item());
 
-        tag(MFItemTags.IS_NON_GOLD_INGOT)
+        this.tag(MFItemTags.IS_NON_GOLD_INGOT)
                 .add(ItemIds.COPPER_INGOT)
                 .add(MFItemIds.MAGNESIUM_INGOT)
                 .add(MFItemIds.ALUMINIUM_INGOT)
                 .add(ItemIds.IRON_INGOT);
 
-        tag(MFItemTags.IS_GOLD)
+        this.tag(MFItemTags.IS_GOLD)
                 .add(ItemIds.RAW_GOLD)
                 .add(ItemIds.GOLD_INGOT);
 
-        tag(ItemTags.SHOVELS)
+        this.tag(ItemTags.SHOVELS)
                 .add(MFItems.BISMUTH_SHOVEL.getKey());
 
-        tag(ItemTags.AXES)
+        this.tag(ItemTags.AXES)
                 .add(MFItems.BISMUTH_AXE.getKey());
 
-        tag(ItemTags.HOES)
+        this.tag(ItemTags.HOES)
                 .add(MFItems.BISMUTH_HOE.getKey());
 
-        tag(ItemTags.PICKAXES)
+        this.tag(ItemTags.PICKAXES)
                 .add(MFItemIds.BISMUTH_PICKAXE);
 
-        tag(ItemTags.SWORDS)
+        this.tag(ItemTags.SWORDS)
                 .add(MFItemIds.BISMUTH_SWORD);
 
-        tag(ItemTags.SPEARS)
+        this.tag(ItemTags.SPEARS)
                 .add(MFItemIds.BISMUTH_SPEAR);
 
-        tag(ItemTags.MELEE_WEAPON_ENCHANTABLE)
+        this.tag(ItemTags.MELEE_WEAPON_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_SPEAR)
                 .add(MFItemIds.BISMUTH_AXE);
 
-        tag(ItemTags.SWEEPING_ENCHANTABLE)
+        this.tag(ItemTags.SWEEPING_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_SWORD);
 
-        tag(ItemTags.MINING_ENCHANTABLE)
+        this.tag(ItemTags.MINING_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_PICKAXE)
                 .add(MFItemIds.BISMUTH_AXE)
                 .add(MFItemIds.BISMUTH_SHOVEL);
 
-        tag(ItemTags.DURABILITY_ENCHANTABLE)
+        this.tag(ItemTags.DURABILITY_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_PICKAXE)
                 .add(MFItemIds.BISMUTH_AXE)
@@ -228,80 +228,80 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.BISMUTH_LEGGINGS)
                 .add(MFItemIds.BISMUTH_BOOTS);
 
-        tag(ItemTags.LUNGE_ENCHANTABLE)
+        this.tag(ItemTags.LUNGE_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_SPEAR);
 
-        tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
+        this.tag(ItemTags.SHARP_WEAPON_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_SPEAR)
                 .add(MFItemIds.BISMUTH_AXE);
 
-        tag(ItemTags.WEAPON_ENCHANTABLE)
+        this.tag(ItemTags.WEAPON_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_SPEAR)
                 .add(MFItemIds.BISMUTH_AXE);
 
-        tag(ItemTags.FIRE_ASPECT_ENCHANTABLE)
+        this.tag(ItemTags.FIRE_ASPECT_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_SWORD)
                 .add(MFItemIds.BISMUTH_SPEAR);
 
-        tag(ItemTags.ARMOR_ENCHANTABLE)
+        this.tag(ItemTags.ARMOR_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_HELMET)
                 .add(MFItemIds.BISMUTH_CHESTPLATE)
                 .add(MFItemIds.BISMUTH_LEGGINGS)
                 .add(MFItemIds.BISMUTH_BOOTS);
 
-        tag(ItemTags.HEAD_ARMOR)
+        this.tag(ItemTags.HEAD_ARMOR)
                 .add(MFItemIds.BISMUTH_HELMET);
 
-        tag(ItemTags.CHEST_ARMOR)
+        this.tag(ItemTags.CHEST_ARMOR)
                 .add(MFItemIds.BISMUTH_CHESTPLATE);
 
-        tag(ItemTags.LEG_ARMOR)
+        this.tag(ItemTags.LEG_ARMOR)
                 .add(MFItemIds.BISMUTH_LEGGINGS);
 
-        tag(ItemTags.FOOT_ARMOR)
+        this.tag(ItemTags.FOOT_ARMOR)
                 .add(MFItemIds.BISMUTH_BOOTS);
 
-        tag(ItemTags.HEAD_ARMOR_ENCHANTABLE)
+        this.tag(ItemTags.HEAD_ARMOR_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_HELMET);
 
-        tag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
+        this.tag(ItemTags.CHEST_ARMOR_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_CHESTPLATE);
 
-        tag(ItemTags.LEG_ARMOR_ENCHANTABLE)
+        this.tag(ItemTags.LEG_ARMOR_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_LEGGINGS);
 
-        tag(ItemTags.FOOT_ARMOR_ENCHANTABLE)
+        this.tag(ItemTags.FOOT_ARMOR_ENCHANTABLE)
                 .add(MFItemIds.BISMUTH_BOOTS);
 
-        tag(ItemTags.SAPLINGS)
+        this.tag(ItemTags.SAPLINGS)
                 .add(MFBlockItemIds.TAINTED_SAPLING.item())
                 .add(MFBlockItemIds.BLOODWOOD_SAPLING.item())
                 .add(MFBlockItemIds.PALM_SAPLING.item())
                 .add(MFBlockItemIds.DECREPIT_SAPLING.item())
                 .add(MFBlockItemIds.PALLID_SAPLING.item());
 
-        tag(MFItemTags.COMPRESSOR_FUEL)
+        this.tag(MFItemTags.COMPRESSOR_FUEL)
                 .add(MFItemIds.AZURITE)
                 .add(MFItemIds.FLUORITE)
                 .add(MFItemIds.EVERFROST);
 
-        tag(ItemTags.LOGS_THAT_BURN)
+        this.tag(ItemTags.LOGS_THAT_BURN)
                 .addTag(MFItemTags.BLOODWOOD_LOGS)
                 .addTag(MFItemTags.TAINTED_LOGS)
                 .addTag(MFItemTags.PALM_LOGS)
                 .addTag(MFItemTags.DECREPIT_LOGS)
                 .addTag(MFItemTags.PALLID_LOGS);
 
-        tag(ItemTags.PLANKS)
+        this.tag(ItemTags.PLANKS)
                 .add(MFBlockItemIds.TAINTED_PLANKS.item())
                 .add(MFBlockItemIds.BLOODWOOD_PLANKS.item())
                 .add(MFBlockItemIds.PALM_PLANKS.item())
                 .add(MFBlockItemIds.DECREPIT_PLANKS.item())
                 .add(MFBlockItemIds.PALLID_PLANKS.item());
 
-        tag(MFItemTags.MUSIC_DISCS)
+        this.tag(MFItemTags.MUSIC_DISCS)
                 .addTag(ItemTags.CREEPER_DROP_MUSIC_DISCS)
                 .add(ItemIds.MUSIC_DISC_PIGSTEP)
                 .add(ItemIds.MUSIC_DISC_OTHERSIDE)
@@ -315,28 +315,28 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(ItemIds.MUSIC_DISC_BOUNCE)
                 .add(MFItemIds.MUSIC_DISC_AQUAMARINE);
 
-        tag(ItemTags.BEACON_PAYMENT_ITEMS)
+        this.tag(ItemTags.BEACON_PAYMENT_ITEMS)
                 .add(MFItemIds.BISMUTH)
                 .add(MFItemIds.ALUMINIUM_INGOT)
                 .add(MFItemIds.MAGNESIUM_INGOT)
                 .add(MFItemIds.AZURITE)
                 .add(MFItemIds.FLUORITE);
 
-        tag(MFItemTags.AIMABLE_WANDS)
+        this.tag(MFItemTags.AIMABLE_WANDS)
                 .add(MFItems.FIRE_WAND.getKey());
 
-        tag(MFItemTags.TARGETING_ENTITY_WANDS)
+        this.tag(MFItemTags.TARGETING_ENTITY_WANDS)
                 .add(MFItemIds.ICE_WAND)
                 .add(MFItemIds.HEALING_WAND);
 
-        tag(MFItemTags.AOE_WANDS)
+        this.tag(MFItemTags.AOE_WANDS)
                 .add(MFItemIds.LIGHTNING_WAND)
                 .add(MFItemIds.EARTH_WAND);
 
-        tag(MFItemTags.TARGETING_BLOCK_WANDS)
+        this.tag(MFItemTags.TARGETING_BLOCK_WANDS)
                 .add(MFItemIds.TIME_WAND);
 
-        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_CARBON)
+        this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_CARBON)
                 .add(ItemIds.COAL)
                 .addTag(ItemTags.SAPLINGS)
                 .addTag(ItemTags.LOGS)
@@ -353,45 +353,45 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(ItemIds.STICK)
                 .add(BlockItemIds.REDSTONE_DUST.item());
 
-        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP)
+        this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP)
                 .addTag(MFItemTags.IS_NON_GOLD_RAW_METAL)
                 .addTag(MFItemTags.IS_NON_GOLD_INGOT);
 
-        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_RAW_BISMUTH_BLOCK)
+        this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_RAW_BISMUTH_BLOCK)
                 .addTag(MFItemTags.IS_NON_GOLD_METAL_BLOCK);
 
-        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_SCRAP)
+        this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_SCRAP)
                 .addTag(ItemTags.GOLD_TOOL_MATERIALS)
                 .addTag(ItemTags.GOLD_ORES)
                 .addTag(MFItemTags.IS_GOLD)
                 .addTag(MFItemTags.IS_GOLD_ARMOR);
 
-        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_INGOT)
+        this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_NETHERITE_INGOT)
                 .add(BlockItemIds.RAW_GOLD_BLOCK.item())
                 .add(BlockItemIds.GOLD_BLOCK.item());
 
-        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_DIAMOND)
+        this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_DIAMOND)
                 .add(ItemIds.EMERALD)
                 .add(ItemIds.AMETHYST_SHARD)
                 .add(MFItems.AZURITE.getKey())
                 .add(MFItems.FLUORITE.getKey());
 
-        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_STONE)
+        this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_STONE)
                 .add(BlockItemIds.GRANITE.item())
                 .add(BlockItemIds.DIORITE.item())
                 .add(BlockItemIds.ANDESITE.item());
 
-        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_LINGERING_POT)
+        this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_LINGERING_POT)
                 .add(ItemIds.POTION)
                 .add(ItemIds.SPLASH_POTION);
 
-        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_BEDROCK)
+        this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_BEDROCK)
                 .add(MFBlockItemIds.MAGIC_BLOCK.item());
 
-        tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC)
+        this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC)
                 .add(ItemIds.MUSIC_DISC_BOUNCE);
 
-        tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)
+        this.tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)
                 .add(MFItems.CARBON_FIBER.getKey())
                 .add(MFItemIds.BISMUTH_SCRAP)
                 .add(MFBlockItemIds.RAW_BISMUTH_BLOCK.item())
@@ -403,7 +403,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.MUSIC_DISC_AQUAMARINE)
                 .add(BlockItemIds.BEDROCK.item());
 
-        tag(MFItemTags.METAL_DETECTOR_FINDABLE)
+        this.tag(MFItemTags.METAL_DETECTOR_FINDABLE)
                 .add(MFBlockItemIds.ALUMINIUM_ORE.item())
                 .add(MFBlockItemIds.MAGNESIUM_ORE.item())
                 .add(MFBlockItemIds.DEEPSLATE_ALUMINIUM_ORE.item())
@@ -418,7 +418,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(BlockItemIds.ANCIENT_DEBRIS.item())
                 .add(BlockItemIds.NETHER_GOLD_ORE.item());
 
-        tag(MFItemTags.WOODEN_VERTICAL_SLABS)
+        this.tag(MFItemTags.WOODEN_VERTICAL_SLABS)
                 .add(MFBlockItemIds.OAK_VERTICAL_SLAB.item())
                 .add(MFBlockItemIds.SPRUCE_VERTICAL_SLAB.item())
                 .add(MFBlockItemIds.BIRCH_VERTICAL_SLAB.item())
@@ -438,21 +438,21 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFBlockItemIds.DECREPIT_VERTICAL_SLAB.item())
                 .add(MFBlockItemIds.PALLID_VERTICAL_SLAB.item());
 
-        tag(ItemTags.WOODEN_STAIRS)
+        this.tag(ItemTags.WOODEN_STAIRS)
                 .add(MFBlockItemIds.BLOODWOOD_STAIRS.item())
                 .add(MFBlockItemIds.TAINTED_STAIRS.item())
                 .add(MFBlockItemIds.PALM_STAIRS.item())
                 .add(MFBlockItemIds.DECREPIT_STAIRS.item())
                 .add(MFBlockItemIds.PALLID_STAIRS.item());
 
-        tag(ItemTags.WOODEN_SLABS)
+        this.tag(ItemTags.WOODEN_SLABS)
                 .add(MFBlockItemIds.BLOODWOOD_SLAB.item())
                 .add(MFBlockItemIds.TAINTED_SLAB.item())
                 .add(MFBlockItemIds.PALM_SLAB.item())
                 .add(MFBlockItemIds.DECREPIT_SLAB.item())
                 .add(MFBlockItemIds.PALLID_SLAB.item());
 
-        tag(ItemTags.TRIM_MATERIALS)
+        this.tag(ItemTags.TRIM_MATERIALS)
                 .add(MFItemIds.ALUMINIUM_INGOT)
                 .add(MFItemIds.MAGNESIUM_INGOT)
                 .add(MFItemIds.AZURITE)
@@ -460,7 +460,7 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.CARBON_FIBER)
                 .add(MFItemIds.BISMUTH);
 
-        tag(MFItemTags.MAGIC_BLOCK_MULTIPLIES_RESULT)
+        this.tag(MFItemTags.MAGIC_BLOCK_MULTIPLIES_RESULT)
                 .addTag(ItemTags.PLANKS);
     }
 }

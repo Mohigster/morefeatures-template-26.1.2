@@ -15,6 +15,6 @@ public record ElytraSpeedEntry(HolderSet<Item> elytra, double percentSpeedBoost,
     public static final Codec<ElytraSpeedEntry> CODEC = RecordCodecBuilder.create(instance -> instance.group(
             ITEM_HOLDER_SET_CODEC.fieldOf("values").forGetter(ElytraSpeedEntry::elytra),
             Codec.DOUBLE.fieldOf("percent_speed_boost").forGetter(ElytraSpeedEntry::percentSpeedBoost),
-            Codec.DOUBLE.optionalFieldOf("maximum_speed", 0D).forGetter(ElytraSpeedEntry::maximumSpeed)
+            Codec.DOUBLE.optionalFieldOf("maximum_speed", 0.0D).forGetter(ElytraSpeedEntry::maximumSpeed)
     ).apply(instance, ElytraSpeedEntry::new));
 }

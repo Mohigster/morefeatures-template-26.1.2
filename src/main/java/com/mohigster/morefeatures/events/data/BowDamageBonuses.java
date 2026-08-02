@@ -37,7 +37,7 @@ public class BowDamageBonuses extends SimpleJsonResourceReloadListener<BowDamage
     }
     
     public double getDamage(ItemStack stack){
-        for (BowDamageEntry entry : entries){
+        for (BowDamageEntry entry : this.entries){
             if (stack.is(entry.bows())){
                 return entry.damageBonus();
             }
@@ -48,5 +48,9 @@ public class BowDamageBonuses extends SimpleJsonResourceReloadListener<BowDamage
 
     public Set<Item> getBowEntries() {
         return this.bowEntries;
+    }
+
+    public boolean isBow(ItemStack stack){
+        return this.bowEntries.contains(stack.getItem());
     }
 }

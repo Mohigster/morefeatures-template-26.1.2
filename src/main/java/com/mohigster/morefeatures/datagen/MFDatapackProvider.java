@@ -23,16 +23,16 @@ import java.util.concurrent.CompletableFuture;
 public class MFDatapackProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.JUKEBOX_SONG, MFJukeboxSongs::bootstrap)
-            .add(Registries.CONFIGURED_FEATURE, MFConfiguredFeatures::bootstrap)
-            .add(Registries.PLACED_FEATURE, MFPlacedFeatures::bootstrap)
-            .add(Registries.TRIM_MATERIAL, MFTrimMaterials::bootstrap)
-            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, MFBiomeModifiers::bootstrap)
             .add(Registries.NOISE, MFNoiseData::bootstrap)
             .add(Registries.DIMENSION_TYPE, MFDimensions::bootstrapType)
             .add(Registries.LEVEL_STEM, MFDimensions::bootstrapStem)
             .add(Registries.ENCHANTMENT, MFEnchantments::bootstrap)
             .add(Registries.CONFIGURED_CARVER, MFCarvers::bootstrap)
-            .add(Registries.BIOME, MFBiomes::bootstrap);
+            .add(Registries.TRIM_MATERIAL, MFTrimMaterials::bootstrap)
+            .add(Registries.BIOME, MFBiomes::bootstrap)
+            .add(Registries.CONFIGURED_FEATURE, MFConfiguredFeatures::bootstrap)
+            .add(Registries.PLACED_FEATURE, MFPlacedFeatures::bootstrap)
+            .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, MFBiomeModifiers::bootstrap);
 
     public MFDatapackProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries){
         super(output, registries, BUILDER, Set.of(MoreFeatures.MODID));

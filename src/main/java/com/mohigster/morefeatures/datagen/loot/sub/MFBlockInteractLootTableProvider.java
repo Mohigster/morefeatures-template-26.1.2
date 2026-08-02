@@ -1,4 +1,4 @@
-package com.mohigster.morefeatures.datagen.loot;
+package com.mohigster.morefeatures.datagen.loot.sub;
 
 
 import com.mohigster.morefeatures.block.MFBlocks;

@@ -1,4 +1,4 @@
-package com.mohigster.morefeatures.datagen.loot;
+package com.mohigster.morefeatures.datagen.loot.sub;
 
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.custom.BlueBerryBushBlock;
@@ -12,13 +12,11 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColorCollection;
-import net.minecraft.world.level.block.SweetBerryBushBlock;
 import net.minecraft.world.level.storage.loot.LootPool;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
@@ -82,6 +80,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(MFBlocks.CHARRED_HYPHAE.get());
         this.dropSelf(MFBlocks.STRIPPED_CHARRED_STEM.get());
         this.dropSelf(MFBlocks.STRIPPED_CHARRED_HYPHAE.get());
+        this.dropSelf(MFBlocks.CHARRED_ROOTS.get());
         this.dropSelf(MFBlocks.PALM_LOG.get());
         this.dropSelf(MFBlocks.PALM_WOOD.get());
         this.dropSelf(MFBlocks.STRIPPED_PALM_LOG.get());
@@ -147,18 +146,21 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(MFBlocks.PALLID_ROOTS.get());
         this.dropSelf(MFBlocks.VOID_ANCHOR.get());
         this.dropSelf(MFBlocks.ICICLE.get());
+        this.dropSelf(MFBlocks.CONCRETE_STAIRS);
+        this.dropSelf(MFBlocks.CONCRETE_PILLAR);
 
         // POTTED PLANTS
 
-        this.add(MFBlocks.POTTED_ROSE.get(), createPotFlowerItemTable(MFBlocks.ROSE.get()));
-        this.add(MFBlocks.POTTED_BLUE_ROSE.get(), createPotFlowerItemTable(MFBlocks.BLUE_ROSE.get()));
-        this.add(MFBlocks.POTTED_TAINTED_SAPLING.get(), createPotFlowerItemTable(MFBlocks.TAINTED_SAPLING.get()));
-        this.add(MFBlocks.POTTED_BLOODWOOD_SAPLING.get(), createPotFlowerItemTable(MFBlocks.BLOODWOOD_SAPLING.get()));
-        this.add(MFBlocks.POTTED_PALM_SAPLING.get(), createPotFlowerItemTable(MFBlocks.PALM_SAPLING.get()));
-        this.add(MFBlocks.POTTED_DECREPIT_SAPLING.get(), createPotFlowerItemTable(MFBlocks.DECREPIT_SAPLING.get()));
-        this.add(MFBlocks.POTTED_PALLID_SAPLING.get(), createPotFlowerItemTable(MFBlocks.PALLID_SAPLING.get()));
-        this.add(MFBlocks.POTTED_DECREPIT_ROOTS.get(), createPotFlowerItemTable(MFBlocks.DECREPIT_ROOTS.get()));
-        this.add(MFBlocks.POTTED_PALLID_ROOTS.get(), createPotFlowerItemTable(MFBlocks.PALLID_ROOTS.get()));
+        this.flowerPotDrops(MFBlocks.POTTED_ROSE.get(),MFBlocks.ROSE.get());
+        this.flowerPotDrops(MFBlocks.POTTED_BLUE_ROSE.get(), MFBlocks.BLUE_ROSE.get());
+        this.flowerPotDrops(MFBlocks.POTTED_TAINTED_SAPLING.get(), MFBlocks.TAINTED_SAPLING.get());
+        this.flowerPotDrops(MFBlocks.POTTED_BLOODWOOD_SAPLING.get(), MFBlocks.BLOODWOOD_SAPLING.get());
+        this.flowerPotDrops(MFBlocks.POTTED_PALM_SAPLING.get(), MFBlocks.PALM_SAPLING.get());
+        this.flowerPotDrops(MFBlocks.POTTED_DECREPIT_SAPLING.get(), MFBlocks.DECREPIT_SAPLING.get());
+        this.flowerPotDrops(MFBlocks.POTTED_PALLID_SAPLING.get(), MFBlocks.PALLID_SAPLING.get());
+        this.flowerPotDrops(MFBlocks.POTTED_DECREPIT_ROOTS.get(), MFBlocks.DECREPIT_ROOTS.get());
+        this.flowerPotDrops(MFBlocks.POTTED_PALLID_ROOTS.get(), MFBlocks.PALLID_ROOTS.get());
+        this.flowerPotDrops(MFBlocks.POTTED_CHARRED_ROOTS.get(), MFBlocks.CHARRED_ROOTS.get());
 
         // SILK TOUCH DROPS
 
@@ -181,6 +183,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.slabDrops(MFBlocks.CHARRED_SLAB.get());
         this.slabDrops(MFBlocks.DECREPIT_SLAB.get());
         this.slabDrops(MFBlocks.PALLID_SLAB.get());
+        this.slabDrops(MFBlocks.CONCRETE_SLAB);
 
         // VERTICAL SLABS
 
@@ -189,6 +192,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.verticalSlabDrops(MFBlocks.BLOODWOOD_VERTICAL_SLAB.get());
         this.verticalSlabDrops(MFBlocks.TAINTED_VERTICAL_SLAB.get());
         this.verticalSlabDrops(MFBlocks.PALM_VERTICAL_SLAB.get());
+        this.verticalSlabDrops(MFBlocks.CHARRED_VERTICAL_SLAB.get());
         this.verticalSlabDrops(MFBlocks.DECREPIT_VERTICAL_SLAB.get());
         this.verticalSlabDrops(MFBlocks.PALLID_VERTICAL_SLAB.get());
         this.verticalSlabDrops(MFBlocks.OAK_VERTICAL_SLAB.get());
@@ -259,11 +263,6 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         
         MFBlocks.CUT_COPPER_PILLAR.forEach(block -> this.dropSelf(block.get()));
 
-        this.dropSelf(MFBlocks.CONCRETE_STAIRS);
-        this.dropSelf(MFBlocks.CONCRETE_PILLAR);
-
-        MFBlocks.CONCRETE_SLAB.forEach(block -> this.add(block.get(), this::createSlabItemTable));
-
         // LEAVES
 
         this.leavesDrops(MFBlocks.BLOODWOOD_LEAVES.get(), MFBlocks.BLOODWOOD_SAPLING.get());
@@ -291,9 +290,9 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
 
         // DOOR
 
-        this.add(MFBlocks.AZURITE_DOOR.get(), this::createDoorTable);
-        this.add(MFBlocks.FLUORITE_DOOR.get(), this::createDoorTable);
-        this.add(MFBlocks.PALM_DOOR.get(), this::createDoorTable);
+        this.doorDrops(MFBlocks.AZURITE_DOOR.get());
+        this.doorDrops(MFBlocks.FLUORITE_DOOR.get());
+        this.doorDrops(MFBlocks.PALM_DOOR.get());
 
         // ORES
 
@@ -330,7 +329,6 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
 
         this.oreDrops(MFBlocks.BISMUTH_ORE.get(), MFItems.RAW_BISMUTH.get());
 
-
         // Berry bush
 
         this.berryBushDrops(MFBlocks.BLUE_BERRY_BUSH.get(), MFItems.BLUE_BERRY.get());
@@ -344,8 +342,6 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
                         .apply(SetItemCountFunction.setCount(UniformGenerator.between(minDrops, maxDrops)))
                         .apply(ApplyBonusCount.addOreBonusCount(enchantments.getOrThrow(Enchantments.FORTUNE)))));
     }
-
-
 
     @NullMarked
     @Override
@@ -373,6 +369,11 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
 
     protected void slabDrops(Block block){
         this.add(block, this::createSlabItemTable);
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    protected <T extends Block> void slabDrops(ColorCollection<DeferredBlock<T>> blockSet){
+        blockSet.forEach(block -> this.slabDrops(block.get()));
     }
 
     protected void leavesDrops(Block leaves, Block sapling){
@@ -416,6 +417,14 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
     }
 
     protected void dropOtherWhenNoSilkTouch(Block block, Block other){
-        this.add(block, createSingleItemTableWithSilkTouch(block, other));
+        this.add(block, this.createSingleItemTableWithSilkTouch(block, other));
+    }
+
+    protected void doorDrops(Block block){
+        this.add(block, this::createDoorTable);
+    }
+
+    protected void flowerPotDrops(Block potted, Block flower){
+        this.add(potted, this.createPotFlowerItemTable(flower));
     }
 }

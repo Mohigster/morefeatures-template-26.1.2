@@ -1,4 +1,4 @@
-package com.mohigster.morefeatures.datagen;
+package com.mohigster.morefeatures.datagen.tag;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.tag.MFBiomeTags;

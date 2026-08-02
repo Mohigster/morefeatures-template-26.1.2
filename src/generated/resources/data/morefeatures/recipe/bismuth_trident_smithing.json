@@ -1,6 +1,6 @@
 {
   "type": "minecraft:smithing_transform",
-  "addition": "#morefeatures:bismuth_tool_materials",
+  "addition": "#morefeatures:tool_materials/bismuth",
   "base": "morefeatures:carbon_trident",
   "result": {
     "id": "morefeatures:bismuth_trident"

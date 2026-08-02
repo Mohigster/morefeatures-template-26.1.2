@@ -120,7 +120,7 @@ public class MFEvents {
 
         ItemStack weapon = player.getUseItem();
 
-        if (!BowDamageBonuses.INSTANCE.getBowEntries().contains(weapon.getItem())) return;
+        if (!BowDamageBonuses.INSTANCE.isBow(weapon)) return;
 
         if (!sharedAllBowEntries){
             MoreFeatures.LOGGER.debug("All Bow Entries: {}", BowDamageBonuses.INSTANCE.getBowEntries());
@@ -240,9 +240,6 @@ public class MFEvents {
 
         if (VoidAnchorBlock.cannotSetSpawn(currentLevel)) return;
 
-        // Find the nearest charged Void Anchor within a reasonable search radius.
-        // We stored nothing extra, so we find the closest one to the player's
-        // current position as a best-effort restore.
         BlockPos playerPos = player.blockPosition();
         int searchRadius = 8; // should always be within 1 block of the anchor
         for (BlockPos candidate : BlockPos.betweenClosed(
@@ -253,7 +250,6 @@ public class MFEvents {
             if (!(state.getBlock() instanceof VoidAnchorBlock)) continue;
             if (state.getValue(VoidAnchorBlock.CHARGE) == 0) continue;
 
-            // Found it — restore the respawn config silently.
             player.setRespawnPosition(
                     new ServerPlayer.RespawnConfig(LevelData.RespawnData.of(currentLevel.dimension(), candidate.immutable(), 0.0F, 0.0F), false),
                     false
@@ -283,7 +279,7 @@ public class MFEvents {
         double damage = baseDamage * BowDamageBonuses.INSTANCE.getDamage(weapon);
 
         if (damage != 0){
-            return baseDamage * BowDamageBonuses.INSTANCE.getDamage(weapon);
+            return damage;
         }
 
         throw new IllegalStateException("Bow damage multiplier cannot be 0!");

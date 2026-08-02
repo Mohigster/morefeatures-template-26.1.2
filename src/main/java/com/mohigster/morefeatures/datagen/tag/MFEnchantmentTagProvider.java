@@ -1,4 +1,4 @@
-package com.mohigster.morefeatures.datagen;
+package com.mohigster.morefeatures.datagen.tag;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.enchantment.MFEnchantments;
@@ -17,7 +17,7 @@ public class MFEnchantmentTagProvider extends EnchantmentTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NonNull Provider provider) {
-        tag(EnchantmentTags.IN_ENCHANTING_TABLE)
+        this.tag(EnchantmentTags.IN_ENCHANTING_TABLE)
                 .addOptional(MFEnchantments.THUNDERING)
                 .addOptional(MFEnchantments.THUNDERBOLT);
 

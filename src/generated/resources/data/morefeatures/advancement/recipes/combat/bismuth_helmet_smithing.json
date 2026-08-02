@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#morefeatures:bismuth_tool_materials"
+            "items": "#morefeatures:tool_materials/bismuth"
           }
         ]
       },

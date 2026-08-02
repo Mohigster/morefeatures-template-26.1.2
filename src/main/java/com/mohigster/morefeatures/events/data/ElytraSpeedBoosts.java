@@ -48,7 +48,7 @@ public class ElytraSpeedBoosts extends SimpleJsonResourceReloadListener<ElytraSp
             }
         }
 
-        return 0; // default fallback
+        return 0.0D; // default fallback
     }
 
     public double getMaxSpeed(ItemStack stack){

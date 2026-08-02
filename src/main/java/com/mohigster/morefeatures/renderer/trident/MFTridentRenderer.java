@@ -38,8 +38,10 @@ public class MFTridentRenderer extends ThrownTridentRenderer {
         poseStack.pushPose();
         poseStack.mulPose(Axis.YP.rotationDegrees(state.yRot - 90.0F));
         poseStack.mulPose(Axis.ZP.rotationDegrees(state.xRot + 90.0F));
-        submitNodeCollector.order(0)
-                .submitModel(this.model, Unit.INSTANCE, poseStack, MFTridentModel.getTexture(tridentKey), state.lightCoords, OverlayTexture.NO_OVERLAY, state.outlineColor, null);
+        submitNodeCollector.order(0).submitModel(this.model, Unit.INSTANCE, poseStack,
+                MFTridentModel.getTexture(this.tridentKey), state.lightCoords,
+                OverlayTexture.NO_OVERLAY, state.outlineColor, null
+        );
         if (state.isFoil) {
             submitNodeCollector.order(1)
                     .submitModel(

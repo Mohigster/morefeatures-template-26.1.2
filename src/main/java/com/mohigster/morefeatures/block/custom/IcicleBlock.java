@@ -53,7 +53,7 @@ public class IcicleBlock extends SpeleothemBlock {
 
     public IcicleBlock(List<BlockState> blocksToGrowOn, Properties properties) {
         super(Blocks.PACKED_ICE.defaultBlockState(), properties); // Passing Blocks.PACKED_ICE.defaultBlockState() into the super is just to keep the compiler happy because the base class wants a singular block state, not a list. This block state is unused by this class.
-                                                                  // I have checked SpeleothemBlock. Within that class, the blockToGrowIn Block State passed in here is ONLY used in the canGrow method. Since we override that to use the list, this will have no side effects.
+                                                                  // I have checked SpeleothemBlock. Within that class, the blockToGrowIn Block State passed in here is ONLY used in the canGrow method. Since we override that to use the list anyway, this will have no side effects.
 
         if(blocksToGrowOn.isEmpty()) this.blocksToGrowOn = this.defaultValidGrowthBlocks();
         else this.blocksToGrowOn = blocksToGrowOn;

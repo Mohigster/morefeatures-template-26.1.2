@@ -16,9 +16,12 @@ import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColorCollection;
 import net.minecraft.world.level.block.WeatheringCopperCollection;
+import net.neoforged.neoforge.registries.DeferredBlock;
+import org.apache.commons.compress.compressors.lz77support.LZ77Compressor;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
@@ -731,8 +734,8 @@ public class MFRecipeProvider extends RecipeProvider {
 
         // And this line generates the recipe for all different colours of wool vertical slabs!
 
-        ColorCollection.VALUES.forEach(colour ->
-                verticalSlabCrafting(MFBlocks.WOOL_VERTICAL_SLAB.pick(colour).get(), Blocks.WOOL.pick(colour)));
+        verticalSlabCrafting(MFBlocks.WOOL_VERTICAL_SLAB, Blocks.WOOL);
+        verticalSlabCrafting(MFBlocks.CONCRETE_VERTICAL_SLAB, Blocks.CONCRETE);
 
         //——————————————————————————VERTICAL SLABS STONECUTTING————————————————————————
 
@@ -862,6 +865,10 @@ public class MFRecipeProvider extends RecipeProvider {
 
     protected RecipeBuilder specialFenceGateBuilder(ItemLike result, Ingredient planks, Ingredient actingStick) {
         return this.shaped(RecipeCategory.REDSTONE, result).define('#', actingStick).define('W', planks).pattern("#W#").pattern("#W#");
+    }
+
+    protected <T extends Block> void verticalSlabCrafting(ColorCollection<DeferredBlock<T>> slabSet, ColorCollection<T> blockSet){
+        ColorCollection.VALUES.forEach(colour -> this.verticalSlabCrafting(slabSet.pick(colour).get(), blockSet.pick(colour)));
     }
 }
 

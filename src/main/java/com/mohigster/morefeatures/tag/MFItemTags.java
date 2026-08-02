@@ -6,17 +6,17 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 
 public final class MFItemTags {
-    public static final TagKey<Item> BISMUTH_TOOL_MATERIAL_REPAIRABLE = morefeaturesTag("bismuth_tool_material_repairable");
-    public static final TagKey<Item> CARBON_TOOL_MATERIAL_REPAIRABLE = morefeaturesTag("carbon_tool_material_repairable");
-    public static final TagKey<Item> REPAIRS_BISMUTH_ARMOR = morefeaturesTag("repairs_bismuth_armor");
-    public static final TagKey<Item> REPAIRS_CARBON_ARMOR = morefeaturesTag("repairs_carbon_armor");
-    public static final TagKey<Item> BISMUTH_TOOL_MATERIALS = morefeaturesTag("bismuth_tool_materials");
-    public static final TagKey<Item> CARBON_TOOL_MATERIALS = morefeaturesTag("carbon_tool_materials");
+    // Tool material tags
+    public static final TagKey<Item> BISMUTH_TOOL_MATERIAL_REPAIRABLE = morefeaturesTag("tool_materials/repairable/bismuth");
+    public static final TagKey<Item> CARBON_TOOL_MATERIAL_REPAIRABLE = morefeaturesTag("tool_materials/repairable/carbon");
+    public static final TagKey<Item> REPAIRS_BISMUTH_ARMOR = morefeaturesTag("repairs/bismuth_armor");
+    public static final TagKey<Item> REPAIRS_CARBON_ARMOR = morefeaturesTag("repairs/carbon_armor");
+    public static final TagKey<Item> BISMUTH_TOOL_MATERIALS = morefeaturesTag("tool_materials/bismuth");
+    public static final TagKey<Item> CARBON_TOOL_MATERIALS = morefeaturesTag("tool_materials/carbon");
 
     // Magic block tags are quite big, so a lot of their items are broken up into smaller tags to make the magic block tag itself easier to read
 
     // These are the subtags
-
     public static final TagKey<Item> IS_FOOD = morefeaturesTag("is_food");
     public static final TagKey<Item> IS_POTION = morefeaturesTag("is_potion");
     public static final TagKey<Item> IS_GOLD = morefeaturesTag("is_gold");
@@ -26,7 +26,6 @@ public final class MFItemTags {
     public static final TagKey<Item> IS_NON_GOLD_METAL_BLOCK = morefeaturesTag("is_non_gold_metal_block");
 
     // Other misc tags
-
     public static final TagKey<Item> COMPRESSOR_FUEL = morefeaturesTag("compressor_fuel");
     public static final TagKey<Item> THUNDERBOLT_ENCHANTABLE = morefeaturesTag("thunderbolt_enchantable");
     public static final TagKey<Item> THUNDERING_ENCHANTABLE = morefeaturesTag("thundering_enchantable");
@@ -45,7 +44,6 @@ public final class MFItemTags {
     public static final TagKey<Item> WOODEN_VERTICAL_SLABS = morefeaturesTag("vertical_slabs/wooden");
 
     // Magic block tags
-
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC = morefeaturesTag("magic_block_transmutations/aquamarine_disc");
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_CARBON = morefeaturesTag("magic_block_transmutations/carbon");
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP = morefeaturesTag("magic_block_transmutations/bismuth_scrap");

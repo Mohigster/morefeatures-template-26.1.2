@@ -36,8 +36,8 @@ public class EvilPortalBlock extends Block implements Portal {
     @NullMarked
     @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if(!level.isClientSide()) {
-            player.teleport(Objects.requireNonNull(getPortalDestination(((ServerLevel) level), player, pos)));
+        if(level instanceof ServerLevel server) {
+            player.teleport(Objects.requireNonNull(getPortalDestination(server, player, pos)));
         }
 
         return InteractionResult.SUCCESS;

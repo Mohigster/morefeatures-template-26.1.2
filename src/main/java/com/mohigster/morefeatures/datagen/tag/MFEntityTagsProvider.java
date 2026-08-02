@@ -1,4 +1,4 @@
-package com.mohigster.morefeatures.datagen;
+package com.mohigster.morefeatures.datagen.tag;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.entity.MFEntityTypes;
@@ -19,7 +19,7 @@ public class MFEntityTagsProvider extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NonNull Provider registries){
-        tag(EntityTypeTags.BOAT)
+        this.tag(EntityTypeTags.BOAT)
                 .add(MFEntityTypes.BLOODWOOD_BOAT.getKey())
                 .add(MFEntityTypes.BLOODWOOD_CHEST_BOAT.getKey())
                 .add(MFEntityTypes.TAINTED_BOAT.getKey())
@@ -27,10 +27,10 @@ public class MFEntityTagsProvider extends EntityTypeTagsProvider {
                 .add(MFEntityTypes.PALM_BOAT.getKey())
                 .add(MFEntityTypes.PALM_CHEST_BOAT.getKey());
 
-        tag(MFEntityTypeTags.WAND_IMMUNE_MOUNTS)
+        this.tag(MFEntityTypeTags.WAND_IMMUNE_MOUNTS)
                 .addTag(EntityTypeTags.CAN_EQUIP_SADDLE);
 
-        tag(MFEntityTypeTags.ICEOLOGER_FRIENDS)
+        this.tag(MFEntityTypeTags.ICEOLOGER_FRIENDS)
                 .add(EntityTypeIds.RAVAGER)
                 .add(EntityTypeIds.EVOKER)
                 .add(EntityTypeIds.PILLAGER)

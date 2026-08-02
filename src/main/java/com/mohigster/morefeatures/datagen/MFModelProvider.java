@@ -147,6 +147,7 @@ public class MFModelProvider extends ModelProvider {
 
         blockModels.woodProvider(MFBlocks.CHARRED_STEM.get()).logWithHorizontal(MFBlocks.CHARRED_STEM.get()).wood(MFBlocks.CHARRED_HYPHAE.get());
         blockModels.woodProvider(MFBlocks.STRIPPED_CHARRED_STEM.get()).logWithHorizontal(MFBlocks.STRIPPED_CHARRED_STEM.get()).wood(MFBlocks.STRIPPED_CHARRED_HYPHAE.get());
+        MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.CHARRED_VERTICAL_SLAB.get(), MFBlocks.CHARRED_PLANKS.get());
 
         blockModels.woodProvider(MFBlocks.DECREPIT_LOG.get()).logWithHorizontal(MFBlocks.DECREPIT_LOG.get()).wood(MFBlocks.DECREPIT_WOOD.get());
         blockModels.woodProvider(MFBlocks.STRIPPED_DECREPIT_LOG.get()).logWithHorizontal(MFBlocks.STRIPPED_DECREPIT_LOG.get()).wood(MFBlocks.STRIPPED_DECREPIT_WOOD.get());
@@ -167,6 +168,7 @@ public class MFModelProvider extends ModelProvider {
         blockModels.createFurnace(MFBlocks.COMPRESSOR_BLOCK.get(), TexturedModel.ORIENTABLE);
         blockModels.createPlantWithDefaultItem(MFBlocks.ROSE.get(), MFBlocks.POTTED_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
         blockModels.createPlantWithDefaultItem(MFBlocks.BLUE_ROSE.get(), MFBlocks.POTTED_BLUE_ROSE.get(), BlockModelGenerators.PlantType.TINTED);
+        blockModels.createPlantWithDefaultItem(MFBlocks.CHARRED_ROOTS.get(), MFBlocks.POTTED_CHARRED_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(MFBlocks.DECREPIT_ROOTS.get(), MFBlocks.POTTED_DECREPIT_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
         blockModels.createPlantWithDefaultItem(MFBlocks.PALLID_ROOTS.get(), MFBlocks.POTTED_PALLID_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
@@ -340,8 +342,8 @@ public class MFModelProvider extends ModelProvider {
         blockModels.family(MFBlocks.PALLID_PLANKS.get())
                 .generateFor(MFBlockFamilies.getPallidFamily());
 
-        ColorCollection.VALUES.forEach(colour ->
-                blockModels.family(Blocks.CONCRETE.pick(colour))
+        ColorCollection.VALUES.forEach(
+                colour -> blockModels.family(Blocks.CONCRETE.pick(colour))
                         .generateFor(MFBlockFamilies.getConcreteFamily().pick(colour)));
     }
 }
