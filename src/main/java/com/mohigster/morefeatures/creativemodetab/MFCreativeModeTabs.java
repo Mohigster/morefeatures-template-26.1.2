@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.creativemodetab;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.references.MFIdentifier;
 import net.minecraft.core.registries.Registries;
@@ -179,114 +180,32 @@ public class MFCreativeModeTabs {
     );
 
     public static final Supplier<CreativeModeTab> MOREFEATURES_WOOD_TAB = CREATIVE_MODE_TABS.register("morefeatures_wood_tab", () -> CreativeModeTab.builder()
-            .icon(() -> new ItemStack(MFBlocks.BLOODWOOD_LOG))
+            .icon(() -> new ItemStack(MFBlocks.LOG.bloodwood()))
             .title(Component.translatable("creativetab.morefeatures.morefeatures_wood"))
             .withTabsBefore(MFIdentifier.withMfNamespace("morefeatures_equipment_tab"))
             .displayItems((_, output) -> {
-
                 // Bloodwood
 
-                output.accept(MFBlocks.BLOODWOOD_LOG);
-                output.accept(MFBlocks.BLOODWOOD);
-                output.accept(MFBlocks.STRIPPED_BLOODWOOD_LOG);
-                output.accept(MFBlocks.STRIPPED_BLOODWOOD);
-                output.accept(MFBlocks.BLOODWOOD_PLANKS);
-                output.accept(MFBlocks.BLOODWOOD_STAIRS);
-                output.accept(MFBlocks.BLOODWOOD_VERTICAL_SLAB);
-                output.accept(MFBlocks.BLOODWOOD_SLAB);
-                output.accept(MFBlocks.BLOODWOOD_FENCE);
-                output.accept(MFBlocks.BLOODWOOD_FENCE_GATE);
-                output.accept(MFBlocks.BLOODWOOD_PRESSURE_PLATE);
-                output.accept(MFBlocks.BLOODWOOD_BUTTON);
-                output.accept(MFBlocks.BLOODWOOD_LEAVES);
-                output.accept(MFBlocks.BLOODWOOD_SAPLING);
-                output.accept(MFBlocks.BLOODWOOD_SHELF);
-                output.accept(MFItems.BLOODWOOD_SIGN);
-                output.accept(MFItems.BLOODWOOD_HANGING_SIGN);
-
-                // Tainted wood
-
-                output.accept(MFBlocks.TAINTED_LOG);
-                output.accept(MFBlocks.TAINTED_WOOD);
-                output.accept(MFBlocks.STRIPPED_TAINTED_LOG);
-                output.accept(MFBlocks.STRIPPED_TAINTED_WOOD);
-                output.accept(MFBlocks.TAINTED_PLANKS);
-                output.accept(MFBlocks.TAINTED_STAIRS);
-                output.accept(MFBlocks.TAINTED_VERTICAL_SLAB);
-                output.accept(MFBlocks.TAINTED_SLAB);
-                output.accept(MFBlocks.TAINTED_FENCE);
-                output.accept(MFBlocks.TAINTED_FENCE_GATE);
-                output.accept(MFBlocks.TAINTED_PRESSURE_PLATE);
-                output.accept(MFBlocks.TAINTED_BUTTON);
-                output.accept(MFBlocks.TAINTED_LEAVES);
-                output.accept(MFBlocks.TAINTED_SAPLING);
-                output.accept(MFBlocks.TAINTED_SHELF);
-                output.accept(MFItems.TAINTED_SIGN);
-                output.accept(MFItems.TAINTED_HANGING_SIGN);
-
-                // Palm wood
-
-                output.accept(MFBlocks.PALM_LOG);
-                output.accept(MFBlocks.PALM_WOOD);
-                output.accept(MFBlocks.STRIPPED_PALM_LOG);
-                output.accept(MFBlocks.STRIPPED_PALM_WOOD);
-                output.accept(MFBlocks.PALM_PLANKS);
-                output.accept(MFBlocks.PALM_STAIRS);
-                output.accept(MFBlocks.PALM_VERTICAL_SLAB);
-                output.accept(MFBlocks.PALM_SLAB);
-                output.accept(MFBlocks.PALM_FENCE);
-                output.accept(MFBlocks.PALM_FENCE_GATE);
-                output.accept(MFBlocks.PALM_DOOR);
-                output.accept(MFBlocks.PALM_TRAPDOOR);
-                output.accept(MFBlocks.PALM_PRESSURE_PLATE);
-                output.accept(MFBlocks.PALM_BUTTON);
-                output.accept(MFBlocks.PALM_LEAVES);
-                output.accept(MFBlocks.PALM_SAPLING);
-                output.accept(MFBlocks.PALM_SHELF);
-                output.accept(MFItems.PALM_SIGN);
-                output.accept(MFItems.PALM_HANGING_SIGN);
-                output.accept(MFItems.PALM_BOAT);
-                output.accept(MFItems.PALM_CHEST_BOAT);
-
-                // Decrepit wood
-
-                output.accept(MFBlocks.DECREPIT_LOG);
-                output.accept(MFBlocks.DECREPIT_WOOD);
-                output.accept(MFBlocks.STRIPPED_DECREPIT_LOG);
-                output.accept(MFBlocks.STRIPPED_DECREPIT_WOOD);
-                output.accept(MFBlocks.DECREPIT_PLANKS);
-                output.accept(MFBlocks.DECREPIT_STAIRS);
-                output.accept(MFBlocks.DECREPIT_VERTICAL_SLAB);
-                output.accept(MFBlocks.DECREPIT_SLAB);
-                output.accept(MFBlocks.DECREPIT_FENCE);
-                output.accept(MFBlocks.DECREPIT_FENCE_GATE);
-                output.accept(MFBlocks.DECREPIT_PRESSURE_PLATE);
-                output.accept(MFBlocks.DECREPIT_BUTTON);
-                output.accept(MFBlocks.DECREPIT_LEAVES);
-                output.accept(MFBlocks.DECREPIT_SAPLING);
-                output.accept(MFBlocks.DECREPIT_SHELF);
-                output.accept(MFItems.DECREPIT_SIGN);
-                output.accept(MFItems.DECREPIT_HANGING_SIGN);
-
-                // Pallid wood
-
-                output.accept(MFBlocks.PALLID_LOG);
-                output.accept(MFBlocks.PALLID_WOOD);
-                output.accept(MFBlocks.STRIPPED_PALLID_LOG);
-                output.accept(MFBlocks.STRIPPED_PALLID_WOOD);
-                output.accept(MFBlocks.PALLID_PLANKS);
-                output.accept(MFBlocks.PALLID_STAIRS);
-                output.accept(MFBlocks.PALLID_VERTICAL_SLAB);
-                output.accept(MFBlocks.PALLID_SLAB);
-                output.accept(MFBlocks.PALLID_FENCE);
-                output.accept(MFBlocks.PALLID_FENCE_GATE);
-                output.accept(MFBlocks.PALLID_PRESSURE_PLATE);
-                output.accept(MFBlocks.PALLID_BUTTON);
-                output.accept(MFBlocks.PALLID_LEAVES);
-                output.accept(MFBlocks.PALLID_SAPLING);
-                output.accept(MFBlocks.PALLID_SHELF);
-                output.accept(MFItems.PALLID_SIGN);
-                output.accept(MFItems.PALLID_HANGING_SIGN);
+                WoodTypeCollection.TYPES.forEach(type -> {
+                    output.accept(MFBlocks.LOG.pick(type));
+                    output.accept(MFBlocks.WOOD.pick(type));
+                    output.accept(MFBlocks.STRIPPED_LOG.pick(type));
+                    output.accept(MFBlocks.STRIPPED_WOOD.pick(type));
+                    output.accept(MFBlocks.PLANKS.pick(type));
+                    output.accept(MFBlocks.WOODEN_STAIRS.pick(type));
+                    output.accept(MFBlocks.WOODEN_VERTICAL_SLAB.pick(type));
+                    output.accept(MFBlocks.WOODEN_SLAB.pick(type));
+                    output.accept(MFBlocks.WOODEN_FENCE.pick(type));
+                    output.accept(MFBlocks.WOODEN_FENCE_GATE.pick(type));
+                    output.accept(MFBlocks.WOODEN_PRESSURE_PLATE.pick(type));
+                    output.accept(MFBlocks.WOODEN_BUTTON.pick(type));
+                    output.accept(type.getLeavesOrWart());
+                    output.accept(type.getSaplingOrFungus());
+                    output.accept(MFBlocks.BLOODWOOD_SAPLING);
+                    output.accept(MFBlocks.WOODEN_SHELF.pick(type));
+                    output.accept(MFItems.SIGN.pick(type));
+                    output.accept(MFItems.HANGING_SIGN.pick(type));
+                });
             })
             .build()
     );

@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.block.custom.flammable;
 
+import com.mohigster.morefeatures.block.collection.WoodSetType;
 import com.mohigster.morefeatures.block.custom.modified.MFFenceBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -8,7 +9,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jspecify.annotations.NullMarked;
 
 public class MFFlammableFenceBlock extends MFFenceBlock {
-    public MFFlammableFenceBlock(Properties properties) {
+    public MFFlammableFenceBlock(WoodSetType wood, Properties properties) {
         super(properties);
     }
 

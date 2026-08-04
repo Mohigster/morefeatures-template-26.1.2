@@ -79,8 +79,8 @@ public class EvilPortalBlock extends Block implements Portal {
             if(!targetLevel.getBlockState(portalPos.above()).is(MFBlocks.EVIL_PORTAL)) {
                 EndPlatformFeature.createEndPlatform(targetLevel, platformCenter, false);
 
-                targetLevel.setBlockAndUpdate(portalPos.south(1), MFBlocks.TAINTED_PLANKS.get().defaultBlockState());
-                targetLevel.setBlockAndUpdate(portalPos.north(1), MFBlocks.BLOODWOOD_PLANKS.get().defaultBlockState());
+                targetLevel.setBlockAndUpdate(portalPos.south(1), MFBlocks.PLANKS.tainted().get().defaultBlockState());
+                targetLevel.setBlockAndUpdate(portalPos.north(1), MFBlocks.PLANKS.bloodwood().get().defaultBlockState());
                 targetLevel.setBlockAndUpdate(portalPos, Blocks.BASALT.defaultBlockState());
                 targetLevel.setBlockAndUpdate(portalPos.above(), MFBlocks.EVIL_PORTAL.get().defaultBlockState());
             }

@@ -3,7 +3,7 @@
   "category": "building",
   "group": "tainted_planks",
   "ingredients": [
-    "#morefeatures:logs/tainted"
+    "#morefeatures:wood/logs/tainted"
   ],
   "result": {
     "count": 4,

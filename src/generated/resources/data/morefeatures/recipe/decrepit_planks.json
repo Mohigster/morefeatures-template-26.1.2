@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "building",
-  "group": "palm_planks",
+  "group": "decrepit_planks",
   "ingredients": [
-    "#morefeatures:logs/decrepit"
+    "#morefeatures:wood/logs/decrepit"
   ],
   "result": {
     "count": 4,

@@ -3,18 +3,16 @@ package com.mohigster.morefeatures.datagen;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.asset.MFEquipmentAssets;
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
 import com.mohigster.morefeatures.block.family.MFBlockFamilies;
 import com.mohigster.morefeatures.datagen.models.MFBlockModelGenerators;
 import com.mohigster.morefeatures.datagen.models.MFItemModelGenerators;
 import com.mohigster.morefeatures.item.MFItems;
 import net.minecraft.client.data.models.*;
-import net.minecraft.client.data.models.blockstates.MultiVariantGenerator;
 import net.minecraft.client.data.models.model.*;
 
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.*;
-
-import static net.minecraft.client.data.models.BlockModelGenerators.createSlab;
 
 public class MFModelProvider extends ModelProvider {
 
@@ -124,44 +122,23 @@ public class MFModelProvider extends ModelProvider {
 
         MFBlockModelGenerators.createAge3Block(blockModels, MFBlocks.CONJURED_ICE.get(), true);
 
-        blockModels.woodProvider(MFBlocks.TAINTED_LOG.get()).logWithHorizontal(MFBlocks.TAINTED_LOG.get()).wood(MFBlocks.TAINTED_WOOD.get());
-        blockModels.woodProvider(MFBlocks.STRIPPED_TAINTED_LOG.get()).logWithHorizontal(MFBlocks.STRIPPED_TAINTED_LOG.get()).wood(MFBlocks.STRIPPED_TAINTED_WOOD.get());
-        blockModels.createShelf(MFBlocks.TAINTED_SHELF.get(), MFBlocks.STRIPPED_TAINTED_LOG.get());
         blockModels.createTrivialBlock(MFBlocks.TAINTED_LEAVES.get(), TexturedModel.LEAVES);
-        blockModels.createPlantWithDefaultItem(MFBlocks.TAINTED_SAPLING.get(), MFBlocks.POTTED_TAINTED_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.TAINTED_VERTICAL_SLAB.get(), MFBlocks.TAINTED_PLANKS.get());
+        blockModels.createPlantWithDefaultItem(MFBlocks.TAINTED_SAPLING.get(), MFBlocks.POTTED_SAPLING.tainted().get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
-        blockModels.woodProvider(MFBlocks.BLOODWOOD_LOG.get()).logWithHorizontal(MFBlocks.BLOODWOOD_LOG.get()).wood(MFBlocks.BLOODWOOD.get());
-        blockModels.woodProvider(MFBlocks.STRIPPED_BLOODWOOD_LOG.get()).logWithHorizontal(MFBlocks.STRIPPED_BLOODWOOD_LOG.get()).wood(MFBlocks.STRIPPED_BLOODWOOD.get());
-        blockModels.createShelf(MFBlocks.BLOODWOOD_SHELF.get(), MFBlocks.STRIPPED_BLOODWOOD_LOG.get());
         blockModels.createTrivialBlock(MFBlocks.BLOODWOOD_LEAVES.get(), TexturedModel.LEAVES);
-        blockModels.createPlantWithDefaultItem(MFBlocks.BLOODWOOD_SAPLING.get(), MFBlocks.POTTED_BLOODWOOD_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.BLOODWOOD_VERTICAL_SLAB.get(), MFBlocks.BLOODWOOD_PLANKS.get());
+        blockModels.createPlantWithDefaultItem(MFBlocks.BLOODWOOD_SAPLING.get(), MFBlocks.POTTED_SAPLING.bloodwood().get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
-        blockModels.woodProvider(MFBlocks.PALM_LOG.get()).logWithHorizontal(MFBlocks.PALM_LOG.get()).wood(MFBlocks.PALM_WOOD.get());
-        blockModels.woodProvider(MFBlocks.STRIPPED_PALM_LOG.get()).logWithHorizontal(MFBlocks.STRIPPED_PALM_LOG.get()).wood(MFBlocks.STRIPPED_PALM_WOOD.get());
-        blockModels.createShelf(MFBlocks.PALM_SHELF.get(), MFBlocks.STRIPPED_PALM_LOG.get());
         blockModels.createTrivialBlock(MFBlocks.PALM_LEAVES.get(), TexturedModel.LEAVES);
-        blockModels.createPlantWithDefaultItem(MFBlocks.PALM_SAPLING.get(), MFBlocks.POTTED_PALM_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.PALM_VERTICAL_SLAB.get(), MFBlocks.PALM_PLANKS.get());
+        blockModels.createPlantWithDefaultItem(MFBlocks.PALM_SAPLING.get(), MFBlocks.POTTED_SAPLING.palm().get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
-        blockModels.woodProvider(MFBlocks.CHARRED_STEM.get()).logWithHorizontal(MFBlocks.CHARRED_STEM.get()).wood(MFBlocks.CHARRED_HYPHAE.get());
-        blockModels.woodProvider(MFBlocks.STRIPPED_CHARRED_STEM.get()).logWithHorizontal(MFBlocks.STRIPPED_CHARRED_STEM.get()).wood(MFBlocks.STRIPPED_CHARRED_HYPHAE.get());
-        MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.CHARRED_VERTICAL_SLAB.get(), MFBlocks.CHARRED_PLANKS.get());
+        blockModels.createTrivialCube(MFBlocks.CHARRED_WART_BLOCK.get());
+        blockModels.createPlantWithDefaultItem(MFBlocks.CHARRED_FUNGUS.get(), MFBlocks.POTTED_SAPLING.charred().get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
-        blockModels.woodProvider(MFBlocks.DECREPIT_LOG.get()).logWithHorizontal(MFBlocks.DECREPIT_LOG.get()).wood(MFBlocks.DECREPIT_WOOD.get());
-        blockModels.woodProvider(MFBlocks.STRIPPED_DECREPIT_LOG.get()).logWithHorizontal(MFBlocks.STRIPPED_DECREPIT_LOG.get()).wood(MFBlocks.STRIPPED_DECREPIT_WOOD.get());
-        blockModels.createShelf(MFBlocks.DECREPIT_SHELF.get(), MFBlocks.STRIPPED_DECREPIT_LOG.get());
         blockModels.createTrivialBlock(MFBlocks.DECREPIT_LEAVES.get(), TexturedModel.LEAVES);
-        blockModels.createPlantWithDefaultItem(MFBlocks.DECREPIT_SAPLING.get(), MFBlocks.POTTED_DECREPIT_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.DECREPIT_VERTICAL_SLAB.get(), MFBlocks.DECREPIT_PLANKS.get());
+        blockModels.createPlantWithDefaultItem(MFBlocks.DECREPIT_SAPLING.get(), MFBlocks.POTTED_SAPLING.decrepit().get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
-        blockModels.woodProvider(MFBlocks.PALLID_LOG.get()).logWithHorizontal(MFBlocks.PALLID_LOG.get()).wood(MFBlocks.PALLID_WOOD.get());
-        blockModels.woodProvider(MFBlocks.STRIPPED_PALLID_LOG.get()).logWithHorizontal(MFBlocks.STRIPPED_PALLID_LOG.get()).wood(MFBlocks.STRIPPED_PALLID_WOOD.get());
-        blockModels.createShelf(MFBlocks.PALLID_SHELF.get(), MFBlocks.STRIPPED_PALLID_LOG.get());
         blockModels.createTrivialBlock(MFBlocks.PALLID_LEAVES.get(), TexturedModel.LEAVES);
-        blockModels.createPlantWithDefaultItem(MFBlocks.PALLID_SAPLING.get(), MFBlocks.POTTED_PALLID_SAPLING.get(), BlockModelGenerators.PlantType.NOT_TINTED);
-        MFBlockModelGenerators.createVerticalSlab(blockModels, MFBlocks.PALLID_VERTICAL_SLAB.get(), MFBlocks.PALLID_PLANKS.get());
+        blockModels.createPlantWithDefaultItem(MFBlocks.PALLID_SAPLING.get(), MFBlocks.POTTED_SAPLING.pallid().get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
         blockModels.createTrivialCube(MFBlocks.MAGIC_BLOCK.get());
         blockModels.createTrivialCube(MFBlocks.EVIL_PORTAL.get());
@@ -288,6 +265,32 @@ public class MFModelProvider extends ModelProvider {
                 )
         );
 
+        WoodTypeCollection.TYPES.forEach(
+                type -> MFBlockModelGenerators.createVerticalSlab(
+                        blockModels,
+                        MFBlocks.WOODEN_VERTICAL_SLAB.pick(type).get(),
+                        MFBlocks.PLANKS.pick(type).get()
+                )
+        );
+
+        WoodTypeCollection.TYPES.forEach(
+                type -> blockModels.createShelf(
+                        MFBlocks.WOODEN_SHELF.pick(type).get(),
+                        MFBlocks.STRIPPED_LOG.pick(type).get()
+                )
+        );
+
+        WoodTypeCollection.TYPES.forEach(
+                type -> {
+                    Block log = MFBlocks.LOG.pick(type).get();
+                    Block wood = MFBlocks.WOOD.pick(type).get();
+                    Block strippedLog = MFBlocks.STRIPPED_LOG.pick(type).get();
+                    Block strippedWood = MFBlocks.STRIPPED_WOOD.pick(type).get();
+                    blockModels.woodProvider(log).logWithHorizontal(log).wood(wood);
+                    blockModels.woodProvider(strippedLog).logWithHorizontal(strippedLog).wood(strippedWood);
+                }
+        );
+
         ColorCollection.VALUES.forEach(
                 colour -> MFBlockModelGenerators.createVerticalSlab(
                         blockModels,
@@ -329,18 +332,10 @@ public class MFModelProvider extends ModelProvider {
                 .generateFor(MFBlockFamilies.getAzuriteFamily());
         blockModels.family(MFBlocks.FLUORITE_BLOCK.get())
                 .generateFor(MFBlockFamilies.getFluoriteFamily());
-        blockModels.family(MFBlocks.BLOODWOOD_PLANKS.get())
-                .generateFor(MFBlockFamilies.getBloodwoodFamily());
-        blockModels.family(MFBlocks.TAINTED_PLANKS.get())
-                .generateFor(MFBlockFamilies.getTaintedFamily());
-        blockModels.family(MFBlocks.PALM_PLANKS.get())
-                .generateFor(MFBlockFamilies.getPalmFamily());
-        blockModels.family(MFBlocks.CHARRED_PLANKS.get())
-                .generateFor(MFBlockFamilies.getCharredFamily());
-        blockModels.family(MFBlocks.DECREPIT_PLANKS.get())
-                .generateFor(MFBlockFamilies.getDecrepitFamily());
-        blockModels.family(MFBlocks.PALLID_PLANKS.get())
-                .generateFor(MFBlockFamilies.getPallidFamily());
+
+        WoodTypeCollection.TYPES.forEach(
+                type -> blockModels.family(MFBlocks.PLANKS.pick(type).get())
+                        .generateFor(MFBlockFamilies.getWoodFamily().pick(type)));
 
         ColorCollection.VALUES.forEach(
                 colour -> blockModels.family(Blocks.CONCRETE.pick(colour))

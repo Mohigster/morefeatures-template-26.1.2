@@ -3,7 +3,7 @@
   "category": "building",
   "group": "bloodwood_planks",
   "ingredients": [
-    "#morefeatures:logs/bloodwood"
+    "#morefeatures:wood/logs/bloodwood"
   ],
   "result": {
     "count": 4,

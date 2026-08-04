@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.tag;
 
+import com.mohigster.morefeatures.references.MFBlockItemIds;
 import com.mohigster.morefeatures.references.MFIdentifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
@@ -18,20 +19,26 @@ public final class MFBlockTags {
     public static final TagKey<Block> GEMSTONE_FENCES = morefeaturesTag("gemstone_fences");
 
     // Wood
-    public static final TagKey<Block> BLOODWOOD_LOGS = morefeaturesTag("wood/logs/bloodwood");
+    public static final TagKey<Block> BLOODWOOD_LOGS = MFBlockItemTags.BLOODWOOD_LOGS.block();
     public static final TagKey<Block> BLOODWOOD = morefeaturesTag("wood/bloodwood");
-    public static final TagKey<Block> TAINTED_LOGS = morefeaturesTag("wood/logs/tainted");
+    public static final TagKey<Block> TAINTED_LOGS = MFBlockItemTags.TAINTED_LOGS.block();
     public static final TagKey<Block> TAINTED = morefeaturesTag("wood/tainted");
-    public static final TagKey<Block> PALM_LOGS = morefeaturesTag("wood/logs/palm");
+    public static final TagKey<Block> PALM_LOGS = MFBlockItemTags.PALM_LOGS.block();
     public static final TagKey<Block> PALM = morefeaturesTag("wood/palm");
-    public static final TagKey<Block> DECREPIT_LOGS = morefeaturesTag("wood/logs/decrepit");
+    public static final TagKey<Block> DECREPIT_LOGS = MFBlockItemTags.DECREPIT_LOGS.block();
     public static final TagKey<Block> DECREPIT = morefeaturesTag("wood/decrepit");
-    public static final TagKey<Block> PALLID_LOGS = morefeaturesTag("wood/logs/pallid");
+    public static final TagKey<Block> PALLID_LOGS = MFBlockItemTags.PALLID_LOGS.block();
     public static final TagKey<Block> PALLID = morefeaturesTag("wood/pallid");
-    public static final TagKey<Block> IS_MODDED_WOOD = morefeaturesTag("wood/is_modded");
+    public static final TagKey<Block> CHARRED_STEMS = MFBlockItemTags.CHARRED_STEMS.block();
+    public static final TagKey<Block> CHARRED = morefeaturesTag("wood/charred");
+    public static final TagKey<Block> IS_MODDED_WOOD = morefeaturesTag("wood/all_modded");
+
+    public static final TagKey<Block> FLAMMABLE_WOOD = morefeaturesTag("wood/flammable");
+
 
     // Support roots
     public static final TagKey<Block> SUPPORTS_CHARRED_ROOTS = morefeaturesTag("supports_charred_roots");
+    public static final TagKey<Block> SUPPORTS_CHARRED_FUNGUS = morefeaturesTag("supports_charred_fungus");
     public static final TagKey<Block> SUPPORTS_END_ROOTS = morefeaturesTag("supports_end_roots");
 
     // Vertical slabs

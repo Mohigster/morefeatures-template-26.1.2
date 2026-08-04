@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "P": "morefeatures:stripped_pallid_log"
+    "W": "morefeatures:stripped_pallid_log"
   },
   "pattern": [
-    "PP",
-    "PP"
+    "WW",
+    "WW"
   ],
   "result": {
     "count": 3,

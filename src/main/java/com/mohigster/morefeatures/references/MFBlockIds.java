@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.references;
 
+import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.Block;
@@ -66,7 +67,22 @@ public class MFBlockIds {
 
     public static final ResourceKey<Block> BLUE_BERRY_BUSH = createId("blue_berry_bush");
 
+    public static final WoodTypeCollection<ResourceKey<Block>> SIGN = createSimpleWoodId("sign");
+    public static final WoodTypeCollection<ResourceKey<Block>> WALL_SIGN = createSimpleWoodId("wall_sign");
+    public static final WoodTypeCollection<ResourceKey<Block>> HANGING_SIGN = createSimpleWoodId("hanging_sign");
+    public static final WoodTypeCollection<ResourceKey<Block>> WALL_HANGING_SIGN = createSimpleWoodId("wall_hanging_sign");
+
+    public static final WoodTypeCollection<ResourceKey<Block>> POTTED_SAPLING = createPottedSaplingId();
+
     private static ResourceKey<Block> createId(String name) {
         return ResourceKey.create(Registries.BLOCK, MFIdentifier.withMfNamespace(name));
+    }
+
+    private static WoodTypeCollection<ResourceKey<Block>> createSimpleWoodId(String name) {
+        return WoodTypeCollection.prefixWithType(WoodTypeCollection.create(name)).map(MFBlockIds::createId);
+    }
+
+    private static WoodTypeCollection<ResourceKey<Block>> createPottedSaplingId() {
+        return WoodTypeCollection.prefixPrefixed("potted", WoodTypeCollection.create("sapling")).map(MFBlockIds::createId);
     }
 }

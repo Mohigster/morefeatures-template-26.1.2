@@ -1,8 +1,10 @@
 package com.mohigster.morefeatures.references;
 
+import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
 
 public class MFItemIds {
     public static final ResourceKey<Item> RAW_ALUMINIUM = createId("raw_aluminium");
@@ -24,19 +26,9 @@ public class MFItemIds {
 
     public static final ResourceKey<Item> AZURITE_SIGN = createId("azurite_sign");
     public static final ResourceKey<Item> FLUORITE_SIGN = createId("fluorite_sign");
-    public static final ResourceKey<Item> BLOODWOOD_SIGN = createId("bloodwood_sign");
-    public static final ResourceKey<Item> TAINTED_SIGN = createId("tainted_sign");
-    public static final ResourceKey<Item> PALM_SIGN = createId("palm_sign");
-    public static final ResourceKey<Item> DECREPIT_SIGN = createId("decrepit_sign");
-    public static final ResourceKey<Item> PALLID_SIGN = createId("pallid_sign");
 
     public static final ResourceKey<Item> AZURITE_HANGING_SIGN = createId("azurite_hanging_sign");
     public static final ResourceKey<Item> FLUORITE_HANGING_SIGN = createId("fluorite_hanging_sign");
-    public static final ResourceKey<Item> BLOODWOOD_HANGING_SIGN = createId("bloodwood_hanging_sign");
-    public static final ResourceKey<Item> TAINTED_HANGING_SIGN = createId("tainted_hanging_sign");
-    public static final ResourceKey<Item> PALM_HANGING_SIGN = createId("palm_hanging_sign");
-    public static final ResourceKey<Item> DECREPIT_HANGING_SIGN = createId("decrepit_hanging_sign");
-    public static final ResourceKey<Item> PALLID_HANGING_SIGN = createId("pallid_hanging_sign");
 
     public static final ResourceKey<Item> BLOODWOOD_BOAT = createId("bloodwood_boat");
     public static final ResourceKey<Item> BLOODWOOD_CHEST_BOAT = createId("bloodwood_chest_boat");
@@ -60,32 +52,51 @@ public class MFItemIds {
 
     public static final ResourceKey<Item> RAW_BISMUTH = createId("raw_bismuth");
     public static final ResourceKey<Item> BISMUTH = createId("bismuth");
-    public static final ResourceKey<Item> BISMUTH_SCRAP = createId("bismuth_scrap");
-    public static final ResourceKey<Item> BISMUTH_HELMET = createId("bismuth_helmet");
-    public static final ResourceKey<Item> BISMUTH_CHESTPLATE = createId("bismuth_chestplate");
-    public static final ResourceKey<Item> BISMUTH_LEGGINGS = createId("bismuth_leggings");
-    public static final ResourceKey<Item> BISMUTH_BOOTS = createId("bismuth_boots");
-    public static final ResourceKey<Item> BISMUTH_NAUTILUS_ARMOR = createId("bismuth_nautilus_armor");
-    public static final ResourceKey<Item> BISMUTH_SWORD = createId("bismuth_sword");
-    public static final ResourceKey<Item> BISMUTH_PICKAXE = createId("bismuth_pickaxe");
-    public static final ResourceKey<Item> BISMUTH_AXE = createId("bismuth_axe");
-    public static final ResourceKey<Item> BISMUTH_HOE = createId("bismuth_hoe");
-    public static final ResourceKey<Item> BISMUTH_SHOVEL = createId("bismuth_shovel");
-    public static final ResourceKey<Item> BISMUTH_SPEAR = createId("bismuth_spear");
-    public static final ResourceKey<Item> BISMUTH_BOW = createId("bismuth_bow");
+    public static final ResourceKey<Item> BISMUTH_SCRAP = createBismuthId("scrap");
+    public static final ResourceKey<Item> BISMUTH_HELMET = createBismuthId("helmet");
+    public static final ResourceKey<Item> BISMUTH_CHESTPLATE = createBismuthId("chestplate");
+    public static final ResourceKey<Item> BISMUTH_LEGGINGS = createBismuthId("leggings");
+    public static final ResourceKey<Item> BISMUTH_BOOTS = createBismuthId("boots");
+    public static final ResourceKey<Item> BISMUTH_NAUTILUS_ARMOR = createBismuthId("nautilus_armor");
+    public static final ResourceKey<Item> BISMUTH_HORSE_ARMOR = createBismuthId("horse_armor");
+    public static final ResourceKey<Item> BISMUTH_SWORD = createBismuthId("sword");
+    public static final ResourceKey<Item> BISMUTH_PICKAXE = createBismuthId("pickaxe");
+    public static final ResourceKey<Item> BISMUTH_AXE = createBismuthId("axe");
+    public static final ResourceKey<Item> BISMUTH_HOE = createBismuthId("hoe");
+    public static final ResourceKey<Item> BISMUTH_SHOVEL = createBismuthId("shovel");
+    public static final ResourceKey<Item> BISMUTH_SPEAR = createBismuthId("spear");
+    public static final ResourceKey<Item> BISMUTH_BOW = createBismuthId("bow");
+    public static final ResourceKey<Item> BISMUTH_TRIDENT = createBismuthId("trident");
+    public static final ResourceKey<Item> BISMUTH_ELYTRA = createBismuthId("elytra");
 
-    public static final ResourceKey<Item> CARBON_ELYTRA = createId("carbon_elytra");
-    public static final ResourceKey<Item> BISMUTH_ELYTRA = createId("bismuth_elytra");
-
-    public static final ResourceKey<Item> CARBON_TRIDENT = createId("carbon_trident");
-    public static final ResourceKey<Item> BISMUTH_TRIDENT = createId("bismuth_trident");
+    public static final ResourceKey<Item> CARBON_WOLF_ARMOR =  createCarbonId("wolf_armor");
+    public static final ResourceKey<Item> CARBON_BOW = createCarbonId("bow");
+    public static final ResourceKey<Item> CARBON_CROSSBOW = createCarbonId("crossbow");
+    public static final ResourceKey<Item> CARBON_SHIELD =  createCarbonId("shield");
+    public static final ResourceKey<Item> CARBON_TRIDENT = createCarbonId("trident");
+    public static final ResourceKey<Item> CARBON_ELYTRA = createCarbonId("elytra");
 
     public static final ResourceKey<Item> MUSIC_DISC_AQUAMARINE = createId("music_disc_aquamarine");
     public static final ResourceKey<Item> MUSIC_DISC_SNOW_QUEEN = createId("music_disc_snow_queen");
 
     public static final ResourceKey<Item> BLUE_BERRY = createId("blue_berry");
 
+    public static final WoodTypeCollection<ResourceKey<Item>> SIGN = createSimpleWoodId("sign");
+    public static final WoodTypeCollection<ResourceKey<Item>> HANGING_SIGN = createSimpleWoodId("hanging_sign");
+
     private static ResourceKey<Item> createId(String name) {
         return ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace(name));
+    }
+
+    private static ResourceKey<Item> createBismuthId(String name) {
+        return createId("bismuth_" + name);
+    }
+
+    private static ResourceKey<Item> createCarbonId(String name) {
+        return createId("carbon_" + name);
+    }
+
+    private static WoodTypeCollection<ResourceKey<Item>> createSimpleWoodId(String name) {
+        return WoodTypeCollection.prefixWithType(WoodTypeCollection.create(name)).map(MFItemIds::createId);
     }
 }

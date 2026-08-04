@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.block.custom.modified;
 
+import com.mohigster.morefeatures.block.collection.WoodSetType;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.WallSignBlock;
@@ -11,6 +12,10 @@ import org.jspecify.annotations.NullMarked;
 public class MFWallSignBlock extends WallSignBlock {
     public MFWallSignBlock(WoodType type, Properties properties) {
         super(type, properties);
+    }
+
+    public MFWallSignBlock(WoodSetType type, Properties properties) {
+        super(type.getWoodType(), properties);
     }
 
     @NullMarked

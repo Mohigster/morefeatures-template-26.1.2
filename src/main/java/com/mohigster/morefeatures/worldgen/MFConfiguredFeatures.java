@@ -9,6 +9,7 @@ import com.mohigster.morefeatures.worldgen.feature.config.OasisConfiguration;
 import com.mohigster.morefeatures.worldgen.tree.decorator.TrunkLightDecorator;
 import com.mohigster.morefeatures.worldgen.tree.foliage_placer.PalmFoliagePlacer;
 import com.mohigster.morefeatures.worldgen.tree.trunk_placer.LeaningTrunkPlacer;
+import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -25,6 +26,7 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
+import net.minecraft.world.level.levelgen.feature.HugeFungusConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.*;
 import net.minecraft.world.level.levelgen.feature.featuresize.ThreeLayersFeatureSize;
 import net.minecraft.world.level.levelgen.feature.featuresize.TwoLayersFeatureSize;
@@ -71,6 +73,8 @@ public class MFConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_PALM_KEY = registerKey("fallen_palm");
     public static final ResourceKey<ConfiguredFeature<?, ?>> DECREPIT_KEY = registerKey("decrepit");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PALLID_KEY = registerKey("pallid");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CHARRED_KEY = registerKey("charred_fungus");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PLANTED_CHARRED_KEY = registerKey("charred_fungus_planted");
 
     // Vegetation keys
 
@@ -98,10 +102,70 @@ public class MFConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> OASIS_KEY = registerKey("oasis");
 
 
-
-
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context){
         HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);
+
+        BlockPredicate stemReplaceableBlocks = BlockPredicate.matchesBlocks(
+                Blocks.OAK_SAPLING,
+                Blocks.SPRUCE_SAPLING,
+                Blocks.BIRCH_SAPLING,
+                Blocks.JUNGLE_SAPLING,
+                Blocks.ACACIA_SAPLING,
+                Blocks.CHERRY_SAPLING,
+                Blocks.DARK_OAK_SAPLING,
+                Blocks.PALE_OAK_SAPLING,
+                Blocks.MANGROVE_PROPAGULE,
+                Blocks.DANDELION,
+                Blocks.TORCHFLOWER,
+                Blocks.POPPY,
+                Blocks.BLUE_ORCHID,
+                Blocks.ALLIUM,
+                Blocks.AZURE_BLUET,
+                Blocks.RED_TULIP,
+                Blocks.ORANGE_TULIP,
+                Blocks.WHITE_TULIP,
+                Blocks.PINK_TULIP,
+                Blocks.OXEYE_DAISY,
+                Blocks.CORNFLOWER,
+                Blocks.WITHER_ROSE,
+                Blocks.LILY_OF_THE_VALLEY,
+                Blocks.BROWN_MUSHROOM,
+                Blocks.RED_MUSHROOM,
+                Blocks.WHEAT,
+                Blocks.SUGAR_CANE,
+                Blocks.ATTACHED_PUMPKIN_STEM,
+                Blocks.ATTACHED_MELON_STEM,
+                Blocks.PUMPKIN_STEM,
+                Blocks.MELON_STEM,
+                Blocks.LILY_PAD,
+                Blocks.NETHER_WART,
+                Blocks.COCOA,
+                Blocks.CARROTS,
+                Blocks.POTATOES,
+                Blocks.CHORUS_PLANT,
+                Blocks.CHORUS_FLOWER,
+                Blocks.TORCHFLOWER_CROP,
+                Blocks.PITCHER_CROP,
+                Blocks.BEETROOTS,
+                Blocks.SWEET_BERRY_BUSH,
+                Blocks.WARPED_FUNGUS,
+                Blocks.CRIMSON_FUNGUS,
+                Blocks.WEEPING_VINES,
+                Blocks.WEEPING_VINES_PLANT,
+                Blocks.TWISTING_VINES,
+                Blocks.TWISTING_VINES_PLANT,
+                Blocks.CAVE_VINES,
+                Blocks.CAVE_VINES_PLANT,
+                Blocks.SPORE_BLOSSOM,
+                Blocks.AZALEA,
+                Blocks.FLOWERING_AZALEA,
+                Blocks.MOSS_CARPET,
+                Blocks.PINK_PETALS,
+                Blocks.WILDFLOWERS,
+                Blocks.BIG_DRIPLEAF,
+                Blocks.BIG_DRIPLEAF_STEM,
+                Blocks.SMALL_DRIPLEAF
+        );
 
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
@@ -179,7 +243,7 @@ public class MFConfiguredFeatures {
 
         // Registering tree configured features
         register(context, BLOODWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(MFBlocks.BLOODWOOD_LOG.get()),
+                BlockStateProvider.simple(MFBlocks.LOG.bloodwood().get()),
                 new ForkingTrunkPlacer(4, 4, 3),
                 BlockStateProvider.simple(MFBlocks.BLOODWOOD_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2), 3),
@@ -189,7 +253,7 @@ public class MFConfiguredFeatures {
                 .build()
         );
         register(context, SMALL_BLOODWOOD_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(MFBlocks.BLOODWOOD_LOG.get()),
+                BlockStateProvider.simple(MFBlocks.LOG.bloodwood().get()),
                 new StraightTrunkPlacer(4, 2, 0),
                 BlockStateProvider.simple(MFBlocks.BLOODWOOD_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
@@ -200,14 +264,14 @@ public class MFConfiguredFeatures {
         );
         register(context, FALLEN_BLOODWOOD_KEY, Feature.FALLEN_TREE,
                 createFallenTree(
-                        MFBlocks.BLOODWOOD_LOG.get(),
+                        MFBlocks.LOG.bloodwood().get(),
                         4,
                         9,
                         true)
                 .build()
         );
         register(context, TAINTED_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(MFBlocks.TAINTED_LOG.get()),
+                BlockStateProvider.simple(MFBlocks.LOG.tainted().get()),
                 new ForkingTrunkPlacer(4, 4, 3),
                 BlockStateProvider.simple(MFBlocks.TAINTED_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(2), 3),
@@ -217,7 +281,7 @@ public class MFConfiguredFeatures {
                 .build()
         );
         register(context, SMALL_TAINTED_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(MFBlocks.TAINTED_LOG.get()),
+                BlockStateProvider.simple(MFBlocks.LOG.tainted().get()),
                 new StraightTrunkPlacer(4, 2, 0),
                 BlockStateProvider.simple(MFBlocks.TAINTED_LEAVES.get()),
                 new BlobFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0), 3),
@@ -228,14 +292,14 @@ public class MFConfiguredFeatures {
         );
         register(context, FALLEN_TAINTED_KEY, Feature.FALLEN_TREE,
                 createFallenTree(
-                        MFBlocks.TAINTED_LOG.get(),
+                        MFBlocks.LOG.tainted().get(),
                         4,
                         9,
                         true)
                         .build()
         );
         register(context, PALM_TREE_KEY, Feature.TREE, new TreeConfiguration.TreeConfigurationBuilder(
-                BlockStateProvider.simple(MFBlocks.PALM_LOG.get()),
+                BlockStateProvider.simple(MFBlocks.LOG.palm().get()),
                 new LeaningTrunkPlacer(5, 2, 2),
                 BlockStateProvider.simple(MFBlocks.PALM_LEAVES.get()),
                 new PalmFoliagePlacer(ConstantInt.of(2), ConstantInt.of(0)),
@@ -246,7 +310,7 @@ public class MFConfiguredFeatures {
         );
         register(context, FALLEN_PALM_KEY, Feature.FALLEN_TREE,
                 createFallenTree(
-                        MFBlocks.PALM_LOG.get(),
+                        MFBlocks.LOG.palm().get(),
                         4,
                         9,
                         false)
@@ -254,7 +318,7 @@ public class MFConfiguredFeatures {
         );
         register(context, DECREPIT_KEY, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        BlockStateProvider.simple(MFBlocks.DECREPIT_LOG.get()),
+                        BlockStateProvider.simple(MFBlocks.LOG.decrepit().get()),
                         new DarkOakTrunkPlacer(6, 2, 1),
                         BlockStateProvider.simple(MFBlocks.DECREPIT_LEAVES.get()),
                         new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
@@ -269,7 +333,7 @@ public class MFConfiguredFeatures {
         );
         register(context, PALLID_KEY, Feature.TREE,
                 new TreeConfiguration.TreeConfigurationBuilder(
-                        BlockStateProvider.simple(MFBlocks.PALLID_LOG.get()),
+                        BlockStateProvider.simple(MFBlocks.LOG.pallid().get()),
                         new DarkOakTrunkPlacer(6, 2, 1),
                         BlockStateProvider.simple(MFBlocks.PALLID_LEAVES.get()),
                         new DarkOakFoliagePlacer(ConstantInt.of(0), ConstantInt.of(0)),
@@ -282,6 +346,26 @@ public class MFConfiguredFeatures {
                         ))
                         .build()
         );
+
+        register(context, CHARRED_KEY, Feature.HUGE_FUNGUS,
+                new HugeFungusConfiguration(
+                        MFBlocks.CHARRED_NYLIUM.get().defaultBlockState(),
+                        MFBlocks.LOG.charred().get().defaultBlockState(),
+                        MFBlocks.CHARRED_WART_BLOCK.get().defaultBlockState(),
+                        Blocks.SHROOMLIGHT.defaultBlockState(),
+                        stemReplaceableBlocks,
+                        false
+                ));
+
+        register(context, PLANTED_CHARRED_KEY, Feature.HUGE_FUNGUS,
+                new HugeFungusConfiguration(
+                        MFBlocks.CHARRED_NYLIUM.get().defaultBlockState(),
+                        MFBlocks.LOG.charred().get().defaultBlockState(),
+                        MFBlocks.CHARRED_WART_BLOCK.get().defaultBlockState(),
+                        Blocks.SHROOMLIGHT.defaultBlockState(),
+                        stemReplaceableBlocks,
+                        true
+                ));
 
         // Registering forest vegetation (Roots)
         register(context, DECREPIT_ROOTS_KEY, Feature.SIMPLE_BLOCK,

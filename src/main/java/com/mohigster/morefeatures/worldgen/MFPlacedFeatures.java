@@ -43,6 +43,7 @@ public class MFPlacedFeatures {
     public static final ResourceKey<PlacedFeature> FALLEN_PALM_PLACED_KEY = registerKey("fallen_palm_placed");
     public static final ResourceKey<PlacedFeature> DECREPIT_PLACED_KEY = registerKey("decrepit_placed");
     public static final ResourceKey<PlacedFeature> PALLID_PLACED_KEY = registerKey("pallid_placed");
+    public static final ResourceKey<PlacedFeature> CHARRED_PLACED_KEY = registerKey("charred_placed");
 
     // Vegetation keys
 
@@ -181,6 +182,10 @@ public class MFPlacedFeatures {
         register(context, PALLID_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.PALLID_KEY),
                 VegetationPlacements.treePlacement(PlacementUtils.countExtra(8, 0.02f, 1),
                         MFBlocks.PALLID_SAPLING.get()));
+
+        register(context, CHARRED_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.CHARRED_KEY),
+                VegetationPlacements.treePlacement(PlacementUtils.countExtra(9, 0.02f, 1),
+                        MFBlocks.CHARRED_FUNGUS.get()));
 
         register(context, OASIS_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.OASIS_KEY),
                 List.of(

@@ -62,42 +62,6 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.BISMUTH_TRIDENT)
                 .add(MFItemIds.CARBON_TRIDENT);
 
-        this.tag(MFItemTags.BLOODWOOD_LOGS)
-                .add(MFBlockItemIds.BLOODWOOD.item())
-                .add(MFBlockItemIds.BLOODWOOD_LOG.item())
-                .add(MFBlockItemIds.STRIPPED_BLOODWOOD.item())
-                .add(MFBlockItemIds.STRIPPED_BLOODWOOD_LOG.item());
-
-        this.tag(MFItemTags.TAINTED_LOGS)
-                .add(MFBlockItemIds.TAINTED_LOG.item())
-                .add(MFBlockItemIds.TAINTED_WOOD.item())
-                .add(MFBlockItemIds.STRIPPED_TAINTED_LOG.item())
-                .add(MFBlockItemIds.STRIPPED_TAINTED_WOOD.item());
-
-        this.tag(MFItemTags.PALM_LOGS)
-                .add(MFBlockItemIds.PALM_LOG.item())
-                .add(MFBlockItemIds.PALM_WOOD.item())
-                .add(MFBlockItemIds.STRIPPED_PALM_LOG.item())
-                .add(MFBlockItemIds.STRIPPED_PALM_WOOD.item());
-
-        this.tag(MFItemTags.CHARRED_STEMS)
-                .add(MFBlockItemIds.CHARRED_STEM.item())
-                .add(MFBlockItemIds.CHARRED_HYPHAE.item())
-                .add(MFBlockItemIds.STRIPPED_CHARRED_STEM.item())
-                .add(MFBlockItemIds.STRIPPED_CHARRED_HYPHAE.item());
-
-        this.tag(MFItemTags.DECREPIT_LOGS)
-                .add(MFBlockItemIds.DECREPIT_LOG.item())
-                .add(MFBlockItemIds.DECREPIT_WOOD.item())
-                .add(MFBlockItemIds.STRIPPED_DECREPIT_LOG.item())
-                .add(MFBlockItemIds.STRIPPED_DECREPIT_WOOD.item());
-
-        this.tag(MFItemTags.PALLID_LOGS)
-                .add(MFBlockItemIds.PALLID_LOG.item())
-                .add(MFBlockItemIds.PALLID_WOOD.item())
-                .add(MFBlockItemIds.STRIPPED_PALLID_LOG.item())
-                .add(MFBlockItemIds.STRIPPED_PALLID_WOOD.item());
-
         this.tag(MFItemTags.IS_FOOD)
                 .add(ItemIds.APPLE)
                 .add(ItemIds.BAKED_POTATO)
@@ -295,11 +259,11 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .addTag(MFItemTags.PALLID_LOGS);
 
         this.tag(ItemTags.PLANKS)
-                .add(MFBlockItemIds.TAINTED_PLANKS.item())
-                .add(MFBlockItemIds.BLOODWOOD_PLANKS.item())
-                .add(MFBlockItemIds.PALM_PLANKS.item())
-                .add(MFBlockItemIds.DECREPIT_PLANKS.item())
-                .add(MFBlockItemIds.PALLID_PLANKS.item());
+                .add(MFBlockItemIds.PLANKS.bloodwood().item())
+                .add(MFBlockItemIds.PLANKS.tainted().item())
+                .add(MFBlockItemIds.PLANKS.palm().item())
+                .add(MFBlockItemIds.PLANKS.decrepit().item())
+                .add(MFBlockItemIds.PLANKS.pallid().item());
 
         this.tag(MFItemTags.MUSIC_DISCS)
                 .addTag(ItemTags.CREEPER_DROP_MUSIC_DISCS)
@@ -432,25 +396,13 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFBlockItemIds.BAMBOO_VERTICAL_SLAB.item())
                 .add(MFBlockItemIds.BAMBOO_MOSAIC_VERTICAL_SLAB.item())
                 .add(MFBlockItemIds.PALE_OAK_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.BLOODWOOD_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.TAINTED_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.PALM_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.DECREPIT_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.PALLID_VERTICAL_SLAB.item());
+                .addTag(MFBlockItemTags.CUSTOM_WOODEN_VERTICAL_SLABS.item());
 
         this.tag(ItemTags.WOODEN_STAIRS)
-                .add(MFBlockItemIds.BLOODWOOD_STAIRS.item())
-                .add(MFBlockItemIds.TAINTED_STAIRS.item())
-                .add(MFBlockItemIds.PALM_STAIRS.item())
-                .add(MFBlockItemIds.DECREPIT_STAIRS.item())
-                .add(MFBlockItemIds.PALLID_STAIRS.item());
+                .addTag(MFBlockItemTags.WOODEN_STAIRS.item());
 
         this.tag(ItemTags.WOODEN_SLABS)
-                .add(MFBlockItemIds.BLOODWOOD_SLAB.item())
-                .add(MFBlockItemIds.TAINTED_SLAB.item())
-                .add(MFBlockItemIds.PALM_SLAB.item())
-                .add(MFBlockItemIds.DECREPIT_SLAB.item())
-                .add(MFBlockItemIds.PALLID_SLAB.item());
+                .addTag(MFBlockItemTags.WOODEN_SLABS.item());
 
         this.tag(ItemTags.TRIM_MATERIALS)
                 .add(MFItemIds.ALUMINIUM_INGOT)

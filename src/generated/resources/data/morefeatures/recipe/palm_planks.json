@@ -3,7 +3,7 @@
   "category": "building",
   "group": "palm_planks",
   "ingredients": [
-    "#morefeatures:logs/palm"
+    "#morefeatures:wood/logs/palm"
   ],
   "result": {
     "count": 4,

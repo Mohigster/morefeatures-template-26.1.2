@@ -4,6 +4,7 @@ import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.references.MFBlockIds;
 import com.mohigster.morefeatures.references.MFBlockItemIds;
+import com.mohigster.morefeatures.tag.MFBlockItemTags;
 import com.mohigster.morefeatures.tag.MFBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -11,6 +12,7 @@ import net.minecraft.data.tags.BlockItemTagsProvider;
 import net.minecraft.references.BlockIds;
 import net.minecraft.references.BlockItemIds;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.state.properties.BlockSetType;
 import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import org.jspecify.annotations.NonNull;
@@ -131,29 +133,17 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.FENCES)
                 .add(MFBlockItemIds.FLUORITE_FENCE.block())
                 .add(MFBlockItemIds.AZURITE_FENCE.block())
-                .add(MFBlockItemIds.BLOODWOOD_FENCE.block())
-                .add(MFBlockItemIds.TAINTED_FENCE.block())
-                .add(MFBlockItemIds.PALM_FENCE.block())
-                .add(MFBlockItemIds.DECREPIT_FENCE.block())
-                .add(MFBlockItemIds.PALLID_FENCE.block());
+                .addTag(MFBlockItemTags.CUSTOM_WOODEN_FENCES.block());
 
         this.tag(MFBlockTags.GEMSTONE_FENCES)
                 .add(MFBlockItemIds.AZURITE_FENCE.block())
                 .add(MFBlockItemIds.FLUORITE_FENCE.block());
 
         this.tag(BlockTags.WOODEN_FENCES)
-                .add(MFBlockItemIds.BLOODWOOD_FENCE.block())
-                .add(MFBlockItemIds.TAINTED_FENCE.block())
-                .add(MFBlockItemIds.PALM_FENCE.block())
-                .add(MFBlockItemIds.DECREPIT_FENCE.block())
-                .add(MFBlockItemIds.PALLID_FENCE.block());
+                .addTag(MFBlockItemTags.CUSTOM_WOODEN_FENCES.block());
 
         this.tag(BlockTags.FENCE_GATES)
-                .add(MFBlockItemIds.BLOODWOOD_FENCE_GATE.block())
-                .add(MFBlockItemIds.TAINTED_FENCE_GATE.block())
-                .add(MFBlockItemIds.PALM_FENCE_GATE.block())
-                .add(MFBlockItemIds.DECREPIT_FENCE_GATE.block())
-                .add(MFBlockItemIds.PALLID_FENCE_GATE.block());
+                .addTag(MFBlockItemTags.WOODEN_FENCE_GATES.block());
 
         this.tag(BlockTags.OVERWORLD_NATURAL_LOGS)
                 .addTag(MFBlockTags.BLOODWOOD_LOGS)
@@ -162,105 +152,76 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .addTag(MFBlockTags.DECREPIT_LOGS)
                 .addTag(MFBlockTags.PALLID_LOGS);
 
-        this.tag(MFBlockTags.BLOODWOOD_LOGS)
-                .add(MFBlockItemIds.STRIPPED_BLOODWOOD.block())
-                .add(MFBlockItemIds.BLOODWOOD.block())
-                .add(MFBlockItemIds.STRIPPED_BLOODWOOD_LOG.block())
-                .add(MFBlockItemIds.BLOODWOOD_LOG.block());
 
         this.tag(MFBlockTags.BLOODWOOD)
-                .add(MFBlockItemIds.BLOODWOOD_PLANKS.block())
-                .add(MFBlockItemIds.BLOODWOOD_STAIRS.block())
-                .add(MFBlockItemIds.BLOODWOOD_SLAB.block())
-                .add(MFBlockItemIds.BLOODWOOD_BUTTON.block())
-                .add(MFBlockItemIds.BLOODWOOD_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.BLOODWOOD_FENCE.block())
-                .add(MFBlockItemIds.BLOODWOOD_FENCE_GATE.block())
-                .add(MFBlockItemIds.BLOODWOOD_SHELF.block())
+                .add(MFBlockItemIds.PLANKS.bloodwood().block())
+                .add(MFBlockItemIds.WOODEN_STAIRS.bloodwood().block())
+                .add(MFBlockItemIds.WOODEN_SLAB.bloodwood().block())
+                .add(MFBlockItemIds.WOODEN_BUTTON.bloodwood().block())
+                .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.bloodwood().block())
+                .add(MFBlockItemIds.WOODEN_FENCE.bloodwood().block())
+                .add(MFBlockItemIds.WOODEN_FENCE_GATE.bloodwood().block())
+                .add(MFBlockItemIds.WOODEN_SHELF.bloodwood().block())
                 .add(MFBlockIds.BLOODWOOD_SIGN)
                 .add(MFBlockIds.BLOODWOOD_WALL_SIGN)
                 .add(MFBlockIds.BLOODWOOD_HANGING_SIGN)
                 .add(MFBlockIds.BLOODWOOD_WALL_HANGING_SIGN);
 
-        this.tag(MFBlockTags.TAINTED_LOGS)
-                .add(MFBlockItemIds.STRIPPED_TAINTED_WOOD.block())
-                .add(MFBlockItemIds.TAINTED_WOOD.block())
-                .add(MFBlockItemIds.STRIPPED_TAINTED_LOG.block())
-                .add(MFBlockItemIds.TAINTED_LOG.block());
-
         this.tag(MFBlockTags.TAINTED)
-                .add(MFBlockItemIds.TAINTED_PLANKS.block())
-                .add(MFBlockItemIds.TAINTED_STAIRS.block())
-                .add(MFBlockItemIds.TAINTED_SLAB.block())
-                .add(MFBlockItemIds.TAINTED_BUTTON.block())
-                .add(MFBlockItemIds.TAINTED_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.TAINTED_FENCE.block())
-                .add(MFBlockItemIds.TAINTED_FENCE_GATE.block())
-                .add(MFBlockItemIds.TAINTED_SHELF.block())
+                .add(MFBlockItemIds.PLANKS.tainted().block())
+                .add(MFBlockItemIds.WOODEN_STAIRS.tainted().block())
+                .add(MFBlockItemIds.WOODEN_SLAB.tainted().block())
+                .add(MFBlockItemIds.WOODEN_BUTTON.tainted().block())
+                .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.tainted().block())
+                .add(MFBlockItemIds.WOODEN_FENCE.tainted().block())
+                .add(MFBlockItemIds.WOODEN_FENCE_GATE.tainted().block())
+                .add(MFBlockItemIds.WOODEN_SHELF.tainted().block())
                 .add(MFBlockIds.TAINTED_SIGN)
                 .add(MFBlockIds.TAINTED_WALL_SIGN)
                 .add(MFBlockIds.TAINTED_HANGING_SIGN)
                 .add(MFBlockIds.TAINTED_WALL_HANGING_SIGN);
 
-        this.tag(MFBlockTags.PALM_LOGS)
-                .add(MFBlockItemIds.STRIPPED_PALM_LOG.block())
-                .add(MFBlockItemIds.PALM_LOG.block())
-                .add(MFBlockItemIds.STRIPPED_PALM_WOOD.block())
-                .add(MFBlockItemIds.PALM_WOOD.block());
-
         this.tag(MFBlockTags.PALM)
-                .add(MFBlockItemIds.PALM_PLANKS.block())
-                .add(MFBlockItemIds.PALM_STAIRS.block())
-                .add(MFBlockItemIds.PALM_SLAB.block())
-                .add(MFBlockItemIds.PALM_BUTTON.block())
-                .add(MFBlockItemIds.PALM_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.PALM_FENCE.block())
-                .add(MFBlockItemIds.PALM_FENCE_GATE.block())
-                .add(MFBlockItemIds.PALM_TRAPDOOR.block())
-                .add(MFBlockItemIds.PALM_DOOR.block())
-                .add(MFBlockItemIds.PALM_SHELF.block())
+                .add(MFBlockItemIds.PLANKS.palm().block())
+                .add(MFBlockItemIds.WOODEN_STAIRS.palm().block())
+                .add(MFBlockItemIds.WOODEN_SLAB.palm().block())
+                .add(MFBlockItemIds.WOODEN_BUTTON.palm().block())
+                .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.palm().block())
+                .add(MFBlockItemIds.WOODEN_FENCE.palm().block())
+                .add(MFBlockItemIds.WOODEN_FENCE_GATE.palm().block())
+                .add(MFBlockItemIds.WOODEN_TRAPDOOR.palm().block())
+                .add(MFBlockItemIds.WOODEN_DOOR.palm().block())
+                .add(MFBlockItemIds.WOODEN_SHELF.palm().block())
                 .add(MFBlockIds.PALM_SIGN)
                 .add(MFBlockIds.PALM_WALL_SIGN)
                 .add(MFBlockIds.PALM_HANGING_SIGN)
                 .add(MFBlockIds.PALM_WALL_HANGING_SIGN);
 
-        this.tag(MFBlockTags.DECREPIT_LOGS)
-                .add(MFBlockItemIds.STRIPPED_DECREPIT_LOG.block())
-                .add(MFBlockItemIds.DECREPIT_LOG.block())
-                .add(MFBlockItemIds.STRIPPED_DECREPIT_WOOD.block())
-                .add(MFBlockItemIds.DECREPIT_WOOD.block());
-
         this.tag(MFBlockTags.DECREPIT)
-                .add(MFBlockItemIds.DECREPIT_PLANKS.block())
-                .add(MFBlockItemIds.DECREPIT_STAIRS.block())
-                .add(MFBlockItemIds.DECREPIT_SLAB.block())
-                .add(MFBlockItemIds.DECREPIT_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.DECREPIT_BUTTON.block())
-                .add(MFBlockItemIds.DECREPIT_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.DECREPIT_FENCE.block())
-                .add(MFBlockItemIds.DECREPIT_FENCE_GATE.block())
-                .add(MFBlockItemIds.DECREPIT_SHELF.block())
+                .add(MFBlockItemIds.PLANKS.decrepit().block())
+                .add(MFBlockItemIds.WOODEN_STAIRS.decrepit().block())
+                .add(MFBlockItemIds.WOODEN_SLAB.decrepit().block())
+                .add(MFBlockItemIds.WOODEN_VERTICAL_SLAB.decrepit().block())
+                .add(MFBlockItemIds.WOODEN_BUTTON.decrepit().block())
+                .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.decrepit().block())
+                .add(MFBlockItemIds.WOODEN_FENCE.decrepit().block())
+                .add(MFBlockItemIds.WOODEN_FENCE_GATE.decrepit().block())
+                .add(MFBlockItemIds.WOODEN_SHELF.decrepit().block())
                 .add(MFBlockIds.DECREPIT_SIGN)
                 .add(MFBlockIds.DECREPIT_WALL_SIGN)
                 .add(MFBlockIds.DECREPIT_HANGING_SIGN)
                 .add(MFBlockIds.DECREPIT_WALL_HANGING_SIGN);
 
-        this.tag(MFBlockTags.PALLID_LOGS)
-                .add(MFBlockItemIds.STRIPPED_PALLID_LOG.block())
-                .add(MFBlockItemIds.PALLID_LOG.block())
-                .add(MFBlockItemIds.STRIPPED_PALLID_WOOD.block())
-                .add(MFBlockItemIds.PALLID_WOOD.block());
-
         this.tag(MFBlockTags.PALLID)
-                .add(MFBlockItemIds.PALLID_PLANKS.block())
-                .add(MFBlockItemIds.PALLID_STAIRS.block())
-                .add(MFBlockItemIds.PALLID_SLAB.block())
-                .add(MFBlockItemIds.PALLID_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.PALLID_BUTTON.block())
-                .add(MFBlockItemIds.PALLID_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.PALLID_FENCE.block())
-                .add(MFBlockItemIds.PALLID_FENCE_GATE.block())
-                .add(MFBlockItemIds.PALLID_SHELF.block())
+                .add(MFBlockItemIds.PLANKS.pallid().block())
+                .add(MFBlockItemIds.WOODEN_STAIRS.pallid().block())
+                .add(MFBlockItemIds.WOODEN_SLAB.pallid().block())
+                .add(MFBlockItemIds.WOODEN_VERTICAL_SLAB.pallid().block())
+                .add(MFBlockItemIds.WOODEN_BUTTON.pallid().block())
+                .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.pallid().block())
+                .add(MFBlockItemIds.WOODEN_FENCE.pallid().block())
+                .add(MFBlockItemIds.WOODEN_FENCE_GATE.pallid().block())
+                .add(MFBlockItemIds.WOODEN_SHELF.pallid().block())
                 .add(MFBlockIds.PALLID_SIGN)
                 .add(MFBlockIds.PALLID_WALL_SIGN)
                 .add(MFBlockIds.PALLID_HANGING_SIGN)
@@ -301,25 +262,15 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlocks.DECREPIT_LEAVES.getKey());
 
         this.tag(BlockTags.PLANKS)
-                .add(MFBlocks.TAINTED_PLANKS.getKey())
-                .add(MFBlocks.BLOODWOOD_PLANKS.getKey())
-                .add(MFBlocks.PALM_PLANKS.getKey())
-                .add(MFBlocks.DECREPIT_PLANKS.getKey())
-                .add(MFBlocks.PALLID_PLANKS.getKey());
+                .add(MFBlocks.PLANKS.bloodwood().getKey())
+                .add(MFBlocks.PLANKS.tainted().getKey())
+                .add(MFBlocks.PLANKS.palm().getKey())
+                .add(MFBlocks.PLANKS.decrepit().getKey())
+                .add(MFBlocks.PLANKS.pallid().getKey());
 
-        this.tag(BlockTags.STAIRS)
-                .add(MFBlocks.TAINTED_STAIRS.getKey())
-                .add(MFBlocks.BLOODWOOD_STAIRS.getKey())
-                .add(MFBlocks.PALM_STAIRS.getKey())
-                .add(MFBlocks.DECREPIT_STAIRS.getKey())
-                .add(MFBlocks.PALLID_STAIRS.getKey());
+        this.tag(BlockTags.STAIRS).addTag(MFBlockItemTags.WOODEN_STAIRS.block());
 
-        this.tag(BlockTags.SLABS)
-                .add(MFBlocks.TAINTED_SLAB.getKey())
-                .add(MFBlocks.BLOODWOOD_SLAB.getKey())
-                .add(MFBlocks.PALM_SLAB.getKey())
-                .add(MFBlocks.DECREPIT_SLAB.getKey())
-                .add(MFBlocks.PALLID_SLAB.getKey());
+        this.tag(BlockTags.SLABS).addTag(MFBlockItemTags.WOODEN_SLABS.block());
 
         this.tag(Tags.Blocks.NEEDS_NETHERITE_TOOL)
                 .add(MFBlockItemIds.BISMUTH_ORE.block())
@@ -334,33 +285,34 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.AZURITE_BLOCK.block());
 
         this.tag(BlockTags.OVERWORLD_NATURAL_LOGS)
-                .add(MFBlockItemIds.BLOODWOOD_LOG.block())
-                .add(MFBlockItemIds.TAINTED_LOG.block())
-                .add(MFBlockItemIds.PALM_LOG.block());
+                .add(MFBlockItemIds.LOG.bloodwood().block())
+                .add(MFBlockItemIds.LOG.tainted().block())
+                .add(MFBlockItemIds.LOG.palm().block());
 
         this.tag(BlockTags.LOGS)
-                .add(MFBlockItemIds.BLOODWOOD_LOG.block())
-                .add(MFBlockItemIds.TAINTED_LOG.block())
-                .add(MFBlockItemIds.PALM_LOG.block())
-                .add(MFBlockItemIds.DECREPIT_LOG.block())
-                .add(MFBlockItemIds.PALLID_LOG.block());
+                .add(MFBlockItemIds.LOG.bloodwood().block())
+                .add(MFBlockItemIds.LOG.tainted().block())
+                .add(MFBlockItemIds.LOG.palm().block())
+                .add(MFBlockItemIds.LOG.decrepit().block())
+                .add(MFBlockItemIds.LOG.pallid().block());
 
         this.tag(BlockTags.PRESSURE_PLATES)
                 .add(MFBlockItemIds.AZURITE_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.BLOODWOOD_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.TAINTED_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.PALM_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.DECREPIT_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.PALLID_PRESSURE_PLATE.block());
+                .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.bloodwood().block())
+                .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.tainted().block())
+                .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.palm().block())
+                .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.charred().block())
+                .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.decrepit().block())
+                .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.pallid().block());
 
         this.tag(BlockTags.BUTTONS)
                 .add(MFBlockItemIds.AZURITE_BUTTON.block())
                 .add(MFBlockItemIds.FLUORITE_BUTTON.block())
-                .add(MFBlockItemIds.BLOODWOOD_BUTTON.block())
-                .add(MFBlockItemIds.TAINTED_BUTTON.block())
-                .add(MFBlockItemIds.PALM_BUTTON.block())
-                .add(MFBlockItemIds.DECREPIT_BUTTON.block())
-                .add(MFBlockItemIds.PALLID_BUTTON.block());
+                .add(MFBlockItemIds.WOODEN_BUTTON.bloodwood().block())
+                .add(MFBlockItemIds.WOODEN_BUTTON.tainted().block())
+                .add(MFBlockItemIds.WOODEN_BUTTON.palm().block())
+                .add(MFBlockItemIds.WOODEN_BUTTON.decrepit().block())
+                .add(MFBlockItemIds.WOODEN_BUTTON.pallid().block());
 
         this.tag(BlockTags.WALLS)
                 .add(MFBlockItemIds.AZURITE_WALL.block())
@@ -394,11 +346,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.BAMBOO_VERTICAL_SLAB.block())
                 .add(MFBlockItemIds.BAMBOO_MOSAIC_VERTICAL_SLAB.block())
                 .add(MFBlockItemIds.PALE_OAK_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.BLOODWOOD_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.TAINTED_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.PALM_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.DECREPIT_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.PALLID_VERTICAL_SLAB.block());
+
+                .addTag(MFBlockItemTags.CUSTOM_WOODEN_VERTICAL_SLABS.block());
 
         this.tag(MFBlockTags.PICKAXE_MINEABLE_VERTICAL_SLABS)
                 .add(MFBlockItemIds.AZURITE_VERTICAL_SLAB.block())
@@ -463,11 +412,11 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.BLUE_ROSE.block());
 
         this.tag(BlockTags.WOODEN_SHELVES)
-                .add(MFBlockItemIds.BLOODWOOD_SHELF.block())
-                .add(MFBlockItemIds.TAINTED_SHELF.block())
-                .add(MFBlockItemIds.PALM_SHELF.block())
-                .add(MFBlockItemIds.DECREPIT_SHELF.block())
-                .add(MFBlockItemIds.PALLID_SHELF.block());
+                .add(MFBlockItemIds.WOODEN_SHELF.bloodwood().block())
+                .add(MFBlockItemIds.WOODEN_SHELF.tainted().block())
+                .add(MFBlockItemIds.WOODEN_SHELF.palm().block())
+                .add(MFBlockItemIds.WOODEN_SHELF.decrepit().block())
+                .add(MFBlockItemIds.WOODEN_SHELF.pallid().block());
 
         this.tag(MFBlockTags.GEMSTONE_SHELVES)
                 .add(MFBlockItemIds.AZURITE_SHELF.block())
@@ -508,7 +457,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
         this.tag(MFBlockTags.METAL_DETECTOR_BISMUTH_COST)
                 .add(MFBlockItemIds.BISMUTH_ORE.block());
 
-        this.tag(MFBlockTags.SUPPORTS_CHARRED_ROOTS)
-                .addTag(BlockTags.SUPPORTS_WARPED_ROOTS);
+        this.tag(BlockTags.NYLIUM).add(MFBlockItemIds.CHARRED_NYLIUM.block());
+
+        this.tag(MFBlockTags.SUPPORTS_CHARRED_ROOTS).addTag(BlockTags.SUPPORTS_WARPED_ROOTS);
     }
 }

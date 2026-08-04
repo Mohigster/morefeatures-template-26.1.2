@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "B": "morefeatures:stripped_charred_stem"
+    "W": "morefeatures:stripped_charred_stem"
   },
   "pattern": [
-    "BB",
-    "BB"
+    "WW",
+    "WW"
   ],
   "result": {
     "count": 3,

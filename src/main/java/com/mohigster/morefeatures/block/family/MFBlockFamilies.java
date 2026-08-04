@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.block.family;
 
 import com.mohigster.morefeatures.block.MFBlocks;
-import net.minecraft.data.BlockFamilies;
+import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
 import net.minecraft.data.BlockFamily;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColorCollection;
@@ -12,13 +12,8 @@ import java.util.List;
 public class MFBlockFamilies {
     private static BlockFamily azuriteFamily;
     private static BlockFamily fluoriteFamily;
-    private static BlockFamily bloodwoodFamily;
-    private static BlockFamily taintedFamily;
-    private static BlockFamily palmFamily;
-    private static BlockFamily charredFamily;
-    private static BlockFamily decrepitFamily;
-    private static BlockFamily pallidFamily;
     private static ColorCollection<BlockFamily> concreteFamily;
+    private static WoodTypeCollection<BlockFamily> woodFamily;
     private static final List<BlockFamily> FAMILIES = new ArrayList<>();
 
     public static BlockFamily getAzuriteFamily(){
@@ -66,126 +61,29 @@ public class MFBlockFamilies {
         return fluoriteFamily;
     }
 
-    public static BlockFamily getBloodwoodFamily(){
-        if (bloodwoodFamily == null) {
-            bloodwoodFamily = new BlockFamily.Builder(MFBlocks.BLOODWOOD_PLANKS.get())
-                    .stairs(MFBlocks.BLOODWOOD_STAIRS.get())
-                    .slab(MFBlocks.BLOODWOOD_SLAB.get())
-                    .log(MFBlocks.BLOODWOOD_LOG.get())
-                    .strippedLog(MFBlocks.STRIPPED_BLOODWOOD_LOG.get())
-                    .fence(MFBlocks.BLOODWOOD_FENCE.get())
-                    .fenceGate(MFBlocks.BLOODWOOD_FENCE_GATE.get())
-                    .pressurePlate(MFBlocks.BLOODWOOD_PRESSURE_PLATE.get())
-                    .button(MFBlocks.BLOODWOOD_BUTTON.get())
-                    .sign(MFBlocks.BLOODWOOD_SIGN.get(), MFBlocks.BLOODWOOD_WALL_SIGN.get())
-                    .hangingSign(MFBlocks.BLOODWOOD_HANGING_SIGN.get(), MFBlocks.BLOODWOOD_WALL_HANGING_SIGN.get())
-                    .recipeGroupPrefix("wooden")
-                    .recipeUnlockedBy("has_planks")
-                    .getFamily();
-            FAMILIES.add(bloodwoodFamily);
+    public static WoodTypeCollection<BlockFamily> getWoodFamily() {
+        if (woodFamily == null) {
+            woodFamily = WoodTypeCollection.TYPES.map(
+                    type -> new BlockFamily.Builder(MFBlocks.PLANKS.pick(type).get())
+                            .stairs(MFBlocks.WOODEN_STAIRS.pick(type).get())
+                            .slab(MFBlocks.WOODEN_SLAB.pick(type).get())
+                            .log(MFBlocks.LOG.pick(type).get())
+                            .strippedLog(MFBlocks.STRIPPED_LOG.pick(type).get())
+                            .fence(MFBlocks.WOODEN_FENCE.pick(type).get())
+                            .fenceGate(MFBlocks.WOODEN_FENCE_GATE.pick(type).get())
+                            .button(MFBlocks.WOODEN_BUTTON.pick(type).get())
+                            .pressurePlate(MFBlocks.WOODEN_PRESSURE_PLATE.pick(type).get())
+                            .door(MFBlocks.WOODEN_DOOR.pick(type).get())
+                            .trapdoor(MFBlocks.WOODEN_TRAPDOOR.pick(type).get())
+                            .sign(MFBlocks.WOODEN_SIGN.pick(type).get(), MFBlocks.WOODEN_WALL_SIGN.pick(type).get())
+                            .hangingSign(MFBlocks.WOODEN_HANGING_SIGN.pick(type).get(), MFBlocks.WOODEN_WALL_HANGING_SIGN.pick(type).get())
+                            .recipeGroupPrefix("wooden")
+                            .recipeUnlockedBy("has_planks")
+                            .getFamily()
+            );
+            woodFamily.forEach(FAMILIES::add);
         }
-        return bloodwoodFamily;
-    }
-
-    public static BlockFamily getCharredFamily(){
-        if (charredFamily == null) {
-            charredFamily = new BlockFamily.Builder(MFBlocks.CHARRED_PLANKS.get())
-                    .log(MFBlocks.CHARRED_STEM.get())
-                    .strippedLog(MFBlocks.STRIPPED_CHARRED_STEM.get())
-                    .stairs(MFBlocks.CHARRED_STAIRS.get())
-                    .slab(MFBlocks.CHARRED_SLAB.get())
-                    .recipeGroupPrefix("wooden")
-                    .recipeUnlockedBy("has_planks")
-                    .getFamily();
-            FAMILIES.add(charredFamily);
-        }
-        return charredFamily;
-    }
-
-    public static BlockFamily getTaintedFamily(){
-        if (taintedFamily == null) {
-            taintedFamily = new BlockFamily.Builder(MFBlocks.TAINTED_PLANKS.get())
-                    .stairs(MFBlocks.TAINTED_STAIRS.get())
-                    .slab(MFBlocks.TAINTED_SLAB.get())
-                    .log(MFBlocks.TAINTED_LOG.get())
-                    .strippedLog(MFBlocks.STRIPPED_TAINTED_LOG.get())
-                    .fence(MFBlocks.TAINTED_FENCE.get())
-                    .fenceGate(MFBlocks.TAINTED_FENCE_GATE.get())
-                    .pressurePlate(MFBlocks.TAINTED_PRESSURE_PLATE.get())
-                    .button(MFBlocks.TAINTED_BUTTON.get())
-                    .sign(MFBlocks.TAINTED_SIGN.get(), MFBlocks.TAINTED_WALL_SIGN.get())
-                    .hangingSign(MFBlocks.TAINTED_HANGING_SIGN.get(), MFBlocks.TAINTED_WALL_HANGING_SIGN.get())
-                    .recipeGroupPrefix("wooden")
-                    .recipeUnlockedBy("has_planks")
-                    .getFamily();
-            FAMILIES.add(taintedFamily);
-        }
-        return taintedFamily;
-    }
-
-    public static BlockFamily getPalmFamily() {
-        if (palmFamily == null) {
-            palmFamily = new BlockFamily.Builder(MFBlocks.PALM_PLANKS.get())
-                    .stairs(MFBlocks.PALM_STAIRS.get())
-                    .slab(MFBlocks.PALM_SLAB.get())
-                    .log(MFBlocks.PALM_LOG.get())
-                    .strippedLog(MFBlocks.STRIPPED_PALM_LOG.get())
-                    .pressurePlate(MFBlocks.PALM_PRESSURE_PLATE.get())
-                    .button(MFBlocks.PALM_BUTTON.get())
-                    .fence(MFBlocks.PALM_FENCE.get())
-                    .fenceGate(MFBlocks.PALM_FENCE_GATE.get())
-                    .trapdoor(MFBlocks.PALM_TRAPDOOR.get())
-                    .door(MFBlocks.PALM_DOOR.get())
-                    .sign(MFBlocks.PALM_SIGN.get(), MFBlocks.PALM_WALL_SIGN.get())
-                    .hangingSign(MFBlocks.PALM_HANGING_SIGN.get(), MFBlocks.PALM_WALL_HANGING_SIGN.get())
-                    .recipeGroupPrefix("wooden")
-                    .recipeUnlockedBy("has_planks")
-                    .getFamily();
-            FAMILIES.add(palmFamily);
-        }
-        return palmFamily;
-    }
-
-    public static BlockFamily getDecrepitFamily() {
-        if (decrepitFamily == null) {
-            decrepitFamily = new BlockFamily.Builder(MFBlocks.DECREPIT_PLANKS.get())
-                    .stairs(MFBlocks.DECREPIT_STAIRS.get())
-                    .slab(MFBlocks.DECREPIT_SLAB.get())
-                    .log(MFBlocks.DECREPIT_LOG.get())
-                    .strippedLog(MFBlocks.STRIPPED_DECREPIT_LOG.get())
-                    .pressurePlate(MFBlocks.DECREPIT_PRESSURE_PLATE.get())
-                    .button(MFBlocks.DECREPIT_BUTTON.get())
-                    .fence(MFBlocks.DECREPIT_FENCE.get())
-                    .fenceGate(MFBlocks.DECREPIT_FENCE_GATE.get())
-                    .sign(MFBlocks.DECREPIT_SIGN.get(), MFBlocks.DECREPIT_WALL_SIGN.get())
-                    .hangingSign(MFBlocks.DECREPIT_HANGING_SIGN.get(), MFBlocks.DECREPIT_WALL_HANGING_SIGN.get())
-                    .recipeGroupPrefix("wooden")
-                    .recipeUnlockedBy("has_planks")
-                    .getFamily();
-            FAMILIES.add(decrepitFamily);
-        }
-        return decrepitFamily;
-    }
-
-    public static BlockFamily getPallidFamily() {
-        if (pallidFamily == null) {
-            pallidFamily = new BlockFamily.Builder(MFBlocks.PALLID_PLANKS.get())
-                    .stairs(MFBlocks.PALLID_STAIRS.get())
-                    .slab(MFBlocks.PALLID_SLAB.get())
-                    .log(MFBlocks.PALLID_LOG.get())
-                    .strippedLog(MFBlocks.STRIPPED_PALLID_LOG.get())
-                    .pressurePlate(MFBlocks.PALLID_PRESSURE_PLATE.get())
-                    .button(MFBlocks.PALLID_BUTTON.get())
-                    .fence(MFBlocks.PALLID_FENCE.get())
-                    .fenceGate(MFBlocks.PALLID_FENCE_GATE.get())
-                    .sign(MFBlocks.PALLID_SIGN.get(), MFBlocks.PALLID_WALL_SIGN.get())
-                    .hangingSign(MFBlocks.PALLID_HANGING_SIGN.get(), MFBlocks.PALLID_WALL_HANGING_SIGN.get())
-                    .recipeGroupPrefix("wooden")
-                    .recipeUnlockedBy("has_planks")
-                    .getFamily();
-            FAMILIES.add(pallidFamily);
-        }
-        return pallidFamily;
+        return woodFamily;
     }
 
     // Concrete is a color collection. However, since it doesn't have any variations in vanilla (stairs, slab etc.) it doesn't have an existing block family. I can add my own
@@ -198,7 +96,7 @@ public class MFBlockFamilies {
                             .recipeGroupPrefix("concrete")
                             .recipeUnlockedBy("has_full_block")
                             .getFamily()
-                    );
+            );
             concreteFamily.forEach(FAMILIES::add);
         }
         return concreteFamily;
@@ -209,12 +107,7 @@ public class MFBlockFamilies {
     // can generate recipes without manual input. Since Azurite and Fluorite
     // fences, signs, etc. are crafted using custom recipes, they are not called here.
     public static List<BlockFamily> getAllNonGemstoneFamilies() {
-        getBloodwoodFamily();
-        getTaintedFamily();
-        getPalmFamily();
-        getCharredFamily();
-        getDecrepitFamily();
-        getPallidFamily();
+        getWoodFamily().asList();
         getConcreteFamily().asList();
         return FAMILIES;
     }

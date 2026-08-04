@@ -1,8 +1,8 @@
 {
   "values": [
-    "morefeatures:stripped_tainted_wood",
+    "morefeatures:tainted_log",
     "morefeatures:tainted_wood",
     "morefeatures:stripped_tainted_log",
-    "morefeatures:tainted_log"
+    "morefeatures:stripped_tainted_wood"
   ]
 }

@@ -1,6 +1,8 @@
 package com.mohigster.morefeatures.block;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.block.collection.WoodSetType;
+import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
 import com.mohigster.morefeatures.block.custom.*;
 import com.mohigster.morefeatures.block.custom.modified.*;
 import com.mohigster.morefeatures.block.custom.nylium.MFNyliumBlock;
@@ -21,6 +23,7 @@ import com.mohigster.morefeatures.particles.MFParticleTypes;
 import com.mohigster.morefeatures.references.MFIdentifier;
 import com.mohigster.morefeatures.sound.MFSoundTypes;
 import com.mohigster.morefeatures.tag.MFBlockTags;
+import com.mohigster.morefeatures.worldgen.MFConfiguredFeatures;
 import com.mohigster.morefeatures.worldgen.tree.MFTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -386,31 +389,147 @@ public class MFBlocks {
                     .friction(0.98F)
             ));
 
-    //———————————————————————————————————————Bloodwood Blocks————————————————————————————————————————————————————————————————————————
+    //———————————————————————————————————————Wooden Blocks———————————————————————————————————————————————————————————————————————————
 
-    public static final DeferredBlock<Block> BLOODWOOD_LOG = registerBlock(MFBlockItemIds.BLOODWOOD_LOG,
+    public static final WoodTypeCollection<DeferredBlock<Block>> LOG = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.LOG,
+            MFBlocks::registerBlock,
             MFFlammableRotatedPillarBlock::new,
-            _ -> logProperties(MapColor.COLOR_RED, true).ignitedByLava()
+            MFBlocks::logProps
     );
 
-    public static final DeferredBlock<Block> BLOODWOOD = registerBlock(MFBlockItemIds.BLOODWOOD,
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOOD = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.WOOD,
+            MFBlocks::registerBlock,
             MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(BLOODWOOD_LOG.get()).mapColor(MapColor.COLOR_GRAY)
+            MFBlocks::logProps
     );
 
-    public static final DeferredBlock<Block> STRIPPED_BLOODWOOD_LOG = registerBlock(MFBlockItemIds.STRIPPED_BLOODWOOD_LOG,
+    public static final WoodTypeCollection<DeferredBlock<Block>> STRIPPED_LOG = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.STRIPPED_LOG,
+            MFBlocks::registerBlock,
             MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(BLOODWOOD_LOG.get())
+            MFBlocks::logProps
     );
 
-    public static final DeferredBlock<Block> STRIPPED_BLOODWOOD = registerBlock(MFBlockItemIds.STRIPPED_BLOODWOOD,
+    public static final WoodTypeCollection<DeferredBlock<Block>> STRIPPED_WOOD = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.STRIPPED_WOOD,
+            MFBlocks::registerBlock,
             MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(BLOODWOOD_LOG.get())
+            MFBlocks::logProps
     );
 
-    public static final DeferredBlock<Block> BLOODWOOD_PLANKS = registerBlock(MFBlockItemIds.BLOODWOOD_PLANKS,
+    public static final WoodTypeCollection<DeferredBlock<Block>> PLANKS = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.PLANKS,
+            MFBlocks::registerBlock,
             MFFlammableBlock::new,
-            _ -> Properties.ofFullCopy(BLOODWOOD_LOG.get())
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_STAIRS = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.WOODEN_STAIRS,
+            MFBlocks::registerBlock,
+            MFFlammableStairBlock::new,
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_SLAB = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.WOODEN_SLAB,
+            MFBlocks::registerBlock,
+            MFFlammableSlabBlock::new,
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_VERTICAL_SLAB = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.WOODEN_VERTICAL_SLAB,
+            MFBlocks::registerBlock,
+            VerticalSlabBlock::new,
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_FENCE = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.WOODEN_FENCE,
+            MFBlocks::registerBlock,
+            MFFlammableFenceBlock::new,
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_FENCE_GATE = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.WOODEN_FENCE_GATE,
+            MFBlocks::registerBlock,
+            MFFlammableFenceGateBlock::new,
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_PRESSURE_PLATE = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.WOODEN_PRESSURE_PLATE,
+            MFBlocks::registerBlock,
+            (wood, props) -> new PressurePlateBlock(wood.getBlockSetType(), props),
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_BUTTON = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.WOODEN_BUTTON,
+            MFBlocks::registerBlock,
+            (wood, props) -> new ButtonBlock(wood.getBlockSetType(), 20, props),
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_DOOR = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.WOODEN_DOOR,
+            MFBlocks::registerBlock,
+            (wood, props) -> new DoorBlock(wood.getBlockSetType(), props),
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_TRAPDOOR = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.WOODEN_TRAPDOOR,
+            MFBlocks::registerBlock,
+            (wood, props) -> new TrapDoorBlock(wood.getBlockSetType(), props),
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_SHELF = WoodTypeCollection.registerBlocks(
+            MFBlockItemIds.WOODEN_SHELF,
+            MFBlocks::registerBlock,
+            MFShelfBlock::new,
+            MFBlocks::shelfProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_SIGN = WoodTypeCollection.registerBlocks(
+            MFBlockIds.SIGN,
+            MFBlocks::registerBlockWithoutItem,
+            MFStandingSignBlock::new,
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_WALL_SIGN = WoodTypeCollection.registerBlocks(
+            MFBlockIds.WALL_SIGN,
+            MFBlocks::registerBlockWithoutItem,
+            MFWallSignBlock::new,
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_HANGING_SIGN = WoodTypeCollection.registerBlocks(
+            MFBlockIds.HANGING_SIGN,
+            MFBlocks::registerBlockWithoutItem,
+            MFCeilingHangingSignBlock::new,
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_WALL_HANGING_SIGN = WoodTypeCollection.registerBlocks(
+            MFBlockIds.WALL_HANGING_SIGN,
+            MFBlocks::registerBlockWithoutItem,
+            MFWallHangingSignBlock::new,
+            MFBlocks::woodProps
+    );
+
+    public static final WoodTypeCollection<DeferredBlock<Block>> POTTED_SAPLING = WoodTypeCollection.registerBlocks(
+            MFBlockIds.POTTED_SAPLING,
+            MFBlocks::registerBlockWithoutItem,
+            (wood, props) -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, wood.getSaplingOrFungus(), props),
+            (_, props) -> props.noOcclusion().instabreak().pushReaction(PushReaction.DESTROY)
     );
 
     public static final DeferredBlock<Block> BLOODWOOD_LEAVES = registerBlock(MFBlockItemIds.BLOODWOOD_LEAVES,
@@ -419,106 +538,11 @@ public class MFBlocks {
     );
 
     public static final DeferredBlock<Block> BLOODWOOD_SAPLING = registerBlock(MFBlockItemIds.BLOODWOOD_SAPLING,
-            properties -> new SaplingBlock(MFTreeGrowers.BLOODWOOD, properties),
+            props -> new SaplingBlock(MFTreeGrowers.BLOODWOOD, props),
             _ -> Properties.ofFullCopy(Blocks.OAK_SAPLING)
     );
 
-    public static final DeferredBlock<Block> POTTED_BLOODWOOD_SAPLING = registerBlockWithoutItem(MFBlockIds.POTTED_BLOODWOOD_SAPLING,
-            props -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT, BLOODWOOD_SAPLING, props),
-            _ -> Properties.ofFullCopy(Blocks.POTTED_OAK_SAPLING)
-    );
-
-    public static final DeferredBlock<StairBlock> BLOODWOOD_STAIRS = registerFlammableStair(MFBlockItemIds.BLOODWOOD_STAIRS, BLOODWOOD_PLANKS);
-
-    public static final DeferredBlock<SlabBlock> BLOODWOOD_SLAB = registerFlammableSlab(MFBlockItemIds.BLOODWOOD_SLAB, BLOODWOOD_PLANKS);
-
-    public static final DeferredBlock<Block> BLOODWOOD_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.BLOODWOOD_VERTICAL_SLAB,
-            true,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(BLOODWOOD_PLANKS.get())
-    );
-
-    public static final DeferredBlock<Block> BLOODWOOD_FENCE = registerBlock(MFBlockItemIds.BLOODWOOD_FENCE,
-            MFFlammableFenceBlock::new,
-            _ -> Properties.ofFullCopy(BLOODWOOD_PLANKS.get())
-                    .isValidSpawn(MFBlocks::never)
-                    .isRedstoneConductor(MFBlocks::never)
-                    .isSuffocating(MFBlocks::never)
-    );
-
-    public static final DeferredBlock<Block> BLOODWOOD_FENCE_GATE = registerBlock(MFBlockItemIds.BLOODWOOD_FENCE_GATE,
-            props -> new MFFlammableFenceGateBlock(MFWoodType.BLOODWOOD, props),
-            _ -> Properties.ofFullCopy(BLOODWOOD_FENCE.get())
-    );
-
-    public static final DeferredBlock<Block> BLOODWOOD_PRESSURE_PLATE = registerBlock(MFBlockItemIds.BLOODWOOD_PRESSURE_PLATE,
-            properties -> new PressurePlateBlock(MFBlockSetType.BLOODWOOD, properties
-                    .sound(SoundType.WOOD)
-                    .strength(2F, 2F)
-            ));
-
-    public static final DeferredBlock<Block> BLOODWOOD_BUTTON = registerBlock(MFBlockItemIds.BLOODWOOD_BUTTON,
-            properties -> new ButtonBlock(MFBlockSetType.BLOODWOOD, 20, properties
-                    .sound(SoundType.WOOD)
-                    .strength(2F, 2F)
-            ));
-
-    public static final DeferredBlock<Block> BLOODWOOD_SIGN = registerBlockWithoutItem(MFBlockIds.BLOODWOOD_SIGN,
-            props -> new MFStandingSignBlock(MFWoodType.BLOODWOOD, props),
-            _ -> Properties.ofFullCopy(BLOODWOOD_PLANKS.get()).mapColor(MapColor.NONE)
-    );
-
-    public static final DeferredBlock<Block> BLOODWOOD_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.BLOODWOOD_WALL_SIGN,
-            props -> new MFWallSignBlock(MFWoodType.BLOODWOOD, props),
-            _ -> Properties.ofFullCopy(BLOODWOOD_SIGN.get())
-    );
-
-    // Ceiling sign
-    public static final DeferredBlock<Block> BLOODWOOD_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.BLOODWOOD_HANGING_SIGN,
-            props -> new MFCeilingHangingSignBlock(MFWoodType.BLOODWOOD, props),
-            _ -> Properties.ofFullCopy(BLOODWOOD_SIGN.get())
-    );
-
-    // Wall sign
-    public static final DeferredBlock<Block> BLOODWOOD_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.BLOODWOOD_WALL_HANGING_SIGN,
-            props -> new MFWallHangingSignBlock(MFWoodType.BLOODWOOD, props),
-            _ -> Properties.ofFullCopy(BLOODWOOD_SIGN.get())
-    );
-
-    public static final DeferredBlock<Block> BLOODWOOD_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.BLOODWOOD_SHELF,
-            true,
-            MFShelfBlock::new,
-            _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.COLOR_RED)
-    );
-
     //———————————————————————————————————————Tainted Wood Blocks—————————————————————————————————————————————————————————————————————
-
-
-    public static final DeferredBlock<Block> TAINTED_LOG = registerBlock(MFBlockItemIds.TAINTED_LOG,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(BLOODWOOD_LOG.get()).mapColor(MapColor.COLOR_PURPLE)
-    );
-
-    public static final DeferredBlock<Block> TAINTED_WOOD = registerBlock(MFBlockItemIds.TAINTED_WOOD,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(TAINTED_LOG.get()).mapColor(MapColor.COLOR_GRAY)
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_TAINTED_LOG = registerBlock(MFBlockItemIds.STRIPPED_TAINTED_LOG,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(TAINTED_LOG.get())
-    );
-
-
-    public static final DeferredBlock<Block> STRIPPED_TAINTED_WOOD = registerBlock(MFBlockItemIds.STRIPPED_TAINTED_WOOD,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(TAINTED_LOG.get())
-    );
-
-    public static final DeferredBlock<Block> TAINTED_PLANKS = registerBlock(MFBlockItemIds.TAINTED_PLANKS,
-            MFFlammableBlock::new,
-            _ -> Properties.ofFullCopy(TAINTED_LOG.get())
-    );
 
     public static final DeferredBlock<Block> TAINTED_LEAVES = registerBlock(MFBlockItemIds.TAINTED_LEAVES,
             properties -> new MFLeavesBlock(0.03F, MFParticleTypes.TAINTED_LEAVES.get(), properties
@@ -537,112 +561,7 @@ public class MFBlocks {
                     .sound(SoundType.GRASS))
     );
 
-    public static final DeferredBlock<Block> POTTED_TAINTED_SAPLING = registerBlockWithoutItem(MFBlockIds.POTTED_TAINTED_SAPLING,
-            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
-                    Blocks.FLOWER_POT, TAINTED_SAPLING, properties
-                    .noOcclusion()
-                    .instabreak()
-                    .pushReaction(PushReaction.DESTROY)
-            ));
-
-    public static final DeferredBlock<StairBlock> TAINTED_STAIRS = registerFlammableStair(MFBlockItemIds.TAINTED_STAIRS, TAINTED_PLANKS);
-
-    public static final DeferredBlock<SlabBlock> TAINTED_SLAB = registerFlammableSlab(MFBlockItemIds.TAINTED_SLAB, TAINTED_PLANKS);
-
-    public static final DeferredBlock<Block> TAINTED_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.TAINTED_VERTICAL_SLAB,
-            true,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(TAINTED_PLANKS.get())
-    );
-
-    public static final DeferredBlock<Block> TAINTED_FENCE = registerBlock(MFBlockItemIds.TAINTED_FENCE,
-            properties -> new MFFlammableFenceBlock(properties
-                    .strength(2F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-            ));
-
-    public static final DeferredBlock<Block> TAINTED_FENCE_GATE = registerBlock(MFBlockItemIds.TAINTED_FENCE_GATE,
-            properties -> new MFFlammableFenceGateBlock(MFWoodType.TAINTED, properties
-                    .strength(2F)
-                    .sound(SoundType.WOOD)
-                    .ignitedByLava()
-            ));
-
-    public static final DeferredBlock<Block> TAINTED_PRESSURE_PLATE = registerBlock(MFBlockItemIds.TAINTED_PRESSURE_PLATE,
-            properties -> new PressurePlateBlock(MFBlockSetType.TAINTED, properties
-                    .sound(SoundType.WOOD)
-                    .strength(2F, 2F)
-            ));
-
-    public static final DeferredBlock<Block> TAINTED_BUTTON = registerBlock(MFBlockItemIds.TAINTED_BUTTON,
-            properties -> new ButtonBlock(MFBlockSetType.TAINTED, 20, properties
-                    .sound(SoundType.WOOD)
-                    .strength(2F, 2F)
-            ));
-
-    public static final DeferredBlock<Block> TAINTED_SIGN = registerBlockWithoutItem(MFBlockIds.TAINTED_SIGN,
-            properties -> new MFStandingSignBlock(MFWoodType.TAINTED, properties
-                    .noCollision()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-            ));
-
-    public static final DeferredBlock<Block> TAINTED_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.TAINTED_WALL_SIGN,
-            properties -> new MFWallSignBlock(MFWoodType.TAINTED, properties
-                    .noCollision()
-                    .strength(1.0F)
-                    .sound(SoundType.WOOD)
-            ));
-
-    // Ceiling sign
-    public static final DeferredBlock<Block> TAINTED_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.TAINTED_HANGING_SIGN,
-            properties -> new MFCeilingHangingSignBlock(MFWoodType.TAINTED, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.WOOD)
-            ));
-
-    // Wall sign
-    public static final DeferredBlock<Block> TAINTED_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.TAINTED_WALL_HANGING_SIGN,
-            properties -> new MFWallHangingSignBlock(MFWoodType.TAINTED, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.WOOD)
-            ));
-
-    public static final DeferredBlock<Block> TAINTED_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.TAINTED_SHELF,
-            true,
-            MFShelfBlock::new,
-            _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.COLOR_PURPLE)
-    );
-
     //———————————————————————————————————————Palm Wood Blocks————————————————————————————————————————————————————————————————————————
-
-    public static final DeferredBlock<Block> PALM_LOG = registerBlock(MFBlockItemIds.PALM_LOG,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> logProperties(MapColor.COLOR_YELLOW, true).ignitedByLava()
-    );
-
-    public static final DeferredBlock<Block> PALM_WOOD = registerBlock(MFBlockItemIds.PALM_WOOD,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(PALM_LOG.get()).mapColor(MapColor.TERRACOTTA_YELLOW)
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_PALM_LOG = registerBlock(MFBlockItemIds.STRIPPED_PALM_LOG,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(PALM_LOG.get())
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_PALM_WOOD = registerBlock(MFBlockItemIds.STRIPPED_PALM_WOOD,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(PALM_LOG.get())
-    );
-
-    public static final DeferredBlock<Block> PALM_PLANKS = registerBlock(MFBlockItemIds.PALM_PLANKS,
-            MFFlammableBlock::new,
-            _ -> Properties.ofFullCopy(PALM_LOG.get())
-    );
 
     public static final DeferredBlock<Block> PALM_LEAVES = registerBlock(MFBlockItemIds.PALM_LEAVES,
             properties -> new MFLeavesBlock(0.01F, MFParticleTypes.PALM_LEAVES.get(), properties
@@ -661,139 +580,7 @@ public class MFBlocks {
                     () -> Blocks.SAND // The block that the sapling can be planted on. You can also pass in a block tag here.
             ));
 
-    public static final DeferredBlock<Block> POTTED_PALM_SAPLING = registerBlockWithoutItem(MFBlockIds.POTTED_PALM_SAPLING,
-            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
-                    Blocks.FLOWER_POT, PALM_SAPLING, properties
-                    .noOcclusion()
-                    .instabreak()
-                    .pushReaction(PushReaction.DESTROY)
-            ));
-
-    public static final DeferredBlock<StairBlock> PALM_STAIRS = registerFlammableStair(MFBlockItemIds.PALM_STAIRS, PALM_PLANKS);
-
-    public static final DeferredBlock<SlabBlock> PALM_SLAB = registerFlammableSlab(MFBlockItemIds.PALM_SLAB, PALM_PLANKS);
-
-    public static final DeferredBlock<Block> PALM_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.PALM_VERTICAL_SLAB,
-            true,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(PALM_PLANKS.get())
-    );
-
-    public static final DeferredBlock<Block> PALM_FENCE = registerBlock(MFBlockItemIds.PALM_FENCE,
-            MFFlammableFenceBlock::new,
-            _ -> Properties.ofFullCopy(PALM_PLANKS.get())
-    );
-
-    public static final DeferredBlock<Block> PALM_FENCE_GATE = registerBlock(MFBlockItemIds.PALM_FENCE_GATE,
-            props -> new MFFlammableFenceGateBlock(MFWoodType.PALM, props),
-            _ -> Properties.ofFullCopy(PALM_PLANKS.get())
-    );
-
-    // Standing sign
-    public static final DeferredBlock<Block> PALM_SIGN = registerBlockWithoutItem(MFBlockIds.PALM_SIGN,
-            properties -> new MFStandingSignBlock(MFWoodType.PALM, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.WOOD)
-            ));
-
-    // Wall sign
-    public static final DeferredBlock<Block> PALM_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.PALM_WALL_SIGN,
-            properties -> new MFWallSignBlock(MFWoodType.PALM, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.WOOD)
-            ));
-
-    // Ceiling hanging sign
-    public static final DeferredBlock<Block> PALM_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.PALM_HANGING_SIGN,
-            properties -> new MFCeilingHangingSignBlock(MFWoodType.PALM, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.WOOD)
-            ));
-
-    // Wall hanging sign
-    public static final DeferredBlock<Block> PALM_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.PALM_WALL_HANGING_SIGN,
-            properties -> new MFWallHangingSignBlock(MFWoodType.PALM, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.WOOD)
-            ));
-
-    public static final DeferredBlock<Block> PALM_TRAPDOOR = registerBlock(MFBlockItemIds.PALM_TRAPDOOR,
-            properties -> new TrapDoorBlock(MFBlockSetType.PALM, properties
-                    .strength(2f, 2f)
-                    .noOcclusion()
-            ));
-
-    public static final DeferredBlock<Block> PALM_DOOR = registerBlock(MFBlockItemIds.PALM_DOOR,
-            properties -> new DoorBlock(MFBlockSetType.PALM, properties
-                    .strength(2f, 2f)
-                    .noOcclusion()
-                    .ignitedByLava()
-                    .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor(MFBlocks::never)
-            ));
-
-    public static final DeferredBlock<Block> PALM_PRESSURE_PLATE = registerBlock(MFBlockItemIds.PALM_PRESSURE_PLATE,
-            properties -> new PressurePlateBlock(MFBlockSetType.PALM, properties
-                    .strength(2f)
-                    .forceSolidOn()
-                    .noCollision()
-                    .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor(MFBlocks::never)
-            ));
-
-    public static final DeferredBlock<Block> PALM_BUTTON = registerBlock(MFBlockItemIds.PALM_BUTTON,
-            properties -> new ButtonBlock(MFBlockSetType.PALM, 20, properties
-                    .strength(2f)
-                    .noCollision()
-                    .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor(MFBlocks::never)
-            ));
-
-    public static final DeferredBlock<Block> PALM_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.PALM_SHELF,
-            true,
-            MFShelfBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.COLOR_YELLOW)
-    );
-
     //———————————————————————————————————————Charred Wood Blocks—————————————————————————————————————————————————————————————————————
-    public static final DeferredBlock<Block> CHARRED_STEM = registerBlock(MFBlockItemIds.CHARRED_STEM,
-            RotatedPillarBlock::new,
-            _ -> logProperties(MapColor.COLOR_BLACK, false)
-    );
-
-    public static final DeferredBlock<Block> CHARRED_HYPHAE = registerBlock(MFBlockItemIds.CHARRED_HYPHAE,
-            RotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(CHARRED_STEM.get())
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_CHARRED_STEM = registerBlock(MFBlockItemIds.STRIPPED_CHARRED_STEM,
-            RotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(CHARRED_STEM.get())
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_CHARRED_HYPHAE = registerBlock(MFBlockItemIds.STRIPPED_CHARRED_HYPHAE,
-            RotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(CHARRED_STEM.get())
-    );
-
-    public static final DeferredBlock<Block> CHARRED_PLANKS = registerBlock(MFBlockItemIds.CHARRED_PLANKS,
-            Block::new,
-            _ -> Properties.ofFullCopy(CHARRED_STEM.get()).sound(SoundType.NETHER_WOOD)
-    );
-
-    public static final DeferredBlock<StairBlock> CHARRED_STAIRS = registerStair(MFBlockItemIds.CHARRED_STAIRS, CHARRED_PLANKS);
-
-    public static final DeferredBlock<SlabBlock> CHARRED_SLAB = registerSlab(MFBlockItemIds.CHARRED_SLAB, CHARRED_PLANKS);
-
-    public static final DeferredBlock<Block> CHARRED_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.CHARRED_VERTICAL_SLAB,
-            false,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(CHARRED_PLANKS.get())
-    );
 
     public static final DeferredBlock<Block> CHARRED_ROOTS = registerBlock(MFBlockItemIds.CHARRED_ROOTS,
             props -> new NetherRootsBlock(MFBlockTags.SUPPORTS_CHARRED_ROOTS, props),
@@ -813,31 +600,22 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(Blocks.WARPED_NYLIUM).mapColor(MapColor.COLOR_BLACK)
     );
 
+    public static final DeferredBlock<Block> CHARRED_WART_BLOCK = registerBlock(MFBlockItemIds.CHARRED_WART_BLOCK,
+            Block::new,
+            _ -> Properties.ofFullCopy(Blocks.WARPED_WART_BLOCK).mapColor(MapColor.COLOR_BLACK)
+    );
+
+    public static final DeferredBlock<Block> CHARRED_FUNGUS = registerBlock(MFBlockItemIds.CHARRED_FUNGUS,
+            props -> new NetherFungusBlock(
+                    MFConfiguredFeatures.PLANTED_CHARRED_KEY,
+                    CHARRED_NYLIUM.get(),
+                    MFBlockTags.SUPPORTS_CHARRED_ROOTS,
+                    props
+            ),
+            _ -> Properties.ofFullCopy(Blocks.WARPED_FUNGUS).mapColor(MapColor.COLOR_GRAY)
+    );
+
     //———————————————————————————————————————Decrepit Wood Blocks————————————————————————————————————————————————————————————————————
-    public static final DeferredBlock<Block> DECREPIT_LOG = registerBlock(MFBlockItemIds.DECREPIT_LOG,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> logProperties(MapColor.TERRACOTTA_BLUE, false).ignitedByLava()
-    );
-
-    public static final DeferredBlock<Block> DECREPIT_WOOD = registerBlock(MFBlockItemIds.DECREPIT_WOOD,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(DECREPIT_LOG.get()).mapColor(MapColor.COLOR_BLACK)
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_DECREPIT_LOG = registerBlock(MFBlockItemIds.STRIPPED_DECREPIT_LOG,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(DECREPIT_LOG.get())
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_DECREPIT_WOOD = registerBlock(MFBlockItemIds.STRIPPED_DECREPIT_WOOD,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(DECREPIT_LOG.get())
-    );
-
-    public static final DeferredBlock<Block> DECREPIT_PLANKS = registerBlock(MFBlockItemIds.DECREPIT_PLANKS,
-            MFFlammableBlock::new,
-            _ -> Properties.ofFullCopy(DECREPIT_LOG.get()).sound(SoundType.NETHER_WOOD)
-    );
 
     public static final DeferredBlock<Block> DECREPIT_LEAVES = registerBlock(MFBlockItemIds.DECREPIT_LEAVES,
             properties -> new MFLeavesBlock(0.02F, MFParticleTypes.DECREPIT_LEAVES.get(), properties
@@ -856,51 +634,6 @@ public class MFBlocks {
                     .noCollision()
                     .mapColor(MapColor.PLANT),
                     MFBlockTags.NULLIUM
-            ));
-
-    public static final DeferredBlock<Block> POTTED_DECREPIT_SAPLING = registerBlockWithoutItem(MFBlockIds.POTTED_DECREPIT_SAPLING, // BlockIds are just ResourceKeys, but it makes referencing them more consistent
-            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
-                    Blocks.FLOWER_POT, DECREPIT_SAPLING, properties
-                    .noOcclusion()
-                    .instabreak()
-                    .pushReaction(PushReaction.DESTROY)
-            ));
-
-    public static final DeferredBlock<StairBlock> DECREPIT_STAIRS = registerFlammableStair(MFBlockItemIds.DECREPIT_STAIRS, DECREPIT_PLANKS);
-
-    public static final DeferredBlock<SlabBlock> DECREPIT_SLAB = registerFlammableSlab(MFBlockItemIds.DECREPIT_SLAB, DECREPIT_PLANKS);
-
-    public static final DeferredBlock<Block> DECREPIT_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.DECREPIT_VERTICAL_SLAB,
-            true,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(DECREPIT_PLANKS.get())
-    );
-
-    public static final DeferredBlock<Block> DECREPIT_FENCE = registerBlock(MFBlockItemIds.DECREPIT_FENCE,
-            properties -> new MFFlammableFenceBlock(properties
-                    .strength(2f, 2f)
-                    .sound(SoundType.NETHER_WOOD)
-            ));
-
-    public static final DeferredBlock<Block> DECREPIT_FENCE_GATE = registerBlock(MFBlockItemIds.DECREPIT_FENCE_GATE,
-            properties -> new MFFlammableFenceGateBlock(MFWoodType.DECREPIT, properties
-                    .strength(2f, 2f)
-                    .sound(SoundType.NETHER_WOOD)
-            ));
-
-    public static final DeferredBlock<Block> DECREPIT_PRESSURE_PLATE = registerBlock(MFBlockItemIds.DECREPIT_PRESSURE_PLATE,
-            properties -> new PressurePlateBlock(MFBlockSetType.DECREPIT, properties
-                    .strength(2f)
-                    .forceSolidOn()
-                    .noCollision()
-                    .pushReaction(PushReaction.DESTROY)
-            ));
-
-    public static final DeferredBlock<Block> DECREPIT_BUTTON = registerBlock(MFBlockItemIds.DECREPIT_BUTTON,
-            properties -> new ButtonBlock(MFBlockSetType.DECREPIT, 20, properties
-                    .strength(2f)
-                    .noCollision()
-                    .pushReaction(PushReaction.DESTROY)
             ));
 
     public static final DeferredBlock<Block> DECREPIT_ROOTS = registerBlock(MFBlockItemIds.DECREPIT_ROOTS,
@@ -931,68 +664,7 @@ public class MFBlocks {
                     DECREPIT_ROOTS
             ));
 
-    public static final DeferredBlock<Block> DECREPIT_SIGN = registerBlockWithoutItem(MFBlockIds.DECREPIT_SIGN,
-            properties -> new MFStandingSignBlock(MFWoodType.DECREPIT, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.NETHER_WOOD)
-            ));
-
-    public static final DeferredBlock<Block> DECREPIT_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.DECREPIT_WALL_SIGN,
-            properties -> new MFWallSignBlock(MFWoodType.DECREPIT, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.NETHER_WOOD)
-            ));
-
-    // Ceiling sign
-    public static final DeferredBlock<Block> DECREPIT_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.DECREPIT_HANGING_SIGN,
-            properties -> new MFCeilingHangingSignBlock(MFWoodType.DECREPIT, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.NETHER_WOOD)
-            ));
-
-    // Wall sign
-    public static final DeferredBlock<Block> DECREPIT_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.DECREPIT_WALL_HANGING_SIGN,
-            properties -> new MFWallHangingSignBlock(MFWoodType.DECREPIT, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.NETHER_WOOD)
-            ));
-
-    public static final DeferredBlock<Block> DECREPIT_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.DECREPIT_SHELF,
-            true,
-            MFShelfBlock::new,
-            _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.TERRACOTTA_BLUE)
-    );
-
     //———————————————————————————————————————Pallid Wood Blocks——————————————————————————————————————————————————————————————————————
-
-    public static final DeferredBlock<Block> PALLID_LOG = registerBlock(MFBlockItemIds.PALLID_LOG,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> logProperties(MapColor.TERRACOTTA_GREEN, false).ignitedByLava()
-    );
-
-    public static final DeferredBlock<Block> PALLID_WOOD = registerBlock(MFBlockItemIds.PALLID_WOOD,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(PALLID_LOG.get()).mapColor(MapColor.COLOR_GRAY)
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_PALLID_LOG = registerBlock(MFBlockItemIds.STRIPPED_PALLID_LOG,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(PALLID_LOG.get())
-    );
-
-    public static final DeferredBlock<Block> STRIPPED_PALLID_WOOD = registerBlock(MFBlockItemIds.STRIPPED_PALLID_WOOD,
-            MFFlammableRotatedPillarBlock::new,
-            _ -> Properties.ofFullCopy(PALLID_LOG.get())
-    );
-
-    public static final DeferredBlock<Block> PALLID_PLANKS = registerBlock(MFBlockItemIds.PALLID_PLANKS,
-            MFFlammableBlock::new,
-            _ -> Properties.ofFullCopy(DECREPIT_PLANKS.get()).mapColor(MapColor.TERRACOTTA_GREEN)
-    );
 
     public static final DeferredBlock<Block> PALLID_LEAVES = registerBlock(MFBlockItemIds.PALLID_LEAVES,
             props -> new MFLeavesBlock(0.02F, MFParticleTypes.PALLID_LEAVES.get(), props),
@@ -1002,45 +674,6 @@ public class MFBlocks {
     public static final DeferredBlock<Block> PALLID_SAPLING = registerBlock(MFBlockItemIds.PALLID_SAPLING,
             props -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALLID, props, MFBlockTags.NULLIUM),
             _ -> Properties.ofFullCopy(DECREPIT_SAPLING.get())
-    );
-
-    public static final DeferredBlock<Block> POTTED_PALLID_SAPLING = registerBlockWithoutItem(MFBlockIds.POTTED_PALLID_SAPLING,
-            props -> new FlowerPotBlock(() -> (FlowerPotBlock)Blocks.FLOWER_POT, PALLID_SAPLING, props),
-            _ -> Properties.ofFullCopy(POTTED_DECREPIT_SAPLING.get()));
-
-    public static final DeferredBlock<StairBlock> PALLID_STAIRS = registerFlammableStair(MFBlockItemIds.PALLID_STAIRS, PALLID_PLANKS);
-
-    public static final DeferredBlock<SlabBlock> PALLID_SLAB = registerFlammableSlab(MFBlockItemIds.PALLID_SLAB, PALLID_PLANKS);
-
-    public static final DeferredBlock<Block> PALLID_VERTICAL_SLAB = registerVerticalSlabOrShelf(MFBlockItemIds.PALLID_VERTICAL_SLAB,
-            true,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
-    );
-
-    public static final DeferredBlock<Block> PALLID_FENCE = registerBlock(MFBlockItemIds.PALLID_FENCE,
-            MFFlammableFenceBlock::new,
-            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
-    );
-
-    public static final DeferredBlock<Block> PALLID_FENCE_GATE = registerBlock(MFBlockItemIds.PALLID_FENCE_GATE,
-            props -> new MFFlammableFenceGateBlock(MFWoodType.PALLID, props),
-            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
-    );
-
-    public static final DeferredBlock<Block> PALLID_PRESSURE_PLATE = registerBlock(MFBlockItemIds.PALLID_PRESSURE_PLATE,
-            props -> new PressurePlateBlock(MFBlockSetType.PALLID, props),
-            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
-                    .forceSolidOn()
-                    .pushReaction(PushReaction.DESTROY)
-                    .noCollision()
-    );
-
-    public static final DeferredBlock<Block> PALLID_BUTTON = registerBlock(MFBlockItemIds.PALLID_BUTTON,
-            properties -> new ButtonBlock(MFBlockSetType.PALLID, 20, properties),
-            _ -> Properties.ofFullCopy(PALLID_PLANKS.get())
-                    .pushReaction(PushReaction.DESTROY)
-                    .noCollision()
     );
 
     public static final DeferredBlock<Block> PALLID_ROOTS = registerBlock(MFBlockItemIds.PALLID_ROOTS,
@@ -1059,40 +692,6 @@ public class MFBlocks {
     public static final DeferredBlock<Block> PALLID_NULLIUM = registerBlock(MFBlockItemIds.PALLID_NULLIUM,
             props -> new NulliumBlock(props, PALLID_ROOTS),
             _ -> Properties.ofFullCopy(DECREPIT_NULLIUM.get()).mapColor(MapColor.TERRACOTTA_GREEN)
-    );
-
-    public static final DeferredBlock<Block> PALLID_SIGN = registerBlockWithoutItem(MFBlockIds.PALLID_SIGN,
-            properties -> new MFStandingSignBlock(MFWoodType.PALLID, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.NETHER_WOOD)
-            ));
-
-    public static final DeferredBlock<Block> PALLID_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.PALLID_WALL_SIGN,
-            properties -> new MFWallSignBlock(MFWoodType.PALLID, properties
-                    .noCollision()
-                    .strength(1.0f)
-                    .sound(SoundType.NETHER_WOOD)
-            ));
-
-    public static final DeferredBlock<Block> PALLID_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.PALLID_HANGING_SIGN,
-            properties -> new MFCeilingHangingSignBlock(MFWoodType.PALLID, properties
-                    .noCollision()
-                    .strength(1.0F)
-                    .sound(SoundType.NETHER_WOOD)
-            ));
-
-    public static final DeferredBlock<Block> PALLID_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.PALLID_WALL_HANGING_SIGN,
-            properties -> new MFWallHangingSignBlock(MFWoodType.PALLID, properties
-                    .noCollision()
-                    .strength(1.0F)
-                    .sound(SoundType.NETHER_WOOD)
-            ));
-
-    public static final DeferredBlock<Block> PALLID_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.PALLID_SHELF,
-            true,
-            MFShelfBlock::new,
-            _ -> BlockBehaviour.Properties.ofFullCopy(Blocks.OAK_SHELF).mapColor(MapColor.TERRACOTTA_GREEN)
     );
 
     /*
@@ -1715,7 +1314,6 @@ public class MFBlocks {
         return block;
     }
 
-    @SuppressWarnings("SameParameterValue")
     private static WeatheringCopperCollection<DeferredBlock<Block>> registerCopperBlockSet(
             WeatheringCopperCollection<BlockItemId> ids,
             BiFunction<WeatheringCopper.WeatherState, Properties, ? extends Block> weatheringFactory,
@@ -1808,19 +1406,9 @@ public class MFBlocks {
                 _ -> Properties.ofFullCopy(fullBlock.get()));
     }
 
-    private static DeferredBlock<StairBlock> registerFlammableStair(BlockItemId stairId, Supplier<Block> plank){
-        return registerBlock(stairId, props -> new MFFlammableStairBlock(plank.get().defaultBlockState(), props),
-                _ -> Properties.ofFullCopy(plank.get()));
-    }
-
     private static DeferredBlock<SlabBlock> registerSlab(BlockItemId slabId, Supplier<Block> fullBlock){
         return registerBlock(slabId, SlabBlock::new,
                 _ -> Properties.ofFullCopy(fullBlock.get()));
-    }
-
-    private static DeferredBlock<SlabBlock> registerFlammableSlab(BlockItemId slabId, Supplier<Block> plank){
-        return registerBlock(slabId, MFFlammableSlabBlock::new,
-                _ -> Properties.ofFullCopy(plank.get()));
     }
 
     // These exact booleans exist in the vanilla Blocks class, but have private access
@@ -1845,16 +1433,25 @@ public class MFBlocks {
         return true;
     }
 
-    private static Properties logProperties(MapColor mapColor, boolean overworldWood){
-        return Properties.of()
-                .strength(2F, 8F)
-                .sound(overworldWood ? SoundType.WOOD : SoundType.STEM)
-                .isRedstoneConductor(MFBlocks::always)
-                .isViewBlocking(MFBlocks::always)
-                .isSuffocating(MFBlocks::always)
-                .isValidSpawn(MFBlocks::never)
-                .instrument(NoteBlockInstrument.BASS)
-                .mapColor(mapColor);
+    private static Properties woodProps(WoodSetType wood, Properties props){
+        return baseWoodProps(wood, props, false);
+    }
+
+    private static Properties logProps(WoodSetType wood, Properties props){
+        return baseWoodProps(wood, props, true);
+    }
+
+    private static Properties shelfProps(WoodSetType wood, Properties props){
+        return baseWoodProps(wood, props, false).sound(SoundType.SHELF);
+    }
+
+    private static Properties baseWoodProps(WoodSetType wood, Properties props, boolean log){
+        Properties finalProps = props.mapColor(wood.getMapColor()).sound(log ? wood.getLogSoundType() : wood.getMainSoundType())
+                .strength(2.0F, 8.0F).isValidSpawn(MFBlocks::never);
+
+        if(wood.isFlammable()) finalProps.ignitedByLava();
+
+        return finalProps;
     }
 
     // Register method called in the mod event bus

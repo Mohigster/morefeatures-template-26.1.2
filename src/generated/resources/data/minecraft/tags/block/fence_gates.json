@@ -1,9 +1,5 @@
 {
   "values": [
-    "morefeatures:bloodwood_fence_gate",
-    "morefeatures:tainted_fence_gate",
-    "morefeatures:palm_fence_gate",
-    "morefeatures:decrepit_fence_gate",
-    "morefeatures:pallid_fence_gate"
+    "#morefeatures:wood/fence_gate"
   ]
 }

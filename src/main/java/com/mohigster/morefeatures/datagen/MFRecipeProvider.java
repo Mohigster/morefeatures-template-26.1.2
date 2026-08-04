@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.datagen;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
 import com.mohigster.morefeatures.block.family.MFBlockFamilies;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.tag.MFItemTags;
@@ -21,7 +22,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColorCollection;
 import net.minecraft.world.level.block.WeatheringCopperCollection;
 import net.neoforged.neoforge.registries.DeferredBlock;
-import org.apache.commons.compress.compressors.lz77support.LZ77Compressor;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
@@ -214,137 +214,50 @@ public class MFRecipeProvider extends RecipeProvider {
         verticalSlabCrafting(MFBlocks.FLUORITE_VERTICAL_SLAB, MFBlocks.FLUORITE_BLOCK);
         verticalSlabStonecutting(MFBlocks.FLUORITE_VERTICAL_SLAB, MFBlocks.FLUORITE_BLOCK);
 
-        // Bloodwood recipes
-        shapeless(RecipeCategory.BUILDING_BLOCKS, MFBlocks.BLOODWOOD_PLANKS.get(), 4)
-                .requires(MFItemTags.BLOODWOOD_LOGS)
-                .unlockedBy(getHasName(MFBlocks.BLOODWOOD_LOG.get()), has(MFBlocks.BLOODWOOD_LOG.get()))
-                .group("bloodwood_planks")
-                .save(output);
 
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.BLOODWOOD.get(), 3)
-                .pattern("BB")
-                .pattern("BB")
-                .define('B', MFBlocks.BLOODWOOD_LOG.get())
-                .unlockedBy(getHasName(MFBlocks.BLOODWOOD_LOG.get()), has(MFBlocks.BLOODWOOD_LOG))
-                .save(output);
-
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.STRIPPED_BLOODWOOD.get(), 3)
-                .pattern("BB")
-                .pattern("BB")
-                .define('B', MFBlocks.STRIPPED_BLOODWOOD_LOG.get())
-                .unlockedBy(getHasName(MFBlocks.STRIPPED_BLOODWOOD_LOG.get()), has(MFBlocks.STRIPPED_BLOODWOOD_LOG))
-                .save(output);
-
-        verticalSlabCrafting(MFBlocks.BLOODWOOD_VERTICAL_SLAB, MFBlocks.BLOODWOOD_PLANKS.get());
+        WoodTypeCollection.TYPES.forEach(
+                type -> verticalSlabCrafting(
+                        MFBlocks.WOODEN_VERTICAL_SLAB.pick(type),
+                        MFBlocks.PLANKS.pick(type)
+                )
+        );
 
         // Tainted wood recipes
-        shapeless(RecipeCategory.BUILDING_BLOCKS, MFBlocks.TAINTED_PLANKS.get(), 4)
-                .requires(MFItemTags.TAINTED_LOGS)
-                .unlockedBy(getHasName(MFBlocks.TAINTED_LOG.get()), has(MFBlocks.TAINTED_LOG.get()))
-                .group("tainted_planks")
-                .save(output);
 
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.TAINTED_WOOD.get(), 3)
-                .pattern("TT")
-                .pattern("TT")
-                .define('T', MFBlocks.TAINTED_LOG.get())
-                .unlockedBy(getHasName(MFBlocks.TAINTED_LOG.get()), has(MFBlocks.TAINTED_LOG))
-                .save(output);
+        WoodTypeCollection.TYPES.forEach(type -> {
+            DeferredBlock<Block> plank = MFBlocks.PLANKS.pick(type);
+            DeferredBlock<Block> log = MFBlocks.LOG.pick(type);
 
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.STRIPPED_TAINTED_WOOD.get(), 3)
-                .pattern("TT")
-                .pattern("TT")
-                .define('T', MFBlocks.STRIPPED_TAINTED_LOG.get())
-                .unlockedBy(getHasName(MFBlocks.STRIPPED_TAINTED_LOG.get()), has(MFBlocks.STRIPPED_TAINTED_LOG))
-                .save(output);
+            shapeless(RecipeCategory.BUILDING_BLOCKS, plank, 4)
+                    .requires(MFBlocks.PLANKS.pickTag(type))
+                    .unlockedBy(getHasName(log), has(log))
+                    .group(type.getName() + "_planks")
+                    .save(output);
+        });
 
-        // Palm recipes
+        WoodTypeCollection.TYPES.forEach(type -> {
+            DeferredBlock<Block> wood = MFBlocks.WOOD.pick(type);
+            DeferredBlock<Block> log = MFBlocks.LOG.pick(type);
 
-        shapeless(RecipeCategory.BUILDING_BLOCKS, MFBlocks.PALM_PLANKS.get(), 4)
-                .requires(MFItemTags.PALM_LOGS)
-                .unlockedBy(getHasName(MFBlocks.PALM_LOG.get()), has(MFBlocks.PALM_LOG.get()))
-                .group("palm_planks")
-                .save(output);
+            shaped(RecipeCategory.BUILDING_BLOCKS, wood, 3)
+                    .pattern("WW")
+                    .pattern("WW")
+                    .define('W', log)
+                    .unlockedBy(getHasName(log), has(log))
+                    .save(output);
+        });
 
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.PALM_WOOD.get(), 3)
-                .pattern("PP")
-                .pattern("PP")
-                .define('P', MFBlocks.PALM_LOG.get())
-                .unlockedBy(getHasName(MFBlocks.PALM_LOG.get()), has(MFBlocks.PALM_LOG))
-                .save(output);
+        WoodTypeCollection.TYPES.forEach(type -> {
+            DeferredBlock<Block> wood = MFBlocks.STRIPPED_WOOD.pick(type);
+            DeferredBlock<Block> log = MFBlocks.STRIPPED_LOG.pick(type);
 
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.STRIPPED_PALM_WOOD.get(), 3)
-                .pattern("PP")
-                .pattern("PP")
-                .define('P', MFBlocks.STRIPPED_PALM_LOG.get())
-                .unlockedBy(getHasName(MFBlocks.STRIPPED_PALM_LOG.get()), has(MFBlocks.STRIPPED_PALM_LOG))
-                .save(output);
-
-        // Charred recipes
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, MFBlocks.CHARRED_PLANKS.get(), 4)
-                .requires(MFItemTags.CHARRED_STEMS)
-                .unlockedBy(getHasName(MFBlocks.CHARRED_STEM.get()), has(MFBlocks.CHARRED_STEM.get()))
-                .group("charred")
-                .save(output);
-
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.CHARRED_HYPHAE.get(), 3)
-                .pattern("BB")
-                .pattern("BB")
-                .define('B', MFBlocks.CHARRED_STEM.get())
-                .unlockedBy(getHasName(MFBlocks.CHARRED_STEM.get()), has(MFBlocks.CHARRED_STEM))
-                .save(output);
-
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.STRIPPED_CHARRED_HYPHAE.get(), 3)
-                .pattern("BB")
-                .pattern("BB")
-                .define('B', MFBlocks.STRIPPED_CHARRED_STEM.get())
-                .unlockedBy(getHasName(MFBlocks.STRIPPED_CHARRED_STEM.get()), has(MFBlocks.STRIPPED_CHARRED_STEM))
-                .save(output);
-
-        // Decrepit recipes
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, MFBlocks.DECREPIT_PLANKS.get(), 4)
-                .requires(MFItemTags.DECREPIT_LOGS)
-                .unlockedBy(getHasName(MFBlocks.DECREPIT_LOG.get()), has(MFBlocks.DECREPIT_LOG.get()))
-                .group("palm_planks")
-                .save(output);
-
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.DECREPIT_WOOD.get(), 3)
-                .pattern("PP")
-                .pattern("PP")
-                .define('P', MFBlocks.DECREPIT_LOG.get())
-                .unlockedBy(getHasName(MFBlocks.DECREPIT_LOG.get()), has(MFBlocks.DECREPIT_LOG))
-                .save(output);
-
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.STRIPPED_DECREPIT_WOOD.get(), 3)
-                .pattern("PP")
-                .pattern("PP")
-                .define('P', MFBlocks.STRIPPED_DECREPIT_LOG.get())
-                .unlockedBy(getHasName(MFBlocks.STRIPPED_DECREPIT_LOG.get()), has(MFBlocks.STRIPPED_DECREPIT_LOG))
-                .save(output);
-
-        // Pallid recipes
-
-        shapeless(RecipeCategory.BUILDING_BLOCKS, MFBlocks.PALLID_PLANKS.get(), 4)
-                .requires(MFItemTags.PALLID_LOGS)
-                .unlockedBy(getHasName(MFBlocks.PALLID_LOG.get()), has(MFBlocks.PALLID_LOG.get()))
-                .group("palm_planks")
-                .save(output);
-
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.PALLID_WOOD.get(), 3)
-                .pattern("PP")
-                .pattern("PP")
-                .define('P', MFBlocks.PALLID_LOG.get())
-                .unlockedBy(getHasName(MFBlocks.PALLID_LOG.get()), has(MFBlocks.PALLID_LOG))
-                .save(output);
-
-        shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.STRIPPED_PALLID_WOOD.get(), 3)
-                .pattern("PP")
-                .pattern("PP")
-                .define('P', MFBlocks.STRIPPED_PALLID_LOG.get())
-                .unlockedBy(getHasName(MFBlocks.STRIPPED_PALLID_LOG.get()), has(MFBlocks.STRIPPED_PALLID_LOG))
-                .save(output);
+            shaped(RecipeCategory.BUILDING_BLOCKS, wood, 3)
+                    .pattern("WW")
+                    .pattern("WW")
+                    .define('W', log)
+                    .unlockedBy(getHasName(log), has(log))
+                    .save(output);
+        });
 
         // Bismuth recipes
 
@@ -507,9 +420,9 @@ public class MFRecipeProvider extends RecipeProvider {
 
         // Boats and chest boats
 
-        woodenBoat(MFItems.BLOODWOOD_BOAT, MFBlocks.BLOODWOOD_PLANKS);
-        woodenBoat(MFItems.TAINTED_BOAT, MFBlocks.TAINTED_PLANKS);
-        woodenBoat(MFItems.PALM_BOAT, MFBlocks.PALM_PLANKS);
+        woodenBoat(MFItems.BLOODWOOD_BOAT, MFBlocks.PLANKS.bloodwood());
+        woodenBoat(MFItems.TAINTED_BOAT, MFBlocks.PLANKS.tainted());
+        woodenBoat(MFItems.PALM_BOAT, MFBlocks.PLANKS.palm());
 
         chestBoat(MFItems.BLOODWOOD_CHEST_BOAT, MFItems.BLOODWOOD_BOAT);
         chestBoat(MFItems.TAINTED_CHEST_BOAT, MFItems.TAINTED_BOAT);

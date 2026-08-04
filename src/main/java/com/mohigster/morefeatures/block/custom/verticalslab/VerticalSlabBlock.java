@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.block.custom.verticalslab;
 
+import com.mohigster.morefeatures.block.collection.WoodSetType;
 import com.mohigster.morefeatures.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -60,6 +61,10 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
                 .setValue(WATERLOGGED, false));
 
         this.isFlammable = isFlammable;
+    }
+
+    public VerticalSlabBlock(WoodSetType woodType, Properties properties){
+        this(woodType.isFlammable(), properties);
     }
 
     @Nullable

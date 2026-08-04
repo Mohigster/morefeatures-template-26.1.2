@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "building",
-  "group": "charred",
+  "group": "charred_planks",
   "ingredients": [
-    "#morefeatures:logs/charred"
+    "#morefeatures:wood/logs/charred"
   ],
   "result": {
     "count": 4,

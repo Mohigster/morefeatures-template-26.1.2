@@ -2,10 +2,6 @@
   "values": [
     "morefeatures:fluorite_fence",
     "morefeatures:azurite_fence",
-    "morefeatures:bloodwood_fence",
-    "morefeatures:tainted_fence",
-    "morefeatures:palm_fence",
-    "morefeatures:decrepit_fence",
-    "morefeatures:pallid_fence"
+    "#morefeatures:wood/fence"
   ]
 }

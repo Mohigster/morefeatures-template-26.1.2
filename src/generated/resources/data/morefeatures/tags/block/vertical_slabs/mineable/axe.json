@@ -13,10 +13,6 @@
     "morefeatures:bamboo_vertical_slab",
     "morefeatures:bamboo_mosaic_vertical_slab",
     "morefeatures:pale_oak_vertical_slab",
-    "morefeatures:bloodwood_vertical_slab",
-    "morefeatures:tainted_vertical_slab",
-    "morefeatures:palm_vertical_slab",
-    "morefeatures:decrepit_vertical_slab",
-    "morefeatures:pallid_vertical_slab"
+    "#morefeatures:vertical_slabs/custom_wooden"
   ]
 }

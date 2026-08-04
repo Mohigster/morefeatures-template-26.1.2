@@ -2,11 +2,11 @@
   "type": "minecraft:crafting_shaped",
   "category": "building",
   "key": {
-    "T": "morefeatures:stripped_tainted_log"
+    "W": "morefeatures:stripped_tainted_log"
   },
   "pattern": [
-    "TT",
-    "TT"
+    "WW",
+    "WW"
   ],
   "result": {
     "count": 3,

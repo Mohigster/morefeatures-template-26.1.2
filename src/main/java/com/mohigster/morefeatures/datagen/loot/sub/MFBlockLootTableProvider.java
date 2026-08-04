@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.datagen.loot.sub;
 
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
 import com.mohigster.morefeatures.block.custom.BlueBerryBushBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabType;
@@ -26,6 +27,7 @@ import net.minecraft.world.level.storage.loot.predicates.LootItemBlockStatePrope
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraft.world.level.storage.loot.providers.number.UniformGenerator;
 import net.neoforged.neoforge.registries.DeferredBlock;
+import net.neoforged.neoforge.registries.DeferredItem;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.Set;
@@ -51,44 +53,11 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(MFBlocks.RAW_FLUORITE_BLOCK.get());
         this.dropSelf(MFBlocks.BISMUTH_BLOCK.get());
         this.dropSelf(MFBlocks.RAW_BISMUTH_BLOCK.get());
-        this.dropSelf(MFBlocks.BLOODWOOD_PLANKS.get());
-        this.dropSelf(MFBlocks.BLOODWOOD_LOG.get());
-        this.dropSelf(MFBlocks.BLOODWOOD.get());
-        this.dropSelf(MFBlocks.BLOODWOOD_FENCE.get());
-        this.dropSelf(MFBlocks.BLOODWOOD_FENCE_GATE.get());
-        this.dropSelf(MFBlocks.STRIPPED_BLOODWOOD_LOG.get());
-        this.dropSelf(MFBlocks.STRIPPED_BLOODWOOD.get());
         this.dropSelf(MFBlocks.BLOODWOOD_SAPLING.get());
-        this.dropSelf(MFBlocks.BLOODWOOD_BUTTON.get());
-        this.dropSelf(MFBlocks.BLOODWOOD_PRESSURE_PLATE.get());
-        this.dropSelf(MFBlocks.BLOODWOOD_SHELF.get());
-        this.dropSelf(MFBlocks.TAINTED_PLANKS.get());
-        this.dropSelf(MFBlocks.TAINTED_LOG.get());
-        this.dropSelf(MFBlocks.TAINTED_WOOD.get());
-        this.dropSelf(MFBlocks.TAINTED_FENCE.get());
-        this.dropSelf(MFBlocks.TAINTED_FENCE_GATE.get());
-        this.dropSelf(MFBlocks.TAINTED_BUTTON.get());
-        this.dropSelf(MFBlocks.TAINTED_PRESSURE_PLATE.get());
-        this.dropSelf(MFBlocks.TAINTED_SHELF.get());
-        this.dropSelf(MFBlocks.STRIPPED_TAINTED_LOG.get());
-        this.dropSelf(MFBlocks.STRIPPED_TAINTED_WOOD.get());
         this.dropSelf(MFBlocks.TEMPORAL_DILATOR.get());
         this.dropSelf(MFBlocks.TAINTED_SAPLING.get());
-        this.dropSelf(MFBlocks.CHARRED_PLANKS.get());
-        this.dropSelf(MFBlocks.CHARRED_STAIRS.get());
-        this.dropSelf(MFBlocks.CHARRED_STEM.get());
-        this.dropSelf(MFBlocks.CHARRED_HYPHAE.get());
-        this.dropSelf(MFBlocks.STRIPPED_CHARRED_STEM.get());
-        this.dropSelf(MFBlocks.STRIPPED_CHARRED_HYPHAE.get());
         this.dropSelf(MFBlocks.CHARRED_ROOTS.get());
-        this.dropSelf(MFBlocks.PALM_LOG.get());
-        this.dropSelf(MFBlocks.PALM_WOOD.get());
-        this.dropSelf(MFBlocks.STRIPPED_PALM_LOG.get());
-        this.dropSelf(MFBlocks.STRIPPED_PALM_WOOD.get());
         this.dropSelf(MFBlocks.PALM_SAPLING.get());
-        this.dropSelf(MFBlocks.PALM_PLANKS.get());
-        this.dropSelf(MFBlocks.PALM_FENCE_GATE.get());
-        this.dropSelf(MFBlocks.PALM_FENCE.get());
         this.dropSelf(MFBlocks.DECREPIT_SAPLING.get());
         this.dropSelf(MFBlocks.PALLID_SAPLING.get());
         this.dropSelf(MFBlocks.MAGIC_BLOCK.get());
@@ -98,10 +67,6 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(MFBlocks.FLUORITE_SHELF.get());
         this.dropSelf(MFBlocks.FLUORITE_FENCE.get());
         this.dropSelf(MFBlocks.FLUORITE_FENCE_GATE.get());
-        this.dropSelf(MFBlocks.BLOODWOOD_STAIRS.get());
-        this.dropSelf(MFBlocks.TAINTED_STAIRS.get());
-        this.dropSelf(MFBlocks.PALM_STAIRS.get());
-        this.dropSelf(MFBlocks.PALM_TRAPDOOR.get());
         this.dropSelf(MFBlocks.FLUORITE_TRAPDOOR.get());
         this.dropSelf(MFBlocks.COMPRESSOR_BLOCK.get());
         this.dropSelf(MFBlocks.AZURITE_BUTTON.get());
@@ -112,52 +77,42 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.dropSelf(MFBlocks.AZURITE_FENCE.get());
         this.dropSelf(MFBlocks.AZURITE_FENCE_GATE.get());
         this.dropSelf(MFBlocks.AZURITE_SHELF.get());
-        this.dropSelf(MFBlocks.PALM_PRESSURE_PLATE.get());
-        this.dropSelf(MFBlocks.PALM_BUTTON.get());
         this.dropSelf(MFBlocks.ROSE.get());
         this.dropSelf(MFBlocks.BLUE_ROSE.get());
         this.dropSelf(MFBlocks.EVIL_PORTAL.get());
-        this.dropSelf(MFBlocks.PALM_SHELF.get());
-        this.dropSelf(MFBlocks.DECREPIT_PLANKS.get());
-        this.dropSelf(MFBlocks.DECREPIT_WOOD.get());
-        this.dropSelf(MFBlocks.DECREPIT_LOG.get());
-        this.dropSelf(MFBlocks.DECREPIT_BUTTON.get());
-        this.dropSelf(MFBlocks.DECREPIT_PRESSURE_PLATE.get());
-        this.dropSelf(MFBlocks.DECREPIT_STAIRS.get());
-        this.dropSelf(MFBlocks.DECREPIT_FENCE.get());
-        this.dropSelf(MFBlocks.DECREPIT_FENCE_GATE.get());
-        this.dropSelf(MFBlocks.DECREPIT_SHELF.get());
         this.dropSelf(MFBlocks.TEST_PILLAR_BLOCK.get());
-        this.dropSelf(MFBlocks.STRIPPED_DECREPIT_WOOD.get());
-        this.dropSelf(MFBlocks.STRIPPED_DECREPIT_LOG.get());
-        this.dropSelf(MFBlocks.PALLID_PLANKS.get());
-        this.dropSelf(MFBlocks.PALLID_WOOD.get());
-        this.dropSelf(MFBlocks.PALLID_LOG.get());
-        this.dropSelf(MFBlocks.PALLID_BUTTON.get());
-        this.dropSelf(MFBlocks.PALLID_PRESSURE_PLATE.get());
-        this.dropSelf(MFBlocks.PALLID_STAIRS.get());
-        this.dropSelf(MFBlocks.PALLID_FENCE.get());
-        this.dropSelf(MFBlocks.PALLID_FENCE_GATE.get());
-        this.dropSelf(MFBlocks.PALLID_SHELF.get());
         this.dropSelf(MFBlocks.AZURITE_WALL.get());
-        this.dropSelf(MFBlocks.STRIPPED_PALLID_WOOD.get());
-        this.dropSelf(MFBlocks.STRIPPED_PALLID_LOG.get());
         this.dropSelf(MFBlocks.DECREPIT_ROOTS.get());
         this.dropSelf(MFBlocks.PALLID_ROOTS.get());
         this.dropSelf(MFBlocks.VOID_ANCHOR.get());
         this.dropSelf(MFBlocks.ICICLE.get());
+        this.dropSelf(MFBlocks.CHARRED_WART_BLOCK.get());
+        this.dropSelf(MFBlocks.CHARRED_FUNGUS.get());
         this.dropSelf(MFBlocks.CONCRETE_STAIRS);
         this.dropSelf(MFBlocks.CONCRETE_PILLAR);
+        this.dropSelf(MFBlocks.PLANKS);
+        this.dropSelf(MFBlocks.LOG);
+        this.dropSelf(MFBlocks.WOOD);
+        this.dropSelf(MFBlocks.STRIPPED_LOG);
+        this.dropSelf(MFBlocks.STRIPPED_WOOD);
+        this.dropSelf(MFBlocks.WOODEN_STAIRS);
+        this.dropSelf(MFBlocks.WOODEN_FENCE);
+        this.dropSelf(MFBlocks.WOODEN_FENCE_GATE);
+        this.dropSelf(MFBlocks.WOODEN_PRESSURE_PLATE);
+        this.dropSelf(MFBlocks.WOODEN_BUTTON);
+        this.dropSelf(MFBlocks.WOODEN_SHELF);
+        this.dropSelf(MFBlocks.WOODEN_TRAPDOOR);
 
         // POTTED PLANTS
 
         this.flowerPotDrops(MFBlocks.POTTED_ROSE.get(),MFBlocks.ROSE.get());
         this.flowerPotDrops(MFBlocks.POTTED_BLUE_ROSE.get(), MFBlocks.BLUE_ROSE.get());
-        this.flowerPotDrops(MFBlocks.POTTED_TAINTED_SAPLING.get(), MFBlocks.TAINTED_SAPLING.get());
-        this.flowerPotDrops(MFBlocks.POTTED_BLOODWOOD_SAPLING.get(), MFBlocks.BLOODWOOD_SAPLING.get());
-        this.flowerPotDrops(MFBlocks.POTTED_PALM_SAPLING.get(), MFBlocks.PALM_SAPLING.get());
-        this.flowerPotDrops(MFBlocks.POTTED_DECREPIT_SAPLING.get(), MFBlocks.DECREPIT_SAPLING.get());
-        this.flowerPotDrops(MFBlocks.POTTED_PALLID_SAPLING.get(), MFBlocks.PALLID_SAPLING.get());
+        this.flowerPotDrops(MFBlocks.POTTED_SAPLING.tainted().get(), MFBlocks.TAINTED_SAPLING.get());
+        this.flowerPotDrops(MFBlocks.POTTED_SAPLING.bloodwood().get(), MFBlocks.BLOODWOOD_SAPLING.get());
+        this.flowerPotDrops(MFBlocks.POTTED_SAPLING.palm().get(), MFBlocks.PALM_SAPLING.get());
+        this.flowerPotDrops(MFBlocks.POTTED_SAPLING.charred().get(), MFBlocks.CHARRED_FUNGUS.get());
+        this.flowerPotDrops(MFBlocks.POTTED_SAPLING.decrepit().get(), MFBlocks.DECREPIT_SAPLING.get());
+        this.flowerPotDrops(MFBlocks.POTTED_SAPLING.pallid().get(), MFBlocks.PALLID_SAPLING.get());
         this.flowerPotDrops(MFBlocks.POTTED_DECREPIT_ROOTS.get(), MFBlocks.DECREPIT_ROOTS.get());
         this.flowerPotDrops(MFBlocks.POTTED_PALLID_ROOTS.get(), MFBlocks.PALLID_ROOTS.get());
         this.flowerPotDrops(MFBlocks.POTTED_CHARRED_ROOTS.get(), MFBlocks.CHARRED_ROOTS.get());
@@ -177,24 +132,15 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
 
         this.slabDrops(MFBlocks.AZURITE_SLAB.get());
         this.slabDrops(MFBlocks.FLUORITE_SLAB.get());
-        this.slabDrops(MFBlocks.BLOODWOOD_SLAB.get());
-        this.slabDrops(MFBlocks.TAINTED_SLAB.get());
-        this.slabDrops(MFBlocks.PALM_SLAB.get());
-        this.slabDrops(MFBlocks.CHARRED_SLAB.get());
-        this.slabDrops(MFBlocks.DECREPIT_SLAB.get());
-        this.slabDrops(MFBlocks.PALLID_SLAB.get());
         this.slabDrops(MFBlocks.CONCRETE_SLAB);
+        this.slabDrops(MFBlocks.WOODEN_SLAB);
+
+        MFBlocks.WOODEN_DOOR.forEach(block -> this.doorDrops(block.get()));
 
         // VERTICAL SLABS
 
         this.verticalSlabDrops(MFBlocks.AZURITE_VERTICAL_SLAB.get());
         this.verticalSlabDrops(MFBlocks.FLUORITE_VERTICAL_SLAB.get());
-        this.verticalSlabDrops(MFBlocks.BLOODWOOD_VERTICAL_SLAB.get());
-        this.verticalSlabDrops(MFBlocks.TAINTED_VERTICAL_SLAB.get());
-        this.verticalSlabDrops(MFBlocks.PALM_VERTICAL_SLAB.get());
-        this.verticalSlabDrops(MFBlocks.CHARRED_VERTICAL_SLAB.get());
-        this.verticalSlabDrops(MFBlocks.DECREPIT_VERTICAL_SLAB.get());
-        this.verticalSlabDrops(MFBlocks.PALLID_VERTICAL_SLAB.get());
         this.verticalSlabDrops(MFBlocks.OAK_VERTICAL_SLAB.get());
         this.verticalSlabDrops(MFBlocks.SPRUCE_VERTICAL_SLAB.get());
         this.verticalSlabDrops(MFBlocks.BIRCH_VERTICAL_SLAB.get());
@@ -256,6 +202,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.verticalSlabDrops(MFBlocks.RESIN_BRICK_VERTICAL_SLAB.get());
 
         MFBlocks.CUT_COPPER_VERTICAL_SLAB.forEach(block -> this.verticalSlabDrops(block.get()));
+        this.verticalSlabDrops(MFBlocks.WOODEN_VERTICAL_SLAB);
 
         // Whilst the method name is the same, this method accepts a color collection rather than a block
         this.verticalSlabDrops(MFBlocks.WOOL_VERTICAL_SLAB);
@@ -268,7 +215,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.leavesDrops(MFBlocks.BLOODWOOD_LEAVES.get(), MFBlocks.BLOODWOOD_SAPLING.get());
         this.leavesDrops(MFBlocks.TAINTED_LEAVES.get(), MFBlocks.TAINTED_SAPLING.get());
         this.leavesDrops(MFBlocks.PALM_LEAVES.get(), MFBlocks.PALM_SAPLING.get());
-        this.leavesDrops(MFBlocks.DECREPIT_LEAVES.get(),MFBlocks.DECREPIT_SAPLING.get());
+        this.leavesDrops(MFBlocks.DECREPIT_LEAVES.get(), MFBlocks.DECREPIT_SAPLING.get());
         this.leavesDrops(MFBlocks.PALLID_LEAVES.get(), MFBlocks.PALLID_SAPLING.get());
 
         // SIGNS
@@ -277,22 +224,13 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.signDrops(MFBlocks.AZURITE_HANGING_SIGN.get(), MFBlocks.AZURITE_WALL_HANGING_SIGN.get(), MFItems.AZURITE_HANGING_SIGN.get());
         this.signDrops(MFBlocks.FLUORITE_SIGN.get(), MFBlocks.FLUORITE_WALL_SIGN.get(), MFItems.FLUORITE_SIGN.get());
         this.signDrops(MFBlocks.FLUORITE_HANGING_SIGN.get(), MFBlocks.FLUORITE_WALL_HANGING_SIGN.get(), MFItems.FLUORITE_HANGING_SIGN.get());
-        this.signDrops(MFBlocks.BLOODWOOD_SIGN.get(), MFBlocks.BLOODWOOD_WALL_SIGN.get(), MFItems.BLOODWOOD_SIGN.get());
-        this.signDrops(MFBlocks.BLOODWOOD_HANGING_SIGN.get(), MFBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(), MFItems.BLOODWOOD_HANGING_SIGN.get());
-        this.signDrops(MFBlocks.TAINTED_SIGN.get(), MFBlocks.TAINTED_WALL_SIGN.get(), MFItems.TAINTED_SIGN.get());
-        this.signDrops(MFBlocks.TAINTED_HANGING_SIGN.get(), MFBlocks.TAINTED_WALL_HANGING_SIGN.get(), MFItems.TAINTED_HANGING_SIGN.get());
-        this.signDrops(MFBlocks.PALM_SIGN.get(), MFBlocks.PALM_WALL_SIGN.get(), MFItems.PALM_SIGN.get());
-        this.signDrops(MFBlocks.PALM_HANGING_SIGN.get(), MFBlocks.PALM_WALL_HANGING_SIGN.get(), MFItems.PALM_HANGING_SIGN.get());
-        this.signDrops(MFBlocks.DECREPIT_SIGN.get(), MFBlocks.DECREPIT_WALL_SIGN.get(), MFItems.DECREPIT_SIGN.get());
-        this.signDrops(MFBlocks.DECREPIT_HANGING_SIGN.get(), MFBlocks.DECREPIT_WALL_HANGING_SIGN.get(), MFItems.DECREPIT_HANGING_SIGN.get());
-        this.signDrops(MFBlocks.PALLID_SIGN.get(), MFBlocks.PALLID_WALL_SIGN.get(), MFItems.PALLID_SIGN.get());
-        this.signDrops(MFBlocks.PALLID_HANGING_SIGN.get(), MFBlocks.PALLID_WALL_HANGING_SIGN.get(), MFItems.PALLID_HANGING_SIGN.get());
+        this.signDrops(MFBlocks.WOODEN_SIGN, MFBlocks.WOODEN_WALL_SIGN, MFItems.SIGN);
+        this.signDrops(MFBlocks.WOODEN_HANGING_SIGN, MFBlocks.WOODEN_WALL_HANGING_SIGN, MFItems.HANGING_SIGN);
 
         // DOOR
 
         this.doorDrops(MFBlocks.AZURITE_DOOR.get());
         this.doorDrops(MFBlocks.FLUORITE_DOOR.get());
-        this.doorDrops(MFBlocks.PALM_DOOR.get());
 
         // ORES
 
@@ -362,6 +300,11 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
     protected <T extends Block> void verticalSlabDrops(ColorCollection<DeferredBlock<T>> blockSet){
         blockSet.forEach(block -> this.verticalSlabDrops(block.get()));
     }
+
+    @SuppressWarnings("SameParameterValue")
+    protected <T extends Block> void verticalSlabDrops(WoodTypeCollection<DeferredBlock<T>> blockSet){
+        blockSet.forEach(block -> this.verticalSlabDrops(block.get()));
+    }
     
     protected void verticalSlabDrops(Block block){
         this.add(block, this::createVerticalSlabItemTable);
@@ -376,6 +319,11 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         blockSet.forEach(block -> this.slabDrops(block.get()));
     }
 
+    @SuppressWarnings("SameParameterValue")
+    protected <T extends Block> void slabDrops(WoodTypeCollection<DeferredBlock<T>> blockSet){
+        blockSet.forEach(block -> this.slabDrops(block.get()));
+    }
+
     protected void leavesDrops(Block leaves, Block sapling){
         this.add(leaves, this.createLeavesDrops(leaves, sapling, NORMAL_LEAVES_SAPLING_CHANCES));
     }
@@ -383,6 +331,12 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
     protected void signDrops(Block standing, Block wall, Item sign){
         this.add(standing, this.createSingleItemTable(sign));
         this.add(wall, this.createSingleItemTable(sign));
+    }
+
+    protected <B extends Block, I extends Item> void signDrops(WoodTypeCollection<DeferredBlock<B>> standing, WoodTypeCollection<DeferredBlock<B>> wall, WoodTypeCollection<DeferredItem<I>> item){
+        WoodTypeCollection.TYPES.forEach(type ->
+                this.signDrops(standing.pick(type).get(), wall.pick(type).get(), item.pick(type).get())
+        );
     }
 
     protected void oreDrops(Block ore, Item drop){
@@ -394,6 +348,10 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
     }
 
     protected <T extends Block> void dropSelf(ColorCollection<DeferredBlock<T>> blockSet){
+        blockSet.forEach(block -> this.dropSelf(block.get()));
+    }
+
+    protected <T extends Block> void dropSelf(WoodTypeCollection<DeferredBlock<T>> blockSet){
         blockSet.forEach(block -> this.dropSelf(block.get()));
     }
 

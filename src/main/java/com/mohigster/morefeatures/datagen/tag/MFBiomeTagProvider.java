@@ -21,36 +21,36 @@ public class MFBiomeTagProvider extends TagsProvider<Biome> {
 
     @Override
     protected void addTags(HolderLookup.@NonNull Provider provider) {
-        tag(BiomeTags.IS_OVERWORLD)
+        this.tag(BiomeTags.IS_OVERWORLD)
                 .addOptional(MFBiomes.TAINTED_FOREST)
                 .addOptional(MFBiomes.ICE_CAVES)
                 .addOptional(MFBiomes.BLOODWOOD_FOREST);
 
-        tag(BiomeTags.IS_END)
+        this.tag(BiomeTags.IS_END)
                 .addOptional(MFBiomes.END_ROT)
                 .addOptional(MFBiomes.DECREPIT_FOREST)
                 .addOptional(MFBiomes.PALLID_FOREST);
 
-        tag(BiomeTags.IS_NETHER)
+        this.tag(BiomeTags.IS_NETHER)
                 .addOptional(MFBiomes.CHARRED_FOREST);
 
-        tag(MFBiomeTags.NETHER_FOREST)
+        this.tag(MFBiomeTags.NETHER_FOREST)
                 .addOptional(MFBiomes.CHARRED_FOREST)
                 .addOptional(Biomes.WARPED_FOREST)
                 .addOptional(Biomes.CRIMSON_FOREST);
 
-        tag(MFBiomeTags.EVIL_FOREST)
+        this.tag(MFBiomeTags.EVIL_FOREST)
                 .addOptional(MFBiomes.BLOODWOOD_FOREST)
                 .addOptional(MFBiomes.TAINTED_FOREST);
 
-        tag(MFBiomeTags.END_FOREST)
+        this.tag(MFBiomeTags.END_FOREST)
                 .addOptional(MFBiomes.DECREPIT_FOREST)
                 .addOptional(MFBiomes.PALLID_FOREST);
 
-        tag(MFBiomeTags.DESERT)
+        this.tag(MFBiomeTags.DESERT)
                 .addOptional(Biomes.DESERT);
 
-        tag(MFBiomeTags.OCEAN_CITADEL_BIOMES)
+        this.tag(MFBiomeTags.OCEAN_CITADEL_BIOMES)
                 .addOptionalTag(BiomeTags.IS_OCEAN);
     }
 }

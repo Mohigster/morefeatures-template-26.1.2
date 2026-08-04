@@ -29,16 +29,18 @@ public class MFBlockEntities {
                     MFBlocks.AZURITE_WALL_SIGN.get(),
                     MFBlocks.FLUORITE_SIGN.get(),
                     MFBlocks.FLUORITE_WALL_SIGN.get(),
-                    MFBlocks.BLOODWOOD_SIGN.get(),
-                    MFBlocks.BLOODWOOD_WALL_SIGN.get(),
-                    MFBlocks.TAINTED_SIGN.get(),
-                    MFBlocks.TAINTED_WALL_SIGN.get(),
-                    MFBlocks.PALM_SIGN.get(),
-                    MFBlocks.PALM_WALL_SIGN.get(),
-                    MFBlocks.DECREPIT_SIGN.get(),
-                    MFBlocks.DECREPIT_WALL_SIGN.get(),
-                    MFBlocks.PALLID_SIGN.get(),
-                    MFBlocks.PALLID_WALL_SIGN.get()
+                    MFBlocks.WOODEN_SIGN.bloodwood().get(),
+                    MFBlocks.WOODEN_WALL_SIGN.bloodwood().get(),
+                    MFBlocks.WOODEN_SIGN.tainted().get(),
+                    MFBlocks.WOODEN_WALL_SIGN.tainted().get(),
+                    MFBlocks.WOODEN_SIGN.palm().get(),
+                    MFBlocks.WOODEN_WALL_SIGN.palm().get(),
+                    MFBlocks.WOODEN_SIGN.charred().get(),
+                    MFBlocks.WOODEN_WALL_SIGN.charred().get(),
+                    MFBlocks.WOODEN_SIGN.decrepit().get(),
+                    MFBlocks.WOODEN_WALL_SIGN.decrepit().get(),
+                    MFBlocks.WOODEN_SIGN.pallid().get(),
+                    MFBlocks.WOODEN_WALL_SIGN.pallid().get()
             ));
 
     public static final Supplier<BlockEntityType<MFHangingSignBlockEntity>> MF_HANGING_SIGN_BE =
@@ -48,16 +50,18 @@ public class MFBlockEntities {
                     MFBlocks.AZURITE_WALL_HANGING_SIGN.get(),
                     MFBlocks.FLUORITE_HANGING_SIGN.get(),
                     MFBlocks.FLUORITE_WALL_HANGING_SIGN.get(),
-                    MFBlocks.BLOODWOOD_HANGING_SIGN.get(),
-                    MFBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(),
-                    MFBlocks.TAINTED_HANGING_SIGN.get(),
-                    MFBlocks.TAINTED_WALL_HANGING_SIGN.get(),
-                    MFBlocks.PALM_HANGING_SIGN.get(),
-                    MFBlocks.PALM_WALL_HANGING_SIGN.get(),
-                    MFBlocks.DECREPIT_HANGING_SIGN.get(),
-                    MFBlocks.DECREPIT_WALL_HANGING_SIGN.get(),
-                    MFBlocks.PALLID_HANGING_SIGN.get(),
-                    MFBlocks.PALLID_WALL_HANGING_SIGN.get()
+                    MFBlocks.WOODEN_HANGING_SIGN.bloodwood().get(),
+                    MFBlocks.WOODEN_WALL_HANGING_SIGN.bloodwood().get(),
+                    MFBlocks.WOODEN_HANGING_SIGN.tainted().get(),
+                    MFBlocks.WOODEN_WALL_HANGING_SIGN.tainted().get(),
+                    MFBlocks.WOODEN_HANGING_SIGN.palm().get(),
+                    MFBlocks.WOODEN_WALL_HANGING_SIGN.palm().get(),
+                    MFBlocks.WOODEN_HANGING_SIGN.charred().get(),
+                    MFBlocks.WOODEN_WALL_HANGING_SIGN.charred().get(),
+                    MFBlocks.WOODEN_HANGING_SIGN.decrepit().get(),
+                    MFBlocks.WOODEN_WALL_HANGING_SIGN.decrepit().get(),
+                    MFBlocks.WOODEN_HANGING_SIGN.pallid().get(),
+                    MFBlocks.WOODEN_WALL_HANGING_SIGN.pallid().get()
             ));
 
     public static final Supplier<BlockEntityType<MFShelfBlockEntity>> MF_SHELF_BE =
@@ -65,11 +69,12 @@ public class MFBlockEntities {
                     MFShelfBlockEntity::new,
                     MFBlocks.AZURITE_SHELF.get(),
                     MFBlocks.FLUORITE_SHELF.get(),
-                    MFBlocks.BLOODWOOD_SHELF.get(),
-                    MFBlocks.TAINTED_SHELF.get(),
-                    MFBlocks.PALM_SHELF.get(),
-                    MFBlocks.DECREPIT_SHELF.get(),
-                    MFBlocks.PALLID_SHELF.get()
+                    MFBlocks.WOODEN_SHELF.bloodwood().get(),
+                    MFBlocks.WOODEN_SHELF.tainted().get(),
+                    MFBlocks.WOODEN_SHELF.palm().get(),
+                    MFBlocks.WOODEN_SHELF.charred().get(),
+                    MFBlocks.WOODEN_SHELF.decrepit().get(),
+                    MFBlocks.WOODEN_SHELF.pallid().get()
             ));
 
     public static void register(IEventBus eventBus) {

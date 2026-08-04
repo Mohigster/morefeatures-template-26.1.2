@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/door_top_left_open",
+  "textures": {
+    "bottom": "morefeatures:block/decrepit_door_bottom",
+    "top": "morefeatures:block/decrepit_door_top"
+  }
+}

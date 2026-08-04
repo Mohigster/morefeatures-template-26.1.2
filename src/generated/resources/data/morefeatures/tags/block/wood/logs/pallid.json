@@ -1,8 +1,8 @@
 {
   "values": [
-    "morefeatures:stripped_pallid_log",
     "morefeatures:pallid_log",
-    "morefeatures:stripped_pallid_wood",
-    "morefeatures:pallid_wood"
+    "morefeatures:pallid_wood",
+    "morefeatures:stripped_pallid_log",
+    "morefeatures:stripped_pallid_wood"
   ]
 }

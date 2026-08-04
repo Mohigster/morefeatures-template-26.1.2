@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.item;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.asset.MFEquipmentAssets;
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
 import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorItem;
 import com.mohigster.morefeatures.item.custom.trident.MFTridentItem;
 import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
@@ -19,7 +20,6 @@ import com.mohigster.morefeatures.material.MFArmorMaterials;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.DamageTypeTags;
-import net.minecraft.tags.TagKey;
 import net.minecraft.util.Unit;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -199,7 +199,7 @@ public class MFItems {
                     .trimMaterial(MFTrimMaterials.CARBON)
             ));
 
-    public static final DeferredItem<Item> CARBON_BOW = ITEMS.registerItem("carbon_bow",
+    public static final DeferredItem<Item> CARBON_BOW = registerItem(MFItemIds.CARBON_BOW,
             properties -> new BowItem(properties
                     .durability(856)
                     .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
@@ -207,7 +207,7 @@ public class MFItems {
                     .fireResistant()
             ));
 
-    public static final DeferredItem<Item> CARBON_CROSSBOW = ITEMS.registerItem("carbon_crossbow",
+    public static final DeferredItem<Item> CARBON_CROSSBOW = registerItem(MFItemIds.CARBON_CROSSBOW,
             properties -> new CrossbowItem(properties
                     .durability(885)
                     .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
@@ -216,7 +216,7 @@ public class MFItems {
                     .fireResistant()
             ));
 
-    public static final DeferredItem<Item> CARBON_WOLF_ARMOR = ITEMS.registerItem("carbon_wolf_armor",
+    public static final DeferredItem<Item> CARBON_WOLF_ARMOR = registerItem(MFItemIds.CARBON_WOLF_ARMOR,
             properties -> new Item(properties
                     .durability(256)
                     .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
@@ -225,7 +225,7 @@ public class MFItems {
                     .wolfArmor(MFArmorMaterials.CARBON)
             ));
 
-    public static final DeferredItem<Item> CARBON_ELYTRA = ITEMS.registerItem("carbon_elytra",
+    public static final DeferredItem<Item> CARBON_ELYTRA = registerItem(MFItemIds.CARBON_ELYTRA,
             properties -> new Item(properties
                     .durability(893)
                     .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
@@ -258,7 +258,7 @@ public class MFItems {
                     MFItemIds.CARBON_TRIDENT.identifier()
             ));
 
-    public static final DeferredItem<Item> CARBON_SHIELD = ITEMS.registerItem("carbon_shield",
+    public static final DeferredItem<Item> CARBON_SHIELD = registerItem(MFItemIds.CARBON_SHIELD,
             properties -> new ShieldItem(properties
                     .fireResistant()
                     .enchantable(15)
@@ -356,7 +356,7 @@ public class MFItems {
                     .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
             ));
 
-    public static final DeferredItem<Item> BISMUTH_SHOVEL = ITEMS.registerItem("bismuth_shovel",
+    public static final DeferredItem<Item> BISMUTH_SHOVEL = registerItem(MFItemIds.BISMUTH_SHOVEL,
             properties -> new ShovelItem(BISMUTH_TOOL_MATERIAL, 1f, -3.0f, properties
                     .enchantable(15)
                     .fireResistant()
@@ -364,7 +364,7 @@ public class MFItems {
                     .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
             ));
 
-    public static final DeferredItem<Item> BISMUTH_HOE = ITEMS.registerItem("bismuth_hoe",
+    public static final DeferredItem<Item> BISMUTH_HOE = registerItem(MFItemIds.BISMUTH_HOE,
             properties -> new HoeItem(BISMUTH_TOOL_MATERIAL, -5.4f, 1f, properties
                     .enchantable(15)
                     .fireResistant()
@@ -401,7 +401,7 @@ public class MFItems {
                     .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
             ));
 
-    public static final DeferredItem<Item> BISMUTH_HORSE_ARMOR = ITEMS.registerItem("bismuth_horse_armor",
+    public static final DeferredItem<Item> BISMUTH_HORSE_ARMOR = registerItem(MFItemIds.BISMUTH_HORSE_ARMOR,
             properties -> new Item(properties
                     .horseArmor(MFArmorMaterials.BISMUTH)
                     .rarity(Rarity.RARE)
@@ -490,95 +490,27 @@ public class MFItems {
                     )
             );
 
-    public static final DeferredItem<Item> BLOODWOOD_SIGN =
-            registerItem(MFItemIds.BLOODWOOD_SIGN, properties ->
-                    new SignItem(
-                            MFBlocks.BLOODWOOD_SIGN.get(),
-                            MFBlocks.BLOODWOOD_WALL_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
+    public static final WoodTypeCollection<DeferredItem<Item>> SIGN = WoodTypeCollection.registerItems(
+            MFItemIds.SIGN,
+            MFItems::registerItem,
+            (wood, props) -> new SignItem(
+                    MFBlocks.WOODEN_SIGN.pick(wood).get(),
+                    MFBlocks.WOODEN_WALL_SIGN.pick(wood).get(),
+                    props
+            ),
+            (_, props) -> props.stacksTo(16)
+    );
 
-    public static final DeferredItem<Item> BLOODWOOD_HANGING_SIGN =
-            registerItem(MFItemIds.BLOODWOOD_HANGING_SIGN, properties ->
-                    new HangingSignItem(
-                            MFBlocks.BLOODWOOD_HANGING_SIGN.get(),
-                            MFBlocks.BLOODWOOD_WALL_HANGING_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
-
-    public static final DeferredItem<Item> TAINTED_SIGN =
-            registerItem(MFItemIds.TAINTED_SIGN, properties ->
-                    new SignItem(
-                            MFBlocks.TAINTED_SIGN.get(),
-                            MFBlocks.TAINTED_WALL_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
-
-    public static final DeferredItem<Item> TAINTED_HANGING_SIGN =
-            registerItem(MFItemIds.TAINTED_HANGING_SIGN, properties ->
-                    new HangingSignItem(
-                            MFBlocks.TAINTED_HANGING_SIGN.get(),
-                            MFBlocks.TAINTED_WALL_HANGING_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
-
-    public static final DeferredItem<Item> PALM_SIGN =
-            registerItem(MFItemIds.PALM_SIGN, properties ->
-                    new SignItem(
-                            MFBlocks.PALM_SIGN.get(),
-                            MFBlocks.PALM_WALL_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
-
-    public static final DeferredItem<Item> PALM_HANGING_SIGN =
-            registerItem(MFItemIds.PALM_HANGING_SIGN, properties ->
-                    new HangingSignItem(
-                            MFBlocks.PALM_HANGING_SIGN.get(),
-                            MFBlocks.PALM_WALL_HANGING_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
-
-    public static final DeferredItem<Item> PALLID_SIGN =
-            registerItem(MFItemIds.PALLID_SIGN, properties ->
-                    new SignItem(
-                            MFBlocks.PALLID_SIGN.get(),
-                            MFBlocks.PALLID_WALL_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
-
-    public static final DeferredItem<Item> PALLID_HANGING_SIGN =
-            registerItem(MFItemIds.PALLID_HANGING_SIGN, properties ->
-                    new HangingSignItem(
-                            MFBlocks.PALLID_HANGING_SIGN.get(),
-                            MFBlocks.PALLID_WALL_HANGING_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
-
-    public static final DeferredItem<Item> DECREPIT_SIGN =
-            registerItem(MFItemIds.DECREPIT_SIGN, properties ->
-                    new SignItem(
-                            MFBlocks.DECREPIT_SIGN.get(),
-                            MFBlocks.DECREPIT_WALL_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
-
-    public static final DeferredItem<Item> DECREPIT_HANGING_SIGN =
-            registerItem(MFItemIds.DECREPIT_HANGING_SIGN, properties ->
-                    new HangingSignItem(
-                            MFBlocks.DECREPIT_HANGING_SIGN.get(),
-                            MFBlocks.DECREPIT_WALL_HANGING_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
+    public static final WoodTypeCollection<DeferredItem<Item>> HANGING_SIGN = WoodTypeCollection.registerItems(
+            MFItemIds.HANGING_SIGN,
+            MFItems::registerItem,
+            (wood, props) -> new HangingSignItem(
+                    MFBlocks.WOODEN_HANGING_SIGN.pick(wood).get(),
+                    MFBlocks.WOODEN_WALL_HANGING_SIGN.pick(wood).get(),
+                    props
+            ),
+            (_, props) -> props.stacksTo(16)
+    );
 
     // Boat items
 

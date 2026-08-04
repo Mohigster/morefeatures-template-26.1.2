@@ -35,48 +35,53 @@ public class MFDataMapsProvider extends DataMapProvider {
         final var cutCopperVSList = MFBlocks.CUT_COPPER_VERTICAL_SLAB.asList();
         final var cutCopperPillarList = MFBlocks.CUT_COPPER_PILLAR.asList();
 
+        final var logList = MFBlocks.LOG.asList();
+        final var woodList =  MFBlocks.WOOD.asList();
+        final var strippedLogList = MFBlocks.STRIPPED_LOG.asList();
+        final var strippedWoodList = MFBlocks.STRIPPED_WOOD.asList();
+
         final var bonemealMorphs = builder(MFDataMaps.BONEMEAL_MORPHS);
         bonemealMorphs.add(Blocks.NETHERRACK.builtInRegistryHolder(), new BonemealMorphData(List.of(MFBlocks.CHARRED_NYLIUM.get(), Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM)), false);
         bonemealMorphs.add(Blocks.END_STONE.builtInRegistryHolder(), new BonemealMorphData(List.of(MFBlocks.DECREPIT_NULLIUM.get(), MFBlocks.PALLID_NULLIUM.get())), false);
 
         final var oxidizables = builder(NeoForgeDataMaps.OXIDIZABLES);
-        oxidizables.add(cutCopperVSList.getFirst().getKey(), new Oxidizable(cutCopperVSList.get(1).get()), false);
-        oxidizables.add(cutCopperVSList.get(1).getKey(), new Oxidizable(cutCopperVSList.get(2).get()), false);
-        oxidizables.add(cutCopperVSList.get(2).getKey(), new Oxidizable(cutCopperVSList.get(3).get()), false);
+        oxidizables.add(cutCopperVSList.getFirst(), new Oxidizable(cutCopperVSList.get(1).get()), false);
+        oxidizables.add(cutCopperVSList.get(1), new Oxidizable(cutCopperVSList.get(2).get()), false);
+        oxidizables.add(cutCopperVSList.get(2), new Oxidizable(cutCopperVSList.get(3).get()), false);
 
-        oxidizables.add(cutCopperPillarList.getFirst().getKey(), new Oxidizable(cutCopperPillarList.get(1).get()), false);
-        oxidizables.add(cutCopperPillarList.get(1).getKey(), new Oxidizable(cutCopperPillarList.get(2).get()), false);
-        oxidizables.add(cutCopperPillarList.get(2).getKey(), new Oxidizable(cutCopperPillarList.get(3).get()), false);
+        oxidizables.add(cutCopperPillarList.getFirst(), new Oxidizable(cutCopperPillarList.get(1).get()), false);
+        oxidizables.add(cutCopperPillarList.get(1), new Oxidizable(cutCopperPillarList.get(2).get()), false);
+        oxidizables.add(cutCopperPillarList.get(2), new Oxidizable(cutCopperPillarList.get(3).get()), false);
 
         final var waxables = builder(NeoForgeDataMaps.WAXABLES);
-        waxables.add(cutCopperVSList.getFirst().getKey(), new Waxable(cutCopperVSList.get(4).get()), false);
-        waxables.add(cutCopperVSList.get(1).getKey(), new Waxable(cutCopperVSList.get(5).get()), false);
-        waxables.add(cutCopperVSList.get(2).getKey(), new Waxable(cutCopperVSList.get(6).get()), false);
-        waxables.add(cutCopperVSList.get(3).getKey(), new Waxable(cutCopperVSList.getLast().get()), false);
+        waxables.add(cutCopperVSList.getFirst(), new Waxable(cutCopperVSList.get(4).get()), false);
+        waxables.add(cutCopperVSList.get(1), new Waxable(cutCopperVSList.get(5).get()), false);
+        waxables.add(cutCopperVSList.get(2), new Waxable(cutCopperVSList.get(6).get()), false);
+        waxables.add(cutCopperVSList.get(3), new Waxable(cutCopperVSList.getLast().get()), false);
 
-        waxables.add(cutCopperPillarList.getFirst().getKey(), new Waxable(cutCopperPillarList.get(4).get()), false);
-        waxables.add(cutCopperPillarList.get(1).getKey(), new Waxable(cutCopperPillarList.get(5).get()), false);
-        waxables.add(cutCopperPillarList.get(2).getKey(), new Waxable(cutCopperPillarList.get(6).get()), false);
-        waxables.add(cutCopperPillarList.get(3).getKey(), new Waxable(cutCopperPillarList.getLast().get()), false);
+        waxables.add(cutCopperPillarList.getFirst(), new Waxable(cutCopperPillarList.get(4).get()), false);
+        waxables.add(cutCopperPillarList.get(1), new Waxable(cutCopperPillarList.get(5).get()), false);
+        waxables.add(cutCopperPillarList.get(2), new Waxable(cutCopperPillarList.get(6).get()), false);
+        waxables.add(cutCopperPillarList.get(3), new Waxable(cutCopperPillarList.getLast().get()), false);
 
         final var strippables = builder(NeoForgeDataMaps.STRIPPABLES);
 
-        strippables.add(MFBlockItemIds.BLOODWOOD_LOG.block(), new Strippable(MFBlocks.STRIPPED_BLOODWOOD_LOG.get()), false);
-        strippables.add(MFBlockItemIds.BLOODWOOD.block(), new Strippable(MFBlocks.STRIPPED_BLOODWOOD.get()), false);
+        strippables.add(logList.getFirst(), new Strippable(strippedLogList.getFirst().get()), false);
+        strippables.add(woodList.getFirst(), new Strippable(strippedWoodList.getFirst().get()), false);
 
-        strippables.add(MFBlockItemIds.TAINTED_LOG.block(), new Strippable(MFBlocks.STRIPPED_TAINTED_LOG.get()), false);
-        strippables.add(MFBlockItemIds.TAINTED_WOOD.block(), new Strippable(MFBlocks.STRIPPED_TAINTED_WOOD.get()), false);
+        strippables.add(logList.get(1), new Strippable(strippedLogList.get(1).get()), false);
+        strippables.add(woodList.get(1), new Strippable(strippedWoodList.get(1).get()), false);
 
-        strippables.add(MFBlockItemIds.PALM_LOG.block(), new Strippable(MFBlocks.STRIPPED_PALM_LOG.get()), false);
-        strippables.add(MFBlockItemIds.PALM_WOOD.block(), new Strippable(MFBlocks.STRIPPED_PALM_WOOD.get()), false);
+        strippables.add(logList.get(2), new Strippable(strippedLogList.get(2).get()), false);
+        strippables.add(woodList.get(2), new Strippable(strippedWoodList.get(2).get()), false);
 
-        strippables.add(MFBlockItemIds.CHARRED_STEM.block(), new Strippable(MFBlocks.STRIPPED_CHARRED_STEM.get()), false);
-        strippables.add(MFBlockItemIds.CHARRED_HYPHAE.block(), new Strippable(MFBlocks.STRIPPED_CHARRED_HYPHAE.get()), false);
+        strippables.add(logList.get(3), new Strippable(strippedLogList.get(3).get()), false);
+        strippables.add(woodList.get(3), new Strippable(strippedWoodList.get(3).get()), false);
 
-        strippables.add(MFBlockItemIds.DECREPIT_LOG.block(), new Strippable(MFBlocks.STRIPPED_DECREPIT_LOG.get()), false);
-        strippables.add(MFBlockItemIds.DECREPIT_WOOD.block(), new Strippable(MFBlocks.STRIPPED_DECREPIT_WOOD.get()), false);
+        strippables.add(logList.get(4), new Strippable(strippedLogList.get(4).get()), false);
+        strippables.add(woodList.get(4), new Strippable(strippedWoodList.get(4).get()), false);
 
-        strippables.add(MFBlockItemIds.PALLID_LOG.block(), new Strippable(MFBlocks.STRIPPED_PALLID_LOG.get()), false);
-        strippables.add(MFBlockItemIds.PALLID_WOOD.block(), new Strippable(MFBlocks.STRIPPED_PALLID_WOOD.get()), false);
+        strippables.add(logList.getLast(), new Strippable(strippedLogList.getLast().get()), false);
+        strippables.add(woodList.getLast(), new Strippable(strippedWoodList.getLast().get()), false);
     }
 }

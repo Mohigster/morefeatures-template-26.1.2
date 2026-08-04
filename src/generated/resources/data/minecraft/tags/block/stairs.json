@@ -1,9 +1,5 @@
 {
   "values": [
-    "morefeatures:tainted_stairs",
-    "morefeatures:bloodwood_stairs",
-    "morefeatures:palm_stairs",
-    "morefeatures:decrepit_stairs",
-    "morefeatures:pallid_stairs"
+    "#morefeatures:wood/stairs"
   ]
 }

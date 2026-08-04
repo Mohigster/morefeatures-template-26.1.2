@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.references;
 
+import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
 import net.minecraft.references.BlockItemId;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.level.block.ColorCollection;
@@ -8,102 +9,29 @@ import net.minecraft.world.level.block.WeatheringCopperCollection;
 public class MFBlockItemIds {
 
     // --- Bloodwood ---
-    public static final BlockItemId BLOODWOOD_LOG = createId("bloodwood_log");
-    public static final BlockItemId BLOODWOOD = createId("bloodwood");
-    public static final BlockItemId BLOODWOOD_PLANKS = createId("bloodwood_planks");
-    public static final BlockItemId STRIPPED_BLOODWOOD = createId("stripped_bloodwood");
-    public static final BlockItemId STRIPPED_BLOODWOOD_LOG = createId("stripped_bloodwood_log");
-    public static final BlockItemId BLOODWOOD_STAIRS = createId("bloodwood_stairs");
-    public static final BlockItemId BLOODWOOD_SLAB = createId("bloodwood_slab");
-    public static final BlockItemId BLOODWOOD_VERTICAL_SLAB = createId("bloodwood_vertical_slab");
-    public static final BlockItemId BLOODWOOD_FENCE = createId("bloodwood_fence");
-    public static final BlockItemId BLOODWOOD_FENCE_GATE = createId("bloodwood_fence_gate");
-    public static final BlockItemId BLOODWOOD_PRESSURE_PLATE = createId("bloodwood_pressure_plate");
-    public static final BlockItemId BLOODWOOD_BUTTON = createId("bloodwood_button");
-    public static final BlockItemId BLOODWOOD_SHELF = createId("bloodwood_shelf");
     public static final BlockItemId BLOODWOOD_LEAVES = createId("bloodwood_leaves");
     public static final BlockItemId BLOODWOOD_SAPLING = createId("bloodwood_sapling");
 
     // --- Tainted ---
-    public static final BlockItemId TAINTED_LOG = createId("tainted_log");
-    public static final BlockItemId TAINTED_WOOD = createId("tainted_wood");
-    public static final BlockItemId TAINTED_PLANKS = createId("tainted_planks");
-    public static final BlockItemId STRIPPED_TAINTED_WOOD = createId("stripped_tainted_wood");
-    public static final BlockItemId STRIPPED_TAINTED_LOG = createId("stripped_tainted_log");
-    public static final BlockItemId TAINTED_STAIRS = createId("tainted_stairs");
-    public static final BlockItemId TAINTED_FENCE = createId("tainted_fence");
-    public static final BlockItemId TAINTED_FENCE_GATE = createId("tainted_fence_gate");
-    public static final BlockItemId TAINTED_SLAB = createId("tainted_slab");
-    public static final BlockItemId TAINTED_VERTICAL_SLAB = createId("tainted_vertical_slab");
-    public static final BlockItemId TAINTED_PRESSURE_PLATE = createId("tainted_pressure_plate");
-    public static final BlockItemId TAINTED_BUTTON = createId("tainted_button");
-    public static final BlockItemId TAINTED_SHELF = createId("tainted_shelf");
     public static final BlockItemId TAINTED_LEAVES = createId("tainted_leaves");
     public static final BlockItemId TAINTED_SAPLING = createId("tainted_sapling");
 
     // --- Palm ---
-    public static final BlockItemId PALM_LOG = createId("palm_log");
-    public static final BlockItemId PALM_WOOD = createId("palm_wood");
-    public static final BlockItemId PALM_PLANKS = createId("palm_planks");
-    public static final BlockItemId STRIPPED_PALM_WOOD = createId("stripped_palm_wood");
-    public static final BlockItemId STRIPPED_PALM_LOG = createId("stripped_palm_log");
-    public static final BlockItemId PALM_STAIRS = createId("palm_stairs");
-    public static final BlockItemId PALM_SLAB = createId("palm_slab");
-    public static final BlockItemId PALM_VERTICAL_SLAB = createId("palm_vertical_slab");
-    public static final BlockItemId PALM_FENCE = createId("palm_fence");
-    public static final BlockItemId PALM_FENCE_GATE = createId("palm_fence_gate");
-    public static final BlockItemId PALM_PRESSURE_PLATE = createId("palm_pressure_plate");
-    public static final BlockItemId PALM_BUTTON = createId("palm_button");
-    public static final BlockItemId PALM_DOOR = createId("palm_door");
-    public static final BlockItemId PALM_TRAPDOOR = createId("palm_trapdoor");
-    public static final BlockItemId PALM_SHELF = createId("palm_shelf");
     public static final BlockItemId PALM_LEAVES = createId("palm_leaves");
     public static final BlockItemId PALM_SAPLING = createId("palm_sapling");
 
-    public static final BlockItemId CHARRED_STEM = createId("charred_stem");
-    public static final BlockItemId CHARRED_HYPHAE = createId("charred_hyphae");
-    public static final BlockItemId CHARRED_PLANKS = createId("charred_planks");
-    public static final BlockItemId STRIPPED_CHARRED_STEM = createId("stripped_charred_stem");
-    public static final BlockItemId STRIPPED_CHARRED_HYPHAE = createId("stripped_charred_hyphae");
-    public static final BlockItemId CHARRED_STAIRS = createId("charred_stairs");
-    public static final BlockItemId CHARRED_SLAB = createId("charred_slab");
-    public static final BlockItemId CHARRED_VERTICAL_SLAB = createId("charred_vertical_slab");
     public static final BlockItemId CHARRED_ROOTS = createId("charred_roots");
+    public static final BlockItemId CHARRED_WART_BLOCK = createId("charred_wart_block");
+    public static final BlockItemId CHARRED_FUNGUS = createId("charred_fungus");
     public static final BlockItemId CHARRED_NYLIUM = createId("charred_nylium");
 
     // --- Decrepit ---
-    public static final BlockItemId DECREPIT_LOG = createId("decrepit_log");
-    public static final BlockItemId DECREPIT_WOOD = createId("decrepit_wood");
-    public static final BlockItemId DECREPIT_PLANKS = createId("decrepit_planks");
-    public static final BlockItemId STRIPPED_DECREPIT_WOOD = createId("stripped_decrepit_wood");
-    public static final BlockItemId STRIPPED_DECREPIT_LOG = createId("stripped_decrepit_log");
-    public static final BlockItemId DECREPIT_STAIRS = createId("decrepit_stairs");
-    public static final BlockItemId DECREPIT_SLAB = createId("decrepit_slab");
-    public static final BlockItemId DECREPIT_VERTICAL_SLAB = createId("decrepit_vertical_slab");
-    public static final BlockItemId DECREPIT_FENCE = createId("decrepit_fence");
-    public static final BlockItemId DECREPIT_FENCE_GATE = createId("decrepit_fence_gate");
-    public static final BlockItemId DECREPIT_PRESSURE_PLATE = createId("decrepit_pressure_plate");
-    public static final BlockItemId DECREPIT_BUTTON = createId("decrepit_button");
-    public static final BlockItemId DECREPIT_SHELF = createId("decrepit_shelf");
     public static final BlockItemId DECREPIT_LEAVES = createId("decrepit_leaves");
     public static final BlockItemId DECREPIT_SAPLING = createId("decrepit_sapling");
     public static final BlockItemId DECREPIT_ROOTS = createId("decrepit_roots");
     public static final BlockItemId DECREPIT_NULLIUM = createId("decrepit_nullium");
 
     // --- Pallid ---
-    public static final BlockItemId PALLID_LOG = createId("pallid_log");
-    public static final BlockItemId PALLID_WOOD = createId("pallid_wood");
-    public static final BlockItemId PALLID_PLANKS = createId("pallid_planks");
-    public static final BlockItemId STRIPPED_PALLID_WOOD = createId("stripped_pallid_wood");
-    public static final BlockItemId STRIPPED_PALLID_LOG = createId("stripped_pallid_log");
-    public static final BlockItemId PALLID_STAIRS = createId("pallid_stairs");
-    public static final BlockItemId PALLID_SLAB = createId("pallid_slab");
-    public static final BlockItemId PALLID_VERTICAL_SLAB = createId("pallid_vertical_slab");
-    public static final BlockItemId PALLID_FENCE = createId("pallid_fence");
-    public static final BlockItemId PALLID_FENCE_GATE = createId("pallid_fence_gate");
-    public static final BlockItemId PALLID_PRESSURE_PLATE = createId("pallid_pressure_plate");
-    public static final BlockItemId PALLID_BUTTON = createId("pallid_button");
-    public static final BlockItemId PALLID_SHELF = createId("pallid_shelf");
     public static final BlockItemId PALLID_LEAVES = createId("pallid_leaves");
     public static final BlockItemId PALLID_SAPLING = createId("pallid_sapling");
     public static final BlockItemId PALLID_ROOTS = createId("pallid_roots");
@@ -267,6 +195,26 @@ public class MFBlockItemIds {
     public static final ColorCollection<BlockItemId> CONCRETE_SLAB = createSimpleColouredId("concrete_slab");
     public static final ColorCollection<BlockItemId> CONCRETE_STAIRS = createSimpleColouredId("concrete_stairs");
 
+    public static final WoodTypeCollection<BlockItemId> PLANKS = createSimpleWoodId("planks");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_STAIRS = createSimpleWoodId("stairs");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_SLAB = createSimpleWoodId("slab");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_VERTICAL_SLAB = createSimpleWoodId("vertical_slab");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_FENCE = createSimpleWoodId("fence");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_FENCE_GATE = createSimpleWoodId("fence_gate");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_PRESSURE_PLATE = createSimpleWoodId("pressure_plate");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_BUTTON = createSimpleWoodId("button");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_DOOR = createSimpleWoodId("door");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_TRAPDOOR = createSimpleWoodId("trapdoor");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_SHELF = createSimpleWoodId("shelf");
+
+    public static final WoodTypeCollection<BlockItemId> LOG = createSimpleWoodId("log");
+    public static final WoodTypeCollection<BlockItemId> WOOD = createSimpleWoodId("wood");
+
+    // Stripped wood is a bit different. It uses stripped_woodtype_log or stripped_woodtype_wood.
+    // Since the wood type is in the middle of the id, it uses a separate method to add the stripped prefix
+    public static final WoodTypeCollection<BlockItemId> STRIPPED_LOG = createStrippedWoodId("log");
+    public static final WoodTypeCollection<BlockItemId> STRIPPED_WOOD = createStrippedWoodId("wood");
+
     public static final BlockItemId TEST_COLUMN = createId("test_column");
 
     private static BlockItemId createId(String name) {
@@ -280,5 +228,13 @@ public class MFBlockItemIds {
 
     private static WeatheringCopperCollection<BlockItemId> createSimpleCopperId(String name) {
         return WeatheringCopperCollection.prefixWithState(WeatheringCopperCollection.create(name)).map(MFBlockItemIds::createId);
+    }
+
+    private static WoodTypeCollection<BlockItemId> createSimpleWoodId(String name) {
+        return WoodTypeCollection.prefixWithType(WoodTypeCollection.create(name)).map(MFBlockItemIds::createId);
+    }
+
+    private static WoodTypeCollection<BlockItemId> createStrippedWoodId(String name) {
+        return WoodTypeCollection.prefixPrefixed("stripped", WoodTypeCollection.create(name)).map(MFBlockItemIds::createId);
     }
 }

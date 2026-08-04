@@ -2,6 +2,7 @@ package com.mohigster.morefeatures;
 
 import com.mohigster.morefeatures.attachment.MFAttachments;
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
 import com.mohigster.morefeatures.block.custom.blocktype.MFWoodType;
 import com.mohigster.morefeatures.block.custom.data.BonemealMorphData;
 import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
@@ -162,11 +163,12 @@ public class MoreFeatures {
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.ROSE.getId(), MFBlocks.POTTED_ROSE);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.BLUE_ROSE.getId(), MFBlocks.POTTED_BLUE_ROSE);
 
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.TAINTED_SAPLING.getId(), MFBlocks.POTTED_TAINTED_SAPLING);
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.BLOODWOOD_SAPLING.getId(), MFBlocks.POTTED_BLOODWOOD_SAPLING);
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.PALM_SAPLING.getId(), MFBlocks.POTTED_PALM_SAPLING);
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.DECREPIT_SAPLING.getId(), MFBlocks.POTTED_DECREPIT_SAPLING);
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.PALLID_SAPLING.getId(), MFBlocks.POTTED_PALLID_SAPLING);
+        WoodTypeCollection.TYPES.forEach(type ->
+                ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
+                        MFBlocks.POTTED_SAPLING.pick(type).getId(),
+                        type.getSaplingOrFungus()
+                )
+        );
 
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.DECREPIT_ROOTS.getId(), MFBlocks.POTTED_DECREPIT_ROOTS);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.PALLID_ROOTS.getId(), MFBlocks.POTTED_PALLID_ROOTS);

@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/template_shelf_body",
+  "textures": {
+    "all": "morefeatures:block/charred_shelf",
+    "particle": "morefeatures:block/stripped_charred_stem"
+  }
+}

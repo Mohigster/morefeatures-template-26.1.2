@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.block.custom.modified;
 
+import com.mohigster.morefeatures.block.collection.WoodSetType;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
@@ -27,9 +28,15 @@ public class MFShelfBlock extends ShelfBlock {
     private static final int SHELF_FLAMMABILITY = 20;
     private static final int SHELF_FIRE_SPREAD_SPEED = 30;
 
+    // Used by gemstone shelves
     public MFShelfBlock(boolean isFlammable, Properties properties) {
         super(properties);
         this.isFlammable = isFlammable;
+    }
+
+    // Used by wooden shelves
+    public MFShelfBlock(WoodSetType woodSet, Properties properties) {
+        this(woodSet.isFlammable(), properties);
     }
 
     // The only difference between this and the super method is that vanilla always plays the vanilla shelf sounds
