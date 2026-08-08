@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.menu.custom;
 
-import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
 import com.mohigster.morefeatures.renderer.EnergyDisplayTooltipArea;
 import com.mohigster.morefeatures.renderer.FluidTankRenderer;
 import com.mohigster.morefeatures.util.MouseUtil;

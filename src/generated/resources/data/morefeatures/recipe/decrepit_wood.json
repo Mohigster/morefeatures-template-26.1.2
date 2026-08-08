@@ -1,12 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "bark",
   "key": {
-    "W": "morefeatures:decrepit_log"
+    "#": "morefeatures:decrepit_log"
   },
   "pattern": [
-    "WW",
-    "WW"
+    "##",
+    "##"
   ],
   "result": {
     "count": 3,

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_charred_stem": {
+    "has_logs": {
       "conditions": {
         "items": [
           {
-            "items": "morefeatures:charred_stem"
+            "items": "#morefeatures:wood/charred_logs"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_charred_stem"
+      "has_logs"
     ]
   ],
   "rewards": {

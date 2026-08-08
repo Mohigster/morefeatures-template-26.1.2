@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_palm_log": {
+    "has_logs": {
       "conditions": {
         "items": [
           {
-            "items": "morefeatures:palm_log"
+            "items": "#morefeatures:wood/palm_logs"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_palm_log"
+      "has_logs"
     ]
   ],
   "rewards": {

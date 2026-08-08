@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "building",
-  "group": "tainted_planks",
+  "group": "planks",
   "ingredients": [
-    "#morefeatures:wood/logs/tainted"
+    "#morefeatures:wood/tainted_logs"
   ],
   "result": {
     "count": 4,

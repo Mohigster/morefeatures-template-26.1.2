@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom.modified;
 
-import com.mohigster.morefeatures.block.collection.WoodSetType;
+import com.mohigster.morefeatures.block.collection.wood.WoodSet;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.CeilingHangingSignBlock;
@@ -14,8 +14,8 @@ public class MFCeilingHangingSignBlock extends CeilingHangingSignBlock {
         super(type, properties);
     }
 
-    public MFCeilingHangingSignBlock(WoodSetType type, Properties properties) {
-        super(type.getWoodType(), properties);
+    public MFCeilingHangingSignBlock(WoodSet set, Properties properties) {
+        this(set.getWoodType(), properties);
     }
 
     @NullMarked

@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom.data;
 
-import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.datamaps.AdvancedDataMapType;
@@ -10,18 +10,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MFDataMaps {
-
-    public static final AdvancedDataMapType<Block, BonemealMorphData, ?> BONEMEAL_MORPHS =
+    public static final AdvancedDataMapType<Block, BonemealMorph, ?> BONEMEAL_MORPHS =
             AdvancedDataMapType.builder(
                     MFIdentifier.withMfNamespace("bonemeal_morphs"),
                     Registries.BLOCK,
-                    BonemealMorphData.CODEC
+                    BonemealMorph.CODEC
             ).merger((_, _, first, _, second) -> {
                 // If two data packs both add variants to the same block,
-                // combine the lists instead of one clobbering the other.
+                // combine the lists instead of one overriding the other.
                 List<Block> merged = new ArrayList<>(first.variants());
                 for (Block b : second.variants()) if (!merged.contains(b)) merged.add(b);
-                return new BonemealMorphData(merged);
+                return new BonemealMorph(merged);
             }).build();
 
     public static void registerDataMaps(RegisterDataMapTypesEvent event) {

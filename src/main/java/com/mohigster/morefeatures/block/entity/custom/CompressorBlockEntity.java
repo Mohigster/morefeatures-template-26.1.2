@@ -2,12 +2,12 @@ package com.mohigster.morefeatures.block.entity.custom;
 
 import com.mohigster.morefeatures.block.custom.CompressorBlock;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
-import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
+import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorMenu;
 import com.mohigster.morefeatures.recipe.MFRecipes;
 import com.mohigster.morefeatures.recipe.custom.CompressionRecipe;
 import com.mohigster.morefeatures.recipe.custom.CompressorRecipeInput;
-import com.mohigster.morefeatures.tag.MFItemTags;
+import com.mohigster.morefeatures.data.tag.MFItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;

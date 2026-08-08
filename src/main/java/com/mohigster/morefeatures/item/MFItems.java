@@ -1,22 +1,22 @@
 package com.mohigster.morefeatures.item;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.asset.MFEquipmentAssets;
+import com.mohigster.morefeatures.data.material.MFEquipmentAssets;
 import com.mohigster.morefeatures.block.MFBlocks;
-import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
+import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorItem;
 import com.mohigster.morefeatures.item.custom.trident.MFTridentItem;
 import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
 import com.mohigster.morefeatures.item.food.MFFoods;
-import com.mohigster.morefeatures.material.MFToolMaterial;
-import com.mohigster.morefeatures.references.MFItemIds;
-import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
-import com.mohigster.morefeatures.datagen.MFJukeboxSongs;
+import com.mohigster.morefeatures.data.material.MFToolMaterial;
+import com.mohigster.morefeatures.data.references.MFItemIds;
+import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
+import com.mohigster.morefeatures.data.sound.MFJukeboxSongs;
 import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.item.custom.*;
 import com.mohigster.morefeatures.item.custom.wand.*;
-import com.mohigster.morefeatures.tag.MFItemTags;
-import com.mohigster.morefeatures.material.MFArmorMaterials;
+import com.mohigster.morefeatures.data.tag.MFItemTags;
+import com.mohigster.morefeatures.data.material.MFArmorMaterials;
 import net.minecraft.network.chat.Component;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.DamageTypeTags;
@@ -46,7 +46,7 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import static com.mohigster.morefeatures.MoreFeatures.MODID;
-import static com.mohigster.morefeatures.material.MFToolMaterial.BISMUTH_TOOL_MATERIAL;
+import static com.mohigster.morefeatures.data.material.MFToolMaterial.BISMUTH_TOOL_MATERIAL;
 
 public class MFItems {
 

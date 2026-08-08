@@ -1,8 +1,8 @@
 package com.mohigster.morefeatures.enchantment;
 
 import com.mohigster.morefeatures.enchantment.custom.ThunderEnchantmentEffect;
-import com.mohigster.morefeatures.references.MFIdentifier;
-import com.mohigster.morefeatures.tag.MFItemTags;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.tag.MFItemTags;
 import net.minecraft.advancements.predicates.DamageSourcePredicate;
 import net.minecraft.advancements.predicates.TagPredicate;
 import net.minecraft.core.registries.Registries;

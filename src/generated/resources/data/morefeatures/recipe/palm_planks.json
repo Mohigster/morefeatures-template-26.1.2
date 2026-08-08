@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "building",
-  "group": "palm_planks",
+  "group": "planks",
   "ingredients": [
-    "#morefeatures:wood/logs/palm"
+    "#morefeatures:wood/palm_logs"
   ],
   "result": {
     "count": 4,

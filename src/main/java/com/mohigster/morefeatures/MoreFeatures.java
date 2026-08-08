@@ -2,14 +2,13 @@ package com.mohigster.morefeatures;
 
 import com.mohigster.morefeatures.attachment.MFAttachments;
 import com.mohigster.morefeatures.block.MFBlocks;
-import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
+import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.block.custom.blocktype.MFWoodType;
-import com.mohigster.morefeatures.block.custom.data.BonemealMorphData;
 import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
 import com.mohigster.morefeatures.block.custom.magicblock.MagicBlockTransmutations;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.creativemodetab.MFCreativeModeTabs;
-import com.mohigster.morefeatures.datacomponent.MFDataComponentTypes;
+import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
 import com.mohigster.morefeatures.enchantment.MFEnchantmentEffects;
 import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.events.data.BowDamageBonuses;
@@ -19,14 +18,14 @@ import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorCosts;
 import com.mohigster.morefeatures.menu.MFMenuTypes;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
 import com.mohigster.morefeatures.recipe.MFRecipes;
-import com.mohigster.morefeatures.references.MFIdentifier;
-import com.mohigster.morefeatures.sound.MFSoundEvents;
-import com.mohigster.morefeatures.worldgen.biome.MFBiomes;
-import com.mohigster.morefeatures.worldgen.biome.MFSurfaceRules;
-import com.mohigster.morefeatures.worldgen.feature.MFFeatures;
-import com.mohigster.morefeatures.worldgen.tree.decorator.MFTreeDecorators;
-import com.mohigster.morefeatures.worldgen.tree.foliage_placer.MFFoliagePlacerType;
-import com.mohigster.morefeatures.worldgen.tree.trunk_placer.MFTrunkPlacerType;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.sound.MFSoundEvents;
+import com.mohigster.morefeatures.data.world.biome.MFBiomes;
+import com.mohigster.morefeatures.data.world.biome.MFSurfaceRules;
+import com.mohigster.morefeatures.data.world.feature.MFFeatures;
+import com.mohigster.morefeatures.data.world.tree.decorator.MFTreeDecorators;
+import com.mohigster.morefeatures.data.world.tree.placer.foliage.MFFoliagePlacerType;
+import com.mohigster.morefeatures.data.world.tree.placer.trunk.MFTrunkPlacerType;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
@@ -47,7 +46,6 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
-import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import org.slf4j.Logger;
 import terrablender.api.SurfaceRuleManager;
 
@@ -119,7 +117,7 @@ public class MoreFeatures {
         event.enqueueWork(() -> {
             this.registerPottedPlants();
 
-            MFBiomes.registerBiomes(); // Register biomes so the SurfaceRules has something to find.
+            MFBiomes.registerBiomes();
 
             this.registerDispenserBehaviour();
         });
@@ -163,13 +161,18 @@ public class MoreFeatures {
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.ROSE.getId(), MFBlocks.POTTED_ROSE);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.BLUE_ROSE.getId(), MFBlocks.POTTED_BLUE_ROSE);
 
-        WoodTypeCollection.TYPES.forEach(type ->
+        WoodTypeCollection.SETS.forEach(type ->
                 ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
-                        MFBlocks.POTTED_SAPLING.pick(type).getId(),
-                        type.getSaplingOrFungus()
+                        // Saplings are registered separately since they are not all registered by the same class. Instead,
+                        // the getSaplingOrFungus() method will return the sapling associated with the relevant WoodSetType
+                        type.getSaplingOrFungus().getId(),
+                        // Potted saplings ARE by contrast registered as a WoodTypeCollection because
+                        // they are all registered by the same class. That class being FlowerPotBlock
+                        MFBlocks.POTTED_SAPLING.pick(type)
                 )
         );
 
+        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.CHARRED_ROOTS.getId(), MFBlocks.POTTED_CHARRED_ROOTS);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.DECREPIT_ROOTS.getId(), MFBlocks.POTTED_DECREPIT_ROOTS);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.PALLID_ROOTS.getId(), MFBlocks.POTTED_PALLID_ROOTS);
     }
@@ -205,19 +208,8 @@ public class MoreFeatures {
 
     private void registerSurfaceRules(HolderGetter<Biome> biomeGetter){
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, MODID, MFSurfaceRules.makeIceCaveRules(biomeGetter));
+        SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MODID, MFSurfaceRules.makeCharredForestRules(biomeGetter));
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, MFSurfaceRules.makeEndSurfaceRules(biomeGetter));
-
-        // Fixes several broken vanilla surface rules.
-
-        // I'm not entirely sure what broke, but a bunch of surface rules just stopped working. This caused issues.
-
-        // For example, the desert was entirely grass. The dry shrubs? Growing on grass.
-        // Ice spikes also didn't generate in the Ice Spikes biome because all of the snow was grass.
-        // My own custom surface rules had nothing to do with it, as confirmed when I commented this whole event
-        // including the custom rules registration, and the biomes were still broken.
-
-        // Perhaps a TerraBlender issue, rather than an issue with my mod. If so, I'll update my TerraBlender
-        // version when a new patch releases and see if that patch fixes the issue. Until then, this temporary solution will have to do
 
         SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.OVERWORLD, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK, 10, MFSurfaceRules.fixOverworldRules(biomeGetter));
 

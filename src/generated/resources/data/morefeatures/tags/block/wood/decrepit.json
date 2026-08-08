@@ -1,5 +1,16 @@
 {
   "values": [
+    "#morefeatures:wood/decrepit_logs",
+    "morefeatures:decrepit_planks",
+    "morefeatures:decrepit_stairs",
+    "morefeatures:decrepit_slab",
+    "morefeatures:decrepit_button",
+    "morefeatures:decrepit_pressure_plate",
+    "morefeatures:decrepit_fence",
+    "morefeatures:decrepit_fence_gate",
+    "morefeatures:decrepit_trapdoor",
+    "morefeatures:decrepit_door",
+    "morefeatures:decrepit_shelf",
     "morefeatures:decrepit_planks",
     "morefeatures:decrepit_stairs",
     "morefeatures:decrepit_slab",

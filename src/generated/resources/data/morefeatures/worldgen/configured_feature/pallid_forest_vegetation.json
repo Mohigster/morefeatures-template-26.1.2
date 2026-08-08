@@ -1,11 +1,24 @@
 {
-  "type": "minecraft:simple_block",
+  "type": "minecraft:nether_forest_vegetation",
   "config": {
-    "to_place": {
-      "type": "minecraft:simple_state_provider",
-      "state": {
-        "Name": "morefeatures:pallid_roots"
-      }
+    "spread_height": 4,
+    "spread_width": 8,
+    "state_provider": {
+      "type": "minecraft:weighted_state_provider",
+      "entries": [
+        {
+          "data": {
+            "Name": "morefeatures:pallid_roots"
+          },
+          "weight": 94
+        },
+        {
+          "data": {
+            "Name": "morefeatures:decrepit_roots"
+          },
+          "weight": 6
+        }
+      ]
     }
   }
 }

@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "morefeatures:block/scorched_vines_plant"
+  }
+}

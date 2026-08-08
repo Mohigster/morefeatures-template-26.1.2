@@ -20,8 +20,8 @@ public class EarthWandItem extends GenericAOEWandItem {
     private static final float PITCH = 0.5F;
 
     public EarthWandItem(Properties properties) {
-        super(properties, RADIUS, COOLDOWN, RINGS, DURABILITY_COST,
-                MANA_COST, FLOOR_SCAN_DISTANCE, SoundEvents.DEEPSLATE_BREAK, VOLUME, PITCH);
+        super(properties, RADIUS, COOLDOWN, RINGS, DURABILITY_COST, MANA_COST,
+                FLOOR_SCAN_DISTANCE, SoundEvents.DEEPSLATE_BREAK, VOLUME, PITCH);
     }
 
     @Override

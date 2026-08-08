@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.block.custom;
 
 import com.mohigster.morefeatures.block.MFBlocks;
-import com.mohigster.morefeatures.worldgen.dimension.MFDimensions;
+import com.mohigster.morefeatures.data.world.dimension.MFDimensions;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;

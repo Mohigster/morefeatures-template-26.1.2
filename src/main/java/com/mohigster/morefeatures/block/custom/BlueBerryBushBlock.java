@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.block.custom;
 
 import com.mohigster.morefeatures.item.MFItems;
-import com.mohigster.morefeatures.references.MFLootTableIds;
+import com.mohigster.morefeatures.data.references.MFLootTableIds;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;

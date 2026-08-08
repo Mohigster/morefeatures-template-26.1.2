@@ -4,23 +4,24 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.properties.BlockSetType;
 
-public record MFBlockSetType() {
-
+public class MFBlockSetType {
     // Creates the BlockSetTypes for each of my custom Block Sets. Including all of my woods and my gemstone block sets
     // These gemstones have custom signs, hanging signs, doors, trapdoors, pressure plates, etc. so they do need a BlockSetType
-    public static final BlockSetType AZURITE = BlockSetType.register(createGemstoneBlockSetType("azurite"));
-    public static final BlockSetType FLUORITE = BlockSetType.register(createGemstoneBlockSetType("fluorite"));
+    public static final BlockSetType AZURITE = BlockSetType.register(gemstoneSetType("azurite"));
+    public static final BlockSetType FLUORITE = BlockSetType.register(gemstoneSetType("fluorite"));
 
     // Only inputting the name causes it to naturally fall back to overworld wooden properties,
     // as the BlockSetType class has a constructor that accepts only a name and falls back on that
+
+    // This is why overworld wood block set types do not have a custom method to create their properties
     public static final BlockSetType BLOODWOOD = BlockSetType.register(new BlockSetType("bloodwood"));
     public static final BlockSetType TAINTED = BlockSetType.register(new BlockSetType("tainted"));
     public static final BlockSetType PALM = BlockSetType.register(new BlockSetType("palm"));
-    public static final BlockSetType CHARRED = BlockSetType.register(createNetherOrEndBlockSetType("charred"));
-    public static final BlockSetType DECREPIT = BlockSetType.register(createNetherOrEndBlockSetType("decrepit"));
-    public static final BlockSetType PALLID = BlockSetType.register(createNetherOrEndBlockSetType("pallid"));
+    public static final BlockSetType CHARRED = BlockSetType.register(netherOrEndSetType("charred"));
+    public static final BlockSetType DECREPIT = BlockSetType.register(netherOrEndSetType("decrepit"));
+    public static final BlockSetType PALLID = BlockSetType.register(netherOrEndSetType("pallid"));
 
-    private static BlockSetType createNetherOrEndBlockSetType(String name){
+    private static BlockSetType netherOrEndSetType(String name){
         return new BlockSetType(name,
                 true,
                 true,
@@ -38,7 +39,7 @@ public record MFBlockSetType() {
         );
     }
 
-    private static BlockSetType createGemstoneBlockSetType(String name) {
+    private static BlockSetType gemstoneSetType(String name) {
         return new BlockSetType(name,
                 true,
                 false,

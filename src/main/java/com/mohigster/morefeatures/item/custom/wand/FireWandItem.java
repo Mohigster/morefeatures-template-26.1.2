@@ -25,7 +25,8 @@ public class FireWandItem extends AimableWandItem {
     private static final float PITCH = 0.5F;
 
     public FireWandItem(Properties properties) {
-        super(properties, SPREAD_RADIUS, VARIABLE_SPREAD, PROJECTILE_COUNT, BONUS_PROJECTILES, COOLDOWN, DURABILITY_COST, MANA_COST, SoundEvents.FIRECHARGE_USE, VOLUME, PITCH);
+        super(properties, SPREAD_RADIUS, VARIABLE_SPREAD, PROJECTILE_COUNT, BONUS_PROJECTILES,
+                COOLDOWN, DURABILITY_COST, MANA_COST, SoundEvents.FIRECHARGE_USE, VOLUME, PITCH);
     }
 
     @Override

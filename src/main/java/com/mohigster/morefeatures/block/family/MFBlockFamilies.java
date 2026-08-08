@@ -1,18 +1,17 @@
 package com.mohigster.morefeatures.block.family;
 
 import com.mohigster.morefeatures.block.MFBlocks;
-import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
+import com.mohigster.morefeatures.block.collection.gemstone.GemstoneCollection;
+import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import net.minecraft.data.BlockFamily;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.ColorCollection;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class MFBlockFamilies {
+    private static GemstoneCollection<BlockFamily> gemstoneFamily;
     private static BlockFamily azuriteFamily;
     private static BlockFamily fluoriteFamily;
-    private static ColorCollection<BlockFamily> concreteFamily;
     private static WoodTypeCollection<BlockFamily> woodFamily;
     private static final List<BlockFamily> FAMILIES = new ArrayList<>();
 
@@ -37,6 +36,14 @@ public class MFBlockFamilies {
         }
         return azuriteFamily;
     }
+
+//    public static GemstoneCollection<BlockFamily> getGemstoneFamily() {
+//        if(gemstoneFamily == null) {
+//            gemstoneFamily = GemstoneCollection.GEMS.map(
+//                    gem -> new BlockFamily.Builder()
+//            );
+//        }
+//    }
 
     public static BlockFamily getFluoriteFamily(){
         if(fluoriteFamily == null) {
@@ -63,20 +70,20 @@ public class MFBlockFamilies {
 
     public static WoodTypeCollection<BlockFamily> getWoodFamily() {
         if (woodFamily == null) {
-            woodFamily = WoodTypeCollection.TYPES.map(
-                    type -> new BlockFamily.Builder(MFBlocks.PLANKS.pick(type).get())
-                            .stairs(MFBlocks.WOODEN_STAIRS.pick(type).get())
-                            .slab(MFBlocks.WOODEN_SLAB.pick(type).get())
-                            .log(MFBlocks.LOG.pick(type).get())
-                            .strippedLog(MFBlocks.STRIPPED_LOG.pick(type).get())
-                            .fence(MFBlocks.WOODEN_FENCE.pick(type).get())
-                            .fenceGate(MFBlocks.WOODEN_FENCE_GATE.pick(type).get())
-                            .button(MFBlocks.WOODEN_BUTTON.pick(type).get())
-                            .pressurePlate(MFBlocks.WOODEN_PRESSURE_PLATE.pick(type).get())
-                            .door(MFBlocks.WOODEN_DOOR.pick(type).get())
-                            .trapdoor(MFBlocks.WOODEN_TRAPDOOR.pick(type).get())
-                            .sign(MFBlocks.WOODEN_SIGN.pick(type).get(), MFBlocks.WOODEN_WALL_SIGN.pick(type).get())
-                            .hangingSign(MFBlocks.WOODEN_HANGING_SIGN.pick(type).get(), MFBlocks.WOODEN_WALL_HANGING_SIGN.pick(type).get())
+            woodFamily = WoodTypeCollection.SETS.map(
+                    set -> new BlockFamily.Builder(MFBlocks.PLANKS.pick(set).get())
+                            .stairs(MFBlocks.WOODEN_STAIRS.pick(set).get())
+                            .slab(MFBlocks.WOODEN_SLAB.pick(set).get())
+                            .log(MFBlocks.LOG.pick(set).get())
+                            .strippedLog(MFBlocks.STRIPPED_LOG.pick(set).get())
+                            .fence(MFBlocks.WOODEN_FENCE.pick(set).get())
+                            .fenceGate(MFBlocks.WOODEN_FENCE_GATE.pick(set).get())
+                            .button(MFBlocks.WOODEN_BUTTON.pick(set).get())
+                            .pressurePlate(MFBlocks.WOODEN_PRESSURE_PLATE.pick(set).get())
+                            .door(MFBlocks.WOODEN_DOOR.pick(set).get())
+                            .trapdoor(MFBlocks.WOODEN_TRAPDOOR.pick(set).get())
+                            .sign(MFBlocks.WOODEN_SIGN.pick(set).get(), MFBlocks.WOODEN_WALL_SIGN.pick(set).get())
+                            .hangingSign(MFBlocks.WOODEN_HANGING_SIGN.pick(set).get(), MFBlocks.WOODEN_WALL_HANGING_SIGN.pick(set).get())
                             .recipeGroupPrefix("wooden")
                             .recipeUnlockedBy("has_planks")
                             .getFamily()
@@ -86,29 +93,12 @@ public class MFBlockFamilies {
         return woodFamily;
     }
 
-    // Concrete is a color collection. However, since it doesn't have any variations in vanilla (stairs, slab etc.) it doesn't have an existing block family. I can add my own
-    public static ColorCollection<BlockFamily> getConcreteFamily() {
-        if (concreteFamily == null) {
-            concreteFamily = ColorCollection.VALUES.map(
-                    colour -> new BlockFamily.Builder(Blocks.CONCRETE.pick(colour))
-                            .slab(MFBlocks.CONCRETE_SLAB.pick(colour).get())
-                            .stairs(MFBlocks.CONCRETE_STAIRS.pick(colour).get())
-                            .recipeGroupPrefix("concrete")
-                            .recipeUnlockedBy("has_full_block")
-                            .getFamily()
-            );
-            concreteFamily.forEach(FAMILIES::add);
-        }
-        return concreteFamily;
-    }
-
     // Azurite and fluorite has special recipes declared in the Recipes class.
     // This method is used to grab all block families so that the RecipeProvider
     // can generate recipes without manual input. Since Azurite and Fluorite
     // fences, signs, etc. are crafted using custom recipes, they are not called here.
     public static List<BlockFamily> getAllNonGemstoneFamilies() {
         getWoodFamily().asList();
-        getConcreteFamily().asList();
         return FAMILIES;
     }
 }

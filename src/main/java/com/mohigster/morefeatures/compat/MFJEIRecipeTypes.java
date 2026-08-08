@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.compat;
 
 import com.mohigster.morefeatures.recipe.custom.CompressionRecipe;
-import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
 import mezz.jei.api.recipe.types.IRecipeType;
 import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.Recipe;

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:block/flower_pot_cross",
   "textures": {
-    "plant": "morefeatures:block/charred_roots"
+    "plant": "morefeatures:block/charred_roots_pot"
   }
 }

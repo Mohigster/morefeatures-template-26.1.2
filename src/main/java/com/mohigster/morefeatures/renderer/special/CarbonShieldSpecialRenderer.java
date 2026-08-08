@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.renderer.special;
 
-import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.model.geom.ModelLayers;

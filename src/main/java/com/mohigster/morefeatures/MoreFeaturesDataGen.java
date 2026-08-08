@@ -1,12 +1,14 @@
 package com.mohigster.morefeatures;
 
-import com.mohigster.morefeatures.datagen.*;
-import com.mohigster.morefeatures.datagen.custom.MFBowDamageBonusProvider;
-import com.mohigster.morefeatures.datagen.custom.MFElytraSpeedBoostProvider;
-import com.mohigster.morefeatures.datagen.custom.MFMagicBlockTransmutationProvider;
-import com.mohigster.morefeatures.datagen.custom.MFMetalDetectorCostProvider;
-import com.mohigster.morefeatures.datagen.loot.MFLootTableProvider;
-import com.mohigster.morefeatures.datagen.tag.*;
+import com.mohigster.morefeatures.data.generators.*;
+import com.mohigster.morefeatures.data.generators.custom.MFBowDamageBonusProvider;
+import com.mohigster.morefeatures.data.generators.custom.MFElytraSpeedBoostProvider;
+import com.mohigster.morefeatures.data.generators.custom.MFMagicBlockTransmutationProvider;
+import com.mohigster.morefeatures.data.generators.custom.MFMetalDetectorCostProvider;
+import com.mohigster.morefeatures.data.generators.loot.MFLootTableProvider;
+import com.mohigster.morefeatures.data.generators.models.MFModelProvider;
+import com.mohigster.morefeatures.data.generators.MFSoundsProvider;
+import com.mohigster.morefeatures.data.generators.tag.*;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
@@ -25,7 +27,7 @@ public class MoreFeaturesDataGen {
     public static void gatherClientData(GatherDataEvent.Client event){
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
-        var lookupProvider = event.getLookupProvider();
+        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
 
         //————————————————————————————Adding providers————————————————————————————
 
@@ -51,7 +53,7 @@ public class MoreFeaturesDataGen {
         generator.addProvider(true, new MFElytraSpeedBoostProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFBowDamageBonusProvider(packOutput, lookupProvider));
 
-        // Loot tables work a bit differently. The LootTableProvider returns a list of sub providers for blocks, entities, etc.
-        generator.addProvider(true, MFLootTableProvider.createLootTables(packOutput, lookupProvider));
+        // Loot tables work a bit differently. generateLootTables() returns the LootTableProvider with all of the SubProviderEntries
+        generator.addProvider(true, MFLootTableProvider.generateLootTables(packOutput, lookupProvider));
     }
 }

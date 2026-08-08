@@ -1,7 +1,6 @@
 package com.mohigster.morefeatures.block.custom.verticalslab;
 
-import com.mohigster.morefeatures.block.collection.WoodSetType;
-import com.mohigster.morefeatures.tag.MFBlockTags;
+import com.mohigster.morefeatures.block.collection.wood.WoodSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -11,10 +10,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.ScheduledTickAccess;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Mirror;
-import net.minecraft.world.level.block.Rotation;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -34,19 +30,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
-
     public static final EnumProperty<Direction> FACING = BlockStateProperties.HORIZONTAL_FACING;
     public static final EnumProperty<VerticalSlabType> TYPE = EnumProperty.create("type", VerticalSlabType.class);
     public static final EnumProperty<StairsShape> SHAPE = BlockStateProperties.STAIRS_SHAPE;
     public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
-    // Base "straight" shapes for each of the four single-slab orientations.
     private static final VoxelShape NORTH_SHAPE = Block.box(0, 0, 0, 16, 16, 8);
     private static final VoxelShape SOUTH_SHAPE = Block.box(0, 0, 8, 16, 16, 16);
     private static final VoxelShape WEST_SHAPE = Block.box(0, 0, 0, 8, 16, 16);
     private static final VoxelShape EAST_SHAPE = Block.box(8, 0, 0, 16, 16, 16);
 
-    // Cache of every (type, shape) -> VoxelShape combination.
     private static final Map<BlockState, VoxelShape> SHAPE_CACHE = new HashMap<>();
 
     private final boolean isFlammable;
@@ -63,8 +56,8 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
         this.isFlammable = isFlammable;
     }
 
-    public VerticalSlabBlock(WoodSetType woodType, Properties properties){
-        this(woodType.isFlammable(), properties);
+    public VerticalSlabBlock(WoodSet set, Properties properties){
+        this(set.isFlammable(), properties);
     }
 
     @Nullable
@@ -226,18 +219,9 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
         return !canConnectToVerticalSlab(adjacent) || adjacent.getValue(TYPE).toDirection().getAxis() == state.getValue(TYPE).toDirection().getAxis();
     }
 
-    // A block can connect to other blocks if:
-
-    // The block is a non-double vertical slab
-    // OR the block is in the vertical slab connectable tag
-    // Vertical slabs being in the tag does nothing.
-    // This is intentional to prevent double connections caused by a vertical slab in the tag
     private static boolean canConnectToVerticalSlab(BlockState state) {
         return (state.getBlock() instanceof VerticalSlabBlock
-                && state.getValue(TYPE) != VerticalSlabType.DOUBLE)
-                || (state.is(MFBlockTags.VERTICAL_SLAB_CONNECTABLE)
-                && !(state.getBlock() instanceof VerticalSlabBlock)
-        );
+                && state.getValue(TYPE) != VerticalSlabType.DOUBLE);
     }
 
     private static Direction rotateClockwise(Direction facing) {

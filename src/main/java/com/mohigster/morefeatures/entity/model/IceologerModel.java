@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.entity.model;
 
 import com.mohigster.morefeatures.entity.renderstate.IceologerRenderState;
-import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
 import net.minecraft.client.model.EntityModel;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;

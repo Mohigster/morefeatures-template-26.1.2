@@ -1,5 +1,16 @@
 {
   "values": [
+    "#morefeatures:wood/pallid_logs",
+    "morefeatures:pallid_planks",
+    "morefeatures:pallid_stairs",
+    "morefeatures:pallid_slab",
+    "morefeatures:pallid_button",
+    "morefeatures:pallid_pressure_plate",
+    "morefeatures:pallid_fence",
+    "morefeatures:pallid_fence_gate",
+    "morefeatures:pallid_trapdoor",
+    "morefeatures:pallid_door",
+    "morefeatures:pallid_shelf",
     "morefeatures:pallid_planks",
     "morefeatures:pallid_stairs",
     "morefeatures:pallid_slab",

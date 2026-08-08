@@ -21,8 +21,7 @@
       "minecraft:pale_garden_flowers",
       "minecraft:pale_moss_patch",
       "morefeatures:decrepit_placed",
-      "morefeatures:decrepit_forest_vegetation_placed",
-      "morefeatures:decrepit_forest_vegetation_rare_placed"
+      "morefeatures:decrepit_forest_vegetation_placed"
     ]
   ],
   "has_precipitation": false,

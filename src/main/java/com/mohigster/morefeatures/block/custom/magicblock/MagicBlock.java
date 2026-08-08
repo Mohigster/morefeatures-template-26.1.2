@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.block.custom.magicblock;
 
-import com.mohigster.morefeatures.sound.MFSoundEvents;
-import com.mohigster.morefeatures.tag.MFItemTags;
+import com.mohigster.morefeatures.data.sound.MFSoundEvents;
+import com.mohigster.morefeatures.data.tag.MFItemTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.sounds.SoundSource;

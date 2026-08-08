@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom.pillar;
 
-import com.mohigster.morefeatures.tag.MFBlockTags;
+import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -95,15 +95,13 @@ public class PillarBlock extends Block implements SimpleWaterloggedBlock {
         boolean connectAbove = canConnectTo(level.getBlockState(pos.above()));
         boolean connectBelow = canConnectTo(level.getBlockState(pos.below()));
 
-        if (connectAbove && connectBelow) {
-            return this.defaultBlockState().setValue(SHAPE, PillarShape.MIDDLE).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
-        } else if (connectAbove) {
-            return this.defaultBlockState().setValue(SHAPE, PillarShape.BOTTOM).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
-        } else if (connectBelow) {
-            return this.defaultBlockState().setValue(SHAPE, PillarShape.TOP).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
-        } else {
-            return this.defaultBlockState().setValue(SHAPE, PillarShape.FULL).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
-        }
+        PillarShape shape = (connectAbove && connectBelow) ? PillarShape.MIDDLE : connectAbove ? PillarShape.BOTTOM : connectBelow ? PillarShape.TOP : PillarShape.FULL;
+
+        return updateShape(shape, fluidState);
+    }
+
+    private BlockState updateShape(PillarShape shape, FluidState fluidState) {
+        return this.defaultBlockState().setValue(SHAPE, shape).setValue(WATERLOGGED, fluidState.getType() == Fluids.WATER);
     }
 
     // Pillar blocks don't need to be added to the tag, only non pillar blocks that pillars should connect to will need to be in the tag

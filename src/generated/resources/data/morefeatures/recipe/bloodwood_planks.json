@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "building",
-  "group": "bloodwood_planks",
+  "group": "planks",
   "ingredients": [
-    "#morefeatures:wood/logs/bloodwood"
+    "#morefeatures:wood/bloodwood_logs"
   ],
   "result": {
     "count": 4,

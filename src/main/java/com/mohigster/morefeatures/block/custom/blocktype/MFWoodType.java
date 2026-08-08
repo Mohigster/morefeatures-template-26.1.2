@@ -9,7 +9,7 @@ import net.minecraft.world.level.block.state.properties.WoodType;
 public class MFWoodType {
     // Not *really* a wood type, but it is necessary to add the azurite signs, fence gates, etc.
     public static final WoodType AZURITE = WoodType.register(
-            createGemstoneType(
+            gemstoneType(
                     "azurite",
                     MFBlockSetType.AZURITE
             )
@@ -17,55 +17,55 @@ public class MFWoodType {
 
     // Same as above
     public static final WoodType FLUORITE = WoodType.register(
-            createGemstoneType(
+            gemstoneType(
                     "fluorite",
                     MFBlockSetType.FLUORITE
             )
     );
 
     public static final WoodType PALM = WoodType.register(
-            createWoodType(
+            standardType(
                     "palm",
                     MFBlockSetType.PALM
             )
     );
 
     public static final WoodType BLOODWOOD = WoodType.register(
-            createWoodType(
+            standardType(
                     "bloodwood",
                     MFBlockSetType.BLOODWOOD
             )
     );
 
     public static final WoodType TAINTED = WoodType.register(
-            createWoodType(
+            standardType(
                     "tainted",
                     MFBlockSetType.TAINTED
             )
     );
 
     public static final WoodType CHARRED = WoodType.register(
-            createNetherOrEndWoodType(
+            netherOrEndType(
                     "charred",
                     MFBlockSetType.CHARRED
             )
     );
 
     public static final WoodType DECREPIT = WoodType.register(
-            createNetherOrEndWoodType(
+            netherOrEndType(
                     "decrepit",
                     MFBlockSetType.DECREPIT
             )
     );
 
     public static final WoodType PALLID = WoodType.register(
-            createNetherOrEndWoodType(
+            netherOrEndType(
                     "pallid",
                     MFBlockSetType.PALLID
             )
     );
 
-    private static WoodType createNetherOrEndWoodType(String name, BlockSetType blockSet){
+    private static WoodType netherOrEndType(String name, BlockSetType blockSet){
         return new WoodType(
                 MoreFeatures.MODID + ":" + name,
                 blockSet,
@@ -76,7 +76,7 @@ public class MFWoodType {
         );
     }
 
-    private static WoodType createGemstoneType(String name, BlockSetType blockSet){
+    private static WoodType gemstoneType(String name, BlockSetType blockSet){
         return new WoodType(
                 MoreFeatures.MODID + ":" + name,
                 blockSet,
@@ -87,7 +87,7 @@ public class MFWoodType {
         );
     }
 
-    private static WoodType createWoodType(String name, BlockSetType blockSet){
+    private static WoodType standardType(String name, BlockSetType blockSet){
         return new WoodType(
                 MoreFeatures.MODID + ":" + name,
                 blockSet

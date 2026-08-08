@@ -3,12 +3,12 @@ package com.mohigster.morefeatures.events;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.custom.VoidAnchorBlock;
 import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
-import com.mohigster.morefeatures.block.custom.data.BonemealMorphData;
+import com.mohigster.morefeatures.block.custom.data.BonemealMorph;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
 import com.mohigster.morefeatures.events.data.BowDamageBonuses;
 import com.mohigster.morefeatures.events.data.ElytraSpeedBoosts;
-import com.mohigster.morefeatures.worldgen.biome.MFBiomes;
+import com.mohigster.morefeatures.data.world.biome.MFBiomes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -145,6 +145,7 @@ public class MFEvents {
         }
     }
 
+    // This event takes data from the BonemealMorphs data map and uses it to transform a block to another when bonemealed
     @SuppressWarnings("deprecation")
     @SubscribeEvent
     public static void onBonemeal(BonemealEvent event) {
@@ -152,34 +153,36 @@ public class MFEvents {
         BlockPos pos = event.getPos();
         BlockState targetState = event.getState();
 
-        BonemealMorphData data = targetState.getBlock().builtInRegistryHolder().getData(MFDataMaps.BONEMEAL_MORPHS);
+        BonemealMorph data = targetState.getBlock().builtInRegistryHolder().getData(MFDataMaps.BONEMEAL_MORPHS);
 
         if (data == null || data.variants().isEmpty()) {
             return;
         }
 
-        if (!level.isClientSide()) {
-            RandomSource random = level.getRandom();
-            List<Block> availableVariants = new ArrayList<>();
+        List<Block> availableVariants = new ArrayList<>();
 
-            for (BlockPos testPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
-                BlockState nearbyState = level.getBlockState(testPos);
+        for (BlockPos testPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
+            BlockState nearbyState = level.getBlockState(testPos);
 
-                for (Block variantBlock : data.variants()) {
-                    if (nearbyState.is(variantBlock) && !availableVariants.contains(variantBlock)) {
-                        availableVariants.add(variantBlock);
-                    }
+            for (Block variantBlock : data.variants()) {
+                if (nearbyState.is(variantBlock) && !availableVariants.contains(variantBlock)) {
+                    availableVariants.add(variantBlock);
                 }
             }
+        }
 
-            if (!availableVariants.isEmpty()) {
+        if (!availableVariants.isEmpty()) {
+            if (!level.isClientSide()) {
+                RandomSource random = level.getRandom();
                 Block chosenVariant = availableVariants.get(random.nextInt(availableVariants.size()));
 
                 level.setBlock(pos, chosenVariant.defaultBlockState(), Block.UPDATE_ALL);
-
-                event.setSuccessful(true);
-                event.setCanceled(true);
             }
+
+            level.levelEvent(1505, pos, 20);
+
+            event.setSuccessful(true);
+            event.setCanceled(true);
         }
     }
 

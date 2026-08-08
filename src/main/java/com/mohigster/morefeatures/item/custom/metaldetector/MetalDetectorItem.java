@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.item.custom.metaldetector;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.tag.MFBlockTags;
+import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleTypes;

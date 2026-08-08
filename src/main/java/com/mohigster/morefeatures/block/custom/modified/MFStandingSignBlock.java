@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom.modified;
 
-import com.mohigster.morefeatures.block.collection.WoodSetType;
+import com.mohigster.morefeatures.block.collection.wood.WoodSet;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.StandingSignBlock;
@@ -14,8 +14,8 @@ public class MFStandingSignBlock extends StandingSignBlock {
         super(type, properties);
     }
 
-    public MFStandingSignBlock(WoodSetType type, Properties properties) {
-        super(type.getWoodType(), properties);
+    public MFStandingSignBlock(WoodSet set, Properties properties) {
+        this(set.getWoodType(), properties);
     }
 
     @NullMarked

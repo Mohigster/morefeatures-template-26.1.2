@@ -2,7 +2,7 @@ package com.mohigster.morefeatures.renderer.special;
 
 import com.mohigster.morefeatures.entity.model.MFTridentModel;
 import com.mohigster.morefeatures.entity.model.MFModelLayer;
-import com.mohigster.morefeatures.references.MFEntityTypeIds;
+import com.mohigster.morefeatures.data.references.MFEntityTypeIds;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.client.renderer.special.NoDataSpecialModelRenderer;
 import org.jspecify.annotations.NullMarked;

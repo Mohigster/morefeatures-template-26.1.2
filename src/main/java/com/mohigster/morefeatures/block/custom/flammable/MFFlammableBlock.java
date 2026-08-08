@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.block.custom.flammable;
 
-import com.mohigster.morefeatures.block.collection.WoodSetType;
-import com.mohigster.morefeatures.tag.MFBlockTags;
+import com.mohigster.morefeatures.block.collection.wood.WoodSet;
+import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -17,8 +17,8 @@ public class MFFlammableBlock extends Block {
         this.isFlammable = isFlammable;
     }
 
-    public MFFlammableBlock(WoodSetType woodType, Properties properties) {
-        this(woodType.isFlammable(), properties);
+    public MFFlammableBlock(WoodSet set, Properties properties) {
+        this(set.isFlammable(), properties);
     }
 
     @NullMarked

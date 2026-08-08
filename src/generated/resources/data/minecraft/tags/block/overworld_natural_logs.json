@@ -1,10 +1,5 @@
 {
   "values": [
-    "#morefeatures:wood/logs/bloodwood",
-    "#morefeatures:wood/logs/tainted",
-    "#morefeatures:wood/logs/palm",
-    "#morefeatures:wood/logs/decrepit",
-    "#morefeatures:wood/logs/pallid",
     "morefeatures:bloodwood_log",
     "morefeatures:tainted_log",
     "morefeatures:palm_log"

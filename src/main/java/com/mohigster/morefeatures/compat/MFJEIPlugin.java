@@ -5,7 +5,7 @@ import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.compat.custom.CompressionRecipeCategory;
 import com.mohigster.morefeatures.menu.custom.CompressorScreen;
 import com.mohigster.morefeatures.recipe.MFRecipes;
-import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IGuiHandlerRegistration;

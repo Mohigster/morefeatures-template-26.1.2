@@ -1,12 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "bark",
   "key": {
-    "W": "morefeatures:bloodwood_log"
+    "#": "morefeatures:bloodwood_log"
   },
   "pattern": [
-    "WW",
-    "WW"
+    "##",
+    "##"
   ],
   "result": {
     "count": 3,

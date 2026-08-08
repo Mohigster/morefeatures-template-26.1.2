@@ -3,7 +3,7 @@ package com.mohigster.morefeatures.renderer.iceologer;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
 import com.mohigster.morefeatures.entity.model.IceologerModel;
 import com.mohigster.morefeatures.entity.renderstate.IceologerRenderState;
-import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.Identifier;

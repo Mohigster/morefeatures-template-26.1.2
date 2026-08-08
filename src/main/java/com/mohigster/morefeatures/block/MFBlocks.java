@@ -1,8 +1,8 @@
 package com.mohigster.morefeatures.block;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.block.collection.WoodSetType;
-import com.mohigster.morefeatures.block.collection.WoodTypeCollection;
+import com.mohigster.morefeatures.block.collection.wood.WoodSet;
+import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.block.custom.*;
 import com.mohigster.morefeatures.block.custom.modified.*;
 import com.mohigster.morefeatures.block.custom.nylium.MFNyliumBlock;
@@ -16,15 +16,15 @@ import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.WeatheringCopperVerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.blocktype.MFBlockSetType;
 import com.mohigster.morefeatures.block.custom.blocktype.MFWoodType;
-import com.mohigster.morefeatures.references.MFBlockIds;
-import com.mohigster.morefeatures.references.MFBlockItemIds;
+import com.mohigster.morefeatures.data.references.MFBlockIds;
+import com.mohigster.morefeatures.data.references.MFBlockItemIds;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
-import com.mohigster.morefeatures.references.MFIdentifier;
-import com.mohigster.morefeatures.sound.MFSoundTypes;
-import com.mohigster.morefeatures.tag.MFBlockTags;
-import com.mohigster.morefeatures.worldgen.MFConfiguredFeatures;
-import com.mohigster.morefeatures.worldgen.tree.MFTreeGrowers;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.sound.MFSoundTypes;
+import com.mohigster.morefeatures.data.tag.MFBlockTags;
+import com.mohigster.morefeatures.data.world.MFConfiguredFeatures;
+import com.mohigster.morefeatures.data.world.tree.MFTreeGrowers;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.references.BlockItemId;
@@ -138,7 +138,8 @@ public class MFBlocks {
     //———————————————————————————————————————Azurite Blocks——————————————————————————————————————————————————————————————————————————
     public static final DeferredBlock<Block> AZURITE_ORE = registerBlock(MFBlockItemIds.AZURITE_ORE,
             props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            _ -> Properties.ofFullCopy(BISMUTH_ORE.get()).mapColor(MapColor.STONE));
+            _ -> Properties.ofFullCopy(BISMUTH_ORE.get()).mapColor(MapColor.STONE)
+    );
 
     public static final DeferredBlock<Block> DEEPSLATE_AZURITE_ORE = registerBlock(MFBlockItemIds.DEEPSLATE_AZURITE_ORE,
             props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
@@ -262,7 +263,7 @@ public class MFBlocks {
     public static final DeferredBlock<Block> AZURITE_SHELF = registerVerticalSlabOrShelf(MFBlockItemIds.AZURITE_SHELF,
             false,
             MFShelfBlock::new,
-            _ -> BlockBehaviour.Properties.ofFullCopy(RAW_AZURITE_BLOCK.get())
+            _ -> Properties.ofFullCopy(RAW_AZURITE_BLOCK.get())
                     .sound(SoundType.MEDIUM_AMETHYST_BUD)
                     .isValidSpawn(MFBlocks::never)
                     .isRedstoneConductor(MFBlocks::never)
@@ -389,6 +390,180 @@ public class MFBlocks {
                     .friction(0.98F)
             ));
 
+    //———————————————————————————————————————Bloodwood Blocks————————————————————————————————————————————————————————————————————————
+
+    public static final DeferredBlock<Block> BLOODWOOD_LEAVES = registerBlock(MFBlockItemIds.BLOODWOOD_LEAVES,
+            props -> new MFLeavesBlock(0.03F, MFParticleTypes.BLOODWOOD_LEAVES.get(), props),
+            _ -> Properties.ofFullCopy(Blocks.OAK_LEAVES)
+    );
+
+    public static final DeferredBlock<Block> BLOODWOOD_SAPLING = registerBlock(MFBlockItemIds.BLOODWOOD_SAPLING,
+            props -> new SaplingBlock(MFTreeGrowers.BLOODWOOD, props),
+            _ -> Properties.ofFullCopy(Blocks.OAK_SAPLING)
+    );
+
+    //———————————————————————————————————————Tainted Wood Blocks—————————————————————————————————————————————————————————————————————
+
+    public static final DeferredBlock<Block> TAINTED_LEAVES = registerBlock(MFBlockItemIds.TAINTED_LEAVES,
+            properties -> new MFLeavesBlock(0.03F, MFParticleTypes.TAINTED_LEAVES.get(), properties
+                    .strength(0.2f, 0.2f)
+                    .sound(SoundType.GRASS)
+                    .noOcclusion()
+                    .ignitedByLava()
+            ));
+
+    public static final DeferredBlock<Block> TAINTED_SAPLING = registerBlock(MFBlockItemIds.TAINTED_SAPLING,
+            properties -> new SaplingBlock(MFTreeGrowers.TAINTED, properties
+                    .randomTicks()
+                    .instabreak()
+                    .noCollision()
+                    .pushReaction(PushReaction.DESTROY)
+                    .sound(SoundType.GRASS))
+    );
+
+    //———————————————————————————————————————Palm Wood Blocks————————————————————————————————————————————————————————————————————————
+
+    public static final DeferredBlock<Block> PALM_LEAVES = registerBlock(MFBlockItemIds.PALM_LEAVES,
+            properties -> new MFLeavesBlock(0.01F, MFParticleTypes.PALM_LEAVES.get(), properties
+                    .strength(0.2F, 0.2F)
+                    .sound(SoundType.GRASS)
+                    .noOcclusion()
+                    .ignitedByLava()
+            ));
+
+    public static final DeferredBlock<Block> PALM_SAPLING = registerBlock(MFBlockItemIds.PALM_SAPLING,
+            properties -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALM, properties
+                    .sound(SoundType.GRASS)
+                    .instabreak()
+                    .noOcclusion()
+                    .noCollision(),
+                    () -> Blocks.SAND // The block that the sapling can be planted on. You can also pass in a block tag here.
+            ));
+
+    //———————————————————————————————————————Charred Wood Blocks—————————————————————————————————————————————————————————————————————
+
+    public static final DeferredBlock<Block> CHARRED_ROOTS = registerBlock(MFBlockItemIds.CHARRED_ROOTS,
+            props -> new NetherRootsBlock(MFBlockTags.SUPPORTS_CHARRED_ROOTS, props),
+            _ -> Properties.ofFullCopy(Blocks.WARPED_ROOTS)
+    );
+
+    public static final DeferredBlock<Block> POTTED_CHARRED_ROOTS = registerBlockWithoutItem(MFBlockIds.POTTED_CHARRED_ROOTS,
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, CHARRED_ROOTS, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> CHARRED_NYLIUM = registerBlock(MFBlockItemIds.CHARRED_NYLIUM,
+            props -> new MFNyliumBlock(props, MFConfiguredFeatures.CHARRED_VEGETATION_BONEMEAL_KEY),
+            _ -> Properties.ofFullCopy(Blocks.WARPED_NYLIUM).mapColor(MapColor.COLOR_BLACK)
+    );
+
+    public static final DeferredBlock<Block> CHARRED_WART_BLOCK = registerBlock(MFBlockItemIds.CHARRED_WART_BLOCK,
+            Block::new,
+            _ -> Properties.ofFullCopy(Blocks.WARPED_WART_BLOCK).mapColor(MapColor.COLOR_BLACK)
+    );
+
+    public static final DeferredBlock<Block> CHARRED_FUNGUS = registerBlock(MFBlockItemIds.CHARRED_FUNGUS,
+            props -> new NetherFungusBlock(
+                    MFConfiguredFeatures.PLANTED_CHARRED_KEY,
+                    CHARRED_NYLIUM.get(),
+                    MFBlockTags.SUPPORTS_CHARRED_FUNGUS,
+                    props
+            ),
+            _ -> Properties.ofFullCopy(Blocks.WARPED_FUNGUS).mapColor(MapColor.COLOR_GRAY)
+    );
+
+    public static final DeferredBlock<Block> SCORCHED_VINES = registerBlock(MFBlockItemIds.SCORCHED_VINES,
+            MFWeepingVinesBlock::new,
+            _ -> Properties.ofFullCopy(Blocks.WEEPING_VINES)
+    );
+
+    public static final DeferredBlock<Block> SCORCHED_VINES_PLANT = registerBlockWithoutItem(MFBlockIds.SCORCHED_VINES_PLANT,
+            MFWeepingVinesPlantBlock::new,
+            _ -> Properties.ofFullCopy(Blocks.WEEPING_VINES_PLANT)
+    );
+
+    //———————————————————————————————————————Decrepit Wood Blocks————————————————————————————————————————————————————————————————————
+
+    public static final DeferredBlock<Block> DECREPIT_LEAVES = registerBlock(MFBlockItemIds.DECREPIT_LEAVES,
+            properties -> new MFLeavesBlock(0.02F, MFParticleTypes.DECREPIT_LEAVES.get(), properties
+                    .strength(0.2f, 0.2f)
+                    .sound(SoundType.GRASS)
+                    .noOcclusion()
+                    .ignitedByLava()
+                    .mapColor(Blocks.PALE_OAK_LEAVES.defaultMapColor())
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_SAPLING = registerBlock(MFBlockItemIds.DECREPIT_SAPLING,
+            properties -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.DECREPIT, properties
+                    .sound(SoundType.GRASS)
+                    .instabreak()
+                    .noOcclusion()
+                    .noCollision()
+                    .mapColor(MapColor.PLANT),
+                    MFBlockTags.NULLIUM
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_ROOTS = registerBlock(MFBlockItemIds.DECREPIT_ROOTS,
+            properties -> new NetherRootsBlock(MFBlockTags.SUPPORTS_END_ROOTS, properties
+                    .sound(SoundType.ROOTS)
+                    .noOcclusion()
+                    .noCollision()
+                    .instabreak()
+                    .replaceable()
+                    .offsetType(BlockBehaviour.OffsetType.XZ)
+            ));
+
+    public static final DeferredBlock<Block> POTTED_DECREPIT_ROOTS = registerBlockWithoutItem(MFBlockIds.POTTED_DECREPIT_ROOTS,
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, DECREPIT_ROOTS, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> DECREPIT_NULLIUM = registerBlock(MFBlockItemIds.DECREPIT_NULLIUM,
+            properties -> new NulliumBlock(properties
+                    .sound(SoundType.NYLIUM)
+                    .strength(4f, 4f)
+                    .requiresCorrectToolForDrops()
+                    .randomTicks()
+                    .mapColor(MapColor.TERRACOTTA_BLUE),
+                    MFConfiguredFeatures.DECREPIT_VEGETATION_BONEMEAL_KEY
+            ));
+
+    //———————————————————————————————————————Pallid Wood Blocks——————————————————————————————————————————————————————————————————————
+
+    public static final DeferredBlock<Block> PALLID_LEAVES = registerBlock(MFBlockItemIds.PALLID_LEAVES,
+            props -> new MFLeavesBlock(0.02F, MFParticleTypes.PALLID_LEAVES.get(), props),
+            _ -> Properties.ofFullCopy(DECREPIT_LEAVES.get())
+    );
+
+    public static final DeferredBlock<Block> PALLID_SAPLING = registerBlock(MFBlockItemIds.PALLID_SAPLING,
+            props -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALLID, props, MFBlockTags.NULLIUM),
+            _ -> Properties.ofFullCopy(DECREPIT_SAPLING.get())
+    );
+
+    public static final DeferredBlock<Block> PALLID_ROOTS = registerBlock(MFBlockItemIds.PALLID_ROOTS,
+            properties -> new NetherRootsBlock(MFBlockTags.SUPPORTS_END_ROOTS, properties),
+            _ -> Properties.ofFullCopy(DECREPIT_ROOTS.get())
+    );
+
+    public static final DeferredBlock<Block> POTTED_PALLID_ROOTS = registerBlockWithoutItem(MFBlockIds.POTTED_PALLID_ROOTS,
+            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
+                    Blocks.FLOWER_POT, PALLID_ROOTS, properties
+                    .noOcclusion()
+                    .instabreak()
+                    .pushReaction(PushReaction.DESTROY)
+            ));
+
+    public static final DeferredBlock<Block> PALLID_NULLIUM = registerBlock(MFBlockItemIds.PALLID_NULLIUM,
+            props -> new NulliumBlock(props, MFConfiguredFeatures.PALLID_VEGETATION_BONEMEAL_KEY),
+            _ -> Properties.ofFullCopy(DECREPIT_NULLIUM.get()).mapColor(MapColor.TERRACOTTA_GREEN)
+    );
+
     //———————————————————————————————————————Wooden Blocks———————————————————————————————————————————————————————————————————————————
 
     public static final WoodTypeCollection<DeferredBlock<Block>> LOG = WoodTypeCollection.registerBlocks(
@@ -500,14 +675,14 @@ public class MFBlocks {
             MFBlockIds.SIGN,
             MFBlocks::registerBlockWithoutItem,
             MFStandingSignBlock::new,
-            MFBlocks::woodProps
+            MFBlocks::signProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_WALL_SIGN = WoodTypeCollection.registerBlocks(
             MFBlockIds.WALL_SIGN,
             MFBlocks::registerBlockWithoutItem,
             MFWallSignBlock::new,
-            MFBlocks::woodProps
+            MFBlocks::signProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_HANGING_SIGN = WoodTypeCollection.registerBlocks(
@@ -530,168 +705,6 @@ public class MFBlocks {
             (wood, props) -> new FlowerPotBlock(() -> (FlowerPotBlock)
                     Blocks.FLOWER_POT, wood.getSaplingOrFungus(), props),
             (_, props) -> props.noOcclusion().instabreak().pushReaction(PushReaction.DESTROY)
-    );
-
-    public static final DeferredBlock<Block> BLOODWOOD_LEAVES = registerBlock(MFBlockItemIds.BLOODWOOD_LEAVES,
-            props -> new MFLeavesBlock(0.03F, MFParticleTypes.BLOODWOOD_LEAVES.get(), props),
-            _ -> Properties.ofFullCopy(Blocks.OAK_LEAVES)
-    );
-
-    public static final DeferredBlock<Block> BLOODWOOD_SAPLING = registerBlock(MFBlockItemIds.BLOODWOOD_SAPLING,
-            props -> new SaplingBlock(MFTreeGrowers.BLOODWOOD, props),
-            _ -> Properties.ofFullCopy(Blocks.OAK_SAPLING)
-    );
-
-    //———————————————————————————————————————Tainted Wood Blocks—————————————————————————————————————————————————————————————————————
-
-    public static final DeferredBlock<Block> TAINTED_LEAVES = registerBlock(MFBlockItemIds.TAINTED_LEAVES,
-            properties -> new MFLeavesBlock(0.03F, MFParticleTypes.TAINTED_LEAVES.get(), properties
-                    .strength(0.2f, 0.2f)
-                    .sound(SoundType.GRASS)
-                    .noOcclusion()
-                    .ignitedByLava()
-            ));
-
-    public static final DeferredBlock<Block> TAINTED_SAPLING = registerBlock(MFBlockItemIds.TAINTED_SAPLING,
-            properties -> new SaplingBlock(MFTreeGrowers.TAINTED, properties
-                    .randomTicks()
-                    .instabreak()
-                    .noCollision()
-                    .pushReaction(PushReaction.DESTROY)
-                    .sound(SoundType.GRASS))
-    );
-
-    //———————————————————————————————————————Palm Wood Blocks————————————————————————————————————————————————————————————————————————
-
-    public static final DeferredBlock<Block> PALM_LEAVES = registerBlock(MFBlockItemIds.PALM_LEAVES,
-            properties -> new MFLeavesBlock(0.01F, MFParticleTypes.PALM_LEAVES.get(), properties
-                    .strength(0.2F, 0.2F)
-                    .sound(SoundType.GRASS)
-                    .noOcclusion()
-                    .ignitedByLava()
-            ));
-
-    public static final DeferredBlock<Block> PALM_SAPLING = registerBlock(MFBlockItemIds.PALM_SAPLING,
-            properties -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALM, properties
-                    .sound(SoundType.GRASS)
-                    .instabreak()
-                    .noOcclusion()
-                    .noCollision(),
-                    () -> Blocks.SAND // The block that the sapling can be planted on. You can also pass in a block tag here.
-            ));
-
-    //———————————————————————————————————————Charred Wood Blocks—————————————————————————————————————————————————————————————————————
-
-    public static final DeferredBlock<Block> CHARRED_ROOTS = registerBlock(MFBlockItemIds.CHARRED_ROOTS,
-            props -> new NetherRootsBlock(MFBlockTags.SUPPORTS_CHARRED_ROOTS, props),
-            _ -> Properties.ofFullCopy(Blocks.WARPED_ROOTS)
-    );
-
-    public static final DeferredBlock<Block> POTTED_CHARRED_ROOTS = registerBlockWithoutItem(MFBlockIds.POTTED_CHARRED_ROOTS,
-            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
-                    Blocks.FLOWER_POT, CHARRED_ROOTS, properties
-                    .noOcclusion()
-                    .instabreak()
-                    .pushReaction(PushReaction.DESTROY)
-            ));
-
-    public static final DeferredBlock<Block> CHARRED_NYLIUM = registerBlock(MFBlockItemIds.CHARRED_NYLIUM,
-            props -> new MFNyliumBlock(props, CHARRED_ROOTS),
-            _ -> Properties.ofFullCopy(Blocks.WARPED_NYLIUM).mapColor(MapColor.COLOR_BLACK)
-    );
-
-    public static final DeferredBlock<Block> CHARRED_WART_BLOCK = registerBlock(MFBlockItemIds.CHARRED_WART_BLOCK,
-            Block::new,
-            _ -> Properties.ofFullCopy(Blocks.WARPED_WART_BLOCK).mapColor(MapColor.COLOR_BLACK)
-    );
-
-    public static final DeferredBlock<Block> CHARRED_FUNGUS = registerBlock(MFBlockItemIds.CHARRED_FUNGUS,
-            props -> new NetherFungusBlock(
-                    MFConfiguredFeatures.PLANTED_CHARRED_KEY,
-                    CHARRED_NYLIUM.get(),
-                    MFBlockTags.SUPPORTS_CHARRED_ROOTS,
-                    props
-            ),
-            _ -> Properties.ofFullCopy(Blocks.WARPED_FUNGUS).mapColor(MapColor.COLOR_GRAY)
-    );
-
-    //———————————————————————————————————————Decrepit Wood Blocks————————————————————————————————————————————————————————————————————
-
-    public static final DeferredBlock<Block> DECREPIT_LEAVES = registerBlock(MFBlockItemIds.DECREPIT_LEAVES,
-            properties -> new MFLeavesBlock(0.02F, MFParticleTypes.DECREPIT_LEAVES.get(), properties
-                    .strength(0.2f, 0.2f)
-                    .sound(SoundType.GRASS)
-                    .noOcclusion()
-                    .ignitedByLava()
-                    .mapColor(Blocks.PALE_OAK_LEAVES.defaultMapColor())
-            ));
-
-    public static final DeferredBlock<Block> DECREPIT_SAPLING = registerBlock(MFBlockItemIds.DECREPIT_SAPLING,
-            properties -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.DECREPIT, properties
-                    .sound(SoundType.GRASS)
-                    .instabreak()
-                    .noOcclusion()
-                    .noCollision()
-                    .mapColor(MapColor.PLANT),
-                    MFBlockTags.NULLIUM
-            ));
-
-    public static final DeferredBlock<Block> DECREPIT_ROOTS = registerBlock(MFBlockItemIds.DECREPIT_ROOTS,
-            properties -> new NetherRootsBlock(MFBlockTags.SUPPORTS_END_ROOTS, properties
-                    .sound(SoundType.ROOTS)
-                    .noOcclusion()
-                    .noCollision()
-                    .instabreak()
-                    .replaceable()
-                    .offsetType(BlockBehaviour.OffsetType.XZ)
-            ));
-
-    public static final DeferredBlock<Block> POTTED_DECREPIT_ROOTS = registerBlockWithoutItem(MFBlockIds.POTTED_DECREPIT_ROOTS,
-            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
-                    Blocks.FLOWER_POT, DECREPIT_ROOTS, properties
-                    .noOcclusion()
-                    .instabreak()
-                    .pushReaction(PushReaction.DESTROY)
-            ));
-
-    public static final DeferredBlock<Block> DECREPIT_NULLIUM = registerBlock(MFBlockItemIds.DECREPIT_NULLIUM,
-            properties -> new NulliumBlock(properties
-                    .sound(SoundType.NYLIUM)
-                    .strength(4f, 4f)
-                    .requiresCorrectToolForDrops()
-                    .randomTicks()
-                    .mapColor(MapColor.TERRACOTTA_BLUE),
-                    DECREPIT_ROOTS
-            ));
-
-    //———————————————————————————————————————Pallid Wood Blocks——————————————————————————————————————————————————————————————————————
-
-    public static final DeferredBlock<Block> PALLID_LEAVES = registerBlock(MFBlockItemIds.PALLID_LEAVES,
-            props -> new MFLeavesBlock(0.02F, MFParticleTypes.PALLID_LEAVES.get(), props),
-            _ -> Properties.ofFullCopy(DECREPIT_LEAVES.get())
-    );
-
-    public static final DeferredBlock<Block> PALLID_SAPLING = registerBlock(MFBlockItemIds.PALLID_SAPLING,
-            props -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALLID, props, MFBlockTags.NULLIUM),
-            _ -> Properties.ofFullCopy(DECREPIT_SAPLING.get())
-    );
-
-    public static final DeferredBlock<Block> PALLID_ROOTS = registerBlock(MFBlockItemIds.PALLID_ROOTS,
-            properties -> new NetherRootsBlock(MFBlockTags.SUPPORTS_END_ROOTS, properties),
-            _ -> Properties.ofFullCopy(DECREPIT_ROOTS.get())
-    );
-
-    public static final DeferredBlock<Block> POTTED_PALLID_ROOTS = registerBlockWithoutItem(MFBlockIds.POTTED_PALLID_ROOTS,
-            properties -> new FlowerPotBlock(() -> (FlowerPotBlock)
-                    Blocks.FLOWER_POT, PALLID_ROOTS, properties
-                    .noOcclusion()
-                    .instabreak()
-                    .pushReaction(PushReaction.DESTROY)
-            ));
-
-    public static final DeferredBlock<Block> PALLID_NULLIUM = registerBlock(MFBlockItemIds.PALLID_NULLIUM,
-            props -> new NulliumBlock(props, PALLID_ROOTS),
-            _ -> Properties.ofFullCopy(DECREPIT_NULLIUM.get()).mapColor(MapColor.TERRACOTTA_GREEN)
     );
 
     /*
@@ -1114,22 +1127,6 @@ public class MFBlocks {
                     state -> Properties.ofFullCopy(Blocks.CUT_COPPER.weathering().pick(state))
             );
 
-    // Concrete slabs and stairs
-
-    public static final ColorCollection<DeferredBlock<Block>> CONCRETE_SLAB =
-            registerColouredBlockSet(
-                    MFBlockItemIds.CONCRETE_SLAB,
-                    SlabBlock::new,
-                    colour -> Properties.ofFullCopy(Blocks.CONCRETE.pick(colour))
-            );
-
-    public static final ColorCollection<DeferredBlock<Block>> CONCRETE_STAIRS =
-            registerColouredBlockSet(
-                    MFBlockItemIds.CONCRETE_STAIRS,
-                    props -> new StairBlock(Blocks.CONCRETE.white().defaultBlockState(), props),
-                    colour -> Properties.ofFullCopy(Blocks.CONCRETE.pick(colour))
-            );
-
     // Flowers
 
     public static final DeferredBlock<Block> ROSE = registerBlock(MFBlockItemIds.ROSE,
@@ -1433,19 +1430,23 @@ public class MFBlocks {
         return true;
     }
 
-    private static Properties woodProps(WoodSetType wood, Properties props){
+    private static Properties woodProps(WoodSet wood, Properties props){
         return baseWoodProps(wood, props, false);
     }
 
-    private static Properties logProps(WoodSetType wood, Properties props){
+    private static Properties logProps(WoodSet wood, Properties props){
         return baseWoodProps(wood, props, true);
     }
 
-    private static Properties shelfProps(WoodSetType wood, Properties props){
+    private static Properties shelfProps(WoodSet wood, Properties props){
         return baseWoodProps(wood, props, false).sound(SoundType.SHELF);
     }
 
-    private static Properties baseWoodProps(WoodSetType wood, Properties props, boolean log){
+    private static Properties signProps(WoodSet wood, Properties props){
+        return baseWoodProps(wood, props, false).noCollision();
+    }
+
+    private static Properties baseWoodProps(WoodSet wood, Properties props, boolean log){
         Properties finalProps = props.mapColor(wood.getMapColor()).sound(log ? wood.getLogSoundType() : wood.getMainSoundType())
                 .strength(2.0F, 8.0F).isValidSpawn(MFBlocks::never);
 

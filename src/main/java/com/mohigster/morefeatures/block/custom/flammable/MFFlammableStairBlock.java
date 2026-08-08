@@ -1,8 +1,8 @@
 package com.mohigster.morefeatures.block.custom.flammable;
 
 import com.mohigster.morefeatures.block.MFBlocks;
-import com.mohigster.morefeatures.block.collection.WoodSetType;
-import com.mohigster.morefeatures.tag.MFBlockTags;
+import com.mohigster.morefeatures.block.collection.wood.WoodSet;
+import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -18,12 +18,12 @@ public class MFFlammableStairBlock extends StairBlock {
         this.isFlammable = isFlammable;
     }
 
-    public MFFlammableStairBlock(BlockState baseState, WoodSetType woodType, Properties properties) {
-        this(baseState, woodType.isFlammable(), properties);
+    public MFFlammableStairBlock(BlockState baseState, WoodSet set, Properties properties) {
+        this(baseState, set.isFlammable(), properties);
     }
 
-    public MFFlammableStairBlock(WoodSetType woodType, Properties properties) {
-        this(MFBlocks.PLANKS.pick(woodType).get().defaultBlockState(), woodType, properties);
+    public MFFlammableStairBlock(WoodSet set, Properties properties) {
+        this(MFBlocks.PLANKS.pick(set).get().defaultBlockState(), set, properties);
     }
 
     @NullMarked

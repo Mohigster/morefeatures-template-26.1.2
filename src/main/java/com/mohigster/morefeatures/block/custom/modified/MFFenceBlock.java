@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.block.custom.modified;
 
-import com.mohigster.morefeatures.tag.MFBlockTags;
+import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Block;

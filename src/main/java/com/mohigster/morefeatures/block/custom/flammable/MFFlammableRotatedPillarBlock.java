@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.block.custom.flammable;
 
-import com.mohigster.morefeatures.block.collection.WoodSetType;
-import com.mohigster.morefeatures.tag.MFBlockTags;
+import com.mohigster.morefeatures.block.collection.wood.WoodSet;
+import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -12,9 +12,13 @@ import org.jspecify.annotations.NullMarked;
 public class MFFlammableRotatedPillarBlock extends RotatedPillarBlock {
     private final boolean isFlammable;
 
-    public MFFlammableRotatedPillarBlock(WoodSetType woodType, Properties properties) {
+    public MFFlammableRotatedPillarBlock(boolean isFlammable, Properties properties) {
         super(properties);
-        this.isFlammable = woodType.isFlammable();
+        this.isFlammable = isFlammable;
+    }
+
+    public MFFlammableRotatedPillarBlock(WoodSet set, Properties properties) {
+        this(set.isFlammable(), properties);
     }
 
     @NullMarked

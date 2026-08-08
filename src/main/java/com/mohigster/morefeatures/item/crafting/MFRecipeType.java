@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.item.crafting;
 
 import com.mohigster.morefeatures.recipe.custom.CompressionRecipe;
-import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.crafting.Recipe;

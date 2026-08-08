@@ -6,9 +6,9 @@ import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.entity.model.IceologerModel;
 import com.mohigster.morefeatures.particles.MFFallingLeavesParticle;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
-import com.mohigster.morefeatures.particles.MFSuspendedParticles;
-import com.mohigster.morefeatures.references.MFEntityTypeIds;
-import com.mohigster.morefeatures.references.MFIdentifier;
+import com.mohigster.morefeatures.particles.MFSuspendedParticle;
+import com.mohigster.morefeatures.data.references.MFEntityTypeIds;
+import com.mohigster.morefeatures.data.references.MFIdentifier;
 import com.mohigster.morefeatures.entity.model.MFTridentModel;
 import com.mohigster.morefeatures.renderer.trident.MFTridentRenderer;
 import com.mohigster.morefeatures.menu.MFMenuTypes;
@@ -78,7 +78,7 @@ public class MoreFeaturesClient {
         );
         event.registerSpriteSet(
                 MFParticleTypes.CHARRED_SPORE.get(),
-                MFSuspendedParticles.CharredSporeProvider::new
+                MFSuspendedParticle.CharredSporeProvider::new
         );
     }
 

@@ -1,12 +1,13 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
+  "group": "bark",
   "key": {
-    "W": "morefeatures:charred_stem"
+    "#": "morefeatures:charred_stem"
   },
   "pattern": [
-    "WW",
-    "WW"
+    "##",
+    "##"
   ],
   "result": {
     "count": 3,

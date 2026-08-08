@@ -2,8 +2,7 @@ package com.mohigster.morefeatures.item.custom.metaldetector;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
-import com.mohigster.morefeatures.tag.MFBlockTags;
-import com.mohigster.morefeatures.tag.MFItemTags;
+import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
