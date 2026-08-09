@@ -1,15 +1,12 @@
 package com.mohigster.morefeatures.block.custom.modified;
 
-import com.mohigster.morefeatures.block.collection.wood.WoodSet;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
@@ -23,20 +20,8 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 public class MFShelfBlock extends ShelfBlock {
-    private final boolean isFlammable;
-
-    private static final int SHELF_FLAMMABILITY = 20;
-    private static final int SHELF_FIRE_SPREAD_SPEED = 30;
-
-    // Used by gemstone shelves
-    public MFShelfBlock(boolean isFlammable, Properties properties) {
+    public MFShelfBlock(Properties properties) {
         super(properties);
-        this.isFlammable = isFlammable;
-    }
-
-    // Used by wooden shelves
-    public MFShelfBlock(WoodSet set, Properties properties) {
-        this(set.isFlammable(), properties);
     }
 
     // The only difference between this and the super method is that vanilla always plays the vanilla shelf sounds
@@ -92,23 +77,5 @@ public class MFShelfBlock extends ShelfBlock {
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return MFBlockEntities.MF_SHELF_BE.get().create(pos, state);
-    }
-
-    @NullMarked
-    @Override
-    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return isFlammable;
-    }
-
-    @NullMarked
-    @Override
-    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return isFlammable ? SHELF_FLAMMABILITY : 0;
-    }
-
-    @NullMarked
-    @Override
-    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return isFlammable ? SHELF_FIRE_SPREAD_SPEED : 0;
     }
 }

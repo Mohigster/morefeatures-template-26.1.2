@@ -1,6 +1,12 @@
 {
   "type": "morefeatures:oasis",
   "config": {
-    "palm_feature": "morefeatures:palm_tree"
+    "exposed_base_block": {
+      "Name": "minecraft:sandstone"
+    },
+    "main_base_block": {
+      "Name": "minecraft:sand"
+    },
+    "tree_feature": "morefeatures:palm_tree"
   }
 }

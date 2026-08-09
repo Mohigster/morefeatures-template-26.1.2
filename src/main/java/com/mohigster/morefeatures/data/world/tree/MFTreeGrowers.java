@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.data.world.tree;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.data.world.MFConfiguredFeatures;
+import com.mohigster.morefeatures.data.world.feature.MFConfiguredFeatures;
 import net.minecraft.world.level.block.grower.TreeGrower;
 
 import java.util.Optional;

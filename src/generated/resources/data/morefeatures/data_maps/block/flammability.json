@@ -1,0 +1,352 @@
+{
+  "values": {
+    "morefeatures:acacia_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:bamboo_mosaic_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:bamboo_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:birch_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:black_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:bloodwood": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:bloodwood_fence": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:bloodwood_fence_gate": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:bloodwood_leaves": {
+      "fire_spread_speed": 30,
+      "flammability": 60
+    },
+    "morefeatures:bloodwood_log": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:bloodwood_planks": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:bloodwood_shelf": {
+      "fire_spread_speed": 30,
+      "flammability": 20
+    },
+    "morefeatures:bloodwood_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:bloodwood_stairs": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:bloodwood_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:blue_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:brown_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:cherry_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:cyan_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:dark_oak_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:decrepit_fence": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:decrepit_fence_gate": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:decrepit_leaves": {
+      "fire_spread_speed": 30,
+      "flammability": 60
+    },
+    "morefeatures:decrepit_log": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:decrepit_planks": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:decrepit_shelf": {
+      "fire_spread_speed": 30,
+      "flammability": 20
+    },
+    "morefeatures:decrepit_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:decrepit_stairs": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:decrepit_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:decrepit_wood": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:gray_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:green_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:jungle_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:light_blue_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:light_gray_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:lime_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:magenta_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:mangrove_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:oak_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:orange_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:pale_oak_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:pallid_fence": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:pallid_fence_gate": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:pallid_leaves": {
+      "fire_spread_speed": 30,
+      "flammability": 60
+    },
+    "morefeatures:pallid_log": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:pallid_planks": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:pallid_shelf": {
+      "fire_spread_speed": 30,
+      "flammability": 20
+    },
+    "morefeatures:pallid_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:pallid_stairs": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:pallid_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:pallid_wood": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:palm_fence": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:palm_fence_gate": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:palm_leaves": {
+      "fire_spread_speed": 30,
+      "flammability": 60
+    },
+    "morefeatures:palm_log": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:palm_planks": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:palm_shelf": {
+      "fire_spread_speed": 30,
+      "flammability": 20
+    },
+    "morefeatures:palm_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:palm_stairs": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:palm_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:palm_wood": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:pink_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:purple_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:red_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:spruce_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:stripped_bloodwood": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:stripped_bloodwood_log": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:stripped_decrepit_log": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:stripped_decrepit_wood": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:stripped_pallid_log": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:stripped_pallid_wood": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:stripped_palm_log": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:stripped_palm_wood": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:stripped_tainted_log": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:stripped_tainted_wood": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:tainted_fence": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:tainted_fence_gate": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:tainted_leaves": {
+      "fire_spread_speed": 30,
+      "flammability": 60
+    },
+    "morefeatures:tainted_log": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:tainted_planks": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:tainted_shelf": {
+      "fire_spread_speed": 30,
+      "flammability": 20
+    },
+    "morefeatures:tainted_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:tainted_stairs": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:tainted_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:tainted_wood": {
+      "fire_spread_speed": 5,
+      "flammability": 5
+    },
+    "morefeatures:white_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    },
+    "morefeatures:yellow_wool_vertical_slab": {
+      "fire_spread_speed": 5,
+      "flammability": 20
+    }
+  }
+}

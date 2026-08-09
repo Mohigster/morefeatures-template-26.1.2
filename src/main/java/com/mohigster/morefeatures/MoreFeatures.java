@@ -22,7 +22,7 @@ import com.mohigster.morefeatures.data.references.MFIdentifier;
 import com.mohigster.morefeatures.data.sound.MFSoundEvents;
 import com.mohigster.morefeatures.data.world.biome.MFBiomes;
 import com.mohigster.morefeatures.data.world.biome.MFSurfaceRules;
-import com.mohigster.morefeatures.data.world.feature.MFFeatures;
+import com.mohigster.morefeatures.data.world.feature.custom.MFFeatures;
 import com.mohigster.morefeatures.data.world.tree.decorator.MFTreeDecorators;
 import com.mohigster.morefeatures.data.world.tree.placer.foliage.MFFoliagePlacerType;
 import com.mohigster.morefeatures.data.world.tree.placer.trunk.MFTrunkPlacerType;
@@ -161,14 +161,14 @@ public class MoreFeatures {
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.ROSE.getId(), MFBlocks.POTTED_ROSE);
         ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.BLUE_ROSE.getId(), MFBlocks.POTTED_BLUE_ROSE);
 
-        WoodTypeCollection.SETS.forEach(type ->
+        WoodTypeCollection.SETS.forEach(set ->
                 ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
                         // Saplings are registered separately since they are not all registered by the same class. Instead,
                         // the getSaplingOrFungus() method will return the sapling associated with the relevant WoodSetType
-                        type.getSaplingOrFungus().getId(),
+                        set.getSaplingOrFungus().getId(),
                         // Potted saplings ARE by contrast registered as a WoodTypeCollection because
                         // they are all registered by the same class. That class being FlowerPotBlock
-                        MFBlocks.POTTED_SAPLING.pick(type)
+                        MFBlocks.POTTED_SAPLING.pick(set)
                 )
         );
 

@@ -148,7 +148,10 @@ public class MFModelProvider extends ModelProvider {
         blockModels.createPlantWithDefaultItem(MFBlocks.PALLID_ROOTS.get(), MFBlocks.POTTED_PALLID_ROOTS.get(), BlockModelGenerators.PlantType.NOT_TINTED);
 
         blockModels.createGrowingPlant(MFBlocks.SCORCHED_VINES.get(), MFBlocks.SCORCHED_VINES_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+        blockModels.createGrowingPlant(MFBlocks.SMOLDERED_VINES.get(), MFBlocks.SMOLDERED_VINES_PLANT.get(), BlockModelGenerators.PlantType.NOT_TINTED);
+
         blockModels.registerSimpleFlatItemModel(MFBlocks.SCORCHED_VINES.get(), "_plant");
+        blockModels.registerSimpleFlatItemModel(MFBlocks.SMOLDERED_VINES.get(), "_plant");
 
         blockModels.createSpeleothem(MFBlocks.ICICLE.get());
 

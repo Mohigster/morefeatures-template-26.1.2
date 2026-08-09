@@ -3,7 +3,7 @@ package com.mohigster.morefeatures.events;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.custom.VoidAnchorBlock;
 import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
-import com.mohigster.morefeatures.block.custom.data.BonemealMorph;
+import com.mohigster.morefeatures.block.custom.data.codec.BonemealMorph;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
 import com.mohigster.morefeatures.events.data.BowDamageBonuses;

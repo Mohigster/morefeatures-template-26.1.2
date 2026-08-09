@@ -1,6 +1,9 @@
 package com.mohigster.morefeatures.data.world.biome;
 
 import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.world.biome.custom.MFEndBiomes;
+import com.mohigster.morefeatures.data.world.biome.custom.MFNetherBiomes;
+import com.mohigster.morefeatures.data.world.biome.custom.MFOverworldBiomes;
 import com.mohigster.morefeatures.data.world.biome.region.NetherRegion;
 import com.mohigster.morefeatures.data.world.biome.region.OverworldRegion;
 import net.minecraft.core.registries.Registries;

@@ -9,7 +9,7 @@
     },
     "decorators": [],
     "foliage_placer": {
-      "type": "morefeatures:palm_foliage_placer",
+      "type": "morefeatures:quad_fronged_foliage_placer",
       "offset": 0,
       "radius": 2
     },

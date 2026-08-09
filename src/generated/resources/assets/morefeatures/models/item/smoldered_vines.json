@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "morefeatures:block/smoldered_vines_plant"
+  }
+}

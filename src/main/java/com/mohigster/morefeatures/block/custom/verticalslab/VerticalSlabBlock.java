@@ -1,6 +1,5 @@
 package com.mohigster.morefeatures.block.custom.verticalslab;
 
-import com.mohigster.morefeatures.block.collection.wood.WoodSet;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
@@ -42,9 +41,7 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
 
     private static final Map<BlockState, VoxelShape> SHAPE_CACHE = new HashMap<>();
 
-    private final boolean isFlammable;
-
-    public VerticalSlabBlock(boolean isFlammable, Properties properties) {
+    public VerticalSlabBlock(Properties properties) {
         super(properties);
 
         this.registerDefaultState(this.stateDefinition.any()
@@ -52,12 +49,6 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
                 .setValue(FACING, Direction.NORTH)
                 .setValue(SHAPE, StairsShape.STRAIGHT)
                 .setValue(WATERLOGGED, false));
-
-        this.isFlammable = isFlammable;
-    }
-
-    public VerticalSlabBlock(WoodSet set, Properties properties){
-        this(set.isFlammable(), properties);
     }
 
     @Nullable
@@ -365,28 +356,5 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
         }
 
         return true;
-    }
-
-
-    /* --- FLAMMABILITY OVERRIDES --- */
-
-    /* written to allow a true or false flammability setting at block registration, making flammability overrides easy */
-
-    @NullMarked
-    @Override
-    public boolean isFlammable(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return this.isFlammable;
-    }
-
-    @NullMarked
-    @Override
-    public int getFlammability(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return this.isFlammable ? 20 : 0;
-    }
-
-    @NullMarked
-    @Override
-    public int getFireSpreadSpeed(BlockState state, BlockGetter level, BlockPos pos, Direction direction) {
-        return this.isFlammable ? 5 : 0;
     }
 }

@@ -1,0 +1,18 @@
+{
+  "type": "morefeatures:ceiling_vines",
+  "config": {
+    "max_height": 8,
+    "spread_height": 4,
+    "spread_width": 8,
+    "valid_support_blocks": "morefeatures:charred_wart_block",
+    "vines": {
+      "Name": "morefeatures:scorched_vines",
+      "Properties": {
+        "age": "0"
+      }
+    },
+    "vines_plant": {
+      "Name": "morefeatures:scorched_vines_plant"
+    }
+  }
+}

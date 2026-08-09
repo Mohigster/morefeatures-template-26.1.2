@@ -104,12 +104,13 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
 
         // NETHER VINES
         this.addNetherVinesDropTable(MFBlocks.SCORCHED_VINES.get(), MFBlocks.SCORCHED_VINES_PLANT.get());
+        this.addNetherVinesDropTable(MFBlocks.SMOLDERED_VINES.get(), MFBlocks.SMOLDERED_VINES_PLANT.get());
 
         // POTTED PLANTS
 
         this.flowerPotDrops(MFBlocks.POTTED_ROSE.get(),MFBlocks.ROSE.get());
         this.flowerPotDrops(MFBlocks.POTTED_BLUE_ROSE.get(), MFBlocks.BLUE_ROSE.get());
-        WoodTypeCollection.SETS.forEach(type -> this.flowerPotDrops(MFBlocks.POTTED_SAPLING.pick(type).get(), type.getSaplingOrFungus().get()));
+        WoodTypeCollection.SETS.forEach(set -> this.flowerPotDrops(MFBlocks.POTTED_SAPLING.pick(set).get(), set.getSaplingOrFungus().get()));
         this.flowerPotDrops(MFBlocks.POTTED_DECREPIT_ROOTS.get(), MFBlocks.DECREPIT_ROOTS.get());
         this.flowerPotDrops(MFBlocks.POTTED_PALLID_ROOTS.get(), MFBlocks.PALLID_ROOTS.get());
         this.flowerPotDrops(MFBlocks.POTTED_CHARRED_ROOTS.get(), MFBlocks.CHARRED_ROOTS.get());
@@ -311,11 +312,6 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
     }
 
     @SuppressWarnings("SameParameterValue")
-    protected <T extends Block> void slabDrops(ColorCollection<DeferredBlock<T>> blockSet){
-        blockSet.forEach(block -> this.slabDrops(block.get()));
-    }
-
-    @SuppressWarnings("SameParameterValue")
     protected <T extends Block> void slabDrops(WoodTypeCollection<DeferredBlock<T>> blockSet){
         blockSet.forEach(block -> this.slabDrops(block.get()));
     }
@@ -343,6 +339,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.add(ore, this.createMultipleOreDrops(ore, drop, minDrops, maxDrops));
     }
 
+    @SuppressWarnings("SameParameterValue")
     protected <T extends Block> void dropSelf(ColorCollection<DeferredBlock<T>> blockSet){
         blockSet.forEach(block -> this.dropSelf(block.get()));
     }

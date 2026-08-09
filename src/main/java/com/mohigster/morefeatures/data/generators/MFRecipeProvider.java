@@ -743,16 +743,16 @@ public class MFRecipeProvider extends RecipeProvider {
         return this.shaped(RecipeCategory.DECORATIONS, result, 3).define('W', base).define('#', actingStick).pattern("W#W").pattern("W#W");
     }
 
-    protected RecipeBuilder specialFenceGateBuilder(ItemLike result, Ingredient planks, Ingredient actingStick) {
-        return this.shaped(RecipeCategory.REDSTONE, result).define('#', actingStick).define('W', planks).pattern("#W#").pattern("#W#");
+    protected RecipeBuilder specialFenceGateBuilder(ItemLike result, Ingredient block, Ingredient actingStick) {
+        return this.shaped(RecipeCategory.REDSTONE, result).define('#', actingStick).define('W', block).pattern("#W#").pattern("#W#");
     }
 
-    protected <T extends Block> void verticalSlabCrafting(ColorCollection<DeferredBlock<T>> slabSet, ColorCollection<T> blockSet){
+    protected <T extends Block> void verticalSlabCrafting(ColorCollection<DeferredBlock<T>> slabSet, ColorCollection<T> blockSet) {
         ColorCollection.VALUES.forEach(colour -> this.verticalSlabCrafting(slabSet.pick(colour).get(), blockSet.pick(colour)));
     }
 
-    protected void planksFromLogs (ItemLike result, BlockItemTagId logBlockItemTag){
-        this.planksFromLogs(result, logBlockItemTag.item(), 4);
+    protected void planksFromLogs(ItemLike result, BlockItemTagId logTag) {
+        this.planksFromLogs(result, logTag.item(), 4);
     }
 }
 

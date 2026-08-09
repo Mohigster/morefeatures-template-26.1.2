@@ -45,6 +45,12 @@
     [],
     [],
     [
+      "minecraft:patch_fire",
+      "minecraft:patch_soul_fire",
+      "minecraft:glowstone_extra",
+      "minecraft:glowstone",
+      "minecraft:ore_magma",
+      "minecraft:spring_closed",
       "minecraft:ore_gravel_nether",
       "minecraft:ore_blackstone",
       "minecraft:ore_gold_nether",
@@ -55,7 +61,9 @@
     [],
     [
       "morefeatures:charred_placed",
-      "morefeatures:charred_forest_vegetation_placed"
+      "morefeatures:charred_forest_vegetation_placed",
+      "morefeatures:smoldered_vines_placed",
+      "morefeatures:scorched_vines_placed"
     ]
   ],
   "has_precipitation": false,

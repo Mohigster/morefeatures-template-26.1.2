@@ -22,7 +22,7 @@ public class WeatheringCopperVerticalSlabBlock extends VerticalSlabBlock impleme
     private final WeatherState weatherState;
 
     public WeatheringCopperVerticalSlabBlock(WeatherState weatherState, Properties properties) {
-        super(false, properties); // Copper slabs are not flammable, so we always set this value to false
+        super(properties);
         this.weatherState = weatherState;
     }
 

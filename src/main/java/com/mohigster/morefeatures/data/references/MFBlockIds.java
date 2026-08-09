@@ -28,8 +28,9 @@ public class MFBlockIds {
     public static final ResourceKey<Block> POTTED_ROSE = createId("potted_rose");
     public static final ResourceKey<Block> POTTED_BLUE_ROSE = createId("potted_blue_rose");
 
-    // Nether vines
+    // Nether vinesState
     public static final ResourceKey<Block> SCORCHED_VINES_PLANT = createId("scorched_vines_plant");
+    public static final ResourceKey<Block> SMOLDERED_VINES_PLANT = createId("smoldered_vines_plant");
 
     // Conjured ice
     public static final ResourceKey<Block> CONJURED_ICE = createId("conjured_ice");

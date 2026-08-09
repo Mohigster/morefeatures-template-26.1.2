@@ -1,8 +1,10 @@
 package com.mohigster.morefeatures.data.generators;
 
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.block.custom.data.FlammableHelper;
 import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
-import com.mohigster.morefeatures.block.custom.data.BonemealMorph;
+import com.mohigster.morefeatures.block.custom.data.codec.BonemealMorph;
+import com.mohigster.morefeatures.block.custom.data.codec.Flammable;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
@@ -75,5 +77,14 @@ public class MFDataMapsProvider extends DataMapProvider {
 
         strippables.add(logList.getLast(), new Strippable(strippedLogList.getLast().get()), false);
         strippables.add(woodList.getLast(), new Strippable(strippedWoodList.getLast().get()), false);
+
+        final var flammable = builder(MFDataMaps.FLAMMABILITY);
+        FlammableHelper.getDefaults().forEach(entry ->
+            flammable.add(
+                    entry.block().builtInRegistryHolder(),
+                    new Flammable(entry.flammability(), entry.fireSpreadSpeed()),
+                    false
+            )
+        );
     }
 }
