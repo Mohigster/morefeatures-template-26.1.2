@@ -35,8 +35,19 @@ public class MFDataMapsProvider extends DataMapProvider {
         final var strippedWoodList = MFBlocks.STRIPPED_WOOD.asList();
 
         final var bonemealMorphs = builder(MFDataMaps.BONEMEAL_MORPHS);
-        bonemealMorphs.add(Blocks.NETHERRACK.builtInRegistryHolder(), new BonemealMorph(List.of(MFBlocks.CHARRED_NYLIUM.get(), Blocks.CRIMSON_NYLIUM, Blocks.WARPED_NYLIUM)), false);
-        bonemealMorphs.add(Blocks.END_STONE.builtInRegistryHolder(), new BonemealMorph(List.of(MFBlocks.DECREPIT_NULLIUM.get(), MFBlocks.PALLID_NULLIUM.get())), false);
+        bonemealMorphs.add(Blocks.NETHERRACK.builtInRegistryHolder(), new BonemealMorph(
+                List.of(
+                        MFBlocks.CHARRED_NYLIUM.get(),
+                        Blocks.CRIMSON_NYLIUM,
+                        Blocks.WARPED_NYLIUM
+                )
+        ), false);
+        bonemealMorphs.add(Blocks.END_STONE.builtInRegistryHolder(), new BonemealMorph(
+                List.of(
+                        MFBlocks.DECREPIT_NULLIUM.get(),
+                        MFBlocks.PALLID_NULLIUM.get()
+                )
+        ), false);
 
         final var oxidizables = builder(NeoForgeDataMaps.OXIDIZABLES);
         oxidizables.add(cutCopperVSList.getFirst(), new Oxidizable(cutCopperVSList.get(1).get()), false);

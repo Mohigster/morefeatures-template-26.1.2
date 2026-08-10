@@ -8,16 +8,15 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.function.Supplier;
 
-public class SmolderedVinesPlantBlock extends TwistingVinesPlantBlock {
-    private final Supplier<SmolderedVinesBlock> headBlock;
-    public static final MapCodec<SmolderedVinesPlantBlock> CODEC = simpleCodec(SmolderedVinesPlantBlock::new);
+public class FloorVinesPlantBlock extends TwistingVinesPlantBlock {
+    private final Supplier<FloorVinesBlock> headBlock;
 
-    public SmolderedVinesPlantBlock(Supplier<SmolderedVinesBlock> headBlock, Properties properties) {
+    public FloorVinesPlantBlock(Supplier<FloorVinesBlock> headBlock, Properties properties) {
         super(properties);
         this.headBlock = headBlock;
     }
 
-    public SmolderedVinesPlantBlock(Properties properties) {
+    public FloorVinesPlantBlock(Properties properties) {
         this(MFBlocks.SMOLDERED_VINES, properties);
     }
 

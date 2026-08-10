@@ -31,14 +31,17 @@ public class MoreFeaturesDataGen {
 
         //————————————————————————————Adding providers————————————————————————————
 
+        // Main vanilla providers
         generator.addProvider(true, new MFModelProvider(packOutput));
         generator.addProvider(true, new MFRecipeProvider.Runner(packOutput, lookupProvider));
         generator.addProvider(true, new MFDatapackProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFSoundsProvider(packOutput));
         generator.addProvider(true, new MFAdvancementProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFEquipmentAssetProvider(packOutput));
+
+        // NeoForge providers
         generator.addProvider(true, new MFDataMapsProvider(packOutput, lookupProvider));
-        generator.addProvider(true, new MFParticleDescriptionProvider(packOutput));
+        generator.addProvider(true, new MFParticleDescriptionProvider(packOutput)); // Oddly enough, vanilla doesn't have this.
 
         // Tag providers
         generator.addProvider(true, new MFBlockTagsProvider(packOutput, lookupProvider));
@@ -47,7 +50,7 @@ public class MoreFeaturesDataGen {
         generator.addProvider(true, new MFBiomeTagProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFEntityTagsProvider(packOutput, lookupProvider));
 
-        // Custom providers for data-driven features that are not from vanilla
+        // Custom providers for data-driven features added by this mod
         generator.addProvider(true, new MFMagicBlockTransmutationProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFMetalDetectorCostProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFElytraSpeedBoostProvider(packOutput, lookupProvider));

@@ -23,11 +23,11 @@ public class PlantedOffGrassSaplingBlock extends SaplingBlock {
         this.blocksToSurviveOn =  blocksToSurviveOn;
     }
 
-    public PlantedOffGrassSaplingBlock(TreeGrower treeGrower, Properties properties, Supplier<Block> blockToSurviveOn) {
+    public PlantedOffGrassSaplingBlock(TreeGrower treeGrower, Supplier<Block> blockToSurviveOn, Properties properties) {
         this(treeGrower, properties, blockToSurviveOn, BlockTags.GRASS_BLOCKS, false);
     }
 
-    public PlantedOffGrassSaplingBlock(TreeGrower treeGrower, Properties properties, TagKey<Block> blocksToSurviveOn) {
+    public PlantedOffGrassSaplingBlock(TreeGrower treeGrower, TagKey<Block> blocksToSurviveOn, Properties properties) {
         this(treeGrower, properties, () -> Blocks.GRASS_BLOCK, blocksToSurviveOn, true);
     }
 

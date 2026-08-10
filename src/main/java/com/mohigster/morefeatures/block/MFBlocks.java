@@ -5,10 +5,10 @@ import com.mohigster.morefeatures.block.collection.wood.WoodSet;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.block.custom.*;
 import com.mohigster.morefeatures.block.custom.modified.*;
-import com.mohigster.morefeatures.block.custom.modified.nethervines.scorched.ScorchedVinesBlock;
-import com.mohigster.morefeatures.block.custom.modified.nethervines.scorched.ScorchedVinesPlantBlock;
-import com.mohigster.morefeatures.block.custom.modified.nethervines.smoldered.SmolderedVinesBlock;
-import com.mohigster.morefeatures.block.custom.modified.nethervines.smoldered.SmolderedVinesPlantBlock;
+import com.mohigster.morefeatures.block.custom.modified.nethervines.scorched.CeilingVinesBlock;
+import com.mohigster.morefeatures.block.custom.modified.nethervines.scorched.CeilingVinesPlantBlock;
+import com.mohigster.morefeatures.block.custom.modified.nethervines.smoldered.FloorVinesBlock;
+import com.mohigster.morefeatures.block.custom.modified.nethervines.smoldered.FloorVinesPlantBlock;
 import com.mohigster.morefeatures.block.custom.modified.sign.MFCeilingHangingSignBlock;
 import com.mohigster.morefeatures.block.custom.modified.sign.MFStandingSignBlock;
 import com.mohigster.morefeatures.block.custom.modified.sign.MFWallHangingSignBlock;
@@ -435,12 +435,12 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> PALM_SAPLING = registerBlock(MFBlockItemIds.PALM_SAPLING,
-            properties -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALM, properties
+            properties -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALM, () -> Blocks.SAND, properties
                     .sound(SoundType.GRASS)
                     .instabreak()
                     .noOcclusion()
-                    .noCollision(),
-                    () -> Blocks.SAND // The block that the sapling can be planted on. You can also pass in a block tag here.
+                    .noCollision()
+                    // The block that the sapling can be planted on. You can also pass in a block tag here.
             ));
 
     //———————————————————————————————————————Charred Wood Blocks—————————————————————————————————————————————————————————————————————
@@ -459,7 +459,7 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> CHARRED_NYLIUM = registerBlock(MFBlockItemIds.CHARRED_NYLIUM,
-            props -> new MFNyliumBlock(props, MFConfiguredFeatures.CHARRED_VEGETATION_BONEMEAL_KEY),
+            props -> new MFNyliumBlock(MFConfiguredFeatures.CHARRED_VEGETATION_BONEMEAL_KEY, props),
             _ -> Properties.ofFullCopy(Blocks.WARPED_NYLIUM).mapColor(MapColor.COLOR_BLACK)
     );
 
@@ -479,22 +479,22 @@ public class MFBlocks {
     );
 
     public static final DeferredBlock<Block> SCORCHED_VINES = registerBlock(MFBlockItemIds.SCORCHED_VINES,
-            ScorchedVinesBlock::new,
+            CeilingVinesBlock::new,
             _ -> Properties.ofFullCopy(Blocks.WEEPING_VINES)
     );
 
     public static final DeferredBlock<Block> SCORCHED_VINES_PLANT = registerBlockWithoutItem(MFBlockIds.SCORCHED_VINES_PLANT,
-            ScorchedVinesPlantBlock::new,
+            CeilingVinesPlantBlock::new,
             _ -> Properties.ofFullCopy(Blocks.WEEPING_VINES_PLANT)
     );
 
-    public static final DeferredBlock<SmolderedVinesBlock> SMOLDERED_VINES = registerBlock(MFBlockItemIds.SMOLDERED_VINES,
-            SmolderedVinesBlock::new,
+    public static final DeferredBlock<FloorVinesBlock> SMOLDERED_VINES = registerBlock(MFBlockItemIds.SMOLDERED_VINES,
+            FloorVinesBlock::new,
             _ -> Properties.ofFullCopy(Blocks.TWISTING_VINES)
     );
 
-    public static final DeferredBlock<SmolderedVinesPlantBlock> SMOLDERED_VINES_PLANT = registerBlockWithoutItem(MFBlockIds.SMOLDERED_VINES_PLANT,
-            SmolderedVinesPlantBlock::new,
+    public static final DeferredBlock<FloorVinesPlantBlock> SMOLDERED_VINES_PLANT = registerBlockWithoutItem(MFBlockIds.SMOLDERED_VINES_PLANT,
+            FloorVinesPlantBlock::new,
             _ -> Properties.ofFullCopy(Blocks.TWISTING_VINES_PLANT)
     );
 
@@ -510,13 +510,13 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> DECREPIT_SAPLING = registerBlock(MFBlockItemIds.DECREPIT_SAPLING,
-            properties -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.DECREPIT, properties
+            properties -> new PlantedOffGrassSaplingBlock
+                    (MFTreeGrowers.DECREPIT, MFBlockTags.NULLIUM, properties
                     .sound(SoundType.GRASS)
                     .instabreak()
                     .noOcclusion()
                     .noCollision()
-                    .mapColor(MapColor.PLANT),
-                    MFBlockTags.NULLIUM
+                    .mapColor(MapColor.PLANT)
             ));
 
     public static final DeferredBlock<Block> DECREPIT_ROOTS = registerBlock(MFBlockItemIds.DECREPIT_ROOTS,
@@ -538,13 +538,12 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> DECREPIT_NULLIUM = registerBlock(MFBlockItemIds.DECREPIT_NULLIUM,
-            properties -> new NulliumBlock(properties
-                    .sound(SoundType.NYLIUM)
+            properties -> new NulliumBlock(MFConfiguredFeatures.DECREPIT_VEGETATION_BONEMEAL_KEY,
+                    properties.sound(SoundType.NYLIUM)
                     .strength(4f, 4f)
                     .requiresCorrectToolForDrops()
                     .randomTicks()
-                    .mapColor(MapColor.TERRACOTTA_BLUE),
-                    MFConfiguredFeatures.DECREPIT_VEGETATION_BONEMEAL_KEY
+                    .mapColor(MapColor.TERRACOTTA_BLUE)
             ));
 
     //———————————————————————————————————————Pallid Wood Blocks——————————————————————————————————————————————————————————————————————
@@ -555,7 +554,7 @@ public class MFBlocks {
     );
 
     public static final DeferredBlock<Block> PALLID_SAPLING = registerBlock(MFBlockItemIds.PALLID_SAPLING,
-            props -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALLID, props, MFBlockTags.NULLIUM),
+            props -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALLID, MFBlockTags.NULLIUM, props),
             _ -> Properties.ofFullCopy(DECREPIT_SAPLING.get())
     );
 
@@ -573,7 +572,7 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> PALLID_NULLIUM = registerBlock(MFBlockItemIds.PALLID_NULLIUM,
-            props -> new NulliumBlock(props, MFConfiguredFeatures.PALLID_VEGETATION_BONEMEAL_KEY),
+            props -> new NulliumBlock(MFConfiguredFeatures.PALLID_VEGETATION_BONEMEAL_KEY, props),
             _ -> Properties.ofFullCopy(DECREPIT_NULLIUM.get()).mapColor(MapColor.TERRACOTTA_GREEN)
     );
 

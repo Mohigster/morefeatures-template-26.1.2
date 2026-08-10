@@ -35,7 +35,7 @@ import java.util.Set;
 public class MFBlockLootTableProvider extends BlockLootSubProvider {
 
     public MFBlockLootTableProvider(HolderLookup.Provider registries) {
-        super(Set.of(), FeatureFlags.REGISTRY.allFlags(), registries);
+        super(Set.of(MFBlocks.BISMUTH_BLOCK.asItem()), FeatureFlags.REGISTRY.allFlags(), registries);
     }
 
     @Override

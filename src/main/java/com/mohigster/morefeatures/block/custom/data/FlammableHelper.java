@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class FlammableHelper {
+public final class FlammableHelper {
     public record FlammabilityEntry(Block block, int flammability, int fireSpreadSpeed) {}
 
     private static final List<FlammabilityEntry> DEFAULTS = new ArrayList<>();
@@ -63,6 +63,7 @@ public class FlammableHelper {
     public static void add(Block block, int flammability, int fireSpreadSpeed) {
         DEFAULTS.add(new FlammabilityEntry(block, flammability, fireSpreadSpeed));
     }
+
     public static void add(WoodSet set, Block block, int flammability, int fireSpreadSpeed) {
         if (set.isFlammable()) add(block, flammability, fireSpreadSpeed);
     }
@@ -70,5 +71,4 @@ public class FlammableHelper {
     public static List<FlammabilityEntry> getDefaults() {
         return Collections.unmodifiableList(DEFAULTS);
     }
-
 }

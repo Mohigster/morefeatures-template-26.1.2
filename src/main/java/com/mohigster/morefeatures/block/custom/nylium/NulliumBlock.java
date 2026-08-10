@@ -6,8 +6,18 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
 public class NulliumBlock extends MFNyliumBlock {
-    public NulliumBlock(Properties properties, ResourceKey<ConfiguredFeature<?, ?>> feature) {
-        super(properties, feature);
+    public NulliumBlock(ResourceKey<ConfiguredFeature<?, ?>> feature, Properties properties) {
+        super(feature, properties);
+    }
+
+    @SuppressWarnings("unused")
+    public NulliumBlock(
+            ResourceKey<ConfiguredFeature<?, ?>> feature,
+            ResourceKey<ConfiguredFeature<?, ?>> rareFeature,
+            int chance,
+            Properties properties
+    ) {
+        super(feature, rareFeature, chance, properties);
     }
 
     @Override

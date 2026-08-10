@@ -25,9 +25,24 @@ import java.util.function.BiConsumer;
 public record MFBlockInteractLootTableProvider(HolderLookup.Provider registries) implements LootTableSubProvider {
     @Override
     public void generate(@NonNull BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output) {
-        output.accept(
+        this.generateSimple(
+                output,
                 MFLootTableIds.HARVEST_BLUE_BERRY_BUSH,
-                this.createBerryInteractTable(MFBlocks.BLUE_BERRY_BUSH.get(), MFItems.BLUE_BERRY.get())
+                this.createBerryInteractTable(
+                        MFBlocks.BLUE_BERRY_BUSH.get(),
+                        MFItems.BLUE_BERRY.get()
+                )
+        );
+    }
+
+    @SuppressWarnings("SameParameterValue")
+    private void generateSimple(
+            BiConsumer<ResourceKey<LootTable>, LootTable.Builder> output,
+            ResourceKey<LootTable> lootTable,
+            LootTable.Builder builder) {
+        output.accept(
+                lootTable,
+                builder
         );
     }
 

@@ -18,7 +18,6 @@ public class MFWallHangingSignBlock extends WallHangingSignBlock {
         super(set.getWoodType(), properties);
     }
 
-    @NullMarked
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return MFBlockEntities.MF_HANGING_SIGN_BE.get().create(pos, state);

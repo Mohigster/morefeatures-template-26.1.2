@@ -37,14 +37,6 @@ public class MFBlockFamilies {
         return azuriteFamily;
     }
 
-//    public static GemstoneCollection<BlockFamily> getGemstoneFamily() {
-//        if(gemstoneFamily == null) {
-//            gemstoneFamily = GemstoneCollection.GEMS.map(
-//                    gem -> new BlockFamily.Builder()
-//            );
-//        }
-//    }
-
     public static BlockFamily getFluoriteFamily(){
         if(fluoriteFamily == null) {
             fluoriteFamily = new BlockFamily.Builder(MFBlocks.FLUORITE_BLOCK.get())

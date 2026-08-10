@@ -16,7 +16,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.SideChainPart;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.redstone.Orientation;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 public class MFShelfBlock extends ShelfBlock {
@@ -26,7 +25,6 @@ public class MFShelfBlock extends ShelfBlock {
 
     // The only difference between this and the super method is that vanilla always plays the vanilla shelf sounds
     // Now, it will play gemstone shelf sounds if the shelf is a gemstone shelf
-    @NullMarked
     @Override
     protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston) {
         if (!level.isClientSide()) {
@@ -73,7 +71,6 @@ public class MFShelfBlock extends ShelfBlock {
         return bothWoodenShelves || bothGemstoneShelves;
     }
 
-    @NullMarked
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return MFBlockEntities.MF_SHELF_BE.get().create(pos, state);

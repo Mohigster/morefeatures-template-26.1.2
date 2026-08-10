@@ -23,13 +23,12 @@ import java.util.function.Consumer;
 import static net.minecraft.advancements.triggers.InventoryChangeTrigger.TriggerInstance.hasItems;
 
 public class MFAdvancementProvider extends AdvancementProvider {
-
     public MFAdvancementProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, List.of(new ModAdvancements()));
+        super(output, registries, List.of(new MFAdvancements()));
     }
 
     @SuppressWarnings("unused")
-    public static class ModAdvancements implements AdvancementSubProvider {
+    public static class MFAdvancements implements AdvancementSubProvider {
         @Override
         public void generate(HolderLookup.Provider registries, @NonNull Consumer<AdvancementHolder> output) {
             var items = registries.lookupOrThrow(Registries.ITEM);

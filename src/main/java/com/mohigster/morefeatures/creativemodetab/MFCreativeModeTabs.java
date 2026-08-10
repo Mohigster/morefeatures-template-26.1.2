@@ -183,37 +183,36 @@ public class MFCreativeModeTabs {
             .icon(() -> new ItemStack(MFBlocks.LOG.bloodwood()))
             .title(Component.translatable("creativetab.morefeatures.morefeatures_wood"))
             .withTabsBefore(MFIdentifier.withMfNamespace("morefeatures_equipment_tab"))
-            .displayItems((_, output) -> {
-                WoodTypeCollection.SETS.forEach(type -> {
-                    output.accept(MFBlocks.LOG.pick(type));
-                    output.accept(MFBlocks.WOOD.pick(type));
-                    output.accept(MFBlocks.STRIPPED_LOG.pick(type));
-                    output.accept(MFBlocks.STRIPPED_WOOD.pick(type));
-                    output.accept(MFBlocks.PLANKS.pick(type));
-                    output.accept(MFBlocks.WOODEN_STAIRS.pick(type));
-                    output.accept(MFBlocks.WOODEN_VERTICAL_SLAB.pick(type));
-                    output.accept(MFBlocks.WOODEN_SLAB.pick(type));
-                    output.accept(MFBlocks.WOODEN_FENCE.pick(type));
-                    output.accept(MFBlocks.WOODEN_FENCE_GATE.pick(type));
-                    output.accept(MFBlocks.WOODEN_PRESSURE_PLATE.pick(type));
-                    output.accept(MFBlocks.WOODEN_BUTTON.pick(type));
-                    // Leaves and warts, as well as saplings, are registered separately
-                    // because they are registered using different classes to each other
-                    // These get methods substitute calling MFBlocks.LEAVES.pick(type);
-                    output.accept(type.getLeavesOrWart());
-                    output.accept(type.getSaplingOrFungus());
-                    output.accept(MFBlocks.WOODEN_SHELF.pick(type));
-                    output.accept(MFItems.SIGN.pick(type));
-                    output.accept(MFItems.HANGING_SIGN.pick(type));
-                    if (type.hasBoat()) {
-                        assert type.getBoat() != null;
-                        assert type.getChestBoat() != null;
-                        output.accept(type.getBoat());
-                        output.accept(type.getChestBoat());
-                    }
-                });
-            })
-            .build()
+            .displayItems((_, output) ->
+                    WoodTypeCollection.SETS.forEach(set -> {
+                        output.accept(MFBlocks.LOG.pick(set));
+                        output.accept(MFBlocks.WOOD.pick(set));
+                        output.accept(MFBlocks.STRIPPED_LOG.pick(set));
+                        output.accept(MFBlocks.STRIPPED_WOOD.pick(set));
+                        output.accept(MFBlocks.PLANKS.pick(set));
+                        output.accept(MFBlocks.WOODEN_STAIRS.pick(set));
+                        output.accept(MFBlocks.WOODEN_VERTICAL_SLAB.pick(set));
+                        output.accept(MFBlocks.WOODEN_SLAB.pick(set));
+                        output.accept(MFBlocks.WOODEN_FENCE.pick(set));
+                        output.accept(MFBlocks.WOODEN_FENCE_GATE.pick(set));
+                        output.accept(MFBlocks.WOODEN_PRESSURE_PLATE.pick(set));
+                        output.accept(MFBlocks.WOODEN_BUTTON.pick(set));
+                        // Leaves and warts, as well as saplings, are registered separately
+                        // because they are registered using different classes to each other
+                        // These get methods substitute calling MFBlocks.LEAVES.pick(set);
+                        output.accept(set.getLeavesOrWart());
+                        output.accept(set.getSaplingOrFungus());
+                        output.accept(MFBlocks.WOODEN_SHELF.pick(set));
+                        output.accept(MFItems.SIGN.pick(set));
+                        output.accept(MFItems.HANGING_SIGN.pick(set));
+                        if (set.hasBoat()) {
+                            assert set.getBoat() != null;
+                            assert set.getChestBoat() != null;
+                            output.accept(set.getBoat());
+                            output.accept(set.getChestBoat());
+                        }
+                    })
+            ).build()
     );
 
     public static void register(IEventBus eventBus){

@@ -8,15 +8,15 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.function.Supplier;
 
-public class ScorchedVinesPlantBlock extends WeepingVinesPlantBlock {
+public class CeilingVinesPlantBlock extends WeepingVinesPlantBlock {
     private final Supplier<Block> headBlock;
 
-    public ScorchedVinesPlantBlock(Supplier<Block> headBlock, Properties properties) {
+    public CeilingVinesPlantBlock(Supplier<Block> headBlock, Properties properties) {
         super(properties);
         this.headBlock = headBlock;
     }
 
-    public ScorchedVinesPlantBlock(Properties properties) {
+    public CeilingVinesPlantBlock(Properties properties) {
         this(MFBlocks.SCORCHED_VINES, properties);
     }
 

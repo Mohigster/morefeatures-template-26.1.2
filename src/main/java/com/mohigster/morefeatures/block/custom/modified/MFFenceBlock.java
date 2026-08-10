@@ -7,14 +7,12 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jspecify.annotations.NullMarked;
 
 public class MFFenceBlock extends FenceBlock {
     public MFFenceBlock(Properties properties) {
         super(properties);
     }
 
-    @NullMarked
     @Override
     public boolean connectsTo(BlockState state, boolean faceSolid, Direction direction) {
         Block block = state.getBlock();

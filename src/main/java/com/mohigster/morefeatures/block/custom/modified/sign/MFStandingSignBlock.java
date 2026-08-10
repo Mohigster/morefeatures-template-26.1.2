@@ -18,7 +18,6 @@ public class MFStandingSignBlock extends StandingSignBlock {
         this(set.getWoodType(), properties);
     }
 
-    @NullMarked
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
         return MFBlockEntities.MF_SIGN_BE.get().create(pos, state);
