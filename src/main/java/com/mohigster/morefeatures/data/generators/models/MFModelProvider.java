@@ -55,6 +55,7 @@ public class MFModelProvider extends ModelProvider {
         MFItemModelGenerators.customModelWithFlatInvTexture(itemModels, MFItems.EARTH_WAND.get());
         MFItemModelGenerators.customModelWithFlatInvTexture(itemModels, MFItems.LIGHTNING_WAND.get());
         MFItemModelGenerators.customModelWithFlatInvTexture(itemModels, MFItems.TIME_WAND.get());
+        itemModels.generateShield(MFItems.BISMUTH_SHIELD.get());
 
         // Used the generateFlatItem() line to get carbon_bow.json, then to prevent datagen deleting it,
         // I moved that file to the permanent resources file instead of the generated resources file.

@@ -51,9 +51,16 @@ public class MFTridentItem extends TridentItem {
     @NullMarked
     @Override
     public Projectile asProjectile(final Level level, final Position position, final ItemStack itemStack, final Direction direction) {
-        System.out.println(tridentId);
-
-        ThrownMFTrident trident = new ThrownMFTrident(level, position.x(), position.y(), position.z(), itemStack.copyWithCount(1), tridentEntity, tridentId, projectileDamage);
+        ThrownMFTrident trident = new ThrownMFTrident(
+                level,
+                position.x(),
+                position.y(),
+                position.z(),
+                itemStack.copyWithCount(1),
+                tridentEntity,
+                tridentId,
+                projectileDamage
+        );
         trident.pickup = AbstractArrow.Pickup.ALLOWED;
         return trident;
     }
@@ -61,8 +68,10 @@ public class MFTridentItem extends TridentItem {
 
     public static ItemAttributeModifiers createAttributes(double damageAmount, double attackSpeedModifier) {
         return ItemAttributeModifiers.builder()
-                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID, damageAmount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
-                .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID, attackSpeedModifier, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_ID,
+                        damageAmount, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
+                .add(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_ID,
+                        attackSpeedModifier, AttributeModifier.Operation.ADD_VALUE), EquipmentSlotGroup.MAINHAND)
                 .build();
     }
 

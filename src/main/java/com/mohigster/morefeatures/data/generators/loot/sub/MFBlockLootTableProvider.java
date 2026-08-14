@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.data.generators.loot.sub;
 
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.block.collection.gemstone.GemstoneCollection;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.block.custom.BlueBerryBushBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
@@ -221,8 +222,8 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
         this.signDrops(MFBlocks.AZURITE_HANGING_SIGN.get(), MFBlocks.AZURITE_WALL_HANGING_SIGN.get(), MFItems.AZURITE_HANGING_SIGN.get());
         this.signDrops(MFBlocks.FLUORITE_SIGN.get(), MFBlocks.FLUORITE_WALL_SIGN.get(), MFItems.FLUORITE_SIGN.get());
         this.signDrops(MFBlocks.FLUORITE_HANGING_SIGN.get(), MFBlocks.FLUORITE_WALL_HANGING_SIGN.get(), MFItems.FLUORITE_HANGING_SIGN.get());
-        this.signDrops(MFBlocks.WOODEN_SIGN, MFBlocks.WOODEN_WALL_SIGN, MFItems.SIGN);
-        this.signDrops(MFBlocks.WOODEN_HANGING_SIGN, MFBlocks.WOODEN_WALL_HANGING_SIGN, MFItems.HANGING_SIGN);
+        this.signDrops(MFBlocks.WOODEN_SIGN, MFBlocks.WOODEN_WALL_SIGN, MFItems.WOODEN_SIGN);
+        this.signDrops(MFBlocks.WOODEN_HANGING_SIGN, MFBlocks.WOODEN_WALL_HANGING_SIGN, MFItems.WOODEN_HANGING_SIGN);
 
         // DOOR
 
@@ -333,6 +334,12 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
 
     protected void oreDrops(Block ore, Item drop){
         this.add(ore, this.createOreDrop(ore, drop));
+    }
+
+    protected void oreDrops(GemstoneCollection<DeferredBlock<Block>> blockSet, GemstoneCollection<DeferredItem<Item>> drop){
+        GemstoneCollection.GEMS.forEach(gem ->
+                this.oreDrops(blockSet.pick(gem).get(), drop.pick(gem).get())
+        );
     }
 
     protected void oreDrops(Block ore, Item drop, float minDrops, float maxDrops){

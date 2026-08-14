@@ -7,6 +7,7 @@ import com.mohigster.morefeatures.block.custom.data.codec.BonemealMorph;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
 import com.mohigster.morefeatures.events.data.BowDamageBonuses;
+import com.mohigster.morefeatures.events.data.BowDamageEntry;
 import com.mohigster.morefeatures.events.data.ElytraSpeedBoosts;
 import com.mohigster.morefeatures.data.world.biome.MFBiomes;
 import net.minecraft.core.BlockPos;
@@ -64,7 +65,7 @@ public class MFEvents {
 
         ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
 
-        if (!ElytraSpeedBoosts.INSTANCE.getElytraEntries().contains(chest.getItem())) return;
+        if (!ElytraSpeedBoosts.INSTANCE.elytraInEntries(chest)) return;
 
         // This boolean prevents the logger from being spammed for every tick that the player is flying
         if(!sharedAllElytraEntries) {
@@ -262,7 +263,7 @@ public class MFEvents {
         }
     }
 
-    private static void consumeCharge(ServerLevel level, BlockPos pos, BlockState state) { // This part works perfectly
+    private static void consumeCharge(ServerLevel level, BlockPos pos, BlockState state) {
         int current = state.getValue(VoidAnchorBlock.CHARGE);
         if (current > 0) {
             level.setBlock(pos, state.setValue(VoidAnchorBlock.CHARGE, current - 1), 3);
@@ -271,20 +272,37 @@ public class MFEvents {
 
     @SubscribeEvent
     public static void registerCapabilities(RegisterCapabilitiesEvent event) {
-        event.registerBlockEntity(Capabilities.Item.BLOCK, MFBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getItemHandler);
+        event.registerBlockEntity(Capabilities.Item.BLOCK,
+                MFBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getItemHandler);
 
-        event.registerBlockEntity(Capabilities.Energy.BLOCK, MFBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getEnergyStorage);
+        event.registerBlockEntity(Capabilities.Energy.BLOCK,
+                MFBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getEnergyStorage);
 
-        event.registerBlockEntity(Capabilities.Fluid.BLOCK, MFBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getFluidTank);
+        event.registerBlockEntity(Capabilities.Fluid.BLOCK,
+                MFBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getFluidTank);
     }
 
-    private static double getBowDamage(double baseDamage, ItemStack weapon){
+    /**
+     * @param baseDamage the base damage for the projectile
+     * @param weapon the {@link ItemStack} to check for a damage value in a {@link BowDamageEntry}
+     *
+     * @return the final damage that the bow will inflict as a double
+     *
+     * @throws IllegalStateException if the final calculated damage is zero or less.
+     * <p>This is typically the result of this method failing to find a {@link BowDamageEntry} for the
+     * specified weapon, as the entry returns a damage value of zero if no entry is found</p>
+     */
+    protected static double getBowDamage(double baseDamage, ItemStack weapon){
         double damage = baseDamage * BowDamageBonuses.INSTANCE.getDamage(weapon);
 
-        if (damage != 0){
+        if (damage > 0){
             return damage;
         }
 
-        throw new IllegalStateException("Bow damage multiplier cannot be 0!");
+        throw new IllegalStateException("Bow damage multiplier value was calculated as zero or less! " +
+                "Ensure that there is a Bow Damage Entry for: " + weapon + ". " +
+                "If there is, ensure the damage_bonus value is greater than zero. If there is not, " +
+                "you can create one in a JSON format at the following directory: " +
+                "data/<modid>/bow_damage_bonuses/<custom_bow>.json");
     }
 }

@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.data.sound;
 
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;

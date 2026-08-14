@@ -1,7 +1,8 @@
 package com.mohigster.morefeatures.block.custom;
 
 import com.mohigster.morefeatures.block.MFBlocks;
-import com.mohigster.morefeatures.data.world.dimension.MFDimensions;
+import com.mohigster.morefeatures.data.resources.references.dimension.MFDimensionIds;
+import com.mohigster.morefeatures.data.world.dimension.MFDimensionTypes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceKey;
@@ -46,10 +47,10 @@ public class EvilPortalBlock extends Block implements Portal {
     @Override
     public @Nullable TeleportTransition getPortalDestination(ServerLevel currentLevel, @NonNull Entity entity, @NonNull BlockPos portalEntryPos) {
         ResourceKey<Level> currentDimension = currentLevel.dimension();
-        boolean isLeavingCustomDim = currentDimension == MFDimensions.EVILDIM_LEVEL_KEY;
+        boolean isLeavingCustomDim = currentDimension == MFDimensionIds.EVILDIM;
 
         LevelData.RespawnData respawnData = currentLevel.getRespawnData();
-        ResourceKey<Level> targetDimensionKey = isLeavingCustomDim ? respawnData.dimension() : MFDimensions.EVILDIM_LEVEL_KEY;
+        ResourceKey<Level> targetDimensionKey = isLeavingCustomDim ? respawnData.dimension() : MFDimensionIds.EVILDIM;
         BlockPos baseSpawnPos = isLeavingCustomDim ? respawnData.pos() : ServerLevel.END_SPAWN_POINT.above(14);
 
         ServerLevel targetLevel = currentLevel.getServer().getLevel(targetDimensionKey);

@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.data.tag;
 
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
@@ -55,6 +55,10 @@ public final class MFBlockTags {
     // Pillars
     public static final TagKey<Block> CUT_COPPER_PILLARS = MFBlockItemTags.CUT_COPPER_PILLARS.block();
     public static final TagKey<Block> CONCRETE_PILLARS = MFBlockItemTags.CONCRETE_PILLARS.block();
+
+    // Infiniburn
+    public static final TagKey<Block> INFINIBURN_EVIL = morefeaturesTag("infiniburn_evil");
+    public static final TagKey<Block> INFINIBURN_BOREALIS = morefeaturesTag("infiniburn_borealis");
 
     // Miscellaneous
     public static final TagKey<Block> COMPRESSOR_FLUIDS = morefeaturesTag("compressor_fluids");

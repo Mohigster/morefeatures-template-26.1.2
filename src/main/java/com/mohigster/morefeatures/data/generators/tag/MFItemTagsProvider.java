@@ -1,8 +1,8 @@
 package com.mohigster.morefeatures.data.generators.tag;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.data.references.MFBlockItemIds;
-import com.mohigster.morefeatures.data.references.MFItemIds;
+import com.mohigster.morefeatures.data.resources.references.MFBlockItemIds;
+import com.mohigster.morefeatures.data.resources.references.MFItemIds;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.data.tag.MFBlockItemTags;
 import com.mohigster.morefeatures.data.tag.MFItemTags;
@@ -252,11 +252,13 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.EVERFROST);
 
         this.tag(ItemTags.LOGS_THAT_BURN)
-                .addTag(MFItemTags.BLOODWOOD_LOGS)
-                .addTag(MFItemTags.TAINTED_LOGS)
-                .addTag(MFItemTags.PALM_LOGS)
-                .addTag(MFItemTags.DECREPIT_LOGS)
-                .addTag(MFItemTags.PALLID_LOGS);
+                .addTag(MFBlockItemTags.LOGS.bloodwood().item())
+                .addTag(MFBlockItemTags.LOGS.tainted().item())
+                .addTag(MFBlockItemTags.LOGS.palm().item())
+                .addTag(MFBlockItemTags.LOGS.decrepit().item())
+                .addTag(MFBlockItemTags.LOGS.pallid().item());
+
+        this.tag(ItemTags.LOGS).addTag(MFItemTags.MODDED_LOGS);
 
         this.tag(ItemTags.PLANKS)
                 .add(MFBlockItemIds.PLANKS.bloodwood().item())

@@ -26,8 +26,7 @@ public class FireBlockMixin {
             return;
         }
 
-        // Query your Data Map via the block's Holder
-        Flammable data = state.getBlock().builtInRegistryHolder().getData(MFDataMaps.FLAMMABILITY);
+        Flammable data = state.getBlock().builtInRegistryHolder().getData(MFDataMaps.FLAMMABLES);
         if (data != null) {
             cir.setReturnValue(data.flammability());
         }
@@ -44,7 +43,7 @@ public class FireBlockMixin {
             return;
         }
 
-        Flammable data = state.getBlock().builtInRegistryHolder().getData(MFDataMaps.FLAMMABILITY);
+        Flammable data = state.getBlock().builtInRegistryHolder().getData(MFDataMaps.FLAMMABLES);
         if (data != null) {
             cir.setReturnValue(data.fireSpreadSpeed());
         }

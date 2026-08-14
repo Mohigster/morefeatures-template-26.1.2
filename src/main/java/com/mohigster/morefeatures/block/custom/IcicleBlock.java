@@ -170,8 +170,6 @@ public class IcicleBlock extends SpeleothemBlock {
         return false;
     }
 
-    // This is simply the default blocks that the Icicle can row on. Intentionally declared as protected instead of private so
-    // that subclasses can override if need be, especially if another modder wants to use this as a base and change the defaults
     protected List<BlockState> defaultValidGrowthBlocks(){
         return List.of(
                 Blocks.PACKED_ICE.defaultBlockState(),

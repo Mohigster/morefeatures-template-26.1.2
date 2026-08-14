@@ -1,6 +1,8 @@
 package com.mohigster.morefeatures.block;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.block.collection.gemstone.GemstoneCollection;
+import com.mohigster.morefeatures.block.collection.gemstone.GemstoneType;
 import com.mohigster.morefeatures.block.collection.wood.WoodSet;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.block.custom.*;
@@ -23,11 +25,11 @@ import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.WeatheringCopperVerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.blocktype.MFBlockSetType;
 import com.mohigster.morefeatures.block.custom.blocktype.MFWoodType;
-import com.mohigster.morefeatures.data.references.MFBlockIds;
-import com.mohigster.morefeatures.data.references.MFBlockItemIds;
+import com.mohigster.morefeatures.data.resources.references.MFBlockIds;
+import com.mohigster.morefeatures.data.resources.references.MFBlockItemIds;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.sound.MFSoundTypes;
 import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import com.mohigster.morefeatures.data.world.feature.MFConfiguredFeatures;
@@ -140,6 +142,20 @@ public class MFBlocks {
     public static final DeferredBlock<Block> RAW_BISMUTH_BLOCK = registerBlock(MFBlockItemIds.RAW_BISMUTH_BLOCK,
             Block::new,
             _ -> Properties.ofFullCopy(BISMUTH_BLOCK.get())
+    );
+    //———————————————————————————————————————Gemstone Blocks—————————————————————————————————————————————————————————————————————————
+    public static final GemstoneCollection<DeferredBlock<Block>> ORE = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.ORE,
+            MFBlocks::registerBlock,
+            (_, props) -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            MFBlocks::stoneGemOreProps
+    );
+
+    public static final GemstoneCollection<DeferredBlock<Block>> DEEPSLATE_ORE = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.DEEPSLATE_ORE,
+            MFBlocks::registerBlock,
+            (gem, props) -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            MFBlocks::deepslateGemOreProps
     );
 
     //———————————————————————————————————————Azurite Blocks——————————————————————————————————————————————————————————————————————————
@@ -488,12 +504,12 @@ public class MFBlocks {
             _ -> Properties.ofFullCopy(Blocks.WEEPING_VINES_PLANT)
     );
 
-    public static final DeferredBlock<FloorVinesBlock> SMOLDERED_VINES = registerBlock(MFBlockItemIds.SMOLDERED_VINES,
+    public static final DeferredBlock<Block> SMOLDERED_VINES = registerBlock(MFBlockItemIds.SMOLDERED_VINES,
             FloorVinesBlock::new,
             _ -> Properties.ofFullCopy(Blocks.TWISTING_VINES)
     );
 
-    public static final DeferredBlock<FloorVinesPlantBlock> SMOLDERED_VINES_PLANT = registerBlockWithoutItem(MFBlockIds.SMOLDERED_VINES_PLANT,
+    public static final DeferredBlock<Block> SMOLDERED_VINES_PLANT = registerBlockWithoutItem(MFBlockIds.SMOLDERED_VINES_PLANT,
             FloorVinesPlantBlock::new,
             _ -> Properties.ofFullCopy(Blocks.TWISTING_VINES_PLANT)
     );
@@ -644,35 +660,35 @@ public class MFBlocks {
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_FENCE_GATE = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_FENCE_GATE,
             MFBlocks::registerBlock,
-            (wood, props) -> new FenceGateBlock(wood.getWoodType(), props),
+            (set, props) -> new FenceGateBlock(set.getWoodType(), props),
             MFBlocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_PRESSURE_PLATE = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_PRESSURE_PLATE,
             MFBlocks::registerBlock,
-            (wood, props) -> new PressurePlateBlock(wood.getBlockSetType(), props),
+            (set, props) -> new PressurePlateBlock(set.getBlockSetType(), props),
             MFBlocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_BUTTON = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_BUTTON,
             MFBlocks::registerBlock,
-            (wood, props) -> new ButtonBlock(wood.getBlockSetType(), 20, props),
+            (set, props) -> new ButtonBlock(set.getBlockSetType(), 20, props),
             MFBlocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_DOOR = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_DOOR,
             MFBlocks::registerBlock,
-            (wood, props) -> new DoorBlock(wood.getBlockSetType(), props),
+            (set, props) -> new DoorBlock(set.getBlockSetType(), props),
             MFBlocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_TRAPDOOR = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_TRAPDOOR,
             MFBlocks::registerBlock,
-            (wood, props) -> new TrapDoorBlock(wood.getBlockSetType(), props),
+            (set, props) -> new TrapDoorBlock(set.getBlockSetType(), props),
             MFBlocks::woodProps
     );
 
@@ -1321,7 +1337,6 @@ public class MFBlocks {
                     Properties props = propertiesSupplier.apply(color).setId(id.block());
                     DeferredBlock<Block> block = BLOCKS.register(name, () -> factory.apply(props));
 
-                    // Register the BlockItem, just like with copper
                     registerBlockItem(id, block);
 
                     return block;
@@ -1377,11 +1392,30 @@ public class MFBlocks {
         return baseWoodProps(wood, props, false).noCollision();
     }
 
-    private static Properties baseWoodProps(WoodSet wood, Properties props, boolean log){
-        Properties finalProps = props.mapColor(wood.getMapColor()).sound(log ? wood.getLogSoundType() : wood.getMainSoundType())
+    private static Properties deepslateGemOreProps(GemstoneType gem, Properties props) {
+        return baseGemOreProps(gem, props, false);
+    }
+
+    private static Properties stoneGemOreProps(GemstoneType gem, Properties props) {
+        return baseGemOreProps(gem, props, true);
+    }
+
+    private static Properties baseGemOreProps(GemstoneType gem, Properties props, boolean stone){
+        return gemProps(gem, props).mapColor(stone ? MapColor.STONE : MapColor.DEEPSLATE).sound(stone ? SoundType.STONE : SoundType.DEEPSLATE);
+    }
+
+    private static Properties gemProps(GemstoneType gem, Properties props) {
+
+        return props.mapColor(gem.getMapColor()).sound(SoundType.AMETHYST).strength(10F, 400F)
+                .isRedstoneConductor(MFBlocks::always).isSuffocating(MFBlocks::always).isValidSpawn(MFBlocks::always)
+                .isViewBlocking(MFBlocks::always).instrument(NoteBlockInstrument.CHIME);
+    }
+
+    private static Properties baseWoodProps(WoodSet set, Properties props, boolean log){
+        Properties finalProps = props.mapColor(set.getMapColor()).sound(log ? set.getLogSoundType() : set.getMainSoundType())
                 .strength(2.0F, 8.0F).isValidSpawn(MFBlocks::never);
 
-        if(wood.isFlammable()) finalProps.ignitedByLava();
+        if(set.isFlammable()) finalProps.ignitedByLava();
 
         return finalProps;
     }

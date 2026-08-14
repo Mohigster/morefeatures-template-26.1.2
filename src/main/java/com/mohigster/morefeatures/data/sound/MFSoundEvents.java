@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.data.sound;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.sounds.SoundEvent;

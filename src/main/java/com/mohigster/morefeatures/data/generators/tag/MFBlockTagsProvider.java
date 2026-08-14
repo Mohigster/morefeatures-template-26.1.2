@@ -3,8 +3,8 @@ package com.mohigster.morefeatures.data.generators.tag;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
-import com.mohigster.morefeatures.data.references.MFBlockIds;
-import com.mohigster.morefeatures.data.references.MFBlockItemIds;
+import com.mohigster.morefeatures.data.resources.references.MFBlockIds;
+import com.mohigster.morefeatures.data.resources.references.MFBlockItemIds;
 import com.mohigster.morefeatures.data.tag.MFBlockItemTags;
 import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.HolderLookup;
@@ -405,7 +405,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.MUD_BRICK_VERTICAL_SLAB.block())
                 .add(MFBlockItemIds.RESIN_BRICK_VERTICAL_SLAB.block())
 
-                .addTag(MFBlockTags.CUT_COPPER_VERTICAL_SLABS);
+                .addTag(MFBlockTags.CUT_COPPER_VERTICAL_SLABS)
+                .addTag(MFBlockTags.CONCRETE_VERTICAL_SLABS);
 
         this.tag(BlockTags.FLOWERS)
                 .add(MFBlockItemIds.ROSE.block())

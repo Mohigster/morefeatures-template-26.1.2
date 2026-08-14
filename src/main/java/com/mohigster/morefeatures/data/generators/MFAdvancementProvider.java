@@ -2,7 +2,7 @@ package com.mohigster.morefeatures.data.generators;
 
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.item.MFItems;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.advancements.Advancement;
 import net.minecraft.advancements.AdvancementHolder;
 import net.minecraft.advancements.AdvancementType;
@@ -27,6 +27,7 @@ public class MFAdvancementProvider extends AdvancementProvider {
         super(output, registries, List.of(new MFAdvancements()));
     }
 
+    // getHoe and craftPortal are technically unused but are still displayed by the game, hence why we suppress unused warnings
     @SuppressWarnings("unused")
     public static class MFAdvancements implements AdvancementSubProvider {
         @Override

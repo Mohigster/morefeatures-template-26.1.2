@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.data.world.feature;
 
 import com.mohigster.morefeatures.block.MFBlocks;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.util.MFOrePlacementUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
@@ -85,62 +85,81 @@ public class MFPlacedFeatures {
         // PLACE ORES
 
         register(context, AZURITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.OVERWORLD_AZURITE_ORE_KEY),
-                MFOrePlacementUtil.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64))));
+                MFOrePlacementUtil.commonOrePlacement(12, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64))));
 
         register(context, NETHER_AZURITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.NETHER_AZURITE_ORE_KEY),
-                MFOrePlacementUtil.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.commonOrePlacement(12, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
 
         register(context, END_AZURITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.END_AZURITE_ORE_KEY),
-                MFOrePlacementUtil.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.commonOrePlacement(10, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
 
         register(context, FLUORITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.OVERWORLD_FLUORITE_ORE_KEY),
-                MFOrePlacementUtil.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64))));
+                MFOrePlacementUtil.commonOrePlacement(12, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(64))));
 
         register(context, NETHER_FLUORITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.NETHER_FLUORITE_ORE_KEY),
-                MFOrePlacementUtil.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.commonOrePlacement(12, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
 
         register(context, END_FLUORITE_ORE_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.END_FLUORITE_ORE_KEY),
-                MFOrePlacementUtil.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.commonOrePlacement(10, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(0), VerticalAnchor.absolute(128))));
 
         register(context, ALUMINIUM_ORE_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.ALUMINIUM_ORE_KEY),
-                MFOrePlacementUtil.commonOrePlacement(12, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.commonOrePlacement(12, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, MAGNESIUM_ORE_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.MAGNESIUM_ORE_KEY),
-                MFOrePlacementUtil.commonOrePlacement(3, HeightRangePlacement.uniform(VerticalAnchor.absolute(-16), VerticalAnchor.absolute(160))));
+                MFOrePlacementUtil.commonOrePlacement(3, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-16), VerticalAnchor.absolute(160))));
 
         register(context, BISMUTH_ORE_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.BISMUTH_ORE_KEY),
-                MFOrePlacementUtil.extraOrePlacement(1, 0.5f, 1, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
+                MFOrePlacementUtil.extraOrePlacement(1, 0.5f, 1, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
 
         register(context, EVERFROST_ORE_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.EVERFROST_ORE_KEY),
-                MFOrePlacementUtil.commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
+                MFOrePlacementUtil.commonOrePlacement(10, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(0), VerticalAnchor.absolute(64))));
 
         register(context, SMALL_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.SMALL_ICE_PATCH_KEY),
-                MFOrePlacementUtil.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.commonOrePlacement(6, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.ICE_PATCH_KEY),
-                MFOrePlacementUtil.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.commonOrePlacement(6, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, LARGE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.LARGE_ICE_PATCH_KEY),
-                MFOrePlacementUtil.commonOrePlacement(6, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.commonOrePlacement(6, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, SMALL_BLUE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.SMALL_BLUE_ICE_PATCH_KEY),
-                MFOrePlacementUtil.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.commonOrePlacement(8, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, BLUE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.BLUE_ICE_PATCH_KEY),
-                MFOrePlacementUtil.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.commonOrePlacement(8, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, LARGE_BLUE_ICE_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.LARGE_BLUE_ICE_PATCH_KEY),
-                MFOrePlacementUtil.commonOrePlacement(8, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.commonOrePlacement(8, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         // Ice Caves have bands of snow. These are rare but add some extra snow to the Ice Caves alongside those existing bands
         register(context, SMALL_SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.SMALL_SNOW_PATCH_KEY),
-                MFOrePlacementUtil.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.rareOrePlacement(2, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.SNOW_PATCH_KEY),
-                MFOrePlacementUtil.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.rareOrePlacement(2, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
         register(context, LARGE_SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.LARGE_SNOW_PATCH_KEY),
-                MFOrePlacementUtil.rareOrePlacement(2, HeightRangePlacement.uniform(VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
+                MFOrePlacementUtil.rareOrePlacement(2, HeightRangePlacement.uniform(
+                        VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
 
         // PLACE TREES
@@ -245,25 +264,27 @@ public class MFPlacedFeatures {
 
         // PLACE SPIRE
 
-        PlacementUtils.register(
+        register(
                 context,
                 ICE_SPIRE_PLACED_KEY,
                 configuredFeatures.getOrThrow(MFConfiguredFeatures.ICE_SPIRE_KEY),
-                RarityFilter.onAverageOnceEvery(5),
-                InSquarePlacement.spread(),
+                List.of(
+                        RarityFilter.onAverageOnceEvery(5),
+                        InSquarePlacement.spread(),
 
-                // Check across vertical heightmap
-                PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
+                        // Check across vertical heightmap
+                        PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT,
 
-                EnvironmentScanPlacement.scanningFor(
-                        Direction.UP,
-                        BlockPredicate.solid(),               // Target the ice cave ceiling
-                        BlockPredicate.ONLY_IN_AIR_PREDICATE, // Only allow for air
-                        12
-                ),
+                        EnvironmentScanPlacement.scanningFor(
+                                Direction.UP,
+                                BlockPredicate.solid(),               // Target the ice cave ceiling
+                                BlockPredicate.ONLY_IN_AIR_PREDICATE, // Only allow for air
+                                12
+                        ),
 
-                BiomeFilter.biome(),
-                PlacementUtils.HEIGHTMAP
+                        BiomeFilter.biome(),
+                        PlacementUtils.HEIGHTMAP
+                )
         );
     }
 

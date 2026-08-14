@@ -9,9 +9,9 @@ import org.jspecify.annotations.NonNull;
 import java.util.function.Supplier;
 
 public class FloorVinesBlock extends TwistingVinesBlock {
-    private final Supplier<FloorVinesPlantBlock> bodyBlock;
+    private final Supplier<Block> bodyBlock;
 
-    public FloorVinesBlock(Supplier<FloorVinesPlantBlock> bodyBlock, Properties properties) {
+    public FloorVinesBlock(Supplier<Block> bodyBlock, Properties properties) {
         super(properties);
         this.bodyBlock = bodyBlock;
     }

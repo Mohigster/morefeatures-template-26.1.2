@@ -23,10 +23,10 @@ public class MyMagicBlockTransmutationProvider extends MagicBlockTransmutationPr
     @Override
     protected void generate() {
         // Turns any item in the "my_mod:magic_to_dirt" tag into dirt
-        add(MyItemTags.MAGIC_TO_DIRT, Items.DIRT);
+        this.addFromTag(Items.DIRT, MyItemTags.MAGIC_TO_DIRT);
 
         // Turns any item in the "my_mod:magic_to_stone" tag into stone
-        add(MyItemTags.MAGIC_TO_STONE, Items.STONE);
+        this.add(Items.STONE, MyItemTags.MAGIC_TO_STONE);
     }
 }
 ```
@@ -47,26 +47,34 @@ Any name will work, but item_from_magic_block is the convention for this mod and
 
 ```json
 {
-    "input_tag": "namespace:item_tag",
-    "output_item": "namespace:item",
-    "copy_components": false
+    "input_values": [
+      "namespace:input_item",
+      "#namespace:item_tag"
+    ],
+    "output_item": "namespace:output_item",
+    "copy_components": false,
+    "extra_items": 0
 }
 ```
 
 Important notes:
 
-`"namespace:item_tag"` MUST be an existing item tag. This can be a custom tag, or a vanilla tag
+`"namespace:item_tag"` MUST be an existing item tag. This can be a custom tag, or a vanilla tag.
 
-`"namespace:item"` MUST be an existing item. Item registration is not related to magic block transmutations
+`"namespace:input_item"` AND `"namespace:output_item` MUST be valid items. Only the output is technically mandatory
+
+`"input_values` accepts a list of however many Item Tags or Items you want. There must be at least one value within this, but otherwise it is completely up to you.
 
 `"copy_components"` is OPTIONAL. It can be set to true, false, or left out of the JSON entirely (defaults to false if omitted). When true, any components on the input item (e.g. potion effects, custom data, enchantments) are copied onto the output item. Useful for transmutations where the output item should retain some property of the input, such as turning a custom potion into a lingering variant of itself
+
+`"extra_items"` is also OPTIONAL. It can be set to any non-negative integer (0 or greater) or left out (default to 0 if omitted). The transmutation result is a 1:value + 1 ratio. For example, if set to 0, each input item will turn into one output item. Or if set to one, each input becomes two of the output.
 
 Example JSONs. These may not necessarily actually be in the mod:
 
 `carbon_fiber_from_magic_block.json`:
 ```json
 {
-  "input_tag": "morefeatures:magic_block_transmutations/carbon",
+  "input_value": "#morefeatures:magic_block_transmutations/carbon",
   "output_item": "morefeatures:carbon_fiber"
 }
 ```
@@ -74,7 +82,7 @@ Example JSONs. These may not necessarily actually be in the mod:
 `lingering_potion_from_magic_block.json`:
 ```json
 {
-  "input_tag": "morefeatures:magic_block_transmutations/lingering_pot",
+  "input_value": "#morefeatures:magic_block_transmutations/lingering_pot",
   "output_item": "minecraft:lingering_potion",
   "copy_components": true
 }
@@ -83,14 +91,19 @@ Example JSONs. These may not necessarily actually be in the mod:
 `grass_block_from_magic_block.json`:
 ```json
 {
-  "input_tag": "minecraft:sand",
-  "output_item": "minecraft:grass_block"
+  "input_value": [
+    "minecraft:sand",
+    "minecraft:red_sand",
+    "#my_mod:nylium"
+  ],
+  "output_item": "minecraft:grass_block",
+  "extra_items": 2
 }
 ```
 
 Keep in mind that while vanilla tags do work, it is better to make your own specifically for use as an input tag. That way, you have complete control over what items are valid.
 
-For example, if you remove an item from a vanilla tag in order to use that tag as an input without that item, you may inadvertently affect vanilla behaviour. Using a custom tag avoids this possibility, and is therefore HIGHLY recommended.
+For example, if you remove an item from a vanilla tag in order to use that tag as an input without that item, you may inadvertently affect vanilla behaviour. Using a custom tag avoids this possibility.
 
 
 And finally, don't forget to add your custom transmutation result to the **results** item tag!
@@ -112,12 +125,12 @@ An example ItemTagsProvider class:
 public class MyItemTagsProvider extends ItemTagsProvider {
 
     public MyItemTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
-        super(output, lookupProvider, "my_mod_id");
+        super(output, lookupProvider, MyMod.MOD_ID);
     }
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)
+        this.tag(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)
                 .add(ItemIds.DIRT)
                 .add(ItemIds.STONE);
     }

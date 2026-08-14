@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.data.generators;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.data.sound.MFJukeboxSongs;
+import com.mohigster.morefeatures.data.world.dimension.MFLevelStems;
 import com.mohigster.morefeatures.enchantment.MFEnchantments;
 import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
 import com.mohigster.morefeatures.data.world.biome.MFBiomeModifiers;
@@ -9,7 +10,7 @@ import com.mohigster.morefeatures.data.world.feature.MFConfiguredFeatures;
 import com.mohigster.morefeatures.data.world.feature.MFPlacedFeatures;
 import com.mohigster.morefeatures.data.world.biome.MFBiomes;
 import com.mohigster.morefeatures.data.world.carver.MFCarvers;
-import com.mohigster.morefeatures.data.world.dimension.MFDimensions;
+import com.mohigster.morefeatures.data.world.dimension.MFDimensionTypes;
 import com.mohigster.morefeatures.data.world.noise.MFNoiseData;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistrySetBuilder;
@@ -25,8 +26,8 @@ public class MFDatapackProvider extends DatapackBuiltinEntriesProvider {
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
             .add(Registries.JUKEBOX_SONG, MFJukeboxSongs::bootstrap)
             .add(Registries.NOISE, MFNoiseData::bootstrap)
-            .add(Registries.DIMENSION_TYPE, MFDimensions::bootstrapType)
-            .add(Registries.LEVEL_STEM, MFDimensions::bootstrapStem)
+            .add(Registries.DIMENSION_TYPE, MFDimensionTypes::bootstrap)
+            .add(Registries.LEVEL_STEM, MFLevelStems::bootstrap)
             .add(Registries.ENCHANTMENT, MFEnchantments::bootstrap)
             .add(Registries.CONFIGURED_CARVER, MFCarvers::bootstrap)
             .add(Registries.TRIM_MATERIAL, MFTrimMaterials::bootstrap)

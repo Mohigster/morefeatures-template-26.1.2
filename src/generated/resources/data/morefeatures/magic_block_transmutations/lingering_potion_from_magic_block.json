@@ -1,5 +1,5 @@
 {
   "copy_components": true,
-  "input_tag": "morefeatures:magic_block_transmutations/lingering_pot",
+  "input_values": "#morefeatures:magic_block_transmutations/lingering_pot",
   "output_item": "minecraft:lingering_potion"
 }

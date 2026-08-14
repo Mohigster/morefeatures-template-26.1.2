@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.data.world.feature.custom.nethervine;
 
-import com.mohigster.morefeatures.data.world.feature.custom.config.nethervine.NetherVinesConfiguration;
+import com.mohigster.morefeatures.data.world.feature.custom.config.nethervine.FloorVinesConfiguration;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -14,16 +14,16 @@ import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 import org.jspecify.annotations.NonNull;
 
-public class FloorVinesFeature extends Feature<NetherVinesConfiguration> {
-    public FloorVinesFeature(Codec<NetherVinesConfiguration> codec) {
+public class FloorVinesFeature extends Feature<FloorVinesConfiguration> {
+    public FloorVinesFeature(Codec<FloorVinesConfiguration> codec) {
         super(codec);
     }
 
     @Override
-    public boolean place(@NonNull FeaturePlaceContext<NetherVinesConfiguration> context) {
+    public boolean place(@NonNull FeaturePlaceContext<FloorVinesConfiguration> context) {
         WorldGenLevel level = context.level();
         BlockPos origin = context.origin();
-        NetherVinesConfiguration config = context.config();
+        FloorVinesConfiguration config = context.config();
         if (!isValidPlacementLocation(config, level, origin)) {
             return false;
         } else {
@@ -63,7 +63,7 @@ public class FloorVinesFeature extends Feature<NetherVinesConfiguration> {
         return true;
     }
 
-    public static void placeVinesColumn(NetherVinesConfiguration config, LevelAccessor level, RandomSource random, BlockPos.MutableBlockPos placePos, int totalHeight, int minAge, int maxAge) {
+    public static void placeVinesColumn(FloorVinesConfiguration config, LevelAccessor level, RandomSource random, BlockPos.MutableBlockPos placePos, int totalHeight, int minAge, int maxAge) {
         for(int height = 1; height <= totalHeight; ++height) {
             if (level.isEmptyBlock(placePos)) {
                 if (height == totalHeight || !level.isEmptyBlock(placePos.above())) {
@@ -76,7 +76,7 @@ public class FloorVinesFeature extends Feature<NetherVinesConfiguration> {
         }
     }
 
-    private static boolean isValidPlacementLocation(NetherVinesConfiguration config, WorldGenLevel level, BlockPos pos) {
+    private static boolean isValidPlacementLocation(FloorVinesConfiguration config, WorldGenLevel level, BlockPos pos) {
         if (level.isEmptyBlock(pos)) {
             return true;
         } else {

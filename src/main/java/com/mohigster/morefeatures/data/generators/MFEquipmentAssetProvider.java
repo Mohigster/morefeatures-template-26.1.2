@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.data.generators;
 
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.material.MFArmorMaterials;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
 import net.minecraft.data.CachedOutput;
@@ -30,7 +30,7 @@ public class MFEquipmentAssetProvider implements DataProvider {
                         .addLayers(EquipmentClientInfo.LayerType.NAUTILUS_BODY, createLayer("bismuth"))
                 .build());
         output.accept(MFArmorMaterials.CARBON_KEY, EquipmentClientInfo.builder()
-                .addLayers(EquipmentClientInfo.LayerType.WOLF_BODY, createLayer("carbon", false))
+                .addLayers(EquipmentClientInfo.LayerType.WOLF_BODY, createLayer("carbon"))
                 .addLayers(EquipmentClientInfo.LayerType.WINGS, createLayer("carbon_elytra", true))
                 .build());
     }
@@ -54,11 +54,11 @@ public class MFEquipmentAssetProvider implements DataProvider {
         return "More Features Equipment Definitions";
     }
 
-    @SuppressWarnings("SameParameterValue")
     private static EquipmentClientInfo.Layer createLayer(String name){
         return new EquipmentClientInfo.Layer(MFIdentifier.withMfNamespace(name));
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static EquipmentClientInfo.Layer createLayer(String name, boolean usePlayerTexture){
         return new EquipmentClientInfo.Layer(MFIdentifier.withMfNamespace(name), Optional.empty(), usePlayerTexture);
     }

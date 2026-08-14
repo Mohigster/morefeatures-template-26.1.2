@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.data.tag;
 
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
@@ -30,18 +30,13 @@ public final class MFItemTags {
     public static final TagKey<Item> THUNDERBOLT_ENCHANTABLE = morefeaturesTag("thunderbolt_enchantable");
     public static final TagKey<Item> THUNDERING_ENCHANTABLE = morefeaturesTag("thundering_enchantable");
     public static final TagKey<Item> CARBON_INGREDIENTS = morefeaturesTag("carbon_ingredients");
-    public static final TagKey<Item> BLOODWOOD_LOGS = MFBlockItemTags.LOGS.bloodwood().item();
-    public static final TagKey<Item> TAINTED_LOGS = MFBlockItemTags.LOGS.tainted().item();
-    public static final TagKey<Item> PALM_LOGS = MFBlockItemTags.LOGS.palm().item();
-    public static final TagKey<Item> CHARRED_STEMS = MFBlockItemTags.LOGS.charred().item();
-    public static final TagKey<Item> DECREPIT_LOGS = MFBlockItemTags.LOGS.decrepit().item();
-    public static final TagKey<Item> PALLID_LOGS = MFBlockItemTags.LOGS.pallid().item();
     public static final TagKey<Item> MUSIC_DISCS = morefeaturesTag("music_discs");
     public static final TagKey<Item> AIMABLE_WANDS = morefeaturesTag("wands/aimable");
     public static final TagKey<Item> AOE_WANDS = morefeaturesTag("wands/aoe_generic");
     public static final TagKey<Item> TARGETING_ENTITY_WANDS = morefeaturesTag("wands/targeting/entity");
     public static final TagKey<Item> TARGETING_BLOCK_WANDS = morefeaturesTag("wands/targeting/block");
     public static final TagKey<Item> WOODEN_VERTICAL_SLABS = morefeaturesTag("vertical_slabs/wooden");
+    public static final TagKey<Item> MODDED_LOGS = MFBlockItemTags.MODDED_LOGS.item();
 
     // Magic block tags
     public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC = morefeaturesTag("magic_block_transmutations/aquamarine_disc");

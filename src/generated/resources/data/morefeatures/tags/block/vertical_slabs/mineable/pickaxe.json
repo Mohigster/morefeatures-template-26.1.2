@@ -48,6 +48,7 @@
     "morefeatures:brick_vertical_slab",
     "morefeatures:mud_brick_vertical_slab",
     "morefeatures:resin_brick_vertical_slab",
-    "#morefeatures:vertical_slabs/cut_copper"
+    "#morefeatures:vertical_slabs/cut_copper",
+    "#morefeatures:vertical_slabs/concrete"
   ]
 }

@@ -2,7 +2,7 @@ package com.mohigster.morefeatures.block.custom.data;
 
 import com.mohigster.morefeatures.block.custom.data.codec.BonemealMorph;
 import com.mohigster.morefeatures.block.custom.data.codec.Flammable;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.datamaps.AdvancedDataMapType;
@@ -25,15 +25,15 @@ public class MFDataMaps {
                 return new BonemealMorph(merged);
             }).build();
 
-    public static final AdvancedDataMapType<Block, Flammable, ?> FLAMMABILITY =
+    public static final AdvancedDataMapType<Block, Flammable, ?> FLAMMABLES =
             AdvancedDataMapType.builder(
-                    MFIdentifier.withMfNamespace("flammability"),
+                    MFIdentifier.withMfNamespace("flammables"),
                     Registries.BLOCK,
                     Flammable.CODEC
             ).build();
 
     public static void registerDataMaps(RegisterDataMapTypesEvent event) {
         event.register(BONEMEAL_MORPHS);
-        event.register(FLAMMABILITY);
+        event.register(FLAMMABLES);
     }
 }

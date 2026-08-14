@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.data.world.biome.region;
 
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.world.biome.MFBiomes;
 import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Registry;

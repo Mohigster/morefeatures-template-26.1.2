@@ -5,12 +5,20 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 
+import java.util.List;
+
+@SuppressWarnings("unused")
 public class NulliumBlock extends MFNyliumBlock {
-    public NulliumBlock(ResourceKey<ConfiguredFeature<?, ?>> feature, Properties properties) {
-        super(feature, properties);
+
+    public NulliumBlock(
+            List<ResourceKey<ConfiguredFeature<?, ?>>> features,
+            ResourceKey<ConfiguredFeature<?, ?>> rareFeature,
+            int chance,
+            Properties properties
+    ) {
+        super(features, rareFeature, chance, properties);
     }
 
-    @SuppressWarnings("unused")
     public NulliumBlock(
             ResourceKey<ConfiguredFeature<?, ?>> feature,
             ResourceKey<ConfiguredFeature<?, ?>> rareFeature,
@@ -18,6 +26,17 @@ public class NulliumBlock extends MFNyliumBlock {
             Properties properties
     ) {
         super(feature, rareFeature, chance, properties);
+    }
+
+    public NulliumBlock(
+            List<ResourceKey<ConfiguredFeature<?, ?>>> feature,
+            Properties properties
+    ) {
+        this(feature, null, 1, properties);
+    }
+
+    public NulliumBlock(ResourceKey<ConfiguredFeature<?, ?>> feature, Properties properties) {
+        this(List.of(feature), properties);
     }
 
     @Override

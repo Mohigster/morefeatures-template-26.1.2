@@ -7,25 +7,24 @@ import com.mohigster.morefeatures.entity.model.IceologerModel;
 import com.mohigster.morefeatures.particles.MFFallingLeavesParticle;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
 import com.mohigster.morefeatures.particles.MFSuspendedParticle;
-import com.mohigster.morefeatures.data.references.MFEntityTypeIds;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.references.MFEntityTypeIds;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.entity.model.MFTridentModel;
-import com.mohigster.morefeatures.renderer.trident.MFTridentRenderer;
+import com.mohigster.morefeatures.renderer.special.shield.BismuthShieldUnbaked;
+import com.mohigster.morefeatures.renderer.special.shield.CarbonShieldUnbaked;
+import com.mohigster.morefeatures.renderer.special.trident.BismuthTridentUnbaked;
+import com.mohigster.morefeatures.renderer.special.trident.CarbonTridentUnbaked;
+import com.mohigster.morefeatures.renderer.main.MFTridentRenderer;
 import com.mohigster.morefeatures.menu.MFMenuTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorScreen;
 import com.mohigster.morefeatures.entity.model.MFModelLayer;
-import com.mohigster.morefeatures.renderer.iceologer.IceologerRenderer;
-import com.mohigster.morefeatures.renderer.special.BismuthTridentSpecialRenderer;
-import com.mohigster.morefeatures.renderer.special.CarbonShieldSpecialRenderer;
-import com.mohigster.morefeatures.renderer.special.CarbonTridentSpecialRenderer;
+import com.mohigster.morefeatures.renderer.main.IceologerRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.object.boat.BoatModel;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.ShelfRenderer;
 import net.minecraft.client.renderer.blockentity.StandingSignRenderer;
 import net.minecraft.client.renderer.entity.BoatRenderer;
-import net.minecraft.data.AtlasIds;
-import net.minecraft.resources.Identifier;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -180,26 +179,22 @@ public class MoreFeaturesClient {
     }
 
     @SubscribeEvent
-    public static Identifier onTextureStitch(TextureAtlasStitchedEvent event) {
-        if (event.getAtlas().location().equals(AtlasIds.GUI)) {
-            return MFIdentifier.withMfNamespace("entity/sign/palm");
-        }
-        return null;
-    }
-
-    @SubscribeEvent
     public static void onRegisterSpecialRenderers(RegisterSpecialModelRendererEvent event) {
         event.register(
                 MFIdentifier.withMfNamespace("carbon_trident"),
-                CarbonTridentSpecialRenderer.Unbaked.MAP_CODEC
+                CarbonTridentUnbaked.MAP_CODEC
         );
         event.register(
                 MFIdentifier.withMfNamespace("bismuth_trident"),
-                BismuthTridentSpecialRenderer.Unbaked.MAP_CODEC
+                BismuthTridentUnbaked.MAP_CODEC
         );
         event.register(
                 MFIdentifier.withMfNamespace("carbon_shield"),
-                CarbonShieldSpecialRenderer.Unbaked.MAP_CODEC
+                CarbonShieldUnbaked.MAP_CODEC
+        );
+        event.register(
+                MFIdentifier.withMfNamespace("bismuth_shield"),
+                BismuthShieldUnbaked.MAP_CODEC
         );
     }
 

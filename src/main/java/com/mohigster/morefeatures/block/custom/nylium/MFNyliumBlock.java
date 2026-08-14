@@ -14,27 +14,47 @@ import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 
 public class MFNyliumBlock extends NyliumBlock {
-    private final ResourceKey<ConfiguredFeature<?, ?>> primaryFeature;
+    private final List<ResourceKey<ConfiguredFeature<?, ?>>> primaryFeatures;
     private final ResourceKey<ConfiguredFeature<?, ?>> rareFeature;
     private final int chance;
 
     public MFNyliumBlock(
-            @NonNull ResourceKey<ConfiguredFeature<?, ?>> primaryFeature,
+            @NonNull List<ResourceKey<ConfiguredFeature<?, ?>>> features,
             @Nullable ResourceKey<ConfiguredFeature<?, ?>> rareFeature,
             int chance,
             Properties properties
     ) {
         super(properties);
-        this.primaryFeature = primaryFeature;
+        this.primaryFeatures = features;
         this.rareFeature = rareFeature;
         this.chance = chance;
     }
 
-    public MFNyliumBlock(ResourceKey<ConfiguredFeature<?, ?>> feature, Properties properties) {
-        this(feature, null, 1, properties);
+    public MFNyliumBlock(
+            @NonNull ResourceKey<ConfiguredFeature<?, ?>> feature,
+            @Nullable ResourceKey<ConfiguredFeature<?, ?>> rareFeature,
+            int chance,
+            Properties properties
+    ) {
+        this(List.of(feature), rareFeature, chance, properties);
+    }
+
+    public MFNyliumBlock(
+            @NonNull List<ResourceKey<ConfiguredFeature<?, ?>>> features,
+            Properties properties
+    ) {
+        this(features, null, 1, properties);
+    }
+
+    public MFNyliumBlock(
+            @NonNull ResourceKey<ConfiguredFeature<?, ?>> feature,
+            Properties properties
+    ) {
+        this(List.of(feature), properties);
     }
 
     @Override
@@ -50,11 +70,18 @@ public class MFNyliumBlock extends NyliumBlock {
         this.placeFeature(level, generator, random, abovePos, blockState);
     }
 
-    protected void placeFeature(ServerLevel level, ChunkGenerator generator, RandomSource random, BlockPos pos, BlockState state) {
+    protected void placeFeature(
+            ServerLevel level,
+            ChunkGenerator generator,
+            RandomSource random,
+            BlockPos pos,
+            BlockState state
+    ) {
         Registry<ConfiguredFeature<?, ?>> configuredFeatures =
                 level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE);
         if (canGrow(state)) {
-            this.place(configuredFeatures, this.getPrimaryFeature(), level, generator, random, pos);
+            this.getPrimaryFeatures().forEach(feature ->
+                    this.place(configuredFeatures, feature, level, generator, random, pos));
             if(random.nextInt(this.getChance()) == 0) {
                 this.getRareFeature().ifPresent(configuredFeature ->
                         this.place(configuredFeatures, configuredFeature,
@@ -67,8 +94,8 @@ public class MFNyliumBlock extends NyliumBlock {
         return state.is(BlockTags.NYLIUM);
     }
 
-    protected ResourceKey<ConfiguredFeature<?, ?>> getPrimaryFeature() {
-        return this.primaryFeature;
+    protected List<ResourceKey<ConfiguredFeature<?, ?>>> getPrimaryFeatures() {
+        return this.primaryFeatures;
     }
 
     protected Optional<ResourceKey<ConfiguredFeature<?, ?>>> getRareFeature() {

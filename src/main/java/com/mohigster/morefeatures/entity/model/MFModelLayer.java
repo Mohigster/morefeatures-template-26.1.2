@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.entity.model;
 
 import com.google.common.collect.Sets;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.client.model.geom.ModelLayerLocation;
 
 import java.util.Set;

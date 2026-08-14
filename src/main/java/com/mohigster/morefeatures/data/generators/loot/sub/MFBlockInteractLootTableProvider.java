@@ -4,7 +4,7 @@ package com.mohigster.morefeatures.data.generators.loot.sub;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.custom.BlueBerryBushBlock;
 import com.mohigster.morefeatures.item.MFItems;
-import com.mohigster.morefeatures.data.references.MFLootTableIds;
+import com.mohigster.morefeatures.data.resources.references.MFLootTableIds;
 import net.minecraft.advancements.predicates.StatePropertiesPredicate;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.LootTableSubProvider;

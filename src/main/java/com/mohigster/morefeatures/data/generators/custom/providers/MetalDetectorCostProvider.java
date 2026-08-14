@@ -2,7 +2,9 @@ package com.mohigster.morefeatures.data.generators.custom.providers;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.item.custom.metaldetector.DetectorCostEntry;
+import com.mohigster.morefeatures.util.Directories;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
@@ -16,6 +18,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @SuppressWarnings("unused")
 public abstract class MetalDetectorCostProvider implements DataProvider {
@@ -43,26 +46,31 @@ public abstract class MetalDetectorCostProvider implements DataProvider {
     }
 
     protected void add(Identifier id, TagKey<Block> tag, int cost) {
-        DetectorCostEntry entry = new DetectorCostEntry(tag, cost);
-        if (entries.putIfAbsent(id, entry) != null) {
-            throw new IllegalStateException("Duplicate cost entry ID: " + id);
+        try {
+            HolderSet<Block> value = this.registries.get().getOrThrow(tag);
+            DetectorCostEntry entry = new DetectorCostEntry(value, cost);
+            if (entries.putIfAbsent(id, entry) != null) {
+                throw new IllegalStateException("Duplicate cost entry ID: " + id);
+            }
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
         }
     }
 
     @NullMarked
     @Override
     public CompletableFuture<?> run(CachedOutput cachedOutput) {
-        entries.clear();
+        this.entries.clear();
         generate();
 
-        return registries.thenCompose(provider -> {
-            Path outputFolder = output.getOutputFolder(PackOutput.Target.DATA_PACK);
+        return this.registries.thenCompose(provider -> {
+            Path outputFolder = this.output.getOutputFolder(PackOutput.Target.DATA_PACK);
 
             return CompletableFuture.allOf(
-                    entries.entrySet().stream().map(e -> {
+                    this.entries.entrySet().stream().map(e -> {
                         Path path = outputFolder
                                 .resolve(e.getKey().getNamespace())
-                                .resolve("metal_detector_costs")
+                                .resolve(Directories.METAL_DETECTOR_PATH)
                                 .resolve(e.getKey().getPath() + ".json");
 
                         return DataProvider.saveStable(cachedOutput, provider, DetectorCostEntry.CODEC, e.getValue(), path);

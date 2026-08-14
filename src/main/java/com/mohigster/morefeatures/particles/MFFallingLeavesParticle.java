@@ -14,6 +14,8 @@ import org.jspecify.annotations.NullMarked;
 public class MFFallingLeavesParticle extends SingleQuadParticle {
 
     private static final float ACCELERATION_SCALE = 0.0025F;
+    private static final float SCALING_OF_RANDOM_FLOW_VALUE = 60.0F;
+    private static final float DIVISION_FACTOR_FOR_ROT_SPEED_AND_ROLL = 20.0F;
     private static final int INITIAL_LIFETIME = 300;
 
     private float rotSpeed = (float) Math.toRadians(this.random.nextBoolean() ? -30.0 : 30.0);
@@ -54,8 +56,8 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
         this.yd = -startVelocity;
 
         float particleRandom = this.random.nextFloat();
-        this.xaFlowScale = Math.cos(Math.toRadians(particleRandom * 60.0F)) * this.windBig;
-        this.zaFlowScale = Math.sin(Math.toRadians(particleRandom * 60.0F)) * this.windBig;
+        this.xaFlowScale = Math.cos(Math.toRadians(particleRandom * SCALING_OF_RANDOM_FLOW_VALUE)) * this.windBig;
+        this.zaFlowScale = Math.sin(Math.toRadians(particleRandom * SCALING_OF_RANDOM_FLOW_VALUE)) * this.windBig;
         this.swirlPeriod = Math.toRadians(1000.0F + particleRandom * 3000.0F);
     }
 
@@ -96,13 +98,13 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
         this.zd += za * ACCELERATION_SCALE;
         this.yd -= this.gravity;
 
-        this.rotSpeed += this.spinAcceleration / 20.0F;
+        this.rotSpeed += this.spinAcceleration / DIVISION_FACTOR_FOR_ROT_SPEED_AND_ROLL;
         this.oRoll = this.roll;
-        this.roll += this.rotSpeed / 20.0F;
+        this.roll += this.rotSpeed / DIVISION_FACTOR_FOR_ROT_SPEED_AND_ROLL;
 
         this.move(this.xd, this.yd, this.zd);
 
-        if (this.onGround || (this.lifetime < 299 && (this.xd == 0.0 || this.zd == 0.0))) {
+        if (this.onGround || (this.lifetime < (INITIAL_LIFETIME - 1) && (this.xd == 0.0 || this.zd == 0.0))) {
             this.remove();
             return;
         }
@@ -112,7 +114,9 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
         this.zd *= this.friction;
     }
 
-    // Provider
+    // ————————————————————————————————PROVIDERS————————————————————————————————————
+
+
     public static class PalmProvider implements ParticleProvider<SimpleParticleType> {
         private final SpriteSet sprites;
 
@@ -131,14 +135,18 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
         ) {
             return new MFFallingLeavesParticle(
                     level, x, y, z,
-                    this.sprites.get(random),
-                    0.12F,   // fallAcceleration (slower than cherry)
-                    8.0F,    // sideAcceleration / wind
-                    true,    // swirl
-                    false,   // flowAway
-                    2.8F,    // scale (palm leaves are bigger)
-                    0.018F   // startVelocity
+                    this.getSprite(random),
+                    0.12F,
+                    8.0F,
+                    true,
+                    false,
+                    2.8F,
+                    0.018F
             );
+        }
+
+        protected TextureAtlasSprite getSprite(RandomSource random) {
+            return this.sprites.get(random);
         }
     }
 
@@ -160,7 +168,7 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
         ) {
             return new MFFallingLeavesParticle(
                     level, x, y, z,
-                    this.sprites.get(random),
+                    this.getSprite(random),
                     0.16F,
                     8.0F,
                     true,
@@ -168,6 +176,10 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
                     1.4F,
                     0.018F
             );
+        }
+
+        protected TextureAtlasSprite getSprite(RandomSource random) {
+            return this.sprites.get(random);
         }
     }
 
@@ -189,7 +201,7 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
         ) {
             return new MFFallingLeavesParticle(
                     level, x, y, z,
-                    this.sprites.get(random),
+                    this.getSprite(random),
                     0.13F,
                     7.5F,
                     false,
@@ -197,6 +209,10 @@ public class MFFallingLeavesParticle extends SingleQuadParticle {
                     2.2F,
                     0.015F
             );
+        }
+
+        protected TextureAtlasSprite getSprite(RandomSource random) {
+            return this.sprites.get(random);
         }
     }
 }

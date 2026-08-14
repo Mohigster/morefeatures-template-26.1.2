@@ -5,7 +5,7 @@ import com.mohigster.morefeatures.data.sound.MFSoundEvents;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.SoundDefinitionsProvider;
 
-import static com.mohigster.morefeatures.data.references.MFIdentifier.withMfNamespace;
+import static com.mohigster.morefeatures.data.resources.MFIdentifier.withMfNamespace;
 
 public class MFSoundsProvider extends SoundDefinitionsProvider {
     public MFSoundsProvider(PackOutput output) {

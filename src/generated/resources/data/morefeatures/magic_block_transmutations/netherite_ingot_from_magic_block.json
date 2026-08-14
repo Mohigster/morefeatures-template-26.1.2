@@ -1,4 +1,4 @@
 {
-  "input_tag": "morefeatures:magic_block_transmutations/netherite_ingot",
+  "input_values": "#morefeatures:magic_block_transmutations/netherite_ingot",
   "output_item": "minecraft:netherite_ingot"
 }

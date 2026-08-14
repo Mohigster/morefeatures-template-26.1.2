@@ -89,9 +89,9 @@ public class MFDataMapsProvider extends DataMapProvider {
         strippables.add(logList.getLast(), new Strippable(strippedLogList.getLast().get()), false);
         strippables.add(woodList.getLast(), new Strippable(strippedWoodList.getLast().get()), false);
 
-        final var flammable = builder(MFDataMaps.FLAMMABILITY);
+        final var flammables = builder(MFDataMaps.FLAMMABLES);
         FlammableHelper.getDefaults().forEach(entry ->
-            flammable.add(
+            flammables.add(
                     entry.block().builtInRegistryHolder(),
                     new Flammable(entry.flammability(), entry.fireSpreadSpeed()),
                     false

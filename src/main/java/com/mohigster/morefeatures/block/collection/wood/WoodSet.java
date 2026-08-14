@@ -19,12 +19,12 @@ import org.jspecify.annotations.Nullable;
  * Represents every wood set introduced by this mod and holds its core physical and environmental properties.
  *
  * <p>Each entry defines direct parameters such as the associated {@link WoodType} and {@link MapColor},
- * as well as environmental flags like flammability and dimension classification (Overworld, Nether, or End).</p>
+ * as well as environmental flags like flammability and dimension classification ({@code overworld}, {@code nether}, or {@code end}).</p>
  *
- * <p><b>Dimension Fallback Rules:</b>
+ * <p><b>Dimension Functionality:</b>
  * <ul>
- *   <li>If both {@code nether} and {@code overworld} flags are set to {@code true}, Nether behavior takes precedence.</li>
- *   <li>If neither flag is set to {@code true}, the wood set is treated as End wood.</li>
+ *   <li>If both {@code nether} and {@code overworld} flags are set to {@code true}, {@code nether} behavior takes precedence.</li>
+ *   <li>If neither flag is set to {@code true}, the wood set is treated as {@code end} wood.</li>
  * </ul>
  * </p>
  */
@@ -124,12 +124,12 @@ public enum WoodSet implements StringRepresentable {
     }
 
     // This is used to convert the WoodSet from this Enum to the vanilla WoodType that already exists
-    public WoodType getWoodType(){
+    public WoodType getWoodType() {
         return this.woodType;
     }
 
     // Returns the BlockSetType passed in when registering the WoodType
-    public BlockSetType getBlockSetType(){
+    public BlockSetType getBlockSetType() {
         return this.woodType.setType();
     }
 

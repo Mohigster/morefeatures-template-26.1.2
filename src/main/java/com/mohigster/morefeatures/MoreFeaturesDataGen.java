@@ -27,7 +27,9 @@ public class MoreFeaturesDataGen {
     public static void gatherClientData(GatherDataEvent.Client event){
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+
+        // This HolderLookup.Provider is wrapped in a CompletableFuture
+        var lookupProvider = event.getLookupProvider();
 
         //————————————————————————————Adding providers————————————————————————————
 
@@ -51,10 +53,10 @@ public class MoreFeaturesDataGen {
         generator.addProvider(true, new MFEntityTagsProvider(packOutput, lookupProvider));
 
         // Custom providers for data-driven features added by this mod
-        generator.addProvider(true, new MFMagicBlockTransmutationProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFMetalDetectorCostProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFElytraSpeedBoostProvider(packOutput, lookupProvider));
         generator.addProvider(true, new MFBowDamageBonusProvider(packOutput, lookupProvider));
+        generator.addProvider(true, new MFMagicBlockTransmutationProvider(packOutput, lookupProvider));
 
         // Loot tables work a bit differently. generateLootTables() returns the LootTableProvider with all of the SubProviderEntries
         generator.addProvider(true, MFLootTableProvider.generateLootTables(packOutput, lookupProvider));

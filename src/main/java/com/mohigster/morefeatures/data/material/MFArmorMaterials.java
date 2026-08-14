@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.data.material;
 
 import com.google.common.collect.Maps;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.tag.MFItemTags;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.Identifier;

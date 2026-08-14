@@ -25,7 +25,7 @@ import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
 
-import static com.mohigster.morefeatures.data.references.MFIdentifier.withMfNamespace;
+import static com.mohigster.morefeatures.data.resources.MFIdentifier.withMfNamespace;
 import static net.minecraft.client.data.models.BlockModelGenerators.*;
 
 public final class MFBlockModelGenerators {

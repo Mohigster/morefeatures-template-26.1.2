@@ -9,7 +9,7 @@ import com.mohigster.morefeatures.item.custom.trident.MFTridentItem;
 import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
 import com.mohigster.morefeatures.item.food.MFFoods;
 import com.mohigster.morefeatures.data.material.MFToolMaterial;
-import com.mohigster.morefeatures.data.references.MFItemIds;
+import com.mohigster.morefeatures.data.resources.references.MFItemIds;
 import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
 import com.mohigster.morefeatures.data.sound.MFJukeboxSongs;
 import com.mohigster.morefeatures.entity.MFEntityTypes;
@@ -269,7 +269,29 @@ public class MFItems {
                             DataComponents.BLOCKS_ATTACKS,
                             context -> new BlocksAttacks(
                                     0.25F,
-                                    1.0F,
+                                    0.9F,
+                                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
+                                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
+                                    Optional.of(context.getOrThrow(DamageTypeTags.BYPASSES_SHIELD)),
+                                    Optional.of(SoundEvents.SHIELD_BLOCK),
+                                    Optional.of(SoundEvents.SHIELD_BREAK)
+                            )
+                    )
+                    .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK)
+            ));
+
+    public static final DeferredItem<Item> BISMUTH_SHIELD = registerItem(MFItemIds.BISMUTH_SHIELD,
+            properties -> new ShieldItem(properties
+                    .fireResistant()
+                    .enchantable(15)
+                    .durability(685)
+                    .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
+                    .equippableUnswappable(EquipmentSlot.OFFHAND)
+                    .delayedComponent(
+                            DataComponents.BLOCKS_ATTACKS,
+                            context -> new BlocksAttacks(
+                                    0.25F,
+                                    0.7F,
                                     List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
                                     new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
                                     Optional.of(context.getOrThrow(DamageTypeTags.BYPASSES_SHIELD)),
@@ -490,23 +512,23 @@ public class MFItems {
                     )
             );
 
-    public static final WoodTypeCollection<DeferredItem<Item>> SIGN = WoodTypeCollection.registerItems(
-            MFItemIds.SIGN,
+    public static final WoodTypeCollection<DeferredItem<Item>> WOODEN_SIGN = WoodTypeCollection.registerItems(
+            MFItemIds.WOODEN_SIGN,
             MFItems::registerItem,
-            (wood, props) -> new SignItem(
-                    MFBlocks.WOODEN_SIGN.pick(wood).get(),
-                    MFBlocks.WOODEN_WALL_SIGN.pick(wood).get(),
+            (set, props) -> new SignItem(
+                    MFBlocks.WOODEN_SIGN.pick(set).get(),
+                    MFBlocks.WOODEN_WALL_SIGN.pick(set).get(),
                     props
             ),
             (_, props) -> props.stacksTo(16)
     );
 
-    public static final WoodTypeCollection<DeferredItem<Item>> HANGING_SIGN = WoodTypeCollection.registerItems(
-            MFItemIds.HANGING_SIGN,
+    public static final WoodTypeCollection<DeferredItem<Item>> WOODEN_HANGING_SIGN = WoodTypeCollection.registerItems(
+            MFItemIds.WOODEN_HANGING_SIGN,
             MFItems::registerItem,
-            (wood, props) -> new HangingSignItem(
-                    MFBlocks.WOODEN_HANGING_SIGN.pick(wood).get(),
-                    MFBlocks.WOODEN_WALL_HANGING_SIGN.pick(wood).get(),
+            (set, props) -> new HangingSignItem(
+                    MFBlocks.WOODEN_HANGING_SIGN.pick(set).get(),
+                    MFBlocks.WOODEN_WALL_HANGING_SIGN.pick(set).get(),
                     props
             ),
             (_, props) -> props.stacksTo(16)

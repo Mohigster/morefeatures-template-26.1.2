@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.block.collection.gemstone;
 
 import com.google.common.collect.ImmutableList;
+import com.mohigster.morefeatures.block.collection.wood.WoodSet;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -29,11 +30,21 @@ public record GemstoneCollection<T>(
     public static final GemstoneCollection<String> NAMES = GEMS.map(GemstoneType::getName);
 
     public static GemstoneCollection<String> prefixWithGem(final GemstoneCollection<String> ids) {
-        return zipMap(NAMES, ids, GemstoneCollection::concatenate);
+        return zipMap(NAMES, ids, GemstoneCollection::prefix);
     }
 
-    private static String concatenate(String gem, String id){
-        return gem + id;
+    public static GemstoneCollection<String> suffixWithGem(final GemstoneCollection<String> ids) {
+        return zipMap(NAMES, ids, GemstoneCollection::suffix);
+    }
+
+    private static String prefix(String gem, String id){
+        if (id.isEmpty()) return gem + id;
+
+        else return gem + "_" + id;
+    }
+
+    private static String suffix(String gem, String id){
+        return id + "_" + gem;
     }
 
     public static <Id, B extends Block> GemstoneCollection<DeferredBlock<B>> registerBlocks(
@@ -88,5 +99,12 @@ public record GemstoneCollection<T>(
                 operation.apply(first.azurite(), second.azurite()),
                 operation.apply(first.fluorite(), second.fluorite())
         );
+    }
+
+    public T pick(final GemstoneType gem) {
+        return switch (gem) {
+            case AZURITE -> this.azurite;
+            case FLUORITE -> this.fluorite;
+        };
     }
 }

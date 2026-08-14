@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.data.generators.custom.providers;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.events.data.ElytraSpeedEntry;
+import com.mohigster.morefeatures.util.Directories;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @SuppressWarnings("deprecation")
 public abstract class ElytraSpeedBoostProvider implements DataProvider {
@@ -49,13 +51,13 @@ public abstract class ElytraSpeedBoostProvider implements DataProvider {
     protected abstract void generate();
 
     protected void add(Item elytra, double percentSpeedBoost){
-        String elytraName = getElytraName(elytra);
+        String elytraName = this.getElytraName(elytra);
 
         this.add(elytraName, elytra, percentSpeedBoost);
     }
 
     protected void add(Item elytra, double percentSpeedBoost, double maxSpeed){ // This method automatically sets the item name
-        String elytraName = getElytraName(elytra);
+        String elytraName = this.getElytraName(elytra);
 
         this.add(elytraName, elytra, percentSpeedBoost, maxSpeed);
     }
@@ -67,7 +69,7 @@ public abstract class ElytraSpeedBoostProvider implements DataProvider {
     protected void add(String elytraName, Item elytra, double percentSpeedBoost, double maxSpeed){ // Allows manually setting the item name.
         String jsonFileName = elytraName + "_speed_boost";
 
-        this.add(Identifier.fromNamespaceAndPath(modId, jsonFileName), elytra, percentSpeedBoost, maxSpeed);
+        this.add(Identifier.fromNamespaceAndPath(this.modId, jsonFileName), elytra, percentSpeedBoost, maxSpeed);
     }
 
     private String getElytraName(Item elytra){
@@ -75,7 +77,7 @@ public abstract class ElytraSpeedBoostProvider implements DataProvider {
     }
 
     protected void add(Identifier id, Item item, double percentSpeedBoost, double maxSpeed) {
-        HolderSet<Item> holderSet = HolderSet.direct(item.builtInRegistryHolder());
+        HolderSet<Item> holderSet = HolderSet.direct(Item::builtInRegistryHolder, item);
         this.entries.put(id, new ElytraSpeedEntry(holderSet, percentSpeedBoost, maxSpeed));
     }
 
@@ -89,9 +91,12 @@ public abstract class ElytraSpeedBoostProvider implements DataProvider {
     }
 
     protected void add(Identifier id, TagKey<Item> tag, double percentSpeedBoost, double maxSpeed) {
-        // TagKey can be resolved via the registry lookup
-        HolderSet<Item> holderSet = BuiltInRegistries.ITEM.getOrThrow(tag);
-        this.entries.put(id, new ElytraSpeedEntry(holderSet, percentSpeedBoost, maxSpeed));
+        try {
+            HolderSet<Item> holderSet = this.registries.get().getOrThrow(tag);
+            this.entries.put(id, new ElytraSpeedEntry(holderSet, percentSpeedBoost, maxSpeed));
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @NullMarked
@@ -107,7 +112,7 @@ public abstract class ElytraSpeedBoostProvider implements DataProvider {
                     this.entries.entrySet().stream().map(e -> {
                         Path path = outputFolder
                                 .resolve(e.getKey().getNamespace())
-                                .resolve("elytra_speed_boosts")
+                                .resolve(Directories.ELYTRA_PATH)
                                 .resolve(e.getKey().getPath() + ".json");
 
                         return DataProvider.saveStable(cachedOutput, provider, ElytraSpeedEntry.CODEC, e.getValue(), path);

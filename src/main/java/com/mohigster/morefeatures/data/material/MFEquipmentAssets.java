@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.data.material;
 
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.equipment.EquipmentAsset;
 

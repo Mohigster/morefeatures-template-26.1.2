@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.data.generators.custom.providers;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.events.data.BowDamageEntry;
+import com.mohigster.morefeatures.util.Directories;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
@@ -21,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @SuppressWarnings("deprecation")
 public abstract class BowDamageBonusProvider implements DataProvider {
@@ -93,9 +95,12 @@ public abstract class BowDamageBonusProvider implements DataProvider {
     }
 
     protected void add(Identifier id, TagKey<Item> tag, double damageBonus) {
-        // TagKey can be resolved via the registry lookup
-        HolderSet<Item> holderSet = BuiltInRegistries.ITEM.getOrThrow(tag);
-        entries.put(id, new BowDamageEntry(holderSet, damageBonus));
+        try {
+            HolderSet<Item> holderSet = this.registries.get().getOrThrow(tag);
+            entries.put(id, new BowDamageEntry(holderSet, damageBonus));
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @NullMarked
@@ -111,7 +116,7 @@ public abstract class BowDamageBonusProvider implements DataProvider {
                     entries.entrySet().stream().map(e -> {
                         Path path = outputFolder
                                 .resolve(e.getKey().getNamespace())
-                                .resolve("bow_damage_bonuses")
+                                .resolve(Directories.BOW_PATH)
                                 .resolve(e.getKey().getPath() + ".json");
 
                         return DataProvider.saveStable(cachedOutput, provider, BowDamageEntry.CODEC, e.getValue(), path);

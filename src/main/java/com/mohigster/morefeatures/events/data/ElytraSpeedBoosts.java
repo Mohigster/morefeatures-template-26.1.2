@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.events.data;
 
+import com.mohigster.morefeatures.util.Directories;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
@@ -16,7 +17,8 @@ import java.util.stream.Collectors;
 public class ElytraSpeedBoosts extends SimpleJsonResourceReloadListener<ElytraSpeedEntry> {
     private static final double MAX_SPEED_SCALING_FACTOR = 130.0D;
     private static final double MAX_SPEED_REDUCTION_BEFORE_SCALE = 0.1D;
-    private static final double MIN_MAX_SPEED = 1.0D; // The effective minimum value for the max speed parameter
+    private static final double MIN_MAX_SPEED = 2.0D;
+    private static final int FACTOR_TO_ROUND_BY = 100;
 
     public static final ElytraSpeedBoosts INSTANCE = new ElytraSpeedBoosts();
 
@@ -24,8 +26,8 @@ public class ElytraSpeedBoosts extends SimpleJsonResourceReloadListener<ElytraSp
 
     private Set<Item> elytraEntries = Collections.emptySet();
 
-    protected ElytraSpeedBoosts() {
-        super(ElytraSpeedEntry.CODEC, FileToIdConverter.json("elytra_speed_boosts"));
+    private ElytraSpeedBoosts() {
+        super(ElytraSpeedEntry.CODEC, FileToIdConverter.json(Directories.ELYTRA_PATH));
     }
 
     @NullMarked
@@ -44,7 +46,7 @@ public class ElytraSpeedBoosts extends SimpleJsonResourceReloadListener<ElytraSp
     public double getSpeed(ItemStack stack){
         for (ElytraSpeedEntry entry : this.entries){
             if (entry.elytra().contains(stack.typeHolder())){
-                return entry.percentSpeedBoost() / 100; // To make it more readable for other mod devs and datapack creators, the speed boost is divided by 100 before being returned. This allows them to input a percentage boost (e.g 18 for 18%)
+                return entry.percentSpeedBoost() / 100; // To make it more readable, the speed boost is divided by 100 before being returned. This allows them to input a percentage boost (e.g 18 for 18%)
             }
         }
 
@@ -58,22 +60,26 @@ public class ElytraSpeedBoosts extends SimpleJsonResourceReloadListener<ElytraSp
                     double maxSpeed = (this.getSpeed(stack) - MAX_SPEED_REDUCTION_BEFORE_SCALE) * MAX_SPEED_SCALING_FACTOR;
 
                     // Use the simple, less precise rounding method. This is just an elytra max speed, not cybersecurity software. Ultra-precision is unnecessary
-                    double roundedMaxSpeed = this.roundToTwoDecimals(maxSpeed);
+                    double roundedMaxSpeed = this.round(maxSpeed);
 
                     return Math.max(roundedMaxSpeed, MIN_MAX_SPEED);
                 }
-                return this.roundToTwoDecimals(entry.maximumSpeed());
+                return this.round(entry.maximumSpeed());
             }
         }
 
         return MIN_MAX_SPEED; // Fallback
     }
 
+    public boolean elytraInEntries(ItemStack stack){
+        return this.getElytraEntries().contains(stack.getItem());
+    }
+
     public Set<Item> getElytraEntries(){
         return this.elytraEntries;
     }
 
-    private double roundToTwoDecimals(double valueToRound){
-        return (double) Math.round(valueToRound / 100) * 100;
+    private double round(double valueToRound){
+        return (double) Math.round(valueToRound / FACTOR_TO_ROUND_BY) * FACTOR_TO_ROUND_BY;
     }
 }

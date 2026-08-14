@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.item.custom.metaldetector;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.data.tag.MFBlockTags;
+import com.mohigster.morefeatures.util.Directories;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -20,7 +21,7 @@ public class MetalDetectorCosts extends SimpleJsonResourceReloadListener<Detecto
     private List<DetectorCostEntry> entries = List.of();
 
     protected MetalDetectorCosts() {
-        super(DetectorCostEntry.CODEC, FileToIdConverter.json("metal_detector_costs"));
+        super(DetectorCostEntry.CODEC, FileToIdConverter.json(Directories.METAL_DETECTOR_PATH));
     }
 
     @NullMarked
@@ -33,15 +34,13 @@ public class MetalDetectorCosts extends SimpleJsonResourceReloadListener<Detecto
 
     public int getCost(BlockState state) {
         for (DetectorCostEntry entry : entries) {
-            // Just a bit of a joke here. The tag will still work and give them the desired cost, it will just poke a bit of fun in the console.
+            if (state.is(entry.inputValues())) {
+                // Just a lil Easter egg
+                if (entry.inputValues().unwrapKey().get().equals(MFBlockTags.METAL_DETECTOR_BISMUTH_COST) && !state.is(MFBlocks.BISMUTH_BLOCK)) {
+                    MoreFeatures.LOGGER.debug("wait... that's not bismuth in the bismuth cost tag... isn't that ILLEGAL???!!!");
+                }
 
-            // The joke is that all the other tags have generic names e.g. high or low. Bismuth is exceptionally rare, so it got its own tag with
-            // a higher cost than any other in the base mod. This will only fire if another modder or datapack creator adds a different block to this tag
-            if (entry.inputTag().equals(MFBlockTags.METAL_DETECTOR_BISMUTH_COST) && !state.is(MFBlocks.BISMUTH_ORE.get())){
-                MoreFeatures.LOGGER.info("Wait... there's something that's not bismuth in the bismuth cost tag... that's illegal!");
-            }
-
-            if (state.is(entry.inputTag())) {
+                // This is the actual cost input
                 return entry.durabilityCost();
             }
         }

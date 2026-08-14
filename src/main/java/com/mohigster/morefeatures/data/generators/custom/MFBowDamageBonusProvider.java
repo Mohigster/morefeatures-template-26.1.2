@@ -14,7 +14,7 @@ public class MFBowDamageBonusProvider extends BowDamageBonusProvider {
 
     @Override
     protected void generate() {
-        this.add(MFItems.CARBON_BOW.get(), 1.15D);
+        this.add(MFItems.CARBON_BOW.get(), 1.2D);
         this.add(MFItems.BISMUTH_BOW.get(), 1.45D);
     }
 }

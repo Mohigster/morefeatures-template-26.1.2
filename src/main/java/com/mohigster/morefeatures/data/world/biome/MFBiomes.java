@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.data.world.biome;
 
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.world.biome.custom.MFEndBiomes;
 import com.mohigster.morefeatures.data.world.biome.custom.MFNetherBiomes;
 import com.mohigster.morefeatures.data.world.biome.custom.MFOverworldBiomes;

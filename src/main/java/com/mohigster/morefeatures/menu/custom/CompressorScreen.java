@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.menu.custom;
 
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.renderer.EnergyDisplayTooltipArea;
 import com.mohigster.morefeatures.renderer.FluidTankRenderer;
 import com.mohigster.morefeatures.util.MouseUtil;
@@ -38,17 +38,17 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
     }
 
     private void assignEnergyInfoArea() {
-        energyInfoArea = new EnergyDisplayTooltipArea(((width - imageWidth) / 2) + 156,
+        this.energyInfoArea = new EnergyDisplayTooltipArea(((this.width - this.imageWidth) / 2) + 156,
                 ((height - imageHeight) / 2 ) + 9, menu.blockEntity.getEnergyStorage(null), 8, 48);
     }
 
     private void assignFluidRenderer() {
-        fluidRenderer = new FluidTankRenderer(16000, true, 16, 50);
+        this.fluidRenderer = new FluidTankRenderer(16000, true, 16, 50);
     }
 
     private void renderEnergyAreaTooltip(GuiGraphicsExtractor guiGraphics, int pMouseX, int pMouseY, int x, int y) {
         if(isMouseAboveArea(pMouseX, pMouseY, x, y, 156, 11, 8, 48)) {
-            guiGraphics.setComponentTooltipForNextFrame(this.font, energyInfoArea.getTooltips(), pMouseX, pMouseY);
+            guiGraphics.setComponentTooltipForNextFrame(this.font, this.energyInfoArea.getTooltips(), pMouseX, pMouseY);
         }
     }
 

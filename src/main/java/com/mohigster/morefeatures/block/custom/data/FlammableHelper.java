@@ -15,7 +15,7 @@ public final class FlammableHelper {
 
     private static final List<FlammabilityEntry> DEFAULTS = new ArrayList<>();
 
-    static {
+    public static void bootstrap() {
         WoodTypeCollection.SETS.forEach(set ->
                 add(set, MFBlocks.LOG.pick(set).get(), 5, 5));
         WoodTypeCollection.SETS.forEach(set ->
@@ -69,6 +69,7 @@ public final class FlammableHelper {
     }
 
     public static List<FlammabilityEntry> getDefaults() {
+        bootstrap();
         return Collections.unmodifiableList(DEFAULTS);
     }
 }

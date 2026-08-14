@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.events.data;
 
+import com.mohigster.morefeatures.util.Directories;
 import net.minecraft.core.Holder;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
@@ -20,7 +21,7 @@ public class BowDamageBonuses extends SimpleJsonResourceReloadListener<BowDamage
     private Set<Item> bowEntries = Collections.emptySet();
     
     protected BowDamageBonuses() {
-        super(BowDamageEntry.CODEC, FileToIdConverter.json("bow_damage_bonuses"));
+        super(BowDamageEntry.CODEC, FileToIdConverter.json(Directories.BOW_PATH));
     }
 
     @NullMarked
@@ -50,7 +51,7 @@ public class BowDamageBonuses extends SimpleJsonResourceReloadListener<BowDamage
         return this.bowEntries;
     }
 
-    public boolean isBow(ItemStack stack){
-        return this.bowEntries.contains(stack.getItem());
+    public final boolean isBow(ItemStack stack){
+        return this.getBowEntries().contains(stack.getItem());
     }
 }

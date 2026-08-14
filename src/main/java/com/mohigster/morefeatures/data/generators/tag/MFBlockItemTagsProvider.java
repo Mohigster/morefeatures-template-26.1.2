@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.data.generators.tag;
 
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
-import com.mohigster.morefeatures.data.references.MFBlockItemIds;
+import com.mohigster.morefeatures.data.resources.references.MFBlockItemIds;
 import com.mohigster.morefeatures.data.tag.MFBlockItemTags;
 import net.minecraft.data.tags.BlockItemTagsProvider;
 import net.minecraft.tags.BlockItemTagId;
@@ -49,6 +49,11 @@ public class MFBlockItemTagsProvider extends BlockItemTagsProvider {
                         .add(MFBlockItemIds.WOODEN_DOOR.pick(set))
                         .add(MFBlockItemIds.WOODEN_SHELF.pick(set))
         );
+        this.tag(MFBlockItemTags.MODDED_LOGS)
+                .addAll(MFBlockItemIds.LOG.asList())
+                .addAll(MFBlockItemIds.WOOD.asList())
+                .addAll(MFBlockItemIds.STRIPPED_LOG.asList())
+                .addAll(MFBlockItemIds.STRIPPED_WOOD.asList());
         this.tag(BlockItemTags.COMPLETES_FIND_TREE_TUTORIAL).addAll(MFBlockItemIds.LOG.asList());
         this.tag(BlockItemTags.SAPLINGS).add(
                 MFBlockItemIds.BLOODWOOD_SAPLING,

@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.data.generators;
 
 import com.mohigster.morefeatures.particles.MFParticleTypes;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.neoforged.neoforge.client.data.ParticleDescriptionProvider;

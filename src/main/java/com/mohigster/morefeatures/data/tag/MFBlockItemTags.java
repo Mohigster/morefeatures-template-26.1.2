@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.data.tag;
 
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.BlockItemTagId;
@@ -19,6 +19,7 @@ public class MFBlockItemTags {
     public static final BlockItemTagId WOODEN_SLABS = morefeaturesTag("wood/slabs");
     public static final BlockItemTagId CUSTOM_WOODEN_FENCES = morefeaturesTag("wood/fence");
     public static final BlockItemTagId WOODEN_FENCE_GATES = morefeaturesTag("wood/fence_gate");
+    public static final BlockItemTagId MODDED_LOGS = morefeaturesTag("wood/logs");
 
     public static final WoodTypeCollection<BlockItemTagId> LOGS = simpleMorefeaturesWoodTag("logs");
     public static final WoodTypeCollection<BlockItemTagId> WOODEN = simpleMorefeaturesWoodTag("");

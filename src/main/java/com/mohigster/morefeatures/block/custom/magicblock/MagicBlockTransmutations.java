@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.block.custom.magicblock;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.data.tag.MFItemTags;
+import com.mohigster.morefeatures.util.Directories;
 import net.minecraft.resources.FileToIdConverter;
 import net.minecraft.resources.Identifier;
 import net.minecraft.server.packs.resources.ResourceManager;
@@ -23,7 +24,7 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
     private List<TransmutationEntry> entries = List.of();
 
     protected MagicBlockTransmutations() {
-        super(TransmutationEntry.CODEC, FileToIdConverter.json("magic_block_transmutations"));
+        super(TransmutationEntry.CODEC, FileToIdConverter.json(Directories.MAGIC_BLOCK_PATH));
     }
 
     @NullMarked
@@ -58,7 +59,7 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
 
     public ItemStack getResult(ItemStack input) {
         for (TransmutationEntry entry : this.entries) {
-            if (input.is(entry.inputTag())) {
+            if (input.is(entry.inputValue())) {
                 ItemStack result = new ItemStack(entry.output(), input.getCount());
                 if (entry.copyComponents()) {
                     result.applyComponents(input.getComponentsPatch()); // Use getComponentsPatch instead of getComponents so that the model can still change (models are a component as of 1.21.2 so getComponents will copy the model)
@@ -69,10 +70,10 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
         return ItemStack.EMPTY;
     }
 
-    // This method is separate so that the extra amounts are applied to individual input items separately from the input tag itself
+    // This method is separate so that the extra amounts are applied to individual input items separately from the input value itself
     public ItemStack applyExtraAmounts(ItemStack input) {
         for (TransmutationEntry entry : this.entries){
-            if (input.is(entry.inputTag())) input.setCount(entry.extraItems() + 1);
+            if (input.is(entry.inputValue())) input.setCount(entry.extraItems() + 1);
         }
 
         return input;

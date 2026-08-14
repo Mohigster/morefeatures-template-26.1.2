@@ -3,7 +3,8 @@ package com.mohigster.morefeatures.data.world.feature.custom;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.data.world.feature.custom.config.MultiBaseSpeleothemClusterConfiguration;
 import com.mohigster.morefeatures.data.world.feature.custom.config.OasisConfiguration;
-import com.mohigster.morefeatures.data.world.feature.custom.config.nethervine.NetherVinesConfiguration;
+import com.mohigster.morefeatures.data.world.feature.custom.config.nethervine.CeilingVinesConfiguration;
+import com.mohigster.morefeatures.data.world.feature.custom.config.nethervine.FloorVinesConfiguration;
 import com.mohigster.morefeatures.data.world.feature.custom.nethervine.CeilingVinesFeature;
 import com.mohigster.morefeatures.data.world.feature.custom.nethervine.FloorVinesFeature;
 import net.minecraft.core.registries.Registries;
@@ -28,11 +29,11 @@ public class MFFeatures {
                     () -> new MultiBaseSpeleothemClusterFeature(
                             MultiBaseSpeleothemClusterConfiguration.CODEC.codec()));
 
-    public static final DeferredHolder<Feature<?>, Feature<NetherVinesConfiguration>> FLOOR_VINES =
-            FEATURES.register("floor_vines", () -> new FloorVinesFeature(NetherVinesConfiguration.CODEC));
+    public static final DeferredHolder<Feature<?>, Feature<FloorVinesConfiguration>> FLOOR_VINES =
+            FEATURES.register("floor_vines", () -> new FloorVinesFeature(FloorVinesConfiguration.CODEC));
 
-    public static final DeferredHolder<Feature<?>, Feature<NetherVinesConfiguration>> CEILING_VINES =
-            FEATURES.register("ceiling_vines", () -> new CeilingVinesFeature(NetherVinesConfiguration.CODEC));
+    public static final DeferredHolder<Feature<?>, Feature<CeilingVinesConfiguration>> CEILING_VINES =
+            FEATURES.register("ceiling_vines", () -> new CeilingVinesFeature(CeilingVinesConfiguration.CODEC));
 
     public static void register(IEventBus eventBus){
         FEATURES.register(eventBus);

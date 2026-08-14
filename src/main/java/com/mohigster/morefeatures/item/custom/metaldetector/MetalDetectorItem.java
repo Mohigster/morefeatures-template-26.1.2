@@ -4,6 +4,8 @@ import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -72,10 +74,15 @@ public class MetalDetectorItem extends Item {
         for(int i = 0; i < 20; i++){
             ServerLevel serverLevel = (ServerLevel) level;
 
-            serverLevel.sendParticles(new BlockParticleOption(ParticleTypes.BLOCK, blockState),
+            serverLevel.sendParticles(this.getParticleType(blockState),
             positionClicked.getX() + 0.5d, positionClicked.getY() + 1, positionClicked.getZ() + 0.5d, 1,
                     Math.cos(i * 18) * 0.15d, 0.15d, Math.sin(i * 18) * 0.15d, 0.1);
         }
+    }
+
+    @SuppressWarnings("unchecked")
+    protected <T extends ParticleOptions> T getParticleType(BlockState state) {
+        return (T) new BlockParticleOption(ParticleTypes.BLOCK, state);
     }
 
     private int getDamageCost(BlockState state){
@@ -88,7 +95,7 @@ public class MetalDetectorItem extends Item {
         return totalCost;
     }
 
-    private boolean isValidTarget(BlockState blockState) {
+    protected boolean isValidTarget(BlockState blockState) {
         return blockState.is(MFBlockTags.METAL_DETECTOR_FINDABLE);
     }
 

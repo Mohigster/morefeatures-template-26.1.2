@@ -7,8 +7,9 @@ import com.mohigster.morefeatures.block.custom.blocktype.MFWoodType;
 import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
 import com.mohigster.morefeatures.block.custom.magicblock.MagicBlockTransmutations;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
-import com.mohigster.morefeatures.creativemodetab.MFCreativeModeTabs;
+import com.mohigster.morefeatures.creativetab.MFCreativeModeTabs;
 import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
+import com.mohigster.morefeatures.data.world.biome.SurfaceRuleFix;
 import com.mohigster.morefeatures.enchantment.MFEnchantmentEffects;
 import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.events.data.BowDamageBonuses;
@@ -18,7 +19,7 @@ import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorCosts;
 import com.mohigster.morefeatures.menu.MFMenuTypes;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
 import com.mohigster.morefeatures.recipe.MFRecipes;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.sound.MFSoundEvents;
 import com.mohigster.morefeatures.data.world.biome.MFBiomes;
 import com.mohigster.morefeatures.data.world.biome.MFSurfaceRules;
@@ -53,7 +54,6 @@ import terrablender.api.SurfaceRuleManager;
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MoreFeatures.MODID)
 public class MoreFeatures {
-
     private static boolean rulesAdded = false;
     // Define mod id in a common place for everything to reference
     public static final String MODID = "morefeatures";
@@ -80,6 +80,7 @@ public class MoreFeatures {
         MFAttachments.register(modEventBus);
 
         MFEntityTypes.register(modEventBus);
+
         MFSoundEvents.register(modEventBus);
 
         MFEnchantmentEffects.register(modEventBus);
@@ -211,9 +212,9 @@ public class MoreFeatures {
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.NETHER, MODID, MFSurfaceRules.makeCharredForestRules(biomeGetter));
         SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.END, MODID, MFSurfaceRules.makeEndSurfaceRules(biomeGetter));
 
-        SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.OVERWORLD, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK, 10, MFSurfaceRules.fixOverworldRules(biomeGetter));
+        SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.OVERWORLD, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK, 15, SurfaceRuleFix.fixOverworldRules(biomeGetter));
 
-        SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.NETHER, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK, 10, MFSurfaceRules.fixNetherRules(biomeGetter));
+        SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.NETHER, SurfaceRuleManager.RuleStage.BEFORE_BEDROCK, 15, SurfaceRuleFix.fixNetherRules(biomeGetter));
     }
 
     // I have broken down the creative tab event into many separate methods for readability
@@ -223,6 +224,7 @@ public class MoreFeatures {
         this.addArmorAndTools(event);
         this.addOresAndIngots(event);
         this.addAllVerticalSlabs(event);
+        this.addCustomWoodSets(event);
     }
 
     private void addAllVerticalSlabs(BuildCreativeModeTabContentsEvent event){
@@ -377,6 +379,36 @@ public class MoreFeatures {
             event.insertAfter(MFItems.BISMUTH_SCRAP.toStack(), MFItems.BISMUTH.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(MFItems.RAW_BISMUTH.toStack(), MFItems.RAW_AZURITE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(MFItems.BISMUTH.toStack(), MFItems.AZURITE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+        }
+    }
+
+    private void addCustomWoodSets(BuildCreativeModeTabContentsEvent event) {
+        if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS){
+            WoodTypeCollection.SETS.forEach(
+                    set -> {
+                        event.insertBefore(Items.STONE.getDefaultInstance(), MFBlocks.LOG.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFBlocks.LOG.pick(set).toStack(), MFBlocks.WOOD.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFBlocks.WOOD.pick(set).toStack(), MFBlocks.STRIPPED_LOG.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFBlocks.STRIPPED_LOG.pick(set).toStack(), MFBlocks.STRIPPED_WOOD.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFBlocks.STRIPPED_WOOD.pick(set).toStack(), MFBlocks.PLANKS.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFBlocks.PLANKS.pick(set).toStack(), MFBlocks.WOODEN_STAIRS.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFBlocks.WOODEN_STAIRS.pick(set).toStack(), MFBlocks.WOODEN_VERTICAL_SLAB.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFBlocks.WOODEN_VERTICAL_SLAB.pick(set).toStack(), MFBlocks.WOODEN_SLAB.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFBlocks.WOODEN_SLAB.pick(set).toStack(), MFBlocks.WOODEN_FENCE.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFBlocks.WOODEN_FENCE.pick(set).toStack(), MFBlocks.WOODEN_FENCE_GATE.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFBlocks.WOODEN_FENCE_GATE.pick(set).toStack(), MFBlocks.WOODEN_PRESSURE_PLATE.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFBlocks.WOODEN_PRESSURE_PLATE.pick(set).toStack(), MFBlocks.WOODEN_BUTTON.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                    }
+            );
+        }
+        if (event.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS){
+            WoodTypeCollection.SETS.forEach(
+                    set -> {
+                        event.insertBefore(Items.CHEST.getDefaultInstance(), MFItems.WOODEN_SIGN.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertAfter(MFItems.WOODEN_SIGN.pick(set).toStack(), MFItems.WOODEN_HANGING_SIGN.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                        event.insertBefore(Items.LECTERN.getDefaultInstance(), MFBlocks.WOODEN_SHELF.pick(set).toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+                    }
+            );
         }
     }
 }

@@ -5,7 +5,7 @@ import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.compat.custom.CompressionRecipeCategory;
 import com.mohigster.morefeatures.menu.custom.CompressorScreen;
 import com.mohigster.morefeatures.recipe.MFRecipes;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import mezz.jei.api.IModPlugin;
 import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IGuiHandlerRegistration;
@@ -33,9 +33,8 @@ public class MFJEIPlugin implements IModPlugin {
         return MFIdentifier.withMfNamespace("jei_plugin");
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
     private <I extends RecipeInput, T extends Recipe<I>> List<RecipeHolder<T>> getRecipes(RecipeMap recipeMap, RecipeType<T> type) {
-        return (List) recipeMap.byType(type);
+        return (List<RecipeHolder<T>>) recipeMap.byType(type);
     }
 
     @Override

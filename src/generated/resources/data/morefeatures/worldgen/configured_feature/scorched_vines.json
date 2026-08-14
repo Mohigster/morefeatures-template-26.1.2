@@ -2,9 +2,12 @@
   "type": "morefeatures:ceiling_vines",
   "config": {
     "max_height": 8,
+    "roof_block": {
+      "Name": "morefeatures:charred_wart_block"
+    },
     "spread_height": 4,
     "spread_width": 8,
-    "valid_support_blocks": "morefeatures:charred_wart_block",
+    "valid_support_blocks": "minecraft:netherrack",
     "vines": {
       "Name": "morefeatures:scorched_vines",
       "Properties": {

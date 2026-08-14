@@ -2,11 +2,12 @@ package com.mohigster.morefeatures.data.world.feature;
 
 import com.google.common.collect.ImmutableList;
 import com.mohigster.morefeatures.block.MFBlocks;
-import com.mohigster.morefeatures.data.references.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.world.feature.custom.MFFeatures;
 import com.mohigster.morefeatures.data.world.feature.custom.config.MultiBaseSpeleothemClusterConfiguration;
 import com.mohigster.morefeatures.data.world.feature.custom.config.OasisConfiguration;
-import com.mohigster.morefeatures.data.world.feature.custom.config.nethervine.NetherVinesConfiguration;
+import com.mohigster.morefeatures.data.world.feature.custom.config.nethervine.CeilingVinesConfiguration;
+import com.mohigster.morefeatures.data.world.feature.custom.config.nethervine.FloorVinesConfiguration;
 import com.mohigster.morefeatures.data.world.tree.decorator.TrunkLightDecorator;
 import com.mohigster.morefeatures.data.world.tree.placer.foliage.QuadFrongedFoliagePlacer;
 import com.mohigster.morefeatures.data.world.tree.placer.trunk.LeaningTrunkPlacer;
@@ -428,7 +429,7 @@ public class MFConfiguredFeatures {
                 ));
 
         register(context, SMOLDERED_VINES_KEY, MFFeatures.FLOOR_VINES.get(),
-                new NetherVinesConfiguration(
+                new FloorVinesConfiguration(
                         MFBlocks.SMOLDERED_VINES.get().defaultBlockState(),
                         MFBlocks.SMOLDERED_VINES_PLANT.get().defaultBlockState(),
                         HolderSet.direct(
@@ -445,12 +446,13 @@ public class MFConfiguredFeatures {
                 ));
 
         register(context, SCORCHED_VINES_KEY, MFFeatures.CEILING_VINES.get(),
-                new NetherVinesConfiguration(
+                new CeilingVinesConfiguration(
                         MFBlocks.SCORCHED_VINES.get().defaultBlockState(),
                         MFBlocks.SCORCHED_VINES_PLANT.get().defaultBlockState(),
+                        MFBlocks.CHARRED_WART_BLOCK.get().defaultBlockState(),
                         HolderSet.direct(
                                 Block::builtInRegistryHolder,
-                                MFBlocks.CHARRED_WART_BLOCK.get()
+                                Blocks.NETHERRACK
                         ),
                         8,
                         4,

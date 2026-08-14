@@ -3,14 +3,18 @@ package com.mohigster.morefeatures.data.generators.custom.providers;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.custom.magicblock.TransmutationEntry;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.level.block.Block;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 
@@ -18,6 +22,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 
 @SuppressWarnings("unused")
 public abstract class MagicBlockTransmutationProvider implements DataProvider {
@@ -43,50 +48,76 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
         this(output, registries, MoreFeatures.MODID);
     }
 
-    protected abstract void generate();
+    protected abstract void generate(HolderLookup.Provider provider);
 
-    protected void add(TagKey<Item> inputTag, Item output) {
-        this.add(inputTag, output, false);
+    protected void addFromTag(Item output, TagKey<Item> inputTag) {
+        this.addFromTag(false, output, inputTag);
     }
 
-    protected void add(TagKey<Item> inputTag, Item output, int extraAmount) {
-        this.add(inputTag, output, extraAmount, false);
+    @SuppressWarnings("SameParameterValue")
+    protected void addFromTag(int extraAmount, Item output, TagKey<Item> inputTag) {
+        this.addFromTag(inputTag, output, extraAmount, false);
     }
 
-    protected void add(String transmutationName, TagKey<Item> inputTag, Item output) {
-        this.add(transmutationName, inputTag, output, 0, false);
+    protected void addFromTag(String transmutationName, TagKey<Item> inputTag, Item output) {
+        this.addFromTag(transmutationName, inputTag, output, 0);
     }
 
-    protected void add(String transmutationName, TagKey<Item> inputTag, Item output, int extraAmount) {
-        this.add(transmutationName, inputTag, output, extraAmount, false);
+    @SuppressWarnings("SameParameterValue")
+    protected void addFromTag(String transmutationName, TagKey<Item> inputTag, Item output, int extraAmount) {
+        this.addFromTag(transmutationName, inputTag, output, extraAmount, false);
     }
 
-    protected void add(TagKey<Item> inputTag, Item output, int extraAmount, boolean copyComponents) {
+    protected void addFromTag(TagKey<Item> inputTag, Item output, int extraAmount, boolean copyComponents) {
         String itemName = BuiltInRegistries.ITEM.getKey(output).getPath();
 
-        this.add(itemName, inputTag, output, extraAmount, copyComponents);
+        this.addFromTag(itemName, inputTag, output, extraAmount, copyComponents);
     }
 
-    protected void add(TagKey<Item> inputTag, Item output, boolean copyComponents) {
-        String itemName = BuiltInRegistries.ITEM.getKey(output).getPath();
-
-        this.add(itemName, inputTag, output, 0, copyComponents);
+    protected void addFromTag(boolean copyComponents, Item output, TagKey<Item> inputTag) {
+        this.addFromTag(inputTag, output, 0, copyComponents);
     }
 
-    protected void add(String transmutationName, TagKey<Item> inputTag, Item output, int extraAmount, boolean copyComponents) {
+    protected void addFromTag(String transmutationName, TagKey<Item> inputTag, Item output, int extraAmount, boolean copyComponents) {
         String descriptionId = transmutationName + "_from_magic_block";
 
-        this.add(Identifier.fromNamespaceAndPath(modId, descriptionId), inputTag, output, extraAmount, copyComponents);
+        this.add(Identifier.fromNamespaceAndPath(this.modId, descriptionId), extraAmount, copyComponents, output, inputTag);
     }
 
-    // This method is private because the Identifier is already defined by the other add methods
-    private void add(Identifier id, TagKey<Item> inputTag, Item output, int extraAmount, boolean copyComponents) {
+    // These methods are private because all they do is convert the TagKey or Item into a HolderSet for the main method
+
+    private void add(Identifier id, int extraAmount, boolean copyComponents, @NonNull Item output, @NonNull TagKey<Item> inputTag) {
+        try {
+            this.add(id, this.registries.get().getOrThrow(inputTag), output, extraAmount, copyComponents);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private void add(Identifier id, int extraAmount, boolean copyComponents, @NonNull Item output, @NonNull Item input) {
+        this.add(id, HolderSet.direct(Item::builtInRegistryHolder, input), output, extraAmount, copyComponents);
+    }
+
+    /**
+     * Creates and registers a new {@link TransmutationEntry} associated with the given identifier.
+     *
+     * @param id the unique {@link Identifier} for this entry
+     * @param holder the {@link HolderSet} containing input items or tags
+     * @param output the target {@link Item} produced by the transmutation
+     * @param extraAmount additional items to yield above the base amount (e.g. 0 produces a standard stack of 1)
+     * @param copyComponents whether item components (e.g. enchantments, potion effects, or custom data components) should transfer to the output
+     *
+     * @throws IllegalStateException if an entry with the specified {@code id} is already registered
+     * @throws IllegalArgumentException if {@code output} is {@link Items#AIR}
+     */
+    protected void add(Identifier id, HolderSet<Item> holder, Item output, int extraAmount, boolean copyComponents) {
         if (output == Items.AIR) {
-            throw new IllegalArgumentException("Cannot transmute to AIR!");
+            throw new IllegalArgumentException("The Magic Block cannot transmute to AIR!");
         }
 
-        TransmutationEntry entry = new TransmutationEntry(inputTag, output, extraAmount, copyComponents);
-        TransmutationEntry existing = entries.putIfAbsent(id, entry);
+        TransmutationEntry entry = new TransmutationEntry(holder, output, extraAmount, copyComponents);
+        TransmutationEntry existing = this.entries.putIfAbsent(id, entry);
 
         if (existing != null) {
             throw new IllegalStateException("Duplicate magic block transmutation id: " + id);
@@ -96,14 +127,20 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
     @NullMarked
     @Override
     public CompletableFuture<?> run(CachedOutput cachedOutput) {
-        entries.clear();
-        generate();
+        this.entries.clear();
 
-        return registries.thenCompose(provider -> {
-            Path outputFolder = output.getOutputFolder(PackOutput.Target.DATA_PACK);
+        try {
+            var lookupProvider = this.registries.get();
+            generate(lookupProvider);
+        } catch (InterruptedException | ExecutionException e) {
+            throw new RuntimeException(e);
+        }
+
+        return this.registries.thenCompose(provider -> {
+            Path outputFolder = this.output.getOutputFolder(PackOutput.Target.DATA_PACK);
 
             return CompletableFuture.allOf(
-                    entries.entrySet().stream().map(e -> {
+                    this.entries.entrySet().stream().map(e -> {
                         Path path = outputFolder
                                 .resolve(e.getKey().getNamespace())
                                 .resolve("magic_block_transmutations")
@@ -117,6 +154,6 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
 
     @Override
     public @NonNull String getName() {
-        return "Magic Block Transmutations: " + modId;
+        return "Magic Block Transmutations: " + this.modId;
     }
 }
