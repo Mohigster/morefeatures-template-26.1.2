@@ -2,8 +2,7 @@ package com.mohigster.morefeatures.block;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.collection.gemstone.GemstoneCollection;
-import com.mohigster.morefeatures.block.collection.gemstone.GemstoneType;
-import com.mohigster.morefeatures.block.collection.wood.WoodSet;
+import com.mohigster.morefeatures.block.collection.vanilla.VanillaWoodCollection;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.block.custom.*;
 import com.mohigster.morefeatures.block.custom.modified.*;
@@ -20,11 +19,11 @@ import com.mohigster.morefeatures.block.custom.nylium.NulliumBlock;
 import com.mohigster.morefeatures.block.custom.pillar.PillarBlock;
 import com.mohigster.morefeatures.block.custom.magicblock.MagicBlock;
 import com.mohigster.morefeatures.block.custom.pillar.WeatheringCopperPillarBlock;
+import com.mohigster.morefeatures.block.custom.portal.EvilPortalBlock;
+import com.mohigster.morefeatures.block.custom.portal.datadriven.PortalBlock;
 import com.mohigster.morefeatures.block.custom.temporaldilator.TemporalDilatorBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.WeatheringCopperVerticalSlabBlock;
-import com.mohigster.morefeatures.block.custom.blocktype.MFBlockSetType;
-import com.mohigster.morefeatures.block.custom.blocktype.MFWoodType;
 import com.mohigster.morefeatures.data.resources.references.MFBlockIds;
 import com.mohigster.morefeatures.data.resources.references.MFBlockItemIds;
 import com.mohigster.morefeatures.item.MFItems;
@@ -34,23 +33,21 @@ import com.mohigster.morefeatures.data.sound.MFSoundTypes;
 import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import com.mohigster.morefeatures.data.world.feature.MFConfiguredFeatures;
 import com.mohigster.morefeatures.data.world.tree.MFTreeGrowers;
-import net.minecraft.core.BlockPos;
+import com.mohigster.morefeatures.util.PropertyUtil;
+import com.mohigster.morefeatures.util.VanillaCollectionUtil;
 import net.minecraft.network.chat.Component;
 import net.minecraft.references.BlockItemId;
+import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.effect.MobEffects;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockBehaviour.Properties;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
@@ -61,8 +58,6 @@ import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
 import java.util.function.*;
-
-import static net.minecraft.world.level.block.WeatheringCopperCollection.zipMap;
 
 public class MFBlocks {
     public static final DeferredRegister.Blocks BLOCKS =
@@ -78,8 +73,8 @@ public class MFBlocks {
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.IRON)
                     .instrument(NoteBlockInstrument.IRON_XYLOPHONE)
-                    .isValidSpawn(MFBlocks::always)
-                    .isRedstoneConductor(MFBlocks::always)
+                    .isValidSpawn(PropertyUtil.Blocks::always)
+                    .isRedstoneConductor(PropertyUtil.Blocks::always)
             ));
 
     public static final DeferredBlock<Block> RAW_ALUMINIUM_BLOCK = registerBlock(MFBlockItemIds.RAW_ALUMINIUM_BLOCK,
@@ -126,10 +121,10 @@ public class MFBlocks {
                     .sound(SoundType.AMETHYST)
                     .mapColor(MapColor.COLOR_MAGENTA)
                     .instrument(NoteBlockInstrument.HARP)
-                    .isRedstoneConductor(MFBlocks::always)
-                    .isValidSpawn(MFBlocks::always)
-                    .isViewBlocking(MFBlocks::always)
-                    .isSuffocating(MFBlocks::always)
+                    .isRedstoneConductor(PropertyUtil.Blocks::always)
+                    .isValidSpawn(PropertyUtil.Blocks::always)
+                    .isViewBlocking(PropertyUtil.Blocks::always)
+                    .isSuffocating(PropertyUtil.Blocks::always)
             ));
 
     public static final DeferredBlock<Block> BISMUTH_ORE = registerBlock(MFBlockItemIds.BISMUTH_ORE,
@@ -143,252 +138,154 @@ public class MFBlocks {
             Block::new,
             _ -> Properties.ofFullCopy(BISMUTH_BLOCK.get())
     );
+
     //———————————————————————————————————————Gemstone Blocks—————————————————————————————————————————————————————————————————————————
+
     public static final GemstoneCollection<DeferredBlock<Block>> ORE = GemstoneCollection.registerBlocks(
             MFBlockItemIds.ORE,
             MFBlocks::registerBlock,
             (_, props) -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            MFBlocks::stoneGemOreProps
+            PropertyUtil.Blocks::stoneGemOreProps
     );
 
     public static final GemstoneCollection<DeferredBlock<Block>> DEEPSLATE_ORE = GemstoneCollection.registerBlocks(
             MFBlockItemIds.DEEPSLATE_ORE,
             MFBlocks::registerBlock,
-            (gem, props) -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            MFBlocks::deepslateGemOreProps
+            (_, props) -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            PropertyUtil.Blocks::deepslateGemOreProps
     );
 
-    //———————————————————————————————————————Azurite Blocks——————————————————————————————————————————————————————————————————————————
-    public static final DeferredBlock<Block> AZURITE_ORE = registerBlock(MFBlockItemIds.AZURITE_ORE,
-            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            _ -> Properties.ofFullCopy(BISMUTH_ORE.get()).mapColor(MapColor.STONE)
+    public static final GemstoneCollection<DeferredBlock<Block>> NETHER_ORE = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.NETHER_ORE,
+            MFBlocks::registerBlock,
+            (_, props) -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            PropertyUtil.Blocks::netherGemOreProps
     );
 
-    public static final DeferredBlock<Block> DEEPSLATE_AZURITE_ORE = registerBlock(MFBlockItemIds.DEEPSLATE_AZURITE_ORE,
-            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            _ -> Properties.ofFullCopy(AZURITE_ORE.get())
-                    .sound(SoundType.DEEPSLATE)
-                    .mapColor(MapColor.DEEPSLATE)
+    public static final GemstoneCollection<DeferredBlock<Block>> END_ORE = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.END_ORE,
+            MFBlocks::registerBlock,
+            (_, props) -> new DropExperienceBlock(UniformInt.of(2, 4), props),
+            PropertyUtil.Blocks::endGemOreProps
     );
 
-    public static final DeferredBlock<Block> NETHER_AZURITE_ORE = registerBlock(MFBlockItemIds.NETHER_AZURITE_ORE,
-            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            _ -> Properties.ofFullCopy(AZURITE_ORE.get())
-                    .sound(SoundType.NETHER_ORE)
-                    .mapColor(MapColor.NETHER)
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_BLOCK = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.BLOCK,
+            MFBlocks::registerBlock,
+            (_, props) -> new Block(props),
+            PropertyUtil.Blocks::gemProps
     );
 
-    public static final DeferredBlock<Block> END_AZURITE_ORE = registerBlock(MFBlockItemIds.END_AZURITE_ORE,
-            properties -> new DropExperienceBlock(UniformInt.of(2, 4), properties),
-            _ -> Properties.ofFullCopy(AZURITE_ORE.get()).mapColor(MapColor.SAND)
+    public static final GemstoneCollection<DeferredBlock<Block>> RAW_GEM_BLOCK = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.RAW_BLOCK,
+            MFBlocks::registerBlock,
+            (_, props) -> new Block(props),
+            PropertyUtil.Blocks::gemProps
     );
 
-    public static final DeferredBlock<Block> AZURITE_BLOCK = registerBlock(MFBlockItemIds.AZURITE_BLOCK,
-            properties -> new Block(properties
-                    .strength(4f, 16f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)
-                    .instrument(NoteBlockInstrument.CHIME)
-                    .isRedstoneConductor(MFBlocks::always)
-                    .isValidSpawn(MFBlocks::always)
-                    .isSuffocating(MFBlocks::always)
-                    .isViewBlocking(MFBlocks::always)
-                    .mapColor(MapColor.COLOR_BLUE)
-            ));
-
-    public static final DeferredBlock<Block> RAW_AZURITE_BLOCK = registerBlock(MFBlockItemIds.RAW_AZURITE_BLOCK,
-            Block::new,
-            _ -> Properties.ofFullCopy(AZURITE_BLOCK.get())
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_STAIRS = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.GEMSTONE_STAIRS,
+            MFBlocks::registerBlock,
+            (gem, props) -> new StairBlock(GEMSTONE_BLOCK.pick(gem).get().defaultBlockState(), props),
+            PropertyUtil.Blocks::gemProps
     );
 
-    public static final DeferredBlock<StairBlock> AZURITE_STAIRS = registerStair(MFBlockItemIds.AZURITE_STAIRS, AZURITE_BLOCK);
-
-    public static final DeferredBlock<SlabBlock> AZURITE_SLAB = registerSlab(MFBlockItemIds.AZURITE_SLAB, AZURITE_BLOCK);
-
-    public static final DeferredBlock<Block> AZURITE_VERTICAL_SLAB = registerBlock(MFBlockItemIds.AZURITE_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(AZURITE_BLOCK.get())
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_SLAB = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.GEMSTONE_SLAB,
+            MFBlocks::registerBlock,
+            (_, props) -> new SlabBlock(props),
+            PropertyUtil.Blocks::gemProps
     );
 
-    public static final DeferredBlock<Block> AZURITE_PRESSURE_PLATE = registerBlock(MFBlockItemIds.AZURITE_PRESSURE_PLATE,
-            properties -> new PressurePlateBlock(MFBlockSetType.AZURITE, properties),
-            _ -> Properties.ofFullCopy(Blocks.HEAVY_WEIGHTED_PRESSURE_PLATE)
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_VERTICAL_SLAB = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.GEMSTONE_VERTICAL_SLAB,
+            MFBlocks::registerBlock,
+            (_, props) -> new VerticalSlabBlock(props),
+            PropertyUtil.Blocks::gemProps
     );
 
-    public static final DeferredBlock<Block> AZURITE_BUTTON = registerBlock(MFBlockItemIds.AZURITE_BUTTON,
-            properties -> new ButtonBlock(MFBlockSetType.AZURITE, 20, properties),
-            _ -> Properties.ofFullCopy(Blocks.STONE_BUTTON));
-
-    public static final DeferredBlock<Block> AZURITE_WALL = registerBlock(MFBlockItemIds.AZURITE_WALL,
-            WallBlock::new,
-            _ -> Properties.ofFullCopy(AZURITE_BLOCK.get()).forceSolidOn()
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_FENCE = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.GEMSTONE_FENCE,
+            MFBlocks::registerBlock,
+            (_, props) -> new MFFenceBlock(props),
+            PropertyUtil.Blocks::gemFenceProps
     );
 
-    public static final DeferredBlock<Block> AZURITE_FENCE = registerBlock(MFBlockItemIds.AZURITE_FENCE,
-            properties -> new MFFenceBlock(properties
-                    .strength(2F, 8F)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)
-                    .isRedstoneConductor(MFBlocks::never)
-                    .isViewBlocking(MFBlocks::never)
-                    .isSuffocating(MFBlocks::never)
-                    .isValidSpawn(MFBlocks::never)
-                    .noOcclusion()
-                    .forceSolidOn()
-            ));
-
-    public static final DeferredBlock<Block> AZURITE_FENCE_GATE = registerBlock(MFBlockItemIds.AZURITE_FENCE_GATE,
-            props -> new FenceGateBlock(MFWoodType.AZURITE, props),
-            _ -> Properties.ofFullCopy(AZURITE_FENCE.get())
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_FENCE_GATE = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.GEMSTONE_FENCE_GATE,
+            MFBlocks::registerBlock,
+            (gem, props) -> new FenceGateBlock(gem.woodType(), props),
+            PropertyUtil.Blocks::gemFenceProps
     );
 
-    public static final DeferredBlock<Block> AZURITE_DOOR = registerBlock(MFBlockItemIds.AZURITE_DOOR,
-            properties -> new DoorBlock(MFBlockSetType.AZURITE, properties
-                    .strength(2F, 6F)
-                    .requiresCorrectToolForDrops()
-                    .noOcclusion()
-                    .pushReaction(PushReaction.DESTROY)
-                    .isRedstoneConductor(MFBlocks::never)
-            ));
-
-    public static final DeferredBlock<Block> AZURITE_TRAPDOOR = registerBlock(MFBlockItemIds.AZURITE_TRAPDOOR,
-            props -> new TrapDoorBlock(MFBlockSetType.AZURITE, props),
-            _ -> Properties.ofFullCopy(AZURITE_DOOR.get())
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_PRESSURE_PLATE = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.GEMSTONE_PRESSURE_PLATE,
+            MFBlocks::registerBlock,
+            (gem, props) -> new PressurePlateBlock(gem.blockSetType(), props),
+            PropertyUtil.Blocks::gemFenceProps
     );
 
-    public static final DeferredBlock<Block> AZURITE_SIGN = registerBlockWithoutItem(MFBlockIds.AZURITE_SIGN,
-            properties -> new MFStandingSignBlock(MFWoodType.AZURITE, properties
-                    .noCollision()
-                    .strength(2F, 6F)
-                    .sound(SoundType.AMETHYST)
-                    .requiresCorrectToolForDrops()
-                    .isRedstoneConductor(MFBlocks::never)
-            ));
-
-    public static final DeferredBlock<Block> AZURITE_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.AZURITE_WALL_SIGN,
-            properties -> new MFWallSignBlock(MFWoodType.AZURITE, properties),
-            _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_BUTTON = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.GEMSTONE_BUTTON,
+            MFBlocks::registerBlock,
+            (gem, props) -> new ButtonBlock(gem.blockSetType(), 20, props),
+            PropertyUtil.Blocks::gemFenceProps
     );
 
-    // Ceiling sign
-    public static final DeferredBlock<Block> AZURITE_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.AZURITE_HANGING_SIGN,
-            properties -> new MFCeilingHangingSignBlock(MFWoodType.AZURITE, properties),
-            _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_WALL = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.GEMSTONE_WALL,
+            MFBlocks::registerBlock,
+            (_, props) -> new WallBlock(props),
+            PropertyUtil.Blocks::gemFenceProps
     );
 
-    // Wall sign
-    public static final DeferredBlock<Block> AZURITE_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.AZURITE_WALL_HANGING_SIGN,
-            properties -> new MFWallHangingSignBlock(MFWoodType.AZURITE, properties),
-            _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_DOOR = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.GEMSTONE_DOOR,
+            MFBlocks::registerBlock,
+            (gem, props) -> new DoorBlock(gem.blockSetType(), props),
+            PropertyUtil.Blocks::gemFenceProps
     );
 
-    public static final DeferredBlock<Block> AZURITE_SHELF = registerBlock(MFBlockItemIds.AZURITE_SHELF,
-            MFShelfBlock::new,
-            _ -> Properties.ofFullCopy(RAW_AZURITE_BLOCK.get())
-                    .sound(SoundType.MEDIUM_AMETHYST_BUD)
-                    .isValidSpawn(MFBlocks::never)
-                    .isRedstoneConductor(MFBlocks::never)
-                    .isSuffocating(MFBlocks::never)
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_TRAPDOOR = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.GEMSTONE_TRAPDOOR,
+            MFBlocks::registerBlock,
+            (gem, props) -> new TrapDoorBlock(gem.blockSetType(), props),
+            PropertyUtil.Blocks::gemFenceProps
     );
 
-    //———————————————————————————————————————Fluorite Blocks—————————————————————————————————————————————————————————————————————————
-
-    public static final DeferredBlock<Block> FLUORITE_ORE = registerBlock(MFBlockItemIds.FLUORITE_ORE,
-            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            _ -> Properties.ofFullCopy(AZURITE_ORE.get())
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_SHELF = GemstoneCollection.registerBlocks(
+            MFBlockItemIds.GEMSTONE_SHELF,
+            MFBlocks::registerBlock,
+            (_, props) -> new MFShelfBlock(props),
+            (gem, props) -> PropertyUtil.Blocks.gemProps(gem, props).sound(SoundType.MEDIUM_AMETHYST_BUD)
     );
 
-    public static final DeferredBlock<Block> DEEPSLATE_FLUORITE_ORE = registerBlock(MFBlockItemIds.DEEPSLATE_FLUORITE_ORE,
-            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            _ -> Properties.ofFullCopy(DEEPSLATE_AZURITE_ORE.get())
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_SIGN = GemstoneCollection.registerBlocks(
+            MFBlockIds.GEMSTONE_SIGN,
+            MFBlocks::registerBlockWithoutItem,
+            MFStandingSignBlock::new,
+            PropertyUtil.Blocks::gemSignProps
     );
 
-    public static final DeferredBlock<Block> NETHER_FLUORITE_ORE = registerBlock(MFBlockItemIds.NETHER_FLUORITE_ORE,
-            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            _ -> Properties.ofFullCopy(NETHER_AZURITE_ORE.get())
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_WALL_SIGN = GemstoneCollection.registerBlocks(
+            MFBlockIds.GEMSTONE_WALL_SIGN,
+            MFBlocks::registerBlockWithoutItem,
+            MFWallSignBlock::new,
+            PropertyUtil.Blocks::gemSignProps
     );
 
-    public static final DeferredBlock<Block> END_FLUORITE_ORE = registerBlock(MFBlockItemIds.END_FLUORITE_ORE,
-            props -> new DropExperienceBlock(UniformInt.of(2, 4), props),
-            _ -> Properties.ofFullCopy(END_AZURITE_ORE.get()));
-
-    public static final DeferredBlock<Block> FLUORITE_BLOCK = registerBlock(MFBlockItemIds.FLUORITE_BLOCK,
-            Block::new,
-            _ -> Properties.ofFullCopy(AZURITE_BLOCK.get()).mapColor(MapColor.COLOR_GREEN)
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_HANGING_SIGN = GemstoneCollection.registerBlocks(
+            MFBlockIds.GEMSTONE_HANGING_SIGN,
+            MFBlocks::registerBlockWithoutItem,
+            MFCeilingHangingSignBlock::new,
+            PropertyUtil.Blocks::gemSignProps
     );
 
-    public static final DeferredBlock<Block> RAW_FLUORITE_BLOCK = registerBlock(MFBlockItemIds.RAW_FLUORITE_BLOCK,
-            Block::new,
-            _ -> Properties.ofFullCopy(FLUORITE_BLOCK.get())
-    );
-
-    public static final DeferredBlock<StairBlock> FLUORITE_STAIRS = registerStair(MFBlockItemIds.FLUORITE_STAIRS, FLUORITE_BLOCK);
-
-    public static final DeferredBlock<SlabBlock> FLUORITE_SLAB = registerSlab(MFBlockItemIds.FLUORITE_SLAB, FLUORITE_BLOCK);
-
-    public static final DeferredBlock<Block> FLUORITE_VERTICAL_SLAB = registerBlock(MFBlockItemIds.FLUORITE_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(FLUORITE_BLOCK.get())
-    );
-
-    public static final DeferredBlock<Block> FLUORITE_WALL = registerBlock(MFBlockItemIds.FLUORITE_WALL,
-            WallBlock::new,
-            _ -> Properties.ofFullCopy(FLUORITE_BLOCK.get()).forceSolidOn()
-    );
-
-    public static final DeferredBlock<Block> FLUORITE_PRESSURE_PLATE = registerBlock(MFBlockItemIds.FLUORITE_PRESSURE_PLATE,
-            properties -> new PressurePlateBlock(MFBlockSetType.FLUORITE, properties),
-            _ -> Properties.ofFullCopy(AZURITE_PRESSURE_PLATE.get())
-    );
-
-    public static final DeferredBlock<Block> FLUORITE_BUTTON = registerBlock(MFBlockItemIds.FLUORITE_BUTTON,
-            properties -> new ButtonBlock(MFBlockSetType.FLUORITE, 20, properties),
-            _ -> Properties.ofFullCopy(AZURITE_BUTTON.get())
-    );
-
-    public static final DeferredBlock<Block> FLUORITE_FENCE = registerBlock(MFBlockItemIds.FLUORITE_FENCE,
-            MFFenceBlock::new,
-            _ -> Properties.ofFullCopy(AZURITE_FENCE.get())
-    );
-
-    public static final DeferredBlock<Block> FLUORITE_FENCE_GATE = registerBlock(MFBlockItemIds.FLUORITE_FENCE_GATE,
-            props -> new FenceGateBlock(MFWoodType.FLUORITE, props),
-            _ -> Properties.ofFullCopy(AZURITE_FENCE_GATE.get())
-    );
-
-    public static final DeferredBlock<Block> FLUORITE_DOOR = registerBlock(MFBlockItemIds.FLUORITE_DOOR,
-            properties -> new DoorBlock(MFBlockSetType.FLUORITE, properties),
-            _ -> Properties.ofFullCopy(AZURITE_DOOR.get()));
-
-    public static final DeferredBlock<Block> FLUORITE_TRAPDOOR = registerBlock(MFBlockItemIds.FLUORITE_TRAPDOOR,
-            props -> new TrapDoorBlock(MFBlockSetType.FLUORITE, props),
-            _ -> Properties.ofFullCopy(AZURITE_TRAPDOOR.get())
-    );
-
-    public static final DeferredBlock<Block> FLUORITE_SIGN = registerBlockWithoutItem(MFBlockIds.FLUORITE_SIGN,
-            props -> new MFStandingSignBlock(MFWoodType.FLUORITE, props),
-            _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
-    );
-
-    public static final DeferredBlock<Block> FLUORITE_WALL_SIGN = registerBlockWithoutItem(MFBlockIds.FLUORITE_WALL_SIGN,
-            properties -> new MFWallSignBlock(MFWoodType.FLUORITE, properties),
-            _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
-    );
-
-    public static final DeferredBlock<Block> FLUORITE_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.FLUORITE_HANGING_SIGN,
-            properties -> new MFCeilingHangingSignBlock(MFWoodType.FLUORITE, properties),
-            _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
-    );
-
-    // Wall sign
-    public static final DeferredBlock<Block> FLUORITE_WALL_HANGING_SIGN = registerBlockWithoutItem(MFBlockIds.FLUORITE_WALL_HANGING_SIGN,
-            properties -> new MFWallHangingSignBlock(MFWoodType.FLUORITE, properties),
-            _ -> Properties.ofFullCopy(AZURITE_SIGN.get())
-    );
-
-    public static final DeferredBlock<Block> FLUORITE_SHELF = registerBlock(MFBlockItemIds.FLUORITE_SHELF,
-            MFShelfBlock::new,
-            _ -> Properties.ofFullCopy(AZURITE_SHELF.get())
+    public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_WALL_HANGING_SIGN = GemstoneCollection.registerBlocks(
+            MFBlockIds.GEMSTONE_WALL_HANGING_SIGN,
+            MFBlocks::registerBlockWithoutItem,
+            MFWallHangingSignBlock::new,
+            PropertyUtil.Blocks::gemSignProps
     );
 
     //———————————————————————————————————————Everfrost Blocks————————————————————————————————————————————————————————————————————————
@@ -451,12 +348,12 @@ public class MFBlocks {
             ));
 
     public static final DeferredBlock<Block> PALM_SAPLING = registerBlock(MFBlockItemIds.PALM_SAPLING,
-            properties -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALM, () -> Blocks.SAND, properties
+            properties -> new PlantedOffGrassSaplingBlock(MFTreeGrowers.PALM,
+                    () -> Blocks.SAND, properties
                     .sound(SoundType.GRASS)
                     .instabreak()
                     .noOcclusion()
                     .noCollision()
-                    // The block that the sapling can be planted on. You can also pass in a block tag here.
             ));
 
     //———————————————————————————————————————Charred Wood Blocks—————————————————————————————————————————————————————————————————————
@@ -598,140 +495,140 @@ public class MFBlocks {
             MFBlockItemIds.LOG,
             MFBlocks::registerBlock,
             (_, props) -> new RotatedPillarBlock(props),
-            MFBlocks::logProps
+            PropertyUtil.Blocks::logProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOOD = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOOD,
             MFBlocks::registerBlock,
             (_, props) -> new RotatedPillarBlock(props),
-            MFBlocks::logProps
+            PropertyUtil.Blocks::logProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> STRIPPED_LOG = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.STRIPPED_LOG,
             MFBlocks::registerBlock,
             (_, props) -> new RotatedPillarBlock(props),
-            MFBlocks::logProps
+            PropertyUtil.Blocks::logProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> STRIPPED_WOOD = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.STRIPPED_WOOD,
             MFBlocks::registerBlock,
             (_, props) -> new RotatedPillarBlock(props),
-            MFBlocks::logProps
+            PropertyUtil.Blocks::logProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> PLANKS = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.PLANKS,
             MFBlocks::registerBlock,
             (_, props) -> new Block(props),
-            MFBlocks::woodProps
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_STAIRS = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_STAIRS,
             MFBlocks::registerBlock,
             (wood, props) -> new StairBlock(PLANKS.pick(wood).get().defaultBlockState(), props),
-            MFBlocks::woodProps
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_SLAB = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_SLAB,
             MFBlocks::registerBlock,
             (_, props) -> new SlabBlock(props),
-            MFBlocks::woodProps
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_VERTICAL_SLAB = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_VERTICAL_SLAB,
             MFBlocks::registerBlock,
             (_, props) -> new VerticalSlabBlock(props),
-            MFBlocks::woodProps
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_FENCE = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_FENCE,
             MFBlocks::registerBlock,
             (_, props) -> new FenceBlock(props),
-            MFBlocks::woodProps
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_FENCE_GATE = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_FENCE_GATE,
             MFBlocks::registerBlock,
-            (set, props) -> new FenceGateBlock(set.getWoodType(), props),
-            MFBlocks::woodProps
+            (set, props) -> new FenceGateBlock(set.woodType(), props),
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_PRESSURE_PLATE = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_PRESSURE_PLATE,
             MFBlocks::registerBlock,
-            (set, props) -> new PressurePlateBlock(set.getBlockSetType(), props),
-            MFBlocks::woodProps
+            (set, props) -> new PressurePlateBlock(set.blockSetType(), props),
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_BUTTON = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_BUTTON,
             MFBlocks::registerBlock,
-            (set, props) -> new ButtonBlock(set.getBlockSetType(), 20, props),
-            MFBlocks::woodProps
+            (set, props) -> new ButtonBlock(set.blockSetType(), 20, props),
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_DOOR = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_DOOR,
             MFBlocks::registerBlock,
-            (set, props) -> new DoorBlock(set.getBlockSetType(), props),
-            MFBlocks::woodProps
+            (set, props) -> new DoorBlock(set.blockSetType(), props),
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_TRAPDOOR = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_TRAPDOOR,
             MFBlocks::registerBlock,
-            (set, props) -> new TrapDoorBlock(set.getBlockSetType(), props),
-            MFBlocks::woodProps
+            (set, props) -> new TrapDoorBlock(set.blockSetType(), props),
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_SHELF = WoodTypeCollection.registerBlocks(
             MFBlockItemIds.WOODEN_SHELF,
             MFBlocks::registerBlock,
             (_, props) -> new MFShelfBlock(props),
-            MFBlocks::shelfProps
+            PropertyUtil.Blocks::woodShelfProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_SIGN = WoodTypeCollection.registerBlocks(
-            MFBlockIds.SIGN,
-            MFBlocks::registerBlockWithoutItem,
+            MFBlockItemIds.WOODEN_SIGN,
+            MFBlocks::registerSign,
             MFStandingSignBlock::new,
-            MFBlocks::signProps
+            PropertyUtil.Blocks::woodSignProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_WALL_SIGN = WoodTypeCollection.registerBlocks(
-            MFBlockIds.WALL_SIGN,
+            MFBlockIds.WOODEN_WALL_SIGN,
             MFBlocks::registerBlockWithoutItem,
             MFWallSignBlock::new,
-            MFBlocks::signProps
+            PropertyUtil.Blocks::woodSignProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_HANGING_SIGN = WoodTypeCollection.registerBlocks(
-            MFBlockIds.HANGING_SIGN,
-            MFBlocks::registerBlockWithoutItem,
+            MFBlockItemIds.WOODEN_HANGING_SIGN,
+            MFBlocks::registerSign,
             MFCeilingHangingSignBlock::new,
-            MFBlocks::woodProps
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> WOODEN_WALL_HANGING_SIGN = WoodTypeCollection.registerBlocks(
-            MFBlockIds.WALL_HANGING_SIGN,
+            MFBlockIds.WOODEN_WALL_HANGING_SIGN,
             MFBlocks::registerBlockWithoutItem,
             MFWallHangingSignBlock::new,
-            MFBlocks::woodProps
+            PropertyUtil.Blocks::woodProps
     );
 
     public static final WoodTypeCollection<DeferredBlock<Block>> POTTED_SAPLING = WoodTypeCollection.registerBlocks(
             MFBlockIds.POTTED_SAPLING,
             MFBlocks::registerBlockWithoutItem,
             (wood, props) -> new FlowerPotBlock(() -> (FlowerPotBlock)
-                    Blocks.FLOWER_POT, wood.getSaplingOrFungus(), props),
+                    Blocks.FLOWER_POT, wood.saplingOrFungus(), props),
             (_, props) -> props.noOcclusion().instabreak().pushReaction(PushReaction.DESTROY)
     );
 
@@ -739,73 +636,6 @@ public class MFBlocks {
      * Vertical slabs for vanilla block types.
      * Because there are so many, I will be subdividing this section into more sections
      */
-
-    /* --- WOOD SLABS --- */
-
-    public static final DeferredBlock<Block> OAK_VERTICAL_SLAB = registerBlock(MFBlockItemIds.OAK_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.OAK_PLANKS)
-    );
-
-    public static final DeferredBlock<Block> SPRUCE_VERTICAL_SLAB = registerBlock(MFBlockItemIds.SPRUCE_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.SPRUCE_PLANKS)
-    );
-
-    public static final DeferredBlock<Block> BIRCH_VERTICAL_SLAB = registerBlock(MFBlockItemIds.BIRCH_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.BIRCH_PLANKS)
-    );
-
-    public static final DeferredBlock<Block> JUNGLE_VERTICAL_SLAB = registerBlock(MFBlockItemIds.JUNGLE_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.JUNGLE_PLANKS)
-    );
-
-    public static final DeferredBlock<Block> ACACIA_VERTICAL_SLAB = registerBlock(MFBlockItemIds.ACACIA_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.ACACIA_PLANKS)
-    );
-
-    public static final DeferredBlock<Block> DARK_OAK_VERTICAL_SLAB = registerBlock(MFBlockItemIds.DARK_OAK_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.DARK_OAK_PLANKS)
-    );
-
-    public static final DeferredBlock<Block> CRIMSON_VERTICAL_SLAB = registerBlock(MFBlockItemIds.CRIMSON_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.CRIMSON_PLANKS)
-    );
-
-    public static final DeferredBlock<Block> WARPED_VERTICAL_SLAB = registerBlock(MFBlockItemIds.WARPED_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.WARPED_PLANKS)
-    );
-
-    public static final DeferredBlock<Block> MANGROVE_VERTICAL_SLAB = registerBlock(MFBlockItemIds.MANGROVE_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.MANGROVE_PLANKS)
-    );
-
-    public static final DeferredBlock<Block> CHERRY_VERTICAL_SLAB = registerBlock(MFBlockItemIds.CHERRY_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.CHERRY_PLANKS)
-    );
-
-    public static final DeferredBlock<Block> BAMBOO_VERTICAL_SLAB = registerBlock(MFBlockItemIds.BAMBOO_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.BAMBOO_PLANKS)
-    );
-
-    public static final DeferredBlock<Block> BAMBOO_MOSAIC_VERTICAL_SLAB = registerBlock(MFBlockItemIds.BAMBOO_MOSAIC_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.BAMBOO_MOSAIC)
-    );
-
-    public static final DeferredBlock<Block> PALE_OAK_VERTICAL_SLAB = registerBlock(MFBlockItemIds.PALE_OAK_VERTICAL_SLAB,
-            VerticalSlabBlock::new,
-            _ -> Properties.ofFullCopy(Blocks.PALE_OAK_PLANKS)
-    );
 
     /* --- STONE & DEEPSLATE SLABS --- */
 
@@ -1052,7 +882,7 @@ public class MFBlocks {
     /* --- BLOCK COLLECTION SLABS --- */
 
     public static final WeatheringCopperCollection<DeferredBlock<Block>> CUT_COPPER_VERTICAL_SLAB = // Because this is a WeatheringCopperCollection, all eight blocks (unaffected, exposed, weathered, and oxidised, and all of their waxed variants) are registered at the exact same time. No need to repeat myself for each one.
-            registerCopperBlockSet(
+            VanillaCollectionUtil.registerDeferredCopper(
                     MFBlockItemIds.CUT_COPPER_VERTICAL_SLAB,
                     WeatheringCopperVerticalSlabBlock::new, // Regular
                     WeatheringCopperVerticalSlabBlock::new, // Waxed
@@ -1060,18 +890,25 @@ public class MFBlocks {
             );
 
     public static final ColorCollection<DeferredBlock<Block>> WOOL_VERTICAL_SLAB =
-            registerColouredBlockSet(
+            VanillaCollectionUtil.registerDeferredColoured(
                     MFBlockItemIds.WOOL_VERTICAL_SLAB,
                     VerticalSlabBlock::new,
                     colour -> Properties.ofFullCopy(Blocks.WOOL.pick(colour))
             );
 
     public static final ColorCollection<DeferredBlock<Block>> CONCRETE_VERTICAL_SLAB =
-            registerColouredBlockSet(
+            VanillaCollectionUtil.registerDeferredColoured(
                     MFBlockItemIds.CONCRETE_VERTICAL_SLAB,
                     VerticalSlabBlock::new,
                     colour -> Properties.ofFullCopy(Blocks.CONCRETE.pick(colour))
             );
+
+    public static final VanillaWoodCollection<DeferredBlock<Block>> VANILLA_WOOD_VERTICAL_SLAB = VanillaWoodCollection.registerBlocks(
+            MFBlockItemIds.VANILLA_WOOD_VERTICAL_SLAB,
+            MFBlocks::registerBlock,
+            (_, props) -> new VerticalSlabBlock(props),
+            PropertyUtil.Blocks::vanillaWoodProps
+    );
 
 
     // PILLARS
@@ -1082,19 +919,26 @@ public class MFBlocks {
     );
 
     public static final ColorCollection<DeferredBlock<Block>> CONCRETE_PILLAR =
-            registerColouredBlockSet(
+            VanillaCollectionUtil.registerDeferredColoured(
                     MFBlockItemIds.CONCRETE_PILLAR,
                     PillarBlock::new,
                     colour -> Properties.ofFullCopy(Blocks.CONCRETE.pick(colour))
             );
 
     public static final WeatheringCopperCollection<DeferredBlock<Block>> CUT_COPPER_PILLAR =
-            registerCopperBlockSet(
+            VanillaCollectionUtil.registerDeferredCopper(
                     MFBlockItemIds.CUT_COPPER_PILLAR,
                     WeatheringCopperPillarBlock::new,
                     WeatheringCopperPillarBlock::new,
                     state -> Properties.ofFullCopy(Blocks.CUT_COPPER.weathering().pick(state))
             );
+
+    public static final VanillaWoodCollection<DeferredBlock<Block>> VANILLA_WOOD_PILLAR = VanillaWoodCollection.registerBlocks(
+            MFBlockItemIds.VANILLA_WOOD_PILLAR,
+            MFBlocks::registerBlock,
+            (_, props) -> new PillarBlock(props),
+            PropertyUtil.Blocks::vanillaWoodProps
+    );
 
     // Flowers
 
@@ -1145,17 +989,21 @@ public class MFBlocks {
                     .sound(SoundType.IRON)
             ));
 
-    // Portal Block
+    // Portal Blocks
     public static final DeferredBlock<Block> EVIL_PORTAL = registerBlockWithTooltip(MFBlockItemIds.EVIL_PORTAL,
             properties -> new EvilPortalBlock(properties
                     .strength(2f)
                     .sound(MFSoundTypes.EVIL_PORTAL_SOUNDS)
                     .pushReaction(PushReaction.BLOCK)
-                    .isViewBlocking(MFBlocks::always)
-                    .isValidSpawn(MFBlocks::never)
-                    .isSuffocating(MFBlocks::always)
-                    .isRedstoneConductor(MFBlocks::never)
+                    .isViewBlocking(PropertyUtil.Blocks::always)
+                    .isValidSpawn(PropertyUtil.Blocks::never)
+                    .isSuffocating(PropertyUtil.Blocks::always)
+                    .isRedstoneConductor(PropertyUtil.Blocks::never)
             ), Component.translatable("tooltip.morefeatures.evil_portal"));
+
+    public static final DeferredBlock<Block> PORTAL = registerBlockWithoutItem(MFBlockIds.PORTAL_BLOCK,
+            props -> new PortalBlock(props.noCollision().noOcclusion())
+    );
 
     // Conjured Ice
     public static final DeferredBlock<Block> CONJURED_ICE = registerBlockWithoutItem(MFBlockIds.CONJURED_ICE,
@@ -1252,7 +1100,11 @@ public class MFBlocks {
         return block;
     }
 
-    private static <T extends Block> void registerBlockItem(BlockItemId id, DeferredBlock<T> block) {
+    private static <T extends Block> DeferredBlock<T> registerSign(BlockItemId id, Function<BlockBehaviour.Properties, T> function) {
+        return registerBlockWithoutItem(id.block(), function);
+    }
+
+    public static <T extends Block> void registerBlockItem(BlockItemId id, DeferredBlock<T> block) {
         MFItems.ITEMS.registerItem(
                 id.item().identifier().getPath(),
                 properties -> new BlockItem(block.get(), properties.setId(id.item()).useBlockDescriptionPrefix())
@@ -1264,12 +1116,14 @@ public class MFBlocks {
             Function<BlockBehaviour.Properties, T> blockFactory,
             UnaryOperator<BlockBehaviour.Properties> propertyModifier
     ) {
+        Identifier blockId = id.block().identifier();
 
         // This register method is private, so ensuring all blocks in this class are registered in the More Features namespace only forces me to follow good practice without hindering other devs
-        if (MFIdentifier.isNotMfNamespace(id.block().identifier())){
-            throw new IllegalStateException("Could not register the " + id.block().identifier().getPath() + " block. ID must be within the More Features namespace!");
+        if (MFIdentifier.isNotMfNamespace(blockId)){
+            throw new IllegalStateException("Could not register the " + blockId.getPath() + " block. ID must be within the More Features namespace!");
         }
-        DeferredBlock<T> block = BLOCKS.registerBlock(id.block().identifier().getPath(),
+
+        DeferredBlock<T> block = BLOCKS.registerBlock(blockId.getPath(),
                 baseProps -> {
                     BlockBehaviour.Properties props = propertyModifier.apply(baseProps).setId(id.block());
                     return blockFactory.apply(props);
@@ -1278,146 +1132,6 @@ public class MFBlocks {
 
         registerBlockItem(id, block);
         return block;
-    }
-
-    private static WeatheringCopperCollection<DeferredBlock<Block>> registerCopperBlockSet(
-            WeatheringCopperCollection<BlockItemId> ids,
-            BiFunction<WeatheringCopper.WeatherState, Properties, ? extends Block> weatheringFactory,
-            BiFunction<WeatheringCopper.WeatherState, Properties, ? extends Block> waxedFactory,
-            Function<WeatheringCopper.WeatherState, Properties> propertiesSupplier) {
-
-        return ids.apply(
-                weatheringIds -> zipMap(
-                        WeatheringCopperCollection.STATES,
-                        weatheringIds,
-                        (state, id) -> {
-                            String name = id.block().identifier().getPath();
-                            Properties props = propertiesSupplier.apply(state).setId(id.block());
-
-                            DeferredBlock<Block> toReturn = BLOCKS.register(name, () -> weatheringFactory.apply(state, props));
-
-                            registerBlockItem(id, toReturn);
-
-                            return toReturn;
-                        }
-                ),
-                waxedIds -> zipMap(
-                        WeatheringCopperCollection.STATES,
-                        waxedIds,
-                        (state, id) -> {
-                            String name = id.block().identifier().getPath();
-                            if (MFIdentifier.isNotMfNamespace(id.block().identifier())){
-                                throw new IllegalStateException("Failed to register " + name + " within the " + ids.weathering().unaffected().block().identifier().getPath() + " copper block set. ID must be within the More Features namespace!");
-                            }
-                            Properties props = propertiesSupplier.apply(state).setId(id.block());
-
-                            DeferredBlock<Block> toReturn = BLOCKS.register(name, () -> waxedFactory.apply(state, props));
-
-                            registerBlockItem(id, toReturn);
-
-                            return toReturn;
-                        }
-                )
-        );
-    }
-
-    private static ColorCollection<DeferredBlock<Block>> registerColouredBlockSet(
-            ColorCollection<BlockItemId> ids,
-            Function<Properties, ? extends Block> factory,
-            Function<DyeColor, Properties> propertiesSupplier){
-
-        return ColorCollection.zipMap(
-                ColorCollection.VALUES,
-                ids,
-                (color, id) -> {
-                    String name = id.block().identifier().getPath();
-                    if (MFIdentifier.isNotMfNamespace(id.block().identifier())){
-                        throw new IllegalStateException("Failed to register " + name + " within a coloured block set. ID must be within the More Features namespace!");
-                    }
-                    Properties props = propertiesSupplier.apply(color).setId(id.block());
-                    DeferredBlock<Block> block = BLOCKS.register(name, () -> factory.apply(props));
-
-                    registerBlockItem(id, block);
-
-                    return block;
-                }
-        );
-    }
-
-    private static DeferredBlock<StairBlock> registerStair(BlockItemId stairId, Supplier<Block> fullBlock){
-        return registerBlock(stairId, props -> new StairBlock(fullBlock.get().defaultBlockState(), props),
-                _ -> Properties.ofFullCopy(fullBlock.get()));
-    }
-
-    private static DeferredBlock<SlabBlock> registerSlab(BlockItemId slabId, Supplier<Block> fullBlock){
-        return registerBlock(slabId, SlabBlock::new,
-                _ -> Properties.ofFullCopy(fullBlock.get()));
-    }
-
-    // These exact booleans exist in the vanilla Blocks class, but have private access
-
-    // Used by the isRedstoneConductor, isViewBlocking, and isSuffocating properties
-
-    private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos blockPos) {
-        return true;
-    }
-
-    private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos blockPos) {
-        return false;
-    }
-
-    // Used by the isValidSpawn property
-
-    private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
-        return false;
-    }
-
-    private static boolean always(BlockState state, BlockGetter blockGetter, BlockPos blockPos, EntityType<?> entityType) {
-        return true;
-    }
-
-    private static Properties woodProps(WoodSet wood, Properties props){
-        return baseWoodProps(wood, props, false);
-    }
-
-    private static Properties logProps(WoodSet wood, Properties props){
-        return baseWoodProps(wood, props, true);
-    }
-
-    private static Properties shelfProps(WoodSet wood, Properties props){
-        return baseWoodProps(wood, props, false).sound(SoundType.SHELF);
-    }
-
-    private static Properties signProps(WoodSet wood, Properties props){
-        return baseWoodProps(wood, props, false).noCollision();
-    }
-
-    private static Properties deepslateGemOreProps(GemstoneType gem, Properties props) {
-        return baseGemOreProps(gem, props, false);
-    }
-
-    private static Properties stoneGemOreProps(GemstoneType gem, Properties props) {
-        return baseGemOreProps(gem, props, true);
-    }
-
-    private static Properties baseGemOreProps(GemstoneType gem, Properties props, boolean stone){
-        return gemProps(gem, props).mapColor(stone ? MapColor.STONE : MapColor.DEEPSLATE).sound(stone ? SoundType.STONE : SoundType.DEEPSLATE);
-    }
-
-    private static Properties gemProps(GemstoneType gem, Properties props) {
-
-        return props.mapColor(gem.getMapColor()).sound(SoundType.AMETHYST).strength(10F, 400F)
-                .isRedstoneConductor(MFBlocks::always).isSuffocating(MFBlocks::always).isValidSpawn(MFBlocks::always)
-                .isViewBlocking(MFBlocks::always).instrument(NoteBlockInstrument.CHIME);
-    }
-
-    private static Properties baseWoodProps(WoodSet set, Properties props, boolean log){
-        Properties finalProps = props.mapColor(set.getMapColor()).sound(log ? set.getLogSoundType() : set.getMainSoundType())
-                .strength(2.0F, 8.0F).isValidSpawn(MFBlocks::never);
-
-        if(set.isFlammable()) finalProps.ignitedByLava();
-
-        return finalProps;
     }
 
     // Register method called in the mod event bus

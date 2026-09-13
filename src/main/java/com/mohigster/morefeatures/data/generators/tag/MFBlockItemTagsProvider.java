@@ -18,7 +18,9 @@ public class MFBlockItemTagsProvider extends BlockItemTagsProvider {
     protected void run() {
         this.tag(MFBlockItemTags.WOOL_VERTICAL_SLABS).addAll(MFBlockItemIds.WOOL_VERTICAL_SLAB.asList());
         this.tag(MFBlockItemTags.CONCRETE_VERTICAL_SLABS).addAll(MFBlockItemIds.CONCRETE_VERTICAL_SLAB.asList());
-        this.tag(MFBlockItemTags.CUSTOM_WOODEN_VERTICAL_SLABS).addAll(MFBlockItemIds.WOODEN_VERTICAL_SLAB.asList());
+        this.tag(MFBlockItemTags.WOODEN_VERTICAL_SLABS)
+                .addAll(MFBlockItemIds.WOODEN_VERTICAL_SLAB.asList())
+                .addAll(MFBlockItemIds.VANILLA_WOOD_VERTICAL_SLAB.asList());
         this.tag(MFBlockItemTags.CUT_COPPER_VERTICAL_SLABS).addAll(MFBlockItemIds.CUT_COPPER_VERTICAL_SLAB.asList());
         this.tag(MFBlockItemTags.CUT_COPPER_PILLARS).addAll(MFBlockItemIds.CUT_COPPER_PILLAR.asList());
         this.tag(MFBlockItemTags.CONCRETE_PILLARS).addAll(MFBlockItemIds.CONCRETE_PILLAR.asList());

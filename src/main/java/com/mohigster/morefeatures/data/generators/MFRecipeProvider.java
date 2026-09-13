@@ -2,6 +2,8 @@ package com.mohigster.morefeatures.data.generators;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.block.collection.gemstone.GemstoneCollection;
+import com.mohigster.morefeatures.block.collection.vanilla.VanillaWoodCollection;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.block.family.MFBlockFamilies;
 import com.mohigster.morefeatures.data.tag.MFBlockItemTags;
@@ -19,11 +21,9 @@ import net.minecraft.world.item.crafting.AbstractCookingRecipe;
 import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ColorCollection;
 import net.minecraft.world.level.block.WeatheringCopperCollection;
-import net.neoforged.neoforge.registries.DeferredBlock;
 import org.jspecify.annotations.NullMarked;
 
 import java.util.List;
@@ -52,7 +52,7 @@ public class MFRecipeProvider extends RecipeProvider {
         }
     }
 
-    protected void generateForBlockFamilies(FeatureFlagSet flagSet) {
+    protected void generateForMFBlockFamilies(FeatureFlagSet flagSet) {
         MFBlockFamilies.getAllNonGemstoneFamilies()
                 .forEach(family -> this.generateRecipes(family, flagSet));
     }
@@ -60,7 +60,7 @@ public class MFRecipeProvider extends RecipeProvider {
     @Override
     protected void buildRecipes(){
 
-        this.generateForBlockFamilies(
+        this.generateForMFBlockFamilies(
                 FeatureFlagSet.of(FeatureFlags.VANILLA)
         );
 
@@ -128,95 +128,26 @@ public class MFRecipeProvider extends RecipeProvider {
                 .group("magnesium")
                 .save(output);
 
-        // Azurite recipes
-
-        this.shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.RAW_AZURITE_BLOCK)
-                .pattern("AAA")
-                .pattern("AAA")
-                .pattern("AAA")
-                .define('A', MFItems.RAW_AZURITE.get())
-                .unlockedBy(getHasName(MFItems.RAW_AZURITE.get()), has(MFItems.RAW_AZURITE))
-                .group("azurite")
-                .save(output);
-
-        this.shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.AZURITE_BLOCK)
-                .pattern("AAA")
-                .pattern("AAA")
-                .pattern("AAA")
-                .define('A', MFItems.AZURITE.get())
-                .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE))
-                .group("azurite")
-                .save(output);
-
-        this.shapeless(RecipeCategory.MISC, MFItems.RAW_AZURITE.get(), 9)
-                .requires(MFBlocks.RAW_AZURITE_BLOCK)
-                .unlockedBy(getHasName(MFBlocks.RAW_AZURITE_BLOCK.get()), has(MFBlocks.RAW_AZURITE_BLOCK))
-                .group("azurite")
-                .save(output);
-
-        this.shapeless(RecipeCategory.MISC, MFItems.AZURITE.get(), 9)
-                .requires(MFBlocks.AZURITE_BLOCK)
-                .unlockedBy(getHasName(MFBlocks.AZURITE_BLOCK.get()), has(MFBlocks.AZURITE_BLOCK))
-                .group("azurite")
-                .save(output);
-
-        this.shapeless(RecipeCategory.MISC, MFItems.AZURITE.get(), 18)
-                .requires(MFBlocks.AZURITE_BLOCK)
-                .requires(Items.BLAZE_ROD)
-                .requires(Items.BREEZE_ROD)
-                .requires(MFItems.BRINE_ROD)
-                .unlockedBy(getHasName(MFBlocks.AZURITE_BLOCK.get()), has(MFBlocks.AZURITE_BLOCK))
-                .group("azurite")
-                .save(output, "morefeatures:azurite_from_blaze_rod_and_breeze_rod_and_brine_rod");
-
-        this.verticalSlabCrafting(MFBlocks.AZURITE_VERTICAL_SLAB, MFBlocks.AZURITE_BLOCK);
-        this.verticalSlabStonecutting(MFBlocks.AZURITE_VERTICAL_SLAB, MFBlocks.AZURITE_BLOCK);
-
         // Fluorite recipes
 
-        this.shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.RAW_FLUORITE_BLOCK)
-                .pattern("AAA")
-                .pattern("AAA")
-                .pattern("AAA")
-                .define('A', MFItems.RAW_FLUORITE.get())
-                .unlockedBy(getHasName(MFItems.RAW_FLUORITE.get()), has(MFItems.RAW_FLUORITE))
-                .group("fluorite")
-                .save(output);
+        GemstoneCollection.zipApply(MFBlocks.GEMSTONE_BLOCK, MFItems.GEM, this::simpleShaped);
+        GemstoneCollection.zipApply(MFBlocks.RAW_GEM_BLOCK, MFItems.RAW_GEM, this::simpleShaped);
+        GemstoneCollection.zipApply(MFItems.GEM, MFBlocks.GEMSTONE_BLOCK, this::simpleShapeless);
+        GemstoneCollection.zipApply(MFItems.RAW_GEM, MFBlocks.RAW_GEM_BLOCK, this::simpleShapeless);
+        GemstoneCollection.zipApply(MFBlocks.GEMSTONE_VERTICAL_SLAB, MFBlocks.GEMSTONE_BLOCK, this::verticalSlabCrafting);
+        GemstoneCollection.zipApply(MFBlocks.GEMSTONE_VERTICAL_SLAB, MFBlocks.GEMSTONE_BLOCK, this::verticalSlabStonecutting);
 
-        this.shaped(RecipeCategory.BUILDING_BLOCKS, MFBlocks.FLUORITE_BLOCK)
-                .pattern("AAA")
-                .pattern("AAA")
-                .pattern("AAA")
-                .define('A', MFItems.FLUORITE.get())
-                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE))
-                .group("fluorite")
-                .save(output);
+        GemstoneCollection.GEMS.forEach(gem ->
+                this.shapeless(RecipeCategory.MISC, MFItems.GEM.pick(gem).get(), 18)
+                        .requires(MFBlocks.GEMSTONE_BLOCK.pick(gem))
+                        .requires(Items.BLAZE_ROD)
+                        .requires(Items.BREEZE_ROD)
+                        .requires(MFItems.BRINE_ROD)
+                        .unlockedBy(getHasName(MFBlocks.GEMSTONE_BLOCK.pick(gem)), has(MFBlocks.GEMSTONE_BLOCK.pick(gem)))
+                        .group("gemstone")
+                        .save(output, "morefeatures:" + gem.getName() + "_from_blaze_rod_and_breeze_rod_and_brine_rod"));
 
-        this.shapeless(RecipeCategory.MISC, MFItems.RAW_FLUORITE.get(), 9)
-                .requires(MFBlocks.RAW_FLUORITE_BLOCK)
-                .unlockedBy(getHasName(MFBlocks.RAW_FLUORITE_BLOCK.get()), has(MFBlocks.RAW_FLUORITE_BLOCK))
-                .group("fluorite")
-                .save(output);
-
-        this.shapeless(RecipeCategory.MISC, MFItems.FLUORITE.get(), 9)
-                .requires(MFBlocks.FLUORITE_BLOCK)
-                .unlockedBy(getHasName(MFBlocks.FLUORITE_BLOCK.get()), has(MFBlocks.FLUORITE_BLOCK))
-                .group("fluorite")
-                .save(output);
-
-        this.shapeless(RecipeCategory.MISC, MFItems.FLUORITE.get(), 18)
-                .requires(MFBlocks.FLUORITE_BLOCK)
-                .requires(Items.BLAZE_ROD)
-                .requires(Items.BREEZE_ROD)
-                .requires(MFItems.BRINE_ROD)
-                .unlockedBy(getHasName(MFBlocks.FLUORITE_BLOCK.get()), has(MFBlocks.FLUORITE_BLOCK))
-                .group("fluorite")
-                .save(output, "morefeatures:fluorite_from_blaze_rod_and_breeze_rod_and_brine_rod");
-
-        this.verticalSlabCrafting(MFBlocks.FLUORITE_VERTICAL_SLAB, MFBlocks.FLUORITE_BLOCK);
-        this.verticalSlabStonecutting(MFBlocks.FLUORITE_VERTICAL_SLAB, MFBlocks.FLUORITE_BLOCK);
-
-        // Tainted wood recipes
+        // Wood recipes
 
         WoodTypeCollection.zipApply(MFBlocks.PLANKS, MFBlockItemTags.LOGS, this::planksFromLogs);
 
@@ -289,10 +220,10 @@ public class MFRecipeProvider extends RecipeProvider {
                 .pattern("DBD")
                 .pattern("BAB")
                 .pattern("NFN")
-                .define('B', MFItems.BISMUTH.get())
+                .define('B', MFItems.BISMUTH)
                 .define('N', Items.NETHERITE_SCRAP)
-                .define('A', MFItems.AZURITE.get())
-                .define('F', MFItems.FLUORITE.get())
+                .define('A', MFItems.GEM.azurite())
+                .define('F', MFItems.GEM.fluorite())
                 .define('D', Items.DIAMOND)
                 .unlockedBy(getHasName(Items.NETHERITE_SCRAP), has(Items.NETHERITE_SCRAP))
                 .group("magic")
@@ -401,94 +332,67 @@ public class MFRecipeProvider extends RecipeProvider {
 
         // Stairs and slabs
 
-        this.stairBuilder(MFBlocks.AZURITE_STAIRS.get(), Ingredient.of(MFBlocks.AZURITE_BLOCK))
-                .unlockedBy(getHasName(MFBlocks.AZURITE_BLOCK.get()), has(MFBlocks.AZURITE_BLOCK))
-                .group("azurite").save(output);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, MFBlocks.AZURITE_SLAB.get(), MFBlocks.AZURITE_BLOCK.get());
+        GemstoneCollection.zipApply(MFBlocks.GEMSTONE_STAIRS, MFBlocks.GEMSTONE_BLOCK, this::stairs);
 
-        this.stairBuilder(MFBlocks.FLUORITE_STAIRS.get(), Ingredient.of(MFBlocks.FLUORITE_BLOCK))
-                .unlockedBy(getHasName(MFBlocks.FLUORITE_BLOCK.get()), has(MFBlocks.FLUORITE_BLOCK))
-                .group("fluorite").save(output);
-        this.slab(RecipeCategory.BUILDING_BLOCKS, MFBlocks.FLUORITE_SLAB.get(), MFBlocks.FLUORITE_BLOCK.get());
+        this.slab(RecipeCategory.BUILDING_BLOCKS, MFBlocks.GEMSTONE_SLAB.azurite().get(), MFBlocks.GEMSTONE_BLOCK.azurite().get());
+        this.slab(RecipeCategory.BUILDING_BLOCKS, MFBlocks.GEMSTONE_SLAB.fluorite().get(), MFBlocks.GEMSTONE_BLOCK.fluorite().get());
 
         // Buttons and pressure plates
 
-        this.buttonBuilder(MFBlocks.AZURITE_BUTTON.get(), Ingredient.of(MFItems.AZURITE))
-                .group("azurite")
-                .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
-                .save(output);
-        this.pressurePlate(MFBlocks.AZURITE_PRESSURE_PLATE.get(), MFItems.AZURITE.get());
+        GemstoneCollection.zipApply(MFBlocks.GEMSTONE_PRESSURE_PLATE, MFItems.GEM, this::pressurePlate);
 
-        this.buttonBuilder(MFBlocks.FLUORITE_BUTTON.get(), Ingredient.of(MFItems.FLUORITE))
-                .group("fluorite")
-                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
+        this.buttonBuilder(MFBlocks.GEMSTONE_BUTTON.azurite().get(), Ingredient.of(MFItems.GEM.azurite()))
+                .group("azurite")
+                .unlockedBy(getHasName(MFItems.GEM.azurite().get()), has(MFItems.GEM.azurite().get()))
                 .save(output);
-        this.pressurePlate(MFBlocks.FLUORITE_PRESSURE_PLATE.get(), MFItems.FLUORITE.get());
+
+        this.buttonBuilder(MFBlocks.GEMSTONE_BUTTON.fluorite().get(), Ingredient.of(MFItems.GEM.fluorite()))
+                .group("fluorite")
+                .unlockedBy(getHasName(MFItems.GEM.fluorite().get()), has(MFItems.GEM.fluorite().get()))
+                .save(output);
 
         // Doors and trapdoors
 
-        this.doorBuilder(MFBlocks.AZURITE_DOOR.get(), Ingredient.of(MFItems.AZURITE))
+        this.doorBuilder(MFBlocks.GEMSTONE_DOOR.azurite().get(), Ingredient.of(MFItems.GEM.azurite()))
                 .group("azurite")
-                .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
+                .unlockedBy(getHasName(MFItems.GEM.azurite().get()), has(MFItems.GEM.azurite().get()))
                 .save(output);
-        this.trapdoorBuilder(MFBlocks.AZURITE_TRAPDOOR.get(), Ingredient.of(MFItems.AZURITE))
+        this.trapdoorBuilder(MFBlocks.GEMSTONE_TRAPDOOR.azurite().get(), Ingredient.of(MFItems.GEM.azurite()))
                 .group("azurite")
-                .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
+                .unlockedBy(getHasName(MFItems.GEM.azurite().get()), has(MFItems.GEM.azurite().get()))
                 .save(output);
 
-        this.doorBuilder(MFBlocks.FLUORITE_DOOR.get(), Ingredient.of(MFItems.FLUORITE))
+        this.doorBuilder(MFBlocks.GEMSTONE_DOOR.fluorite().get(), Ingredient.of(MFItems.GEM.fluorite()))
                 .group("fluorite")
-                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
+                .unlockedBy(getHasName(MFItems.GEM.fluorite().get()), has(MFItems.GEM.fluorite().get()))
                 .save(output);
-        this.trapdoorBuilder(MFBlocks.FLUORITE_TRAPDOOR.get(), Ingredient.of(MFItems.FLUORITE))
+        this.trapdoorBuilder(MFBlocks.GEMSTONE_TRAPDOOR.fluorite().get(), Ingredient.of(MFItems.GEM.fluorite()))
                 .group("fluorite")
-                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
+                .unlockedBy(getHasName(MFItems.GEM.fluorite().get()), has(MFItems.GEM.fluorite().get()))
                 .save(output);
 
-        // Signs and Hanging signs
-
-        this.signBuilder(MFItems.AZURITE_SIGN.get(), Ingredient.of(MFItems.AZURITE.get()))
-                .group("azurite")
-                .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
-                .save(output);
-        this.hangingSignBuilder(MFItems.AZURITE_HANGING_SIGN.get(), Ingredient.of(MFItems.RAW_AZURITE.get()))
-                .group("azurite")
-                .unlockedBy(getHasName(MFItems.RAW_AZURITE.get()), has(MFItems.RAW_AZURITE.get()))
-                .save(output);
-
-        this.signBuilder(MFItems.FLUORITE_SIGN.get(), Ingredient.of(MFItems.FLUORITE.get()))
-                .group("fluorite")
-                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
-                .save(output);
-        this.hangingSignBuilder(MFItems.FLUORITE_HANGING_SIGN.get(), Ingredient.of(MFItems.RAW_FLUORITE.get()))
-                .group("fluorite")
-                .unlockedBy(getHasName(MFItems.RAW_FLUORITE.get()), has(MFItems.RAW_FLUORITE.get()))
-                .save(output);
+        GemstoneCollection.GEMS.forEach(
+                gem -> this.gemstoneSignSet(
+                        MFItems.GEMSTONE_SIGN.pick(gem),
+                        MFItems.GEMSTONE_HANGING_SIGN.pick(gem),
+                        MFItems.RAW_GEM.pick(gem)
+                )
+        );
 
         // Fences and Fence Gates
 
-        this.specialFenceBuilder(MFBlocks.AZURITE_FENCE.get(), Ingredient.of(MFBlocks.AZURITE_BLOCK), Ingredient.of(MFItems.AZURITE))
-                .group("azurite")
-                .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
-                .save(output);
-        this.specialFenceGateBuilder(MFBlocks.AZURITE_FENCE_GATE.get(), Ingredient.of(MFBlocks.AZURITE_BLOCK), Ingredient.of(MFItems.AZURITE))
-                .group("azurite")
-                .unlockedBy(getHasName(MFItems.AZURITE.get()), has(MFItems.AZURITE.get()))
-                .save(output);
-
-        this.specialFenceBuilder(MFBlocks.FLUORITE_FENCE.get(), Ingredient.of(MFBlocks.FLUORITE_BLOCK), Ingredient.of(MFItems.FLUORITE))
-                .group("fluorite")
-                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
-                .save(output);
-        this.specialFenceGateBuilder(MFBlocks.FLUORITE_FENCE_GATE.get(), Ingredient.of(MFBlocks.FLUORITE_BLOCK), Ingredient.of(MFItems.FLUORITE))
-                .group("fluorite")
-                .unlockedBy(getHasName(MFItems.FLUORITE.get()), has(MFItems.FLUORITE.get()))
-                .save(output);
+        GemstoneCollection.GEMS.forEach(
+                gem -> this.gemstoneFenceSet(
+                        MFBlocks.GEMSTONE_FENCE.pick(gem),
+                        MFBlocks.GEMSTONE_FENCE_GATE.pick(gem),
+                        MFBlocks.GEMSTONE_BLOCK.pick(gem),
+                        MFItems.GEM.pick(gem)
+                )
+        );
 
         // Walls
 
-        this.wall(RecipeCategory.DECORATIONS, MFBlocks.AZURITE_WALL, MFBlocks.AZURITE_BLOCK);
-        this.wall(RecipeCategory.DECORATIONS, MFBlocks.FLUORITE_WALL, MFBlocks.FLUORITE_BLOCK);
+        GemstoneCollection.zipApply(MFBlocks.GEMSTONE_WALL, MFBlocks.GEMSTONE_BLOCK, this::wall);
 
         // Bismuth smithing recipes
 
@@ -511,8 +415,8 @@ public class MFRecipeProvider extends RecipeProvider {
 
         List<ItemLike> ALUMINIUM_SMELTABLES = List.of(MFItems.RAW_ALUMINIUM, MFBlocks.ALUMINIUM_ORE, MFBlocks.DEEPSLATE_ALUMINIUM_ORE);
         List<ItemLike> MAGNESIUM_SMELTABLES = List.of(MFItems.RAW_MAGNESIUM, MFBlocks.MAGNESIUM_ORE, MFBlocks.DEEPSLATE_MAGNESIUM_ORE);
-        List<ItemLike> AZURITE_SMELTABLES = List.of(MFItems.RAW_AZURITE, MFBlocks.ORE.azurite(), MFBlocks.DEEPSLATE_ORE.azurite(), MFBlocks.END_AZURITE_ORE, MFBlocks.NETHER_AZURITE_ORE);
-        List<ItemLike> FLUORITE_SMELTABLES = List.of(MFItems.RAW_FLUORITE, MFBlocks.FLUORITE_ORE, MFBlocks.DEEPSLATE_FLUORITE_ORE, MFBlocks.NETHER_FLUORITE_ORE, MFBlocks.END_FLUORITE_ORE);
+        List<ItemLike> AZURITE_SMELTABLES = List.of(MFItems.RAW_GEM.azurite(), MFBlocks.ORE.azurite(), MFBlocks.DEEPSLATE_ORE.azurite(), MFBlocks.NETHER_ORE.azurite(), MFBlocks.END_ORE.azurite());
+        List<ItemLike> FLUORITE_SMELTABLES = List.of(MFItems.RAW_GEM.fluorite(), MFBlocks.ORE.fluorite(), MFBlocks.DEEPSLATE_ORE.fluorite(), MFBlocks.NETHER_ORE.fluorite(), MFBlocks.END_ORE.fluorite());
         List<ItemLike> BISMUTH_SMELTABLES = List.of(MFItems.RAW_BISMUTH, MFBlocks.BISMUTH_ORE);
 
         //——————————————————————SMELTING RECIPE DATA GENERATION——————————————————————
@@ -526,31 +430,21 @@ public class MFRecipeProvider extends RecipeProvider {
         this.oreBlasting(MAGNESIUM_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, MFItems.MAGNESIUM_INGOT.get(), 0.25f, 100, "magnesium");
 
         // Azurite
-        this.oreSmelting(AZURITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, MFItems.AZURITE.get(), 0.25f, 200, "azurite");
-        this.oreBlasting(AZURITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, MFItems.AZURITE.get(), 0.25f, 100, "azurite");
+        this.oreSmelting(AZURITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, MFItems.GEM.azurite().get(), 0.25f, 200, "azurite");
+        this.oreBlasting(AZURITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, MFItems.GEM.azurite().get(), 0.25f, 100, "azurite");
 
         // Fluorite
-        this.oreSmelting(FLUORITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, MFItems.FLUORITE.get(), 0.25f, 200, "fluorite");
-        this.oreBlasting(FLUORITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, MFItems.FLUORITE.get(), 0.25f, 100, "fluorite");
+        this.oreSmelting(FLUORITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, MFItems.GEM.fluorite().get(), 0.25f, 200, "fluorite");
+        this.oreBlasting(FLUORITE_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, MFItems.GEM.fluorite().get(), 0.25f, 100, "fluorite");
 
         // Bismuth
         this.oreSmelting(BISMUTH_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, MFItems.BISMUTH_SCRAP.get(), 0.25f, 200, "bismuth");
         this.oreBlasting(BISMUTH_SMELTABLES, RecipeCategory.MISC, CookingBookCategory.MISC, MFItems.BISMUTH_SCRAP.get(), 0.25f, 100, "bismuth");
 
         //—————————————————————————————VERTICAL SLABS TABLE———————————————————————————
-        this.verticalSlabCrafting(MFBlocks.OAK_VERTICAL_SLAB, Blocks.OAK_PLANKS);
-        this.verticalSlabCrafting(MFBlocks.SPRUCE_VERTICAL_SLAB, Blocks.SPRUCE_PLANKS);
-        this.verticalSlabCrafting(MFBlocks.BIRCH_VERTICAL_SLAB, Blocks.BIRCH_PLANKS);
-        this.verticalSlabCrafting(MFBlocks.JUNGLE_VERTICAL_SLAB, Blocks.JUNGLE_PLANKS);
-        this.verticalSlabCrafting(MFBlocks.ACACIA_VERTICAL_SLAB, Blocks.ACACIA_PLANKS);
-        this.verticalSlabCrafting(MFBlocks.DARK_OAK_VERTICAL_SLAB, Blocks.DARK_OAK_PLANKS);
-        this.verticalSlabCrafting(MFBlocks.CRIMSON_VERTICAL_SLAB, Blocks.CRIMSON_PLANKS);
-        this.verticalSlabCrafting(MFBlocks.WARPED_VERTICAL_SLAB, Blocks.WARPED_PLANKS);
-        this.verticalSlabCrafting(MFBlocks.MANGROVE_VERTICAL_SLAB, Blocks.MANGROVE_PLANKS);
-        this.verticalSlabCrafting(MFBlocks.CHERRY_VERTICAL_SLAB, Blocks.CHERRY_PLANKS);
-        this.verticalSlabCrafting(MFBlocks.BAMBOO_VERTICAL_SLAB, Blocks.BAMBOO_PLANKS);
-        this.verticalSlabCrafting(MFBlocks.BAMBOO_MOSAIC_VERTICAL_SLAB, Blocks.BAMBOO_MOSAIC);
-        this.verticalSlabCrafting(MFBlocks.PALE_OAK_VERTICAL_SLAB, Blocks.PALE_OAK_PLANKS);
+
+        VanillaWoodCollection.SETS.forEach(set -> this.verticalSlabCrafting(MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.pick(set), set.planks().get()));
+
 
         this.verticalSlabCrafting(MFBlocks.STONE_VERTICAL_SLAB, Blocks.STONE);
         this.verticalSlabCrafting(MFBlocks.COBBLESTONE_VERTICAL_SLAB, Blocks.COBBLESTONE);
@@ -613,9 +507,8 @@ public class MFRecipeProvider extends RecipeProvider {
         WoodTypeCollection.zipApply(MFBlocks.WOODEN_VERTICAL_SLAB, MFBlocks.PLANKS, this::verticalSlabCrafting);
 
         // And this line generates the recipe for all different colours of wool vertical slabs!
-
-        this.verticalSlabCrafting(MFBlocks.WOOL_VERTICAL_SLAB, Blocks.WOOL);
-        this.verticalSlabCrafting(MFBlocks.CONCRETE_VERTICAL_SLAB, Blocks.CONCRETE);
+        ColorCollection.zipApply(MFBlocks.WOOL_VERTICAL_SLAB, Blocks.WOOL, this::verticalSlabCrafting);
+        ColorCollection.zipApply(MFBlocks.CONCRETE_VERTICAL_SLAB, Blocks.CONCRETE, this::verticalSlabCrafting);
 
         //——————————————————————————VERTICAL SLABS STONECUTTING————————————————————————
 
@@ -739,6 +632,20 @@ public class MFRecipeProvider extends RecipeProvider {
                 .save(output, MoreFeatures.MODID + ":" + getConversionRecipeName(verticalSlab, fullBlock) + "_stonecutting");
     }
 
+    protected void gemstoneFenceSet(ItemLike fence, ItemLike gate, ItemLike base, ItemLike actingStick){
+        String hasName = getHasName(actingStick);
+
+        this.specialFenceBuilder(fence, Ingredient.of(base), Ingredient.of(actingStick)).group("gemstone").unlockedBy(hasName, has(actingStick)).save(output);
+        this.specialFenceGateBuilder(gate, Ingredient.of(base), Ingredient.of(actingStick)).group("gemstone").unlockedBy(hasName, has(actingStick)).save(output);
+    }
+
+    protected void gemstoneSignSet(ItemLike sign, ItemLike hanging, ItemLike base){
+        String hasName = getHasName(base);
+
+        this.signBuilder(sign, Ingredient.of(base)).group("gemstone").unlockedBy(hasName, has(base)).save(output);
+        this.hangingSignBuilder(hanging, Ingredient.of(base)).group("gemstone").unlockedBy(hasName, has(base)).save(output);
+    }
+
     protected RecipeBuilder specialFenceBuilder(ItemLike result, Ingredient base, Ingredient actingStick) {
         return this.shaped(RecipeCategory.DECORATIONS, result, 3).define('W', base).define('#', actingStick).pattern("W#W").pattern("W#W");
     }
@@ -747,12 +654,37 @@ public class MFRecipeProvider extends RecipeProvider {
         return this.shaped(RecipeCategory.REDSTONE, result).define('#', actingStick).define('W', block).pattern("#W#").pattern("#W#");
     }
 
-    protected <T extends Block> void verticalSlabCrafting(ColorCollection<DeferredBlock<T>> slabSet, ColorCollection<T> blockSet) {
-        ColorCollection.VALUES.forEach(colour -> this.verticalSlabCrafting(slabSet.pick(colour).get(), blockSet.pick(colour)));
-    }
-
     protected void planksFromLogs(ItemLike result, BlockItemTagId logTag) {
         this.planksFromLogs(result, logTag.item(), 4);
+    }
+
+    protected void simpleShaped(ItemLike result, ItemLike ingredient) {
+        this.shaped(RecipeCategory.BUILDING_BLOCKS, result)
+                .pattern("AAA")
+                .pattern("AAA")
+                .pattern("AAA")
+                .define('A', ingredient)
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .group("gemstone")
+                .save(output);
+    }
+
+    protected void simpleShapeless(ItemLike result, ItemLike ingredient) {
+        this.shapeless(RecipeCategory.BUILDING_BLOCKS, result, 9)
+                .requires(ingredient)
+                .unlockedBy(getHasName(ingredient), has(ingredient))
+                .group("gemstone")
+                .save(output);
+    }
+
+    protected void wall(ItemLike result, ItemLike base) {
+        this.wall(RecipeCategory.DECORATIONS, result, base);
+    }
+
+    protected void stairs(ItemLike result, ItemLike base) {
+        this.stairBuilder(result, Ingredient.of(base))
+                .unlockedBy(getHasName(result), has(result))
+                .group("gemstone").save(output);
     }
 }
 

@@ -1,8 +1,8 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "azurite",
+  "group": "gemstone",
   "key": {
-    "#": "morefeatures:azurite",
+    "#": "morefeatures:raw_azurite",
     "X": "minecraft:stick"
   },
   "pattern": [

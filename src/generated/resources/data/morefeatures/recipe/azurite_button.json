@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
-  "group": "azurite",
+  "group": "gemstone_button",
   "ingredients": [
-    "morefeatures:azurite"
+    "morefeatures:azurite_block"
   ],
   "result": {
     "id": "morefeatures:azurite_button"

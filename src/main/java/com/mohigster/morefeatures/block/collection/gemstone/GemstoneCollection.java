@@ -1,14 +1,15 @@
 package com.mohigster.morefeatures.block.collection.gemstone;
 
 import com.google.common.collect.ImmutableList;
-import com.mohigster.morefeatures.block.collection.wood.WoodSet;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -23,28 +24,22 @@ public record GemstoneCollection<T>(
             GemstoneType.FLUORITE
     );
 
-    public static <T> GemstoneCollection<T> create(final T value) {
+    public static <T> GemstoneCollection<T> createForAll(final T value) {
         return new GemstoneCollection<>(value, value);
     }
 
-    public static final GemstoneCollection<String> NAMES = GEMS.map(GemstoneType::getName);
-
     public static GemstoneCollection<String> prefixWithGem(final GemstoneCollection<String> ids) {
-        return zipMap(NAMES, ids, GemstoneCollection::prefix);
+        return prefixWithGem("", ids);
     }
 
-    public static GemstoneCollection<String> suffixWithGem(final GemstoneCollection<String> ids) {
-        return zipMap(NAMES, ids, GemstoneCollection::suffix);
+    public static GemstoneCollection<String> prefixWithGem(String prefix, final GemstoneCollection<String> ids) {
+        return prefixWithGem(prefix, ids, !prefix.isEmpty());
     }
 
-    private static String prefix(String gem, String id){
-        if (id.isEmpty()) return gem + id;
+    public static GemstoneCollection<String> prefixWithGem(String prefix, final GemstoneCollection<String> ids, boolean appendPrefixWithUnderscore) {
+        String formattedPrefix = appendPrefixWithUnderscore ? prefix + "_" : prefix;
 
-        else return gem + "_" + id;
-    }
-
-    private static String suffix(String gem, String id){
-        return id + "_" + gem;
+        return zipMap(GEMS, ids, (gem, id) -> gem.getFormattedId(formattedPrefix, id));
     }
 
     public static <Id, B extends Block> GemstoneCollection<DeferredBlock<B>> registerBlocks(
@@ -90,8 +85,7 @@ public record GemstoneCollection<T>(
     }
 
     public static <T, U> void zipApply(final GemstoneCollection<T> first, final GemstoneCollection<U> second, final BiConsumer<T, U> consumer) {
-        consumer.accept(first.azurite(), second.azurite());
-        consumer.accept(first.fluorite(), second.fluorite());
+        GEMS.forEach(gem -> consumer.accept(first.pick(gem), second.pick(gem)));
     }
 
     public static <T, U, R> GemstoneCollection<R> zipMap(final GemstoneCollection<T> first, final GemstoneCollection<U> second, final BiFunction<T, U, R> operation) {

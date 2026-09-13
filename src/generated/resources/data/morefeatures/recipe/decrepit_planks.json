@@ -3,7 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    "#morefeatures:wood/decrepit_logs"
+    "#morefeatures:wood/logs/decrepit"
   ],
   "result": {
     "count": 4,

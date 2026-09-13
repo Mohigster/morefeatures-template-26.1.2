@@ -35,7 +35,7 @@ public final class MFItemTags {
     public static final TagKey<Item> AOE_WANDS = morefeaturesTag("wands/aoe_generic");
     public static final TagKey<Item> TARGETING_ENTITY_WANDS = morefeaturesTag("wands/targeting/entity");
     public static final TagKey<Item> TARGETING_BLOCK_WANDS = morefeaturesTag("wands/targeting/block");
-    public static final TagKey<Item> WOODEN_VERTICAL_SLABS = morefeaturesTag("vertical_slabs/wooden");
+    public static final TagKey<Item> WOODEN_VERTICAL_SLABS = MFBlockItemTags.WOODEN_VERTICAL_SLABS.item();
     public static final TagKey<Item> MODDED_LOGS = MFBlockItemTags.MODDED_LOGS.item();
 
     // Magic block tags

@@ -32,7 +32,7 @@ public class HealingWandItem extends SelfInflictingAndTargetingWandItem {
     }
 
     @Override
-    protected Predicate<LivingEntity> getTargetPredicate(Player caster) {
+    public Predicate<LivingEntity> getTargetPredicate(Player caster) {
         return entity -> entity != caster &&
                 (entity instanceof Player ||
                         (entity instanceof TamableAnimal animal && animal.getOwner() == caster))
@@ -40,17 +40,17 @@ public class HealingWandItem extends SelfInflictingAndTargetingWandItem {
     }
 
     @Override
-    protected boolean canCastSpellOnSelf(Player caster) {
+    public boolean canCastSpellOnSelf(Player caster) {
         return caster.getHealth() < caster.getMaxHealth(); // Only cast if the casters health is not full.
     }
 
     @Override
-    protected void castSelfInflictingSpell(Player caster, Level level) {
+    public void castSelfInflictingSpell(Player caster, Level level) {
         caster.heal(SELF_HEALING_AMOUNT);
     }
 
     @Override
-    protected void castTargetedSpell(LivingEntity target, Player caster, Level level) {
+    public void castTargetedSpell(LivingEntity target, Player caster, Level level) {
         target.heal(TARGET_HEALING_AMOUNT);
     }
 }

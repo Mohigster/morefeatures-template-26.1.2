@@ -1,9 +1,12 @@
 package com.mohigster.morefeatures.data.world.biome.custom;
 
 import com.mohigster.morefeatures.data.world.feature.MFPlacedFeatures;
+import com.mohigster.morefeatures.particles.MFParticleTypes;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.data.worldgen.placement.EndPlacements;
 import net.minecraft.data.worldgen.placement.VegetationPlacements;
+import net.minecraft.world.attribute.AmbientParticle;
+import net.minecraft.world.attribute.EnvironmentAttributes;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.BiomeGenerationSettings;
 import net.minecraft.world.level.biome.BiomeSpecialEffects;
@@ -42,6 +45,8 @@ public class MFEndBiomes {
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false).temperature(4.0F).downfall(0.0F)
                 .specialEffects((new BiomeSpecialEffects.Builder().waterColor(0xbdd1b4).grassColorOverride(0xbdb1b3).build()))
+                .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES,
+                        AmbientParticle.of(MFParticleTypes.DECREPIT_SPORE.get(), 0.005F))
                 .mobSpawnSettings(spawnBuilder.build()).generationSettings(biomeBuilder.build()).build();
     }
 
@@ -57,6 +62,8 @@ public class MFEndBiomes {
         return new Biome.BiomeBuilder()
                 .hasPrecipitation(false).temperature(4.0F).downfall(0.0F)
                 .specialEffects((new BiomeSpecialEffects.Builder().waterColor(0xbda1b4).grassColorOverride(0xbda1b3).build()))
+                .setAttribute(EnvironmentAttributes.AMBIENT_PARTICLES,
+                        AmbientParticle.of(MFParticleTypes.PALLID_SPORE.get(), 0.005F))
                 .mobSpawnSettings(spawnBuilder.build()).generationSettings(biomeBuilder.build()).build();
     }
 }

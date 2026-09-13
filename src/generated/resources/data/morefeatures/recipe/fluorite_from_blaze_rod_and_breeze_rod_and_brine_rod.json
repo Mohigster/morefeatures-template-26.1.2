@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "fluorite",
+  "group": "gemstone",
   "ingredients": [
     "morefeatures:fluorite_block",
     "minecraft:blaze_rod",

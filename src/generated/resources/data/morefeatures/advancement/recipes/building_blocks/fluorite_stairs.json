@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_fluorite_block": {
+    "has_fluorite_stairs": {
       "conditions": {
         "items": [
           {
-            "items": "morefeatures:fluorite_block"
+            "items": "morefeatures:fluorite_stairs"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_fluorite_block"
+      "has_fluorite_stairs"
     ]
   ],
   "rewards": {

@@ -1,8 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
+  "group": "gemstone_pressure_plate",
   "key": {
-    "#": "morefeatures:fluorite"
+    "#": "morefeatures:fluorite_block"
   },
   "pattern": [
     "##"

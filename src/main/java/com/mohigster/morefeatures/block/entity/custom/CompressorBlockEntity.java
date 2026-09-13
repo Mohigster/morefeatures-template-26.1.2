@@ -303,7 +303,6 @@ public class CompressorBlockEntity extends BlockEntity implements MenuProvider {
 
     /* ENERGY */
 
-    @SuppressWarnings("unused")
     public EnergyHandler getEnergyStorage(@Nullable Direction direction) {
         return this.ENERGY_STORAGE;
     }

@@ -61,7 +61,7 @@ public abstract class MetalDetectorCostProvider implements DataProvider {
     @Override
     public CompletableFuture<?> run(CachedOutput cachedOutput) {
         this.entries.clear();
-        generate();
+        this.generate();
 
         return this.registries.thenCompose(provider -> {
             Path outputFolder = this.output.getOutputFolder(PackOutput.Target.DATA_PACK);

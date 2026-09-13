@@ -18,7 +18,6 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 
 public class ConjuredIceBlock extends FrostedIceBlock {
-
     public static BlockState meltsInto(Level level, BlockPos pos) {
         if (!neighboursWater(level, pos)) return Blocks.AIR.defaultBlockState();
         else return Blocks.WATER.defaultBlockState();

@@ -1,12 +1,26 @@
 {
   "type": "morefeatures:oasis",
   "config": {
+    "blocks_that_should_be_replaced_when_clearing": [
+      "minecraft:grass_block",
+      "minecraft:dirt",
+      "minecraft:rooted_dirt",
+      "minecraft:coarse_dirt",
+      "minecraft:sand",
+      "minecraft:red_sand",
+      "minecraft:suspicious_sand",
+      "minecraft:stone"
+    ],
     "exposed_base_block": {
       "Name": "minecraft:sandstone"
     },
     "main_base_block": {
       "Name": "minecraft:sand"
     },
-    "tree_feature": "morefeatures:palm_tree"
+    "required_distance_in_blocks_between_trees": 5,
+    "tree_attempts": 7,
+    "tree_feature": "morefeatures:palm_tree",
+    "tree_ring_max_distance": 7,
+    "tree_ring_min_distance": 5
   }
 }

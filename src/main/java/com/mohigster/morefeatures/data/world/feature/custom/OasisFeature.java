@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.data.world.feature.custom;
 
+import com.google.common.collect.Lists;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import com.mohigster.morefeatures.data.world.feature.custom.config.OasisConfiguration;
@@ -11,6 +12,7 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
 
@@ -23,11 +25,8 @@ public class OasisFeature extends Feature<OasisConfiguration> {
 
     private static final int WATER_RADIUS = 4;
     private static final int MAIN_BASE_RADIUS = 7;
-    private static final int TREE_ATTEMPTS = 7;
-    private static final int TREE_RING_MIN = 5;
-    private static final int TREE_RING_MAX = 7;
 
-    private final List<BlockPos> usedPalmSpots = new ArrayList<>();
+    private final List<BlockPos> usedTreeSpots = Lists.newArrayList();
 
     public OasisFeature(Codec<OasisConfiguration> codec) {
         super(codec);
@@ -40,27 +39,28 @@ public class OasisFeature extends Feature<OasisConfiguration> {
         BlockPos origin = context.origin();
         OasisConfiguration config = context.config();
 
-        usedPalmSpots.clear();
+        this.usedTreeSpots.clear();
 
-        BlockPos center = findSurface(level, origin);
+        BlockPos center = this.findSurface(level, origin);
         if (center == null) return false;
 
         double uniqueAngle = this.calculateDeformationAngle(center, random);
 
-        if (noSurfaceCount > 0){
-            MoreFeatures.LOGGER.debug("Oasis at {} had {} positions without suitable surface", center, noSurfaceCount);
+        if (this.noSurfaceCount > 0){
+            MoreFeatures.LOGGER.debug("Oasis at {} had {} positions without suitable surface", center, this.noSurfaceCount);
         }
 
         this.generateOasisPool(config, level, center, uniqueAngle); // Generate the actual pool of water
         this.wallInWater(config, level, center);                    // Prevent holes in the pool wall from causing water to flow out
         this.placeTrees(context, level, random, center);            // Place on average 2-4 trees around the pool
-                                                               // NOTE: can generate with only one or none in rough areas, and can theoretically generate 5 or more
+                                                                    // NOTE: can generate with only one or none in rough areas, and can theoretically generate 5 or more
         return true;
     }
 
     private double calculateDeformationAngle(BlockPos center, RandomSource source) {
         Random random = new Random(center.asLong() + source.nextLong());
-        return random.nextDouble() * 2 * Math.PI;
+        double toReturn = random.nextDouble() * ((double) source.nextInt((int) center.asLong()) / 2);
+        return toReturn * 2 * Math.PI;
     }
 
     @SuppressWarnings("deprecation")
@@ -95,10 +95,10 @@ public class OasisFeature extends Feature<OasisConfiguration> {
                 double effectiveWaterRadius = WATER_RADIUS + deformation;
                 double effectiveSandRadius = MAIN_BASE_RADIUS + (deformation * 1.3);
 
-                BlockPos surfacePos = findSurface(level, center.offset(dx, 0, dz));
+                BlockPos surfacePos = this.findSurface(level, center.offset(dx, 0, dz));
 
                 if (surfacePos == null){
-                    noSurfaceCount++;
+                    this.noSurfaceCount++;
                     continue;
                 }
 
@@ -138,10 +138,10 @@ public class OasisFeature extends Feature<OasisConfiguration> {
                     BlockPos below = floorPos.below();
                     BlockState belowState = level.getBlockState(below);
 
-                    if (!level.getBlockState(floorPos).is(Blocks.SAND) && !belowState.isAir()) {
-                        level.setBlock(floorPos, main, 3); // Place sand if the block beneath target is not air
+                    if (!level.getBlockState(floorPos).equals(main) && !belowState.isAir()) {
+                        level.setBlock(floorPos, main, 3); // Place main if the block beneath target is not air
                     } else if (belowState.isAir()) {
-                        level.setBlock(floorPos, exposed, 3); // If the block beneath the target block IS air, place sandstone instead
+                        level.setBlock(floorPos, exposed, 3); // If the block beneath the target block IS air, place exposed instead
                     }
                 }
                 // Sand ring
@@ -150,23 +150,16 @@ public class OasisFeature extends Feature<OasisConfiguration> {
                     BlockPos target = surfacePos.below();
                     BlockState current = level.getBlockState(target);
 
-                    boolean shouldReplace =
-                            current.is(BlockTags.DIRT) ||
-                                    current.is(BlockTags.SAND) ||
-                                    current.is(Blocks.GRASS_BLOCK) ||
-                                    current.is(Blocks.COARSE_DIRT) ||
-                                    current.is(Blocks.STONE);
+                    if (current.is(config.shouldBeReplacedWhenClearing())) {
 
-                    if (shouldReplace) {
-
-                        level.setBlock(target, Blocks.SAND.defaultBlockState(), 3);
+                        level.setBlock(target, main, 3);
 
                         BlockPos below = target.below();
 
                         BlockState belowState = level.getBlockState(below);
 
                         if (belowState.isAir() || belowState.is(BlockTags.REPLACEABLE)) {
-                            level.setBlock(below, Blocks.SANDSTONE.defaultBlockState(), 3);
+                            level.setBlock(below, exposed, 3);
                         }
                     }
 
@@ -181,8 +174,8 @@ public class OasisFeature extends Feature<OasisConfiguration> {
 
                     BlockPos ceilingPos = new BlockPos(center.getX() + dx, finalClearY + 1, center.getZ() + dz);
                     BlockState ceilingState = level.getBlockState(ceilingPos);
-                    if (ceilingState.is(Blocks.SAND)) {
-                        level.setBlock(ceilingPos, Blocks.SANDSTONE.defaultBlockState(), 3);
+                    if (ceilingState.is(config.mainBaseBlock().getBlock())) {
+                        level.setBlock(ceilingPos, config.exposedBaseBlock(), 3);
                     }
                 }
             }
@@ -227,29 +220,42 @@ public class OasisFeature extends Feature<OasisConfiguration> {
         }
     }
 
-    private void placeTrees(FeaturePlaceContext<OasisConfiguration> context,
-                            WorldGenLevel level,
-                            RandomSource random,
-                            BlockPos center) {
+    private void placeTrees(
+            FeaturePlaceContext<OasisConfiguration> context,
+            WorldGenLevel level,
+            RandomSource random,
+            BlockPos center
+    ) {
+        OasisConfiguration config = context.config();
 
-        var treeFeature = context.config().treeFeature().value();
+        final ConfiguredFeature<?, ?> treeFeature = config.treeFeature().value();
 
-        for (int i = 0; i < TREE_ATTEMPTS; i++) {
+        for (int i = 0; i < config.treeAttempts(); i++) {
+
+            if (config.treeRingMin() > config.treeRingMax()) {
+                throw new IllegalStateException();
+            }
+            int dist;
+
+            if (config.treeRingMin() == config.treeRingMax()) {
+                dist = config.treeRingMin();
+            } else {
+                dist = config.treeRingMin() + Math.max(random.nextInt(config.treeRingMax() - config.treeRingMin() + 1), 1);
+            }
 
             double angle = random.nextDouble() * 2 * Math.PI;
-            int dist = TREE_RING_MIN + random.nextInt(TREE_RING_MAX - TREE_RING_MIN + 1);
 
             int dx = (int) Math.round(Math.cos(angle) * dist);
             int dz = (int) Math.round(Math.sin(angle) * dist);
 
-            BlockPos treeBase = findSurface(level, center.offset(dx, 0, dz));
+            BlockPos treeBase = this.findSurface(level, center.offset(dx, 0, dz));
             if (treeBase == null) continue;
 
-            if (!level.getBlockState(treeBase.below()).is(BlockTags.SAND)) continue;
+            if (!level.getBlockState(treeBase.below()).is(config.mainBaseBlock().getBlock())) continue;
 
             boolean tooClose = false;
-            for (BlockPos used : usedPalmSpots) {
-                if (used.distSqr(treeBase) < 25) { // 5 block radius
+            for (BlockPos used : this.usedTreeSpots) {
+                if (used.distSqr(treeBase) < (config.requiredDistanceInBlocksBetweenTrees() * 5)) {
                     tooClose = true;
                     break;
                 }
@@ -257,7 +263,7 @@ public class OasisFeature extends Feature<OasisConfiguration> {
 
             if (tooClose) continue;
 
-            usedPalmSpots.add(treeBase);
+            this.usedTreeSpots.add(treeBase);
             treeFeature.place(level, context.chunkGenerator(), random, treeBase);
         }
     }

@@ -19,5 +19,7 @@ public class MFParticleDescriptionProvider extends ParticleDescriptionProvider {
         this.spriteSet(MFParticleTypes.CHARRED_SPORE.get(), Identifier.withDefaultNamespace("generic"), 1, false);
         this.spriteSet(MFParticleTypes.DECREPIT_LEAVES.get(), MFIdentifier.withMfNamespace("decrepit"), 4, false);
         this.spriteSet(MFParticleTypes.PALLID_LEAVES.get(), MFIdentifier.withMfNamespace("pallid"), 4, false);
+        this.spriteSet(MFParticleTypes.DECREPIT_SPORE.get(), Identifier.withDefaultNamespace("generic"), 1, false);
+        this.spriteSet(MFParticleTypes.PALLID_SPORE.get(), Identifier.withDefaultNamespace("generic"), 1, false);
     }
 }

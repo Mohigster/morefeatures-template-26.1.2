@@ -19,7 +19,7 @@ public class MFFeatures {
             DeferredRegister.create(Registries.FEATURE, MoreFeatures.MODID);
 
     public static final DeferredHolder<Feature<?>, Feature<OasisConfiguration>> OASIS =
-            FEATURES.register("oasis", () -> new OasisFeature(OasisConfiguration.CODEC.codec()));
+            FEATURES.register("oasis", () -> new OasisFeature(OasisConfiguration.CODEC));
 
     public static final DeferredHolder<Feature<?>, Feature<NoneFeatureConfiguration>> ICE_SPIRE =
             FEATURES.register("ice_spire", () -> new IceSpireFeature(NoneFeatureConfiguration.CODEC));

@@ -8,9 +8,18 @@ import net.minecraft.world.entity.monster.illager.AbstractIllager;
 public class IceologerRenderState extends IllagerRenderState {
     public HumanoidArm mainArm;
     public AbstractIllager.IllagerArmPose armPose;
-    public boolean isCastingSpell;
+    private boolean isCastingSpell;
+
     public IceologerRenderState() {
-        mainArm = HumanoidArm.RIGHT;
-        armPose = AbstractIllager.IllagerArmPose.CROSSED;
+        this.mainArm = HumanoidArm.RIGHT;
+        this.armPose = AbstractIllager.IllagerArmPose.CROSSED;
+    }
+
+    public boolean isCastingSpell() {
+        return this.isCastingSpell;
+    }
+
+    public void setCastingSpell(boolean isCastingSpell) {
+        this.isCastingSpell = isCastingSpell;
     }
 }

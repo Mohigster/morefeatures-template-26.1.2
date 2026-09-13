@@ -1,0 +1,10 @@
+{
+  "portal_key": {
+    "type": "morefeatures:block",
+    "block": "minecraft:dirt"
+  },
+  "target_dimension": "morefeatures:borealis",
+  "portal_frame": {
+    "Name": "minecraft:packed_ice"
+  }
+}

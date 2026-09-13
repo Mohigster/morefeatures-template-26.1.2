@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shaped",
-  "group": "azurite",
+  "group": "gemstone",
   "key": {
     "#": "morefeatures:raw_azurite",
     "X": "minecraft:iron_chain"

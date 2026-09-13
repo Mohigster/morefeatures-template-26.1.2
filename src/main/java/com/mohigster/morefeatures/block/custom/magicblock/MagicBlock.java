@@ -51,7 +51,7 @@ public class MagicBlock extends Block {
         if(entity instanceof ItemEntity itemEntity) {
             ItemStack currentItem = itemEntity.getItem();
             if (!currentItem.is(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)) { // A failsafe. If an item is a possible result of a magic block transmutation, it shouldn't even attempt to find a transmutation result
-                this.performTransmutationEffects(itemEntity, getTransmutationResult(currentItem), level, pos);
+                this.performTransmutationEffects(itemEntity, this.getTransmutationResult(currentItem), level, pos);
             }
         }
 
@@ -59,11 +59,7 @@ public class MagicBlock extends Block {
     }
 
     protected ItemStack getTransmutationResult(ItemStack item) {
-        ItemStack result = MagicBlockTransmutations.INSTANCE.getResult(item);
-
-        if(item.is(MFItemTags.MAGIC_BLOCK_MULTIPLIES_RESULT)) {
-            return MagicBlockTransmutations.INSTANCE.applyExtraAmounts(result);
-        }
+        ItemStack result = MagicBlockTransmutations.getResult(item);
 
         return result.isEmpty() ? ItemStack.EMPTY : result;
     }

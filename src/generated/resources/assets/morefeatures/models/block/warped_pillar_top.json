@@ -1,0 +1,7 @@
+{
+  "parent": "morefeatures:block/template_pillar_top",
+  "textures": {
+    "all": "minecraft:block/warped_planks",
+    "particle": "minecraft:block/warped_planks"
+  }
+}

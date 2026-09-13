@@ -1,6 +1,7 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "fluorite",
+  "category": "building",
+  "group": "gemstone",
   "ingredients": [
     "morefeatures:raw_fluorite_block"
   ],

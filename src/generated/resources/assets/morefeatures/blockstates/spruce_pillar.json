@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "shape=bottom": {
+      "model": "morefeatures:block/spruce_pillar_bottom",
+      "uvlock": true
+    },
+    "shape=full": {
+      "model": "morefeatures:block/spruce_pillar",
+      "uvlock": true
+    },
+    "shape=middle": {
+      "model": "morefeatures:block/spruce_pillar_middle",
+      "uvlock": true
+    },
+    "shape=top": {
+      "model": "morefeatures:block/spruce_pillar_top",
+      "uvlock": true
+    }
+  }
+}

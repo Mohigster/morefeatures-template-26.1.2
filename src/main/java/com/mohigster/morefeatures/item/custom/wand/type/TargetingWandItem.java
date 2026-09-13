@@ -17,51 +17,31 @@ import org.jspecify.annotations.NonNull;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class TargetingWandItem extends AbstractWandItem {
+public abstract class TargetingWandItem extends AbstractWandItem implements Targeting {
     protected final int maxTargets;
     protected final float proximityLimit; // In blocks
 
-    public TargetingWandItem(Properties properties, double radius, int cooldownTicks,
-                             int baseDurabilityCost, int durabilityScalingFactor, int manaCost, int maxTargets,
-                             float proximityLimit, SoundEvent castSound, float soundVolume, float soundPitch) {
-        super(properties, radius, cooldownTicks, baseDurabilityCost, durabilityScalingFactor, manaCost, castSound, soundVolume, soundPitch);
+    public TargetingWandItem(
+            Properties properties,
+            double radius,
+            int cooldownTicks,
+            int baseDurabilityCost,
+            int durabilityScalingFactor,
+            int manaCost,
+            int maxTargets,
+            float proximityLimit,
+            SoundEvent castSound,
+            float soundVolume,
+            float soundPitch
+    ) {
+        super(
+                properties, radius, cooldownTicks,
+                baseDurabilityCost, durabilityScalingFactor,
+                manaCost, castSound, soundVolume, soundPitch
+        );
+
         this.maxTargets = maxTargets;
         this.proximityLimit = proximityLimit;
-    }
-
-    protected Predicate<LivingEntity> getTargetPredicate(Player caster) {
-        return entity -> {
-
-            if (entity instanceof ArmorStand){
-                return false;
-            }
-
-            if (entity instanceof TamableAnimal pet && pet.getOwner() != null) { // Prevents pets from being targeted! No accidentally killing your own pets OR stooping low. We do not support the petty killing of beloved pets here. Also, this covers the Nautilus. Wild and untamed wolves / cats are fair game, though.
-                return false;
-            }
-
-            if (entity.getVehicle() == caster){
-                return false;
-            }
-
-            if (caster.getVehicle() == entity){
-                return false;
-            }
-
-            if (entity instanceof AbstractHorse horse && horse.isTamed()){ // Don't allow accidental killing of mounts! AbstractNautilus extends TamableAnimal and so the Nautilus is already protected, no separate logic necessary.
-                return false;
-            }
-
-            if (caster.distanceToSqr(entity) < proximityLimit * proximityLimit) { // Squaring the proximity limit ensures the limit value set will be in blocks. This makes it easier to set appropriate proximity limits in new wands!
-                return false;
-            }
-
-            boolean isFriendly = entity instanceof Animal // This boolean controls entities that can only be targeted when holding down the shift key.
-                    || entity instanceof Villager
-                    || entity instanceof Player;
-
-            return !isFriendly || caster.isShiftKeyDown();
-        };
     }
 
     @Override
@@ -70,30 +50,33 @@ public abstract class TargetingWandItem extends AbstractWandItem {
         if (!level.isClientSide() && hasEnoughMana(player)) {
             List<LivingEntity> targets = level.getEntitiesOfClass(
                     LivingEntity.class,
-                    player.getBoundingBox().inflate(radius),
-                    getTargetPredicate(player)
+                    player.getBoundingBox().inflate(this.radius),
+                    this.getTargetPredicate(player)
             );
 
             if (!targets.isEmpty()) {
                 int targetCount = 0;
                 for (LivingEntity target : targets) {
-                    if (targetCount >= maxTargets){
+                    if (targetCount >= this.maxTargets){
                         break;
                     }
 
-                    castTargetedSpell(target, player, level);
+                    this.castTargetedSpell(target, player, level);
                     targetCount++;
                 }
                 int durabilityCost = totalDurabilityCost(targets.size());
 
-                consumeMana(player);
+                this.consumeMana(player);
 
-                applyCastEffects(player, stack, durabilityCost, hand, level);
+                this.applyCastEffects(player, stack, durabilityCost, hand, level);
                 return InteractionResult.SUCCESS_SERVER;
             }
         }
         return InteractionResult.PASS;
     }
 
-    protected abstract void castTargetedSpell(LivingEntity target, Player caster, Level level);
+    @Override
+    public float proximityLimit() {
+        return this.proximityLimit;
+    }
 }

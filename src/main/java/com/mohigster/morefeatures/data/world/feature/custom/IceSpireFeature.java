@@ -35,13 +35,13 @@ public class IceSpireFeature extends Feature<NoneFeatureConfiguration> {
         BlockState coreState = Blocks.AIR.defaultBlockState();
 
         // Generate the actual spire
-        generateSpire(level, blueIce, packedIce, coreState, random, baseRadius, height, origin);
+        this.generateSpire(level, blueIce, packedIce, coreState, random, baseRadius, height, origin);
 
         // Place a single glowing block at the bottom center of the spire
         this.setBlock(level, origin.above(1), Blocks.MAGMA_BLOCK.defaultBlockState());
 
         // Extend the foundation so the spire isn't left floating
-        extendFoundation(level, blueIce, baseRadius, origin);
+        this.extendFoundation(level, blueIce, baseRadius, origin);
 
         return true;
     }

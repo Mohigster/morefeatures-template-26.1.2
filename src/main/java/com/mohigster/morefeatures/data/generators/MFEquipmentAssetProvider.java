@@ -1,65 +1,39 @@
 package com.mohigster.morefeatures.data.generators;
 
+import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.data.generators.custom.providers.EquipmentAssetProvider;
+import com.mohigster.morefeatures.data.material.MFEquipmentAssets;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
-import com.mohigster.morefeatures.data.material.MFArmorMaterials;
 import net.minecraft.client.resources.model.EquipmentClientInfo;
-import net.minecraft.data.CachedOutput;
-import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.equipment.EquipmentAsset;
-import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.NonNull;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.BiConsumer;
 
-public class MFEquipmentAssetProvider implements DataProvider {
-    private final PackOutput.PathProvider pathProvider;
-
+public class MFEquipmentAssetProvider extends EquipmentAssetProvider {
     public MFEquipmentAssetProvider(PackOutput packOutput) {
-        this.pathProvider = packOutput.createPathProvider(PackOutput.Target.RESOURCE_PACK, "equipment");
+        super(packOutput, MoreFeatures.MODID);
     }
 
-    private static void bootstrap(BiConsumer<ResourceKey<EquipmentAsset>, EquipmentClientInfo> output){
-        output.accept(MFArmorMaterials.BISMUTH_KEY, EquipmentClientInfo.builder()
-                        .addHumanoidLayers(MFIdentifier.withMfNamespace("bismuth"), false)
-                        .addLayers(EquipmentClientInfo.LayerType.HORSE_BODY, createLayer("bismuth"))
-                        .addLayers(EquipmentClientInfo.LayerType.NAUTILUS_BODY, createLayer("bismuth"))
+    @Override
+    public void bootstrap(@NonNull BiConsumer<ResourceKey<EquipmentAsset>, EquipmentClientInfo> output) {
+        output.accept(MFEquipmentAssets.BISMUTH, EquipmentClientInfo.builder()
+                .addHumanoidLayers(MFIdentifier.withMfNamespace("bismuth"), false)
+                .addLayers(EquipmentClientInfo.LayerType.HORSE_BODY, createLayer("bismuth"))
+                .addLayers(EquipmentClientInfo.LayerType.NAUTILUS_BODY, createLayer("bismuth"))
                 .build());
-        output.accept(MFArmorMaterials.CARBON_KEY, EquipmentClientInfo.builder()
+
+        // Bismuth elytra must be separate because it has humanoid layers. This causes the elytra to also show the bismuth chestplate alongside the elytra layer when put together
+        output.accept(MFEquipmentAssets.BISMUTH_ELYTRA, EquipmentClientInfo.builder()
+                .addLayers(EquipmentClientInfo.LayerType.WINGS, createLayer("bismuth_elytra", true))
+                .build());
+
+        // Carbon lacks the above problem because it does not have humanoid layers
+        output.accept(MFEquipmentAssets.CARBON, EquipmentClientInfo.builder()
                 .addLayers(EquipmentClientInfo.LayerType.WOLF_BODY, createLayer("carbon"))
                 .addLayers(EquipmentClientInfo.LayerType.WINGS, createLayer("carbon_elytra", true))
                 .build());
-    }
-
-    @NullMarked
-    @Override
-    public CompletableFuture<?> run(CachedOutput cache) {
-        Map<ResourceKey<EquipmentAsset>, EquipmentClientInfo> equipmentAssets = new HashMap<>();
-        bootstrap((id, asset) -> {
-            if(equipmentAssets.putIfAbsent(id, asset) != null){
-                throw new IllegalStateException("Tried to register equipment asset twice for the " + id + " id");
-            }
-        });
-
-        return DataProvider.saveAll(cache, EquipmentClientInfo.CODEC, this.pathProvider::json, equipmentAssets);
-    }
-
-    @NullMarked
-    @Override
-    public String getName() {
-        return "More Features Equipment Definitions";
-    }
-
-    private static EquipmentClientInfo.Layer createLayer(String name){
-        return new EquipmentClientInfo.Layer(MFIdentifier.withMfNamespace(name));
-    }
-
-    @SuppressWarnings("SameParameterValue")
-    private static EquipmentClientInfo.Layer createLayer(String name, boolean usePlayerTexture){
-        return new EquipmentClientInfo.Layer(MFIdentifier.withMfNamespace(name), Optional.empty(), usePlayerTexture);
     }
 }

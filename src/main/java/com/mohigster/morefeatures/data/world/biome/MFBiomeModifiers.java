@@ -28,7 +28,7 @@ public class MFBiomeModifiers {
     public static final ResourceKey<BiomeModifier> ADD_FALLEN_PALM = registerKey("add_fallen_palm");
     public static final ResourceKey<BiomeModifier> ADD_ICE_SPIRE = registerKey("add_ice_spire");
 
-    public static void bootstrap(BootstrapContext<BiomeModifier> context){
+    public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);
 

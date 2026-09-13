@@ -124,8 +124,8 @@ public class CompressorBlock extends BaseEntityBlock {
 
         level.addParticle(ParticleTypes.SMOKE, xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
 
-        if(level.getBlockEntity(pos) instanceof CompressorBlockEntity crystallizerBlockEntity && !crystallizerBlockEntity.inventory.getResource(1).isEmpty()) {
-            level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, crystallizerBlockEntity.inventory.getResource(1).getItem()),
+        if(level.getBlockEntity(pos) instanceof CompressorBlockEntity compressorBlockEntity && !compressorBlockEntity.inventory.getResource(1).isEmpty()) {
+            level.addParticle(new ItemParticleOption(ParticleTypes.ITEM, compressorBlockEntity.inventory.getResource(1).getItem()),
                     xPos + xOffsets, yPos + yOffset, zPos + zOffset, 0.0, 0.0, 0.0);
         }
     }

@@ -20,6 +20,10 @@ public class MFParticleTypes {
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PALLID_LEAVES = registerSimple("pallid_leaves");
     public static final DeferredHolder<ParticleType<?>, SimpleParticleType> CHARRED_SPORE = registerSimple("charred_spore");
 
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> DECREPIT_SPORE = registerSimple("decrepit_spore");
+
+    public static final DeferredHolder<ParticleType<?>, SimpleParticleType> PALLID_SPORE = registerSimple("pallid_spore");
+
     private static DeferredHolder<ParticleType<?>, SimpleParticleType> registerSimple(String name){
         return PARTICLES.register(name, () -> new SimpleParticleType(false));
     }

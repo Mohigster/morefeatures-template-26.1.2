@@ -54,49 +54,49 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.VOID_ANCHOR.block());
 
         this.tag(MFBlockTags.AZURITE)
-                .add(MFBlockItemIds.AZURITE_ORE.block())
-                .add(MFBlockItemIds.DEEPSLATE_AZURITE_ORE.block())
-                .add(MFBlockItemIds.NETHER_AZURITE_ORE.block())
-                .add(MFBlockItemIds.END_AZURITE_ORE.block())
-                .add(MFBlockItemIds.AZURITE_BLOCK.block())
-                .add(MFBlockItemIds.RAW_AZURITE_BLOCK.block())
-                .add(MFBlockItemIds.AZURITE_STAIRS.block())
-                .add(MFBlockItemIds.AZURITE_SLAB.block())
-                .add(MFBlockItemIds.AZURITE_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.AZURITE_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.AZURITE_BUTTON.block())
-                .add(MFBlockItemIds.AZURITE_DOOR.block())
-                .add(MFBlockItemIds.AZURITE_TRAPDOOR.block())
-                .add(MFBlockItemIds.AZURITE_FENCE.block())
-                .add(MFBlockItemIds.AZURITE_FENCE_GATE.block())
-                .add(MFBlockItemIds.AZURITE_WALL.block())
-                .add(MFBlockIds.AZURITE_SIGN)
-                .add(MFBlockIds.AZURITE_WALL_SIGN)
-                .add(MFBlockIds.AZURITE_HANGING_SIGN)
-                .add(MFBlockIds.AZURITE_WALL_HANGING_SIGN)
-                .add(MFBlockItemIds.AZURITE_SHELF.block());
+                .add(MFBlockItemIds.ORE.azurite().block())
+                .add(MFBlockItemIds.DEEPSLATE_ORE.azurite().block())
+                .add(MFBlockItemIds.NETHER_ORE.azurite().block())
+                .add(MFBlockItemIds.END_ORE.azurite().block())
+                .add(MFBlockItemIds.BLOCK.azurite().block())
+                .add(MFBlockItemIds.RAW_BLOCK.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_STAIRS.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_SLAB.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_VERTICAL_SLAB.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_PRESSURE_PLATE.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_BUTTON.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_DOOR.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_TRAPDOOR.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_FENCE.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_FENCE_GATE.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_WALL.azurite().block())
+                .add(MFBlockIds.GEMSTONE_SIGN.azurite())
+                .add(MFBlockIds.GEMSTONE_WALL_SIGN.azurite())
+                .add(MFBlockIds.GEMSTONE_HANGING_SIGN.azurite())
+                .add(MFBlockIds.GEMSTONE_WALL_HANGING_SIGN.azurite())
+                .add(MFBlockItemIds.GEMSTONE_SHELF.azurite().block());
 
         this.tag(MFBlockTags.FLUORITE)
-                .add(MFBlockItemIds.FLUORITE_ORE.block())
-                .add(MFBlockItemIds.DEEPSLATE_FLUORITE_ORE.block())
-                .add(MFBlockItemIds.NETHER_FLUORITE_ORE.block())
-                .add(MFBlockItemIds.END_FLUORITE_ORE.block())
-                .add(MFBlockItemIds.FLUORITE_BLOCK.block())
-                .add(MFBlockItemIds.RAW_FLUORITE_BLOCK.block())
-                .add(MFBlockItemIds.FLUORITE_STAIRS.block())
-                .add(MFBlockItemIds.FLUORITE_SLAB.block())
-                .add(MFBlockItemIds.FLUORITE_PRESSURE_PLATE.block())
-                .add(MFBlockItemIds.FLUORITE_BUTTON.block())
-                .add(MFBlockItemIds.FLUORITE_DOOR.block())
-                .add(MFBlockItemIds.FLUORITE_TRAPDOOR.block())
-                .add(MFBlockItemIds.FLUORITE_FENCE.block())
-                .add(MFBlockItemIds.FLUORITE_FENCE_GATE.block())
-                .add(MFBlockItemIds.FLUORITE_WALL.block())
-                .add(MFBlockIds.FLUORITE_SIGN)
-                .add(MFBlockIds.FLUORITE_WALL_SIGN)
-                .add(MFBlockIds.FLUORITE_HANGING_SIGN)
-                .add(MFBlockIds.FLUORITE_WALL_HANGING_SIGN)
-                .add(MFBlockItemIds.FLUORITE_SHELF.block());
+                .add(MFBlockItemIds.ORE.fluorite().block())
+                .add(MFBlockItemIds.DEEPSLATE_ORE.fluorite().block())
+                .add(MFBlockItemIds.NETHER_ORE.fluorite().block())
+                .add(MFBlockItemIds.END_ORE.fluorite().block())
+                .add(MFBlockItemIds.BLOCK.fluorite().block())
+                .add(MFBlockItemIds.RAW_BLOCK.fluorite().block())
+                .add(MFBlockItemIds.GEMSTONE_STAIRS.fluorite().block())
+                .add(MFBlockItemIds.GEMSTONE_SLAB.fluorite().block())
+                .add(MFBlockItemIds.GEMSTONE_PRESSURE_PLATE.fluorite().block())
+                .add(MFBlockItemIds.GEMSTONE_BUTTON.fluorite().block())
+                .add(MFBlockItemIds.GEMSTONE_DOOR.fluorite().block())
+                .add(MFBlockItemIds.GEMSTONE_TRAPDOOR.fluorite().block())
+                .add(MFBlockItemIds.GEMSTONE_FENCE.fluorite().block())
+                .add(MFBlockItemIds.GEMSTONE_FENCE_GATE.fluorite().block())
+                .add(MFBlockItemIds.GEMSTONE_WALL.fluorite().block())
+                .add(MFBlockIds.GEMSTONE_SIGN.fluorite())
+                .add(MFBlockIds.GEMSTONE_WALL_SIGN.fluorite())
+                .add(MFBlockIds.GEMSTONE_HANGING_SIGN.fluorite())
+                .add(MFBlockIds.GEMSTONE_WALL_HANGING_SIGN.fluorite())
+                .add(MFBlockItemIds.GEMSTONE_SHELF.fluorite().block());
 
         this.tag(MFBlockTags.ALUMINIUM)
                 .add(MFBlockItemIds.ALUMINIUM_BLOCK.block())
@@ -131,13 +131,13 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .addTag(MFBlockTags.AXE_MINEABLE_VERTICAL_SLABS);
 
         this.tag(BlockTags.FENCES)
-                .add(MFBlockItemIds.FLUORITE_FENCE.block())
-                .add(MFBlockItemIds.AZURITE_FENCE.block())
+                .add(MFBlockItemIds.GEMSTONE_FENCE.fluorite().block())
+                .add(MFBlockItemIds.GEMSTONE_FENCE.azurite().block())
                 .addTag(MFBlockItemTags.CUSTOM_WOODEN_FENCES.block());
 
         this.tag(MFBlockTags.GEMSTONE_FENCES)
-                .add(MFBlockItemIds.AZURITE_FENCE.block())
-                .add(MFBlockItemIds.FLUORITE_FENCE.block());
+                .add(MFBlockItemIds.GEMSTONE_FENCE.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_FENCE.fluorite().block());
 
         this.tag(BlockTags.WOODEN_FENCES)
                 .addTag(MFBlockItemTags.CUSTOM_WOODEN_FENCES.block());
@@ -160,10 +160,10 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.WOODEN_FENCE.bloodwood().block())
                 .add(MFBlockItemIds.WOODEN_FENCE_GATE.bloodwood().block())
                 .add(MFBlockItemIds.WOODEN_SHELF.bloodwood().block())
-                .add(MFBlockIds.SIGN.bloodwood())
-                .add(MFBlockIds.WALL_SIGN.bloodwood())
-                .add(MFBlockIds.HANGING_SIGN.bloodwood())
-                .add(MFBlockIds.WALL_HANGING_SIGN.bloodwood());
+                .add(MFBlockIds.WOODEN_SIGN.bloodwood())
+                .add(MFBlockIds.WOODEN_WALL_SIGN.bloodwood())
+                .add(MFBlockIds.WOODEN_HANGING_SIGN.bloodwood())
+                .add(MFBlockIds.WOODEN_WALL_HANGING_SIGN.bloodwood());
 
         this.tag(MFBlockTags.TAINTED)
                 .add(MFBlockItemIds.PLANKS.tainted().block())
@@ -174,10 +174,10 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.WOODEN_FENCE.tainted().block())
                 .add(MFBlockItemIds.WOODEN_FENCE_GATE.tainted().block())
                 .add(MFBlockItemIds.WOODEN_SHELF.tainted().block())
-                .add(MFBlockIds.SIGN.tainted())
-                .add(MFBlockIds.WALL_SIGN.tainted())
-                .add(MFBlockIds.HANGING_SIGN.tainted())
-                .add(MFBlockIds.WALL_HANGING_SIGN.tainted());
+                .add(MFBlockIds.WOODEN_SIGN.tainted())
+                .add(MFBlockIds.WOODEN_WALL_SIGN.tainted())
+                .add(MFBlockIds.WOODEN_HANGING_SIGN.tainted())
+                .add(MFBlockIds.WOODEN_WALL_HANGING_SIGN.tainted());
 
         this.tag(MFBlockTags.PALM)
                 .add(MFBlockItemIds.PLANKS.palm().block())
@@ -190,10 +190,10 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.WOODEN_TRAPDOOR.palm().block())
                 .add(MFBlockItemIds.WOODEN_DOOR.palm().block())
                 .add(MFBlockItemIds.WOODEN_SHELF.palm().block())
-                .add(MFBlockIds.SIGN.palm())
-                .add(MFBlockIds.WALL_SIGN.palm())
-                .add(MFBlockIds.HANGING_SIGN.palm())
-                .add(MFBlockIds.WALL_HANGING_SIGN.palm());
+                .add(MFBlockIds.WOODEN_SIGN.palm())
+                .add(MFBlockIds.WOODEN_WALL_SIGN.palm())
+                .add(MFBlockIds.WOODEN_HANGING_SIGN.palm())
+                .add(MFBlockIds.WOODEN_WALL_HANGING_SIGN.palm());
 
         this.tag(MFBlockTags.DECREPIT)
                 .add(MFBlockItemIds.PLANKS.decrepit().block())
@@ -205,10 +205,10 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.WOODEN_FENCE.decrepit().block())
                 .add(MFBlockItemIds.WOODEN_FENCE_GATE.decrepit().block())
                 .add(MFBlockItemIds.WOODEN_SHELF.decrepit().block())
-                .add(MFBlockIds.SIGN.decrepit())
-                .add(MFBlockIds.WALL_SIGN.decrepit())
-                .add(MFBlockIds.HANGING_SIGN.decrepit())
-                .add(MFBlockIds.WALL_HANGING_SIGN.decrepit());
+                .add(MFBlockIds.WOODEN_SIGN.decrepit())
+                .add(MFBlockIds.WOODEN_WALL_SIGN.decrepit())
+                .add(MFBlockIds.WOODEN_HANGING_SIGN.decrepit())
+                .add(MFBlockIds.WOODEN_WALL_HANGING_SIGN.decrepit());
 
         this.tag(MFBlockTags.PALLID)
                 .add(MFBlockItemIds.PLANKS.pallid().block())
@@ -220,10 +220,10 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.WOODEN_FENCE.pallid().block())
                 .add(MFBlockItemIds.WOODEN_FENCE_GATE.pallid().block())
                 .add(MFBlockItemIds.WOODEN_SHELF.pallid().block())
-                .add(MFBlockIds.SIGN.pallid())
-                .add(MFBlockIds.WALL_SIGN.pallid())
-                .add(MFBlockIds.HANGING_SIGN.pallid())
-                .add(MFBlockIds.WALL_HANGING_SIGN.pallid());
+                .add(MFBlockIds.WOODEN_SIGN.pallid())
+                .add(MFBlockIds.WOODEN_WALL_SIGN.pallid())
+                .add(MFBlockIds.WOODEN_HANGING_SIGN.pallid())
+                .add(MFBlockIds.WOODEN_WALL_HANGING_SIGN.pallid());
 
         this.tag(MFBlockTags.IS_MODDED_WOOD) // This tag allows me to easily distinguish vanilla vs modded wood types in code
                 .addTag(MFBlockItemTags.LOGS.bloodwood().block())
@@ -279,9 +279,9 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.BEACON_BASE_BLOCKS)
                 .add(MFBlockItemIds.ALUMINIUM_BLOCK.block())
                 .add(MFBlockItemIds.MAGNESIUM_BLOCK.block())
-                .add(MFBlockItemIds.FLUORITE_BLOCK.block())
+                .add(MFBlockItemIds.BLOCK.fluorite().block())
                 .add(MFBlockItemIds.BISMUTH_BLOCK.block())
-                .add(MFBlockItemIds.AZURITE_BLOCK.block());
+                .add(MFBlockItemIds.BLOCK.azurite().block());
 
         this.tag(BlockTags.OVERWORLD_NATURAL_LOGS)
                 .add(MFBlockItemIds.LOG.bloodwood().block())
@@ -296,7 +296,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.LOG.pallid().block());
 
         this.tag(BlockTags.PRESSURE_PLATES)
-                .add(MFBlockItemIds.AZURITE_PRESSURE_PLATE.block())
+                .add(MFBlockItemIds.GEMSTONE_PRESSURE_PLATE.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_PRESSURE_PLATE.fluorite().block())
                 .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.bloodwood().block())
                 .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.tainted().block())
                 .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.palm().block())
@@ -305,8 +306,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.WOODEN_PRESSURE_PLATE.pallid().block());
 
         this.tag(BlockTags.BUTTONS)
-                .add(MFBlockItemIds.AZURITE_BUTTON.block())
-                .add(MFBlockItemIds.FLUORITE_BUTTON.block())
+                .add(MFBlockItemIds.GEMSTONE_BUTTON.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_BUTTON.fluorite().block())
                 .add(MFBlockItemIds.WOODEN_BUTTON.bloodwood().block())
                 .add(MFBlockItemIds.WOODEN_BUTTON.tainted().block())
                 .add(MFBlockItemIds.WOODEN_BUTTON.palm().block())
@@ -314,8 +315,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.WOODEN_BUTTON.pallid().block());
 
         this.tag(BlockTags.WALLS)
-                .add(MFBlockItemIds.AZURITE_WALL.block())
-                .add(MFBlockItemIds.FLUORITE_WALL.block());
+                .add(MFBlockItemIds.GEMSTONE_WALL.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_WALL.fluorite().block());
 
         this.tag(BlockTags.FLOWER_POTS)
                 .add(MFBlockIds.POTTED_ROSE)
@@ -333,25 +334,11 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .addTag(MFBlockTags.WOOL_VERTICAL_SLABS);
 
         this.tag(MFBlockTags.AXE_MINEABLE_VERTICAL_SLABS)
-                .add(MFBlockItemIds.OAK_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.SPRUCE_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.BIRCH_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.JUNGLE_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.ACACIA_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.DARK_OAK_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.CRIMSON_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.WARPED_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.MANGROVE_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.CHERRY_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.BAMBOO_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.BAMBOO_MOSAIC_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.PALE_OAK_VERTICAL_SLAB.block())
-
-                .addTag(MFBlockItemTags.CUSTOM_WOODEN_VERTICAL_SLABS.block());
+                .addTag(MFBlockItemTags.WOODEN_VERTICAL_SLABS.block());
 
         this.tag(MFBlockTags.PICKAXE_MINEABLE_VERTICAL_SLABS)
-                .add(MFBlockItemIds.AZURITE_VERTICAL_SLAB.block())
-                .add(MFBlockItemIds.FLUORITE_VERTICAL_SLAB.block())
+                .add(MFBlockItemIds.GEMSTONE_VERTICAL_SLAB.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_VERTICAL_SLAB.fluorite().block())
 
                 .add(MFBlockItemIds.STONE_VERTICAL_SLAB.block())
                 .add(MFBlockItemIds.COBBLESTONE_VERTICAL_SLAB.block())
@@ -420,8 +407,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
                 .add(MFBlockItemIds.WOODEN_SHELF.pallid().block());
 
         this.tag(MFBlockTags.GEMSTONE_SHELVES)
-                .add(MFBlockItemIds.AZURITE_SHELF.block())
-                .add(MFBlockItemIds.FLUORITE_SHELF.block());
+                .add(MFBlockItemIds.GEMSTONE_SHELF.azurite().block())
+                .add(MFBlockItemIds.GEMSTONE_SHELF.fluorite().block());
 
         this.tag(BlockTags.SPELEOTHEMS)
                 .add(MFBlockItemIds.ICICLE.block());
@@ -477,5 +464,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
         this.tag(BlockTags.CLIMBABLE)
                 .add(MFBlockItemIds.SCORCHED_VINES.block())
                 .add(MFBlockIds.SCORCHED_VINES_PLANT);
+
+        this.tag(MFBlockTags.INFINIBURN_EVIL).addTag(BlockTags.INFINIBURN_OVERWORLD);
+        this.tag(MFBlockTags.INFINIBURN_BOREALIS).addTag(BlockTags.INFINIBURN_OVERWORLD);
     }
 }

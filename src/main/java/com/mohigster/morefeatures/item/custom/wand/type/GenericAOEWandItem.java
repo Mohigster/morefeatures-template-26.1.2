@@ -94,7 +94,7 @@ public abstract class GenericAOEWandItem extends AbstractWandItem {
 
         // Scan downward to find a solid floor to plant the spike
         // floorScanDistance is the maximum distance IN BLOCKS that it will scan
-        for (int i = 0; i < floorScanDistance; i++) {
+        for (int i = 0; i < this.floorScanDistance; i++) {
             // Check the block directly beneath our current position
             if (level.getBlockState(pos.below()).isCollisionShapeFullBlock(level, pos.below())) {
                 return pos.getY(); // Found the floor!

@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.data.generators.tag;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.data.resources.references.MFBlockItemIds;
 import com.mohigster.morefeatures.data.resources.references.MFItemIds;
 import com.mohigster.morefeatures.item.MFItems;
@@ -247,16 +248,16 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFBlockItemIds.PALLID_SAPLING.item());
 
         this.tag(MFItemTags.COMPRESSOR_FUEL)
-                .add(MFItemIds.AZURITE)
-                .add(MFItemIds.FLUORITE)
+                .add(MFItemIds.GEMSTONE.azurite())
+                .add(MFItemIds.GEMSTONE.fluorite())
                 .add(MFItemIds.EVERFROST);
 
-        this.tag(ItemTags.LOGS_THAT_BURN)
-                .addTag(MFBlockItemTags.LOGS.bloodwood().item())
-                .addTag(MFBlockItemTags.LOGS.tainted().item())
-                .addTag(MFBlockItemTags.LOGS.palm().item())
-                .addTag(MFBlockItemTags.LOGS.decrepit().item())
-                .addTag(MFBlockItemTags.LOGS.pallid().item());
+        WoodTypeCollection.SETS.forEach(set -> {
+            if (set.isFlammable()) {
+                this.tag(ItemTags.LOGS_THAT_BURN)
+                        .addTag(MFBlockItemTags.LOGS.pick(set).item());
+            }
+        });
 
         this.tag(ItemTags.LOGS).addTag(MFItemTags.MODDED_LOGS);
 
@@ -285,8 +286,8 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(MFItemIds.BISMUTH)
                 .add(MFItemIds.ALUMINIUM_INGOT)
                 .add(MFItemIds.MAGNESIUM_INGOT)
-                .add(MFItemIds.AZURITE)
-                .add(MFItemIds.FLUORITE);
+                .add(MFItemIds.GEMSTONE.azurite())
+                .add(MFItemIds.GEMSTONE.fluorite());
 
         this.tag(MFItemTags.AIMABLE_WANDS)
                 .add(MFItems.FIRE_WAND.getKey());
@@ -339,8 +340,8 @@ public class MFItemTagsProvider extends ItemTagsProvider {
         this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_DIAMOND)
                 .add(ItemIds.EMERALD)
                 .add(ItemIds.AMETHYST_SHARD)
-                .add(MFItems.AZURITE.getKey())
-                .add(MFItems.FLUORITE.getKey());
+                .add(MFItemIds.GEMSTONE.azurite())
+                .add(MFItemIds.GEMSTONE.fluorite());
 
         this.tag(MFItemTags.MAGIC_BLOCK_TURNS_TO_STONE)
                 .add(BlockItemIds.GRANITE.item())
@@ -384,22 +385,6 @@ public class MFItemTagsProvider extends ItemTagsProvider {
                 .add(BlockItemIds.ANCIENT_DEBRIS.item())
                 .add(BlockItemIds.NETHER_GOLD_ORE.item());
 
-        this.tag(MFItemTags.WOODEN_VERTICAL_SLABS)
-                .add(MFBlockItemIds.OAK_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.SPRUCE_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.BIRCH_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.JUNGLE_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.ACACIA_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.DARK_OAK_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.CRIMSON_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.WARPED_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.MANGROVE_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.CHERRY_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.BAMBOO_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.BAMBOO_MOSAIC_VERTICAL_SLAB.item())
-                .add(MFBlockItemIds.PALE_OAK_VERTICAL_SLAB.item())
-                .addTag(MFBlockItemTags.CUSTOM_WOODEN_VERTICAL_SLABS.item());
-
         this.tag(ItemTags.WOODEN_STAIRS)
                 .addTag(MFBlockItemTags.WOODEN_STAIRS.item());
 
@@ -409,8 +394,8 @@ public class MFItemTagsProvider extends ItemTagsProvider {
         this.tag(ItemTags.TRIM_MATERIALS)
                 .add(MFItemIds.ALUMINIUM_INGOT)
                 .add(MFItemIds.MAGNESIUM_INGOT)
-                .add(MFItemIds.AZURITE)
-                .add(MFItemIds.FLUORITE)
+                .add(MFItemIds.GEMSTONE.azurite())
+                .add(MFItemIds.GEMSTONE.fluorite())
                 .add(MFItemIds.CARBON_FIBER)
                 .add(MFItemIds.BISMUTH);
 

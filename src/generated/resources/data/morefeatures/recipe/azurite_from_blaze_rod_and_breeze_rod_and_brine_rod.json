@@ -1,6 +1,6 @@
 {
   "type": "minecraft:crafting_shapeless",
-  "group": "azurite",
+  "group": "gemstone",
   "ingredients": [
     "morefeatures:azurite_block",
     "minecraft:blaze_rod",

@@ -31,7 +31,7 @@ public record CompressionRecipe(Ingredient inputItem, ItemStackTemplate output) 
 
     public NonNullList<Ingredient> getIngredients() {
         NonNullList<Ingredient> list = NonNullList.create();
-        list.add(inputItem);
+        list.add(this.inputItem);
         return list;
     }
 
@@ -42,13 +42,13 @@ public record CompressionRecipe(Ingredient inputItem, ItemStackTemplate output) 
             return false;
         }
 
-        return inputItem.test(input.getItem(0));
+        return this.inputItem.test(input.getItem(0));
     }
 
     @NullMarked
     @Override
     public ItemStack assemble(CompressorRecipeInput input) {
-        return output.create().copy();
+        return this.output.create().copy();
     }
 
     @Override

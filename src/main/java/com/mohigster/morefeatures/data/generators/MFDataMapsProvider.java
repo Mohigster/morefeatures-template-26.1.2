@@ -4,7 +4,7 @@ import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.custom.data.FlammableHelper;
 import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
 import com.mohigster.morefeatures.block.custom.data.codec.BonemealMorph;
-import com.mohigster.morefeatures.block.custom.data.codec.Flammable;
+import com.mohigster.morefeatures.block.custom.data.codec.FlammabilityEntry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Blocks;
@@ -40,13 +40,15 @@ public class MFDataMapsProvider extends DataMapProvider {
                         MFBlocks.CHARRED_NYLIUM.get(),
                         Blocks.CRIMSON_NYLIUM,
                         Blocks.WARPED_NYLIUM
-                )
+                ),
+                "neighbour_spreader"
         ), false);
         bonemealMorphs.add(Blocks.END_STONE.builtInRegistryHolder(), new BonemealMorph(
                 List.of(
                         MFBlocks.DECREPIT_NULLIUM.get(),
                         MFBlocks.PALLID_NULLIUM.get()
-                )
+                ),
+                "neighbour_spreader"
         ), false);
 
         final var oxidizables = builder(NeoForgeDataMaps.OXIDIZABLES);
@@ -90,12 +92,12 @@ public class MFDataMapsProvider extends DataMapProvider {
         strippables.add(woodList.getLast(), new Strippable(strippedWoodList.getLast().get()), false);
 
         final var flammables = builder(MFDataMaps.FLAMMABLES);
-        FlammableHelper.getDefaults().forEach(entry ->
-            flammables.add(
-                    entry.block().builtInRegistryHolder(),
-                    new Flammable(entry.flammability(), entry.fireSpreadSpeed()),
-                    false
-            )
+        FlammableHelper.INSTANCE.getDefaults().forEach(
+                entry -> flammables.add(
+                        entry.block().builtInRegistryHolder(),
+                        new FlammabilityEntry(entry.flammability(), entry.fireSpreadSpeed()),
+                        false
+                )
         );
     }
 }

@@ -3,7 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    "#morefeatures:wood/charred_logs"
+    "#morefeatures:wood/logs/charred"
   ],
   "result": {
     "count": 4,

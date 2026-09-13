@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
-  "group": "fluorite",
+  "group": "gemstone_trapdoor",
   "key": {
-    "#": "morefeatures:fluorite"
+    "#": "morefeatures:fluorite_block"
   },
   "pattern": [
     "###",

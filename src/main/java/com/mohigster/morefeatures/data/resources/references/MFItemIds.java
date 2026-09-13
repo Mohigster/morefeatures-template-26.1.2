@@ -7,6 +7,7 @@ import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.Item;
 
+@SuppressWarnings("SameParameterValue")
 public class MFItemIds {
     public static final ResourceKey<Item> RAW_ALUMINIUM = createId("raw_aluminium");
     public static final ResourceKey<Item> ALUMINIUM_INGOT = createId("aluminium_ingot");
@@ -14,22 +15,10 @@ public class MFItemIds {
     public static final ResourceKey<Item> RAW_MAGNESIUM = createId("raw_magnesium");
     public static final ResourceKey<Item> MAGNESIUM_INGOT = createId("magnesium_ingot");
 
-    public static final ResourceKey<Item> RAW_AZURITE = createId("raw_azurite");
-    public static final ResourceKey<Item> AZURITE = createId("azurite");
-
-    public static final ResourceKey<Item> RAW_FLUORITE = createId("raw_fluorite");
-    public static final ResourceKey<Item> FLUORITE = createId("fluorite");
-
     public static final ResourceKey<Item> RAW_EVERFROST = createId("raw_everfrost");
     public static final ResourceKey<Item> EVERFROST = createId("everfrost");
 
     public static final ResourceKey<Item> METAL_DETECTOR = createId("metal_detector");
-
-    public static final ResourceKey<Item> AZURITE_SIGN = createId("azurite_sign");
-    public static final ResourceKey<Item> FLUORITE_SIGN = createId("fluorite_sign");
-
-    public static final ResourceKey<Item> AZURITE_HANGING_SIGN = createId("azurite_hanging_sign");
-    public static final ResourceKey<Item> FLUORITE_HANGING_SIGN = createId("fluorite_hanging_sign");
 
     public static final ResourceKey<Item> BLOODWOOD_BOAT = createId("bloodwood_boat");
     public static final ResourceKey<Item> BLOODWOOD_CHEST_BOAT = createId("bloodwood_chest_boat");
@@ -89,6 +78,9 @@ public class MFItemIds {
     public static final GemstoneCollection<ResourceKey<Item>> GEMSTONE = createSimpleGemstoneId("");
     public static final GemstoneCollection<ResourceKey<Item>> RAW_GEM = createSuffixGemstoneId("raw");
 
+    public static final GemstoneCollection<ResourceKey<Item>> GEMSTONE_SIGN = createSimpleGemstoneId("sign");
+    public static final GemstoneCollection<ResourceKey<Item>> GEMSTONE_HANGING_SIGN = createSimpleGemstoneId("hanging_sign");
+
     private static ResourceKey<Item> createId(String name) {
         return ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace(name));
     }
@@ -102,14 +94,14 @@ public class MFItemIds {
     }
 
     private static WoodTypeCollection<ResourceKey<Item>> createSimpleWoodId(String name) {
-        return WoodTypeCollection.prefixWithSet(WoodTypeCollection.create(name)).map(MFItemIds::createId);
+        return WoodTypeCollection.prefixWithSet(WoodTypeCollection.createForAll(name)).map(MFItemIds::createId);
     }
 
     private static GemstoneCollection<ResourceKey<Item>> createSimpleGemstoneId(String name) {
-        return GemstoneCollection.prefixWithGem(GemstoneCollection.create(name)).map(MFItemIds::createId);
+        return GemstoneCollection.prefixWithGem(GemstoneCollection.createForAll(name)).map(MFItemIds::createId);
     }
 
-    private static GemstoneCollection<ResourceKey<Item>> createSuffixGemstoneId(String name) {
-        return GemstoneCollection.suffixWithGem(GemstoneCollection.create(name)).map(MFItemIds::createId);
+    private static GemstoneCollection<ResourceKey<Item>> createSuffixGemstoneId(String prefix) {
+        return GemstoneCollection.prefixWithGem(prefix, GemstoneCollection.createForAll("")).map(MFItemIds::createId);
     }
 }

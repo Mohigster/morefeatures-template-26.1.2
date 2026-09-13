@@ -11,41 +11,54 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
-public abstract class SelfInflictingAndTargetingWandItem extends TargetingWandItem{
+public abstract class SelfInflictingAndTargetingWandItem extends AbstractWandItem implements SelfInflicting, Targeting {
     protected final int selfInflictingExtraDurabilityCost;
-    protected final boolean canUse;
+    private final int maxTargets;
+    private final float proximityLimit;
 
-    public SelfInflictingAndTargetingWandItem(Properties properties, double radius, int cooldownTicks,
-                                              int baseDurabilityCost, int selfInflictingExtraDurabilityCost,
-                                              int durabilityScalingFactor, int manaCost, int maxTargets, float proximityLimit,
-                                              SoundEvent castSound, float soundVolume, float soundPitch) {
-        super(properties, radius, cooldownTicks, baseDurabilityCost, durabilityScalingFactor, manaCost, maxTargets, proximityLimit, castSound, soundVolume, soundPitch);
+    public SelfInflictingAndTargetingWandItem(
+            Properties properties, double radius, int cooldownTicks,
+            int baseDurabilityCost, int selfInflictingExtraDurabilityCost,
+            int durabilityScalingFactor, int manaCost, int maxTargets, float proximityLimit,
+            SoundEvent castSound, float soundVolume, float soundPitch
+    ) {
+        super(properties, radius, cooldownTicks, baseDurabilityCost, durabilityScalingFactor, manaCost, castSound, soundVolume, soundPitch);
         this.selfInflictingExtraDurabilityCost = selfInflictingExtraDurabilityCost;
-        this.canUse = true;
+        this.maxTargets = maxTargets;
+        this.proximityLimit = proximityLimit;
     }
 
     @Override
     public @NonNull InteractionResult use(Level level, Player player, @NonNull InteractionHand hand) {
         ItemStack stack = player.getItemInHand(hand);
-        if (!level.isClientSide() && hasEnoughMana(player)) {
-            if (player.isShiftKeyDown() && canCastSpellOnSelf(player)){
-                castSelfInflictingSpell(player, level);
-                int durabilityCost = baseDurabilityCost + selfInflictingExtraDurabilityCost;
-                applyCastEffects(player, stack, durabilityCost, hand, level);
+        if (!level.isClientSide() && this.hasEnoughMana(player)) {
+            if (player.isShiftKeyDown() && this.canCastSpellOnSelf(player)){
+                this.castSelfInflictingSpell(player, level);
+                int durabilityCost = this.baseDurabilityCost + this.selfInflictingExtraDurabilityCost;
+                this.applyCastEffects(player, stack, durabilityCost, hand, level);
                 return InteractionResult.SUCCESS_SERVER;
             } else {
                 List<LivingEntity> targets = level.getEntitiesOfClass(
                         LivingEntity.class,
-                        player.getBoundingBox().inflate(radius),
+                        player.getBoundingBox().inflate(this.radius),
                         getTargetPredicate(player)
                 );
 
                 if (!targets.isEmpty()) {
+                    int targetCount = 0;
+
                     for (LivingEntity target : targets) {
-                        castTargetedSpell(target, player, level);
+
+                        if (targetCount < this.maxTargets) {
+                            this.castTargetedSpell(target, player, level);
+                        }
+
+                        targetCount++;
                     }
-                    int durabilityCost = totalDurabilityCost(targets.size());
-                    applyCastEffects(player, stack, durabilityCost, hand, level);
+
+                    int durabilityCost = this.totalDurabilityCost(targets.size());
+
+                    this.applyCastEffects(player, stack, durabilityCost, hand, level);
                     return InteractionResult.SUCCESS_SERVER;
                 }
             }
@@ -53,7 +66,8 @@ public abstract class SelfInflictingAndTargetingWandItem extends TargetingWandIt
         return InteractionResult.PASS;
     }
 
-    protected abstract boolean canCastSpellOnSelf(Player caster); // Whether the target can have the spell cast on them is easily defined in the target predicate. However, the same is not said for when casting on yourself, hence this abstract method.
-
-    protected abstract void castSelfInflictingSpell(Player caster, Level level); // To make the self inflicting spell the same as the targeting spell, it is as simple as calling castTargetedSpell(caster, caster, level); in this method. Otherwise, write your own spell logic in here.
+    @Override
+    public float proximityLimit() {
+        return this.proximityLimit;
+    }
 }

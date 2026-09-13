@@ -34,9 +34,11 @@ public class MFSuspendedParticle extends SuspendedParticle {
         @NullMarked
         @Override
         public Particle createParticle(SimpleParticleType options, ClientLevel level, double x, double y, double z, double xAux, double yAux, double zAux, RandomSource random) {
-            double xa = random.nextGaussian() * 1.0E-6D;
+            double horizontalExponent = 1.0E-6D;
+
+            double xa = random.nextGaussian() * horizontalExponent;
             double ya = random.nextGaussian() * 1.0E-4D;
-            double za = random.nextGaussian() * 1.0E-6D;
+            double za = random.nextGaussian() * horizontalExponent;
             MFSuspendedParticle particle = new MFSuspendedParticle(level, x, y, z, xa, ya, za, this.sprite.get(random));
             particle.setColor(0.13F, 0.1F, 0.1F);
             return particle;
@@ -53,12 +55,37 @@ public class MFSuspendedParticle extends SuspendedParticle {
         @NullMarked
         @Override
         public Particle createParticle(SimpleParticleType options, ClientLevel level, double x, double y, double z, double xAux, double yAux, double zAux, RandomSource random) {
-            double xa = random.nextGaussian() * 1.0E-2D;
-            double ya = random.nextGaussian() * 1.0E-3D;
-            double za = random.nextGaussian() * 1.0E-2D;
-            MFSuspendedParticle particle = new MFSuspendedParticle(level, x, y, z, xa, ya, za, this.sprite.get(random));
-            particle.setColor(0.4F, 0.1F, 0.5F);
-            return particle;
+            return createEndParticle(level, x, y, z, random, this.sprite, 0.4F, 0.1F, 0.5F);
         }
+    }
+
+    public static class PallidSporeProvider implements ParticleProvider<SimpleParticleType> {
+        private final SpriteSet sprite;
+
+        public PallidSporeProvider(SpriteSet sprite) {
+            this.sprite = sprite;
+        }
+
+        @NullMarked
+        @Override
+        public Particle createParticle(SimpleParticleType options, ClientLevel level, double x, double y, double z, double xAux, double yAux, double zAux, RandomSource random) {
+            return createEndParticle(level, x, y, z, random, this.sprite, 0.2F, 0.4F, 0.2F);
+        }
+    }
+
+    public static Particle createEndParticle(
+            ClientLevel level,
+            double x, double y, double z,
+            RandomSource random,
+            SpriteSet sprite,
+            float r, float g, float b
+    ) {
+        double horizontalExponent = 1.0E-2D;
+        double xa = random.nextGaussian() * horizontalExponent;
+        double ya = random.nextGaussian() * 1.0E-3D;
+        double za = random.nextGaussian() * horizontalExponent;
+        MFSuspendedParticle particle = new MFSuspendedParticle(level, x, y, z, xa, ya, za, sprite.get(random));
+        particle.setColor(r, g, b);
+        return particle;
     }
 }

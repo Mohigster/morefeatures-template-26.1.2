@@ -46,14 +46,16 @@ public class IcicleBlock extends SpeleothemBlock {
 
     private final List<BlockState> blocksToGrowOn;
 
-    public static final MapCodec<IcicleBlock> CODEC = RecordCodecBuilder.mapCodec((i) -> i.group(
-            BlockState.CODEC.listOf().fieldOf("blocks_to_grow_on").forGetter((b) -> b.blocksToGrowOn),
-            propertiesCodec()
-    ).apply(i, IcicleBlock::new));
+    public static final MapCodec<IcicleBlock> CODEC = RecordCodecBuilder.mapCodec(
+            inst -> inst.group(
+                    BlockState.CODEC.listOf().fieldOf("blocks_to_grow_on")
+                            .forGetter((b) -> b.blocksToGrowOn),
+                    propertiesCodec()
+    ).apply(inst, IcicleBlock::new));
 
     public IcicleBlock(List<BlockState> blocksToGrowOn, Properties properties) {
         super(Blocks.PACKED_ICE.defaultBlockState(), properties); // Passing Blocks.PACKED_ICE.defaultBlockState() into the super is just to keep the compiler happy because the base class wants a singular block state, not a list. This block state is unused by this class.
-                                                                  // I have checked SpeleothemBlock. Within that class, the blockToGrowIn Block State passed in here is ONLY used in the canGrow method. Since we override that to use the list anyway, this will have no side effects.
+                                                                  // I have checked SpeleothemBlock. Within that class, the blockToGrowOn Block State passed in here is ONLY used in the canGrow method. Since we override that to use the list anyway, this will have no side effects.
 
         if(blocksToGrowOn.isEmpty()) this.blocksToGrowOn = this.defaultValidGrowthBlocks();
         else this.blocksToGrowOn = blocksToGrowOn;
@@ -95,11 +97,11 @@ public class IcicleBlock extends SpeleothemBlock {
     }
 
     private boolean canMelt(Level level, BlockState state, BlockPos pos){
-        return isTipOrMerge(state) && isBrightEnoughToMelt(level, pos);
+        return this.isTipOrMerge(state) && this.isBrightEnoughToMelt(level, pos);
     }
 
 
-    // SpeleothemBlock does hav an isTip boolean with a parameter to determine to include merge tips, but it has private access
+    // SpeleothemBlock does have an isTip boolean with a parameter to determine to include merge tips, but it has private access
     // Since I never check only for the tip, and always check for both tip and merge, this method is fine
     protected boolean isTipOrMerge(BlockState state){
         SpeleothemThickness thickness = state.getValue(THICKNESS);
@@ -114,8 +116,8 @@ public class IcicleBlock extends SpeleothemBlock {
     // Icicles will only drip water if they are in danger of melting!
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        if (canMelt(level, state, pos) && random.nextFloat() < (PARTICLE_SPAWN_PERCENT_CHANCE / 100)){
-            spawnDripParticle(level, pos, state, random);
+        if (this.canMelt(level, state, pos) && random.nextFloat() < (PARTICLE_SPAWN_PERCENT_CHANCE / 100)){
+            this.spawnDripParticle(level, pos, state, random);
         } else {
             super.animateTick(state, level, pos, random);
         }

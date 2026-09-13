@@ -25,9 +25,15 @@ public class MFLevelStems {
                         new Climate.ParameterList<>(List.of(
                                 Pair.of(Climate.parameters(0.1f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f), biomes.getOrThrow(MFBiomes.BLOODWOOD_FOREST)),
                                 Pair.of(Climate.parameters(-0.1f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f), biomes.getOrThrow(MFBiomes.TAINTED_FOREST))
-                        ))),
-                noiseGenSettings.getOrThrow(MFNoiseGeneratorSettings.FLOATING_ISLANDS_MULTI));
+                        ))
+                ),
+                noiseGenSettings.getOrThrow(MFNoiseGeneratorSettings.FLOATING_ISLANDS_MULTI)
+        );
 
-        context.register(MFLevelStemIds.EVILDIM, new LevelStem(dimensionTypes.getOrThrow(MFDimensionTypeIds.EVILDIM), multiBiomeGenerator));
+        context.register(MFLevelStemIds.EVILDIM, new LevelStem(
+                dimensionTypes.getOrThrow(MFDimensionTypeIds.EVILDIM), multiBiomeGenerator));
+
+        context.register(MFLevelStemIds.BOREALIS, new LevelStem(
+                dimensionTypes.getOrThrow(MFDimensionTypeIds.BOREALIS), multiBiomeGenerator));
     }
 }

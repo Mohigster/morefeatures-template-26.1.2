@@ -186,12 +186,12 @@ public class MFConfiguredFeatures {
         RuleTest blueIceReplaceables = new BlockMatchTest(Blocks.BLUE_ICE);
 
         List<OreConfiguration.TargetBlockState> overworldAzuriteOres = List.of(
-                OreConfiguration.target(stoneReplaceables, MFBlocks.AZURITE_ORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplaceables, MFBlocks.DEEPSLATE_AZURITE_ORE.get().defaultBlockState())
+                OreConfiguration.target(stoneReplaceables, MFBlocks.ORE.azurite().get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, MFBlocks.DEEPSLATE_ORE.azurite().get().defaultBlockState())
         );
         List<OreConfiguration.TargetBlockState> overworldFluoriteOres = List.of(
-                OreConfiguration.target(stoneReplaceables, MFBlocks.FLUORITE_ORE.get().defaultBlockState()),
-                OreConfiguration.target(deepslateReplaceables, MFBlocks.DEEPSLATE_FLUORITE_ORE.get().defaultBlockState())
+                OreConfiguration.target(stoneReplaceables, MFBlocks.ORE.fluorite().get().defaultBlockState()),
+                OreConfiguration.target(deepslateReplaceables, MFBlocks.DEEPSLATE_ORE.fluorite().get().defaultBlockState())
         );
         List<OreConfiguration.TargetBlockState> aluminiumOres = List.of(
                 OreConfiguration.target(stoneReplaceables, MFBlocks.ALUMINIUM_ORE.get().defaultBlockState()),
@@ -208,11 +208,11 @@ public class MFConfiguredFeatures {
 
         // Registering ore configured features
         register(context, OVERWORLD_AZURITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldAzuriteOres, 9, 0.65f));
-        register(context, NETHER_AZURITE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplaceables, MFBlocks.NETHER_AZURITE_ORE.get().defaultBlockState(), 9, 0.85f));
-        register(context, END_AZURITE_ORE_KEY, Feature.ORE, new OreConfiguration(endStoneReplaceables, MFBlocks.END_AZURITE_ORE.get().defaultBlockState(), 9, 0.80f));
+        register(context, NETHER_AZURITE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplaceables, MFBlocks.NETHER_ORE.azurite().get().defaultBlockState(), 9, 0.85f));
+        register(context, END_AZURITE_ORE_KEY, Feature.ORE, new OreConfiguration(endStoneReplaceables, MFBlocks.END_ORE.azurite().get().defaultBlockState(), 9, 0.80f));
         register(context, OVERWORLD_FLUORITE_ORE_KEY, Feature.ORE, new OreConfiguration(overworldFluoriteOres, 9, 0.65f));
-        register(context, NETHER_FLUORITE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplaceables, MFBlocks.NETHER_FLUORITE_ORE.get().defaultBlockState(), 9, 0.85f));
-        register(context, END_FLUORITE_ORE_KEY, Feature.ORE, new OreConfiguration(endStoneReplaceables, MFBlocks.END_FLUORITE_ORE.get().defaultBlockState(), 9, 0.80f));
+        register(context, NETHER_FLUORITE_ORE_KEY, Feature.ORE, new OreConfiguration(netherrackReplaceables, MFBlocks.NETHER_ORE.fluorite().get().defaultBlockState(), 9, 0.85f));
+        register(context, END_FLUORITE_ORE_KEY, Feature.ORE, new OreConfiguration(endStoneReplaceables, MFBlocks.END_ORE.fluorite().get().defaultBlockState(), 9, 0.80f));
         register(context, ALUMINIUM_ORE_KEY, Feature.ORE, new OreConfiguration(aluminiumOres, 9));
         register(context, MAGNESIUM_ORE_KEY, Feature.ORE, new OreConfiguration(magnesiumOres, 9));
         register(context, BISMUTH_ORE_KEY, Feature.ORE, new OreConfiguration(endStoneReplaceables, MFBlocks.BISMUTH_ORE.get().defaultBlockState(), 3, 1.0f));
@@ -425,7 +425,24 @@ public class MFConfiguredFeatures {
                         context.lookup(Registries.CONFIGURED_FEATURE)
                                 .getOrThrow(MFConfiguredFeatures.PALM_TREE_KEY),
                         Blocks.SAND.defaultBlockState(),
-                        Blocks.SANDSTONE.defaultBlockState()
+                        Blocks.SANDSTONE.defaultBlockState(),
+                        HolderSet.direct(
+                                Block::builtInRegistryHolder,
+                                List.of(
+                                        Blocks.GRASS_BLOCK,
+                                        Blocks.DIRT,
+                                        Blocks.ROOTED_DIRT,
+                                        Blocks.COARSE_DIRT,
+                                        Blocks.SAND,
+                                        Blocks.RED_SAND,
+                                        Blocks.SUSPICIOUS_SAND,
+                                        Blocks.STONE
+                                )
+                        ),
+                        7,
+                        5,
+                        7,
+                        5
                 ));
 
         register(context, SMOLDERED_VINES_KEY, MFFeatures.FLOOR_VINES.get(),

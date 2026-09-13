@@ -85,8 +85,8 @@ public class MetalDetectorItem extends Item {
         return (T) new BlockParticleOption(ParticleTypes.BLOCK, state);
     }
 
-    private int getDamageCost(BlockState state){
-        int totalCost = MetalDetectorCosts.INSTANCE.getCost(state);
+    private static int getDamageCost(BlockState state){
+        int totalCost = MetalDetectorCosts.getCost(state);
 
         if (totalCost == 0){
             throw new IllegalStateException("Metal detector durability cost must not be zero! If the value is not zero within the JSON file, report the issue on GitHub.");
@@ -95,8 +95,8 @@ public class MetalDetectorItem extends Item {
         return totalCost;
     }
 
-    protected boolean isValidTarget(BlockState blockState) {
-        return blockState.is(MFBlockTags.METAL_DETECTOR_FINDABLE);
+    protected boolean isValidTarget(BlockState state) {
+        return state.is(MFBlockTags.METAL_DETECTOR_FINDABLE);
     }
 
     private void outputNoValuablesFound(Player player) {

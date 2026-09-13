@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#morefeatures:wood/pallid_logs"
+            "items": "#morefeatures:wood/logs/pallid"
           }
         ]
       },

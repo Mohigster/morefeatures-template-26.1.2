@@ -1,12 +1,14 @@
 package com.mohigster.morefeatures.entity.model;
 
 import net.minecraft.client.model.Model;
+import net.minecraft.client.model.geom.ModelLayerLocation;
 import net.minecraft.client.model.geom.ModelPart;
 import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.CubeListBuilder;
 import net.minecraft.client.model.geom.builders.LayerDefinition;
 import net.minecraft.client.model.geom.builders.MeshDefinition;
 import net.minecraft.client.model.geom.builders.PartDefinition;
+import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.rendertype.RenderTypes;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
@@ -19,18 +21,26 @@ public class MFTridentModel extends Model<Unit> {
         super(root, RenderTypes::entitySolid);
     }
 
+    public static MFTridentModel create(
+            EntityRendererProvider.Context context,
+            ModelLayerLocation layerToBake
+    ) {
+        return new MFTridentModel(context.bakeLayer(layerToBake));
+    }
+
     // The entity key path is simply the trident e.g. the carbon trident is simply "carbon_trident"
     // So, adding textures/entity/trident/ at the start and .png at the end gives the preferred texture location
     // texture/entity/trident/trident.png is the location of the vanilla trident texture, so this matches that.
 
     // Must be used over the above method when in static contexts
     public static Identifier getTexture(ResourceKey<EntityType<?>> tridentEntityKey){
-        return tridentEntityKey.identifier()
-                .withPath(
-                        "textures/entity/trident/"
-                                + tridentEntityKey.identifier().getPath()
-                                + ".png"
-                );
+        Identifier tridentId = tridentEntityKey.identifier();
+
+        return tridentId.withPath(
+                "textures/entity/trident/"
+                        + tridentEntityKey.identifier().getPath()
+                        + ".png"
+        );
     }
 
     public static LayerDefinition createLayer() {

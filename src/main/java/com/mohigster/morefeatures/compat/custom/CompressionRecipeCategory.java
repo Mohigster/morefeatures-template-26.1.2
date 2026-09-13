@@ -5,7 +5,7 @@ import com.mohigster.morefeatures.compat.MFJEIRecipeTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorScreen;
 import com.mohigster.morefeatures.recipe.custom.CompressionRecipe;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
-import com.mohigster.morefeatures.renderer.FluidTankRenderer;
+import com.mohigster.morefeatures.renderer.menu.FluidTankRenderer;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;

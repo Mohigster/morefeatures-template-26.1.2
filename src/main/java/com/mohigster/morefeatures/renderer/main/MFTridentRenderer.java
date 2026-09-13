@@ -28,7 +28,7 @@ public class MFTridentRenderer extends ThrownTridentRenderer {
     ) {
         super(context);
         this.tridentKey = tridentKey;
-        this.model = new MFTridentModel(context.bakeLayer(layerToBake));
+        this.model = MFTridentModel.create(context, layerToBake);
     }
 
     @Override

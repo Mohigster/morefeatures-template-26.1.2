@@ -1,16 +1,32 @@
 {
   "values": {
+    "morefeatures:acacia_pillar": {
+      "fire_spread_speed": 3,
+      "flammability": 15
+    },
     "morefeatures:acacia_vertical_slab": {
       "fire_spread_speed": 5,
       "flammability": 20
+    },
+    "morefeatures:bamboo_mosaic_pillar": {
+      "fire_spread_speed": 3,
+      "flammability": 15
     },
     "morefeatures:bamboo_mosaic_vertical_slab": {
       "fire_spread_speed": 5,
       "flammability": 20
     },
+    "morefeatures:bamboo_pillar": {
+      "fire_spread_speed": 3,
+      "flammability": 15
+    },
     "morefeatures:bamboo_vertical_slab": {
       "fire_spread_speed": 5,
       "flammability": 20
+    },
+    "morefeatures:birch_pillar": {
+      "fire_spread_speed": 3,
+      "flammability": 15
     },
     "morefeatures:birch_vertical_slab": {
       "fire_spread_speed": 5,
@@ -68,6 +84,10 @@
       "fire_spread_speed": 5,
       "flammability": 20
     },
+    "morefeatures:cherry_pillar": {
+      "fire_spread_speed": 3,
+      "flammability": 15
+    },
     "morefeatures:cherry_vertical_slab": {
       "fire_spread_speed": 5,
       "flammability": 20
@@ -75,6 +95,10 @@
     "morefeatures:cyan_wool_vertical_slab": {
       "fire_spread_speed": 5,
       "flammability": 20
+    },
+    "morefeatures:dark_oak_pillar": {
+      "fire_spread_speed": 3,
+      "flammability": 15
     },
     "morefeatures:dark_oak_vertical_slab": {
       "fire_spread_speed": 5,
@@ -128,6 +152,10 @@
       "fire_spread_speed": 5,
       "flammability": 20
     },
+    "morefeatures:jungle_pillar": {
+      "fire_spread_speed": 3,
+      "flammability": 15
+    },
     "morefeatures:jungle_vertical_slab": {
       "fire_spread_speed": 5,
       "flammability": 20
@@ -148,9 +176,17 @@
       "fire_spread_speed": 5,
       "flammability": 20
     },
+    "morefeatures:mangrove_pillar": {
+      "fire_spread_speed": 3,
+      "flammability": 15
+    },
     "morefeatures:mangrove_vertical_slab": {
       "fire_spread_speed": 5,
       "flammability": 20
+    },
+    "morefeatures:oak_pillar": {
+      "fire_spread_speed": 3,
+      "flammability": 15
     },
     "morefeatures:oak_vertical_slab": {
       "fire_spread_speed": 5,
@@ -159,6 +195,10 @@
     "morefeatures:orange_wool_vertical_slab": {
       "fire_spread_speed": 5,
       "flammability": 20
+    },
+    "morefeatures:pale_oak_pillar": {
+      "fire_spread_speed": 3,
+      "flammability": 15
     },
     "morefeatures:pale_oak_vertical_slab": {
       "fire_spread_speed": 5,
@@ -255,6 +295,10 @@
     "morefeatures:red_wool_vertical_slab": {
       "fire_spread_speed": 5,
       "flammability": 20
+    },
+    "morefeatures:spruce_pillar": {
+      "fire_spread_speed": 3,
+      "flammability": 15
     },
     "morefeatures:spruce_vertical_slab": {
       "fire_spread_speed": 5,

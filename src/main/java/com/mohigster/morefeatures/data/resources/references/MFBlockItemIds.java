@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.data.resources.references;
 
 import com.mohigster.morefeatures.block.collection.gemstone.GemstoneCollection;
+import com.mohigster.morefeatures.block.collection.vanilla.VanillaWoodCollection;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.references.BlockItemId;
@@ -22,6 +23,7 @@ public class MFBlockItemIds {
     public static final BlockItemId PALM_LEAVES = createId("palm_leaves");
     public static final BlockItemId PALM_SAPLING = createId("palm_sapling");
 
+    // --- Charred ---
     public static final BlockItemId CHARRED_ROOTS = createId("charred_roots");
     public static final BlockItemId CHARRED_WART_BLOCK = createId("charred_wart_block");
     public static final BlockItemId CHARRED_FUNGUS = createId("charred_fungus");
@@ -41,44 +43,6 @@ public class MFBlockItemIds {
     public static final BlockItemId PALLID_SAPLING = createId("pallid_sapling");
     public static final BlockItemId PALLID_ROOTS = createId("pallid_roots");
     public static final BlockItemId PALLID_NULLIUM = createId("pallid_nullium");
-
-    // --- Azurite ---
-    public static final BlockItemId AZURITE_BLOCK = createId("azurite_block");
-    public static final BlockItemId AZURITE_ORE = createId("azurite_ore");
-    public static final BlockItemId DEEPSLATE_AZURITE_ORE = createId("deepslate_azurite_ore");
-    public static final BlockItemId NETHER_AZURITE_ORE = createId("nether_azurite_ore");
-    public static final BlockItemId END_AZURITE_ORE = createId("end_azurite_ore");
-    public static final BlockItemId RAW_AZURITE_BLOCK = createId("raw_azurite_block");
-    public static final BlockItemId AZURITE_STAIRS = createId("azurite_stairs");
-    public static final BlockItemId AZURITE_SLAB = createId("azurite_slab");
-    public static final BlockItemId AZURITE_VERTICAL_SLAB = createId("azurite_vertical_slab");
-    public static final BlockItemId AZURITE_FENCE = createId("azurite_fence");
-    public static final BlockItemId AZURITE_FENCE_GATE = createId("azurite_fence_gate");
-    public static final BlockItemId AZURITE_WALL = createId("azurite_wall");
-    public static final BlockItemId AZURITE_PRESSURE_PLATE = createId("azurite_pressure_plate");
-    public static final BlockItemId AZURITE_BUTTON = createId("azurite_button");
-    public static final BlockItemId AZURITE_DOOR = createId("azurite_door");
-    public static final BlockItemId AZURITE_TRAPDOOR = createId("azurite_trapdoor");
-    public static final BlockItemId AZURITE_SHELF = createId("azurite_shelf");
-
-    // --- Fluorite ---
-    public static final BlockItemId FLUORITE_BLOCK = createId("fluorite_block");
-    public static final BlockItemId FLUORITE_ORE = createId("fluorite_ore");
-    public static final BlockItemId DEEPSLATE_FLUORITE_ORE = createId("deepslate_fluorite_ore");
-    public static final BlockItemId NETHER_FLUORITE_ORE = createId("nether_fluorite_ore");
-    public static final BlockItemId END_FLUORITE_ORE = createId("end_fluorite_ore");
-    public static final BlockItemId RAW_FLUORITE_BLOCK = createId("raw_fluorite_block");
-    public static final BlockItemId FLUORITE_STAIRS = createId("fluorite_stairs");
-    public static final BlockItemId FLUORITE_SLAB = createId("fluorite_slab");
-    public static final BlockItemId FLUORITE_VERTICAL_SLAB = createId("fluorite_vertical_slab");
-    public static final BlockItemId FLUORITE_FENCE = createId("fluorite_fence");
-    public static final BlockItemId FLUORITE_FENCE_GATE = createId("fluorite_fence_gate");
-    public static final BlockItemId FLUORITE_WALL = createId("fluorite_wall");
-    public static final BlockItemId FLUORITE_PRESSURE_PLATE = createId("fluorite_pressure_plate");
-    public static final BlockItemId FLUORITE_BUTTON = createId("fluorite_button");
-    public static final BlockItemId FLUORITE_DOOR = createId("fluorite_door");
-    public static final BlockItemId FLUORITE_TRAPDOOR = createId("fluorite_trapdoor");
-    public static final BlockItemId FLUORITE_SHELF = createId("fluorite_shelf");
 
     // --- Aluminium ---
     public static final BlockItemId ALUMINIUM_BLOCK = createId("aluminium_block");
@@ -114,22 +78,6 @@ public class MFBlockItemIds {
     public static final BlockItemId TEMPORAL_DILATOR = createId("temporal_dilator");
 
     // ----- VANILLA VERTICAL SLABS -----
-
-    // --- Wooden ---
-
-    public static final BlockItemId OAK_VERTICAL_SLAB = createId("oak_vertical_slab");
-    public static final BlockItemId SPRUCE_VERTICAL_SLAB = createId("spruce_vertical_slab");
-    public static final BlockItemId BIRCH_VERTICAL_SLAB = createId("birch_vertical_slab");
-    public static final BlockItemId JUNGLE_VERTICAL_SLAB = createId("jungle_vertical_slab");
-    public static final BlockItemId ACACIA_VERTICAL_SLAB = createId("acacia_vertical_slab");
-    public static final BlockItemId DARK_OAK_VERTICAL_SLAB = createId("dark_oak_vertical_slab");
-    public static final BlockItemId CRIMSON_VERTICAL_SLAB = createId("crimson_vertical_slab");
-    public static final BlockItemId WARPED_VERTICAL_SLAB = createId("warped_vertical_slab");
-    public static final BlockItemId MANGROVE_VERTICAL_SLAB = createId("mangrove_vertical_slab");
-    public static final BlockItemId CHERRY_VERTICAL_SLAB = createId("cherry_vertical_slab");
-    public static final BlockItemId BAMBOO_VERTICAL_SLAB = createId("bamboo_vertical_slab");
-    public static final BlockItemId BAMBOO_MOSAIC_VERTICAL_SLAB = createId("bamboo_mosaic_vertical_slab");
-    public static final BlockItemId PALE_OAK_VERTICAL_SLAB = createId("pale_oak_vertical_slab");
 
     // --- Stone & Deepslate ---
     public static final BlockItemId STONE_VERTICAL_SLAB = createId("stone_vertical_slab");
@@ -190,6 +138,9 @@ public class MFBlockItemIds {
     public static final BlockItemId RESIN_BRICK_VERTICAL_SLAB = createId("resin_brick_vertical_slab");
 
     // ----- BLOCK COLLECTIONS -----
+    public static final VanillaWoodCollection<BlockItemId> VANILLA_WOOD_VERTICAL_SLAB = createVanillaWoodId("vertical_slab");
+    public static final VanillaWoodCollection<BlockItemId> VANILLA_WOOD_PILLAR = createVanillaWoodId("pillar");
+
     public static final WeatheringCopperCollection<BlockItemId> CUT_COPPER_VERTICAL_SLAB = createSimpleCopperId("cut_copper_vertical_slab");
     public static final ColorCollection<BlockItemId> WOOL_VERTICAL_SLAB = createSimpleColouredId("wool_vertical_slab");
     public static final ColorCollection<BlockItemId> CONCRETE_VERTICAL_SLAB = createSimpleColouredId("concrete_vertical_slab");
@@ -208,6 +159,8 @@ public class MFBlockItemIds {
     public static final WoodTypeCollection<BlockItemId> WOODEN_DOOR = createSimpleWoodId("door");
     public static final WoodTypeCollection<BlockItemId> WOODEN_TRAPDOOR = createSimpleWoodId("trapdoor");
     public static final WoodTypeCollection<BlockItemId> WOODEN_SHELF = createSimpleWoodId("shelf");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_SIGN = createSimpleWoodId("sign");
+    public static final WoodTypeCollection<BlockItemId> WOODEN_HANGING_SIGN = createSimpleWoodId("hanging_sign");
 
     public static final WoodTypeCollection<BlockItemId> LOG = createSimpleWoodId("log");
     public static final WoodTypeCollection<BlockItemId> WOOD = createSimpleWoodId("wood");
@@ -218,8 +171,22 @@ public class MFBlockItemIds {
     public static final WoodTypeCollection<BlockItemId> STRIPPED_WOOD = createStrippedWoodId("wood");
 
     public static final GemstoneCollection<BlockItemId> ORE = createSimpleGemstoneId("ore");
-    public static final GemstoneCollection<BlockItemId> DEEPSLATE_ORE = createSimpleGemstoneId("deepslate_ore");
+    public static final GemstoneCollection<BlockItemId> DEEPSLATE_ORE = createPrefixedGemstoneId("deepslate", "ore");
+    public static final GemstoneCollection<BlockItemId> NETHER_ORE = createPrefixedGemstoneId("nether", "ore");
+    public static final GemstoneCollection<BlockItemId> END_ORE = createPrefixedGemstoneId("end", "ore");
     public static final GemstoneCollection<BlockItemId> BLOCK = createSimpleGemstoneId("block");
+    public static final GemstoneCollection<BlockItemId> RAW_BLOCK = createPrefixedGemstoneId("raw", "block");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_STAIRS = createSimpleGemstoneId("stairs");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_SLAB = createSimpleGemstoneId("slab");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_VERTICAL_SLAB = createSimpleGemstoneId("vertical_slab");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_FENCE = createSimpleGemstoneId("fence");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_FENCE_GATE = createSimpleGemstoneId("fence_gate");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_PRESSURE_PLATE = createSimpleGemstoneId("pressure_plate");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_BUTTON = createSimpleGemstoneId("button");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_WALL = createSimpleGemstoneId("wall");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_DOOR = createSimpleGemstoneId("door");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_TRAPDOOR = createSimpleGemstoneId("trapdoor");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_SHELF = createSimpleGemstoneId("shelf");
 
     public static final BlockItemId TEST_COLUMN = createId("test_column");
 
@@ -237,14 +204,22 @@ public class MFBlockItemIds {
     }
 
     private static WoodTypeCollection<BlockItemId> createSimpleWoodId(String name) {
-        return WoodTypeCollection.prefixWithSet(WoodTypeCollection.create(name)).map(MFBlockItemIds::createId);
+        return WoodTypeCollection.prefixWithSet(WoodTypeCollection.createForAll(name)).map(MFBlockItemIds::createId);
     }
 
     private static WoodTypeCollection<BlockItemId> createStrippedWoodId(String name) {
-        return WoodTypeCollection.prefixWithSet("stripped", WoodTypeCollection.create(name)).map(MFBlockItemIds::createId);
+        return WoodTypeCollection.prefixWithSet("stripped", WoodTypeCollection.createForAll(name)).map(MFBlockItemIds::createId);
+    }
+
+    private static VanillaWoodCollection<BlockItemId> createVanillaWoodId(String name) {
+        return VanillaWoodCollection.prefixWithSet(VanillaWoodCollection.createForAll(name)).map(MFBlockItemIds::createId);
     }
 
     private static GemstoneCollection<BlockItemId> createSimpleGemstoneId(String name) {
-        return GemstoneCollection.prefixWithGem(GemstoneCollection.create(name)).map(MFBlockItemIds::createId);
+        return GemstoneCollection.prefixWithGem(GemstoneCollection.createForAll(name)).map(MFBlockItemIds::createId);
+    }
+
+    private static GemstoneCollection<BlockItemId> createPrefixedGemstoneId(String prefix, String name) {
+        return GemstoneCollection.prefixWithGem(prefix, GemstoneCollection.createForAll(name)).map(MFBlockItemIds::createId);
     }
 }

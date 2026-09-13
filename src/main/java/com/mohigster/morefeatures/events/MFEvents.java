@@ -6,11 +6,12 @@ import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
 import com.mohigster.morefeatures.block.custom.data.codec.BonemealMorph;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
-import com.mohigster.morefeatures.events.data.BowDamageBonuses;
-import com.mohigster.morefeatures.events.data.BowDamageEntry;
+import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
 import com.mohigster.morefeatures.events.data.ElytraSpeedBoosts;
 import com.mohigster.morefeatures.data.world.biome.MFBiomes;
+import com.mohigster.morefeatures.util.DataMapUtil;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -42,8 +43,8 @@ import net.neoforged.neoforge.event.entity.player.BonemealEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerRespawnPositionEvent;
 import net.neoforged.neoforge.event.tick.PlayerTickEvent;
+import org.apache.commons.compress.utils.Lists;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -52,7 +53,6 @@ import java.util.Optional;
 public class MFEvents {
 
     private static boolean sharedAllElytraEntries;
-    private static boolean sharedAllBowEntries;
 
     // Both elytra speed and bow damage are data-driven
 
@@ -65,11 +65,11 @@ public class MFEvents {
 
         ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
 
-        if (!ElytraSpeedBoosts.INSTANCE.elytraInEntries(chest)) return;
+        if (!(ElytraSpeedBoosts.elytraInEntries(chest))) return;
 
         // This boolean prevents the logger from being spammed for every tick that the player is flying
         if(!sharedAllElytraEntries) {
-            MoreFeatures.LOGGER.debug("All Elytra Entries: {}", ElytraSpeedBoosts.INSTANCE.getElytraEntries());
+            MoreFeatures.LOGGER.debug("All Elytra Entries: {}", ElytraSpeedBoosts.getElytraEntries());
             sharedAllElytraEntries = true;
         }
 
@@ -80,8 +80,8 @@ public class MFEvents {
         ).isEmpty();
 
         if (hasActiveRocket) {
-            double speedBoost = ElytraSpeedBoosts.INSTANCE.getSpeed(chest);
-            double maxSpeed = ElytraSpeedBoosts.INSTANCE.getMaxSpeed(chest);
+            double speedBoost = ElytraSpeedBoosts.getSpeed(chest);
+            double maxSpeed = ElytraSpeedBoosts.getMaxSpeed(chest);
             Vec3 currentVelocity = player.getDeltaMovement();
 
             if (currentVelocity.length() < maxSpeed) {
@@ -121,17 +121,16 @@ public class MFEvents {
 
         ItemStack weapon = player.getUseItem();
 
-        if (!BowDamageBonuses.INSTANCE.isBow(weapon)) return;
+        boolean isBow = weapon.has(MFDataComponentTypes.BOW_DAMAGE_BONUS);
 
-        if (!sharedAllBowEntries){
-            MoreFeatures.LOGGER.debug("All Bow Entries: {}", BowDamageBonuses.INSTANCE.getBowEntries());
-            sharedAllBowEntries = true;
-        }
+        if (!isBow) return;
 
         double baseDamage = 2.0F + arrow.getRandom().triangle(arrow.level().getDifficulty().getId() * 0.11, 0.57425);
         double totalDamage = getBowDamage(baseDamage, weapon);
 
         arrow.setBaseDamage(totalDamage == 0 ? baseDamage : totalDamage);
+
+        MoreFeatures.LOGGER.debug("Arrow Damage: {}", totalDamage);
     }
 
     @SubscribeEvent
@@ -141,6 +140,7 @@ public class MFEvents {
                 player.sendSystemMessage(Component.literal(player.getName().getString() + " just hit this sheep with an End Rod? YOU SICK FUCK!"));
                 player.getMainHandItem().shrink(1);
                 player.addEffect(new MobEffectInstance(MobEffects.HUNGER, 150, 3));
+                player.addEffect(new MobEffectInstance(MobEffects.NAUSEA, 300, 4));
                 sheep.addEffect(new MobEffectInstance(MobEffects.POISON, 600, 6));
             }
         }
@@ -160,7 +160,7 @@ public class MFEvents {
             return;
         }
 
-        List<Block> availableVariants = new ArrayList<>();
+        List<Block> availableVariants = Lists.newArrayList();
 
         for (BlockPos testPos : BlockPos.betweenClosed(pos.offset(-1, -1, -1), pos.offset(1, 1, 1))) {
             BlockState nearbyState = level.getBlockState(testPos);
@@ -180,10 +180,9 @@ public class MFEvents {
                 level.setBlock(pos, chosenVariant.defaultBlockState(), Block.UPDATE_ALL);
             }
 
-            level.levelEvent(1505, pos, 20);
+            DataMapUtil.spawnBonemealParticles(level, pos, 20);
 
             event.setSuccessful(true);
-            event.setCanceled(true);
         }
     }
 
@@ -284,25 +283,25 @@ public class MFEvents {
 
     /**
      * @param baseDamage the base damage for the projectile
-     * @param weapon the {@link ItemStack} to check for a damage value in a {@link BowDamageEntry}
+     * @param weapon the {@link ItemStack} to check for the damage value of the {@code DAMAGE_BONUS} {@link DataComponentType}
      *
      * @return the final damage that the bow will inflict as a double
      *
      * @throws IllegalStateException if the final calculated damage is zero or less.
-     * <p>This is typically the result of this method failing to find a {@link BowDamageEntry} for the
+     * <p>This is typically the result of the weapon not having an attached damage bonus data component for the
      * specified weapon, as the entry returns a damage value of zero if no entry is found</p>
      */
+    @SuppressWarnings("DataFlowIssue")
     protected static double getBowDamage(double baseDamage, ItemStack weapon){
-        double damage = baseDamage * BowDamageBonuses.INSTANCE.getDamage(weapon);
+        double damage = baseDamage * weapon.get(MFDataComponentTypes.BOW_DAMAGE_BONUS);
 
         if (damage > 0){
             return damage;
         }
 
-        throw new IllegalStateException("Bow damage multiplier value was calculated as zero or less! " +
-                "Ensure that there is a Bow Damage Entry for: " + weapon + ". " +
-                "If there is, ensure the damage_bonus value is greater than zero. If there is not, " +
-                "you can create one in a JSON format at the following directory: " +
-                "data/<modid>/bow_damage_bonuses/<custom_bow>.json");
+        throw new IllegalStateException("Bow damage multiplier value for " + weapon + " was calculated " +
+                "as zero or less! Ensure that " + weapon + " has the damage bonus data component. If that" +
+                " is the case, ensure the damage_bonus value is greater than zero. If that is not the case, " +
+                "please attach the damage bonus data component to " + weapon + ".");
     }
 }

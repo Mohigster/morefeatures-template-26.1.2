@@ -11,11 +11,13 @@ import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import org.jspecify.annotations.NullMarked;
 
-public abstract class TargetingBlockWandItem extends AbstractWandItem{
+public abstract class TargetingBlockWandItem extends AbstractWandItem {
 
-    public TargetingBlockWandItem(Properties properties, int cooldownTicks,
-                                  int baseDurabilityCost, int manaCost,
-                                  SoundEvent castSound, float soundVolume, float soundPitch) {
+    public TargetingBlockWandItem(
+            Properties properties, int cooldownTicks,
+            int baseDurabilityCost, int manaCost,
+            SoundEvent castSound, float soundVolume, float soundPitch
+    ) {
         super(properties, 0.0D, cooldownTicks, baseDurabilityCost, 0, manaCost, castSound, soundVolume, soundPitch);
     }
 
@@ -33,11 +35,11 @@ public abstract class TargetingBlockWandItem extends AbstractWandItem{
 
         assert player != null;
         if (hasEnoughMana(player)) {
-            castBlockSpell(serverLevel, player, pos);
+            this.castBlockSpell(serverLevel, player, pos);
 
-            consumeMana(player);
+            this.consumeMana(player);
 
-            applyCastEffects(player, stack, baseDurabilityCost, hand, level);
+            this.applyCastEffects(player, stack, baseDurabilityCost, hand, level);
 
             return InteractionResult.SUCCESS_SERVER;
         }

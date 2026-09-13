@@ -1,12 +1,14 @@
 {
   "values": {
     "minecraft:end_stone": {
+      "bonemeal_type": "neighbour_spreader",
       "variants": [
         "morefeatures:decrepit_nullium",
         "morefeatures:pallid_nullium"
       ]
     },
     "minecraft:netherrack": {
+      "bonemeal_type": "neighbour_spreader",
       "variants": [
         "morefeatures:charred_nylium",
         "minecraft:crimson_nylium",

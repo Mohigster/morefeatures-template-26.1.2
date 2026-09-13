@@ -8,7 +8,7 @@ public record CompressorRecipeInput(ItemStack input) implements RecipeInput {
     @NullMarked
     @Override
     public ItemStack getItem(int index) {
-        return input;
+        return this.input;
     }
 
     @Override

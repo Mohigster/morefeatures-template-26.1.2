@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "shape=bottom": {
+      "model": "morefeatures:block/jungle_pillar_bottom",
+      "uvlock": true
+    },
+    "shape=full": {
+      "model": "morefeatures:block/jungle_pillar",
+      "uvlock": true
+    },
+    "shape=middle": {
+      "model": "morefeatures:block/jungle_pillar_middle",
+      "uvlock": true
+    },
+    "shape=top": {
+      "model": "morefeatures:block/jungle_pillar_top",
+      "uvlock": true
+    }
+  }
+}

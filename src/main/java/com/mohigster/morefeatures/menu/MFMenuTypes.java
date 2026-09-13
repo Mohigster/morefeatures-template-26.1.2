@@ -26,7 +26,7 @@ public class MFMenuTypes {
 
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);
-        MoreFeatures.LOGGER.info("Mod Menu Types -> Performed by: " + MoreFeatures.MODID);
+        MoreFeatures.LOGGER.info("Mod Menu Types registered -> Performed by: " + MoreFeatures.MODID);
     }
 }
 

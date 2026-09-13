@@ -11,7 +11,7 @@ import net.minecraft.world.item.Item;
 public record ElytraSpeedEntry(HolderSet<Item> elytra, double percentSpeedBoost, double maximumSpeed) {
     public static final Codec<ElytraSpeedEntry> CODEC = RecordCodecBuilder.create(
             inst -> inst.group(
-                    RegistryCodecs.homogeneousList(Registries.ITEM).fieldOf("values")
+                    MFExtraCodecs.ITEM_SET.fieldOf("values")
                             .forGetter(ElytraSpeedEntry::elytra),
                     MFExtraCodecs.POSITIVE_DOUBLE.fieldOf("percent_speed_boost")
                             .forGetter(ElytraSpeedEntry::percentSpeedBoost),

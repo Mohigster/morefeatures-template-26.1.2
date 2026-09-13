@@ -248,7 +248,7 @@ public class MFPlacedFeatures {
 
         register(context, SMOLDERED_VINES_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.SMOLDERED_VINES_KEY),
                 List.of(
-                        CountPlacement.of(10),
+                        CountPlacement.of(5),
                         InSquarePlacement.spread(),
                         PlacementUtils.FULL_RANGE,
                         BiomeFilter.biome()
@@ -256,7 +256,7 @@ public class MFPlacedFeatures {
 
         register(context, SCORCHED_VINES_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.SCORCHED_VINES_KEY),
                 List.of(
-                        CountPlacement.of(10),
+                        CountPlacement.of(5),
                         InSquarePlacement.spread(),
                         PlacementUtils.FULL_RANGE,
                         BiomeFilter.biome()

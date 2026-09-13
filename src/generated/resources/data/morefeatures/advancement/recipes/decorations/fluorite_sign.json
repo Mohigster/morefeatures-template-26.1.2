@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_fluorite": {
+    "has_raw_fluorite": {
       "conditions": {
         "items": [
           {
-            "items": "morefeatures:fluorite"
+            "items": "morefeatures:raw_fluorite"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_fluorite"
+      "has_raw_fluorite"
     ]
   ],
   "rewards": {

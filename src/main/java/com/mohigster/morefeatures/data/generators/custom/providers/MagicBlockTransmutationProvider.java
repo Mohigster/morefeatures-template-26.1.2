@@ -2,20 +2,17 @@ package com.mohigster.morefeatures.data.generators.custom.providers;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.custom.magicblock.TransmutationEntry;
+import com.mohigster.morefeatures.util.Directories;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.data.CachedOutput;
 import net.minecraft.data.DataProvider;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
-import net.minecraft.world.level.block.Block;
-import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 
 import java.nio.file.Path;
@@ -86,7 +83,7 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
 
     // These methods are private because all they do is convert the TagKey or Item into a HolderSet for the main method
 
-    private void add(Identifier id, int extraAmount, boolean copyComponents, @NonNull Item output, @NonNull TagKey<Item> inputTag) {
+    private void add(Identifier id, int extraAmount, boolean copyComponents, Item output, TagKey<Item> inputTag) {
         try {
             this.add(id, this.registries.get().getOrThrow(inputTag), output, extraAmount, copyComponents);
         } catch (InterruptedException | ExecutionException e) {
@@ -95,7 +92,7 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
     }
 
     @SuppressWarnings("deprecation")
-    private void add(Identifier id, int extraAmount, boolean copyComponents, @NonNull Item output, @NonNull Item input) {
+    private void add(Identifier id, int extraAmount, boolean copyComponents, Item output, Item input) {
         this.add(id, HolderSet.direct(Item::builtInRegistryHolder, input), output, extraAmount, copyComponents);
     }
 
@@ -131,7 +128,7 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
 
         try {
             var lookupProvider = this.registries.get();
-            generate(lookupProvider);
+            this.generate(lookupProvider);
         } catch (InterruptedException | ExecutionException e) {
             throw new RuntimeException(e);
         }
@@ -143,7 +140,7 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
                     this.entries.entrySet().stream().map(e -> {
                         Path path = outputFolder
                                 .resolve(e.getKey().getNamespace())
-                                .resolve("magic_block_transmutations")
+                                .resolve(Directories.MAGIC_BLOCK_PATH)
                                 .resolve(e.getKey().getPath() + ".json");
 
                         return DataProvider.saveStable(cachedOutput, provider, TransmutationEntry.CODEC, e.getValue(), path);
@@ -153,7 +150,7 @@ public abstract class MagicBlockTransmutationProvider implements DataProvider {
     }
 
     @Override
-    public @NonNull String getName() {
+    public String getName() {
         return "Magic Block Transmutations: " + this.modId;
     }
 }

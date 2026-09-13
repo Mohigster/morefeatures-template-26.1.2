@@ -79,6 +79,14 @@ public class MoreFeaturesClient {
                 MFParticleTypes.CHARRED_SPORE.get(),
                 MFSuspendedParticle.CharredSporeProvider::new
         );
+        event.registerSpriteSet(
+                MFParticleTypes.DECREPIT_SPORE.get(),
+                MFSuspendedParticle.DecrepitSporeProvider::new
+        );
+        event.registerSpriteSet(
+                MFParticleTypes.PALLID_SPORE.get(),
+                MFSuspendedParticle.PallidSporeProvider::new
+        );
     }
 
     @SubscribeEvent
@@ -94,7 +102,7 @@ public class MoreFeaturesClient {
         event.registerLayerDefinition(MFModelLayer.PALM_BOAT, BoatModel::createBoatModel);
         event.registerLayerDefinition(MFModelLayer.PALM_CHEST_BOAT, BoatModel::createChestBoatModel);
 
-        event.registerLayerDefinition(MFModelLayer.ICEOLOGER, IceologerModel::createBodyLayer);
+        event.registerLayerDefinition(MFModelLayer.ICEOLOGER, IceologerModel::createLayer);
     }
 
     @SubscribeEvent

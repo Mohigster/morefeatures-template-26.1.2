@@ -19,11 +19,14 @@ import net.minecraft.world.item.equipment.EquipmentAsset;
 import net.minecraft.world.item.equipment.trim.MaterialAssetGroup;
 import net.minecraft.world.item.equipment.trim.TrimMaterial;
 import net.minecraft.world.item.equipment.trim.TrimMaterials;
+import org.jspecify.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class MFItemModelGenerators {
+    private final ItemModelGenerators itemModels;
+
     public static final List<ItemModelGenerators.TrimMaterialData> TRIM_MATERIAL_MODELS = new ArrayList<>(
             List.of(
                     new ItemModelGenerators.TrimMaterialData(MaterialAssetGroup.QUARTZ, TrimMaterials.QUARTZ),
@@ -46,13 +49,21 @@ public final class MFItemModelGenerators {
             )
     );
 
-    public static void customModelWithFlatInvTexture(ItemModelGenerators itemModels, Item item) {
-        ItemModel.Unbaked flatModel = ItemModelUtils.plainModel(itemModels.createFlatItemModel(item, ModelTemplates.FLAT_ITEM));
-        ItemModel.Unbaked inHandModel = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item, "_in_hand"));
-        itemModels.itemModelOutput.accept(item, ItemModelGenerators.createFlatModelDispatch(flatModel, inHandModel));
+    private MFItemModelGenerators(ItemModelGenerators itemModels) {
+        this.itemModels = itemModels;
     }
 
-    public static void generateTrimmableItem(ItemModelGenerators itemModels, Item armor, ResourceKey<EquipmentAsset> equipmentAssetId, Identifier slotTrimPrefix, boolean hasDyedLayer) {
+    public static MFItemModelGenerators create(@NonNull ItemModelGenerators itemModels) {
+        return new MFItemModelGenerators(itemModels);
+    }
+
+    public void customModelWithFlatInvTexture(Item item) {
+        ItemModel.Unbaked flatModel = ItemModelUtils.plainModel(this.itemModels.createFlatItemModel(item, ModelTemplates.FLAT_ITEM));
+        ItemModel.Unbaked inHandModel = ItemModelUtils.plainModel(ModelLocationUtils.getModelLocation(item, "_in_hand"));
+        this.itemModels().itemModelOutput.accept(item, ItemModelGenerators.createFlatModelDispatch(flatModel, inHandModel));
+    }
+
+    public void generateTrimmableItem(Item armor, ResourceKey<EquipmentAsset> equipmentAssetId, Identifier slotTrimPrefix, boolean hasDyedLayer) {
         Identifier modelLocation = ModelLocationUtils.getModelLocation(armor);
         Material itemTexture = TextureMapping.getItemTexture(armor);
         Material overlayTexture = TextureMapping.getItemTexture(armor, "_overlay");
@@ -63,10 +74,10 @@ public final class MFItemModelGenerators {
             Material trimOverlayTexture = new Material(slotTrimPrefix.withSuffix("_" + material.assets().assetId(equipmentAssetId).suffix()));
             ItemModel.Unbaked trimModel;
             if (hasDyedLayer) {
-                itemModels.generateLayeredItem(trimModelLocation, itemTexture, overlayTexture, trimOverlayTexture);
+                this.itemModels.generateLayeredItem(trimModelLocation, itemTexture, overlayTexture, trimOverlayTexture);
                 trimModel = ItemModelUtils.tintedModel(trimModelLocation, new Dye(-6265536));
             } else {
-                itemModels.generateLayeredItem(trimModelLocation, itemTexture, trimOverlayTexture);
+                this.itemModels.generateLayeredItem(trimModelLocation, itemTexture, trimOverlayTexture);
                 trimModel = ItemModelUtils.plainModel(trimModelLocation);
             }
 
@@ -75,13 +86,17 @@ public final class MFItemModelGenerators {
 
         ItemModel.Unbaked untrimmedModel;
         if (hasDyedLayer) {
-            ModelTemplates.TWO_LAYERED_ITEM.create(modelLocation, TextureMapping.layered(itemTexture, overlayTexture), itemModels.modelOutput);
+            ModelTemplates.TWO_LAYERED_ITEM.create(modelLocation, TextureMapping.layered(itemTexture, overlayTexture), this.itemModels().modelOutput);
             untrimmedModel = ItemModelUtils.tintedModel(modelLocation, new Dye(-6265536));
         } else {
-            ModelTemplates.FLAT_ITEM.create(modelLocation, TextureMapping.layer0(itemTexture), itemModels.modelOutput);
+            ModelTemplates.FLAT_ITEM.create(modelLocation, TextureMapping.layer0(itemTexture), this.itemModels().modelOutput);
             untrimmedModel = ItemModelUtils.plainModel(modelLocation);
         }
 
-        itemModels.itemModelOutput.accept(armor, ItemModelUtils.select(new TrimMaterialProperty(), untrimmedModel, cases));
+        this.itemModels().itemModelOutput.accept(armor, ItemModelUtils.select(new TrimMaterialProperty(), untrimmedModel, cases));
+    }
+
+    public ItemModelGenerators itemModels() {
+        return this.itemModels;
     }
 }

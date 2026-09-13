@@ -31,6 +31,6 @@ public class IceologerRenderer extends MobRenderer<IceologerEntity, IceologerRen
     @Override
     public void extractRenderState(final IceologerEntity entity, final IceologerRenderState state, final float partialTicks) {
         super.extractRenderState(entity, state, partialTicks);
-        state.isCastingSpell = entity.isCastingSpell();
+        state.setCastingSpell(entity.isCastingSpell());
     }
 }

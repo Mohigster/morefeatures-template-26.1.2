@@ -27,7 +27,12 @@ public class MFTrimMaterials {
         register(context, BISMUTH, Style.EMPTY.withColor(16738740), MFMaterialAssetGroups.BISMUTH);
     }
 
-    private static void register(BootstrapContext<TrimMaterial> context, ResourceKey<TrimMaterial> registryKey, Style hoverTextStyle, MaterialAssetGroup assets) {
+    private static void register(
+            BootstrapContext<TrimMaterial> context,
+            ResourceKey<TrimMaterial> registryKey,
+            Style hoverTextStyle,
+            MaterialAssetGroup assets
+    ) {
         Component description = Component.translatable(Util.makeDescriptionId("trim_material", registryKey.identifier())).withStyle(hoverTextStyle);
         context.register(registryKey, new TrimMaterial(assets, description));
     }

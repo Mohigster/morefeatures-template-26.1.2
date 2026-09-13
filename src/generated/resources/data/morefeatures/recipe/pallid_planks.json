@@ -3,7 +3,7 @@
   "category": "building",
   "group": "planks",
   "ingredients": [
-    "#morefeatures:wood/pallid_logs"
+    "#morefeatures:wood/logs/pallid"
   ],
   "result": {
     "count": 4,

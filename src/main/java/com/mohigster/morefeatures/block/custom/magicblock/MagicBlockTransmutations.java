@@ -34,14 +34,14 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
     }
 
     /**
-     * TagsUpdatedEvent is used to delay the check of whether or not a block is in the results tag to after the tag is populated.
+     * TagsUpdatedEvent is used to delay the check of whether a block is in the results tag until after the tag is populated.
      * Despite this, the event parameter is actually never used in the method. Still, it is the correct event to use.
      */
     @SuppressWarnings({"deprecation", "unused"})
-    public void ignoreResultsNotInTag(TagsUpdatedEvent event) {
+    public static void ignoreResultsNotInTag(TagsUpdatedEvent event) {
         List<TransmutationEntry> validEntries = new ArrayList<>();
 
-        for (TransmutationEntry entry : this.rawEntries) {
+        for (TransmutationEntry entry : INSTANCE.rawEntries) {
             if (!entry.output().builtInRegistryHolder().is(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)) {
                 MoreFeatures.LOGGER.warn(
                         "Skipping magic block transmutation: output item '{}' is not in the '{}' tag. Add it to that tag if this transmutation should be allowed.",
@@ -54,28 +54,29 @@ public class MagicBlockTransmutations extends SimpleJsonResourceReloadListener<T
             validEntries.add(entry);
         }
 
-        this.entries = List.copyOf(validEntries);
+      INSTANCE.entries = List.copyOf(validEntries);
     }
 
-    public ItemStack getResult(ItemStack input) {
-        for (TransmutationEntry entry : this.entries) {
+    public static ItemStack getResult(ItemStack input) {
+        for (TransmutationEntry entry : INSTANCE.entries) {
             if (input.is(entry.inputValue())) {
-                ItemStack result = new ItemStack(entry.output(), input.getCount());
+                int count = input.getCount();
+
+                if (input.is(MFItemTags.MAGIC_BLOCK_MULTIPLIES_RESULT)) {
+                    int initCount = count;
+                    count = 1;
+                    count += entry.extraItems();
+                    count *= initCount;
+                }
+
+                ItemStack result = new ItemStack(entry.output(), count);
                 if (entry.copyComponents()) {
                     result.applyComponents(input.getComponentsPatch()); // Use getComponentsPatch instead of getComponents so that the model can still change (models are a component as of 1.21.2 so getComponents will copy the model)
                 }
+
                 return result;
             }
         }
         return ItemStack.EMPTY;
-    }
-
-    // This method is separate so that the extra amounts are applied to individual input items separately from the input value itself
-    public ItemStack applyExtraAmounts(ItemStack input) {
-        for (TransmutationEntry entry : this.entries){
-            if (input.is(entry.inputValue())) input.setCount(entry.extraItems() + 1);
-        }
-
-        return input;
     }
 }

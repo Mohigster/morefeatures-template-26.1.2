@@ -57,11 +57,11 @@ public class MultiBaseSpeleothemClusterFeature extends Feature<MultiBaseSpeleoth
 
         for (int dx = -xRadius; dx <= xRadius; dx++) {
             for (int dz = -zRadius; dz <= zRadius; dz++) {
-                double chance = getChanceOfStalagmiteOrStalactite(xRadius, zRadius, dx, dz, config);
+                double chance = this.getChanceOfStalagmiteOrStalactite(xRadius, zRadius, dx, dz, config);
                 BlockPos pos = origin.offset(dx, 0, dz);
                 // Each column picks its own random base block from the list
                 BlockState baseBlock = config.randomBaseBlock(random);
-                placeColumn(level, random, pos, dx, dz, wetness, chance, height, density, config, baseBlock);
+                this.placeColumn(level, random, pos, dx, dz, wetness, chance, height, density, config, baseBlock);
             }
         }
 
@@ -117,7 +117,7 @@ public class MultiBaseSpeleothemClusterFeature extends Feature<MultiBaseSpeleoth
             int maxH = floor.isPresent()
                     ? Math.min(clusterHeight, ceiling.getAsInt() - floor.getAsInt())
                     : clusterHeight;
-            stalactiteHeight = getSpeleothemHeight(random, dx, dz, density, maxH, config);
+            stalactiteHeight = this.getSpeleothemHeight(random, dx, dz, density, maxH, config);
         } else {
             stalactiteHeight = 0;
         }
@@ -127,7 +127,7 @@ public class MultiBaseSpeleothemClusterFeature extends Feature<MultiBaseSpeleoth
         int stalagmiteHeight;
         if (floor.isPresent() && wantStalagmite && isNotLava(level, pos.atY(floor.getAsInt()))) {
             int floorThickness = config.speleothemBlockLayerThickness().sample(random);
-            replaceBlocksWithBaseBlock(level, pos.atY(floor.getAsInt()), floorThickness, Direction.DOWN, config, baseBlock);
+            this.replaceBlocksWithBaseBlock(level, pos.atY(floor.getAsInt()), floorThickness, Direction.DOWN, config, baseBlock);
             if (ceiling.isPresent()) {
                 stalagmiteHeight = Math.max(0,
                         stalactiteHeight + Mth.randomBetweenInclusive(
@@ -136,7 +136,7 @@ public class MultiBaseSpeleothemClusterFeature extends Feature<MultiBaseSpeleoth
                                 config.maxStalagmiteStalactiteHeightDiff()
                         ));
             } else {
-                stalagmiteHeight = getSpeleothemHeight(random, dx, dz, density, clusterHeight, config);
+                stalagmiteHeight = this.getSpeleothemHeight(random, dx, dz, density, clusterHeight, config);
             }
         } else {
             stalagmiteHeight = 0;
@@ -236,9 +236,9 @@ public class MultiBaseSpeleothemClusterFeature extends Feature<MultiBaseSpeleoth
             return false;
         }
         for (Direction direction : Direction.Plane.HORIZONTAL) {
-            if (!canBeAdjacentToWater(level, pos.relative(direction))) return false;
+            if (!this.canBeAdjacentToWater(level, pos.relative(direction))) return false;
         }
-        return canBeAdjacentToWater(level, pos.below());
+        return this.canBeAdjacentToWater(level, pos.below());
     }
 
     private boolean canBeAdjacentToWater(LevelAccessor level, BlockPos pos) {

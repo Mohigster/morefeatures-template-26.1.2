@@ -30,12 +30,12 @@ public class FireWandItem extends AimableWandItem {
     }
 
     @Override
-    protected void castAimedSpell(Player caster, Level level, List<Vec3> spreadDirections){
-        if (!(level instanceof ServerLevel serverLevel)) return;
+    public void castAimedSpell(Player caster, Level level, List<Vec3> spreadDirections){
+        if (!(level instanceof ServerLevel server)) return;
 
         for (Vec3 direction : spreadDirections) {
             SmallFireball fireball = new SmallFireball(
-                    serverLevel,
+                    server,
                     caster.getX(),
                     caster.getEyeY() - 0.1,
                     caster.getZ(),
@@ -46,7 +46,7 @@ public class FireWandItem extends AimableWandItem {
 
             fireball.setDeltaMovement(direction.scale(1.8));
 
-            serverLevel.addFreshEntity(fireball);
+            server.addFreshEntity(fireball);
         }
     }
 }

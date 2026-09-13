@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
-  "group": "fluorite",
+  "group": "gemstone",
   "key": {
     "#": "morefeatures:fluorite",
     "W": "morefeatures:fluorite_block"

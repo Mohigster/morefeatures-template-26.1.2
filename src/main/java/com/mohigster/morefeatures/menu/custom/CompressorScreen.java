@@ -1,8 +1,8 @@
 package com.mohigster.morefeatures.menu.custom;
 
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
-import com.mohigster.morefeatures.renderer.EnergyDisplayTooltipArea;
-import com.mohigster.morefeatures.renderer.FluidTankRenderer;
+import com.mohigster.morefeatures.renderer.menu.EnergyDisplayTooltipArea;
+import com.mohigster.morefeatures.renderer.menu.FluidTankRenderer;
 import com.mohigster.morefeatures.util.MouseUtil;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -73,13 +73,13 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
     @Override
     public void extractBackground(@NonNull GuiGraphicsExtractor graphics, int mouseX, int mouseY, float a) {
         super.extractBackground(graphics, mouseX, mouseY, a);
-        int x = (width - imageWidth) / 2;
-        int y = (height - imageHeight) / 2;
+        int x = (this.width - imageWidth) / 2;
+        int y = (this.height - imageHeight) / 2;
 
         graphics.blit(RenderPipelines.GUI_TEXTURED, GUI_TEXTURE, x, y, 0, 0, imageWidth, imageHeight, 256, 256);
 
-        energyInfoArea.render(graphics);
-        fluidRenderer.render(graphics, x + 8, y + 7, menu.blockEntity.getFluid());
+        this.energyInfoArea.render(graphics);
+        this.fluidRenderer.render(graphics, x + 8, y + 7, this.menu.blockEntity.getFluid());
 
         renderProgressArrow(graphics, x, y);
         renderProgressCrystal(graphics, x, y);

@@ -9,6 +9,7 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.util.Util;
 import net.minecraft.world.item.JukeboxSong;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class MFJukeboxSongs {
 
@@ -16,8 +17,8 @@ public class MFJukeboxSongs {
     public static final ResourceKey<JukeboxSong> SNOW_QUEEN_KEY = createKey("snow_queen");
 
     public static void bootstrap(BootstrapContext<JukeboxSong> context) {
-        register(context, AQUAMARINE_KEY, ((Holder.Reference<SoundEvent>) MFSoundEvents.AQUAMARINE.getDelegate()), 192, 13);
-        register(context, SNOW_QUEEN_KEY, ((Holder.Reference<SoundEvent>) MFSoundEvents.SNOW_QUEEN.getDelegate()), 220, 15);
+        register(context, AQUAMARINE_KEY, MFSoundEvents.AQUAMARINE, 192, 13);
+        register(context, SNOW_QUEEN_KEY, MFSoundEvents.SNOW_QUEEN, 220, 15);
     }
 
     private static ResourceKey<JukeboxSong> createKey(String name) {
@@ -25,8 +26,9 @@ public class MFJukeboxSongs {
     }
 
     private static void register(BootstrapContext<JukeboxSong> context, ResourceKey<JukeboxSong> registryKey,
-                                 final Holder.Reference<SoundEvent> soundEvent, int lengthInSeconds, int comparatorOutput) {
-        context.register(registryKey, new JukeboxSong(soundEvent,
-                Component.translatable(Util.makeDescriptionId("jukebox_song", registryKey.identifier())), lengthInSeconds, comparatorOutput));
+                                 final DeferredHolder<SoundEvent, SoundEvent> soundEvent, int lengthInSeconds, int comparatorOutput) {
+        context.register(registryKey, new JukeboxSong(soundEvent.getDelegate(), Component.translatable(
+                Util.makeDescriptionId("jukebox_song", registryKey.identifier())),
+                lengthInSeconds, comparatorOutput));
     }
 }

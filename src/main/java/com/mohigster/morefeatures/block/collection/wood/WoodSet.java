@@ -30,11 +30,11 @@ import org.jspecify.annotations.Nullable;
  */
 public enum WoodSet implements StringRepresentable {
     BLOODWOOD("bloodwood", MFWoodType.BLOODWOOD, MapColor.COLOR_RED, false, true,  true, true, true),
-    TAINTED("tainted", MFWoodType.TAINTED, MapColor.COLOR_PURPLE, false, true, true, true, false),
-    PALM("palm", MFWoodType.PALM, MapColor.COLOR_YELLOW, false, true, true, true, false),
-    CHARRED("charred", MFWoodType.CHARRED, MapColor.COLOR_BLACK, true, false, false, false, false),
-    DECREPIT("decrepit", MFWoodType.DECREPIT, MapColor.TERRACOTTA_BLUE, false, false, true, false, false),
-    PALLID("pallid", MFWoodType.PALLID, MapColor.TERRACOTTA_GREEN, false, false, true, false, false);
+    TAINTED("tainted", MFWoodType.TAINTED, MapColor.COLOR_PURPLE),
+    PALM("palm", MFWoodType.PALM, MapColor.COLOR_YELLOW),
+    CHARRED("charred", MFWoodType.CHARRED, MapColor.COLOR_BLACK, true),
+    DECREPIT("decrepit", MFWoodType.DECREPIT, MapColor.TERRACOTTA_BLUE, false, false),
+    PALLID("pallid", MFWoodType.PALLID, MapColor.TERRACOTTA_GREEN, false, false);
 
     private final String name;
     private final boolean nether;
@@ -45,14 +45,10 @@ public enum WoodSet implements StringRepresentable {
     private final boolean overworld;
     private final boolean noWoodSuffix;
 
-    WoodSet(String name,
-            WoodType woodType,
-            MapColor mapColor,
-            boolean nether,
-            boolean hasBoat,
-            boolean flammable,
-            boolean overworld,
-            boolean noWoodSuffix
+    WoodSet(String name, WoodType woodType,
+            MapColor mapColor, boolean nether,
+            boolean hasBoat, boolean flammable,
+            boolean overworld, boolean noWoodSuffix
     ) {
         this.name = name;
         this.nether = nether;
@@ -62,6 +58,27 @@ public enum WoodSet implements StringRepresentable {
         this.flammable = flammable;
         this.overworld = overworld;
         this.noWoodSuffix = noWoodSuffix;
+    }
+
+    WoodSet(String name, WoodType woodType,
+            MapColor mapColor, boolean nether
+    ) {
+        this(name, woodType, mapColor, nether, false,
+                false, false, false);
+    }
+
+    WoodSet(String name, WoodType woodType,
+            MapColor mapColor
+    ) {
+        this(name, woodType, mapColor, false, true,
+                true, true, false);
+    }
+
+    WoodSet(String name, WoodType woodType,
+            MapColor mapColor, boolean nether, boolean overworld
+    ) {
+        this(name, woodType, mapColor, nether,
+                false, true, overworld, false);
     }
 
     @Override
@@ -74,7 +91,11 @@ public enum WoodSet implements StringRepresentable {
         return this.name;
     }
 
-    public String getFormattedSuffix(String id) {
+    String getFormattedId(String prefix, String id) {
+        return prefix + this.getName() + this.getFormattedSuffix(id);
+    }
+
+    private String getFormattedSuffix(String id) {
         if (id.isEmpty()) return id;
 
         if (this.noWoodSuffix && id.equals("wood")) {
@@ -97,21 +118,21 @@ public enum WoodSet implements StringRepresentable {
         return this.nether || !this.overworld;
     }
 
-    public SoundType getMainSoundType() {
-        return this.getSoundType(SoundType.NETHER_WOOD);
+    public SoundType mainSoundType() {
+        return this.soundType(SoundType.NETHER_WOOD);
     }
 
-    public SoundType getLogSoundType() {
-        return this.getSoundType(SoundType.STEM);
+    public SoundType logSoundType() {
+        return this.soundType(SoundType.STEM);
     }
 
-    private SoundType getSoundType(SoundType nonOverworldSound){
+    private SoundType soundType(SoundType nonOverworldSound){
         // Nether and End woods have varied sound types depending on if they are a log or not.
         // Overworld woods, in contrast, always use the same sound type for planks, logs, and others.
         return this.netherOrEndStyled() ? nonOverworldSound : SoundType.WOOD;
     }
 
-    public MapColor getMapColor() {
+    public MapColor mapColor() {
         return this.mapColor;
     }
 
@@ -124,18 +145,18 @@ public enum WoodSet implements StringRepresentable {
     }
 
     // This is used to convert the WoodSet from this Enum to the vanilla WoodType that already exists
-    public WoodType getWoodType() {
+    public WoodType woodType() {
         return this.woodType;
     }
 
     // Returns the BlockSetType passed in when registering the WoodType
-    public BlockSetType getBlockSetType() {
+    public BlockSetType blockSetType() {
         return this.woodType.setType();
     }
 
     // Leaves have to be registered separately because not every wood type is registered
     // as an MFLeavesBlock. Charred wood has CHARRED_WART_BLOCK registered as a plain Block
-    public DeferredBlock<Block> getLeavesOrWart(){
+    public DeferredBlock<Block> leavesOrWart(){
         return switch (this){
             case BLOODWOOD -> MFBlocks.BLOODWOOD_LEAVES;
             case TAINTED -> MFBlocks.TAINTED_LEAVES;
@@ -149,7 +170,7 @@ public enum WoodSet implements StringRepresentable {
     // Same goes for saplings, but it's even more diverse. Bloodwood and Tainted are
     // registered with plain SaplingBlock, but Palm, Decrepit, and Pallid are registered
     // with PlantedOffGrassSaplingBlock, and Charred with NetherFungusBlock.
-    public DeferredBlock<Block> getSaplingOrFungus(){
+    public DeferredBlock<Block> saplingOrFungus(){
         return switch (this){
             case BLOODWOOD ->  MFBlocks.BLOODWOOD_SAPLING;
             case TAINTED ->  MFBlocks.TAINTED_SAPLING;

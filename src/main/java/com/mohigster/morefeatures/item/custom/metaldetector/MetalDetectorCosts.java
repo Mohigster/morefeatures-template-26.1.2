@@ -32,11 +32,12 @@ public class MetalDetectorCosts extends SimpleJsonResourceReloadListener<Detecto
                 .toList();
     }
 
-    public int getCost(BlockState state) {
-        for (DetectorCostEntry entry : entries) {
+    public static int getCost(BlockState state) {
+        for (DetectorCostEntry entry : INSTANCE.entries) {
             if (state.is(entry.inputValues())) {
                 // Just a lil Easter egg
-                if (entry.inputValues().unwrapKey().get().equals(MFBlockTags.METAL_DETECTOR_BISMUTH_COST) && !state.is(MFBlocks.BISMUTH_BLOCK)) {
+                if (entry.inputValues().unwrapKey().get().equals(MFBlockTags.METAL_DETECTOR_BISMUTH_COST)
+                        && !state.is(MFBlocks.BISMUTH_BLOCK)) {
                     MoreFeatures.LOGGER.debug("wait... that's not bismuth in the bismuth cost tag... isn't that ILLEGAL???!!!");
                 }
 

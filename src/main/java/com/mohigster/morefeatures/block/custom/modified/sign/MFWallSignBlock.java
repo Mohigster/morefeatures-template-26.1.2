@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.block.custom.modified.sign;
 
+import com.mohigster.morefeatures.block.collection.gemstone.GemstoneType;
 import com.mohigster.morefeatures.block.collection.wood.WoodSet;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import net.minecraft.core.BlockPos;
@@ -7,15 +8,18 @@ import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.WoodType;
-import org.jspecify.annotations.NullMarked;
 
 public class MFWallSignBlock extends WallSignBlock {
     public MFWallSignBlock(WoodType type, Properties properties) {
         super(type, properties);
     }
 
+    public MFWallSignBlock(GemstoneType gem, Properties properties) {
+        this(gem.woodType(), properties);
+    }
+
     public MFWallSignBlock(WoodSet set, Properties properties) {
-        super(set.getWoodType(), properties);
+        super(set.woodType(), properties);
     }
 
     @Override

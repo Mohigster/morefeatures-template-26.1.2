@@ -6,13 +6,14 @@ import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.block.custom.blocktype.MFWoodType;
 import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
 import com.mohigster.morefeatures.block.custom.magicblock.MagicBlockTransmutations;
+import com.mohigster.morefeatures.block.custom.portal.datadriven.PortalDestinations;
+import com.mohigster.morefeatures.block.custom.portal.key.PortalKeyType;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.creativetab.MFCreativeModeTabs;
 import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
 import com.mohigster.morefeatures.data.world.biome.SurfaceRuleFix;
 import com.mohigster.morefeatures.enchantment.MFEnchantmentEffects;
 import com.mohigster.morefeatures.entity.MFEntityTypes;
-import com.mohigster.morefeatures.events.data.BowDamageBonuses;
 import com.mohigster.morefeatures.events.data.ElytraSpeedBoosts;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorCosts;
@@ -27,6 +28,7 @@ import com.mohigster.morefeatures.data.world.feature.custom.MFFeatures;
 import com.mohigster.morefeatures.data.world.tree.decorator.MFTreeDecorators;
 import com.mohigster.morefeatures.data.world.tree.placer.foliage.MFFoliagePlacerType;
 import com.mohigster.morefeatures.data.world.tree.placer.trunk.MFTrunkPlacerType;
+import com.mohigster.morefeatures.util.Directories;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
@@ -47,6 +49,8 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
+import net.neoforged.neoforge.registries.NewRegistryEvent;
+import net.neoforged.neoforge.registries.RegistryBuilder;
 import org.slf4j.Logger;
 import terrablender.api.SurfaceRuleManager;
 
@@ -54,7 +58,7 @@ import terrablender.api.SurfaceRuleManager;
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MoreFeatures.MODID)
 public class MoreFeatures {
-    private static boolean rulesAdded = false;
+    private boolean rulesAdded = false;
     // Define mod id in a common place for everything to reference
     public static final String MODID = "morefeatures";
     // Directly reference a slf4j logger
@@ -67,7 +71,7 @@ public class MoreFeatures {
 
         modEventBus.addListener(this::commonSetup);
 
-        NeoForge.EVENT_BUS.addListener(MagicBlockTransmutations.INSTANCE::ignoreResultsNotInTag);
+        NeoForge.EVENT_BUS.addListener(MagicBlockTransmutations::ignoreResultsNotInTag);
         modEventBus.addListener(MFDataMaps::registerDataMaps);
 
         MFCreativeModeTabs.register(modEventBus); // All register methods are declared in the class
@@ -84,6 +88,8 @@ public class MoreFeatures {
         MFSoundEvents.register(modEventBus);
 
         MFEnchantmentEffects.register(modEventBus);
+
+        PortalKeyType.register(modEventBus);
 
         MFMenuTypes.register(modEventBus);
         MFBlockEntities.register(modEventBus);
@@ -110,8 +116,6 @@ public class MoreFeatures {
 
         // Register our mod's ModConfigSpec so that FML can create and load the config file for us
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
-
-
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
@@ -127,33 +131,33 @@ public class MoreFeatures {
     @SubscribeEvent
     public void onReloadListener(AddServerReloadListenersEvent event){
         event.addListener(
-                MFIdentifier.withMfNamespace("magic_block_transmutations"),
+                MFIdentifier.withMfNamespace(Directories.MAGIC_BLOCK_PATH),
                 MagicBlockTransmutations.INSTANCE
         );
         event.addListener(
-                MFIdentifier.withMfNamespace("metal_detector_costs"),
+                MFIdentifier.withMfNamespace(Directories.METAL_DETECTOR_PATH),
                 MetalDetectorCosts.INSTANCE
         );
         event.addListener(
-                MFIdentifier.withMfNamespace("elytra_speed_boosts"),
+                MFIdentifier.withMfNamespace(Directories.ELYTRA_PATH),
                 ElytraSpeedBoosts.INSTANCE
         );
         event.addListener(
-                MFIdentifier.withMfNamespace("bow_damage_bonuses"),
-                BowDamageBonuses.INSTANCE
+                MFIdentifier.withMfNamespace(Directories.PORTAL_PATH),
+                PortalDestinations.INSTANCE
         );
     }
 
     @SubscribeEvent
     public void onServerAboutToStart(ServerAboutToStartEvent event){
-        if (rulesAdded) return;
+        if (this.rulesAdded) return;
 
         // Surface rule registration moved here due to 26.2 now requiring a HolderGetter for the isBiome check
         HolderGetter<Biome> biomeGetter = event.getServer().registryAccess().lookupOrThrow(Registries.BIOME);
 
         this.registerSurfaceRules(biomeGetter);
 
-        rulesAdded = true;
+        this.rulesAdded = true;
     }
 
     // Register functions called in enqueueWork and onServerAboutToStart
@@ -166,7 +170,7 @@ public class MoreFeatures {
                 ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
                         // Saplings are registered separately since they are not all registered by the same class. Instead,
                         // the getSaplingOrFungus() method will return the sapling associated with the relevant WoodSetType
-                        set.getSaplingOrFungus().getId(),
+                        set.saplingOrFungus().getId(),
                         // Potted saplings ARE by contrast registered as a WoodTypeCollection because
                         // they are all registered by the same class. That class being FlowerPotBlock
                         MFBlocks.POTTED_SAPLING.pick(set)
@@ -241,19 +245,19 @@ public class MoreFeatures {
 
     private void addWoodenVerticalSlabs(BuildCreativeModeTabContentsEvent event){
         if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
-            event.insertBefore(Items.OAK_SLAB.getDefaultInstance(), MFBlocks.OAK_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.SPRUCE_SLAB.getDefaultInstance(), MFBlocks.SPRUCE_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.BIRCH_SLAB.getDefaultInstance(), MFBlocks.BIRCH_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.JUNGLE_SLAB.getDefaultInstance(), MFBlocks.JUNGLE_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.ACACIA_SLAB.getDefaultInstance(), MFBlocks.ACACIA_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.DARK_OAK_SLAB.getDefaultInstance(), MFBlocks.DARK_OAK_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.CRIMSON_SLAB.getDefaultInstance(), MFBlocks.CRIMSON_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.WARPED_SLAB.getDefaultInstance(), MFBlocks.WARPED_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.MANGROVE_SLAB.getDefaultInstance(), MFBlocks.MANGROVE_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.CHERRY_SLAB.getDefaultInstance(), MFBlocks.CHERRY_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.BAMBOO_SLAB.getDefaultInstance(), MFBlocks.BAMBOO_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.BAMBOO_MOSAIC_SLAB.getDefaultInstance(), MFBlocks.BAMBOO_MOSAIC_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertBefore(Items.PALE_OAK_SLAB.getDefaultInstance(), MFBlocks.PALE_OAK_VERTICAL_SLAB.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.OAK_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.oak().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.SPRUCE_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.spruce().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.BIRCH_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.birch().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.JUNGLE_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.jungle().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.ACACIA_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.acacia().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.DARK_OAK_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.darkOak().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.CRIMSON_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.crimson().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.WARPED_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.warped().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.MANGROVE_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.mangrove().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.CHERRY_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.cherry().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.BAMBOO_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.bamboo().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.BAMBOO_MOSAIC_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.mosaic().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertBefore(Items.PALE_OAK_SLAB.getDefaultInstance(), MFBlocks.VANILLA_WOOD_VERTICAL_SLAB.paleOak().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
 
@@ -377,8 +381,8 @@ public class MoreFeatures {
             event.insertAfter(MFItems.RAW_MAGNESIUM.toStack(), MFItems.RAW_BISMUTH.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(Items.NETHERITE_INGOT.getDefaultInstance(), MFItems.BISMUTH_SCRAP.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
             event.insertAfter(MFItems.BISMUTH_SCRAP.toStack(), MFItems.BISMUTH.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertAfter(MFItems.RAW_BISMUTH.toStack(), MFItems.RAW_AZURITE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
-            event.insertAfter(MFItems.BISMUTH.toStack(), MFItems.AZURITE.toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(MFItems.RAW_BISMUTH.toStack(), MFItems.RAW_GEM.azurite().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
+            event.insertAfter(MFItems.BISMUTH.toStack(), MFItems.GEM.azurite().toStack(), CreativeModeTab.TabVisibility.PARENT_AND_SEARCH_TABS);
         }
     }
 

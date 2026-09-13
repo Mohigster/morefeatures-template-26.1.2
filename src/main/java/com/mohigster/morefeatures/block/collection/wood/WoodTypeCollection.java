@@ -30,7 +30,7 @@ public record WoodTypeCollection<T>(
             WoodSet.PALLID
     );
 
-    public static <T> WoodTypeCollection<T> create(final T value) {
+    public static <T> WoodTypeCollection<T> createForAll(final T value) {
         return new WoodTypeCollection<>(value, value, value, value, value, value);
     }
 
@@ -46,7 +46,7 @@ public record WoodTypeCollection<T>(
         String formattedPrefix = appendPrefixWithUnderscore ? prefix + "_" : prefix;
 
         return zipMap(SETS, ids, (set, id) ->
-                formattedPrefix + set.getName() + set.getFormattedSuffix(id)
+                set.getFormattedId(formattedPrefix, id)
         );
     }
 
@@ -112,12 +112,7 @@ public record WoodTypeCollection<T>(
     }
 
     public static <T, U> void zipApply(final WoodTypeCollection<T> first, final WoodTypeCollection<U> second, final BiConsumer<T, U> consumer) {
-        consumer.accept(first.bloodwood(), second.bloodwood());
-        consumer.accept(first.tainted(), second.tainted());
-        consumer.accept(first.palm(), second.palm());
-        consumer.accept(first.charred(), second.charred());
-        consumer.accept(first.decrepit(), second.decrepit());
-        consumer.accept(first.pallid(), second.pallid());
+        SETS.forEach(set -> consumer.accept(first.pick(set), second.pick(set)));
     }
 
     public static <T, U, R> WoodTypeCollection<R> zipMap(final WoodTypeCollection<T> first, final WoodTypeCollection<U> second, final BiFunction<T, U, R> operation) {

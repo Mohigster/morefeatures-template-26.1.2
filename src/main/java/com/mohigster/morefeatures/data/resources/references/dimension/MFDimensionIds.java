@@ -7,7 +7,7 @@ import net.minecraft.world.level.Level;
 
 public class MFDimensionIds {
     public static final ResourceKey<Level> EVILDIM = create("evildim");
-    public static final ResourceKey<Level> BOREALIS = create("borialis");
+    public static final ResourceKey<Level> BOREALIS = create("borealis");
 
     private static ResourceKey<Level> create(String name){
         return ResourceKey.create(Registries.DIMENSION, MFIdentifier.withMfNamespace(name));

@@ -49,7 +49,7 @@ public class IceologerModel extends EntityModel<IceologerRenderState> {
 		this.mirrored = this.crossed_arm.getChild("mirrored");
 	}
 
-	public static LayerDefinition createBodyLayer() {
+	public static LayerDefinition createLayer() {
 		MeshDefinition meshdefinition = new MeshDefinition();
 		PartDefinition partdefinition = meshdefinition.getRoot();
 
@@ -119,7 +119,7 @@ public class IceologerModel extends EntityModel<IceologerRenderState> {
 		float animationPos = renderState.walkAnimationPos;
 		this.head.yRot = renderState.yRot * (float) (Math.PI / 180.0);
 		this.head.xRot = renderState.xRot * (float) (Math.PI / 180.0);
-		if (!renderState.isCastingSpell) {
+		if (!renderState.isCastingSpell()) {
 			this.right.xRot = Mth.cos(animationPos * 0.6662F + (float) Math.PI) * 2.0F * animationSpeed * 0.5F;
 			this.right.yRot = 0.0F;
 			this.right.zRot = 0.0F;
@@ -136,7 +136,7 @@ public class IceologerModel extends EntityModel<IceologerRenderState> {
 
 		AbstractIllager.IllagerArmPose pose = renderState.armPose;
 
-		if (renderState.isCastingSpell) {
+		if (renderState.isCastingSpell()) {
 			this.right.z = 0.0F;
 			this.right.x = -5.0F;
 			this.left.z = 0.0F;
@@ -150,8 +150,8 @@ public class IceologerModel extends EntityModel<IceologerRenderState> {
 		}
 
 		boolean crossedArms = pose == AbstractIllager.IllagerArmPose.CROSSED;
-		this.crossed_arm.visible = crossedArms && !renderState.isCastingSpell;
-		this.left.visible = !crossedArms || renderState.isCastingSpell;
-		this.right.visible = !crossedArms || renderState.isCastingSpell;
+		this.crossed_arm.visible = crossedArms && !renderState.isCastingSpell();
+		this.left.visible = !crossedArms || renderState.isCastingSpell();
+		this.right.visible = !crossedArms || renderState.isCastingSpell();
 	}
 }

@@ -1,14 +1,17 @@
 package com.mohigster.morefeatures.item;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.block.collection.gemstone.GemstoneCollection;
+import com.mohigster.morefeatures.data.material.BowMaterial;
 import com.mohigster.morefeatures.data.material.MFEquipmentAssets;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
+import com.mohigster.morefeatures.data.resources.MFIdentifier;
+import com.mohigster.morefeatures.data.resources.references.MFEntityTypeIds;
 import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorItem;
 import com.mohigster.morefeatures.item.custom.trident.MFTridentItem;
 import com.mohigster.morefeatures.item.custom.trim.MFTrimMaterials;
 import com.mohigster.morefeatures.item.food.MFFoods;
-import com.mohigster.morefeatures.data.material.MFToolMaterial;
 import com.mohigster.morefeatures.data.resources.references.MFItemIds;
 import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
 import com.mohigster.morefeatures.data.sound.MFJukeboxSongs;
@@ -17,9 +20,8 @@ import com.mohigster.morefeatures.item.custom.*;
 import com.mohigster.morefeatures.item.custom.wand.*;
 import com.mohigster.morefeatures.data.tag.MFItemTags;
 import com.mohigster.morefeatures.data.material.MFArmorMaterials;
+import com.mohigster.morefeatures.util.PropertyUtil;
 import net.minecraft.network.chat.Component;
-import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.DamageTypeTags;
 import net.minecraft.util.Unit;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
@@ -28,19 +30,14 @@ import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.item.*;
-import net.minecraft.world.item.component.BlocksAttacks;
 import net.minecraft.world.item.component.ChargedProjectiles;
 import net.minecraft.world.item.component.TooltipDisplay;
-import net.minecraft.world.item.component.Weapon;
 import net.minecraft.world.item.equipment.ArmorType;
 import net.minecraft.world.item.equipment.Equippable;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import org.jspecify.annotations.NullMarked;
-
-import java.util.List;
-import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.UnaryOperator;
@@ -54,7 +51,7 @@ public class MFItems {
 
     @SuppressWarnings("SameParameterValue")
     private static DeferredItem<Item> registerItem(String name, Function<Item.Properties, Item> function, Item.Properties itemProp) {
-        return ITEMS.register(name, () -> function.apply(itemProp.setId(ResourceKey.create(Registries.ITEM, Identifier.fromNamespaceAndPath(MODID, name)))));
+        return ITEMS.register(name, () -> function.apply(itemProp.setId(ResourceKey.create(Registries.ITEM, MFIdentifier.withMfNamespace(name)))));
     }
 
     // Item registration. JSON files are generated with DataGen. See MoreFeaturesDataGen and classes in the datagen package.
@@ -77,22 +74,20 @@ public class MFItems {
             properties -> new Item(properties
                     .trimMaterial(MFTrimMaterials.MAGNESIUM)
             ));
+    // Gemstone items
 
-    // Azurite items
-    public static final DeferredItem<Item> AZURITE = registerItem(MFItemIds.AZURITE,
-            properties -> new Item(properties
-                    .component(MFDataComponentTypes.COMPRESSOR_FUEL_VALUE.get(), 3200)
-                    .trimMaterial(MFTrimMaterials.AZURITE)
-            ));
-    public static final DeferredItem<Item> RAW_AZURITE = registerSimpleItem(MFItemIds.RAW_AZURITE);
-
-    // Fluorite items
-    public static final DeferredItem<Item> FLUORITE = registerItem(MFItemIds.FLUORITE,
-            properties -> new Item(properties
-                    .component(MFDataComponentTypes.COMPRESSOR_FUEL_VALUE.get(), 3200)
-                    .trimMaterial(MFTrimMaterials.FLUORITE)
-            ));
-    public static final DeferredItem<Item> RAW_FLUORITE = registerSimpleItem(MFItemIds.RAW_FLUORITE);
+    public static final GemstoneCollection<DeferredItem<Item>> GEM = GemstoneCollection.registerItems(
+            MFItemIds.GEMSTONE,
+            MFItems::registerItem,
+            (_, props) -> new Item(props),
+            PropertyUtil.Items::gemProps
+    );
+    public static final GemstoneCollection<DeferredItem<Item>> RAW_GEM = GemstoneCollection.registerItems(
+            MFItemIds.RAW_GEM,
+            MFItems::registerItem,
+            (_, props) -> new Item(props),
+            (_, props) -> props
+    );
 
     // Bismuth items
     public static final DeferredItem<Item> BISMUTH = registerItem(MFItemIds.BISMUTH,
@@ -122,7 +117,7 @@ public class MFItems {
     public static final DeferredItem<Item> BRINE_ROD = registerSimpleItem(MFItemIds.BRINE_ROD);
 
     // Metal detector
-    public static final DeferredItem<MetalDetectorItem> METAL_DETECTOR = registerMetalDetector(MFItemIds.METAL_DETECTOR, Component.translatable("tooltip.morefeatures.metal_detector"));
+    public static final DeferredItem<MetalDetectorItem> METAL_DETECTOR = registerMetalDetector(MFItemIds.METAL_DETECTOR, 256, Component.translatable("tooltip.morefeatures.metal_detector"));
 
     // Frosted core
     public static final DeferredItem<Item> FROSTED_CORE = registerSimpleItem(MFItemIds.FROSTED_CORE);
@@ -200,10 +195,7 @@ public class MFItems {
             ));
 
     public static final DeferredItem<Item> CARBON_BOW = registerItem(MFItemIds.CARBON_BOW,
-            properties -> new BowItem(properties
-                    .durability(856)
-                    .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
-                    .enchantable(15)
+            properties -> new MFBowItem(BowMaterial.CARBON_BOW_MATERIAL, properties
                     .fireResistant()
             ));
 
@@ -243,63 +235,19 @@ public class MFItems {
             ));
 
     public static final DeferredItem<Item> CARBON_TRIDENT = registerItem(MFItemIds.CARBON_TRIDENT,
-            properties -> new MFTridentItem(properties
-                    .fireResistant()
-                    .enchantable(15)
-                    .durability(594)
-                    .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
-                    .tool(MFToolMaterial.CARBON_TOOL_MATERIAL, BlockTags.MINEABLE_WITH_HOE, 2.0F, 6F, 0.5F)
-                    .attributes(MFTridentItem.createAttributes(9.0D, -2.4D))
-                    .rarity(Rarity.RARE)
-                    .component(DataComponents.TOOL, MFTridentItem.createToolProperties(2))
-                    .component(DataComponents.WEAPON, new Weapon(1)),
-                    9.5F,
-                    MFEntityTypes.CARBON_TRIDENT.get(),
-                    MFItemIds.CARBON_TRIDENT.identifier()
-            ));
+            properties -> new MFTridentItem(PropertyUtil.Items.tridentProps(
+                    594, 9.0D, -2.4D,
+                    2, 1,
+                    MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE, properties
+            ),
+                    9.5F, MFEntityTypes.CARBON_TRIDENT.get(),
+                    MFItemIds.CARBON_TRIDENT.identifier())
+    );
 
     public static final DeferredItem<Item> CARBON_SHIELD = registerItem(MFItemIds.CARBON_SHIELD,
-            properties -> new ShieldItem(properties
-                    .fireResistant()
-                    .enchantable(15)
-                    .durability(685)
-                    .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
-                    .equippableUnswappable(EquipmentSlot.OFFHAND)
-                    .delayedComponent(
-                            DataComponents.BLOCKS_ATTACKS,
-                            context -> new BlocksAttacks(
-                                    0.25F,
-                                    0.9F,
-                                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
-                                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
-                                    Optional.of(context.getOrThrow(DamageTypeTags.BYPASSES_SHIELD)),
-                                    Optional.of(SoundEvents.SHIELD_BLOCK),
-                                    Optional.of(SoundEvents.SHIELD_BREAK)
-                            )
-                    )
-                    .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK)
-            ));
-
-    public static final DeferredItem<Item> BISMUTH_SHIELD = registerItem(MFItemIds.BISMUTH_SHIELD,
-            properties -> new ShieldItem(properties
-                    .fireResistant()
-                    .enchantable(15)
-                    .durability(685)
-                    .repairable(MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE)
-                    .equippableUnswappable(EquipmentSlot.OFFHAND)
-                    .delayedComponent(
-                            DataComponents.BLOCKS_ATTACKS,
-                            context -> new BlocksAttacks(
-                                    0.25F,
-                                    0.7F,
-                                    List.of(new BlocksAttacks.DamageReduction(90.0F, Optional.empty(), 0.0F, 1.0F)),
-                                    new BlocksAttacks.ItemDamageFunction(3.0F, 1.0F, 1.0F),
-                                    Optional.of(context.getOrThrow(DamageTypeTags.BYPASSES_SHIELD)),
-                                    Optional.of(SoundEvents.SHIELD_BLOCK),
-                                    Optional.of(SoundEvents.SHIELD_BREAK)
-                            )
-                    )
-                    .component(DataComponents.BREAK_SOUND, SoundEvents.SHIELD_BREAK)
+            properties -> new ShieldItem(PropertyUtil.Items.shieldProps(
+                    685, 0.25F, 0.9F,
+                            MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE, properties)
             ));
 
     // Bismuth tools and equipment
@@ -415,12 +363,9 @@ public class MFItems {
             ));
 
     public static final DeferredItem<Item> BISMUTH_BOW = registerItem(MFItemIds.BISMUTH_BOW,
-            properties -> new BowItem(properties
+            properties -> new MFBowItem(BowMaterial.BISMUTH_BOW_MATERIAL, properties
                     .rarity(Rarity.RARE)
                     .fireResistant()
-                    .durability(1516)
-                    .enchantable(19)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
             ));
 
     public static final DeferredItem<Item> BISMUTH_HORSE_ARMOR = registerItem(MFItemIds.BISMUTH_HORSE_ARMOR,
@@ -449,25 +394,25 @@ public class MFItems {
                     .component(DataComponents.EQUIPPABLE,
                             Equippable.builder(EquipmentSlot.CHEST)
                                     .setEquipSound(SoundEvents.ARMOR_EQUIP_ELYTRA)
-                                    .setAsset(MFEquipmentAssets.BISMUTH)
+                                    .setAsset(MFEquipmentAssets.BISMUTH_ELYTRA)
                                     .setDamageOnHurt(false)
                                     .build()
                     )
             ));
 
     public static final DeferredItem<Item> BISMUTH_TRIDENT = registerItem(MFItemIds.BISMUTH_TRIDENT,
-            properties -> new MFTridentItem(properties
-                    .fireResistant()
-                    .enchantable(15)
-                    .durability(997)
-                    .repairable(MFItemTags.BISMUTH_TOOL_MATERIALS)
-                    .attributes(MFTridentItem.createAttributes(11.0D, -1.9D))
-                    .rarity(Rarity.RARE)
-                    .component(DataComponents.TOOL, MFTridentItem.createToolProperties(3))
-                    .component(DataComponents.WEAPON, new Weapon(2)),
-                    11.75F,
-                    MFEntityTypes.BISMUTH_TRIDENT.get(),
-                    MFItemIds.BISMUTH_TRIDENT.identifier()
+            properties -> new MFTridentItem(PropertyUtil.Items.tridentProps(
+                    997, 11.0D, -1.9D,
+                    3, 2,
+                    MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE, properties
+            ), 11.75F, MFEntityTypes.BISMUTH_TRIDENT.get(),
+                    MFEntityTypeIds.BISMUTH_TRIDENT.identifier())
+    );
+
+    public static final DeferredItem<Item> BISMUTH_SHIELD = registerItem(MFItemIds.BISMUTH_SHIELD,
+            properties -> new ShieldItem(PropertyUtil.Items.shieldProps(
+                    1053, 0.20F, 0.7F,
+                    MFItemTags.BISMUTH_TOOL_MATERIAL_REPAIRABLE, properties)
             ));
 
     // Sign items
@@ -476,41 +421,27 @@ public class MFItems {
     // However, sign items are shared by two blocks, (wall and standing / ceiling)
     // so they have to be registered separately to their respective blocks.
 
-    public static final DeferredItem<Item> AZURITE_SIGN =
-            registerItem(MFItemIds.AZURITE_SIGN, properties ->
-                    new SignItem(
-                            MFBlocks.AZURITE_SIGN.get(),
-                            MFBlocks.AZURITE_WALL_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
+    public static final GemstoneCollection<DeferredItem<Item>> GEMSTONE_SIGN = GemstoneCollection.registerItems(
+            MFItemIds.GEMSTONE_SIGN,
+            MFItems::registerItem,
+            (gem, props) -> new SignItem(
+                    MFBlocks.GEMSTONE_SIGN.pick(gem).get(),
+                    MFBlocks.GEMSTONE_WALL_SIGN.pick(gem).get(),
+                    props
+            ),
+            (_, props) -> props.stacksTo(16)
+    );
 
-    public static final DeferredItem<Item> AZURITE_HANGING_SIGN =
-            registerItem(MFItemIds.AZURITE_HANGING_SIGN, properties ->
-                    new HangingSignItem(
-                            MFBlocks.AZURITE_HANGING_SIGN.get(),
-                            MFBlocks.AZURITE_WALL_HANGING_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
-
-    public static final DeferredItem<Item> FLUORITE_SIGN =
-            registerItem(MFItemIds.FLUORITE_SIGN, properties ->
-                    new SignItem(
-                            MFBlocks.FLUORITE_SIGN.get(),
-                            MFBlocks.FLUORITE_WALL_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
-
-    public static final DeferredItem<Item> FLUORITE_HANGING_SIGN =
-            registerItem(MFItemIds.FLUORITE_HANGING_SIGN, properties ->
-                    new HangingSignItem(
-                            MFBlocks.FLUORITE_HANGING_SIGN.get(),
-                            MFBlocks.FLUORITE_WALL_HANGING_SIGN.get(),
-                            properties.stacksTo(16)
-                    )
-            );
+    public static final GemstoneCollection<DeferredItem<Item>> GEMSTONE_HANGING_SIGN = GemstoneCollection.registerItems(
+            MFItemIds.GEMSTONE_HANGING_SIGN,
+            MFItems::registerItem,
+            (gem, props) -> new HangingSignItem(
+                    MFBlocks.GEMSTONE_HANGING_SIGN.pick(gem).get(),
+                    MFBlocks.GEMSTONE_WALL_HANGING_SIGN.pick(gem).get(),
+                    props
+            ),
+            (_, props) -> props.stacksTo(16)
+    );
 
     public static final WoodTypeCollection<DeferredItem<Item>> WOODEN_SIGN = WoodTypeCollection.registerItems(
             MFItemIds.WOODEN_SIGN,
@@ -578,13 +509,13 @@ public class MFItems {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private static DeferredItem<MetalDetectorItem> registerMetalDetector(ResourceKey<Item> id, Component... components){
-        return ITEMS.registerItem(id.identifier().getPath(), props -> new MetalDetectorItem(props.setId(id).durability(256)){
+    private static DeferredItem<MetalDetectorItem> registerMetalDetector(ResourceKey<Item> id, int durability, Component... components){
+        return ITEMS.registerItem(id.identifier().getPath(), props -> new MetalDetectorItem(props.setId(id).durability(durability)){
             @SuppressWarnings("deprecation")
             @NullMarked
             @Override
             public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
-                for(var component : components) {
+                for (var component : components) {
                     builder.accept(component);
                 }
                 super.appendHoverText(itemStack, context, display, builder, tooltipFlag);

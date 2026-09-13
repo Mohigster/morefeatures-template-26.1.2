@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#morefeatures:wood/bloodwood_logs"
+            "items": "#morefeatures:wood/logs/bloodwood"
           }
         ]
       },

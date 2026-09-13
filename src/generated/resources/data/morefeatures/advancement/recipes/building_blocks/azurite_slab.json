@@ -1,7 +1,7 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_azurite_block": {
+    "has_gemstone": {
       "conditions": {
         "items": [
           {
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_azurite_block"
+      "has_gemstone"
     ]
   ],
   "rewards": {

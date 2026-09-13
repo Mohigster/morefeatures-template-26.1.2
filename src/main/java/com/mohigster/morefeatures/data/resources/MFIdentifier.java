@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.data.resources;
 import net.minecraft.resources.Identifier;
 
 import static com.mohigster.morefeatures.MoreFeatures.MODID;
+
 public final class MFIdentifier {
     private MFIdentifier() {}
 

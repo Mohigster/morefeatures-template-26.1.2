@@ -27,7 +27,7 @@ public class MFAdvancementProvider extends AdvancementProvider {
         super(output, registries, List.of(new MFAdvancements()));
     }
 
-    // getHoe and craftPortal are technically unused but are still displayed by the game, hence why we suppress unused warnings
+    // getHoe and craftPortal are technically unused but are still displayed by the game
     @SuppressWarnings("unused")
     public static class MFAdvancements implements AdvancementSubProvider {
         @Override

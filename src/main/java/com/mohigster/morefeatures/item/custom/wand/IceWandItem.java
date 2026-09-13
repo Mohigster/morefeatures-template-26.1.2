@@ -29,7 +29,7 @@ public class IceWandItem extends TargetingWandItem {
     }
 
     @Override
-    protected void castTargetedSpell(LivingEntity target, Player caster, Level level) {
+    public void castTargetedSpell(LivingEntity target, Player caster, Level level) {
         if (!(level instanceof ServerLevel serverLevel)) return;
 
         BlockPos spawnPos = BlockPos.containing(target.getX(), target.getEyeY() + 4.0, target.getZ());

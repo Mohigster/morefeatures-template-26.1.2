@@ -1,11 +1,13 @@
 package com.mohigster.morefeatures.data.world.feature.custom.config;
 
+import com.mohigster.morefeatures.util.MFExtraCodecs;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.RegistryCodecs;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.util.RandomSource;
 import net.minecraft.util.valueproviders.FloatProvider;
 import net.minecraft.util.valueproviders.FloatProviders;
 import net.minecraft.util.valueproviders.IntProvider;
@@ -37,7 +39,7 @@ public record MultiBaseSpeleothemClusterConfiguration(
                     .forGetter(MultiBaseSpeleothemClusterConfiguration::baseBlocks),
             BlockState.CODEC.fieldOf("pointed_block")
                     .forGetter(MultiBaseSpeleothemClusterConfiguration::pointedBlock),
-            RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("replaceable_blocks")
+            MFExtraCodecs.BLOCK_SET.fieldOf("replaceable_blocks")
                     .forGetter(MultiBaseSpeleothemClusterConfiguration::replaceableBlocks),
             Codec.intRange(1, 512).fieldOf("floor_to_ceiling_search_range")
                     .forGetter(MultiBaseSpeleothemClusterConfiguration::floorToCeilingSearchRange),
@@ -70,7 +72,7 @@ public record MultiBaseSpeleothemClusterConfiguration(
             )
     );
 
-    public BlockState randomBaseBlock(net.minecraft.util.RandomSource random) {
-        return baseBlocks.get(random.nextInt(baseBlocks.size()));
+    public BlockState randomBaseBlock(RandomSource random) {
+        return this.baseBlocks.get(random.nextInt(this.baseBlocks.size()));
     }
 }

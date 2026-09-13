@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "redstone",
-  "group": "fluorite",
+  "group": "gemstone_button",
   "ingredients": [
-    "morefeatures:fluorite"
+    "morefeatures:fluorite_block"
   ],
   "result": {
     "id": "morefeatures:fluorite_button"

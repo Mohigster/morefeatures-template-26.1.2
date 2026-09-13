@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "#morefeatures:wood/charred_logs"
+            "items": "#morefeatures:wood/logs/charred"
           }
         ]
       },

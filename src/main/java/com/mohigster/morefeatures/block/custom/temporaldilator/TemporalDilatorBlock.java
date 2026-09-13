@@ -107,6 +107,10 @@ public class TemporalDilatorBlock extends BaseEntityBlock implements SimpleWater
     }
 
     public static int getLightLevel(BlockState state){
+        if (!(state.getBlock() instanceof TemporalDilatorBlock)) {
+            throw new IllegalStateException("BlockState must be a temporal dilator");
+        }
+
         return !state.getValue(POWERED_BY_REDSTONE) ? getSlowOrFastLightLevel(state) : 15;
     }
 

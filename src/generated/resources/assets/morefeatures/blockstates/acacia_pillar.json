@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "shape=bottom": {
+      "model": "morefeatures:block/acacia_pillar_bottom",
+      "uvlock": true
+    },
+    "shape=full": {
+      "model": "morefeatures:block/acacia_pillar",
+      "uvlock": true
+    },
+    "shape=middle": {
+      "model": "morefeatures:block/acacia_pillar_middle",
+      "uvlock": true
+    },
+    "shape=top": {
+      "model": "morefeatures:block/acacia_pillar_top",
+      "uvlock": true
+    }
+  }
+}

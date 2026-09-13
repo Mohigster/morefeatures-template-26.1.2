@@ -1,9 +1,9 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "redstone",
-  "group": "azurite",
+  "group": "gemstone_trapdoor",
   "key": {
-    "#": "morefeatures:azurite"
+    "#": "morefeatures:azurite_block"
   },
   "pattern": [
     "###",

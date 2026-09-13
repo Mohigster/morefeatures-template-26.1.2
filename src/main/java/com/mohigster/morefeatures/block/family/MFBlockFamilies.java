@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.block.family;
 
+import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.collection.gemstone.GemstoneCollection;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
@@ -10,54 +11,33 @@ import java.util.List;
 
 public class MFBlockFamilies {
     private static GemstoneCollection<BlockFamily> gemstoneFamily;
-    private static BlockFamily azuriteFamily;
-    private static BlockFamily fluoriteFamily;
     private static WoodTypeCollection<BlockFamily> woodFamily;
     private static final List<BlockFamily> FAMILIES = new ArrayList<>();
 
-    public static BlockFamily getAzuriteFamily(){
-        if(azuriteFamily == null) {
-            azuriteFamily = new BlockFamily.Builder(MFBlocks.AZURITE_BLOCK.get())
-                    .stairs(MFBlocks.AZURITE_STAIRS.get())
-                    .strippedLog(MFBlocks.RAW_AZURITE_BLOCK.get())
-                    .slab(MFBlocks.AZURITE_SLAB.get())
-                    .fence(MFBlocks.AZURITE_FENCE.get())
-                    .fenceGate(MFBlocks.AZURITE_FENCE_GATE.get())
-                    .button(MFBlocks.AZURITE_BUTTON.get())
-                    .pressurePlate(MFBlocks.AZURITE_PRESSURE_PLATE.get())
-                    .wall(MFBlocks.AZURITE_WALL.get())
-                    .door(MFBlocks.AZURITE_DOOR.get())
-                    .trapdoor(MFBlocks.AZURITE_TRAPDOOR.get())
-                    .sign(MFBlocks.AZURITE_SIGN.get(), MFBlocks.AZURITE_WALL_SIGN.get())
-                    .hangingSign(MFBlocks.AZURITE_HANGING_SIGN.get(), MFBlocks.AZURITE_WALL_HANGING_SIGN.get())
-                    .recipeGroupPrefix("azurite")
-                    .recipeUnlockedBy("has_azurite")
-                    .getFamily();
+    public static GemstoneCollection<BlockFamily> getGemstoneFamily(){
+        if (gemstoneFamily == null) {
+            gemstoneFamily = GemstoneCollection.GEMS.map(
+                    gem -> new BlockFamily.Builder(MFBlocks.GEMSTONE_BLOCK.pick(gem).get())
+                            .stairs(MFBlocks.GEMSTONE_STAIRS.pick(gem).get())
+                            .strippedLog(MFBlocks.RAW_GEM_BLOCK.pick(gem).get())
+                            .slab(MFBlocks.GEMSTONE_SLAB.pick(gem).get())
+                            .fence(MFBlocks.GEMSTONE_FENCE.pick(gem).get())
+                            .fenceGate(MFBlocks.GEMSTONE_FENCE_GATE.pick(gem).get())
+                            .button(MFBlocks.GEMSTONE_BUTTON.pick(gem).get())
+                            .pressurePlate(MFBlocks.GEMSTONE_PRESSURE_PLATE.pick(gem).get())
+                            .wall(MFBlocks.GEMSTONE_WALL.pick(gem).get())
+                            .door(MFBlocks.GEMSTONE_DOOR.pick(gem).get())
+                            .trapdoor(MFBlocks.GEMSTONE_TRAPDOOR.pick(gem).get())
+                            .sign(MFBlocks.GEMSTONE_SIGN.pick(gem).get(), MFBlocks.GEMSTONE_WALL_SIGN.pick(gem).get())
+                            .hangingSign(MFBlocks.GEMSTONE_HANGING_SIGN.pick(gem).get(), MFBlocks.GEMSTONE_WALL_HANGING_SIGN.pick(gem).get())
+                            .recipeGroupPrefix("gemstone")
+                            .recipeUnlockedBy("has_gemstone")
+                            .generateStonecutterRecipe()
+                            .getFamily()
+            );
+            gemstoneFamily.forEach(FAMILIES::add);
         }
-        return azuriteFamily;
-    }
-
-    public static BlockFamily getFluoriteFamily(){
-        if(fluoriteFamily == null) {
-            fluoriteFamily = new BlockFamily.Builder(MFBlocks.FLUORITE_BLOCK.get())
-                    .stairs(MFBlocks.FLUORITE_STAIRS.get())
-                    .strippedLog(MFBlocks.RAW_FLUORITE_BLOCK.get())
-                    .slab(MFBlocks.FLUORITE_SLAB.get())
-                    .fence(MFBlocks.FLUORITE_FENCE.get())
-                    .fenceGate(MFBlocks.FLUORITE_FENCE_GATE.get())
-                    .button(MFBlocks.FLUORITE_BUTTON.get())
-                    .pressurePlate(MFBlocks.FLUORITE_PRESSURE_PLATE.get())
-                    .wall(MFBlocks.FLUORITE_WALL.get())
-                    .door(MFBlocks.FLUORITE_DOOR.get())
-                    .trapdoor(MFBlocks.FLUORITE_TRAPDOOR.get())
-                    .sign(MFBlocks.FLUORITE_SIGN.get(), MFBlocks.FLUORITE_WALL_SIGN.get())
-                    .hangingSign(MFBlocks.FLUORITE_HANGING_SIGN.get(), MFBlocks.FLUORITE_WALL_HANGING_SIGN.get())
-                    .recipeGroupPrefix("fluorite")
-                    .recipeUnlockedBy("has_fluorite")
-                    .generateStonecutterRecipe()
-                    .getFamily();
-        }
-        return fluoriteFamily;
+        return gemstoneFamily;
     }
 
     public static WoodTypeCollection<BlockFamily> getWoodFamily() {
@@ -85,12 +65,28 @@ public class MFBlockFamilies {
         return woodFamily;
     }
 
+    private static void clearBlockFamilies() {
+        FAMILIES.clear();
+        woodFamily = null;
+        gemstoneFamily = null;
+    }
+
     // Azurite and fluorite has special recipes declared in the Recipes class.
     // This method is used to grab all block families so that the RecipeProvider
     // can generate recipes without manual input. Since Azurite and Fluorite
     // fences, signs, etc. are crafted using custom recipes, they are not called here.
     public static List<BlockFamily> getAllNonGemstoneFamilies() {
-        getWoodFamily().asList();
+        clearBlockFamilies();
+        getWoodFamily();
+
+        if (FAMILIES.isEmpty()) {
+            throw new IllegalStateException("No block families found! Ensure that the family is properly registered");
+        }
+
+        MoreFeatures.LOGGER.debug("Found {} block families!", FAMILIES.size());
+
+        FAMILIES.forEach(family ->  MoreFeatures.LOGGER.debug("Found block family: {}", family.getBaseBlock().asItem().getDescriptionId()));
+
         return FAMILIES;
     }
 }

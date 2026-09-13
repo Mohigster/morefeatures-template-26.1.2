@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_fluorite": {
+    "has_gemstone": {
       "conditions": {
         "items": [
           {
-            "items": "morefeatures:fluorite"
+            "items": "morefeatures:fluorite_block"
           }
         ]
       },
@@ -21,7 +21,7 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_fluorite"
+      "has_gemstone"
     ]
   ],
   "rewards": {

@@ -55,8 +55,10 @@ public class MFSurfaceRules {
         ConditionSource netherWart = SurfaceRules.noiseCondition2d(Noises.NETHER_WART, 1.17);
         ConditionSource closeToCeiling = SurfaceRules.yBlockCheck(VerticalAnchor.belowTop(5), 0);
         return SurfaceRules.sequence(
-                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("bedrock_floor", VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), BEDROCK),
-                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("bedrock_roof", VerticalAnchor.belowTop(5), VerticalAnchor.top())), BEDROCK),
+                SurfaceRules.ifTrue(SurfaceRules.verticalGradient("bedrock_floor",
+                        VerticalAnchor.bottom(), VerticalAnchor.aboveBottom(5)), BEDROCK),
+                SurfaceRules.ifTrue(SurfaceRules.not(SurfaceRules.verticalGradient("bedrock_roof",
+                        VerticalAnchor.belowTop(5), VerticalAnchor.top())), BEDROCK),
                 SurfaceRules.ifTrue(closeToCeiling, NETHERRACK),
                 SurfaceRules.ifTrue(
                         SurfaceRules.ON_FLOOR,

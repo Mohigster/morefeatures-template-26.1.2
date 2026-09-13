@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.creativetab;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.block.collection.gemstone.GemstoneCollection;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
@@ -37,13 +38,10 @@ public class MFCreativeModeTabs {
                 output.accept(MFItems.RAW_MAGNESIUM);
                 output.accept(MFItems.MAGNESIUM_INGOT);
 
-                // Azurite items
-                output.accept(MFItems.RAW_AZURITE);
-                output.accept(MFItems.AZURITE);
-
-                // Fluorite items
-                output.accept(MFItems.RAW_FLUORITE);
-                output.accept(MFItems.FLUORITE);
+                GemstoneCollection.GEMS.forEach(gem -> {
+                    output.accept(MFItems.GEM.pick(gem));
+                    output.accept(MFItems.RAW_GEM.pick(gem));
+                });
 
                 // Bismuth items
                 output.accept(MFItems.RAW_BISMUTH);
@@ -59,7 +57,6 @@ public class MFCreativeModeTabs {
             })
             .build()
     );
-
 
     // May subdivide this blocks tab into natural blocks, building blocks, etc. Depends on what I add and how big these tabs get.
     public static final Supplier<CreativeModeTab> MOREFEATURES_BLOCKS_TAB = CREATIVE_MODE_TABS.register("morefeatures_blocks_tab", () -> CreativeModeTab.builder()
@@ -85,40 +82,24 @@ public class MFCreativeModeTabs {
                 output.accept(MFBlocks.BISMUTH_ORE);
 
                 // Azurite blocks
-                output.accept(MFBlocks.AZURITE_BLOCK);
-                output.accept(MFBlocks.AZURITE_STAIRS);
-                output.accept(MFBlocks.AZURITE_VERTICAL_SLAB);
-                output.accept(MFBlocks.AZURITE_SLAB);
-                output.accept(MFBlocks.AZURITE_FENCE);
-                output.accept(MFBlocks.AZURITE_FENCE_GATE);
-                output.accept(MFBlocks.AZURITE_PRESSURE_PLATE);
-                output.accept(MFBlocks.AZURITE_BUTTON);
-                output.accept(MFBlocks.AZURITE_SHELF);
-                output.accept(MFItems.AZURITE_SIGN);
-                output.accept(MFItems.AZURITE_HANGING_SIGN);
-                output.accept(MFBlocks.RAW_AZURITE_BLOCK);
-                output.accept(MFBlocks.AZURITE_ORE);
-                output.accept(MFBlocks.DEEPSLATE_AZURITE_ORE);
-                output.accept(MFBlocks.NETHER_AZURITE_ORE);
-                output.accept(MFBlocks.END_AZURITE_ORE);
-
-                // Fluorite blocks
-                output.accept(MFBlocks.FLUORITE_BLOCK);
-                output.accept(MFBlocks.FLUORITE_STAIRS);
-                output.accept(MFBlocks.FLUORITE_VERTICAL_SLAB);
-                output.accept(MFBlocks.FLUORITE_SLAB);
-                output.accept(MFBlocks.FLUORITE_FENCE);
-                output.accept(MFBlocks.FLUORITE_FENCE_GATE);
-                output.accept(MFBlocks.FLUORITE_PRESSURE_PLATE);
-                output.accept(MFBlocks.FLUORITE_BUTTON);
-                output.accept(MFBlocks.FLUORITE_SHELF);
-                output.accept(MFItems.FLUORITE_SIGN);
-                output.accept(MFItems.FLUORITE_HANGING_SIGN);
-                output.accept(MFBlocks.RAW_FLUORITE_BLOCK);
-                output.accept(MFBlocks.FLUORITE_ORE);
-                output.accept(MFBlocks.DEEPSLATE_FLUORITE_ORE);
-                output.accept(MFBlocks.NETHER_FLUORITE_ORE);
-                output.accept(MFBlocks.END_FLUORITE_ORE);
+                GemstoneCollection.GEMS.forEach(gem -> {
+                    output.accept(MFBlocks.GEMSTONE_BLOCK.pick(gem));
+                    output.accept(MFBlocks.GEMSTONE_STAIRS.pick(gem));
+                    output.accept(MFBlocks.GEMSTONE_VERTICAL_SLAB.pick(gem));
+                    output.accept(MFBlocks.GEMSTONE_SLAB.pick(gem));
+                    output.accept(MFBlocks.GEMSTONE_FENCE.pick(gem));
+                    output.accept(MFBlocks.GEMSTONE_FENCE_GATE.pick(gem));
+                    output.accept(MFBlocks.GEMSTONE_PRESSURE_PLATE.pick(gem));
+                    output.accept(MFBlocks.GEMSTONE_BUTTON.pick(gem));
+                    output.accept(MFBlocks.GEMSTONE_SHELF.pick(gem));
+                    output.accept(MFItems.GEMSTONE_SIGN.pick(gem));
+                    output.accept(MFItems.GEMSTONE_HANGING_SIGN.pick(gem));
+                    output.accept(MFBlocks.RAW_GEM_BLOCK.pick(gem));
+                    output.accept(MFBlocks.ORE.pick(gem));
+                    output.accept(MFBlocks.DEEPSLATE_ORE.pick(gem));
+                    output.accept(MFBlocks.NETHER_ORE.pick(gem));
+                    output.accept(MFBlocks.END_ORE.pick(gem));
+                });
 
                 // Magic block
                 output.accept(MFBlocks.MAGIC_BLOCK);
@@ -160,25 +141,24 @@ public class MFCreativeModeTabs {
                         MFItems.CARBON_SHIELD
                 ));
 
-                // Bismuth Tools
-
-                output.accept(MFItems.BISMUTH_SWORD);
-                output.accept(MFItems.BISMUTH_PICKAXE);
-                output.accept(MFItems.BISMUTH_AXE);
-                output.accept(MFItems.BISMUTH_SHOVEL);
-                output.accept(MFItems.BISMUTH_HOE);
-                output.accept(MFItems.BISMUTH_SPEAR);
-                output.accept(MFItems.BISMUTH_TRIDENT);
-                output.accept(MFItems.BISMUTH_BOW);
-
-                // Bismuth Armor
-
-                output.accept(MFItems.BISMUTH_HELMET);
-                output.accept(MFItems.BISMUTH_CHESTPLATE);
-                output.accept(MFItems.BISMUTH_LEGGINGS);
-                output.accept(MFItems.BISMUTH_BOOTS);
-                output.accept(MFItems.BISMUTH_HORSE_ARMOR);
-                output.accept(MFItems.BISMUTH_NAUTILUS_ARMOR);
+                accept(output, List.of(
+                        // Weapons
+                        MFItems.BISMUTH_SWORD,
+                        MFItems.BISMUTH_PICKAXE,
+                        MFItems.BISMUTH_AXE,
+                        MFItems.BISMUTH_SHOVEL,
+                        MFItems.BISMUTH_HOE,
+                        MFItems.BISMUTH_SPEAR,
+                        MFItems.BISMUTH_TRIDENT,
+                        MFItems.BISMUTH_BOW,
+                        // Armor
+                        MFItems.BISMUTH_HELMET,
+                        MFItems.BISMUTH_CHESTPLATE,
+                        MFItems.BISMUTH_LEGGINGS,
+                        MFItems.BISMUTH_BOOTS,
+                        MFItems.BISMUTH_HORSE_ARMOR,
+                        MFItems.BISMUTH_NAUTILUS_ARMOR
+                ));
 
                 // Metal detector
 
@@ -208,8 +188,8 @@ public class MFCreativeModeTabs {
                         // Leaves and warts, as well as saplings, are registered separately
                         // because they are registered using different classes to each other
                         // These get methods substitute calling MFBlocks.LEAVES.pick(set);
-                        output.accept(set.getLeavesOrWart());
-                        output.accept(set.getSaplingOrFungus());
+                        output.accept(set.leavesOrWart());
+                        output.accept(set.saplingOrFungus());
                         output.accept(MFBlocks.WOODEN_SHELF.pick(set));
                         output.accept(MFItems.WOODEN_SIGN.pick(set));
                         output.accept(MFItems.WOODEN_HANGING_SIGN.pick(set));
@@ -225,10 +205,19 @@ public class MFCreativeModeTabs {
 
     public static void register(IEventBus eventBus){
         CREATIVE_MODE_TABS.register(eventBus);
+        checkTabs();
         MoreFeatures.LOGGER.info("Mod Creative Tabs registered -> Performed by: " + MoreFeatures.MODID);
     }
 
+    private static void checkTabs() {
+        if (CREATIVE_MODE_TABS.getEntries().isEmpty()) {
+            throw new IllegalStateException("Creative mode tabs are not registered!");
+        }
+    }
+
     private static void accept(CreativeModeTab.Output output, List<ItemLike> items){
+        if (items.isEmpty()) throw new IllegalStateException("Creative mod tab cannot accept an empty list of items!");
+
         items.forEach(output::accept);
     }
 }

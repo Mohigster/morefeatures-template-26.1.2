@@ -4,11 +4,14 @@ import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.entity.custom.*;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.Set;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 public class MFBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
@@ -25,10 +28,10 @@ public class MFBlockEntities {
     public static final Supplier<BlockEntityType<MFSignBlockEntity>> MF_SIGN_BE =
             BLOCK_ENTITIES.register("mf_sign_be", () -> new BlockEntityType<>(
                     MFSignBlockEntity::new,
-                    MFBlocks.AZURITE_SIGN.get(),
-                    MFBlocks.AZURITE_WALL_SIGN.get(),
-                    MFBlocks.FLUORITE_SIGN.get(),
-                    MFBlocks.FLUORITE_WALL_SIGN.get(),
+                    MFBlocks.GEMSTONE_SIGN.azurite().get(),
+                    MFBlocks.GEMSTONE_WALL_SIGN.azurite().get(),
+                    MFBlocks.GEMSTONE_SIGN.fluorite().get(),
+                    MFBlocks.GEMSTONE_WALL_SIGN.fluorite().get(),
                     MFBlocks.WOODEN_SIGN.bloodwood().get(),
                     MFBlocks.WOODEN_WALL_SIGN.bloodwood().get(),
                     MFBlocks.WOODEN_SIGN.tainted().get(),
@@ -46,10 +49,10 @@ public class MFBlockEntities {
     public static final Supplier<BlockEntityType<MFHangingSignBlockEntity>> MF_HANGING_SIGN_BE =
             BLOCK_ENTITIES.register("mf_hanging_sign_be", () -> new BlockEntityType<>(
                     MFHangingSignBlockEntity::new,
-                    MFBlocks.AZURITE_HANGING_SIGN.get(),
-                    MFBlocks.AZURITE_WALL_HANGING_SIGN.get(),
-                    MFBlocks.FLUORITE_HANGING_SIGN.get(),
-                    MFBlocks.FLUORITE_WALL_HANGING_SIGN.get(),
+                    MFBlocks.GEMSTONE_HANGING_SIGN.azurite().get(),
+                    MFBlocks.GEMSTONE_WALL_HANGING_SIGN.azurite().get(),
+                    MFBlocks.GEMSTONE_HANGING_SIGN.fluorite().get(),
+                    MFBlocks.GEMSTONE_WALL_HANGING_SIGN.fluorite().get(),
                     MFBlocks.WOODEN_HANGING_SIGN.bloodwood().get(),
                     MFBlocks.WOODEN_WALL_HANGING_SIGN.bloodwood().get(),
                     MFBlocks.WOODEN_HANGING_SIGN.tainted().get(),
@@ -67,8 +70,8 @@ public class MFBlockEntities {
     public static final Supplier<BlockEntityType<MFShelfBlockEntity>> MF_SHELF_BE =
             BLOCK_ENTITIES.register("mf_shelf_be", () -> new BlockEntityType<>(
                     MFShelfBlockEntity::new,
-                    MFBlocks.AZURITE_SHELF.get(),
-                    MFBlocks.FLUORITE_SHELF.get(),
+                    MFBlocks.GEMSTONE_SHELF.azurite().get(),
+                    MFBlocks.GEMSTONE_SHELF.fluorite().get(),
                     MFBlocks.WOODEN_SHELF.bloodwood().get(),
                     MFBlocks.WOODEN_SHELF.tainted().get(),
                     MFBlocks.WOODEN_SHELF.palm().get(),

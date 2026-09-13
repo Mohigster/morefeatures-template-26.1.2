@@ -1,6 +1,5 @@
 package com.mohigster.morefeatures.item.custom.wand.type;
 
-import com.mohigster.morefeatures.attachment.MFAttachments;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
@@ -9,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public abstract class AbstractWandItem extends Item {
+public abstract class AbstractWandItem extends Item implements Wand {
     protected final double radius;
     protected final int cooldownTicks;
     protected final int baseDurabilityCost;
@@ -19,9 +18,11 @@ public abstract class AbstractWandItem extends Item {
     protected final float soundVolume;
     protected final float soundPitch;
 
-    public AbstractWandItem(Properties properties, double radius, int cooldownTicks,
-                            int baseDurabilityCost, int durabilityScalingFactor, int manaCost,
-                            SoundEvent castSound, float soundVolume, float soundPitch) {
+    public AbstractWandItem(
+            Properties properties, double radius, int cooldownTicks,
+            int baseDurabilityCost, int durabilityScalingFactor, int manaCost,
+            SoundEvent castSound, float soundVolume, float soundPitch
+    ) {
         super(properties);
         this.radius = radius;
         this.cooldownTicks = cooldownTicks;
@@ -50,11 +51,8 @@ public abstract class AbstractWandItem extends Item {
         return this.baseDurabilityCost + extraCost;
     }
 
-    protected boolean hasEnoughMana(Player caster){
-        return caster.getData(MFAttachments.MANA) >= manaCost;
-    }
-
-    protected void consumeMana(Player caster) {
-        caster.setData(MFAttachments.MANA, caster.getData(MFAttachments.MANA) - manaCost);
+    @Override
+    public int manaCost() {
+        return this.manaCost;
     }
 }

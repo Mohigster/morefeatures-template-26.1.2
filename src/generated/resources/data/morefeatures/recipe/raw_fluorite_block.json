@@ -1,7 +1,7 @@
 {
   "type": "minecraft:crafting_shaped",
   "category": "building",
-  "group": "fluorite",
+  "group": "gemstone",
   "key": {
     "A": "morefeatures:raw_fluorite"
   },

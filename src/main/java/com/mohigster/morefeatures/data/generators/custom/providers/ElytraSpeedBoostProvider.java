@@ -13,7 +13,6 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
-import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.NullMarked;
 
 import java.nio.file.Path;
@@ -103,7 +102,7 @@ public abstract class ElytraSpeedBoostProvider implements DataProvider {
     @Override
     public CompletableFuture<?> run(CachedOutput cachedOutput) {
         this.entries.clear();
-        generate();
+        this.generate();
 
         return this.registries.thenCompose(provider -> {
             Path outputFolder = this.output.getOutputFolder(PackOutput.Target.DATA_PACK);
@@ -122,7 +121,7 @@ public abstract class ElytraSpeedBoostProvider implements DataProvider {
     }
 
     @Override
-    public @NonNull String getName() {
+    public String getName() {
         return "Elytra Speed Boosts: " + modId;
     }
 }
