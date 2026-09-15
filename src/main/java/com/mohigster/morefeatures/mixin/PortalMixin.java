@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.mixin;
 
+import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.custom.portal.datadriven.CustomPortalShape;
 import com.mohigster.morefeatures.block.custom.portal.datadriven.PortalBlock;
 import com.mohigster.morefeatures.block.custom.portal.datadriven.PortalDestinations;
@@ -22,7 +23,7 @@ import java.util.Optional;
 
 @Mixin(BlockBehaviour.class)
 public class PortalMixin {
-    @Inject(method = "onPlace", at = @At(value = "HEAD"))
+    @Inject(method = "onPlace", at = @At(value = "HEAD"), cancellable = true)
     public void createPortalIfBlockIsKey(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean movedByPiston, CallbackInfo ci) {
         if (!oldState.is(state.getBlock())) {
             ResourceKey<Level> target = PortalDestinations.getTargetLevel(PortalBlock.scanForFrameState(level, pos));
@@ -30,16 +31,16 @@ public class PortalMixin {
             if (this.portal$shouldIgnite(state, level, target)) {
                 // CustomPortalShape has behaviours that scans for the correct frame based on JSON data, unlike the vanilla PortalShape which always uses Obsidian
                 Optional<CustomPortalShape> optionalShape = CustomPortalShape.findEmptyCustomShape(level, pos, Direction.Axis.X);
-                optionalShape.ifPresent(customShape -> {
+                optionalShape.ifPresent(shape -> {
 
-                    // Convert the custom shape to a vanilla shape so that we can fire the NeoForge event
-                    Optional<PortalShape> vanillaShape = Optional.of(customShape);
-
-                    vanillaShape = EventHooks.onTrySpawnPortal(level, pos, vanillaShape);
+                    // Fire the NeoForge event
+                    Optional<PortalShape> vanillaShape = EventHooks.onTrySpawnPortal(level, pos, Optional.of(shape));
 
                     // If everything goes well, light the portal
                     if (vanillaShape.isPresent()) {
-                        customShape.createPortalBlocks(level);
+                        shape.createPortalBlocks(level);
+                    } else {
+                        ci.cancel();
                     }
                 });
             }
@@ -54,7 +55,11 @@ public class PortalMixin {
     @Unique
     private boolean portal$blockIsKey(BlockState state, ResourceKey<Level> targetLevel) {
         Optional<BlockKey> optionalKey = PortalDestinations.getBlockKey(targetLevel);
-        return optionalKey.filter(key -> state.is(key.block())).isPresent();
+        boolean isKey = optionalKey.filter(key -> state.is(key.block())).isPresent();
+
+        MoreFeatures.LOGGER.debug("Placed Block is key?: {}", isKey);
+
+        return isKey;
     }
 
     @Unique

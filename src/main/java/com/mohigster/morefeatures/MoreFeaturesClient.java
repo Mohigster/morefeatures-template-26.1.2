@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures;
 
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
+import com.mohigster.morefeatures.entity.custom.BrineEntity;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
 import com.mohigster.morefeatures.entity.MFEntityTypes;
 import com.mohigster.morefeatures.entity.model.IceologerModel;
@@ -190,11 +191,11 @@ public class MoreFeaturesClient {
     public static void onRegisterSpecialRenderers(RegisterSpecialModelRendererEvent event) {
         event.register(
                 MFIdentifier.withMfNamespace("carbon_trident"),
-                CarbonTridentUnbaked.MAP_CODEC
+                CarbonTridentUnbaked.CODEC
         );
         event.register(
                 MFIdentifier.withMfNamespace("bismuth_trident"),
-                BismuthTridentUnbaked.MAP_CODEC
+                BismuthTridentUnbaked.CODEC
         );
         event.register(
                 MFIdentifier.withMfNamespace("carbon_shield"),
@@ -213,6 +214,7 @@ public class MoreFeaturesClient {
 
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
-        event.put(MFEntityTypes.ICEOLOGER.get(), IceologerEntity.createAttributes().build());
+        event.put(MFEntityTypes.ICEOLOGER.get(), IceologerEntity.createAttributes());
+        event.put(MFEntityTypes.BRINE.get(), BrineEntity.createAttributes());
     }
 }

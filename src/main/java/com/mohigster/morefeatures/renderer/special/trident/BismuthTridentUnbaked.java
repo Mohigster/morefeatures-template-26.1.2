@@ -10,10 +10,10 @@ public class BismuthTridentUnbaked extends AbstractTridentUnbaked {
         super(MFEntityTypeIds.BISMUTH_TRIDENT, MFModelLayer.BISMUTH_TRIDENT);
     }
 
-    public static final MapCodec<BismuthTridentUnbaked> MAP_CODEC = unitStable(new BismuthTridentUnbaked());
+    public static final MapCodec<BismuthTridentUnbaked> CODEC = unitStable(new BismuthTridentUnbaked());
 
     @Override
     public MapCodec<BismuthTridentUnbaked> type() {
-        return MAP_CODEC;
+        return CODEC;
     }
 }

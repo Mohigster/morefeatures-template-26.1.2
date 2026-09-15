@@ -10,10 +10,10 @@ public class CarbonTridentUnbaked extends AbstractTridentUnbaked {
         super(MFEntityTypeIds.CARBON_TRIDENT, MFModelLayer.CARBON_TRIDENT);
     }
 
-    public static final MapCodec<CarbonTridentUnbaked> MAP_CODEC = unitStable(new CarbonTridentUnbaked());
+    public static final MapCodec<CarbonTridentUnbaked> CODEC = unitStable(new CarbonTridentUnbaked());
 
     @Override
     public MapCodec<CarbonTridentUnbaked> type() {
-        return MAP_CODEC;
+        return CODEC;
     }
 }

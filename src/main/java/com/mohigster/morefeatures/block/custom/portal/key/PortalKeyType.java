@@ -19,12 +19,12 @@ public interface PortalKeyType<P extends PortalKey> {
     DeferredRegister<PortalKeyType<?>> PORTAL_KEYS =
             DeferredRegister.create(MFRegistries.PORTAL_KEY_TYPES, MoreFeatures.MODID);
 
-    Supplier<PortalKeyType<BlockKey>> BLOCK = registerKeyType("block", BlockKey.CODEC);
-    Supplier<PortalKeyType<ItemKey>> ITEM = registerKeyType("item", ItemKey.CODEC);
+    Supplier<PortalKeyType<BlockKey>> BLOCK = register("block", BlockKey.CODEC);
+    Supplier<PortalKeyType<ItemKey>> ITEM = register("item", ItemKey.CODEC);
 
     MapCodec<P> codec();
 
-    private static <P extends PortalKey> Supplier<PortalKeyType<P>> registerKeyType(String id, MapCodec<P> codec) {
+    private static <P extends PortalKey> Supplier<PortalKeyType<P>> register(String id, MapCodec<P> codec) {
         return PORTAL_KEYS.register(id, () -> create(id, codec));
     }
 
@@ -47,15 +47,15 @@ public interface PortalKeyType<P extends PortalKey> {
         };
     }
 
+    default @Nullable Identifier getNullableId() {
+        return MFRegistries.PORTAL_KEY_TYPES.getKey(this);
+    }
+
     default @NonNull Identifier getId() {
         return Objects.requireNonNull(
                 this.getNullableId(),
                 "Attempted to get Identifier for unregistered PortalKeyType: " + this
         );
-    }
-
-    default @Nullable Identifier getNullableId() {
-        return MFRegistries.PORTAL_KEY_TYPES.getKey(this);
     }
 
     // Better for use when in risky areas, and it is uncertain if the key has been registered yet

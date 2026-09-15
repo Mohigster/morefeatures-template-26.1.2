@@ -19,7 +19,7 @@ public class IceologerRenderState extends IllagerRenderState {
         return this.isCastingSpell;
     }
 
-    public void setCastingSpell(boolean isCastingSpell) {
+    public void setIsCastingSpell(boolean isCastingSpell) {
         this.isCastingSpell = isCastingSpell;
     }
 }

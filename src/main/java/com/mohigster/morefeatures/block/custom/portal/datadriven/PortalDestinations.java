@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class PortalDestinations extends SimpleJsonResourceReloadListener<PortalDataEntry> {
     public static final PortalDestinations INSTANCE = new PortalDestinations();
 
-    protected List<PortalDataEntry> entries = List.of();
+    public List<PortalDataEntry> entries = List.of();
 
     private PortalDestinations() {
         super(PortalDataEntry.CODEC, FileToIdConverter.json(Directories.PORTAL_PATH));
@@ -62,7 +62,7 @@ public class PortalDestinations extends SimpleJsonResourceReloadListener<PortalD
         for (PortalDataEntry entry : INSTANCE.entries) {
             if (entry.targetLevel().equals(level)) {
                 if (entry.portalKey() instanceof BlockKey key) {
-                    MoreFeatures.LOGGER.debug("Found block key {} for: {} ", key, entry.targetLevel());
+                    MoreFeatures.LOGGER.debug("Found block key {} for: {} ", key.block(), entry.targetLevel());
 
                     return Optional.of(key);
                 }

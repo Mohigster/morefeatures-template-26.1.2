@@ -9,12 +9,5 @@ public abstract class PortalKey {
                     .dispatch("type", PortalKey::getType,
                             PortalKeyType::codec);
 
-    @Override
-    public String toString() {
-        return this.keyName() + "Key[" + this.getType().getId() + "]";
-    }
-
-    public abstract String keyName();
-
     public abstract PortalKeyType<?> getType();
 }

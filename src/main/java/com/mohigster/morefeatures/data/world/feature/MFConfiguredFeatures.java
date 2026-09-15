@@ -53,63 +53,63 @@ public class MFConfiguredFeatures {
 
     // Ore resource keys
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_AZURITE_ORE_KEY = registerKey("azurite_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> NETHER_AZURITE_ORE_KEY = registerKey("nether_azurite_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> END_AZURITE_ORE_KEY = registerKey("end_azurite_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_FLUORITE_ORE_KEY = registerKey("fluorite_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> NETHER_FLUORITE_ORE_KEY = registerKey("nether_fluorite_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> END_FLUORITE_ORE_KEY = registerKey("end_fluorite_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ALUMINIUM_ORE_KEY = registerKey("aluminium_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNESIUM_ORE_KEY = registerKey("magnesium_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BISMUTH_ORE_KEY = registerKey("bismuth_ore");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> EVERFROST_ORE_KEY = registerKey("everfrost_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_AZURITE_ORE_KEY = createKey("azurite_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NETHER_AZURITE_ORE_KEY = createKey("nether_azurite_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> END_AZURITE_ORE_KEY = createKey("end_azurite_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OVERWORLD_FLUORITE_ORE_KEY = createKey("fluorite_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> NETHER_FLUORITE_ORE_KEY = createKey("nether_fluorite_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> END_FLUORITE_ORE_KEY = createKey("end_fluorite_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ALUMINIUM_ORE_KEY = createKey("aluminium_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> MAGNESIUM_ORE_KEY = createKey("magnesium_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BISMUTH_ORE_KEY = createKey("bismuth_ore");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> EVERFROST_ORE_KEY = createKey("everfrost_ore");
 
     // Tree resource keys
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BLOODWOOD_KEY = registerKey("bloodwood");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_BLOODWOOD_KEY = registerKey("small_bloodwood");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_BLOODWOOD_KEY = registerKey("fallen_bloodwood");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> TAINTED_KEY = registerKey("tainted");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_TAINTED_KEY = registerKey("small_tainted");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_TAINTED_KEY = registerKey("fallen_tainted");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PALM_TREE_KEY = registerKey("palm_tree");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_PALM_KEY = registerKey("fallen_palm");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> DECREPIT_KEY = registerKey("decrepit");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PALLID_KEY = registerKey("pallid");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> CHARRED_KEY = registerKey("charred_fungus");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PLANTED_CHARRED_KEY = registerKey("charred_fungus_planted");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLOODWOOD_KEY = createKey("bloodwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_BLOODWOOD_KEY = createKey("small_bloodwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_BLOODWOOD_KEY = createKey("fallen_bloodwood");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> TAINTED_KEY = createKey("tainted");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_TAINTED_KEY = createKey("small_tainted");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_TAINTED_KEY = createKey("fallen_tainted");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PALM_TREE_KEY = createKey("palm_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_PALM_KEY = createKey("fallen_palm");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DECREPIT_KEY = createKey("decrepit");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PALLID_KEY = createKey("pallid");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CHARRED_KEY = createKey("charred_fungus");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PLANTED_CHARRED_KEY = createKey("charred_fungus_planted");
 
     // Vegetation keys
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> CHARRED_VEGETATION_KEY = registerKey("charred_forest_vegetation");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> CHARRED_VEGETATION_BONEMEAL_KEY = registerKey("charred_forest_vegetation_bonemeal");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> DECREPIT_VEGETATION_KEY = registerKey("decrepit_forest_vegetation");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> DECREPIT_VEGETATION_BONEMEAL_KEY = registerKey("decrepit_forest_vegetation_bonemeal");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PALLID_VEGETATION_KEY = registerKey("pallid_forest_vegetation");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> PALLID_VEGETATION_BONEMEAL_KEY = registerKey("pallid_forest_vegetation_bonemeal");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CHARRED_VEGETATION_KEY = createKey("charred_forest_vegetation");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> CHARRED_VEGETATION_BONEMEAL_KEY = createKey("charred_forest_vegetation_bonemeal");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DECREPIT_VEGETATION_KEY = createKey("decrepit_forest_vegetation");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> DECREPIT_VEGETATION_BONEMEAL_KEY = createKey("decrepit_forest_vegetation_bonemeal");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PALLID_VEGETATION_KEY = createKey("pallid_forest_vegetation");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PALLID_VEGETATION_BONEMEAL_KEY = createKey("pallid_forest_vegetation_bonemeal");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SCORCHED_VINES_KEY = registerKey("scorched_vines");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SMOLDERED_VINES_KEY = registerKey("smoldered_vines");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SCORCHED_VINES_KEY = createKey("scorched_vines");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SMOLDERED_VINES_KEY = createKey("smoldered_vines");
 
 
     // Frozen resource keys
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_ICE_PATCH_KEY = registerKey("small_ice_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_PATCH_KEY = registerKey("ice_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_ICE_PATCH_KEY = registerKey("large_ice_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_BLUE_ICE_PATCH_KEY = registerKey("small_blue_ice_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUE_ICE_PATCH_KEY = registerKey("blue_ice_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_BLUE_ICE_PATCH_KEY = registerKey("large_blue_ice_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_SNOW_PATCH_KEY = registerKey("small_snow_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> SNOW_PATCH_KEY = registerKey("snow_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SNOW_PATCH_KEY = registerKey("large_snow_patch");
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_SPIRE_KEY = registerKey("ice_spire");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_ICE_PATCH_KEY = createKey("small_ice_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_PATCH_KEY = createKey("ice_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_ICE_PATCH_KEY = createKey("large_ice_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_BLUE_ICE_PATCH_KEY = createKey("small_blue_ice_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> BLUE_ICE_PATCH_KEY = createKey("blue_ice_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_BLUE_ICE_PATCH_KEY = createKey("large_blue_ice_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SMALL_SNOW_PATCH_KEY = createKey("small_snow_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> SNOW_PATCH_KEY = createKey("snow_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> LARGE_SNOW_PATCH_KEY = createKey("large_snow_patch");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICE_SPIRE_KEY = createKey("ice_spire");
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_CLUSTER_KEY = registerKey("icicle_cluster");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> ICICLE_CLUSTER_KEY = createKey("icicle_cluster");
 
     // Oasis
 
-    public static final ResourceKey<ConfiguredFeature<?, ?>> OASIS_KEY = registerKey("oasis");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> OASIS_KEY = createKey("oasis");
 
 
     @SuppressWarnings("deprecation")
@@ -500,7 +500,12 @@ public class MFConfiguredFeatures {
         return builder;
     }
 
-    public static void registerNetherVegetation(BootstrapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> naturalFeature, ResourceKey<ConfiguredFeature<?, ?>> bonemealFeature, WeightedStateProvider provider) {
+    public static void registerNetherVegetation(
+            BootstrapContext<ConfiguredFeature<?, ?>> context,
+            ResourceKey<ConfiguredFeature<?, ?>> naturalFeature,
+            ResourceKey<ConfiguredFeature<?, ?>> bonemealFeature,
+            WeightedStateProvider provider
+    ) {
         register(context, naturalFeature, Feature.NETHER_FOREST_VEGETATION, new NetherForestVegetationConfig(
                 provider,
                 8,
@@ -513,12 +518,16 @@ public class MFConfiguredFeatures {
         ));
     }
 
-    public static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name){
+    public static ResourceKey<ConfiguredFeature<?, ?>> createKey(String name){
         return ResourceKey.create(Registries.CONFIGURED_FEATURE, MFIdentifier.withMfNamespace(name));
     }
 
-    private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstrapContext<ConfiguredFeature<?, ?>> context,
-                                                                                          ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC configuration) {
+    private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(
+            BootstrapContext<ConfiguredFeature<?, ?>> context,
+            ResourceKey<ConfiguredFeature<?, ?>> key,
+            F feature,
+            FC configuration
+    ) {
         context.register(key, new ConfiguredFeature<>(feature, configuration));
     }
 }

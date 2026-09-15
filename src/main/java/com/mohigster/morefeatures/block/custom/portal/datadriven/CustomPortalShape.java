@@ -31,16 +31,18 @@ public class CustomPortalShape extends PortalShape {
     public static final int MIN_HEIGHT = 3;
     public static final int MAX_HEIGHT = 21;
 
-    private static final BlockBehaviour.StatePredicate FRAME =
-            (state, _, _) -> state
-                    .is(PortalDestinations.getFrameState(state).getBlock());
+    private static final BlockBehaviour.StatePredicate FRAME = CustomPortalShape::isFrame;
+
+    private static boolean isFrame(BlockState state, BlockGetter level, BlockPos pos) {
+        return state.is(PortalDestinations.getFrameState(state).getBlock());
+    }
 
     private CustomPortalShape(Direction.Axis axis, int portalBlockCount, Direction rightDir, BlockPos bottomLeft, int width, int height) {
         super(axis, portalBlockCount, rightDir, bottomLeft, width, height);
     }
 
     public static Optional<CustomPortalShape> findEmptyCustomShape(LevelAccessor level, BlockPos pos, Direction.Axis preferredAxis) {
-        return findCustomShape(level, pos, (shape) -> shape.isValid() && shape.numPortalBlocks == 0, preferredAxis);
+        return findCustomShape(level, pos, CustomPortalShape::shapeIsValid, preferredAxis);
     }
 
     public static Optional<CustomPortalShape> findCustomShape(LevelAccessor level, BlockPos pos, Predicate<CustomPortalShape> isValid, Direction.Axis preferredAxis) {
@@ -153,6 +155,10 @@ public class CustomPortalShape extends PortalShape {
         }
 
         return MAX_HEIGHT;
+    }
+    
+    private static boolean shapeIsValid(CustomPortalShape shape) {
+        return shape.isValid() && shape.numPortalBlocks == 0;
     }
 
     private static boolean isEmpty(BlockState state) {

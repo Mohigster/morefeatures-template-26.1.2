@@ -30,10 +30,19 @@ public class MFLevelStems {
                 noiseGenSettings.getOrThrow(MFNoiseGeneratorSettings.FLOATING_ISLANDS_MULTI)
         );
 
+        NoiseBasedChunkGenerator borealisGenerator = new NoiseBasedChunkGenerator(
+                MultiNoiseBiomeSource.createFromList(
+                        new Climate.ParameterList<>(List.of(
+                                Pair.of(Climate.parameters(1.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F, 0.0F), biomes.getOrThrow(MFBiomes.ICE_CAVES))
+                        ))
+                ),
+                noiseGenSettings.getOrThrow(MFNoiseGeneratorSettings.BOREALIS)
+        );
+
         context.register(MFLevelStemIds.EVILDIM, new LevelStem(
                 dimensionTypes.getOrThrow(MFDimensionTypeIds.EVILDIM), multiBiomeGenerator));
 
         context.register(MFLevelStemIds.BOREALIS, new LevelStem(
-                dimensionTypes.getOrThrow(MFDimensionTypeIds.BOREALIS), multiBiomeGenerator));
+                dimensionTypes.getOrThrow(MFDimensionTypeIds.BOREALIS), borealisGenerator));
     }
 }

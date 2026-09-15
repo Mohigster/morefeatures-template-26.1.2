@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.data.world.feature.custom.config.nethervine;
 
+import com.mohigster.morefeatures.util.MFExtraCodecs;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderSet;
@@ -24,7 +25,7 @@ public record FloorVinesConfiguration(
                             .forGetter(FloorVinesConfiguration::vinesState),
                     BlockState.CODEC.fieldOf("vines_plant")
                             .forGetter(FloorVinesConfiguration::vinesPlantState),
-                    RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("valid_support_blocks")
+                    MFExtraCodecs.BLOCK_SET.fieldOf("valid_support_blocks")
                             .forGetter(FloorVinesConfiguration::validSupportBlocks),
                     ExtraCodecs.POSITIVE_INT.fieldOf("spread_width")
                             .forGetter(FloorVinesConfiguration::spreadWidth),

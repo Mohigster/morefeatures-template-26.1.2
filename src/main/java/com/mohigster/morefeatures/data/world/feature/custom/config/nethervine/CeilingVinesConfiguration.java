@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.data.world.feature.custom.config.nethervine;
 
+import com.mohigster.morefeatures.util.MFExtraCodecs;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderSet;
@@ -27,7 +28,7 @@ public record CeilingVinesConfiguration(
                             .forGetter(CeilingVinesConfiguration::vinesPlantState),
                     BlockState.CODEC.fieldOf("roof_block")
                             .forGetter(CeilingVinesConfiguration::roofBlockState),
-                    RegistryCodecs.homogeneousList(Registries.BLOCK).fieldOf("valid_support_blocks")
+                    MFExtraCodecs.BLOCK_SET.fieldOf("valid_support_blocks")
                             .forGetter(CeilingVinesConfiguration::validSupportBlocks),
                     ExtraCodecs.POSITIVE_INT.fieldOf("spread_width")
                             .forGetter(CeilingVinesConfiguration::spreadWidth),

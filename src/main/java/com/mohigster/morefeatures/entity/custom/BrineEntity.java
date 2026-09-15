@@ -19,7 +19,7 @@ public class BrineEntity extends Monster {
     public BrineEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
         // Makes it immune to drowning and allows it to swim properly
-        this.setAirSupply(getMaxAirSupply());
+        this.setAirSupply(this.getMaxAirSupply());
     }
 
     @Override
@@ -33,13 +33,13 @@ public class BrineEntity extends Monster {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true));
     }
 
-    @SuppressWarnings("unused")
-    public static AttributeSupplier.Builder createAttributes() {
+    public static AttributeSupplier createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 20.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.ATTACK_DAMAGE, 4.0D)
-                .add(Attributes.FOLLOW_RANGE, 48.0D);
+                .add(Attributes.FOLLOW_RANGE, 48.0D)
+                .build();
     }
 
     // Custom movement mechanics to simulate a "floating" fluid elemental

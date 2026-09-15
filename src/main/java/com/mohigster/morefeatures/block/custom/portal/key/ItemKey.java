@@ -22,13 +22,8 @@ public class ItemKey extends PortalKey {
         this.item = item;
     }
 
-    private Item item() {
+    public Item item() {
         return this.item;
-    }
-
-    @Override
-    public String keyName() {
-        return "Item";
     }
 
     @Override

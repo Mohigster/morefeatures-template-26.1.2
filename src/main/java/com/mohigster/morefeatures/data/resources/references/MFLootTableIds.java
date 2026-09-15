@@ -13,6 +13,7 @@ public class MFLootTableIds {
 
     public static final ResourceKey<LootTable> HARVEST_BLUE_BERRY_BUSH = register("harvest/blue_berry_bush");
 
+    @SuppressWarnings("SameParameterValue")
     private static ResourceKey<LootTable> register(String location) {
         ResourceKey<LootTable> id = ResourceKey.create(Registries.LOOT_TABLE, MFIdentifier.withMfNamespace(location));
         if (LOCATIONS.add(id)) {

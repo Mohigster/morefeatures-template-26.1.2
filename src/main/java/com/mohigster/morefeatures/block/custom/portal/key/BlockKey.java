@@ -16,11 +16,6 @@ public class BlockKey extends PortalKey {
             )
     );
 
-    @Override
-    public String keyName() {
-        return "Block";
-    }
-
     private final Block block;
 
     private BlockKey(Block block) {

@@ -119,12 +119,13 @@ public class IceologerEntity extends AbstractIllager {
         return SoundEvents.EVOKER_CELEBRATE;
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
+    public static AttributeSupplier createAttributes() {
         return Monster.createMonsterAttributes()
                 .add(Attributes.MAX_HEALTH, 30.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.25D)
                 .add(Attributes.ATTACK_DAMAGE, 5.0D)
-                .add(Attributes.FOLLOW_RANGE,12.0D);
+                .add(Attributes.FOLLOW_RANGE,12.0D)
+                .build();
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
