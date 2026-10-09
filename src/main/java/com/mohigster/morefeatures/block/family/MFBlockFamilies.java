@@ -9,7 +9,7 @@ import net.minecraft.data.BlockFamily;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MFBlockFamilies {
+public final class MFBlockFamilies {
     private static GemstoneCollection<BlockFamily> gemstoneFamily;
     private static WoodTypeCollection<BlockFamily> woodFamily;
     private static final List<BlockFamily> FAMILIES = new ArrayList<>();

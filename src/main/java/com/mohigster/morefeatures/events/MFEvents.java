@@ -7,9 +7,10 @@ import com.mohigster.morefeatures.block.custom.data.codec.BonemealMorph;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.block.entity.custom.CompressorBlockEntity;
 import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
-import com.mohigster.morefeatures.events.data.ElytraSpeedBoosts;
+import com.mohigster.morefeatures.events.data.ElytraSpeedBoostManager;
 import com.mohigster.morefeatures.data.world.biome.MFBiomes;
 import com.mohigster.morefeatures.util.DataMapUtil;
+import net.minecraft.client.model.HumanoidModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.network.chat.Component;
@@ -18,13 +19,16 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
+import net.minecraft.world.entity.Avatar;
 import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.animal.sheep.Sheep;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.FireworkRocketEntity;
 import net.minecraft.world.entity.projectile.arrow.AbstractArrow;
+import net.minecraft.world.item.CrossbowItem;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -50,7 +54,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @EventBusSubscriber(modid = MoreFeatures.MODID)
-public class MFEvents {
+public final class MFEvents {
 
     private static boolean sharedAllElytraEntries;
 
@@ -65,11 +69,11 @@ public class MFEvents {
 
         ItemStack chest = player.getItemBySlot(EquipmentSlot.CHEST);
 
-        if (!(ElytraSpeedBoosts.elytraInEntries(chest))) return;
+        if (!(ElytraSpeedBoostManager.elytraInEntries(chest))) return;
 
         // This boolean prevents the logger from being spammed for every tick that the player is flying
         if(!sharedAllElytraEntries) {
-            MoreFeatures.LOGGER.debug("All Elytra Entries: {}", ElytraSpeedBoosts.getElytraEntries());
+            MoreFeatures.LOGGER.debug("All Elytra Entries: {}", ElytraSpeedBoostManager.getElytraEntries());
             sharedAllElytraEntries = true;
         }
 
@@ -80,8 +84,8 @@ public class MFEvents {
         ).isEmpty();
 
         if (hasActiveRocket) {
-            double speedBoost = ElytraSpeedBoosts.getSpeed(chest);
-            double maxSpeed = ElytraSpeedBoosts.getMaxSpeed(chest);
+            double speedBoost = ElytraSpeedBoostManager.getSpeed(chest);
+            double maxSpeed = ElytraSpeedBoostManager.getMaxSpeed(chest);
             Vec3 currentVelocity = player.getDeltaMovement();
 
             if (currentVelocity.length() < maxSpeed) {
@@ -279,6 +283,19 @@ public class MFEvents {
 
         event.registerBlockEntity(Capabilities.Fluid.BLOCK,
                 MFBlockEntities.COMPRESSOR_BE.get(), CompressorBlockEntity::getFluidTank);
+    }
+
+    @SubscribeEvent
+    public static void onSetArmPose(SetArmPoseEvent event) {
+        Avatar avatar = event.getAvatar();
+        ItemStack stack = event.getItemInHand();
+
+        if (!avatar.swinging
+                && stack.getItem() instanceof CrossbowItem
+                && CrossbowItem.isCharged(stack)
+        ) {
+            event.setPose(HumanoidModel.ArmPose.CROSSBOW_HOLD);
+        }
     }
 
     /**

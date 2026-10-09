@@ -21,19 +21,19 @@ public class NulliumBlock extends MFNyliumBlock {
     public NulliumBlock(
             List<ResourceKey<ConfiguredFeature<?, ?>>> features,
             ResourceKey<ConfiguredFeature<?, ?>> rareFeature,
-            int chance,
+            int chanceBound,
             Properties properties
     ) {
-        super(features, rareFeature, chance, properties);
+        super(features, rareFeature, chanceBound, properties);
     }
 
     public NulliumBlock(
             ResourceKey<ConfiguredFeature<?, ?>> feature,
             ResourceKey<ConfiguredFeature<?, ?>> rareFeature,
-            int chance,
+            int chanceBound,
             Properties properties
     ) {
-        super(feature, rareFeature, chance, properties);
+        super(feature, rareFeature, chanceBound, properties);
     }
 
     public NulliumBlock(

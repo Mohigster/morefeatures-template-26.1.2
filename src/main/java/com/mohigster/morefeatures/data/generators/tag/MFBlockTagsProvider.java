@@ -32,7 +32,8 @@ public class MFBlockTagsProvider extends BlockTagsProvider {
          * copper or wool vertical slab to any block tag all at once,
          * without having to add each individual block in the collection
          */
-        new MFBlockItemTagsProvider(tagId -> BlockItemTagsProvider.wrapForBlocks(this.tag(tagId.block()))).run();
+        new MFBlockItemTagsProvider(tagId ->
+                BlockItemTagsProvider.wrapForBlocks(this.tag(tagId.block()))).run();
 
         this.tag(BlockTags.SHEARS_MAJOR_BREAKING_SPEED)
                 .addTag(MFBlockTags.WOOL_VERTICAL_SLABS);

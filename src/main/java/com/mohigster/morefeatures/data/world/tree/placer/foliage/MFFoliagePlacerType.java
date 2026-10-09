@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.data.world.tree.placer.foliage;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.core.RestrictedTo;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.foliageplacers.FoliagePlacerType;
 import net.neoforged.bus.api.IEventBus;
@@ -16,6 +17,7 @@ public class MFFoliagePlacerType {
             FOLIAGE_PLACER_TYPES.register("quad_fronged_foliage_placer",
                     () -> new FoliagePlacerType<>(QuadFrongedFoliagePlacer.CODEC));
 
+    @RestrictedTo(MoreFeatures.class)
     public static void register(IEventBus eventBus){
         FOLIAGE_PLACER_TYPES.register(eventBus);
         MoreFeatures.LOGGER.info("Mod Foliage Placer registered -> Performed by: " + MoreFeatures.MODID);

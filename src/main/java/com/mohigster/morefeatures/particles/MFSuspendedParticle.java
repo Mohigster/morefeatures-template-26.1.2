@@ -73,7 +73,7 @@ public class MFSuspendedParticle extends SuspendedParticle {
         }
     }
 
-    public static Particle createEndParticle(
+    private static Particle createEndParticle(
             ClientLevel level,
             double x, double y, double z,
             RandomSource random,

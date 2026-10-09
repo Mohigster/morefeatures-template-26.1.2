@@ -11,7 +11,7 @@ public final class MFIdentifier {
         return Identifier.fromNamespaceAndPath(MODID, path);
     }
 
-    public static boolean isNotMfNamespace(Identifier id) {
+    public static boolean notMfNamespace(Identifier id) {
         return !id.getNamespace().equals(MODID);
     }
 }

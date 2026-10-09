@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.entity;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.core.RestrictedTo;
 import com.mohigster.morefeatures.entity.custom.BrineEntity;
 import com.mohigster.morefeatures.entity.custom.IceologerEntity;
 import com.mohigster.morefeatures.entity.custom.projectile.trident.ThrownMFTrident;
@@ -18,23 +19,23 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 
-public class MFEntityTypes {
+public final class MFEntityTypes {
 
     public static final DeferredRegister.Entities ENTITY_TYPES =
             DeferredRegister.createEntities(MoreFeatures.MODID);
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownMFTrident>> CARBON_TRIDENT =
             ENTITY_TYPES.register("carbon_trident", () -> createTrident(
-                    (type, level) -> new ThrownMFTrident(
-                            type, level, MFItemIds.CARBON_TRIDENT.identifier(),
+                    (type, level) -> ThrownMFTrident.create(
+                            type, level, MFItemIds.CARBON_TRIDENT,
                             9.5F),
                     MFEntityTypeIds.CARBON_TRIDENT));
 
     public static final DeferredHolder<EntityType<?>, EntityType<ThrownMFTrident>> BISMUTH_TRIDENT =
             ENTITY_TYPES.register("bismuth_trident", () -> createTrident(
-                    (type, level) -> new ThrownMFTrident(
-                            type, level, MFItemIds.BISMUTH_TRIDENT.identifier(),
-                            11.75F),
+                    (type, level) -> ThrownMFTrident.create(
+                            type, level, MFItemIds.BISMUTH_TRIDENT, 11.75F
+                    ),
                     MFEntityTypeIds.BISMUTH_TRIDENT
             ));
 
@@ -89,11 +90,11 @@ public class MFEntityTypes {
             ));
 
     private static <T extends Entity> EntityType<T> createHostile(
-            EntityType.EntityFactory<T> factory, int trackingRange,
-            int updateInterval, float width, float height, float eyeHeight,
-            ResourceKey<EntityType<?>> entityId) {
-
-        EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
+            final EntityType.EntityFactory<T> factory, final int trackingRange,
+            final int updateInterval, final float width, final float height,
+            final float eyeHeight, final ResourceKey<EntityType<?>> entityId
+    ) {
+        final EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
                 .sized(width, height)
                 .eyeHeight(eyeHeight)
                 .clientTrackingRange(trackingRange)
@@ -107,9 +108,10 @@ public class MFEntityTypes {
     }
 
     private static <T extends Entity> EntityType<T> createTrident(
-            EntityType.EntityFactory<T> factory, ResourceKey<EntityType<?>> entityId) {
+            final EntityType.EntityFactory<T> factory, ResourceKey<EntityType<?>> entityId
+    ) {
 
-        EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
+        final EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
                 .sized(0.5F, 0.5F)
                 .eyeHeight(0.13F)
                 .clientTrackingRange(4)
@@ -120,9 +122,10 @@ public class MFEntityTypes {
     }
 
     private static <T extends Entity> EntityType<T> createBoat(
-            EntityType.EntityFactory<T> factory, ResourceKey<EntityType<?>> entityId) {
+            final EntityType.EntityFactory<T> factory, ResourceKey<EntityType<?>> entityId
+    ) {
 
-        EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
+        final EntityType.Builder<T> builder = EntityType.Builder.of(factory, MobCategory.MISC)
                 .sized(1.375F, 0.5625F)
                 .clientTrackingRange(10)
                 .noLootTable();
@@ -131,12 +134,13 @@ public class MFEntityTypes {
     }
 
     private static <T extends Entity> EntityType<T> create(
-            ResourceKey<EntityType<?>> entityId,
-            EntityType.Builder<T> builder
+            final ResourceKey<EntityType<?>> entityId,
+            final EntityType.Builder<T> builder
     ) {
         return builder.build(entityId);
     }
 
+    @RestrictedTo(MoreFeatures.class)
     public static void register(IEventBus modEventBus) {
         ENTITY_TYPES.register(modEventBus);
         MoreFeatures.LOGGER.info("Mod Entity Types registered -> Performed by: " + MoreFeatures.MODID);

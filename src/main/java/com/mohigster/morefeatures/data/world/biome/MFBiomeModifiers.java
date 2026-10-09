@@ -1,8 +1,11 @@
 package com.mohigster.morefeatures.data.world.biome;
 
+import com.mohigster.morefeatures.core.RestrictedTo;
+import com.mohigster.morefeatures.data.generators.MFDatapackProvider;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.world.feature.MFPlacedFeatures;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -14,20 +17,21 @@ import net.neoforged.neoforge.common.world.BiomeModifiers;
 import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 public class MFBiomeModifiers {
-    public static final ResourceKey<BiomeModifier> ADD_AZURITE_ORE = registerKey("add_azurite_ore");
-    public static final ResourceKey<BiomeModifier> ADD_NETHER_AZURITE_ORE = registerKey("add_nether_azurite_ore");
-    public static final ResourceKey<BiomeModifier> ADD_END_AZURITE_ORE = registerKey("add_end_azurite_ore");
-    public static final ResourceKey<BiomeModifier> ADD_FLUORITE_ORE = registerKey("add_fluorite_ore");
-    public static final ResourceKey<BiomeModifier> ADD_NETHER_FLUORITE_ORE = registerKey("add_nether_fluorite_ore");
-    public static final ResourceKey<BiomeModifier> ADD_END_FLUORITE_ORE = registerKey("add_end_fluorite_ore");
-    public static final ResourceKey<BiomeModifier> ADD_ALUMINIUM_ORE = registerKey("add_aluminium_ore");
-    public static final ResourceKey<BiomeModifier> ADD_MAGNESIUM_ORE = registerKey("add_magnesium_ore");
-    public static final ResourceKey<BiomeModifier> ADD_BISMUTH_ORE = registerKey("add_bismuth_ore");
-    public static final ResourceKey<BiomeModifier> ADD_OASIS = registerKey("add_oasis");
-    public static final ResourceKey<BiomeModifier> ADD_PALM_TREE = registerKey("add_palm_tree");
-    public static final ResourceKey<BiomeModifier> ADD_FALLEN_PALM = registerKey("add_fallen_palm");
-    public static final ResourceKey<BiomeModifier> ADD_ICE_SPIRE = registerKey("add_ice_spire");
+    public static final ResourceKey<BiomeModifier> ADD_AZURITE_ORE = newKey("add_azurite_ore");
+    public static final ResourceKey<BiomeModifier> ADD_NETHER_AZURITE_ORE = newKey("add_nether_azurite_ore");
+    public static final ResourceKey<BiomeModifier> ADD_END_AZURITE_ORE = newKey("add_end_azurite_ore");
+    public static final ResourceKey<BiomeModifier> ADD_FLUORITE_ORE = newKey("add_fluorite_ore");
+    public static final ResourceKey<BiomeModifier> ADD_NETHER_FLUORITE_ORE = newKey("add_nether_fluorite_ore");
+    public static final ResourceKey<BiomeModifier> ADD_END_FLUORITE_ORE = newKey("add_end_fluorite_ore");
+    public static final ResourceKey<BiomeModifier> ADD_ALUMINIUM_ORE = newKey("add_aluminium_ore");
+    public static final ResourceKey<BiomeModifier> ADD_MAGNESIUM_ORE = newKey("add_magnesium_ore");
+    public static final ResourceKey<BiomeModifier> ADD_BISMUTH_ORE = newKey("add_bismuth_ore");
+    public static final ResourceKey<BiomeModifier> ADD_OASIS = newKey("add_oasis");
+    public static final ResourceKey<BiomeModifier> ADD_PALM_TREE = newKey("add_palm_tree");
+    public static final ResourceKey<BiomeModifier> ADD_FALLEN_PALM = newKey("add_fallen_palm");
+    public static final ResourceKey<BiomeModifier> ADD_ICE_SPIRE = newKey("add_ice_spire");
 
+    @RestrictedTo({MFDatapackProvider.class, RegistrySetBuilder.class, RegistrySetBuilder.RegistryStub.class})
     public static void bootstrap(BootstrapContext<BiomeModifier> context) {
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);
         var biomes = context.lookup(Registries.BIOME);
@@ -99,7 +103,7 @@ public class MFBiomeModifiers {
         ));
     }
 
-    public static ResourceKey<BiomeModifier> registerKey(String name){
+    public static ResourceKey<BiomeModifier> newKey(String name){
         return ResourceKey.create(NeoForgeRegistries.Keys.BIOME_MODIFIERS, MFIdentifier.withMfNamespace(name));
     }
 }

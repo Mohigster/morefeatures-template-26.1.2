@@ -20,7 +20,7 @@ public class BrineBallEntity extends ThrowableProjectile {
     }
 
     public BrineBallEntity(Level level, LivingEntity shooter) {
-        super(EntityTypes.SNOWBALL, level); // Replace with your registered EntityType later
+        super(EntityTypes.SNOWBALL, level);
     }
 
     @SuppressWarnings("deprecation")

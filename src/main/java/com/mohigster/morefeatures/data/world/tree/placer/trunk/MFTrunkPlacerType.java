@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.data.world.tree.placer.trunk;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.core.RestrictedTo;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.trunkplacers.TrunkPlacerType;
 import net.neoforged.bus.api.IEventBus;
@@ -15,6 +16,7 @@ public class MFTrunkPlacerType{
     public static final DeferredHolder<TrunkPlacerType<?>, TrunkPlacerType<LeaningTrunkPlacer>> LEANING_TRUNK_PLACER =
             TRUNK_PLACER_TYPES.register("leaning_trunk_placer", () -> new TrunkPlacerType<>(LeaningTrunkPlacer.CODEC));
 
+    @RestrictedTo(MoreFeatures.class)
     public static void register(IEventBus eventBus){
         TRUNK_PLACER_TYPES.register(eventBus);
         MoreFeatures.LOGGER.info("Mod Trunk Placers registered -> Performed by: " + MoreFeatures.MODID);

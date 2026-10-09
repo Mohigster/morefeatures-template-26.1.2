@@ -11,7 +11,7 @@ import org.jspecify.annotations.NonNull;
 
 import java.util.List;
 
-public abstract class SelfInflictingAndTargetingWandItem extends AbstractWandItem implements SelfInflicting, Targeting {
+public abstract non-sealed class SelfInflictingAndTargetingWandItem extends AbstractWandItem implements SelfInflicting, Targeting {
     protected final int selfInflictingExtraDurabilityCost;
     private final int maxTargets;
     private final float proximityLimit;

@@ -1,10 +1,13 @@
 package com.mohigster.morefeatures.data.world.dimension;
 
+import com.mohigster.morefeatures.core.RestrictedTo;
+import com.mohigster.morefeatures.data.generators.MFDatapackProvider;
 import com.mohigster.morefeatures.data.resources.references.dimension.MFDimensionTypeIds;
 import com.mohigster.morefeatures.data.resources.references.dimension.MFLevelStemIds;
 import com.mohigster.morefeatures.data.world.biome.MFBiomes;
 import com.mohigster.morefeatures.data.world.noise.MFNoiseGeneratorSettings;
 import com.mojang.datafixers.util.Pair;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.world.level.biome.Climate;
@@ -15,6 +18,7 @@ import net.minecraft.world.level.levelgen.NoiseBasedChunkGenerator;
 import java.util.List;
 
 public class MFLevelStems {
+    @RestrictedTo({MFDatapackProvider.class, RegistrySetBuilder.class, RegistrySetBuilder.RegistryStub.class})
     public static void bootstrap(BootstrapContext<LevelStem> context) {
         var biomes = context.lookup(Registries.BIOME);
         var dimensionTypes = context.lookup(Registries.DIMENSION_TYPE);

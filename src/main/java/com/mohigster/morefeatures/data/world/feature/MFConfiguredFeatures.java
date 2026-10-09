@@ -2,6 +2,8 @@ package com.mohigster.morefeatures.data.world.feature;
 
 import com.google.common.collect.ImmutableList;
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.core.RestrictedTo;
+import com.mohigster.morefeatures.data.generators.MFDatapackProvider;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.world.feature.custom.MFFeatures;
 import com.mohigster.morefeatures.data.world.feature.custom.config.MultiBaseSpeleothemClusterConfiguration;
@@ -12,6 +14,7 @@ import com.mohigster.morefeatures.data.world.tree.decorator.TrunkLightDecorator;
 import com.mohigster.morefeatures.data.world.tree.placer.foliage.QuadFrongedFoliagePlacer;
 import com.mohigster.morefeatures.data.world.tree.placer.trunk.LeaningTrunkPlacer;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
@@ -112,6 +115,7 @@ public class MFConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> OASIS_KEY = createKey("oasis");
 
 
+    @RestrictedTo({MFDatapackProvider.class, RegistrySetBuilder.class, RegistrySetBuilder.RegistryStub.class})
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context){
         HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);

@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.recipe;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.core.RestrictedTo;
 import com.mohigster.morefeatures.recipe.custom.CompressionRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.Recipe;
@@ -32,6 +33,7 @@ public class MFRecipes {
         });
     }
 
+    @RestrictedTo(MoreFeatures.class)
     public static void register(IEventBus eventBus) {
         SERIALIZERS.register(eventBus);
         TYPES.register(eventBus);

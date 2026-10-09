@@ -1,6 +1,9 @@
 package com.mohigster.morefeatures.item.custom.trim;
 
+import com.mohigster.morefeatures.core.RestrictedTo;
+import com.mohigster.morefeatures.data.generators.MFDatapackProvider;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.network.chat.Component;
@@ -18,6 +21,7 @@ public class MFTrimMaterials {
     public static final ResourceKey<TrimMaterial> CARBON = createId("carbon");
     public static final ResourceKey<TrimMaterial> BISMUTH = createId("bismuth");
 
+    @RestrictedTo({MFDatapackProvider.class, RegistrySetBuilder.class, RegistrySetBuilder.RegistryStub.class})
     public static void bootstrap(BootstrapContext<TrimMaterial> context) {
         register(context, ALUMINIUM, Style.EMPTY.withColor(11259102), MFMaterialAssetGroups.ALUMINIUM);
         register(context, MAGNESIUM, Style.EMPTY.withColor(2636355), MFMaterialAssetGroups.MAGNESIUM);

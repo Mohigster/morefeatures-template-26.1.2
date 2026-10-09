@@ -20,10 +20,12 @@ import com.mohigster.morefeatures.block.custom.pillar.PillarBlock;
 import com.mohigster.morefeatures.block.custom.magicblock.MagicBlock;
 import com.mohigster.morefeatures.block.custom.pillar.WeatheringCopperPillarBlock;
 import com.mohigster.morefeatures.block.custom.portal.EvilPortalBlock;
-import com.mohigster.morefeatures.block.custom.portal.datadriven.PortalBlock;
+import com.mohigster.morefeatures.block.custom.portal.PortalBlock;
 import com.mohigster.morefeatures.block.custom.temporaldilator.TemporalDilatorBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.VerticalSlabBlock;
 import com.mohigster.morefeatures.block.custom.verticalslab.WeatheringCopperVerticalSlabBlock;
+import com.mohigster.morefeatures.core.RestrictedTo;
+import com.mohigster.morefeatures.data.generators.loot.sub.MFBlockLootTableProvider;
 import com.mohigster.morefeatures.data.resources.references.MFBlockIds;
 import com.mohigster.morefeatures.data.resources.references.MFBlockItemIds;
 import com.mohigster.morefeatures.item.MFItems;
@@ -59,8 +61,8 @@ import org.jspecify.annotations.NullMarked;
 import java.util.List;
 import java.util.function.*;
 
-public class MFBlocks {
-    public static final DeferredRegister.Blocks BLOCKS =
+public final class MFBlocks {
+    private static final DeferredRegister.Blocks BLOCKS =
             DeferredRegister.createBlocks(MoreFeatures.MODID);
 
     // Same convention as ModItems. Section block registration into types of blocks e.g. // Aluminium Blocks
@@ -261,8 +263,8 @@ public class MFBlocks {
     );
 
     public static final GemstoneCollection<DeferredBlock<Block>> GEMSTONE_SIGN = GemstoneCollection.registerBlocks(
-            MFBlockIds.GEMSTONE_SIGN,
-            MFBlocks::registerBlockWithoutItem,
+            MFBlockItemIds.GEMSTONE_SIGN,
+            MFBlocks::registerSign,
             MFStandingSignBlock::new,
             PropertyUtil.Blocks::gemSignProps
     );
@@ -884,8 +886,7 @@ public class MFBlocks {
     public static final WeatheringCopperCollection<DeferredBlock<Block>> CUT_COPPER_VERTICAL_SLAB = // Because this is a WeatheringCopperCollection, all eight blocks (unaffected, exposed, weathered, and oxidised, and all of their waxed variants) are registered at the exact same time. No need to repeat myself for each one.
             VanillaCollectionUtil.registerDeferredCopper(
                     MFBlockItemIds.CUT_COPPER_VERTICAL_SLAB,
-                    WeatheringCopperVerticalSlabBlock::new, // Regular
-                    WeatheringCopperVerticalSlabBlock::new, // Waxed
+                    WeatheringCopperVerticalSlabBlock::new,
                     state -> Properties.ofFullCopy(Blocks.CUT_COPPER.weathering().pick(state))
             );
 
@@ -928,7 +929,6 @@ public class MFBlocks {
     public static final WeatheringCopperCollection<DeferredBlock<Block>> CUT_COPPER_PILLAR =
             VanillaCollectionUtil.registerDeferredCopper(
                     MFBlockItemIds.CUT_COPPER_PILLAR,
-                    WeatheringCopperPillarBlock::new,
                     WeatheringCopperPillarBlock::new,
                     state -> Properties.ofFullCopy(Blocks.CUT_COPPER.weathering().pick(state))
             );
@@ -1041,14 +1041,14 @@ public class MFBlocks {
     // Register functions
 
     private static <T extends Block> DeferredBlock<T> registerBlockWithoutItem(ResourceKey<Block> id, Function<BlockBehaviour.Properties, T> function){
-        if (MFIdentifier.isNotMfNamespace(id.identifier())){
+        if (MFIdentifier.notMfNamespace(id.identifier())){
             throw new IllegalStateException("Could not register the " + id.identifier().getPath() + " block. ID must be within the More Features namespace!");
         }
         return BLOCKS.registerBlock(id.identifier().getPath(), props -> function.apply(props.setId(id)));
     }
 
     private static <T extends Block> DeferredBlock<T> registerBlockWithoutItem(ResourceKey<Block> id, Function<BlockBehaviour.Properties, T> function, UnaryOperator<BlockBehaviour.Properties> propertyModifier){
-        if (MFIdentifier.isNotMfNamespace(id.identifier())){
+        if (MFIdentifier.notMfNamespace(id.identifier())){
             throw new IllegalStateException("Could not register the " + id.identifier().getPath() + " block. ID must be within the More Features namespace!");
         }
         return BLOCKS.registerBlock(id.identifier().getPath(), baseProps -> {
@@ -1058,11 +1058,13 @@ public class MFBlocks {
     }
 
     private static <T extends Block> DeferredBlock<T> registerBlockWithTooltip(BlockItemId id, Function<BlockBehaviour.Properties, T> function, Component... components){
-        if (MFIdentifier.isNotMfNamespace(id.block().identifier())){
-            throw new IllegalStateException("Could not register the " + id.block().identifier().getPath() + " block. ID must be within the More Features namespace!");
+        Identifier blockId = id.block().identifier();
+
+        if (MFIdentifier.notMfNamespace(blockId)){
+            throw new IllegalStateException("Could not register the " +blockId.getPath() + " block. ID must be within the More Features namespace!");
         }
 
-        DeferredBlock<T> toReturn = BLOCKS.registerBlock(id.block().identifier().getPath(),
+        DeferredBlock<T> toReturn = BLOCKS.registerBlock(blockId.getPath(),
                 props -> function.apply(props.setId(id.block())));
         registerBlockItem(id, toReturn, components);
         return toReturn;
@@ -1071,28 +1073,34 @@ public class MFBlocks {
     private static <T extends Block> void registerBlockItem(BlockItemId id, DeferredBlock<T> block, Component... components){
         MFItems.ITEMS.registerItem(
                 id.item().identifier().getPath(),
-                properties -> new BlockItem(block.get(), properties.setId(id.item()).useBlockDescriptionPrefix()){
-            @SuppressWarnings("deprecation")
-            @NullMarked
-            @Override
-            public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
-                for(var component : components) {
-                    builder.accept(component);
+                properties -> new BlockItem(block.get(), properties
+                        .setId(id.item())
+                        .useBlockDescriptionPrefix()
+                ){
+                    @SuppressWarnings("deprecation")
+                    @NullMarked
+                    @Override
+                    public void appendHoverText(ItemStack itemStack, TooltipContext context, TooltipDisplay display, Consumer<Component> builder, TooltipFlag tooltipFlag) {
+                        for(var component : components) {
+                            builder.accept(component);
+                        }
+                        super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
+                    }
                 }
-                super.appendHoverText(itemStack, context, display, builder, tooltipFlag);
-            }
-        });
+        );
     }
 
     private static <T extends Block> DeferredBlock<T> registerBlock(
             BlockItemId id,
             Function<BlockBehaviour.Properties, T> function
     ) {
-        if (MFIdentifier.isNotMfNamespace(id.block().identifier())){
-            throw new IllegalStateException("Could not register the " + id.block().identifier().getPath() + " block. ID must be within the More Features namespace!");
+        Identifier blockId = id.block().identifier();
+
+        if (MFIdentifier.notMfNamespace(blockId)){
+            throw new IllegalStateException("Could not register the " + blockId.getPath() + " block. ID must be within the More Features namespace!");
         }
 
-        DeferredBlock<T> block = BLOCKS.registerBlock(id.block().identifier().getPath(),
+        DeferredBlock<T> block = BLOCKS.registerBlock(blockId.getPath(),
                 props -> function.apply(props.setId(id.block())));
 
         registerBlockItem(id, block);
@@ -1104,10 +1112,21 @@ public class MFBlocks {
         return registerBlockWithoutItem(id.block(), function);
     }
 
+    @RestrictedTo({
+            MoreFeatures.class,
+            MFBlocks.class,
+            WoodTypeCollection.class,
+            GemstoneCollection.class,
+            VanillaWoodCollection.class,
+            VanillaCollectionUtil.class
+    })
     public static <T extends Block> void registerBlockItem(BlockItemId id, DeferredBlock<T> block) {
-        MFItems.ITEMS.registerItem(
+        MFItems.getRegistry().registerItem(
                 id.item().identifier().getPath(),
-                properties -> new BlockItem(block.get(), properties.setId(id.item()).useBlockDescriptionPrefix())
+                properties -> new BlockItem(block.get(), properties
+                        .setId(id.item())
+                        .useBlockDescriptionPrefix()
+                )
         );
     }
 
@@ -1119,7 +1138,7 @@ public class MFBlocks {
         Identifier blockId = id.block().identifier();
 
         // This register method is private, so ensuring all blocks in this class are registered in the More Features namespace only forces me to follow good practice without hindering other devs
-        if (MFIdentifier.isNotMfNamespace(blockId)){
+        if (MFIdentifier.notMfNamespace(blockId)){
             throw new IllegalStateException("Could not register the " + blockId.getPath() + " block. ID must be within the More Features namespace!");
         }
 
@@ -1134,8 +1153,14 @@ public class MFBlocks {
         return block;
     }
 
-    // Register method called in the mod event bus
+    @RestrictedTo({MFBlocks.class, MFBlockLootTableProvider.class, VanillaCollectionUtil.class})
+    public static DeferredRegister.Blocks getRegistry() {
+        return BLOCKS;
+    }
 
+    // Register method called in the mod event bus
+    // Public, so that it can be called outside of this package, but restricted to one class
+    @RestrictedTo(MoreFeatures.class)
     public static void register(IEventBus eventBus){
         BLOCKS.register(eventBus);
         MoreFeatures.LOGGER.info("Mod Blocks registered -> Performed by: " + MoreFeatures.MODID);

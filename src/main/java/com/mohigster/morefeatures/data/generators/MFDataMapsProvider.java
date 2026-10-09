@@ -18,7 +18,6 @@ import org.jspecify.annotations.NonNull;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-@SuppressWarnings("deprecation")
 public class MFDataMapsProvider extends DataMapProvider {
     public MFDataMapsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> lookupProvider) {
         super(packOutput, lookupProvider);
@@ -34,8 +33,10 @@ public class MFDataMapsProvider extends DataMapProvider {
         final var strippedLogList = MFBlocks.STRIPPED_LOG.asList();
         final var strippedWoodList = MFBlocks.STRIPPED_WOOD.asList();
 
-        final var bonemealMorphs = builder(MFDataMaps.BONEMEAL_MORPHS);
-        bonemealMorphs.add(Blocks.NETHERRACK.builtInRegistryHolder(), new BonemealMorph(
+        final var bonemealMorphs = this.builder(MFDataMaps.BONEMEAL_MORPHS);
+
+        // We use defaultBlockState().typeHolder() since builtInRegistryHolder() is deprecated
+        bonemealMorphs.add(Blocks.NETHERRACK.defaultBlockState().typeHolder(), new BonemealMorph(
                 List.of(
                         MFBlocks.CHARRED_NYLIUM.get(),
                         Blocks.CRIMSON_NYLIUM,
@@ -43,7 +44,7 @@ public class MFDataMapsProvider extends DataMapProvider {
                 ),
                 "neighbour_spreader"
         ), false);
-        bonemealMorphs.add(Blocks.END_STONE.builtInRegistryHolder(), new BonemealMorph(
+        bonemealMorphs.add(Blocks.END_STONE.defaultBlockState().typeHolder(), new BonemealMorph(
                 List.of(
                         MFBlocks.DECREPIT_NULLIUM.get(),
                         MFBlocks.PALLID_NULLIUM.get()
@@ -51,7 +52,7 @@ public class MFDataMapsProvider extends DataMapProvider {
                 "neighbour_spreader"
         ), false);
 
-        final var oxidizables = builder(NeoForgeDataMaps.OXIDIZABLES);
+        final var oxidizables = this.builder(NeoForgeDataMaps.OXIDIZABLES);
         oxidizables.add(cutCopperVSList.getFirst(), new Oxidizable(cutCopperVSList.get(1).get()), false);
         oxidizables.add(cutCopperVSList.get(1), new Oxidizable(cutCopperVSList.get(2).get()), false);
         oxidizables.add(cutCopperVSList.get(2), new Oxidizable(cutCopperVSList.get(3).get()), false);
@@ -60,7 +61,7 @@ public class MFDataMapsProvider extends DataMapProvider {
         oxidizables.add(cutCopperPillarList.get(1), new Oxidizable(cutCopperPillarList.get(2).get()), false);
         oxidizables.add(cutCopperPillarList.get(2), new Oxidizable(cutCopperPillarList.get(3).get()), false);
 
-        final var waxables = builder(NeoForgeDataMaps.WAXABLES);
+        final var waxables = this.builder(NeoForgeDataMaps.WAXABLES);
         waxables.add(cutCopperVSList.getFirst(), new Waxable(cutCopperVSList.get(4).get()), false);
         waxables.add(cutCopperVSList.get(1), new Waxable(cutCopperVSList.get(5).get()), false);
         waxables.add(cutCopperVSList.get(2), new Waxable(cutCopperVSList.get(6).get()), false);
@@ -71,7 +72,7 @@ public class MFDataMapsProvider extends DataMapProvider {
         waxables.add(cutCopperPillarList.get(2), new Waxable(cutCopperPillarList.get(6).get()), false);
         waxables.add(cutCopperPillarList.get(3), new Waxable(cutCopperPillarList.getLast().get()), false);
 
-        final var strippables = builder(NeoForgeDataMaps.STRIPPABLES);
+        final var strippables = this.builder(NeoForgeDataMaps.STRIPPABLES);
 
         strippables.add(logList.getFirst(), new Strippable(strippedLogList.getFirst().get()), false);
         strippables.add(woodList.getFirst(), new Strippable(strippedWoodList.getFirst().get()), false);
@@ -91,10 +92,10 @@ public class MFDataMapsProvider extends DataMapProvider {
         strippables.add(logList.getLast(), new Strippable(strippedLogList.getLast().get()), false);
         strippables.add(woodList.getLast(), new Strippable(strippedWoodList.getLast().get()), false);
 
-        final var flammables = builder(MFDataMaps.FLAMMABLES);
+        final var flammables = this.builder(MFDataMaps.FLAMMABLES);
         FlammableHelper.INSTANCE.getDefaults().forEach(
                 entry -> flammables.add(
-                        entry.block().builtInRegistryHolder(),
+                        entry.block().defaultBlockState().typeHolder(),
                         new FlammabilityEntry(entry.flammability(), entry.fireSpreadSpeed()),
                         false
                 )

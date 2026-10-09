@@ -39,7 +39,7 @@ public class CompressionRecipeCategory implements IRecipeCategory<RecipeHolder<C
         this.overlay = helper.createDrawable(TEXTURE, 0, 0, 176, 85);
         this.icon = helper.createDrawableIngredient(VanillaTypes.ITEM_STACK, new ItemStack(MFBlocks.COMPRESSOR_BLOCK));
 
-        fluidRenderer = new FluidTankRenderer(16000, FluidTankRenderer.TooltipMode.SHOW_AMOUNT, 16, 50);
+        this.fluidRenderer = new FluidTankRenderer(16000, FluidTankRenderer.TooltipMode.SHOW_AMOUNT, 16, 50);
     }
 
     @NullMarked

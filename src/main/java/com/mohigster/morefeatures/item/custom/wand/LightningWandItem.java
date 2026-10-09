@@ -29,7 +29,7 @@ public class LightningWandItem extends GenericAOEWandItem {
     }
 
     @Override
-    protected void castAOESpell(Player caster, Level level, BlockPos pos) {
+    public void castAOESpell(Player caster, Level level, BlockPos pos) {
         LightningBolt bolt = EntityTypes.LIGHTNING_BOLT.create(level, EntitySpawnReason.MOB_SUMMONED);
         if (bolt != null) {
             bolt.setPos(Vec3.atBottomCenterOf(pos));

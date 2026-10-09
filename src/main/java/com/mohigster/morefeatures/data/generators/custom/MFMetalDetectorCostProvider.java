@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.data.generators.custom;
 
-import com.mohigster.morefeatures.data.generators.custom.providers.MetalDetectorCostProvider;
+import com.mohigster.morefeatures.data.generators.custom.base.MetalDetectorCostProvider;
 import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

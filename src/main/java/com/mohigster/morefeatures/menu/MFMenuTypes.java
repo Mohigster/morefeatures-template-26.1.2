@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.menu;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.core.RestrictedTo;
 import com.mohigster.morefeatures.menu.custom.CompressorMenu;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.AbstractContainerMenu;
@@ -11,7 +12,7 @@ import net.neoforged.neoforge.network.IContainerFactory;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
-public class MFMenuTypes {
+public final class MFMenuTypes {
     public static final DeferredRegister<MenuType<?>> MENUS =
             DeferredRegister.create(Registries.MENU, MoreFeatures.MODID);
 
@@ -19,11 +20,14 @@ public class MFMenuTypes {
             registerMenuType("compressor_menu", CompressorMenu::new);
 
     @SuppressWarnings("SameParameterValue")
-    private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(String name,
-                                                                                                               IContainerFactory<T> factory) {
+    private static <T extends AbstractContainerMenu> DeferredHolder<MenuType<?>, MenuType<T>> registerMenuType(
+            String name,
+            IContainerFactory<T> factory
+    ) {
         return MENUS.register(name, () -> IMenuTypeExtension.create(factory));
     }
 
+    @RestrictedTo(MoreFeatures.class)
     public static void register(IEventBus eventBus) {
         MENUS.register(eventBus);
         MoreFeatures.LOGGER.info("Mod Menu Types registered -> Performed by: " + MoreFeatures.MODID);

@@ -53,7 +53,7 @@ public final class MFItemModelGenerators {
         this.itemModels = itemModels;
     }
 
-    public static MFItemModelGenerators create(@NonNull ItemModelGenerators itemModels) {
+    public static MFItemModelGenerators of(@NonNull ItemModelGenerators itemModels) {
         return new MFItemModelGenerators(itemModels);
     }
 

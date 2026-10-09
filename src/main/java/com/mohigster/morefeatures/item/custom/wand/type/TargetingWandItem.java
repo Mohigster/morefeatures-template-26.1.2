@@ -17,7 +17,7 @@ import org.jspecify.annotations.NonNull;
 import java.util.List;
 import java.util.function.Predicate;
 
-public abstract class TargetingWandItem extends AbstractWandItem implements Targeting {
+public abstract non-sealed class TargetingWandItem extends AbstractWandItem implements Targeting {
     protected final int maxTargets;
     protected final float proximityLimit; // In blocks
 

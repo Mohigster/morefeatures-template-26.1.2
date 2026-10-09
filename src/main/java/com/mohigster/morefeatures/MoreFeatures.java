@@ -3,24 +3,22 @@ package com.mohigster.morefeatures;
 import com.mohigster.morefeatures.attachment.MFAttachments;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
-import com.mohigster.morefeatures.block.custom.blocktype.MFWoodType;
 import com.mohigster.morefeatures.block.custom.data.MFDataMaps;
-import com.mohigster.morefeatures.block.custom.magicblock.MagicBlockTransmutations;
-import com.mohigster.morefeatures.block.custom.portal.datadriven.PortalDestinations;
-import com.mohigster.morefeatures.block.custom.portal.key.PortalKeyType;
+import com.mohigster.morefeatures.block.custom.magicblock.MagicBlockTransmutationManager;
+import com.mohigster.morefeatures.portal.PortalDestinationManager;
 import com.mohigster.morefeatures.block.entity.MFBlockEntities;
 import com.mohigster.morefeatures.creativetab.MFCreativeModeTabs;
 import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
 import com.mohigster.morefeatures.data.world.biome.SurfaceRuleFix;
 import com.mohigster.morefeatures.enchantment.MFEnchantmentEffects;
 import com.mohigster.morefeatures.entity.MFEntityTypes;
-import com.mohigster.morefeatures.events.data.ElytraSpeedBoosts;
+import com.mohigster.morefeatures.events.data.ElytraSpeedBoostManager;
 import com.mohigster.morefeatures.item.MFItems;
-import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorCosts;
+import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorCostsManager;
 import com.mohigster.morefeatures.menu.MFMenuTypes;
 import com.mohigster.morefeatures.particles.MFParticleTypes;
+import com.mohigster.morefeatures.portal.key.type.PortalKeyTypes;
 import com.mohigster.morefeatures.recipe.MFRecipes;
-import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.sound.MFSoundEvents;
 import com.mohigster.morefeatures.data.world.biome.MFBiomes;
 import com.mohigster.morefeatures.data.world.biome.MFSurfaceRules;
@@ -28,7 +26,6 @@ import com.mohigster.morefeatures.data.world.feature.custom.MFFeatures;
 import com.mohigster.morefeatures.data.world.tree.decorator.MFTreeDecorators;
 import com.mohigster.morefeatures.data.world.tree.placer.foliage.MFFoliagePlacerType;
 import com.mohigster.morefeatures.data.world.tree.placer.trunk.MFTrunkPlacerType;
-import com.mohigster.morefeatures.util.Directories;
 import com.mojang.logging.LogUtils;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.dispenser.BoatDispenseItemBehavior;
@@ -49,15 +46,15 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddServerReloadListenersEvent;
 import net.neoforged.neoforge.event.BuildCreativeModeTabContentsEvent;
 import net.neoforged.neoforge.event.server.ServerAboutToStartEvent;
-import net.neoforged.neoforge.registries.NewRegistryEvent;
-import net.neoforged.neoforge.registries.RegistryBuilder;
 import org.slf4j.Logger;
 import terrablender.api.SurfaceRuleManager;
+
+import java.util.Objects;
 
 
 // The value here should match an entry in the META-INF/neoforge.mods.toml file
 @Mod(MoreFeatures.MODID)
-public class MoreFeatures {
+public final class MoreFeatures {
     private boolean rulesAdded = false;
     // Define mod id in a common place for everything to reference
     public static final String MODID = "morefeatures";
@@ -65,45 +62,36 @@ public class MoreFeatures {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
+    // FML will recognise some parameter types like IEventBus or ModContainer and pass them in automatically.
     public MoreFeatures(IEventBus modEventBus, ModContainer modContainer) {
-        // Register the commonSetup method for mod loading
+        // Validate the Mod ID
+        if (!Objects.equals(modContainer.getModId(), MoreFeatures.MODID)) {
+            throw new IllegalStateException("Mod ID " + modContainer.getModId() + " not found");
+        }
 
+        // Register the commonSetup method for mod loading
         modEventBus.addListener(this::commonSetup);
 
-        NeoForge.EVENT_BUS.addListener(MagicBlockTransmutations::ignoreResultsNotInTag);
+        NeoForge.EVENT_BUS.addListener(MagicBlockTransmutationManager::ignoreResultsNotInTag);
         modEventBus.addListener(MFDataMaps::registerDataMaps);
 
-        MFCreativeModeTabs.register(modEventBus); // All register methods are declared in the class
-
-        MFWoodType.init();
-
+        // Methods that register to the event bus are restricted to only be callable in this class
+        MFCreativeModeTabs.register(modEventBus);
         MFItems.register(modEventBus);
         MFBlocks.register(modEventBus);
-
         MFAttachments.register(modEventBus);
-
         MFEntityTypes.register(modEventBus);
-
         MFSoundEvents.register(modEventBus);
-
         MFEnchantmentEffects.register(modEventBus);
-
-        PortalKeyType.register(modEventBus);
-
+        PortalKeyTypes.register(modEventBus);
         MFMenuTypes.register(modEventBus);
         MFBlockEntities.register(modEventBus);
-
         MFTrunkPlacerType.register(modEventBus);
         MFFoliagePlacerType.register(modEventBus);
         MFFeatures.register(modEventBus);
-
         MFParticleTypes.register(modEventBus);
-
         MFRecipes.register(modEventBus);
-
         MFTreeDecorators.register(modEventBus);
-
         MFDataComponentTypes.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in.
@@ -130,22 +118,10 @@ public class MoreFeatures {
 
     @SubscribeEvent
     public void onReloadListener(AddServerReloadListenersEvent event){
-        event.addListener(
-                MFIdentifier.withMfNamespace(Directories.MAGIC_BLOCK_PATH),
-                MagicBlockTransmutations.INSTANCE
-        );
-        event.addListener(
-                MFIdentifier.withMfNamespace(Directories.METAL_DETECTOR_PATH),
-                MetalDetectorCosts.INSTANCE
-        );
-        event.addListener(
-                MFIdentifier.withMfNamespace(Directories.ELYTRA_PATH),
-                ElytraSpeedBoosts.INSTANCE
-        );
-        event.addListener(
-                MFIdentifier.withMfNamespace(Directories.PORTAL_PATH),
-                PortalDestinations.INSTANCE
-        );
+        MagicBlockTransmutationManager.init(event);
+        MetalDetectorCostsManager.init(event);
+        ElytraSpeedBoostManager.init(event);
+        PortalDestinationManager.init(event);
     }
 
     @SubscribeEvent
@@ -163,11 +139,11 @@ public class MoreFeatures {
     // Register functions called in enqueueWork and onServerAboutToStart
 
     private void registerPottedPlants(){
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.ROSE.getId(), MFBlocks.POTTED_ROSE);
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.BLUE_ROSE.getId(), MFBlocks.POTTED_BLUE_ROSE);
+        getEmptyPot().addPlant(MFBlocks.ROSE.getId(), MFBlocks.POTTED_ROSE);
+        getEmptyPot().addPlant(MFBlocks.BLUE_ROSE.getId(), MFBlocks.POTTED_BLUE_ROSE);
 
         WoodTypeCollection.SETS.forEach(set ->
-                ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(
+                getEmptyPot().addPlant(
                         // Saplings are registered separately since they are not all registered by the same class. Instead,
                         // the getSaplingOrFungus() method will return the sapling associated with the relevant WoodSetType
                         set.saplingOrFungus().getId(),
@@ -177,9 +153,9 @@ public class MoreFeatures {
                 )
         );
 
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.CHARRED_ROOTS.getId(), MFBlocks.POTTED_CHARRED_ROOTS);
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.DECREPIT_ROOTS.getId(), MFBlocks.POTTED_DECREPIT_ROOTS);
-        ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(MFBlocks.PALLID_ROOTS.getId(), MFBlocks.POTTED_PALLID_ROOTS);
+        getEmptyPot().addPlant(MFBlocks.CHARRED_ROOTS.getId(), MFBlocks.POTTED_CHARRED_ROOTS);
+        getEmptyPot().addPlant(MFBlocks.DECREPIT_ROOTS.getId(), MFBlocks.POTTED_DECREPIT_ROOTS);
+        getEmptyPot().addPlant(MFBlocks.PALLID_ROOTS.getId(), MFBlocks.POTTED_PALLID_ROOTS);
     }
 
     private void registerDispenserBehaviour(){
@@ -414,5 +390,9 @@ public class MoreFeatures {
                     }
             );
         }
+    }
+
+    private static FlowerPotBlock getEmptyPot() {
+        return (FlowerPotBlock) Blocks.FLOWER_POT;
     }
 }

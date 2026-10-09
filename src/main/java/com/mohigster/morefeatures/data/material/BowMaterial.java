@@ -1,35 +1,47 @@
 package com.mohigster.morefeatures.data.material;
 
+import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ToolMaterial;
 
-public record BowMaterial(
-        int durability,
-        float speed,
-        double damageBonus,
-        int enchantmentValue,
-        int useTime,
-        TagKey<Item> repairItems
-) {
-    public static BowMaterial fromToolMaterial(ToolMaterial base, int useTime, double damageBonus) {
+public sealed interface BowMaterial permits BowMaterialImpl {
+    int durability();
+
+    double damageBonus();
+
+    int enchantmentValue();
+
+    int useTime();
+
+    TagKey<Item> repairItems();
+
+    static BowMaterial of(ToolMaterial base, int useTime, double damageBonus) {
         int durability = (int) Math.round(base.durability() * 0.85D);
 
-        return new BowMaterial(
+        return BowMaterialImpl.newBM(
+                base,
                 durability,
-                base.speed(),
                 damageBonus,
-                base.enchantmentValue(),
-                useTime,
-                base.repairItems()
+                useTime
         );
     }
 
-    @SuppressWarnings("unused")
-    public static BowMaterial fromToolMaterial(ToolMaterial base, int useTime) {
-        return fromToolMaterial(base, useTime, base.attackDamageBonus());
+    /**
+     *  The attack damage bonus value of the base material is the damage bonus value of the bow material
+     *  when using this method
+     */
+    static BowMaterial of(ToolMaterial base, int useTime) {
+        return of(base, useTime, base.attackDamageBonus());
     }
 
-    public static final BowMaterial BISMUTH_BOW_MATERIAL = fromToolMaterial(MFToolMaterial.BISMUTH_TOOL_MATERIAL, 90000, 1.45D);
-    public static final BowMaterial CARBON_BOW_MATERIAL = fromToolMaterial(MFToolMaterial.CARBON_TOOL_MATERIAL, 82500, 1.2D);
+    default Item.Properties applyProperties(Item.Properties props) {
+        return props.repairable(this.repairItems())
+                .durability(this.durability())
+                .enchantable(this.enchantmentValue())
+                .component(MFDataComponentTypes.BOW_DAMAGE_BONUS,  this.damageBonus());
+    }
+
+    BowMaterial BISMUTH = of(MFToolMaterial.BISMUTH, 90000, 1.45D);
+    BowMaterial CARBON = of(MFToolMaterial.CARBON, 82500, 1.2D);
 }

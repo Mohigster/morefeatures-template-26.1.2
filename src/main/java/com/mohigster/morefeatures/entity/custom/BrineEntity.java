@@ -15,7 +15,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 
 public class BrineEntity extends Monster {
-
     public BrineEntity(EntityType<? extends Monster> entityType, Level level) {
         super(entityType, level);
         // Makes it immune to drowning and allows it to swim properly
@@ -48,7 +47,7 @@ public class BrineEntity extends Monster {
         super.aiStep();
         if (this.isInWater()) {
             Vec3 delta = this.getDeltaMovement();
-            this.setDeltaMovement(delta.x, delta.y * 0.05D + 0.02D, delta.z);
+            this.setDeltaMovement(delta.x(), delta.y() * 0.05D + 0.02D, delta.z());
         }
     }
 }

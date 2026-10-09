@@ -265,7 +265,7 @@ public class MFBlockLootTableProvider extends BlockLootSubProvider {
     @NullMarked
     @Override
     protected Iterable<Block> getKnownBlocks() {
-        return MFBlocks.BLOCKS.getEntries().stream().map(Holder::value)::iterator;
+        return MFBlocks.getRegistry().getEntries().stream().map(Holder::value)::iterator;
     }
 
     protected LootTable.Builder createVerticalSlabItemTable(Block verticalSlab) { // Built pretty much entirely out of the createSlabItemTable method

@@ -48,7 +48,7 @@ public class BlueBerryBushBlock extends SweetBerryBushBlock {
         int age = state.getValue(AGE);
         if (age > 1){
             if (level instanceof ServerLevel server) {
-                pickBerry(state, server, pos, player);
+                this.pickBerry(state, server, pos, player);
             }
             return InteractionResult.SUCCESS;
         }
@@ -85,7 +85,7 @@ public class BlueBerryBushBlock extends SweetBerryBushBlock {
 
         this.playSound(server, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, HARVEST_VOLUME, pitch);
         BlockState newState = state.setValue(AGE, BERRYLESS_GROWN_AGE);
-        server.setBlock(pos, newState, 2);
+        server.setBlock(pos, newState, UPDATE_CLIENTS);
         server.gameEvent(GameEvent.BLOCK_CHANGE, pos, GameEvent.Context.of(player, newState));
     }
 

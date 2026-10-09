@@ -15,6 +15,7 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.Unit;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.projectile.arrow.ThrownTrident;
 
 
 public class MFTridentRenderer extends ThrownTridentRenderer {
@@ -66,7 +67,7 @@ public class MFTridentRenderer extends ThrownTridentRenderer {
     }
 
     protected ResourceKey<EntityType<?>> getTridentKey() {
-        return this.tridentKey;
+        return  this.tridentKey;
     }
 
     protected Identifier getTexture(){

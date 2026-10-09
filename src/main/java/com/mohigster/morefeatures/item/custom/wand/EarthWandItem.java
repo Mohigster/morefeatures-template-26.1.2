@@ -25,7 +25,7 @@ public class EarthWandItem extends GenericAOEWandItem {
     }
 
     @Override
-    protected void castAOESpell(Player caster, Level level, BlockPos pos) {
+    public void castAOESpell(Player caster, Level level, BlockPos pos) {
         double distance = Math.sqrt(pos.distToCenterSqr(caster.getX(), pos.getY(), caster.getZ()));
 
         int dynamicWarmup = (int) (distance * 1.5); // Calculate a so the ring spreads outwards and doesn't all spawn at once

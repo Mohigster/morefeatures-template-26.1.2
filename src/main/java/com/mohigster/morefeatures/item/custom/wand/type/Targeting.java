@@ -11,7 +11,7 @@ import net.minecraft.world.level.Level;
 
 import java.util.function.Predicate;
 
-public interface Targeting {
+public sealed interface Targeting permits SelfInflictingAndTargetingWandItem, TargetingWandItem{
     float proximityLimit();
 
     default Predicate<LivingEntity> getTargetPredicate(Player caster) {
@@ -33,7 +33,7 @@ public interface Targeting {
                 return false;
             }
 
-            if (entity instanceof AbstractHorse horse && horse.isTamed()){ // Don't allow accidental killing of mounts! AbstractNautilus extends TamableAnimal and so the Nautilus is already protected, no separate logic necessary.
+            if (entity instanceof AbstractHorse horse && horse.isTamed()) { // Don't allow accidental killing of mounts! AbstractNautilus extends TamableAnimal and so the Nautilus is already protected, no separate logic necessary.
                 return false;
             }
 

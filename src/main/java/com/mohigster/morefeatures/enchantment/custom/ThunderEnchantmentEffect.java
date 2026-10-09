@@ -26,17 +26,17 @@ public record ThunderEnchantmentEffect(int level) implements EnchantmentEntityEf
 
     @NullMarked
     @Override
-    public void apply(ServerLevel serverLevel, int enchantmentLevel, EnchantedItemInUse enchantedItemInUse, Entity entity, Vec3 vec3) {
+    public void apply(ServerLevel server, int enchantmentLevel, EnchantedItemInUse enchantedItemInUse, Entity entity, Vec3 vec3) {
         // One lightning bolt spawned per enchantment level. E.g. level 1 = 1 lightning spawned, level 2 = 2 lightning spawned etc. up to a maximum of 5
         // Too many lightning bolts would be laggy and two is the maximum level in survival, so capping at five is only noticable with commands anyway
         for (int i = 0; i < Math.min(enchantmentLevel, 5); i++) {
-            EntityTypes.LIGHTNING_BOLT.spawn(serverLevel, entity.getOnPos(), EntitySpawnReason.TRIGGERED);
+            EntityTypes.LIGHTNING_BOLT.spawn(server, entity.getOnPos(), EntitySpawnReason.TRIGGERED);
         }
     }
 
     @NullMarked
     @Override
-    public MapCodec<? extends EnchantmentEntityEffect> codec() {
+    public MapCodec<ThunderEnchantmentEffect> codec() {
         return CODEC;
     }
 }

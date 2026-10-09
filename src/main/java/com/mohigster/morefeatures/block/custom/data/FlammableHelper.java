@@ -19,6 +19,8 @@ public class FlammableHelper {
 
     public static final FlammableHelper INSTANCE = new FlammableHelper();
 
+    protected FlammableHelper() {}
+
     protected void bootstrap() {
         WoodTypeCollection.SETS.forEach(set ->
                 this.add(set, MFBlocks.LOG.pick(set).get(), 5, 5));

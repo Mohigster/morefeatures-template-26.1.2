@@ -1,6 +1,5 @@
 package com.mohigster.morefeatures.item.custom;
 
-import com.mohigster.morefeatures.data.component.MFDataComponentTypes;
 import com.mohigster.morefeatures.data.material.BowMaterial;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.BowItem;
@@ -13,16 +12,16 @@ public class MFBowItem extends BowItem {
     public MFBowItem(BowMaterial material, Properties properties) {
         this.useDuration = material.useTime();
 
-        super(properties
-                .durability(material.durability())
-                .repairable(material.repairItems())
-                .enchantable(material.enchantmentValue())
-                .component(MFDataComponentTypes.BOW_DAMAGE_BONUS,  material.damageBonus())
-        );
+        super(material.applyProperties(properties));
     }
 
     @Override
-    public int getUseDuration(@NonNull ItemStack itemStack, @NonNull LivingEntity user) {
+    public int getUseDuration(@NonNull ItemStack stack, @NonNull LivingEntity user) {
+        return this.getUseDuration();
+    }
+
+    // This is a custom method. No annotation needed
+    public int getUseDuration() {
         return this.useDuration;
     }
 }

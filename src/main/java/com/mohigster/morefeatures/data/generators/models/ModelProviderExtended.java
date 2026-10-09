@@ -20,8 +20,8 @@ public abstract class ModelProviderExtended extends ModelProvider {
 
     @Override
     public void registerModels(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels) {
-        MFBlockModelGenerators mfBlockModels = MFBlockModelGenerators.create(blockModels);
-        MFItemModelGenerators mfItemModels = MFItemModelGenerators.create(itemModels);
+        MFBlockModelGenerators mfBlockModels = MFBlockModelGenerators.of(blockModels);
+        MFItemModelGenerators mfItemModels = MFItemModelGenerators.of(itemModels);
         this.registerModels(mfBlockModels, mfItemModels, blockModels, itemModels);
     }
 }

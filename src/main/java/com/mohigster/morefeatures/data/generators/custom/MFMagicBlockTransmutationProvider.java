@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.data.generators.custom;
 
 import com.mohigster.morefeatures.block.MFBlocks;
-import com.mohigster.morefeatures.data.generators.custom.providers.MagicBlockTransmutationProvider;
+import com.mohigster.morefeatures.data.generators.custom.base.MagicBlockTransmutationProvider;
 import com.mohigster.morefeatures.item.MFItems;
 import com.mohigster.morefeatures.data.tag.MFItemTags;
 import net.minecraft.core.HolderLookup;

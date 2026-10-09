@@ -8,7 +8,7 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 
-public abstract class AbstractWandItem extends Item implements Wand {
+public abstract non-sealed class AbstractWandItem extends Item implements Wand {
     protected final double radius;
     protected final int cooldownTicks;
     protected final int baseDurabilityCost;

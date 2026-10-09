@@ -4,11 +4,10 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.util.ExtraCodecs;
-import net.minecraft.util.StringRepresentable;
 import net.minecraft.world.level.block.Block;
 
 import java.util.List;
+import java.util.Objects;
 
 public record BonemealMorph(
         List<Block> variants,
@@ -16,18 +15,33 @@ public record BonemealMorph(
 ) {
     // This method is an adapted version of getParticlePos in BonemealableBlock.
     public BlockPos particlePos(BlockPos pos) {
-        return switch (this.bonemealType) {
-            case "neighbour_spreader" -> pos.above();
+        return switch (this.bonemealType()) {
+            case "neighbour_spreader", "neighbor_spreader" -> pos.above();
             case "grower" -> pos;
-            default -> throw new MatchException(null, null);
+            default -> throw new IllegalStateException("Unexpected value: " + this.bonemealType());
         };
+    }
+    
+    public String bonemealType() {
+        if (this.bonemealTypeIsValid()) {
+            return this.bonemealType;
+        }
+        throw new IllegalStateException("Invalid bonemeal type");
+    }
+    
+    private boolean bonemealTypeIsValid() {
+        Objects.requireNonNull(this.bonemealType);
+
+        return Objects.equals(this.bonemealType, "neighbour_spreader")
+                || Objects.equals(this.bonemealType, "neighbor_spreader")
+                || Objects.equals(this.bonemealType, "grower");
     }
 
     public static final Codec<BonemealMorph> CODEC = RecordCodecBuilder.create(
             inst -> inst.group(
                     BuiltInRegistries.BLOCK.byNameCodec().listOf().fieldOf("variants")
                             .forGetter(BonemealMorph::variants),
-                    StringRepresentable.EnumCodec.STRING.fieldOf("bonemeal_type")
+                    Codec.STRING.fieldOf("bonemeal_type")
                             .forGetter(BonemealMorph::bonemealType)
             ).apply(
                     inst,

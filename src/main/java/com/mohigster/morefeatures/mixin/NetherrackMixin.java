@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(NetherrackBlock.class)
-public class NetherrackMixin {
+public final class NetherrackMixin {
     // This method prevents Nullium from triggering Netherrack bonemeal, despite not being able to spread to Netherrack
     @Inject(method = "isValidBonemealTarget", at = @At(value = "RETURN"), cancellable = true)
     private void blockEndNullium(LevelReader level, BlockPos pos, BlockState state, CallbackInfoReturnable<Boolean> cir) {

@@ -25,6 +25,7 @@ import net.minecraft.world.level.block.state.properties.StairsShape;
 import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -37,14 +38,24 @@ public final class MFBlockModelGenerators {
     private final BiConsumer<Identifier, ModelInstance> modelOutput;
     private final Consumer<BlockModelDefinitionGenerator> blockStateOutput;
 
-    private MFBlockModelGenerators(BlockModelGenerators blockModels, BiConsumer<Identifier, ModelInstance> modelOutput, Consumer<BlockModelDefinitionGenerator> blockStateOutput) {
+    private MFBlockModelGenerators(
+            BlockModelGenerators blockModels,
+            BiConsumer<Identifier, ModelInstance> modelOutput,
+            Consumer<BlockModelDefinitionGenerator> blockStateOutput
+    ) {
         this.blockModels = blockModels;
         this.modelOutput = modelOutput;
         this.blockStateOutput = blockStateOutput;
     }
 
-    public static MFBlockModelGenerators create(@NonNull BlockModelGenerators blockModels) {
-        return new MFBlockModelGenerators(blockModels, blockModels.modelOutput, blockModels.blockStateOutput);
+    public static MFBlockModelGenerators of(@NonNull BlockModelGenerators blockModels) {
+        var modelOutput = blockModels.modelOutput;
+        var stateOutput = blockModels.blockStateOutput;
+        return new MFBlockModelGenerators(
+                blockModels,
+                modelOutput,
+                stateOutput
+        );
     }
 
     private static final TextureSlot ALL_SLOT = TextureSlot.create("all");
@@ -130,9 +141,8 @@ public final class MFBlockModelGenerators {
 
     @SuppressWarnings("deprecation")
     public void createVerticalSlab(Block verticalSlab, Block textureSource) {
-        if (textureSource == null){
-            throw new IllegalArgumentException("Cannot create a model for " + verticalSlab + ": textureSource must not be null");
-        }
+        Objects.requireNonNull(verticalSlab);
+        Objects.requireNonNull(textureSource);
 
         TextureMapping mapping = new TextureMapping();
 
@@ -153,7 +163,8 @@ public final class MFBlockModelGenerators {
 
         if (textureSource == Blocks.SANDSTONE || textureSource == Blocks.CUT_SANDSTONE ||
                 textureSource == Blocks.SMOOTH_SANDSTONE || textureSource == Blocks.RED_SANDSTONE ||
-        textureSource == Blocks.CUT_RED_SANDSTONE || textureSource == Blocks.SMOOTH_RED_SANDSTONE){
+                textureSource == Blocks.CUT_RED_SANDSTONE || textureSource == Blocks.SMOOTH_RED_SANDSTONE
+        ){
             Block sourceBlock = textureSource == Blocks.SANDSTONE || textureSource == Blocks.CUT_SANDSTONE
                     ? Blocks.SANDSTONE
                     : textureSource == Blocks.RED_SANDSTONE || textureSource == Blocks.CUT_RED_SANDSTONE
@@ -224,9 +235,8 @@ public final class MFBlockModelGenerators {
     }
 
     public void createPillar(Block pillar, Block textureSource) {
-        if (textureSource == null){
-            throw new IllegalArgumentException("Cannot create a model for " + pillar + ": textureSource must not be null");
-        }
+        Objects.requireNonNull(pillar);
+        Objects.requireNonNull(textureSource);
 
         TextureMapping mapping = new TextureMapping();
 
@@ -263,6 +273,7 @@ public final class MFBlockModelGenerators {
     }
 
     public void createTemporalDilator(Block temporalDilator){
+        Objects.requireNonNull(temporalDilator);
         TextureMapping mapping = new TextureMapping();
 
         Identifier upModel;
@@ -361,6 +372,7 @@ public final class MFBlockModelGenerators {
     }
 
     public void createAnchor(Block anchorBlock){ // Vanilla respawn anchor method is hardcoded for the vanilla anchor, hence the custom method (which allows any block to be passed in as a parameter)
+        Objects.requireNonNull(anchorBlock);
         Material bottom = TextureMapping.getBlockTexture(anchorBlock, "_bottom");
         Material topOff = TextureMapping.getBlockTexture(anchorBlock, "_top_off");
         Material topOn = TextureMapping.getBlockTexture(anchorBlock, "_top");
@@ -425,7 +437,7 @@ public final class MFBlockModelGenerators {
     }
 
     public void createPortal(Block portal) {
-        this.blockModels().blockStateOutput.accept(
+        this.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(portal).with(PropertyDispatch.initial(
                         BlockStateProperties.HORIZONTAL_AXIS).select(Direction.Axis.X, plainVariant(
                                 ModelLocationUtils.getModelLocation(portal, "_ns")))

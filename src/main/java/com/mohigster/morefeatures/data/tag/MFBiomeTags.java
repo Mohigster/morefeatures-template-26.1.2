@@ -7,17 +7,17 @@ import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.biome.Biome;
 
 public class MFBiomeTags {
-    public static final TagKey<Biome> DESERT = morefeaturesTag("desert");
-    public static final TagKey<Biome> EVIL_FOREST = morefeaturesTag("evil_forest");
-    public static final TagKey<Biome> END_FOREST = morefeaturesTag("end_forest");
-    public static final TagKey<Biome> NETHER_FOREST = morefeaturesTag("nether_forest");
-    public static final TagKey<Biome> OCEAN_CITADEL_BIOMES = morefeaturesTag("has_structure/ocean_citadel_biomes");
+    public static final TagKey<Biome> DESERT = mfTag("desert");
+    public static final TagKey<Biome> EVIL_FOREST = mfTag("evil_forest");
+    public static final TagKey<Biome> END_FOREST = mfTag("end_forest");
+    public static final TagKey<Biome> NETHER_FOREST = mfTag("nether_forest");
+    public static final TagKey<Biome> OCEAN_CITADEL_BIOMES = mfTag("has_structure/ocean_citadel_biomes");
 
-    private static TagKey<Biome> morefeaturesTag(String name) {
+    private static TagKey<Biome> mfTag(String name) {
         return create(MFIdentifier.withMfNamespace(name));
     }
 
-    public static TagKey<Biome> create(Identifier id) {
+    private static TagKey<Biome> create(Identifier id) {
         return TagKey.create(Registries.BIOME, id);
     }
 }

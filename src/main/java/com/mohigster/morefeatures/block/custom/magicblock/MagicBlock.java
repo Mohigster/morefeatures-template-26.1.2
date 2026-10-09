@@ -22,6 +22,12 @@ import java.util.Objects;
 
 
 public class MagicBlock extends Block {
+    private static final double HORIZONTAL_OFFSET = 0.5D;
+    private static final double VERTICAL_OFFSET = 1.0D;
+    private static final float VOLUME = 2F;
+    private static final float PITCH = 1F;
+
+    private static final int GLOWING_DURATION = 300;
 
     public MagicBlock(Properties properties) {
         super(properties);
@@ -29,12 +35,18 @@ public class MagicBlock extends Block {
 
     @NullMarked
     @Override
-    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos,
-                                                        Player player, BlockHitResult hitResult) {
-        level.addParticle(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
+    protected InteractionResult useWithoutItem(
+            BlockState state,
+            Level level,
+            BlockPos pos,
+            Player player,
+            BlockHitResult hitResult
+    ) {
+        level.addParticle(ParticleTypes.END_ROD, pos.getX() + HORIZONTAL_OFFSET, pos.getY() + VERTICAL_OFFSET, pos.getZ() + HORIZONTAL_OFFSET,
                 0, 1, 0);
 
-        level.playSound(player, pos, MFSoundEvents.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 2f, 1f);
+        level.playSound(null, pos,
+                MFSoundEvents.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, VOLUME, PITCH);
         return InteractionResult.SUCCESS;
     }
 
@@ -43,15 +55,18 @@ public class MagicBlock extends Block {
     public void stepOn(Level level, BlockPos pos, BlockState onState, Entity entity) {
         if(entity instanceof Player player) {
             // To save performance, the glowing effect is only applied if the player does not have the effect, or is running low.
-            if (!player.hasEffect(MobEffects.GLOWING) || Objects.requireNonNull(player.getEffect(MobEffects.GLOWING)).getDuration() < 50) {
-                player.addEffect(new MobEffectInstance(MobEffects.GLOWING, 300));
+            if (!player.hasEffect(MobEffects.GLOWING) || Objects.requireNonNull(
+                    player.getEffect(MobEffects.GLOWING)).getDuration() < 50
+            ) {
+                player.addEffect(new MobEffectInstance(MobEffects.GLOWING, GLOWING_DURATION));
             }
         }
 
         if(entity instanceof ItemEntity itemEntity) {
             ItemStack currentItem = itemEntity.getItem();
             if (!currentItem.is(MFItemTags.MAGIC_BLOCK_TRANSMUTATION_RESULTS)) { // A failsafe. If an item is a possible result of a magic block transmutation, it shouldn't even attempt to find a transmutation result
-                this.performTransmutationEffects(itemEntity, this.getTransmutationResult(currentItem), level, pos);
+                ItemStack result = this.getTransmutationResult(currentItem);
+                this.performTransmutationEffects(itemEntity, result, level, pos);
             }
         }
 
@@ -59,20 +74,29 @@ public class MagicBlock extends Block {
     }
 
     protected ItemStack getTransmutationResult(ItemStack item) {
-        ItemStack result = MagicBlockTransmutations.getResult(item);
+        ItemStack result = MagicBlockTransmutationManager.getResult(item);
 
         return result.isEmpty() ? ItemStack.EMPTY : result;
     }
 
-    private void performTransmutationEffects(ItemEntity entity, ItemStack transmutationResult, Level level, BlockPos pos){
-        if (!transmutationResult.isEmpty()) {
-            entity.setItem(transmutationResult);
+    private void performTransmutationEffects(
+            ItemEntity entity,
+            ItemStack result,
+            Level level,
+            BlockPos pos
+    ){
+        Objects.requireNonNull(pos);
 
-            level.addParticle(ParticleTypes.END_ROD, pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5,
+        ItemStack checkedResult = Objects.requireNonNullElse(result, ItemStack.EMPTY);
+        if (!checkedResult.isEmpty()) {
+
+            Objects.requireNonNull(entity).setItem(checkedResult);
+
+            Objects.requireNonNull(level).addParticle(ParticleTypes.END_ROD, pos.getX() + HORIZONTAL_OFFSET, pos.getY() + VERTICAL_OFFSET, pos.getZ() + HORIZONTAL_OFFSET,
                     0, 1, 0);
 
             level.playSound(null, entity,
-                    MFSoundEvents.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, 1.5f, 1f);
+                    MFSoundEvents.MAGIC_BLOCK_FALL.get(), SoundSource.BLOCKS, VOLUME, PITCH);
         }
     }
 }

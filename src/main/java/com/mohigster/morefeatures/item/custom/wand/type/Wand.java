@@ -3,7 +3,7 @@ package com.mohigster.morefeatures.item.custom.wand.type;
 import com.mohigster.morefeatures.attachment.MFAttachments;
 import net.minecraft.world.entity.player.Player;
 
-public interface Wand {
+public sealed interface Wand permits AbstractWandItem {
     int manaCost();
 
     default boolean hasEnoughMana(Player caster){

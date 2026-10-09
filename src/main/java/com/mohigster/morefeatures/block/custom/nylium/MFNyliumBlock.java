@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.block.custom.nylium;
 
+import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Registry;
@@ -31,22 +32,22 @@ public class MFNyliumBlock extends NyliumBlock {
     public MFNyliumBlock(
             @NonNull List<ResourceKey<ConfiguredFeature<?, ?>>> features,
             @Nullable ResourceKey<ConfiguredFeature<?, ?>> rareFeature,
-            int chance,
+            int chanceBound,
             Properties properties
     ) {
         super(properties);
         this.primaryFeatures = features;
         this.rareFeature = rareFeature;
-        this.chance = chance;
+        this.chance = chanceBound;
     }
 
     public MFNyliumBlock(
             @NonNull ResourceKey<ConfiguredFeature<?, ?>> feature,
             @Nullable ResourceKey<ConfiguredFeature<?, ?>> rareFeature,
-            int chance,
+            int chanceBound,
             Properties properties
     ) {
-        this(List.of(feature), rareFeature, chance, properties);
+        this(List.of(feature), rareFeature, chanceBound, properties);
     }
 
     public MFNyliumBlock(
@@ -65,39 +66,38 @@ public class MFNyliumBlock extends NyliumBlock {
 
     @Override
     public void performBonemeal(
-            ServerLevel level,
+            @NonNull ServerLevel server,
             @NonNull RandomSource random,
             @NonNull BlockPos pos,
             @NonNull BlockState state
     ) {
-        BlockState blockState = level.getBlockState(pos);
         BlockPos abovePos = pos.above();
-        ChunkGenerator generator = level.getChunkSource().getGenerator();
-        this.placeFeature(level, generator, random, abovePos, blockState);
+        ChunkGenerator generator = server.getChunkSource().getGenerator();
+        this.placeFeature(server, generator, random, abovePos, state);
     }
 
-    protected void placeFeature(
-            ServerLevel level,
+    protected final void placeFeature(
+            @NonNull ServerLevel server,
             ChunkGenerator generator,
             RandomSource random,
             BlockPos pos,
             BlockState state
     ) {
         Registry<ConfiguredFeature<?, ?>> configuredFeatures =
-                level.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE);
-        if (canGrow(state)) {
+                server.registryAccess().lookupOrThrow(Registries.CONFIGURED_FEATURE);
+        if (this.canGrow(state)) {
             this.getPrimaryFeatures().forEach(feature ->
-                    this.place(configuredFeatures, feature, level, generator, random, pos));
-            if(random.nextInt(this.getChance()) == 0) {
-                this.getRareFeature().ifPresent(configuredFeature ->
-                        this.place(configuredFeatures, configuredFeature,
-                                level, generator, random, pos));
+                    this.place(configuredFeatures, feature, server, generator, random, pos));
+            if(this.rareFeatureShouldPlace(random)) {
+                this.getRareFeature().ifPresent(feature ->
+                        this.place(configuredFeatures, feature,
+                                server, generator, random, pos));
             }
         }
     }
 
     protected boolean canGrow(BlockState state) {
-        return state.is(BlockTags.NYLIUM);
+        return state.is(BlockTags.NYLIUM) && !state.is(MFBlockTags.NULLIUM);
     }
 
     protected List<ResourceKey<ConfiguredFeature<?, ?>>> getPrimaryFeatures() {
@@ -110,6 +110,10 @@ public class MFNyliumBlock extends NyliumBlock {
 
     protected int getChance(){
         return Math.max(this.chance, 1);
+    }
+
+    protected boolean rareFeatureShouldPlace(RandomSource random) {
+        return random.nextInt(this.getChance()) == 0;
     }
 
     @NullMarked

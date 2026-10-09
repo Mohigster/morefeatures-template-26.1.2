@@ -46,7 +46,7 @@ public class IceologerEntity extends AbstractIllager {
         this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, Player.class, true).setUnseenMemoryTicks(300));
     }
 
-    private static final EntityDataAccessor<Boolean> DATA_IS_CASTING_SPELL =
+    private static final EntityDataAccessor<Boolean> IS_CASTING_SPELL =
             SynchedEntityData.defineId(IceologerEntity.class, EntityDataSerializers.BOOLEAN);
 
     private static final EntityDataAccessor<Boolean> IS_CELEBRATING =
@@ -55,12 +55,12 @@ public class IceologerEntity extends AbstractIllager {
     @Override
     protected void defineSynchedData(SynchedEntityData.@NonNull Builder builder) {
         super.defineSynchedData(builder);
-        builder.define(DATA_IS_CASTING_SPELL, false);
+        builder.define(IS_CASTING_SPELL, false);
         builder.define(IS_CELEBRATING, false);
     }
 
     public boolean isCastingSpell() {
-        return this.entityData.get(DATA_IS_CASTING_SPELL);
+        return this.entityData.get(IS_CASTING_SPELL);
     }
 
     public boolean isCelebrating() {
@@ -75,15 +75,15 @@ public class IceologerEntity extends AbstractIllager {
     @NullMarked
     @Override
     public IllagerArmPose getArmPose(){
-        if (isCastingSpell()) {
+        if (this.isCastingSpell()) {
             return IllagerArmPose.SPELLCASTING;
         } else {
-            return isCelebrating() ? IllagerArmPose.CELEBRATING : IllagerArmPose.CROSSED;
+            return this.isCelebrating() ? IllagerArmPose.CELEBRATING : IllagerArmPose.CROSSED;
         }
     }
 
     public void setIsCastingSpell(boolean castingSpell) {
-        this.entityData.set(DATA_IS_CASTING_SPELL, castingSpell);
+        this.entityData.set(IS_CASTING_SPELL, castingSpell);
     }
 
     public void setCelebrating(boolean celebrating) {
@@ -128,7 +128,6 @@ public class IceologerEntity extends AbstractIllager {
                 .build();
     }
 
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean isAttackOnCooldown() {
         return this.attackCooldown > 0;
     }

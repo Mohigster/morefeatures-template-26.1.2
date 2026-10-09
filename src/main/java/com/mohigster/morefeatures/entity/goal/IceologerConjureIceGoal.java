@@ -25,9 +25,11 @@ public class IceologerConjureIceGoal extends Goal {
     @Override
     public boolean canUse() {
         LivingEntity target = this.iceologer.getTarget();
-        return target != null && target.isAlive()
-                && !this.iceologer.isAttackOnCooldown()
-                && !this.iceologer.shouldUseIcicleRain();
+        if (this.iceologer.isAttackOnCooldown() || target == null) {
+            return false;
+        }
+
+        return target.isAlive() && !this.iceologer.shouldUseIcicleRain();
     }
 
     @Override

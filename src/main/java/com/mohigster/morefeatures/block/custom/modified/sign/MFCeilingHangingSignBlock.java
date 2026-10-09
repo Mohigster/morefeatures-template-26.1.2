@@ -15,7 +15,7 @@ public class MFCeilingHangingSignBlock extends CeilingHangingSignBlock {
     }
 
     public MFCeilingHangingSignBlock(GemstoneType gem, Properties properties) {
-        super(gem.woodType(), properties);
+        this(gem.woodType(), properties);
     }
 
     public MFCeilingHangingSignBlock(WoodSet set, Properties properties) {

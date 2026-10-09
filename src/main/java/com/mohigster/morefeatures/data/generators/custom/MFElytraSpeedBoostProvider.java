@@ -1,6 +1,6 @@
 package com.mohigster.morefeatures.data.generators.custom;
 
-import com.mohigster.morefeatures.data.generators.custom.providers.ElytraSpeedBoostProvider;
+import com.mohigster.morefeatures.data.generators.custom.base.ElytraSpeedBoostProvider;
 import com.mohigster.morefeatures.item.MFItems;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;

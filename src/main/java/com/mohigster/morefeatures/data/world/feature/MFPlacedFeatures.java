@@ -1,10 +1,13 @@
 package com.mohigster.morefeatures.data.world.feature;
 
 import com.mohigster.morefeatures.block.MFBlocks;
+import com.mohigster.morefeatures.core.RestrictedTo;
+import com.mohigster.morefeatures.data.generators.MFDatapackProvider;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.util.MFOrePlacementUtil;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
@@ -22,62 +25,63 @@ public class MFPlacedFeatures {
 
     // Ore resource keys
 
-    public static final ResourceKey<PlacedFeature> AZURITE_ORE_PLACED_KEY = registerKey("azurite_ore_placed");
-    public static final ResourceKey<PlacedFeature> NETHER_AZURITE_ORE_PLACED_KEY = registerKey("nether_azurite_ore_placed");
-    public static final ResourceKey<PlacedFeature> END_AZURITE_ORE_PLACED_KEY = registerKey("end_azurite_ore_placed");
-    public static final ResourceKey<PlacedFeature> FLUORITE_ORE_PLACED_KEY = registerKey("fluorite_ore_placed");
-    public static final ResourceKey<PlacedFeature> NETHER_FLUORITE_ORE_PLACED_KEY = registerKey("nether_fluorite_ore_placed");
-    public static final ResourceKey<PlacedFeature> END_FLUORITE_ORE_PLACED_KEY = registerKey("end_fluorite_ore_placed");
-    public static final ResourceKey<PlacedFeature> ALUMINIUM_ORE_PLACED_KEY = registerKey("aluminium_ore_placed");
-    public static final ResourceKey<PlacedFeature> MAGNESIUM_ORE_PLACED_KEY = registerKey("magnesium_ore_placed");
-    public static final ResourceKey<PlacedFeature> BISMUTH_ORE_PLACED_KEY = registerKey("bismuth_ore_placed");
+    public static final ResourceKey<PlacedFeature> AZURITE_ORE_PLACED_KEY = createKey("azurite_ore_placed");
+    public static final ResourceKey<PlacedFeature> NETHER_AZURITE_ORE_PLACED_KEY = createKey("nether_azurite_ore_placed");
+    public static final ResourceKey<PlacedFeature> END_AZURITE_ORE_PLACED_KEY = createKey("end_azurite_ore_placed");
+    public static final ResourceKey<PlacedFeature> FLUORITE_ORE_PLACED_KEY = createKey("fluorite_ore_placed");
+    public static final ResourceKey<PlacedFeature> NETHER_FLUORITE_ORE_PLACED_KEY = createKey("nether_fluorite_ore_placed");
+    public static final ResourceKey<PlacedFeature> END_FLUORITE_ORE_PLACED_KEY = createKey("end_fluorite_ore_placed");
+    public static final ResourceKey<PlacedFeature> ALUMINIUM_ORE_PLACED_KEY = createKey("aluminium_ore_placed");
+    public static final ResourceKey<PlacedFeature> MAGNESIUM_ORE_PLACED_KEY = createKey("magnesium_ore_placed");
+    public static final ResourceKey<PlacedFeature> BISMUTH_ORE_PLACED_KEY = createKey("bismuth_ore_placed");
 
     // Tree resource keys
 
-    public static final ResourceKey<PlacedFeature> BLOODWOOD_PLACED_KEY = registerKey("bloodwood_placed");
-    public static final ResourceKey<PlacedFeature> SMALL_BLOODWOOD_PLACED_KEY = registerKey("small_bloodwood_placed");
-    public static final ResourceKey<PlacedFeature> FALLEN_BLOODWOOD_PLACED_KEY = registerKey("fallen_bloodwood_placed");
-    public static final ResourceKey<PlacedFeature> TAINTED_PLACED_KEY = registerKey("tainted_placed");
-    public static final ResourceKey<PlacedFeature> SMALL_TAINTED_PLACED_KEY = registerKey("small_tainted_placed");
-    public static final ResourceKey<PlacedFeature> FALLEN_TAINTED_PLACED_KEY = registerKey("fallen_tainted_placed");
-    public static final ResourceKey<PlacedFeature> PALM_PLACED_KEY = registerKey("palm_placed");
-    public static final ResourceKey<PlacedFeature> FALLEN_PALM_PLACED_KEY = registerKey("fallen_palm_placed");
-    public static final ResourceKey<PlacedFeature> DECREPIT_PLACED_KEY = registerKey("decrepit_placed");
-    public static final ResourceKey<PlacedFeature> PALLID_PLACED_KEY = registerKey("pallid_placed");
-    public static final ResourceKey<PlacedFeature> CHARRED_PLACED_KEY = registerKey("charred_placed");
+    public static final ResourceKey<PlacedFeature> BLOODWOOD_PLACED_KEY = createKey("bloodwood_placed");
+    public static final ResourceKey<PlacedFeature> SMALL_BLOODWOOD_PLACED_KEY = createKey("small_bloodwood_placed");
+    public static final ResourceKey<PlacedFeature> FALLEN_BLOODWOOD_PLACED_KEY = createKey("fallen_bloodwood_placed");
+    public static final ResourceKey<PlacedFeature> TAINTED_PLACED_KEY = createKey("tainted_placed");
+    public static final ResourceKey<PlacedFeature> SMALL_TAINTED_PLACED_KEY = createKey("small_tainted_placed");
+    public static final ResourceKey<PlacedFeature> FALLEN_TAINTED_PLACED_KEY = createKey("fallen_tainted_placed");
+    public static final ResourceKey<PlacedFeature> PALM_PLACED_KEY = createKey("palm_placed");
+    public static final ResourceKey<PlacedFeature> FALLEN_PALM_PLACED_KEY = createKey("fallen_palm_placed");
+    public static final ResourceKey<PlacedFeature> DECREPIT_PLACED_KEY = createKey("decrepit_placed");
+    public static final ResourceKey<PlacedFeature> PALLID_PLACED_KEY = createKey("pallid_placed");
+    public static final ResourceKey<PlacedFeature> CHARRED_PLACED_KEY = createKey("charred_placed");
 
     // Vegetation keys
 
-    public static final ResourceKey<PlacedFeature> DECREPIT_FOREST_VEGETATION_PLACED_KEY = registerKey("decrepit_forest_vegetation_placed");
-    public static final ResourceKey<PlacedFeature> PALLID_FOREST_VEGETATION_PLACED_KEY = registerKey("pallid_forest_vegetation_placed");
-    public static final ResourceKey<PlacedFeature> CHARRED_FOREST_VEGETATION_PLACED_KEY = registerKey("charred_forest_vegetation_placed");
+    public static final ResourceKey<PlacedFeature> DECREPIT_FOREST_VEGETATION_PLACED_KEY = createKey("decrepit_forest_vegetation_placed");
+    public static final ResourceKey<PlacedFeature> PALLID_FOREST_VEGETATION_PLACED_KEY = createKey("pallid_forest_vegetation_placed");
+    public static final ResourceKey<PlacedFeature> CHARRED_FOREST_VEGETATION_PLACED_KEY = createKey("charred_forest_vegetation_placed");
 
     // Ice cave patch resource keys
 
-    public static final ResourceKey<PlacedFeature> SMALL_ICE_PATCH_PLACED_KEY = registerKey("small_ice_patch_placed");
-    public static final ResourceKey<PlacedFeature> ICE_PATCH_PLACED_KEY = registerKey("ice_patch_placed");
-    public static final ResourceKey<PlacedFeature> LARGE_ICE_PATCH_PLACED_KEY = registerKey("large_ice_patch_placed");
-    public static final ResourceKey<PlacedFeature> SMALL_BLUE_ICE_PATCH_PLACED_KEY = registerKey("small_blue_ice_patch_placed");
-    public static final ResourceKey<PlacedFeature> BLUE_ICE_PATCH_PLACED_KEY = registerKey("blue_ice_patch_placed");
-    public static final ResourceKey<PlacedFeature> LARGE_BLUE_ICE_PATCH_PLACED_KEY = registerKey("large_blue_ice_patch_placed");
-    public static final ResourceKey<PlacedFeature> SMALL_SNOW_PATCH_PLACED_KEY = registerKey("small_snow_patch_placed");
-    public static final ResourceKey<PlacedFeature> SNOW_PATCH_PLACED_KEY = registerKey("snow_patch_placed");
-    public static final ResourceKey<PlacedFeature> LARGE_SNOW_PATCH_PLACED_KEY = registerKey("large_snow_patch_placed");
+    public static final ResourceKey<PlacedFeature> SMALL_ICE_PATCH_PLACED_KEY = createKey("small_ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> ICE_PATCH_PLACED_KEY = createKey("ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> LARGE_ICE_PATCH_PLACED_KEY = createKey("large_ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> SMALL_BLUE_ICE_PATCH_PLACED_KEY = createKey("small_blue_ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> BLUE_ICE_PATCH_PLACED_KEY = createKey("blue_ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> LARGE_BLUE_ICE_PATCH_PLACED_KEY = createKey("large_blue_ice_patch_placed");
+    public static final ResourceKey<PlacedFeature> SMALL_SNOW_PATCH_PLACED_KEY = createKey("small_snow_patch_placed");
+    public static final ResourceKey<PlacedFeature> SNOW_PATCH_PLACED_KEY = createKey("snow_patch_placed");
+    public static final ResourceKey<PlacedFeature> LARGE_SNOW_PATCH_PLACED_KEY = createKey("large_snow_patch_placed");
 
     // Other ice cave keys
 
-    public static final ResourceKey<PlacedFeature> EVERFROST_ORE_PLACED_KEY = registerKey("everfrost_ore_placed");
-    public static final ResourceKey<PlacedFeature> ICE_SPIRE_PLACED_KEY = registerKey("iced_spire_placed");
-    public static final ResourceKey<PlacedFeature> ICICLE_CLUSTER_PLACED_KEY = registerKey("icicle_cluster_placed");
+    public static final ResourceKey<PlacedFeature> EVERFROST_ORE_PLACED_KEY = createKey("everfrost_ore_placed");
+    public static final ResourceKey<PlacedFeature> ICE_SPIRE_PLACED_KEY = createKey("iced_spire_placed");
+    public static final ResourceKey<PlacedFeature> ICICLE_CLUSTER_PLACED_KEY = createKey("icicle_cluster_placed");
 
     // Nether vine keys
-    public static final ResourceKey<PlacedFeature> SMOLDERED_VINES_PLACED_KEY = registerKey("smoldered_vines_placed");
-    public static final ResourceKey<PlacedFeature> SCORCHED_VINES_PLACED_KEY = registerKey("scorched_vines_placed");
+    public static final ResourceKey<PlacedFeature> SMOLDERED_VINES_PLACED_KEY = createKey("smoldered_vines_placed");
+    public static final ResourceKey<PlacedFeature> SCORCHED_VINES_PLACED_KEY = createKey("scorched_vines_placed");
 
     // Oasis resource key
 
-    public static final ResourceKey<PlacedFeature> OASIS_PLACED_KEY = registerKey("oasis_placed");
+    public static final ResourceKey<PlacedFeature> OASIS_PLACED_KEY = createKey("oasis_placed");
 
+    @RestrictedTo({MFDatapackProvider.class, RegistrySetBuilder.class, RegistrySetBuilder.RegistryStub.class})
     @SuppressWarnings("deprecation")
     public static void bootstrap(BootstrapContext<PlacedFeature> context) {
         var configuredFeatures = context.lookup(Registries.CONFIGURED_FEATURE);
@@ -148,7 +152,7 @@ public class MFPlacedFeatures {
                 MFOrePlacementUtil.commonOrePlacement(8, HeightRangePlacement.uniform(
                         VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
 
-        // Ice Caves have bands of snow. These are rare but add some extra snow to the Ice Caves alongside those existing bands
+        // Ice Caves have bands of snow. However, snow also comes in patches, which are rare but add some extra snow to the biome
         register(context, SMALL_SNOW_PATCH_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.SMALL_SNOW_PATCH_KEY),
                 MFOrePlacementUtil.rareOrePlacement(2, HeightRangePlacement.uniform(
                         VerticalAnchor.absolute(-64), VerticalAnchor.absolute(128))));
@@ -218,25 +222,29 @@ public class MFPlacedFeatures {
 
         // PLACE VEGETATION
 
-        register(context, DECREPIT_FOREST_VEGETATION_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.DECREPIT_VEGETATION_KEY),
+        register(context, DECREPIT_FOREST_VEGETATION_PLACED_KEY,
+                configuredFeatures.getOrThrow(MFConfiguredFeatures.DECREPIT_VEGETATION_KEY),
                 List.of(
                         CountOnEveryLayerPlacement.of(6),
                         BiomeFilter.biome()
                 ));
 
-        register(context, PALLID_FOREST_VEGETATION_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.PALLID_VEGETATION_KEY),
+        register(context, PALLID_FOREST_VEGETATION_PLACED_KEY,
+                configuredFeatures.getOrThrow(MFConfiguredFeatures.PALLID_VEGETATION_KEY),
                 List.of(
                         CountOnEveryLayerPlacement.of(6),
                         BiomeFilter.biome()
                 ));
 
-        register(context, CHARRED_FOREST_VEGETATION_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.CHARRED_VEGETATION_KEY),
+        register(context, CHARRED_FOREST_VEGETATION_PLACED_KEY,
+                configuredFeatures.getOrThrow(MFConfiguredFeatures.CHARRED_VEGETATION_KEY),
                 List.of(
                         CountOnEveryLayerPlacement.of(6),
                         BiomeFilter.biome()
                 ));
 
-        register(context, ICICLE_CLUSTER_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.ICICLE_CLUSTER_KEY),
+        register(context, ICICLE_CLUSTER_PLACED_KEY,
+                configuredFeatures.getOrThrow(MFConfiguredFeatures.ICICLE_CLUSTER_KEY),
                 List.of(
                         CountPlacement.of(UniformInt.of(48, 96)),
                         InSquarePlacement.spread(),
@@ -246,7 +254,8 @@ public class MFPlacedFeatures {
 
         // PLACE NETHER VINES
 
-        register(context, SMOLDERED_VINES_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.SMOLDERED_VINES_KEY),
+        register(context, SMOLDERED_VINES_PLACED_KEY,
+                configuredFeatures.getOrThrow(MFConfiguredFeatures.SMOLDERED_VINES_KEY),
                 List.of(
                         CountPlacement.of(5),
                         InSquarePlacement.spread(),
@@ -254,7 +263,8 @@ public class MFPlacedFeatures {
                         BiomeFilter.biome()
                 ));
 
-        register(context, SCORCHED_VINES_PLACED_KEY, configuredFeatures.getOrThrow(MFConfiguredFeatures.SCORCHED_VINES_KEY),
+        register(context, SCORCHED_VINES_PLACED_KEY,
+                configuredFeatures.getOrThrow(MFConfiguredFeatures.SCORCHED_VINES_KEY),
                 List.of(
                         CountPlacement.of(5),
                         InSquarePlacement.spread(),
@@ -288,12 +298,16 @@ public class MFPlacedFeatures {
         );
     }
 
-    private static ResourceKey<PlacedFeature> registerKey(String name){
+    private static ResourceKey<PlacedFeature> createKey(String name){
         return ResourceKey.create(Registries.PLACED_FEATURE, MFIdentifier.withMfNamespace(name));
     }
 
-    private static void register(BootstrapContext<PlacedFeature> context, ResourceKey<PlacedFeature> key, Holder<ConfiguredFeature<?, ?>> configuration,
-                                 List<PlacementModifier> modifiers) {
+    private static void register(
+            BootstrapContext<PlacedFeature> context,
+            ResourceKey<PlacedFeature> key,
+            Holder<ConfiguredFeature<?, ?>> configuration,
+            List<PlacementModifier> modifiers
+    ) {
         context.register(key, new PlacedFeature(configuration, List.copyOf(modifiers)));
     }
 }

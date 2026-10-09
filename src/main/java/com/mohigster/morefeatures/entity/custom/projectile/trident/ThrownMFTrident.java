@@ -2,6 +2,7 @@ package com.mohigster.morefeatures.entity.custom.projectile.trident;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.Identifier;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.damagesource.DamageSource;
@@ -30,7 +31,7 @@ public class ThrownMFTrident extends ThrownTrident {
         this.projectileDamage = projectileDamage;
     }
 
-    public ThrownMFTrident(EntityType<? extends ThrownTrident> tridentEntity, Level level, Identifier pickupItemId, float projectileDamage) {
+    private ThrownMFTrident(EntityType<? extends ThrownTrident> tridentEntity, Level level, Identifier pickupItemId, float projectileDamage) {
         super(tridentEntity, level);
         this.tridentEntity = tridentEntity;
         this.pickupItem = pickupItemId;
@@ -42,6 +43,20 @@ public class ThrownMFTrident extends ThrownTrident {
         this.tridentEntity = tridentEntity;
         this.pickupItem = pickupItemId;
         this.projectileDamage = projectileDamage;
+    }
+
+    public static ThrownMFTrident create(
+            EntityType<? extends ThrownTrident> trident,
+            Level level,
+            ResourceKey<Item> itemKey,
+            float projectileDamage
+    ) {
+        return new ThrownMFTrident(
+                trident,
+                level,
+                itemKey.identifier(),
+                projectileDamage
+        );
     }
 
     @SuppressWarnings("deprecation")

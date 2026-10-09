@@ -1,7 +1,10 @@
 package com.mohigster.morefeatures.data.world.carver;
 
+import com.mohigster.morefeatures.core.RestrictedTo;
+import com.mohigster.morefeatures.data.generators.MFDatapackProvider;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import net.minecraft.core.HolderGetter;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -27,6 +30,7 @@ public class MFCarvers {
         return ResourceKey.create(Registries.CONFIGURED_CARVER, MFIdentifier.withMfNamespace(name));
     }
 
+    @RestrictedTo({MFDatapackProvider.class, RegistrySetBuilder.class, RegistrySetBuilder.RegistryStub.class})
     public static void bootstrap(BootstrapContext<ConfiguredWorldCarver<?>> context) {
         HolderGetter<Block> blocks = context.lookup(Registries.BLOCK);
         context.register(ICE_CAVE, WorldCarver.CAVE.configured(

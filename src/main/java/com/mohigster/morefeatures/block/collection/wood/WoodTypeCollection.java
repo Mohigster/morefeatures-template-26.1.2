@@ -75,7 +75,7 @@ public record WoodTypeCollection<T>(
     }
 
     public List<T> asList() {
-        ImmutableList.Builder<T> builder = ImmutableList.builderWithExpectedSize(6);
+        final ImmutableList.Builder<T> builder = ImmutableList.builderWithExpectedSize(6);
         this.forEach(builder::add);
         return builder.build();
     }

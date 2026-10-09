@@ -11,21 +11,24 @@ import com.mohigster.morefeatures.particles.MFSuspendedParticle;
 import com.mohigster.morefeatures.data.resources.references.MFEntityTypeIds;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.entity.model.MFTridentModel;
-import com.mohigster.morefeatures.renderer.special.shield.BismuthShieldUnbaked;
-import com.mohigster.morefeatures.renderer.special.shield.CarbonShieldUnbaked;
-import com.mohigster.morefeatures.renderer.special.trident.BismuthTridentUnbaked;
-import com.mohigster.morefeatures.renderer.special.trident.CarbonTridentUnbaked;
 import com.mohigster.morefeatures.renderer.main.MFTridentRenderer;
 import com.mohigster.morefeatures.menu.MFMenuTypes;
 import com.mohigster.morefeatures.menu.custom.CompressorScreen;
 import com.mohigster.morefeatures.entity.model.MFModelLayer;
 import com.mohigster.morefeatures.renderer.main.IceologerRenderer;
+import com.mohigster.morefeatures.renderer.special.shield.CustomShieldUnbaked;
+import com.mohigster.morefeatures.renderer.special.trident.CustomTridentSpecialRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.object.boat.BoatModel;
 import net.minecraft.client.renderer.blockentity.HangingSignRenderer;
 import net.minecraft.client.renderer.blockentity.ShelfRenderer;
 import net.minecraft.client.renderer.blockentity.StandingSignRenderer;
 import net.minecraft.client.renderer.entity.BoatRenderer;
+import net.minecraft.util.Mth;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BowItem;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
@@ -39,7 +42,7 @@ import net.neoforged.neoforge.event.entity.EntityAttributeCreationEvent;
 
 @Mod(value = MoreFeatures.MODID, dist = Dist.CLIENT)
 @EventBusSubscriber(modid = MoreFeatures.MODID, value = Dist.CLIENT)
-public class MoreFeaturesClient {
+public final class MoreFeaturesClient {
     public MoreFeaturesClient(ModContainer container) {
         // Allows NeoForge to create a config screen for this mod's configs.
         // The config screen is accessed by going to the Mods screen > clicking on your mod > clicking on config.
@@ -191,19 +194,31 @@ public class MoreFeaturesClient {
     public static void onRegisterSpecialRenderers(RegisterSpecialModelRendererEvent event) {
         event.register(
                 MFIdentifier.withMfNamespace("carbon_trident"),
-                CarbonTridentUnbaked.CODEC
+                CustomTridentSpecialRenderer.getUnbakedCodec(
+                        MFModelLayer.CARBON_TRIDENT,
+                        MFEntityTypeIds.CARBON_TRIDENT
+                )
         );
         event.register(
                 MFIdentifier.withMfNamespace("bismuth_trident"),
-                BismuthTridentUnbaked.CODEC
+                CustomTridentSpecialRenderer.getUnbakedCodec(
+                        MFModelLayer.BISMUTH_TRIDENT,
+                        MFEntityTypeIds.BISMUTH_TRIDENT
+                )
         );
         event.register(
                 MFIdentifier.withMfNamespace("carbon_shield"),
-                CarbonShieldUnbaked.MAP_CODEC
+                CustomShieldUnbaked.getMapCodec(
+                        "carbon",
+                        MoreFeatures.MODID
+                )
         );
         event.register(
                 MFIdentifier.withMfNamespace("bismuth_shield"),
-                BismuthShieldUnbaked.MAP_CODEC
+                CustomShieldUnbaked.getMapCodec(
+                        "bismuth",
+                        MoreFeatures.MODID
+                )
         );
     }
 
@@ -216,5 +231,20 @@ public class MoreFeaturesClient {
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(MFEntityTypes.ICEOLOGER.get(), IceologerEntity.createAttributes());
         event.put(MFEntityTypes.BRINE.get(), BrineEntity.createAttributes());
+    }
+
+    @SubscribeEvent
+    public static void computeFovModifier(ComputeFovModifierEvent event) {
+        final Player player = event.getPlayer();
+
+        if (player.isUsingItem()) {
+            final ItemStack stack = player.getUseItem();
+            // Exclude vanilla bow to avoid doubling the FOV modifier
+            if (!stack.is(Items.BOW) && stack.getItem() instanceof BowItem) {
+                final float scale = Math.min(player.getTicksUsingItem() / 20.0F, 1.0F);
+                final float fovMod = event.getFovModifier() * (1.0F - Mth.square(scale) * 0.15F);
+                event.setNewFovModifier(fovMod);
+            }
+        }
     }
 }

@@ -5,7 +5,6 @@ import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.BlockParticleOption;
 import net.minecraft.core.particles.ParticleOptions;
-import net.minecraft.core.particles.ParticleType;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -86,7 +85,7 @@ public class MetalDetectorItem extends Item {
     }
 
     private static int getDamageCost(BlockState state){
-        int totalCost = MetalDetectorCosts.getCost(state);
+        int totalCost = MetalDetectorCostsManager.getCost(state);
 
         if (totalCost == 0){
             throw new IllegalStateException("Metal detector durability cost must not be zero! If the value is not zero within the JSON file, report the issue on GitHub.");

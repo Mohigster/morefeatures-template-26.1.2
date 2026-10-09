@@ -10,8 +10,10 @@ import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
+import java.util.function.Predicate;
+
 @Mixin(BowItem.class)
-public class BowItemMixin {
+public final class BowItemMixin {
     @Redirect(
             method = "releaseUsing",
             at = @At(
@@ -19,8 +21,7 @@ public class BowItemMixin {
                     target = "Lnet/minecraft/world/entity/player/Player;getProjectile(Lnet/minecraft/world/item/ItemStack;)Lnet/minecraft/world/item/ItemStack;"
             )
     )
-    private ItemStack mfBowMixin$getClosestArrow(Player player, ItemStack heldWeapon) {
-
+    private static ItemStack bowMixin$getClosestArrow(Player player, ItemStack heldWeapon) {
         int bowSlot = -1;
         Inventory inv = player.getInventory();
         for (int i = 0; i < Inventory.getSelectionSize(); i++) { // hotbar slots 0-8
@@ -33,13 +34,13 @@ public class BowItemMixin {
             return player.getProjectile(heldWeapon);
         }
 
-        java.util.function.Predicate<ItemStack> ammoPredicate =
+        Predicate<ItemStack> ammoPredicate =
                 ProjectileWeaponItem.ARROW_ONLY;
 
-        ItemStack found = mfBowMixin$findClosestArrow(inv, bowSlot, 0, Inventory.getSelectionSize(), ammoPredicate);
+        ItemStack found = bowMixin$findClosestArrow(inv, bowSlot, 0, Inventory.getSelectionSize(), ammoPredicate);
 
         if (found.isEmpty()) {
-            found = mfBowMixin$findClosestArrow(inv, bowSlot, Inventory.getSelectionSize(), inv.getContainerSize(), ammoPredicate);
+            found = bowMixin$findClosestArrow(inv, bowSlot, Inventory.getSelectionSize(), inv.getContainerSize(), ammoPredicate);
         }
 
         if (found.isEmpty()) {
@@ -57,13 +58,13 @@ public class BowItemMixin {
     }
 
     @Unique
-    private ItemStack mfBowMixin$findClosestArrow(
+    private static ItemStack bowMixin$findClosestArrow(
             Inventory inv, int bowSlot,
             int slotStart, int slotEnd,
-            java.util.function.Predicate<ItemStack> predicate) {
-
-        int bowCol = mfBowMixin$getColumn(bowSlot);
-        int bowRow = mfBowMixin$getRow(bowSlot);
+            Predicate<ItemStack> predicate
+    ) {
+        int bowCol = bowMixin$getColumn(bowSlot);
+        int bowRow = bowMixin$getRow(bowSlot);
         int bestColDist = Integer.MAX_VALUE;
         int bestRowDist = Integer.MAX_VALUE;
         ItemStack best = ItemStack.EMPTY;
@@ -73,8 +74,8 @@ public class BowItemMixin {
 
             ItemStack stack = inv.getItem(i);
             if (!stack.isEmpty() && predicate.test(stack)) {
-                int colDist = Math.abs(mfBowMixin$getColumn(i) - bowCol);
-                int rowDist = Math.abs(mfBowMixin$getRow(i) - bowRow);
+                int colDist = Math.abs(bowMixin$getColumn(i) - bowCol);
+                int rowDist = Math.abs(bowMixin$getRow(i) - bowRow);
 
                 if (colDist < bestColDist || (colDist == bestColDist && rowDist < bestRowDist)) {
                     bestColDist = colDist;
@@ -87,13 +88,13 @@ public class BowItemMixin {
     }
 
     @Unique
-    private int mfBowMixin$getColumn(int slot) {
+    private static int bowMixin$getColumn(int slot) {
         if (slot < 9) return slot;                    // hotbar: column = slot
         return (slot - 9) % 9;                        // main inv: column = position within row
     }
 
     @Unique
-    private int mfBowMixin$getRow(int slot) {
+    private static int bowMixin$getRow(int slot) {
         if (slot < 9) return 4;                       // hotbar is the bottom row
         return (slot - 9) / 9;                        // rows 0-2 above hotbar (top to bottom)
     }

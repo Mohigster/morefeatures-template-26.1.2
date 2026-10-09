@@ -1,10 +1,13 @@
 package com.mohigster.morefeatures.enchantment;
 
+import com.mohigster.morefeatures.core.RestrictedTo;
+import com.mohigster.morefeatures.data.generators.MFDatapackProvider;
 import com.mohigster.morefeatures.enchantment.custom.ThunderEnchantmentEffect;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.tag.MFItemTags;
 import net.minecraft.advancements.predicates.DamageSourcePredicate;
 import net.minecraft.advancements.predicates.TagPredicate;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -17,9 +20,10 @@ import net.minecraft.world.item.enchantment.EnchantmentTarget;
 import net.minecraft.world.level.storage.loot.predicates.DamageSourceCondition;
 
 public class MFEnchantments {
-    public static final ResourceKey<Enchantment> THUNDERBOLT = registerKey("thunderbolt");
-    public static final ResourceKey<Enchantment> THUNDERING = registerKey("thundering");
+    public static final ResourceKey<Enchantment> THUNDERBOLT = newKey("thunderbolt");
+    public static final ResourceKey<Enchantment> THUNDERING = newKey("thundering");
 
+    @RestrictedTo({MFDatapackProvider.class, RegistrySetBuilder.class, RegistrySetBuilder.RegistryStub.class})
     public static void bootstrap(BootstrapContext<Enchantment> context) {
         var enchantment = context.lookup(Registries.ENCHANTMENT);
         var items = context.lookup(Registries.ITEM);
@@ -50,11 +54,15 @@ public class MFEnchantments {
                 ));
     }
 
-    private static ResourceKey<Enchantment> registerKey(String id) {
+    private static ResourceKey<Enchantment> newKey(String id) {
         return ResourceKey.create(Registries.ENCHANTMENT, MFIdentifier.withMfNamespace(id));
     }
 
-    private static void register(BootstrapContext<Enchantment> context, ResourceKey<Enchantment> key, Enchantment.Builder builder) {
+    private static void register(
+            BootstrapContext<Enchantment> context,
+            ResourceKey<Enchantment> key,
+            Enchantment.Builder builder
+    ) {
         context.register(key, builder.build(key.identifier()));
     }
 }

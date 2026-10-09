@@ -93,7 +93,4 @@ public class MFWoodType {
                 blockSet
         );
     }
-
-
-    public static void init() {}
 }

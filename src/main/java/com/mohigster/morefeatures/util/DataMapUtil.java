@@ -12,8 +12,8 @@ import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
 @SuppressWarnings("deprecation")
-public class DataMapUtil {
-    public static void spawnBonemealParticles(LevelAccessor level, BlockPos pos, int count){
+public final class DataMapUtil {
+    public static void spawnBonemealParticles(LevelAccessor level, BlockPos pos, int count) {
         BlockState state = level.getBlockState(pos);
         Block block = state.getBlock();
 
@@ -28,11 +28,24 @@ public class DataMapUtil {
             BlockPos particlePos = data.particlePos(pos);
             switch (data.bonemealType()) {
                 // These mimic vanilla's bonemeal types enum, which can either be neighbour spreader or grower
-                case "neighbour_spreader" -> ParticleUtils.spawnParticles(level, particlePos, count * 3, 3.0F, 1.0F, false, ParticleTypes.HAPPY_VILLAGER);
+
+                // We allow both spellings of "neighbour" here.
+                case "neighbour_spreader", "neighbor_spreader" -> ParticleUtils.spawnParticles(level, particlePos, count * 3, 3.0F, 1.0F, false, ParticleTypes.HAPPY_VILLAGER);
                 case "grower" -> ParticleUtils.spawnParticleInBlock(level, particlePos, count, ParticleTypes.HAPPY_VILLAGER);
+                default -> throw new IllegalStateException("Invalid bonemeal type");
             }
         } else if (state.is(Blocks.WATER)) {
             ParticleUtils.spawnParticles(level, pos, count * 3, 3.0F, 1.0F, false, ParticleTypes.HAPPY_VILLAGER);
         }
+    }
+
+    public static int requirePositive(int data) {
+        return (int) requirePositive((double) data);
+    }
+
+    public static double requirePositive(double data) {
+        if (data <= 0D)
+            throw new IllegalStateException(data + " was not a positive value");
+        return data;
     }
 }

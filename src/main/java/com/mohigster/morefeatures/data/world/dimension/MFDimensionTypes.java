@@ -1,11 +1,14 @@
 package com.mohigster.morefeatures.data.world.dimension;
 
+import com.mohigster.morefeatures.core.RestrictedTo;
+import com.mohigster.morefeatures.data.generators.MFDatapackProvider;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.resources.references.dimension.MFDimensionTypeIds;
 import com.mohigster.morefeatures.data.tag.MFBlockTags;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderSet;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -28,6 +31,7 @@ import java.util.Optional;
 
 public class MFDimensionTypes {
 
+    @RestrictedTo({MFDatapackProvider.class, RegistrySetBuilder.class, RegistrySetBuilder.RegistryStub.class})
     public static void bootstrap(BootstrapContext<DimensionType> context) {
         var timelines = context.lookup(Registries.TIMELINE);
         var clocks = context.lookup(Registries.WORLD_CLOCK);

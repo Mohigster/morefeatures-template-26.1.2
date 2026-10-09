@@ -7,6 +7,8 @@ import net.minecraft.world.item.equipment.EquipmentAsset;
 import static net.minecraft.world.item.equipment.EquipmentAssets.ROOT_ID;
 
 public class MFEquipmentAssets {
+    private MFEquipmentAssets() {}
+
     public static final ResourceKey<EquipmentAsset> BISMUTH = createId("bismuth");
     public static final ResourceKey<EquipmentAsset> BISMUTH_ELYTRA = createId("bismuth_elytra");
     public static final ResourceKey<EquipmentAsset> CARBON = createId("carbon");

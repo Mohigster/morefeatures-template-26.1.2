@@ -1,10 +1,14 @@
 package com.mohigster.morefeatures.data.world.noise;
 
+import com.mohigster.morefeatures.core.RestrictedTo;
+import com.mohigster.morefeatures.data.generators.MFDatapackProvider;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.level.levelgen.synth.NormalNoise;
 
 public class MFNoiseData {
+    @RestrictedTo({MFDatapackProvider.class, RegistrySetBuilder.class, RegistrySetBuilder.RegistryStub.class})
     public static void bootstrap(BootstrapContext<NormalNoise.NoiseParameters> context) {
         register(context, MFNoises.ICE_CAVE_GRADIENT, -5, 1.0, 0.0, 1.0);
     }

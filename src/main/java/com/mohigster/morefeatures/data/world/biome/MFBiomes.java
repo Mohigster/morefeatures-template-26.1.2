@@ -1,11 +1,14 @@
 package com.mohigster.morefeatures.data.world.biome;
 
+import com.mohigster.morefeatures.core.RestrictedTo;
+import com.mohigster.morefeatures.data.generators.MFDatapackProvider;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.world.biome.custom.MFEndBiomes;
 import com.mohigster.morefeatures.data.world.biome.custom.MFNetherBiomes;
 import com.mohigster.morefeatures.data.world.biome.custom.MFOverworldBiomes;
 import com.mohigster.morefeatures.data.world.biome.region.NetherRegion;
 import com.mohigster.morefeatures.data.world.biome.region.OverworldRegion;
+import net.minecraft.core.RegistrySetBuilder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
 import net.minecraft.resources.ResourceKey;
@@ -36,6 +39,7 @@ public class MFBiomes {
         EndBiomeRegistry.registerHighlandsBiome(PALLID_FOREST, 7);
     }
 
+    @RestrictedTo({MFDatapackProvider.class, RegistrySetBuilder.class, RegistrySetBuilder.RegistryStub.class})
     public static void bootstrap(BootstrapContext<Biome> context) {
         var carver = context.lookup(Registries.CONFIGURED_CARVER);
         var placedFeatures = context.lookup(Registries.PLACED_FEATURE);

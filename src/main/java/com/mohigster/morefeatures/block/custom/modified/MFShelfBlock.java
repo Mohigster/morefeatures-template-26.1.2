@@ -26,7 +26,7 @@ public class MFShelfBlock extends ShelfBlock {
     // The only difference between this and the super method is that vanilla always plays the vanilla shelf sounds
     // Now, it will play gemstone shelf sounds if the shelf is a gemstone shelf
     @Override
-    protected void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston) {
+    public void neighborChanged(BlockState state, Level level, BlockPos pos, Block block, @Nullable Orientation orientation, boolean movedByPiston) {
         if (!level.isClientSide()) {
             boolean signal = level.hasNeighborSignal(pos);
             if (state.getValue(POWERED) != signal) {

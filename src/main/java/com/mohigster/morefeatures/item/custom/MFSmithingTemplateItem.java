@@ -23,31 +23,57 @@ public class MFSmithingTemplateItem extends Item {
     private static final ChatFormatting TITLE_FORMAT = ChatFormatting.GRAY;
     private static final ChatFormatting DESCRIPTION_FORMAT = ChatFormatting.BLUE;
     private static final Component INGREDIENTS_TITLE = Component.translatable(
-                    Util.makeDescriptionId("item", MFIdentifier.withMfNamespace("smithing_template.ingredients"))
+            Util.makeDescriptionId(
+                    "item",
+                    MFIdentifier.withMfNamespace("smithing_template.ingredients")
             )
-            .withStyle(TITLE_FORMAT);
+    ).withStyle(TITLE_FORMAT);
     private static final Component APPLIES_TO_TITLE = Component.translatable(
-                    Util.makeDescriptionId("item", MFIdentifier.withMfNamespace("smithing_template.applies_to"))
+            Util.makeDescriptionId(
+                    "item",
+                    MFIdentifier.withMfNamespace("smithing_template.applies_to")
             )
-            .withStyle(TITLE_FORMAT);
+    ).withStyle(TITLE_FORMAT);
     private static final Component SMITHING_TEMPLATE_SUFFIX = Component.translatable(
-                    Util.makeDescriptionId("item", MFIdentifier.withMfNamespace("smithing_template"))
+            Util.makeDescriptionId(
+                    "item",
+                    MFIdentifier.withMfNamespace("smithing_template")
             )
-            .withStyle(TITLE_FORMAT);
+    ).withStyle(TITLE_FORMAT);
 
     private static final Component BISMUTH_UPGRADE_APPLIES_TO = Component.translatable(
-            Util.makeDescriptionId("item", MFIdentifier.withMfNamespace("smithing_template.bismuth_upgrade.applies_to"))
+            Util.makeDescriptionId(
+                    "item",
+                    MFIdentifier.withMfNamespace(
+                            "smithing_template.bismuth_upgrade.applies_to"
+                    )
+            )
     )
             .withStyle(DESCRIPTION_FORMAT);
     private static final Component BISMUTH_UPGRADE_INGREDIENTS = Component.translatable(
-            Util.makeDescriptionId("item", MFIdentifier.withMfNamespace("smithing_template.bismuth_upgrade.ingredients"))
+            Util.makeDescriptionId(
+                    "item",
+                    MFIdentifier.withMfNamespace(
+                            "smithing_template.bismuth_upgrade.ingredients"
+                    )
+            )
     )
             .withStyle(DESCRIPTION_FORMAT);
     private static final Component BISMUTH_UPGRADE_BASE_SLOT_DESCRIPTION = Component.translatable(
-            Util.makeDescriptionId("item", MFIdentifier.withMfNamespace("smithing_template.bismuth_upgrade.base_slot_description"))
+            Util.makeDescriptionId(
+                    "item",
+                    MFIdentifier.withMfNamespace(
+                            "smithing_template.bismuth_upgrade.base_slot_description"
+                    )
+            )
     );
     private static final Component BISMUTH_UPGRADE_ADDITIONS_SLOT_DESCRIPTION = Component.translatable(
-            Util.makeDescriptionId("item", MFIdentifier.withMfNamespace("smithing_template.bismuth_upgrade.additions_slot_description"))
+            Util.makeDescriptionId(
+                    "item",
+                    MFIdentifier.withMfNamespace(
+                            "smithing_template.bismuth_upgrade.additions_slot_description"
+                    )
+            )
     );
     private static final Identifier EMPTY_SLOT_HELMET = Identifier.withDefaultNamespace("container/slot/helmet");
     private static final Identifier EMPTY_SLOT_CHESTPLATE = Identifier.withDefaultNamespace("container/slot/chestplate");
@@ -67,6 +93,7 @@ public class MFSmithingTemplateItem extends Item {
     private final Component additionsSlotDescription;
     private final List<Identifier> baseSlotEmptyIcons;
     private final List<Identifier> additionalSlotEmptyIcons;
+
     public MFSmithingTemplateItem(
             final Component appliesTo,
             final Component ingredients,
@@ -84,6 +111,7 @@ public class MFSmithingTemplateItem extends Item {
         this.baseSlotEmptyIcons = baseSlotEmptyIcons;
         this.additionalSlotEmptyIcons = additionalSlotEmptyIcons;
     }
+
     public static MFSmithingTemplateItem createBismuthUpgradeTemplate(final Properties properties) {
         return new MFSmithingTemplateItem(
                 BISMUTH_UPGRADE_APPLIES_TO,
@@ -97,18 +125,16 @@ public class MFSmithingTemplateItem extends Item {
     }
     private static List<Identifier> createBismuthUpgradeIconList() {
         return List.of(
-                new Identifier[]{
-                        EMPTY_SLOT_HELMET,
-                        EMPTY_SLOT_SWORD,
-                        EMPTY_SLOT_CHESTPLATE,
-                        EMPTY_SLOT_PICKAXE,
-                        EMPTY_SLOT_LEGGINGS,
-                        EMPTY_SLOT_AXE,
-                        EMPTY_SLOT_BOOTS,
-                        EMPTY_SLOT_HOE,
-                        EMPTY_SLOT_SHOVEL,
-                        EMPTY_SLOT_SPEAR
-                }
+                EMPTY_SLOT_HELMET,
+                EMPTY_SLOT_SWORD,
+                EMPTY_SLOT_CHESTPLATE,
+                EMPTY_SLOT_PICKAXE,
+                EMPTY_SLOT_LEGGINGS,
+                EMPTY_SLOT_AXE,
+                EMPTY_SLOT_BOOTS,
+                EMPTY_SLOT_HOE,
+                EMPTY_SLOT_SHOVEL,
+                EMPTY_SLOT_SPEAR
         );
     }
 

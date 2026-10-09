@@ -58,7 +58,7 @@ public class MFRecipeProvider extends RecipeProvider {
     }
 
     @Override
-    protected void buildRecipes(){
+    protected void buildRecipes() {
 
         this.generateForMFBlockFamilies(
                 FeatureFlagSet.of(FeatureFlags.VANILLA)
@@ -333,9 +333,7 @@ public class MFRecipeProvider extends RecipeProvider {
         // Stairs and slabs
 
         GemstoneCollection.zipApply(MFBlocks.GEMSTONE_STAIRS, MFBlocks.GEMSTONE_BLOCK, this::stairs);
-
-        this.slab(RecipeCategory.BUILDING_BLOCKS, MFBlocks.GEMSTONE_SLAB.azurite().get(), MFBlocks.GEMSTONE_BLOCK.azurite().get());
-        this.slab(RecipeCategory.BUILDING_BLOCKS, MFBlocks.GEMSTONE_SLAB.fluorite().get(), MFBlocks.GEMSTONE_BLOCK.fluorite().get());
+        GemstoneCollection.zipApply(MFBlocks.GEMSTONE_SLAB, MFBlocks.GEMSTONE_BLOCK, this::slab);
 
         // Buttons and pressure plates
 
@@ -396,20 +394,20 @@ public class MFRecipeProvider extends RecipeProvider {
 
         // Bismuth smithing recipes
 
-        this.bismuthSmithing(MFItems.CARBON_BOW.get(), RecipeCategory.COMBAT, MFItems.BISMUTH_BOW.get());
-        this.bismuthSmithing(MFItems.CARBON_TRIDENT.get(), RecipeCategory.COMBAT, MFItems.BISMUTH_TRIDENT.get());
-        this.bismuthSmithing(Items.NETHERITE_NAUTILUS_ARMOR, RecipeCategory.COMBAT, MFItems.BISMUTH_NAUTILUS_ARMOR.get());
-        this.bismuthSmithing(Items.NETHERITE_HORSE_ARMOR, RecipeCategory.COMBAT, MFItems.BISMUTH_HORSE_ARMOR.get());
-        this.bismuthSmithing(Items.NETHERITE_SPEAR, RecipeCategory.COMBAT, MFItems.BISMUTH_SPEAR.get());
-        this.bismuthSmithing(Items.NETHERITE_AXE, RecipeCategory.COMBAT, MFItems.BISMUTH_AXE.get());
-        this.bismuthSmithing(Items.NETHERITE_SHOVEL, RecipeCategory.COMBAT, MFItems.BISMUTH_SHOVEL.get());
-        this.bismuthSmithing(Items.NETHERITE_HOE, RecipeCategory.COMBAT, MFItems.BISMUTH_HOE.get());
-        this.bismuthSmithing(Items.NETHERITE_SWORD, RecipeCategory.COMBAT, MFItems.BISMUTH_SWORD.get());
-        this.bismuthSmithing(Items.NETHERITE_PICKAXE, RecipeCategory.COMBAT, MFItems.BISMUTH_PICKAXE.get());
-        this.bismuthSmithing(Items.NETHERITE_HELMET, RecipeCategory.COMBAT, MFItems.BISMUTH_HELMET.get());
-        this.bismuthSmithing(Items.NETHERITE_CHESTPLATE, RecipeCategory.COMBAT, MFItems.BISMUTH_CHESTPLATE.get());
-        this.bismuthSmithing(Items.NETHERITE_LEGGINGS, RecipeCategory.COMBAT, MFItems.BISMUTH_LEGGINGS.get());
-        this.bismuthSmithing(Items.NETHERITE_BOOTS, RecipeCategory.COMBAT, MFItems.BISMUTH_BOOTS.get());
+        this.bismuthSmithing(MFItems.CARBON_BOW.get(), MFItems.BISMUTH_BOW.get());
+        this.bismuthSmithing(MFItems.CARBON_TRIDENT.get(), MFItems.BISMUTH_TRIDENT.get());
+        this.bismuthSmithing(Items.NETHERITE_NAUTILUS_ARMOR, MFItems.BISMUTH_NAUTILUS_ARMOR.get());
+        this.bismuthSmithing(Items.NETHERITE_HORSE_ARMOR, MFItems.BISMUTH_HORSE_ARMOR.get());
+        this.bismuthSmithing(Items.NETHERITE_SPEAR, MFItems.BISMUTH_SPEAR.get());
+        this.bismuthSmithing(Items.NETHERITE_AXE, MFItems.BISMUTH_AXE.get());
+        this.bismuthSmithing(Items.NETHERITE_SHOVEL, MFItems.BISMUTH_SHOVEL.get());
+        this.bismuthSmithing(Items.NETHERITE_HOE, MFItems.BISMUTH_HOE.get());
+        this.bismuthSmithing(Items.NETHERITE_SWORD, MFItems.BISMUTH_SWORD.get());
+        this.bismuthSmithing(Items.NETHERITE_PICKAXE, MFItems.BISMUTH_PICKAXE.get());
+        this.bismuthSmithing(Items.NETHERITE_HELMET, MFItems.BISMUTH_HELMET.get());
+        this.bismuthSmithing(Items.NETHERITE_CHESTPLATE, MFItems.BISMUTH_CHESTPLATE.get());
+        this.bismuthSmithing(Items.NETHERITE_LEGGINGS, MFItems.BISMUTH_LEGGINGS.get());
+        this.bismuthSmithing(Items.NETHERITE_BOOTS, MFItems.BISMUTH_BOOTS.get());
 
         //—————————————————————————————SMELTABLE LISTS———————————————————————————————
 
@@ -601,13 +599,13 @@ public class MFRecipeProvider extends RecipeProvider {
         }
     }
 
-    @SuppressWarnings("SameParameterValue")
-    protected void bismuthSmithing(Item base, RecipeCategory category, Item result) {
+
+    protected void bismuthSmithing(Item base, Item result) {
         SmithingTransformRecipeBuilder.smithing(
                 Ingredient.of(MFItems.BISMUTH_UPGRADE_SMITHING_TEMPLATE),
                 Ingredient.of(base),
                 this.tag(MFItemTags.BISMUTH_TOOL_MATERIALS),
-                category, result).unlocks("has_bismuth_ingot", this.has(MFItemTags.BISMUTH_TOOL_MATERIALS)).save(output, MoreFeatures.MODID + ":" + getItemName(result) + "_smithing");
+                RecipeCategory.COMBAT, result).unlocks("has_bismuth_ingot", this.has(MFItemTags.BISMUTH_TOOL_MATERIALS)).save(output, MoreFeatures.MODID + ":" + getItemName(result) + "_smithing");
     }
 
     protected void verticalSlabCrafting(ItemLike verticalSlab, ItemLike fullBlock) {
@@ -685,6 +683,10 @@ public class MFRecipeProvider extends RecipeProvider {
         this.stairBuilder(result, Ingredient.of(base))
                 .unlockedBy(getHasName(result), has(result))
                 .group("gemstone").save(output);
+    }
+
+    protected void slab(ItemLike result, ItemLike base) {
+        this.slab(RecipeCategory.BUILDING_BLOCKS, result, base);
     }
 }
 

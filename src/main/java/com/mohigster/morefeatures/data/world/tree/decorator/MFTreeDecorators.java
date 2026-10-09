@@ -1,6 +1,7 @@
 package com.mohigster.morefeatures.data.world.tree.decorator;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.core.RestrictedTo;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.levelgen.feature.treedecorators.TreeDecoratorType;
 import net.neoforged.bus.api.IEventBus;
@@ -15,6 +16,7 @@ public class MFTreeDecorators {
             TREE_DECORATORS.register("trunk_light",
                     () -> new TreeDecoratorType<>(TrunkLightDecorator.CODEC));
 
+    @RestrictedTo(MoreFeatures.class)
     public static void register(IEventBus modEventBus) {
         TREE_DECORATORS.register(modEventBus);
         MoreFeatures.LOGGER.info("Mod Tree Decorators registered -> Performed by: " + MoreFeatures.MODID);

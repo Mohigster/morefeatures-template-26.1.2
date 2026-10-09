@@ -63,8 +63,8 @@ public class EvilPortalBlock extends Block implements Portal {
 
         if(isLeavingEvilDim) {
             // Returning from Custom Dimension
-            if(entity instanceof ServerPlayer serverPlayer) {
-                return serverPlayer.findRespawnPositionAndUseSpawnBlock(false, TeleportTransition.DO_NOTHING);
+            if(entity instanceof ServerPlayer player) {
+                return player.findRespawnPositionAndUseSpawnBlock(false, TeleportTransition.DO_NOTHING);
             }
 
             exactSpawnPos = Vec3.atBottomCenterOf(entity.adjustSpawnLocation(targetLevel, baseSpawnPos));

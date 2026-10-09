@@ -33,7 +33,7 @@ public enum VerticalSlabType implements StringRepresentable {
             case EAST -> Direction.EAST;
             case SOUTH -> Direction.SOUTH;
             case WEST -> Direction.WEST;
-            case DOUBLE -> throw new IllegalStateException("DOUBLE vertical slab has no single facing");
+            default -> throw new IllegalStateException("Double vertical slab has no single facing");
         };
     }
 

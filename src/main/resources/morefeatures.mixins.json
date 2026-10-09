@@ -3,16 +3,19 @@
   "package": "com.mohigster.morefeatures.mixin",
   "compatibilityLevel": "JAVA_25",
   "mixins": [
-    "PortalMixin",
     "BowItemMixin",
     "FenceConnectionMixin",
     "FireBlockMixin",
-    "NetherrackMixin"
+    "NetherrackMixin",
+    "PortalMixin"
   ],
   "injectors": {
     "defaultRequire": 1
   },
   "overwrites": {
     "requireAnnotations": true
-  }
+  },
+  "client": [
+    "AvatarRendererMixin"
+  ]
 }

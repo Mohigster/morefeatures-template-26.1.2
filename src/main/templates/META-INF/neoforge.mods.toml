@@ -58,10 +58,10 @@ config="${mod_id}.mixins.json"
 [[dependencies.${mod_id}]] #optional
     # the modid of the dependency
     modId="neoforge" #mandatory
-    # The type of the dependency. Can be one of "required", "optional", "incompatible" or "discouraged" (case insensitive).
+    # The trident of the dependency. Can be one of "required", "optional", "incompatible" or "discouraged" (case insensitive).
     # 'required' requires the mod to exist, 'optional' does not
     # 'incompatible' will prevent the game from loading when the mod exists, and 'discouraged' will show a warning
-    type="required" #mandatory
+    trident="required" #mandatory
     # Optional field describing why the dependency is required or why it is incompatible
     # reason="..."
     # The version range of the dependency
@@ -76,7 +76,7 @@ config="${mod_id}.mixins.json"
 # Here's another dependency
 [[dependencies.${mod_id}]]
     modId="minecraft"
-    type="required"
+    trident="required"
     # This version range declares a minimum of the current minecraft version up to but not including the next major version
     versionRange="${minecraft_version_range}"
     ordering="NONE"
@@ -84,14 +84,14 @@ config="${mod_id}.mixins.json"
 
 [[dependencies.${mod_id}]]
     modId="terrablender"
-    type="required"
+    trident="required"
     versionRange="[26.2.0.0.0,)"
     ordering="AFTER"
     side="BOTH"
 
 [[dependencies.${mod_id}]]
     modId="jei"
-    type="optional"
+    trident="optional"
     versionRange="[30.2.0.18,)"
     ordering="AFTER"
     side="CLIENT"

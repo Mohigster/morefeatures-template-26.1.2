@@ -17,17 +17,20 @@ public class MFBlockIds {
     public static final ResourceKey<Block> POTTED_ROSE = createId("potted_rose");
     public static final ResourceKey<Block> POTTED_BLUE_ROSE = createId("potted_blue_rose");
 
-    // Nether vinesState
+    // Nether vines
     public static final ResourceKey<Block> SCORCHED_VINES_PLANT = createId("scorched_vines_plant");
     public static final ResourceKey<Block> SMOLDERED_VINES_PLANT = createId("smoldered_vines_plant");
 
     // Conjured ice
     public static final ResourceKey<Block> CONJURED_ICE = createId("conjured_ice");
 
+    // Portal
     public static final ResourceKey<Block> PORTAL_BLOCK = createId("portal");
 
+    // Blueberry
     public static final ResourceKey<Block> BLUE_BERRY_BUSH = createId("blue_berry_bush");
 
+    // Signs
     public static final WoodTypeCollection<ResourceKey<Block>> WOODEN_SIGN = createSimpleWoodId("sign");
     public static final WoodTypeCollection<ResourceKey<Block>> WOODEN_WALL_SIGN = createSimpleWoodId("wall_sign");
     public static final WoodTypeCollection<ResourceKey<Block>> WOODEN_HANGING_SIGN = createSimpleWoodId("hanging_sign");

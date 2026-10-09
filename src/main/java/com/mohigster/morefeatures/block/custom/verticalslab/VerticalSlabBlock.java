@@ -59,8 +59,7 @@ public class VerticalSlabBlock extends Block implements SimpleWaterloggedBlock {
 
         if (existing.is(this) && existing.getValue(TYPE) != VerticalSlabType.DOUBLE) {
             Direction originalFacing = existing.getValue(FACING);
-            return existing
-                    .setValue(TYPE, VerticalSlabType.DOUBLE)
+            return existing.setValue(TYPE, VerticalSlabType.DOUBLE)
                     .setValue(FACING, originalFacing)
                     .setValue(WATERLOGGED, false);
         }

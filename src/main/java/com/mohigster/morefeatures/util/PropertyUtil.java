@@ -26,7 +26,7 @@ import net.minecraft.world.level.material.MapColor;
 import java.util.List;
 import java.util.Optional;
 
-public class PropertyUtil {
+public final class PropertyUtil {
     public static class Blocks {
         // Used by the isRedstoneConductor, isViewBlocking, and isSuffocating properties
 
@@ -120,17 +120,17 @@ public class PropertyUtil {
     }
 
     public static class Items {
-        public static Item.Properties gemProps(GemstoneType gem, Item.Properties props) {
+        public static Item.Properties gemProps(final GemstoneType gem, final Item.Properties props) {
             return props.component(MFDataComponentTypes.COMPRESSOR_FUEL_VALUE.get(), 3200)
                     .trimMaterial(gem.trimMaterial());
         }
 
         public static Item.Properties shieldProps(
-                int durability,
-                float blockDelaySeconds,
-                float disableCooldownScale,
-                TagKey<Item> repairable,
-                Item.Properties props
+                final int durability,
+                final float blockDelaySeconds,
+                final float disableCooldownScale,
+                final TagKey<Item> repairable,
+                final Item.Properties props
         ) {
             return props.fireResistant()
                     .enchantable(15)
@@ -153,13 +153,13 @@ public class PropertyUtil {
         }
 
         public static Item.Properties tridentProps(
-                int durability,
-                double damageAmount,
-                double attackSpeedMod,
-                int damagePerBlock,
-                int damagePerAttack,
-                TagKey<Item> repairable,
-                Item.Properties props
+                final int durability,
+                final double damageAmount,
+                final double attackSpeedMod,
+                final int damagePerBlock,
+                final int damagePerAttack,
+                final TagKey<Item> repairable,
+                final Item.Properties props
         ) {
             return props.fireResistant()
                     .enchantable(15)

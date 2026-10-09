@@ -1,5 +1,6 @@
 package com.mohigster.morefeatures.block.custom.magicblock;
 
+import com.mohigster.morefeatures.util.MFExtraCodecs;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.HolderSet;
@@ -18,7 +19,7 @@ public record TransmutationEntry(
 ) {
     public static final Codec<TransmutationEntry> CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
-                    RegistryCodecs.homogeneousList(Registries.ITEM).fieldOf("input_values")
+                    MFExtraCodecs.ITEM_SET.fieldOf("input_values")
                             .forGetter(TransmutationEntry::inputValue),
                     BuiltInRegistries.ITEM.byNameCodec().fieldOf("output_item")
                             .forGetter(TransmutationEntry::output),

@@ -1,6 +1,8 @@
 package com.mohigster.morefeatures.attachment;
 
 import com.mohigster.morefeatures.MoreFeatures;
+import com.mohigster.morefeatures.core.MFRegistries;
+import com.mohigster.morefeatures.core.RestrictedTo;
 import com.mojang.serialization.Codec;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.neoforged.bus.api.IEventBus;
@@ -10,7 +12,7 @@ import net.neoforged.neoforge.registries.NeoForgeRegistries;
 
 import java.util.function.Supplier;
 
-public class MFAttachments {
+public final class MFAttachments {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENT_TYPES =
             DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, MoreFeatures.MODID);
 
@@ -18,6 +20,7 @@ public class MFAttachments {
             () -> AttachmentType.builder(() -> 0).sync(ByteBufCodecs.INT)
                     .serialize(Codec.INT.fieldOf("mana")).build());
 
+    @RestrictedTo(MoreFeatures.class)
     public static void register(IEventBus eventBus) {
         ATTACHMENT_TYPES.register(eventBus);
         MoreFeatures.LOGGER.info("Mod Attachments registered -> Performed by: " + MoreFeatures.MODID);

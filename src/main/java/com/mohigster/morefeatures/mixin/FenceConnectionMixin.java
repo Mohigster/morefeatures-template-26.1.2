@@ -12,14 +12,27 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Objects;
+
 @Mixin(FenceBlock.class)
-public class FenceConnectionMixin {
-    @Inject(method = "connectsTo", at = @At(
-            value = "HEAD",
-            target = "Lnet/minecraft/world/level/block/FenceBlock;isSameFence(Lnet/minecraft/world/level/block/state/BlockState;)Lnet/minecraft/world/level/block/state/BlockState;"
-    ), cancellable = true)
-    private void allowGemstoneConnections(BlockState state, boolean faceSolid, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        FenceBlock thisBlock = (FenceBlock) (Object) this;
+public final class FenceConnectionMixin {
+    @Inject(
+            method = "connectsTo",
+            at = @At(
+                    value = "HEAD",
+                    target = "Lnet/minecraft/world/level/block/FenceBlock;" +
+                            "isSameFence(Lnet/minecraft/world/level/block/state/BlockState;)" +
+                            "Lnet/minecraft/world/level/block/state/BlockState;"),
+            cancellable = true
+    )
+    private void allowGemstoneConnections(
+            BlockState state,
+            boolean faceSolid,
+            Direction direction,
+            CallbackInfoReturnable<Boolean> cir
+    ) {
+        Block thisBlock = (Block) (Object) this;
+        Objects.requireNonNull(thisBlock);
         Block targetBlock = state.getBlock();
 
         if (thisBlock.defaultBlockState().is(MFBlockTags.GEMSTONE_FENCES) || state.is(MFBlockTags.GEMSTONE_FENCES)) {

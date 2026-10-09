@@ -187,6 +187,7 @@ public class MFBlockItemIds {
     public static final GemstoneCollection<BlockItemId> GEMSTONE_DOOR = createSimpleGemstoneId("door");
     public static final GemstoneCollection<BlockItemId> GEMSTONE_TRAPDOOR = createSimpleGemstoneId("trapdoor");
     public static final GemstoneCollection<BlockItemId> GEMSTONE_SHELF = createSimpleGemstoneId("shelf");
+    public static final GemstoneCollection<BlockItemId> GEMSTONE_SIGN = createSimpleGemstoneId("sign");
 
     public static final BlockItemId TEST_COLUMN = createId("test_column");
 

@@ -431,5 +431,6 @@
 
   "item.morefeatures.ice_wand": "Ice Wand",
   "item.morefeatures.fire_wand": "Fire Wand",
-  "item.morefeatures.healing_wand": "Healing Wand"
+  "item.morefeatures.healing_wand": "Healing Wand",
+  "item.morefeatures.earth_wand": "Earth Wand"
 }

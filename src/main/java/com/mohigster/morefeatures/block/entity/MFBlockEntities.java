@@ -3,6 +3,7 @@ package com.mohigster.morefeatures.block.entity;
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.entity.custom.*;
+import com.mohigster.morefeatures.core.RestrictedTo;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -13,7 +14,7 @@ import java.util.Set;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-public class MFBlockEntities {
+public final class MFBlockEntities {
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
             DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, MoreFeatures.MODID);
 
@@ -80,6 +81,7 @@ public class MFBlockEntities {
                     MFBlocks.WOODEN_SHELF.pallid().get()
             ));
 
+    @RestrictedTo(MoreFeatures.class)
     public static void register(IEventBus eventBus) {
         BLOCK_ENTITIES.register(eventBus);
         MoreFeatures.LOGGER.info("Mod Block Entities registered -> Performed by: " + MoreFeatures.MODID);

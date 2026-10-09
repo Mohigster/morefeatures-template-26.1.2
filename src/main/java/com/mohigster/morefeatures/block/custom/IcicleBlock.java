@@ -138,7 +138,12 @@ public class IcicleBlock extends SpeleothemBlock {
         return this.blocksToGrowOn.stream().anyMatch(state -> state.is(blockToCheck));
     }
 
-    protected void spawnDripParticle(Level level, BlockPos stalactiteTipPos, BlockState stalactiteTipState, RandomSource random){
+    protected void spawnDripParticle(
+            Level level,
+            BlockPos stalactiteTipPos,
+            BlockState stalactiteTipState,
+            RandomSource random
+    ){
         Vec3 offset = stalactiteTipState.getOffset(stalactiteTipPos);
         double x = stalactiteTipPos.getX() + 0.5D + offset.x;
         double y = stalactiteTipPos.getY() + STALACTITE_DRIP_START_PIXEL - DRIP_PIXEL_SIZE;
@@ -168,11 +173,11 @@ public class IcicleBlock extends SpeleothemBlock {
     }
 
     @Override
-    public boolean isPathfindable(BlockState state, PathComputationType type){
+    public boolean isPathfindable(BlockState state, PathComputationType type) {
         return false;
     }
 
-    protected List<BlockState> defaultValidGrowthBlocks(){
+    protected final List<BlockState> defaultValidGrowthBlocks() {
         return List.of(
                 Blocks.PACKED_ICE.defaultBlockState(),
                 Blocks.BLUE_ICE.defaultBlockState()

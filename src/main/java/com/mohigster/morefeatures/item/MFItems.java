@@ -2,10 +2,12 @@ package com.mohigster.morefeatures.item;
 
 import com.mohigster.morefeatures.MoreFeatures;
 import com.mohigster.morefeatures.block.collection.gemstone.GemstoneCollection;
+import com.mohigster.morefeatures.core.RestrictedTo;
 import com.mohigster.morefeatures.data.material.BowMaterial;
 import com.mohigster.morefeatures.data.material.MFEquipmentAssets;
 import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.block.collection.wood.WoodTypeCollection;
+import com.mohigster.morefeatures.data.material.MFToolMaterial;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.resources.references.MFEntityTypeIds;
 import com.mohigster.morefeatures.item.custom.metaldetector.MetalDetectorItem;
@@ -25,7 +27,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.util.Unit;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -43,9 +44,8 @@ import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 import static com.mohigster.morefeatures.MoreFeatures.MODID;
-import static com.mohigster.morefeatures.data.material.MFToolMaterial.BISMUTH_TOOL_MATERIAL;
 
-public class MFItems {
+public final class MFItems {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
 
@@ -195,7 +195,7 @@ public class MFItems {
             ));
 
     public static final DeferredItem<Item> CARBON_BOW = registerItem(MFItemIds.CARBON_BOW,
-            properties -> new MFBowItem(BowMaterial.CARBON_BOW_MATERIAL, properties
+            properties -> new MFBowItem(BowMaterial.CARBON, properties
                     .fireResistant()
             ));
 
@@ -235,13 +235,14 @@ public class MFItems {
             ));
 
     public static final DeferredItem<Item> CARBON_TRIDENT = registerItem(MFItemIds.CARBON_TRIDENT,
-            properties -> new MFTridentItem(PropertyUtil.Items.tridentProps(
+            props -> new MFTridentItem(PropertyUtil.Items.tridentProps(
                     594, 9.0D, -2.4D,
                     2, 1,
-                    MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE, properties
+                    MFItemTags.CARBON_TOOL_MATERIAL_REPAIRABLE, props
             ),
                     9.5F, MFEntityTypes.CARBON_TRIDENT.get(),
-                    MFItemIds.CARBON_TRIDENT.identifier())
+                    MFItemIds.CARBON_TRIDENT.identifier()
+            )
     );
 
     public static final DeferredItem<Item> CARBON_SHIELD = registerItem(MFItemIds.CARBON_SHIELD,
@@ -295,7 +296,7 @@ public class MFItems {
     public static final DeferredItem<Item> BISMUTH_PICKAXE = registerItem(MFItemIds.BISMUTH_PICKAXE,
             properties -> new Item(properties
                     .pickaxe(
-                            BISMUTH_TOOL_MATERIAL,
+                            MFToolMaterial.BISMUTH,
                             0F,
                             -2.8F
                     )
@@ -308,7 +309,7 @@ public class MFItems {
     public static final DeferredItem<Item> BISMUTH_SWORD = registerItem(MFItemIds.BISMUTH_SWORD,
             properties -> new Item(properties
                     .sword(
-                            BISMUTH_TOOL_MATERIAL,
+                            MFToolMaterial.BISMUTH,
                             0F,
                             -2.8F
                     )
@@ -319,7 +320,7 @@ public class MFItems {
             ));
 
     public static final DeferredItem<Item> BISMUTH_AXE = registerItem(MFItemIds.BISMUTH_AXE,
-            properties -> new AxeItem(BISMUTH_TOOL_MATERIAL, 6f, -3f, properties
+            properties -> new AxeItem(MFToolMaterial.BISMUTH, 6f, -3f, properties
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
@@ -327,7 +328,7 @@ public class MFItems {
             ));
 
     public static final DeferredItem<Item> BISMUTH_SHOVEL = registerItem(MFItemIds.BISMUTH_SHOVEL,
-            properties -> new ShovelItem(BISMUTH_TOOL_MATERIAL, 1f, -3.0f, properties
+            properties -> new ShovelItem(MFToolMaterial.BISMUTH, 1f, -3.0f, properties
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
@@ -335,7 +336,7 @@ public class MFItems {
             ));
 
     public static final DeferredItem<Item> BISMUTH_HOE = registerItem(MFItemIds.BISMUTH_HOE,
-            properties -> new HoeItem(BISMUTH_TOOL_MATERIAL, -5.4f, 1f, properties
+            properties -> new HoeItem(MFToolMaterial.BISMUTH, -5.4f, 1f, properties
                     .enchantable(15)
                     .fireResistant()
                     .rarity(Rarity.RARE)
@@ -345,7 +346,7 @@ public class MFItems {
     public static final DeferredItem<Item> BISMUTH_SPEAR = registerItem(MFItemIds.BISMUTH_SPEAR,
             properties -> new Item(properties
                     .spear(
-                            BISMUTH_TOOL_MATERIAL,
+                            MFToolMaterial.BISMUTH,
                             1.35F,
                             1.75F,
                             0.30F,
@@ -363,7 +364,7 @@ public class MFItems {
             ));
 
     public static final DeferredItem<Item> BISMUTH_BOW = registerItem(MFItemIds.BISMUTH_BOW,
-            properties -> new MFBowItem(BowMaterial.BISMUTH_BOW_MATERIAL, properties
+            properties -> new MFBowItem(BowMaterial.BISMUTH, properties
                     .rarity(Rarity.RARE)
                     .fireResistant()
             ));
@@ -527,8 +528,14 @@ public class MFItems {
         return ITEMS.registerItem(id.identifier().getPath(), Item::new, UnaryOperator.identity());
     }
 
+    @RestrictedTo(MoreFeatures.class)
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
         MoreFeatures.LOGGER.info("Mod Items registered -> Performed by: " + MODID);
+    }
+
+    @RestrictedTo({MFItems.class, MFBlocks.class})
+    public static DeferredRegister.Items getRegistry() {
+        return ITEMS;
     }
 }

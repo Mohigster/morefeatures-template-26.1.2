@@ -7,54 +7,54 @@ import net.minecraft.world.item.Item;
 
 public final class MFItemTags {
     // Tool material tags
-    public static final TagKey<Item> BISMUTH_TOOL_MATERIAL_REPAIRABLE = morefeaturesTag("tool_materials/repairable/bismuth");
-    public static final TagKey<Item> CARBON_TOOL_MATERIAL_REPAIRABLE = morefeaturesTag("tool_materials/repairable/carbon");
-    public static final TagKey<Item> REPAIRS_BISMUTH_ARMOR = morefeaturesTag("repairs/bismuth_armor");
-    public static final TagKey<Item> REPAIRS_CARBON_ARMOR = morefeaturesTag("repairs/carbon_armor");
-    public static final TagKey<Item> BISMUTH_TOOL_MATERIALS = morefeaturesTag("tool_materials/bismuth");
-    public static final TagKey<Item> CARBON_TOOL_MATERIALS = morefeaturesTag("tool_materials/carbon");
+    public static final TagKey<Item> BISMUTH_TOOL_MATERIAL_REPAIRABLE = mfTag("tool_materials/repairable/bismuth");
+    public static final TagKey<Item> CARBON_TOOL_MATERIAL_REPAIRABLE = mfTag("tool_materials/repairable/carbon");
+    public static final TagKey<Item> REPAIRS_BISMUTH_ARMOR = mfTag("repairs/bismuth_armor");
+    public static final TagKey<Item> REPAIRS_CARBON_ARMOR = mfTag("repairs/carbon_armor");
+    public static final TagKey<Item> BISMUTH_TOOL_MATERIALS = mfTag("tool_materials/bismuth");
+    public static final TagKey<Item> CARBON_TOOL_MATERIALS = mfTag("tool_materials/carbon");
 
     // Magic block tags are quite big, so a lot of their items are broken up into smaller tags to make the magic block tag itself easier to read
 
     // These are the subtags
-    public static final TagKey<Item> IS_FOOD = morefeaturesTag("is_food");
-    public static final TagKey<Item> IS_POTION = morefeaturesTag("is_potion");
-    public static final TagKey<Item> IS_GOLD = morefeaturesTag("is_gold");
-    public static final TagKey<Item> IS_GOLD_ARMOR = morefeaturesTag("is_gold_armor");
-    public static final TagKey<Item> IS_NON_GOLD_INGOT = morefeaturesTag("is_non_gold_ingot");
-    public static final TagKey<Item> IS_NON_GOLD_RAW_METAL = morefeaturesTag("is_non_gold_raw_metal");
-    public static final TagKey<Item> IS_NON_GOLD_METAL_BLOCK = morefeaturesTag("is_non_gold_metal_block");
+    public static final TagKey<Item> IS_FOOD = mfTag("is_food");
+    public static final TagKey<Item> IS_POTION = mfTag("is_potion");
+    public static final TagKey<Item> IS_GOLD = mfTag("is_gold");
+    public static final TagKey<Item> IS_GOLD_ARMOR = mfTag("is_gold_armor");
+    public static final TagKey<Item> IS_NON_GOLD_INGOT = mfTag("is_non_gold_ingot");
+    public static final TagKey<Item> IS_NON_GOLD_RAW_METAL = mfTag("is_non_gold_raw_metal");
+    public static final TagKey<Item> IS_NON_GOLD_METAL_BLOCK = mfTag("is_non_gold_metal_block");
 
     // Other misc tags
-    public static final TagKey<Item> COMPRESSOR_FUEL = morefeaturesTag("compressor_fuel");
-    public static final TagKey<Item> THUNDERBOLT_ENCHANTABLE = morefeaturesTag("thunderbolt_enchantable");
-    public static final TagKey<Item> THUNDERING_ENCHANTABLE = morefeaturesTag("thundering_enchantable");
-    public static final TagKey<Item> CARBON_INGREDIENTS = morefeaturesTag("carbon_ingredients");
-    public static final TagKey<Item> MUSIC_DISCS = morefeaturesTag("music_discs");
-    public static final TagKey<Item> AIMABLE_WANDS = morefeaturesTag("wands/aimable");
-    public static final TagKey<Item> AOE_WANDS = morefeaturesTag("wands/aoe_generic");
-    public static final TagKey<Item> TARGETING_ENTITY_WANDS = morefeaturesTag("wands/targeting/entity");
-    public static final TagKey<Item> TARGETING_BLOCK_WANDS = morefeaturesTag("wands/targeting/block");
+    public static final TagKey<Item> COMPRESSOR_FUEL = mfTag("compressor_fuel");
+    public static final TagKey<Item> THUNDERBOLT_ENCHANTABLE = mfTag("thunderbolt_enchantable");
+    public static final TagKey<Item> THUNDERING_ENCHANTABLE = mfTag("thundering_enchantable");
+    public static final TagKey<Item> CARBON_INGREDIENTS = mfTag("carbon_ingredients");
+    public static final TagKey<Item> MUSIC_DISCS = mfTag("music_discs");
+    public static final TagKey<Item> AIMABLE_WANDS = mfTag("wands/aimable");
+    public static final TagKey<Item> AOE_WANDS = mfTag("wands/aoe_generic");
+    public static final TagKey<Item> TARGETING_ENTITY_WANDS = mfTag("wands/targeting/entity");
+    public static final TagKey<Item> TARGETING_BLOCK_WANDS = mfTag("wands/targeting/block");
     public static final TagKey<Item> WOODEN_VERTICAL_SLABS = MFBlockItemTags.WOODEN_VERTICAL_SLABS.item();
     public static final TagKey<Item> MODDED_LOGS = MFBlockItemTags.MODDED_LOGS.item();
 
     // Magic block tags
-    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC = morefeaturesTag("magic_block_transmutations/aquamarine_disc");
-    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_CARBON = morefeaturesTag("magic_block_transmutations/carbon");
-    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP = morefeaturesTag("magic_block_transmutations/bismuth_scrap");
-    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_RAW_BISMUTH_BLOCK = morefeaturesTag("magic_block_transmutations/raw_bismuth_block");
-    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_NETHERITE_SCRAP = morefeaturesTag("magic_block_transmutations/netherite_scrap");
-    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_NETHERITE_INGOT = morefeaturesTag("magic_block_transmutations/netherite_ingot");
-    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_DIAMOND = morefeaturesTag("magic_block_transmutations/diamond");
-    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_STONE = morefeaturesTag("magic_block_transmutations/stone");
-    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_LINGERING_POT = morefeaturesTag("magic_block_transmutations/lingering_pot");
-    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_BEDROCK = morefeaturesTag("magic_block_transmutations/bedrock");
-    public static final TagKey<Item> MAGIC_BLOCK_TRANSMUTATION_RESULTS = morefeaturesTag("magic_block_transmutations/results");
-    public static final TagKey<Item> MAGIC_BLOCK_MULTIPLIES_RESULT = morefeaturesTag("magic_block_transmutations/mulitplied_result");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_AQUAMARINE_DISC = mfTag("magic_block_transmutations/aquamarine_disc");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_CARBON = mfTag("magic_block_transmutations/carbon");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_BISMUTH_SCRAP = mfTag("magic_block_transmutations/bismuth_scrap");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_RAW_BISMUTH_BLOCK = mfTag("magic_block_transmutations/raw_bismuth_block");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_NETHERITE_SCRAP = mfTag("magic_block_transmutations/netherite_scrap");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_NETHERITE_INGOT = mfTag("magic_block_transmutations/netherite_ingot");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_DIAMOND = mfTag("magic_block_transmutations/diamond");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_STONE = mfTag("magic_block_transmutations/stone");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_LINGERING_POT = mfTag("magic_block_transmutations/lingering_pot");
+    public static final TagKey<Item> MAGIC_BLOCK_TURNS_TO_BEDROCK = mfTag("magic_block_transmutations/bedrock");
+    public static final TagKey<Item> MAGIC_BLOCK_TRANSMUTATION_RESULTS = mfTag("magic_block_transmutations/results");
+    public static final TagKey<Item> MAGIC_BLOCK_MULTIPLIES_RESULT = mfTag("magic_block_transmutations/mulitplied_result");
 
-    public static final TagKey<Item> METAL_DETECTOR_FINDABLE = morefeaturesTag("metal_detector_findable");
+    public static final TagKey<Item> METAL_DETECTOR_FINDABLE = mfTag("metal_detector_findable");
 
-    private static TagKey<Item> morefeaturesTag(String name) {
+    private static TagKey<Item> mfTag(String name) {
         return TagKey.create(Registries.ITEM, MFIdentifier.withMfNamespace(name));
     }
 }
