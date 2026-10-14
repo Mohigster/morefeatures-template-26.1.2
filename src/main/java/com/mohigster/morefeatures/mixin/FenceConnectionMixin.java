@@ -8,6 +8,7 @@ import net.minecraft.world.level.block.FenceBlock;
 import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.state.BlockState;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -31,8 +32,7 @@ public final class FenceConnectionMixin {
             Direction direction,
             CallbackInfoReturnable<Boolean> cir
     ) {
-        Block thisBlock = (Block) (Object) this;
-        Objects.requireNonNull(thisBlock);
+        Block thisBlock = fenceMixin$Self();
         Block targetBlock = state.getBlock();
 
         if (thisBlock.defaultBlockState().is(MFBlockTags.GEMSTONE_FENCES) || state.is(MFBlockTags.GEMSTONE_FENCES)) {
@@ -43,5 +43,11 @@ public final class FenceConnectionMixin {
                 cir.setReturnValue(true);
             }
         }
+    }
+
+    @Unique
+    private Block fenceMixin$Self() {
+        // These casts are necessary since it is a mixin
+        return Objects.requireNonNull((Block) (Object) this);
     }
 }

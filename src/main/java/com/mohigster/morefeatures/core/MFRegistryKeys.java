@@ -1,16 +1,13 @@
 package com.mohigster.morefeatures.core;
 
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
-import com.mohigster.morefeatures.portal.frame.PortalFrameType;
 import com.mohigster.morefeatures.portal.key.type.PortalKeyType;
-import net.minecraft.core.Registry;
-import net.minecraft.resources.ResourceKey;
 
 public final class MFRegistryKeys {
-    public static final ResourceKey<Registry<PortalKeyType<?>>> PORTAL_KEY_TYPE = create("portal_key_type");
-    public static final ResourceKey<Registry<PortalFrameType<?>>> PORTAL_FRAME = create("portal_frame");
+    public static final RegistryKey<PortalKeyType<?>> PORTAL_KEY_TYPE = create("portal_key_type");
 
-    private static <T> ResourceKey<Registry<T>> create(String registryName) {
-        return ResourceKey.createRegistryKey(MFIdentifier.withMfNamespace(registryName));
+    @SuppressWarnings("SameParameterValue")
+    private static <T> RegistryKey<T> create(String registryName) {
+        return RegistryKey.create(MFIdentifier.withMfNamespace(registryName));
     }
 }

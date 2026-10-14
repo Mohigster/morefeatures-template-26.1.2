@@ -17,7 +17,6 @@ import java.util.List;
  */
 
 public class EnergyDisplayTooltipArea {
-
     private final int xPos;
     private final int yPos;
     private final int width;
@@ -25,8 +24,8 @@ public class EnergyDisplayTooltipArea {
     private final EnergyHandler energy;
 
     public EnergyDisplayTooltipArea(int xMin, int yMin, EnergyHandler energy, int width, int height)  {
-        xPos = xMin;
-        yPos = yMin;
+        this.xPos = xMin;
+        this.yPos = yMin;
         this.width = width;
         this.height = height;
         this.energy = energy;

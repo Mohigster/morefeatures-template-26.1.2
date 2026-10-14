@@ -35,15 +35,15 @@ public class MFShelfBlock extends ShelfBlock {
                     newState = newState.setValue(SIDE_CHAIN_PART, SideChainPart.UNCONNECTED);
                 }
 
-                level.setBlock(pos, newState, 3);
-                this.playSound(level, pos, this.getRedstoneSound(newState));
+                level.setBlock(pos, newState, UPDATE_NEIGHBORS | UPDATE_CLIENTS);
+                playSound(level, pos, this.getRedstoneSound(newState));
                 level.gameEvent(signal ? GameEvent.BLOCK_ACTIVATE : GameEvent.BLOCK_DEACTIVATE, pos, GameEvent.Context.of(newState));
             }
         }
     }
 
     // Identical to the private playSound method within ShelfBlock
-    private void playSound(LevelAccessor level, BlockPos pos, SoundEvent sound) {
+    private static void playSound(LevelAccessor level, BlockPos pos, SoundEvent sound) {
         level.playSound(null, pos, sound, SoundSource.BLOCKS, 1.0F, 1.0F);
     }
 

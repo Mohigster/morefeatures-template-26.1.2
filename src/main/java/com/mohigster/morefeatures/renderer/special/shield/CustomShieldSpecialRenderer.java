@@ -33,13 +33,15 @@ public class CustomShieldSpecialRenderer implements SpecialModelRenderer<DataCom
             String shieldName,
             String modId
     ) {
-        this(sprites, model,
+        this(
+                sprites,
+                model,
                 Identifier.fromNamespaceAndPath(modId, getPath(false, shieldName)),
                 Identifier.fromNamespaceAndPath(modId, getPath(true, shieldName))
         );
     }
 
-    public CustomShieldSpecialRenderer(
+    private CustomShieldSpecialRenderer(
             final SpriteGetter sprites,
             final ShieldModel model,
             Identifier baseTexture,
@@ -61,7 +63,7 @@ public class CustomShieldSpecialRenderer implements SpecialModelRenderer<DataCom
                 this.getTexture(true));
     }
 
-    protected final SpriteId customShieldTexture(boolean hasPattern) {
+    protected final SpriteId customShieldTexture(final boolean hasPattern) {
         return hasPattern ? this.customShieldBase() : this.customShieldBaseNoPattern();
     }
 
@@ -85,7 +87,7 @@ public class CustomShieldSpecialRenderer implements SpecialModelRenderer<DataCom
         DyeColor baseColor = components != null ? components.get(DataComponents.BASE_COLOR) : null;
         boolean hasPatterns = !patterns.layers().isEmpty() || baseColor != null;
 
-        SpriteId base = this.customShieldTexture(hasPatterns);
+        SpriteId base = customShieldTexture(hasPatterns);
 
         submitNodeCollector.submitModel(this.getModel(), Unit.INSTANCE, poseStack, lightCoords, overlayCoords, -1, base, this.getSprites(), outlineColor, null);
 
@@ -112,16 +114,16 @@ public class CustomShieldSpecialRenderer implements SpecialModelRenderer<DataCom
     }
 
     @Override
-    public void getExtents (Consumer<Vector3fc> output) {
+    public void getExtents(Consumer<Vector3fc> output) {
         PoseStack poseStack = new PoseStack();
         this.model.root().getExtentsForGui(poseStack, output);
     }
 
-    protected Identifier getBaseTexture(){
+    protected Identifier getBaseTexture() {
         return this.baseTexture;
     }
 
-    protected Identifier getBaseNoPatternTexture(){
+    protected Identifier getBaseNoPatternTexture() {
         return this.baseNoPatternTexture;
     }
 

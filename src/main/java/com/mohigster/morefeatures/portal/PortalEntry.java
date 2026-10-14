@@ -1,7 +1,7 @@
 package com.mohigster.morefeatures.portal;
 
 
-import com.mohigster.morefeatures.portal.frame.PortalFrameTemp;
+import com.mohigster.morefeatures.portal.frame.PortalFrame;
 import com.mohigster.morefeatures.portal.key.PortalKey;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -13,20 +13,20 @@ import net.minecraft.world.level.Level;
 import java.util.Optional;
 
 public record PortalEntry(
-        PortalKey portalKey,
+        PortalKey key,
         ResourceKey<Level> targetLevel,
         Optional<EntityType<?>> entitySpawnedByPortal,
-        PortalFrameTemp frame
+        PortalFrame frame
 ) {
     public static final Codec<PortalEntry> CODEC = RecordCodecBuilder.create(
             inst -> inst.group(
                     PortalKey.CODEC.fieldOf("portal_key")
-                            .forGetter(PortalEntry::portalKey),
+                            .forGetter(PortalEntry::key),
                     Level.RESOURCE_KEY_CODEC.fieldOf("target_dimension")
                             .forGetter(PortalEntry::targetLevel),
                     BuiltInRegistries.ENTITY_TYPE.byNameCodec().optionalFieldOf("entity_spawned_by_portal")
                             .forGetter(PortalEntry::entitySpawnedByPortal),
-                    PortalFrameTemp.CODEC.fieldOf("portal_frame")
+                    PortalFrame.CODEC.fieldOf("portal_frame")
                             .forGetter(PortalEntry::frame)
             ).apply(
                     inst,

@@ -1,7 +1,5 @@
 package com.mohigster.morefeatures.events;
 
-import com.mohigster.morefeatures.core.RestrictedTo;
-import com.mohigster.morefeatures.mixin.AvatarRendererMixin;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Avatar;

@@ -6,6 +6,8 @@ import net.minecraft.client.data.models.ModelProvider;
 import net.minecraft.data.PackOutput;
 import org.jspecify.annotations.NonNull;
 
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+
 public abstract class ModelProviderExtended extends ModelProvider {
     public ModelProviderExtended(PackOutput output, String modId) {
         super(output, modId);
@@ -19,6 +21,7 @@ public abstract class ModelProviderExtended extends ModelProvider {
     );
 
     @Override
+    @OverridingMethodsMustInvokeSuper
     public void registerModels(@NonNull BlockModelGenerators blockModels, @NonNull ItemModelGenerators itemModels) {
         MFBlockModelGenerators mfBlockModels = MFBlockModelGenerators.of(blockModels);
         MFItemModelGenerators mfItemModels = MFItemModelGenerators.of(itemModels);

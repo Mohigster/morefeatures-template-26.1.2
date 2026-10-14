@@ -10,6 +10,6 @@ import java.util.concurrent.CompletableFuture;
 
 public abstract class PortalKeyTypeTagsProvider extends TagsProvider<PortalKeyType<?>> {
     protected PortalKeyTypeTagsProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider, String modId) {
-        super(output, MFRegistryKeys.PORTAL_KEY_TYPE, lookupProvider, modId);
+        super(output, MFRegistryKeys.PORTAL_KEY_TYPE.get(), lookupProvider, modId);
     }
 }

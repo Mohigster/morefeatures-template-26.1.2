@@ -29,11 +29,12 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Supplier;
 
 import static com.mohigster.morefeatures.data.resources.MFIdentifier.withMfNamespace;
 import static net.minecraft.client.data.models.BlockModelGenerators.*;
 
-public final class MFBlockModelGenerators {
+public final class MFBlockModelGenerators implements Supplier<BlockModelGenerators> {
     private final BlockModelGenerators blockModels;
     private final BiConsumer<Identifier, ModelInstance> modelOutput;
     private final Consumer<BlockModelDefinitionGenerator> blockStateOutput;
@@ -231,7 +232,7 @@ public final class MFBlockModelGenerators {
                                 }))
         );
 
-        this.blockModels().registerSimpleItemModel(verticalSlab, straightModel);
+        this.get().registerSimpleItemModel(verticalSlab, straightModel);
     }
 
     public void createPillar(Block pillar, Block textureSource) {
@@ -269,7 +270,7 @@ public final class MFBlockModelGenerators {
                         )
         );
 
-        this.blockModels().registerSimpleItemModel(pillar, fullModel);
+        this.get().registerSimpleItemModel(pillar, fullModel);
     }
 
     public void createTemporalDilator(Block temporalDilator){
@@ -296,7 +297,7 @@ public final class MFBlockModelGenerators {
                         )
         );
 
-        this.blockModels().registerSimpleItemModel(temporalDilator, upModel);
+        this.get().registerSimpleItemModel(temporalDilator, upModel);
     }
 
     @SuppressWarnings("deprecation")
@@ -344,7 +345,7 @@ public final class MFBlockModelGenerators {
                         )
         );
 
-        this.blockModels().registerSimpleItemModel(verticalSlab, straightModel);
+        this.get().registerSimpleItemModel(verticalSlab, straightModel);
     }
 
     private static int yRotationForDouble(Direction facing) {
@@ -389,15 +390,15 @@ public final class MFBlockModelGenerators {
         this.blockStateOutput.accept(MultiVariantGenerator.dispatch(anchorBlock)
                 .with(PropertyDispatch.initial(VoidAnchorBlock.CHARGE)
                         .generate(i -> plainVariant(chargeLevelModels[i]))));
-        this.blockModels().registerSimpleItemModel(anchorBlock, chargeLevelModels[0]);
+        this.get().registerSimpleItemModel(anchorBlock, chargeLevelModels[0]);
     }
 
     public void createBerryBush(Block berry, Item berryItem) {
-        this.blockModels().registerSimpleFlatItemModel(berryItem);
+        this.get().registerSimpleFlatItemModel(berryItem);
         this.blockStateOutput.accept(
                 MultiVariantGenerator.dispatch(berry).with(PropertyDispatch.initial(
                         BlockStateProperties.AGE_3).generate((age) -> plainVariant(
-                                this.blockModels().createSuffixedVariant(berry, "_stage" + age,
+                                this.get().createSuffixedVariant(berry, "_stage" + age,
                                         ModelTemplates.CROSS, TextureMapping::cross)))));
     }
 
@@ -447,7 +448,8 @@ public final class MFBlockModelGenerators {
                 ));
     }
 
-    public BlockModelGenerators blockModels() {
+    @Override
+    public BlockModelGenerators get() {
         return this.blockModels;
     }
 }

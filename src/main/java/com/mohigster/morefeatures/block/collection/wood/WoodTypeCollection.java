@@ -1,16 +1,22 @@
 package com.mohigster.morefeatures.block.collection.wood;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterators;
+import com.mohigster.morefeatures.MoreFeatures;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public record WoodTypeCollection<T>(
@@ -19,9 +25,36 @@ public record WoodTypeCollection<T>(
         T palm,
         T charred,
         T decrepit,
-        T pallid
-) {
-    public static final WoodTypeCollection<WoodSet> SETS = new WoodTypeCollection<>(
+        T pallid,
+        ObjectList<Holder.Reference<T>> byId
+) implements Iterable<T> {
+
+    public static <T> WoodTypeCollection<T> of(
+            final T bloodwood,
+            final T tainted,
+            final T palm,
+            final T charred,
+            final T decrepit,
+            final T pallid
+    ) {
+        WoodTypeCollection<T> collection = new WoodTypeCollection<>(
+                bloodwood,
+                tainted,
+                palm,
+                charred,
+                decrepit,
+                pallid,
+                new ObjectArrayList<>(256)
+        );
+
+        for (T type : collection) {
+            MoreFeatures.LOGGER.debug("WoodType within collection: {}", type);
+        }
+
+        return collection;
+    }
+
+    public static final WoodTypeCollection<WoodSet> SETS = of(
             WoodSet.BLOODWOOD,
             WoodSet.TAINTED,
             WoodSet.PALM,
@@ -30,8 +63,8 @@ public record WoodTypeCollection<T>(
             WoodSet.PALLID
     );
 
-    public static <T> WoodTypeCollection<T> createForAll(final T value) {
-        return new WoodTypeCollection<>(value, value, value, value, value, value);
+    public static <T> WoodTypeCollection<T> ofAll(final T value) {
+        return of(value, value, value, value, value, value);
     }
 
     public static WoodTypeCollection<String> prefixWithSet(final WoodTypeCollection<String> ids) {
@@ -80,15 +113,6 @@ public record WoodTypeCollection<T>(
         return builder.build();
     }
 
-    public void forEach(final Consumer<T> consumer) {
-        consumer.accept(this.bloodwood);
-        consumer.accept(this.tainted);
-        consumer.accept(this.palm);
-        consumer.accept(this.charred);
-        consumer.accept(this.decrepit);
-        consumer.accept(this.pallid);
-    }
-
     public T pick(final WoodSet set) {
         return switch (set) {
             case BLOODWOOD -> this.bloodwood;
@@ -101,7 +125,7 @@ public record WoodTypeCollection<T>(
     }
 
     public <U> WoodTypeCollection<U> map(final Function<T, U> mapper) {
-        return new WoodTypeCollection<>(
+        return of(
                 mapper.apply(this.bloodwood),
                 mapper.apply(this.tainted),
                 mapper.apply(this.palm),
@@ -116,7 +140,7 @@ public record WoodTypeCollection<T>(
     }
 
     public static <T, U, R> WoodTypeCollection<R> zipMap(final WoodTypeCollection<T> first, final WoodTypeCollection<U> second, final BiFunction<T, U, R> operation) {
-        return new WoodTypeCollection<>(
+        return of(
                 operation.apply(first.bloodwood(), second.bloodwood()),
                 operation.apply(first.tainted(), second.tainted()),
                 operation.apply(first.palm(), second.palm()),
@@ -124,5 +148,10 @@ public record WoodTypeCollection<T>(
                 operation.apply(first.decrepit(), second.decrepit()),
                 operation.apply(first.pallid(), second.pallid())
         );
+    }
+
+    @Override
+    public @NotNull Iterator<T> iterator() {
+        return Iterators.transform(this.byId().iterator(), tReference -> tReference != null ? tReference.value() : null);
     }
 }

@@ -38,7 +38,7 @@ public class MFBlockItemTags {
     private static WoodTypeCollection<BlockItemTagId> simpleMfWoodTag(String prefixExtension, String name) {
         String finalExtension = prefixExtension.isEmpty() ? "" : prefixExtension + "/";
 
-        return WoodTypeCollection.prefixWithSet("wood/" + finalExtension, WoodTypeCollection.createForAll(name), false).map(MFBlockItemTags::mfTag);
+        return WoodTypeCollection.prefixWithSet("wood/" + finalExtension, WoodTypeCollection.ofAll(name), false).map(MFBlockItemTags::mfTag);
     }
 
     private static WoodTypeCollection<BlockItemTagId> simpleMfWoodTag(String name) {

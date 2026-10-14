@@ -27,6 +27,7 @@ public class CompressorScreen extends AbstractContainerScreen<CompressorMenu> {
     public CompressorScreen(CompressorMenu menu, Inventory inventory, Component title) {
         super(menu, inventory, title);
     }
+
     @Override
     protected void init() {
         super.init();

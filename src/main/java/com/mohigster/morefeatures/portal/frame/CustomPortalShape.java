@@ -10,14 +10,15 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.NetherPortalBlock;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.portal.PortalShape;
-import net.neoforged.neoforge.event.EventHooks;
 import org.apache.commons.lang3.mutable.MutableInt;
+import org.jspecify.annotations.NonNull;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Optional;
@@ -47,9 +48,7 @@ public class CustomPortalShape extends PortalShape {
     }
 
     public static Optional<PortalShape> findEmptyShape(LevelAccessor level, BlockPos pos, Direction.Axis preferredAxis) {
-        Optional<PortalShape> shape = findCustomShape(level, pos, CustomPortalShape::isValidAndEmpty, preferredAxis);
-        // return the shape AND fire the NeoForge PortalSpawnEvent
-        return EventHooks.onTrySpawnPortal(level, pos, shape);
+        return findCustomShape(level, pos, CustomPortalShape::isValidAndEmpty, preferredAxis);
     }
 
     public static Optional<PortalShape> findCustomShape(LevelAccessor level, BlockPos pos, Predicate<PortalShape> isValid, Direction.Axis preferredAxis) {
@@ -88,7 +87,7 @@ public class CustomPortalShape extends PortalShape {
     private static @Nullable BlockPos calculateBottomLeft(BlockGetter level, Direction rightDir, BlockPos pos) {
         int minY = Math.max(level.getMinY(), pos.getY() - PortalShape.MAX_WIDTH);
 
-        while (pos.getY() > minY && isEmpty(level.getBlockState(pos.below()))) {
+        while (pos.getY() > minY && isEmpty(level.getBlockState(pos.below()), level, pos)) {
             pos = pos.below();
         }
 
@@ -113,7 +112,7 @@ public class CustomPortalShape extends PortalShape {
             MoreFeatures.LOGGER.debug("Width: {}", width);
             mutablePos.set(pos).move(direction, width);
             BlockState state = level.getBlockState(mutablePos);
-            if (!isEmpty(state)) {
+            if (!isEmpty(state, level, pos)) {
                 if (FRAME.test(state, level, mutablePos)) {
                     MoreFeatures.LOGGER.debug("Found block at ({}, {})", mutablePos, state);
                     return width;
@@ -167,7 +166,7 @@ public class CustomPortalShape extends PortalShape {
             for(int i = 0; i < width; ++i) {
                 pos.set(bottomLeft).move(Direction.UP, height).move(rightDir, i);
                 BlockState state = level.getBlockState(pos);
-                if (!isEmpty(state)) {
+                if (!isEmpty(state, level, pos)) {
                     return height;
                 }
 
@@ -184,8 +183,9 @@ public class CustomPortalShape extends PortalShape {
         return shape.isValid() && shape.numPortalBlocks == 0;
     }
 
-    private static boolean isEmpty(BlockState state) {
-        Optional<PortalKey> optionalKey = PortalDestinationManager.getPortalKey(state);
+    private static boolean isEmpty(BlockState state, BlockGetter getter, BlockPos pos) {
+        if (!(getter instanceof Level level)) return false;
+        Optional<PortalKey> optionalKey = PortalDestinationManager.getPortalKey(level, pos);
 
         if (optionalKey.isPresent()) {
             if (optionalKey.get() instanceof BlockKey(Block block)) {
@@ -199,7 +199,7 @@ public class CustomPortalShape extends PortalShape {
     }
 
     @Override
-    public void createPortalBlocks(LevelAccessor level) {
+    public void createPortalBlocks(@NonNull LevelAccessor level) {
         BlockState portalState = MFBlocks.PORTAL.get()
                 .defaultBlockState().setValue(NetherPortalBlock.AXIS, this.axis);
         BlockPos.betweenClosed(this.bottomLeft, this.bottomLeft.relative(

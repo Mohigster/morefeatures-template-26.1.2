@@ -1,31 +1,40 @@
 package com.mohigster.morefeatures.block.collection.gemstone;
 
 import com.google.common.collect.ImmutableList;
+import com.google.common.collect.Iterators;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectList;
+import net.minecraft.core.Holder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
-import java.util.function.Consumer;
 import java.util.function.Function;
 
 public record GemstoneCollection<T>(
         T azurite,
-        T fluorite
-) {
-    public static final GemstoneCollection<GemstoneType> GEMS = new GemstoneCollection<>(
+        T fluorite,
+        ObjectList<Holder.Reference<T>> byId
+) implements Iterable<T> {
+    public static <T> GemstoneCollection<T> of(T azurite, T fluorite) {
+        return new GemstoneCollection<>(azurite, fluorite, new ObjectArrayList<>(256));
+    }
+
+    public static final GemstoneCollection<GemstoneType> GEMS = of(
             GemstoneType.AZURITE,
             GemstoneType.FLUORITE
     );
 
-    public static <T> GemstoneCollection<T> createForAll(final T value) {
-        return new GemstoneCollection<>(value, value);
+    public static <T> GemstoneCollection<T> ofAll(final T value) {
+        return of(value, value);
     }
 
     public static GemstoneCollection<String> prefixWithGem(final GemstoneCollection<String> ids) {
@@ -66,19 +75,15 @@ public record GemstoneCollection<T>(
         );
     }
 
+    @SuppressWarnings("unused")
     public List<T> asList() {
         ImmutableList.Builder<T> builder = ImmutableList.builderWithExpectedSize(2);
         this.forEach(builder::add);
         return builder.build();
     }
 
-    public void forEach(final Consumer<T> consumer) {
-        consumer.accept(this.azurite);
-        consumer.accept(this.fluorite);
-    }
-
     public <U> GemstoneCollection<U> map(final Function<T, U> mapper) {
-        return new GemstoneCollection<>(
+        return of(
                 mapper.apply(this.azurite),
                 mapper.apply(this.fluorite)
         );
@@ -89,7 +94,7 @@ public record GemstoneCollection<T>(
     }
 
     public static <T, U, R> GemstoneCollection<R> zipMap(final GemstoneCollection<T> first, final GemstoneCollection<U> second, final BiFunction<T, U, R> operation) {
-        return new GemstoneCollection<>(
+        return of(
                 operation.apply(first.azurite(), second.azurite()),
                 operation.apply(first.fluorite(), second.fluorite())
         );
@@ -100,5 +105,10 @@ public record GemstoneCollection<T>(
             case AZURITE -> this.azurite;
             case FLUORITE -> this.fluorite;
         };
+    }
+
+    @Override
+    public @NotNull Iterator<T> iterator() {
+        return Iterators.transform(this.byId().iterator(), holder -> Objects.requireNonNull(holder).value());
     }
 }

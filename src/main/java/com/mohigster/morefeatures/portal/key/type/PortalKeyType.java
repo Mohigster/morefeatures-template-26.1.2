@@ -6,19 +6,21 @@ import com.mohigster.morefeatures.core.MFRegistryKeys;
 import com.mohigster.morefeatures.portal.key.*;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.Holder;
+import net.minecraft.core.TypedInstance;
 import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
-import java.util.Objects;
-import java.util.Optional;
+import org.jspecify.annotations.Nullable;
 
-public class PortalKeyType<P extends PortalKey> {
+import java.util.Objects;
+
+public class PortalKeyType<P extends PortalKey> implements TypedInstance<PortalKeyType<?>> {
     private final MapCodec<P> codec;
     private final String name;
 
     private final Holder.Reference<PortalKeyType<?>> builtInRegistryHolder = MFRegistries.PORTAL_KEY_TYPE.createIntrusiveHolder(this);
 
-    private ResourceKey<PortalKeyType<?>> key;
-    private Identifier id;
+    private @Nullable ResourceKey<PortalKeyType<?>> key;
+    private @Nullable Identifier id;
 
     private static final Identifier EMPTY = Identifier.parse("empty");
 
@@ -26,13 +28,6 @@ public class PortalKeyType<P extends PortalKey> {
     protected PortalKeyType(MapCodec<P> codec, String name) {
         this.codec = Objects.requireNonNull(codec, "Codec cannot be null");
         this.name = Objects.requireNonNull(name, "Name cannot be null");
-
-        Optional<ResourceKey<PortalKeyType<?>>> key = MFRegistries.PORTAL_KEY_TYPE.getResourceKey(this);
-
-        this.key = key.orElseGet(() ->
-                ResourceKey.create(MFRegistryKeys.PORTAL_KEY_TYPE, EMPTY));
-
-        this.id = this.key.identifier();
     }
 
     public MapCodec<P> codec() {
@@ -60,7 +55,7 @@ public class PortalKeyType<P extends PortalKey> {
                 id
         );
 
-        if (key.idUnbound()) {
+        if (key.unbound()) {
             key.logEmpty();
         }
 
@@ -85,32 +80,39 @@ public class PortalKeyType<P extends PortalKey> {
     }
 
     public Identifier getId() {
-        if (this.idUnbound()) {
-            // logEmpty() call unnecessary as getKey() does that anyway
-            this.id = this.getKey().identifier();
-        }
-        return this.id;
+        bindKeys();
+        return Objects.requireNonNull(this.id);
     }
 
     public Holder.Reference<PortalKeyType<?>> builtInRegistryHolder() {
         return this.builtInRegistryHolder;
     }
 
-    // Better for when it is certain that the key is registered
-    public ResourceKey<PortalKeyType<?>> getKey() {
-        if (this.idUnbound()) {
-            this.logEmpty();
-            Optional<ResourceKey<PortalKeyType<?>>> key = MFRegistries.PORTAL_KEY_TYPE.getResourceKey(this);
-            key.ifPresent(confirmedKey -> this.key = confirmedKey);
-        }
-        return this.key;
+    private void bindKeys() {
+        if (!this.unbound()) return;
+
+        this.key = MFRegistries.PORTAL_KEY_TYPE.getResourceKey(this).orElseGet(() ->
+                ResourceKey.create(MFRegistryKeys.PORTAL_KEY_TYPE.get(), EMPTY));
+
+        this.id = this.key.identifier();
     }
 
-    private boolean idUnbound() {
-        return this.id.equals(EMPTY);
+    // Better for when it is certain that the key is registered
+    public ResourceKey<PortalKeyType<?>> getKey() {
+        bindKeys();
+        return Objects.requireNonNull(this.key, "key cannot be null");
+    }
+
+    private boolean unbound() {
+        return this.id == null || this.id.equals(EMPTY);
     }
 
     private void logEmpty() {
         MoreFeatures.LOGGER.warn("{} has an empty id", this);
+    }
+
+    @Override
+    public Holder.Reference<PortalKeyType<?>> typeHolder() {
+        return this.builtInRegistryHolder();
     }
 }

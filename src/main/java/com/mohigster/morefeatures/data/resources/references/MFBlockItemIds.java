@@ -205,11 +205,11 @@ public class MFBlockItemIds {
     }
 
     private static WoodTypeCollection<BlockItemId> createSimpleWoodId(String name) {
-        return WoodTypeCollection.prefixWithSet(WoodTypeCollection.createForAll(name)).map(MFBlockItemIds::createId);
+        return WoodTypeCollection.prefixWithSet(WoodTypeCollection.ofAll(name)).map(MFBlockItemIds::createId);
     }
 
     private static WoodTypeCollection<BlockItemId> createStrippedWoodId(String name) {
-        return WoodTypeCollection.prefixWithSet("stripped", WoodTypeCollection.createForAll(name)).map(MFBlockItemIds::createId);
+        return WoodTypeCollection.prefixWithSet("stripped", WoodTypeCollection.ofAll(name)).map(MFBlockItemIds::createId);
     }
 
     private static VanillaWoodCollection<BlockItemId> createVanillaWoodId(String name) {
@@ -217,10 +217,10 @@ public class MFBlockItemIds {
     }
 
     private static GemstoneCollection<BlockItemId> createSimpleGemstoneId(String name) {
-        return GemstoneCollection.prefixWithGem(GemstoneCollection.createForAll(name)).map(MFBlockItemIds::createId);
+        return GemstoneCollection.prefixWithGem(GemstoneCollection.ofAll(name)).map(MFBlockItemIds::createId);
     }
 
     private static GemstoneCollection<BlockItemId> createPrefixedGemstoneId(String prefix, String name) {
-        return GemstoneCollection.prefixWithGem(prefix, GemstoneCollection.createForAll(name)).map(MFBlockItemIds::createId);
+        return GemstoneCollection.prefixWithGem(prefix, GemstoneCollection.ofAll(name)).map(MFBlockItemIds::createId);
     }
 }

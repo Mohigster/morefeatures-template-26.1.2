@@ -5,6 +5,7 @@
   },
   "target_dimension": "morefeatures:borealis",
   "portal_frame": {
-    "Name": "minecraft:packed_ice"
+    "state_sensitive": false,
+    "frame": "minecraft:packed_ice"
   }
 }

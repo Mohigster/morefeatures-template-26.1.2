@@ -94,14 +94,14 @@ public class MFItemIds {
     }
 
     private static WoodTypeCollection<ResourceKey<Item>> createSimpleWoodId(String name) {
-        return WoodTypeCollection.prefixWithSet(WoodTypeCollection.createForAll(name)).map(MFItemIds::createId);
+        return WoodTypeCollection.prefixWithSet(WoodTypeCollection.ofAll(name)).map(MFItemIds::createId);
     }
 
     private static GemstoneCollection<ResourceKey<Item>> createSimpleGemstoneId(String name) {
-        return GemstoneCollection.prefixWithGem(GemstoneCollection.createForAll(name)).map(MFItemIds::createId);
+        return GemstoneCollection.prefixWithGem(GemstoneCollection.ofAll(name)).map(MFItemIds::createId);
     }
 
     private static GemstoneCollection<ResourceKey<Item>> createSuffixGemstoneId(String prefix) {
-        return GemstoneCollection.prefixWithGem(prefix, GemstoneCollection.createForAll("")).map(MFItemIds::createId);
+        return GemstoneCollection.prefixWithGem(prefix, GemstoneCollection.ofAll("")).map(MFItemIds::createId);
     }
 }

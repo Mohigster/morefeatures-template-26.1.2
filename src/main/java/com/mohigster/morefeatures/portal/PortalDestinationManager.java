@@ -1,13 +1,14 @@
 package com.mohigster.morefeatures.portal;
 
 import com.mohigster.morefeatures.MoreFeatures;
-import com.mohigster.morefeatures.block.MFBlocks;
 import com.mohigster.morefeatures.core.RestrictedTo;
 import com.mohigster.morefeatures.data.resources.MFIdentifier;
 import com.mohigster.morefeatures.data.resources.references.MFBlockIds;
 import com.mohigster.morefeatures.portal.frame.CustomPortalShape;
+import com.mohigster.morefeatures.portal.frame.PortalFrame;
 import com.mohigster.morefeatures.portal.key.PortalKey;
 import com.mohigster.morefeatures.util.Directories;
+import com.mohigster.morefeatures.util.PortalUtil;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.FileToIdConverter;
@@ -38,7 +39,11 @@ public final class PortalDestinationManager extends SimpleJsonResourceReloadList
     }
 
     @Override
-    protected void apply(Map<Identifier, PortalEntry> map, ResourceManager resourceManager, ProfilerFiller profiler) {
+    protected void apply(
+            Map<Identifier, PortalEntry> map,
+            ResourceManager resourceManager,
+            ProfilerFiller profiler
+    ) {
         this.entries = map.values().stream()
                 .sorted(Comparator.comparingInt(Record::hashCode))
                 .toList();
@@ -57,17 +62,18 @@ public final class PortalDestinationManager extends SimpleJsonResourceReloadList
     public static Optional<PortalKey> getPortalKey(ResourceKey<Level> level) {
         for (PortalEntry entry : getEntries()) {
             if (entry.targetLevel().equals(level)) {
-                MoreFeatures.LOGGER.debug("Found Portal Key: {}", entry.portalKey());
+                PortalKey key = entry.key();
+                MoreFeatures.LOGGER.debug("Found Portal Key: {}", key);
 
-                return Optional.of(entry.portalKey());
+                return Optional.of(key);
             }
         }
 
         return Optional.empty();
     }
 
-    public static Optional<PortalKey> getPortalKey(BlockState state) {
-        return getPortalKey(getTargetLevel(state));
+    public static Optional<PortalKey> getPortalKey(Level level, BlockPos pos) {
+        return getPortalKey(getTargetLevel(scanForPotentialFrame(level, pos)));
     }
 
     public static ResourceKey<Level> getTargetLevel(Level level, BlockPos pos) {
@@ -76,7 +82,7 @@ public final class PortalDestinationManager extends SimpleJsonResourceReloadList
 
     public static ResourceKey<Level> getTargetLevel(BlockState state) {
         for (PortalEntry entry : getEntries()) {
-            if (entry.frame().blockState().is(state.getBlock())){
+            if (entry.frame().is(state.getBlock())){
                 return entry.targetLevel();
             }
         }
@@ -84,21 +90,21 @@ public final class PortalDestinationManager extends SimpleJsonResourceReloadList
         return Level.NETHER; // Fallback to the nether if all else fails
     }
 
-    public static BlockState getFrame(Level level, BlockPos pos) {
+    public static PortalFrame getFrame(Level level, BlockPos pos) {
         return validateFrame(scanForPotentialFrame(level, pos));
     }
 
-    private static BlockState validateFrame(BlockState state) {
+    private static PortalFrame validateFrame(BlockState state) {
         for (PortalEntry entry : getEntries()) {
-            if (entry.frame().blockState().isAir()) {
+            if (entry.frame().isAir()) {
                 throw new IllegalStateException("Air portal frames are not allowed!");
-            } else if (frameIsValid(entry, state)) {
-                MoreFeatures.LOGGER.debug("Validated frame state {} for: {}", state, entry.targetLevel());
-                return state;
+            } else if (PortalUtil.frameIsValid(entry.frame(), state)) {
+                MoreFeatures.LOGGER.debug("Validated frame {} for: {}", state, entry.targetLevel());
+                return entry.frame();
             }
         }
 
-        return Blocks.AIR.defaultBlockState(); // Air means that the frame was invalid
+        return PortalFrame.empty();
     }
 
     private static BlockState scanForPotentialFrame(Level level, BlockPos startPos) {
@@ -122,13 +128,8 @@ public final class PortalDestinationManager extends SimpleJsonResourceReloadList
         return Blocks.AIR.defaultBlockState();
     }
 
-    private static boolean frameIsValid(PortalEntry entry, BlockState state) {
-        if (entry.frame().stateSensitive()) {
-            return state.equals(entry.frame().blockState());
-        } else {
-            return state.is(entry.frame().blockState().getBlock());
-        }
-    }
+
+
 
     private List<PortalEntry> entries() {
         return this.entries;

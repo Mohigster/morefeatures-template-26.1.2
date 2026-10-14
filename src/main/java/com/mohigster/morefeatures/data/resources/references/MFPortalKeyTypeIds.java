@@ -10,6 +10,6 @@ public class MFPortalKeyTypeIds {
     public static final ResourceKey<PortalKeyType<?>> ITEM = createId("item");
 
     private static ResourceKey<PortalKeyType<?>> createId(String name) {
-        return ResourceKey.create(MFRegistryKeys.PORTAL_KEY_TYPE, MFIdentifier.withMfNamespace(name));
+        return ResourceKey.create(MFRegistryKeys.PORTAL_KEY_TYPE.get(), MFIdentifier.withMfNamespace(name));
     }
 }

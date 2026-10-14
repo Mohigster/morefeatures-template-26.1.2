@@ -49,14 +49,14 @@ public class MFBlockIds {
     }
 
     private static WoodTypeCollection<ResourceKey<Block>> createSimpleWoodId(String name) {
-        return WoodTypeCollection.prefixWithSet(WoodTypeCollection.createForAll(name)).map(MFBlockIds::createId);
+        return WoodTypeCollection.prefixWithSet(WoodTypeCollection.ofAll(name)).map(MFBlockIds::createId);
     }
 
     private static WoodTypeCollection<ResourceKey<Block>> createPottedSaplingId() {
-        return WoodTypeCollection.prefixWithSet("potted", WoodTypeCollection.createForAll("sapling")).map(MFBlockIds::createId);
+        return WoodTypeCollection.prefixWithSet("potted", WoodTypeCollection.ofAll("sapling")).map(MFBlockIds::createId);
     }
 
     private static GemstoneCollection<ResourceKey<Block>> createSimpleGemId(String name) {
-        return GemstoneCollection.prefixWithGem(GemstoneCollection.createForAll(name)).map(MFBlockIds::createId);
+        return GemstoneCollection.prefixWithGem(GemstoneCollection.ofAll(name)).map(MFBlockIds::createId);
     }
 }

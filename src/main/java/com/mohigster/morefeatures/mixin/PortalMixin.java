@@ -12,6 +12,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.portal.PortalShape;
+import net.neoforged.neoforge.event.EventHooks;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,7 +31,8 @@ public final class PortalMixin {
             if (portalMixin$shouldIgnite(state, level, target)) {
                 // CustomPortalShape has behaviours that scans for the correct frame based on JSON data, unlike the vanilla PortalShape which always uses Obsidian
                 Optional<PortalShape> optionalShape = CustomPortalShape.findEmptyShape(level, pos, Direction.Axis.X);
-                optionalShape.ifPresent(shape -> shape.createPortalBlocks(level));
+                Optional<PortalShape> eventFired = EventHooks.onTrySpawnPortal(level, pos, optionalShape);
+                eventFired.ifPresent(shape -> shape.createPortalBlocks(level));
             }
         }
     }

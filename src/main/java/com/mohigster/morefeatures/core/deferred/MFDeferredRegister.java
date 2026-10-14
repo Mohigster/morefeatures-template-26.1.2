@@ -12,13 +12,14 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
-public sealed class MFDeferredRegister<R> permits MFDeferredRegister.Keys {
+public sealed abstract class MFDeferredRegister<R> implements Supplier<DeferredRegister<R>> permits MFDeferredRegister.Keys {
     private final DeferredRegister<R> internalRegister;
 
-    private MFDeferredRegister(final ResourceKey<Registry<R>> key, final String namespace) {
-        this.internalRegister = DeferredRegister.create(key, namespace);
+    private MFDeferredRegister(final Supplier<ResourceKey<Registry<R>>> key, final String namespace) {
+        this.internalRegister = DeferredRegister.create(key.get(), namespace);
     }
 
+    @Override
     public DeferredRegister<R> get() {
         return this.internalRegister;
     }
@@ -37,7 +38,7 @@ public sealed class MFDeferredRegister<R> permits MFDeferredRegister.Keys {
         }
 
         public <T extends PortalKeyType<?>> DeferredKeyType<T> register(final String name, final Function<Identifier, ? extends T> func) {
-            DeferredKeyType<T> key = DeferredKeyType.createKey(this.get().register(name, func).getKey());
+            DeferredKeyType<T> key = DeferredKeyType.createType(this.get().register(name, func).getKey());
             MoreFeatures.LOGGER.info("Creating DeferredKeyType with ResourceKey: {}", key.getKey());
             return key;
         }
@@ -46,7 +47,7 @@ public sealed class MFDeferredRegister<R> permits MFDeferredRegister.Keys {
             return this.register(name, () -> type);
         }
 
-        public void register(IEventBus bus) {
+        public void register(final IEventBus bus) {
             this.get().register(bus);
         }
     }

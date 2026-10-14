@@ -10,8 +10,6 @@ public class CustomShieldUnbaked implements SpecialModelRenderer.Unbaked<DataCom
     private final String shieldMaterial;
     private final String modid;
 
-    private final MapCodec<CustomShieldUnbaked> codec = MapCodec.unit(this).stable();
-
     public CustomShieldUnbaked(String shieldMaterial, String modid) {
         this.shieldMaterial = shieldMaterial;
         this.modid = modid;
@@ -42,7 +40,7 @@ public class CustomShieldUnbaked implements SpecialModelRenderer.Unbaked<DataCom
 
     @Override
     public MapCodec<CustomShieldUnbaked> type() {
-        return this.codec;
+        return MapCodec.unit(this);
     }
 
     public static MapCodec<CustomShieldUnbaked> getMapCodec(String shieldMaterial, String modid) {

@@ -11,7 +11,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.BonemealableBlock;
 import net.minecraft.world.level.block.state.BlockState;
 
-@SuppressWarnings("deprecation")
 public final class DataMapUtil {
     public static void spawnBonemealParticles(LevelAccessor level, BlockPos pos, int count) {
         BlockState state = level.getBlockState(pos);
@@ -20,7 +19,7 @@ public final class DataMapUtil {
         // Fallback to vanilla handling if applicable (otherwise particle count will be doubled)
         if (block instanceof BonemealableBlock) return;
 
-        BonemealMorph data = block.builtInRegistryHolder().getData(MFDataMaps.BONEMEAL_MORPHS);
+        BonemealMorph data = block.defaultBlockState().typeHolder().getData(MFDataMaps.BONEMEAL_MORPHS);
 
         if (data == null) return;
 
@@ -39,13 +38,9 @@ public final class DataMapUtil {
         }
     }
 
-    public static int requirePositive(int data) {
-        return (int) requirePositive((double) data);
-    }
-
-    public static double requirePositive(double data) {
-        if (data <= 0D)
-            throw new IllegalStateException(data + " was not a positive value");
+    public static <T extends Number> T requirePositive(T data) {
+        if (data.intValue() <= 0)
+            throw new IndexOutOfBoundsException(data + " must be a positive value");
         return data;
     }
 }

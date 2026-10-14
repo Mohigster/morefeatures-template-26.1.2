@@ -21,7 +21,7 @@ public final class DeferredKeyType<P extends PortalKeyType<?>> extends DeferredH
         super(key);
     }
 
-    public static <P extends PortalKeyType<?>> DeferredKeyType<P> createKey(ResourceKey<PortalKeyType<?>> key) {
+    public static <P extends PortalKeyType<?>> DeferredKeyType<P> createType(final ResourceKey<PortalKeyType<?>> key) {
         return new DeferredKeyType<>(key);
     }
 
@@ -35,12 +35,14 @@ public final class DeferredKeyType<P extends PortalKeyType<?>> extends DeferredH
         return this.get().hashCode();
     }
 
-    @SuppressWarnings("unused")
-    public Holder<PortalKeyType<?>> getRegistryHolder() {
-        return this.get().builtInRegistryHolder();
-    }
-
     public String getName() {
         return this.get().name();
+    }
+
+    @SuppressWarnings("unused")
+    public Holder.Reference<P> typeHolder() {
+        @SuppressWarnings("unchecked")
+        Holder.Reference<P> holder = (Reference<P>) this.get().typeHolder();
+        return holder;
     }
 }

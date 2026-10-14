@@ -15,14 +15,14 @@ import java.util.function.Consumer;
 
 public final class CustomTridentSpecialRenderer implements NoDataSpecialModelRenderer {
     private final MFTridentModel model;
-    private final ResourceKey<EntityType<?>> tridentKey;
+    private final ResourceKey<EntityType<?>> trident;
 
     public CustomTridentSpecialRenderer(
-            MFTridentModel model,
-            ResourceKey<EntityType<?>> tridentKey
+            final MFTridentModel model,
+            final ResourceKey<EntityType<?>> trident
     ) {
         this.model = model;
-        this.tridentKey = tridentKey;
+        this.trident = trident;
     }
 
     @Override
@@ -36,7 +36,7 @@ public final class CustomTridentSpecialRenderer implements NoDataSpecialModelRen
     ) {
         submitNodeCollector.submitModelPart(
                 this.model.root(), poseStack,
-                this.model.renderType(MFTridentModel.getTexture(this.getTridentKey())),
+                this.model.renderType(MFTridentModel.getTexture(this.getTrident())),
                 lightCoords, overlayCoords, null
         );
     }
@@ -47,8 +47,8 @@ public final class CustomTridentSpecialRenderer implements NoDataSpecialModelRen
         this.model.root().getExtentsForGui(poseStack, consumer);
     }
 
-    public ResourceKey<EntityType<?>> getTridentKey(){
-        return this.tridentKey;
+    public ResourceKey<EntityType<?>> getTrident() {
+        return this.trident;
     }
 
     public static MapCodec<Unbaked> getUnbakedCodec(
@@ -61,12 +61,14 @@ public final class CustomTridentSpecialRenderer implements NoDataSpecialModelRen
         ).type();
     }
 
-    public static final class Unbaked implements NoDataSpecialModelRenderer.Unbaked {
-        private final ModelLayerLocation location;
+    public static class Unbaked implements NoDataSpecialModelRenderer.Unbaked {
+        protected ModelLayerLocation location;
         private final ResourceKey<EntityType<?>> trident;
-        private final MapCodec<Unbaked> codec = unitStable(this);
 
-        private Unbaked(ResourceKey<EntityType<?>> trident, ModelLayerLocation location) {
+        private Unbaked(
+                ResourceKey<EntityType<?>> trident,
+                ModelLayerLocation location
+        ) {
             this.location = location;
             this.trident = trident;
         }
@@ -83,7 +85,7 @@ public final class CustomTridentSpecialRenderer implements NoDataSpecialModelRen
 
         @Override
         public MapCodec<Unbaked> type() {
-            return this.codec;
+            return MapCodec.unit(this);
         }
 
         public ResourceKey<EntityType<?>> getTrident() {
@@ -92,10 +94,6 @@ public final class CustomTridentSpecialRenderer implements NoDataSpecialModelRen
 
         public ModelLayerLocation getLocation() {
             return this.location;
-        }
-
-        private static <T extends Unbaked> MapCodec<T> unitStable(T unbaked){
-            return MapCodec.unit(unbaked).stable();
         }
     }
 }
